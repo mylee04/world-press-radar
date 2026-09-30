@@ -12,10 +12,12 @@ Health is cached from bounded operator checks. Check times are separate from con
 
 World News Sources provides read-only source metadata. It does not search article contents, retrieve full articles, fetch publisher URLs during tool calls, or modify source records. No account or API key is required to use its public MCP endpoint.
 
+For support, contact myungeun2dc@gmail.com.
+
 ## Use cases
 
 - Find publisher RSS or sitemap endpoints for a selected country.
 - Build a source shortlist by language, category, publisher name or domain.
 - Compare cached endpoint availability and publication freshness before configuring a monitoring project.
 
-Publisher identity and public support contact remain unapproved. The directory publisher name follows the selected verified identity. Category Productivity is a proposed value to confirm in the dashboard. Icon is a draft local asset; no new site content has been published. Weekly refresh is an operator process and is not advertised as an uptime guarantee.
+The mylee organization is verified as an individual, but its exact public developer name is not visible. Public support email myungeun2dc@gmail.com is approved for these drafts. The directory publisher name follows the selected verified identity. Category Productivity is a proposed value to confirm in the dashboard. Icon is a draft local asset; no new site content has been published. Weekly refresh is an operator process and is not advertised as an uptime guarantee. See [site and policy drafts](SITE-PAGES-DRAFT.md) for reviewable proposed page content.

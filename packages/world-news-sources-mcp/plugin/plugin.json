@@ -17,7 +17,7 @@
       "interface": {
         "displayName": "World News Sources",
         "shortDescription": "Find RSS feeds and sitemaps",
-        "longDescription": "Find configured publisher RSS feeds and sitemaps across countries for source research, feed setup, and news monitoring projects.\n\nSearch by publisher name or domain, country, endpoint type, category, language, and configuration status. View source details, browse supported countries, and inspect separate RSS and sitemap health records with actual check times, parsed item or URL counts, sample URLs, and publication-date information when available.\n\nHealth is cached from bounded operator checks. Check times are separate from content dates: a reachable feed may contain old content, and a cached result may become stale. Some configured endpoints are empty, blocked, unavailable, malformed, or could not be fully checked. Country and configuration counts do not represent unique publishers or guaranteed live coverage. Sitemap indexes describe child sitemap entries; child files and article links are not validated by this plugin.\n\nWorld News Sources provides read-only source metadata. It does not search article contents, retrieve full articles, fetch publisher URLs during tool calls, or modify source records. No account or API key is required to use its public MCP endpoint.",
+        "longDescription": "Find configured publisher RSS feeds and sitemaps across countries for source research, feed setup, and news monitoring projects.\n\nSearch by publisher name or domain, country, endpoint type, category, language, and configuration status. View source details, browse supported countries, and inspect separate RSS and sitemap health records with actual check times, parsed item or URL counts, sample URLs, and publication-date information when available.\n\nHealth is cached from bounded operator checks. Check times are separate from content dates: a reachable feed may contain old content, and a cached result may become stale. Some configured endpoints are empty, blocked, unavailable, malformed, or could not be fully checked. Country and configuration counts do not represent unique publishers or guaranteed live coverage. Sitemap indexes describe child sitemap entries; child files and article links are not validated by this plugin.\n\nWorld News Sources provides read-only source metadata. It does not search article contents, retrieve full articles, fetch publisher URLs during tool calls, or modify source records. No account or API key is required to use its public MCP endpoint.\n\nFor support, contact myungeun2dc@gmail.com.",
         "category": "Productivity",
         "capabilities": [
           "Find RSS and sitemap sources",
@@ -89,5 +89,8 @@
         "release_notes": "Initial source discovery and cached RSS/sitemap health tools. Configured sources include unsuccessful and incomplete checks."
       }
     }
+  },
+  "author": {
+    "email": "myungeun2dc@gmail.com"
   }
 }

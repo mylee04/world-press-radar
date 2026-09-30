@@ -9,7 +9,7 @@
     "skills/find-news-sources/agents/openai.yaml"
   ],
   "sha256": {
-    "plugin.json": "5a66e6edea5bb300037c37649a67aa523c48b9b7c80d0f7b4523c52c444582eb",
+    "plugin.json": "35fa89c652b21f07c9ce0191f2d5d6e35b170ef05aaac2d86860cf82e306ba28",
     "mcp.json": "19a11ce01db089c1d24586226b597f04ebe0d5e40876bd95246c66651685e75a",
     "assets/icon.svg": "b90b2444d1a2684b1fdaea21f2b0136b13cbaa9351bdfa7b1cf00a510dbb1eb4",
     "skills/find-news-sources/SKILL.md": "993fea6178771ddff51cf6b1835f606852e8565263e84d35a1f6fab90fd1e249",
@@ -22,14 +22,16 @@
   },
   "submission_ready": false,
   "missing_package_fields": [
-    "Verified publisher identity / developerName",
+    "Public developerName consistent with verified identity",
     "supportURL",
     "privacyPolicyURL",
     "termsOfServiceURL",
     "Reviewer-accessible demo_recording_url"
   ],
+  "confirmed_external_gates": [
+    "Individual identity verification (read-only Platform evidence)"
+  ],
   "external_gates": [
-    "Identity verification",
     "Organization submission permission",
     "Approved public site/policy content",
     "Domain ownership challenge",
@@ -38,7 +40,7 @@
   ],
   "archive": {
     "path": "publication/dist/world-news-sources-0.1.0-draft.zip",
-    "sha256": "4831610527aa0257e1030c8e289630be70e8b81eebf1e6196df93a619f2ee96f",
+    "sha256": "f7a3d8d88a025f8dee921383cb09a37ea5ccad54cf3635d27fcdf9baea212ecc",
     "integrity": "passed"
   }
 }

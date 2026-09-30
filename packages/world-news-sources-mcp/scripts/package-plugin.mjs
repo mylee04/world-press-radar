@@ -34,7 +34,7 @@ for (const prompt of listing.defaultPrompt) { bounded(prompt, 128, 'defaultPromp
 requireValue(listing.capabilities.length <= 20, 'At most 20 capabilities');
 for (const capability of listing.capabilities) bounded(capability, 120, 'capability');
 const missing = [];
-if (!listing.developerName) missing.push('Verified publisher identity / developerName');
+if (!listing.developerName) missing.push('Public developerName consistent with verified identity');
 else bounded(listing.developerName, 80, 'developerName');
 for (const field of ['websiteURL', 'supportURL', 'privacyPolicyURL', 'termsOfServiceURL']) {
   if (!listing[field]) { missing.push(field); continue; }
@@ -82,10 +82,13 @@ requireValue(/^---\nname: find-news-sources\ndescription: [^\n]+\n---\n/.test(sk
 const dependency = await fs.readFile(path.join(pluginRoot, files[4]), 'utf8');
 requireValue(dependency.includes('value: "world-news-sources"') && dependency.includes('transport: "streamable_http"') && dependency.includes(`url: "${server.url}"`), 'Skill dependency must match MCP manifest');
 
+const evidence = JSON.parse(await fs.readFile(path.join(root, 'publication/PLATFORM-EVIDENCE.json'), 'utf8'));
+const identityVerified = evidence.identity_verification?.status === 'verified' && evidence.identity_verification?.individual_status === 'approved';
 const report = { local_structure:'passed', portable_schemas:'Agent Plugins 1.0.0', files, sha256:hashes,
   review_scenarios:{positive:5,negative:3,natural_language_executed_in_chatgpt:false},
   submission_ready:false, missing_package_fields:missing,
-  external_gates:['Identity verification','Organization submission permission','Approved public site/policy content','Domain ownership challenge','ChatGPT review tests and video','Explicit submission and publication approval'] };
+  confirmed_external_gates:identityVerified ? ['Individual identity verification (read-only Platform evidence)'] : [],
+  external_gates:[...(identityVerified ? [] : ['Identity verification']),'Organization submission permission','Approved public site/policy content','Domain ownership challenge','ChatGPT review tests and video','Explicit submission and publication approval'] };
 if (process.argv.includes('--package')) {
   const output = path.join(root, 'publication/dist', `${manifest.name}-${manifest.version}-draft.zip`);
   await fs.mkdir(path.dirname(output), {recursive:true});

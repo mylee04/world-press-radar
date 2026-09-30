@@ -1,0 +1,17 @@
+{
+  "identity_verification": {
+    "organization_label": "mylee",
+    "status": "verified",
+    "kind": "individual",
+    "individual_status": "approved",
+    "observed_at": "2026-09-30T20:53:19Z",
+    "url": "https://platform.openai.com/settings/organization/general",
+    "public_developer_name": null,
+    "note": "Verified badge expanded read-only. No public personal/publisher name displayed; the organization label is not evidence of the directory developer name."
+  },
+  "support_contact": {
+    "email": "myungeun2dc@gmail.com",
+    "public_use_approved": true,
+    "approval_scope": "Local listing and support/policy page drafts. Publishing pages remains pending."
+  }
+}

@@ -25,10 +25,10 @@ Validation on September 30, 2026: portable schemas and ZIP integrity passed; the
 
 | Item | Current evidence | Next concrete step |
 | --- | --- | --- |
-| Verified publisher | Existing Platform session's organization settings shows Individual and Business **Start**, not completed verification | User chooses personal/business publisher identity and completes verification; directory name follows that verified identity |
+| Identity verification | **Completed**: mylee Organization shows **Verified**; expanded details show Individual **Approved** | Exact public developer name remains unshown; directory name follows the verified identity |
 | Submission permission | Authenticated Plugins dashboard shows **Upload new or existing plugin**; precise Apps Management permission not yet confirmed | Check organization owner role or `api.apps.write` before creating the draft |
-| Publisher text | Not inserted into package | Approve public publisher name consistent with verified identity |
-| Public support | No contact information inserted | Approve a public support address/channel and support-page content |
+| Publisher text | `developerName` and author name omitted because the exact public identity is not visible | Confirm the public developer name from verified identity or submission preview |
+| Public support | User approved **myungeun2dc@gmail.com**; inserted in local listing metadata and page drafts | Approve support-page content and publishing it; HTTPS supportURL remains omitted until live |
 | Product website | Existing minimal endpoint landing page works, but publisher identification is not yet approved | Approve English product/support/policy content and adding pages only to the independent news project |
 | Privacy and terms | Required URLs deliberately omitted; no fake or unapproved policy URLs | Confirm publisher, support contact, hosting log retention/processing and policy wording; then authorize publishing dedicated pages |
 | Icon/category | Draft SVG included; Productivity proposed | Approve asset and confirm available dashboard category |
@@ -37,13 +37,13 @@ Validation on September 30, 2026: portable schemas and ZIP integrity passed; the
 | Demo | No recording created or published | Record the approved test walkthrough and approve its reviewer-accessible hosting destination |
 | Attestations/submission/publication | None accepted or performed | Review exact portal attestations and obtain explicit authorization at those steps |
 
-Observed verification screen: https://platform.openai.com/settings/organization/general (in the user's currently selected organization). It states: “Verify as an individual or business to access protected models and submit ChatGPT apps.” Individual says “You are verifying as a solo developer.” Business says “You are verifying a registered company.” **Start was not clicked.** Document/provider requirements are not visible before starting, so this report makes no claim about them. No identity documents were accessed. This draft contains no private contact details or account identifiers. The observed dashboard is https://platform.openai.com/plugins.
+Updated read-only observation September 30, 2026: https://platform.openai.com/settings/organization/general with **mylee** selected shows **Verified**. Expanded details show Individual **Approved**; Business still shows **Start**. No verification flow was started by the agent and no identity documents were accessed. The exact public personal/publisher name is not displayed; mylee is the organization label, not confirmed directory developer text. [Local evidence](PLATFORM-EVIDENCE.json) records the observation without account identifiers. The user-approved public support email is included; private credentials are excluded. The observed dashboard is https://platform.openai.com/plugins.
 
-The package omits `author`/`developerName` and missing review URLs rather than pretending the draft is submission-ready. The portable schema permits a draft without these fields; OpenAI's submission gate requires the completed publisher and listing fields. Run the readiness validator again after adding approved fields. Local structural validation does not replace OpenAI scans or review.
+The package includes approved support contact in `author.email` and the long description, and omits `author.name`/`developerName` and missing review URLs. The portable schema permits a draft without these fields; OpenAI's submission gate requires the completed publisher and listing fields. Run the readiness validator again after adding confirmed fields. Local structural validation does not replace OpenAI scans or review.
 
 ## Approval content to prepare next
 
-Publish only within `news.bymyleslee.com`, after approval:
+Reviewable English content is in [SITE-PAGES-DRAFT.md](SITE-PAGES-DRAFT.md). It is not published. Publish only within `news.bymyleslee.com`, after approval:
 
 - `/`: English product description, scope, publisher identity and links to support/privacy/terms.
 - `/support`: approved public support channel, issue-reporting instructions, no feed-uptime guarantee.
