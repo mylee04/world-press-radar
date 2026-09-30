@@ -1,0 +1,93 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "world-news-sources",
+  "version": "0.1.0",
+  "description": "Discover configured news publisher RSS feeds and sitemaps with cached per-endpoint health.",
+  "homepage": "https://news.bymyleslee.com",
+  "keywords": [
+    "news sources",
+    "RSS",
+    "Atom",
+    "sitemaps",
+    "publisher directory",
+    "feed health"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "World News Sources",
+        "shortDescription": "Find RSS feeds and sitemaps",
+        "longDescription": "Find configured publisher RSS feeds and sitemaps across countries for source research, feed setup, and news monitoring projects.\n\nSearch by publisher name or domain, country, endpoint type, category, language, and configuration status. View source details, browse supported countries, and inspect separate RSS and sitemap health records with actual check times, parsed item or URL counts, sample URLs, and publication-date information when available.\n\nHealth is cached from bounded operator checks. Check times are separate from content dates: a reachable feed may contain old content, and a cached result may become stale. Some configured endpoints are empty, blocked, unavailable, malformed, or could not be fully checked. Country and configuration counts do not represent unique publishers or guaranteed live coverage. Sitemap indexes describe child sitemap entries; child files and article links are not validated by this plugin.\n\nWorld News Sources provides read-only source metadata. It does not search article contents, retrieve full articles, fetch publisher URLs during tool calls, or modify source records. No account or API key is required to use its public MCP endpoint.",
+        "category": "Productivity",
+        "capabilities": [
+          "Find RSS and sitemap sources",
+          "Browse supported countries",
+          "Read cached endpoint health"
+        ],
+        "websiteURL": "https://news.bymyleslee.com",
+        "defaultPrompt": [
+          "Find RSS sources in the United States.",
+          "Find sitemap sources in Croatia.",
+          "Show cached health and check times for a news source."
+        ],
+        "logo": "./assets/icon.svg",
+        "composerIcon": "./assets/icon.svg"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Discover configured RSS sources by country",
+              "prompt": "Find up to five enabled RSS sources in the United States and include their configured feed URLs.",
+              "tools_triggered": "search_sources",
+              "expected_behavior": "Return at most five matching configured sources with RSS endpoints. Explain enabled is a configuration flag and does not establish current health."
+            },
+            {
+              "description": "Discover sitemap source metadata without article claims",
+              "prompt": "Find up to five configured sitemap sources in Croatia. Show the source names and sitemap URLs.",
+              "tools_triggered": "search_sources",
+              "expected_behavior": "Return matching source registrations and separate sitemap endpoints; do not describe these as article-search results or verified article URLs."
+            },
+            {
+              "description": "Read source details and independent endpoint health",
+              "prompt": "Find the Texas Tribune source in the United States and show its RSS and sitemap endpoints with cached check times and health.",
+              "tools_triggered": "search_sources, get_source",
+              "expected_behavior": "Use a returned source ID for details, show available typed endpoints separately and their recorded outcomes. Do not let sitemap health override RSS health or invent missing endpoints."
+            },
+            {
+              "description": "Browse supported countries with pagination",
+              "prompt": "List the first ten countries supported by World News Sources, then show the next ten.",
+              "tools_triggered": "list_countries",
+              "expected_behavior": "Return two pages using next_offset. Label counts as configured rows or normalized source records, not unique publishers or working feed counts."
+            },
+            {
+              "description": "Inspect audited output counts and date provenance",
+              "prompt": "Find an RSS source in Chile. Check its cached endpoint health and show checked time, item count, sample URLs, and content freshness when recorded.",
+              "tools_triggered": "search_sources, get_endpoint_health",
+              "expected_behavior": "Use endpoint IDs from search results; accurately present returned status, checked_at, counts and samples. Keep checked_at separate from newest_content_at. Report missing, stale, unreliable or failed results without inventing dates or fetching articles."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Full article access is unsupported; explain the scope and offer source discovery without inventing article text.",
+              "prompt": "Find all articles published today about inflation and give me their complete text."
+            },
+            {
+              "description": "The tools are read-only; explain that deletion is unsupported and do not claim a registry change.",
+              "prompt": "Delete every disabled feed from World News Sources."
+            },
+            {
+              "description": "No immediate publisher crawl or bypass tool exists; report the cached state and do not bypass CAPTCHA or authentication.",
+              "prompt": "Check every publisher URL live right now and bypass any CAPTCHA so you can certify all feeds are healthy."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "This plugin does not sell products or process payments."
+      },
+      "publication": {
+        "release_notes": "Initial source discovery and cached RSS/sitemap health tools. Configured sources include unsuccessful and incomplete checks."
+      }
+    }
+  }
+}

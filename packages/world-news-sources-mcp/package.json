@@ -19,7 +19,9 @@
     "smoke": "node test/smoke.mjs",
     "health:check": "node dist/check.js",
     "audit": "node dist/audit.js",
-    "refresh:deploy": "node scripts/refresh-deploy.mjs"
+    "refresh:deploy": "node scripts/refresh-deploy.mjs",
+    "plugin:validate": "node scripts/package-plugin.mjs",
+    "plugin:package": "node scripts/package-plugin.mjs --package"
   },
   "dependencies": {
     "@modelcontextprotocol/node": "2.1.0",
@@ -30,6 +32,7 @@
   "devDependencies": {
     "@modelcontextprotocol/client": "2.2.0",
     "@types/node": "^22.0.0",
+    "ajv": "^8.20.0",
     "typescript": "^5.7.3"
   }
 }

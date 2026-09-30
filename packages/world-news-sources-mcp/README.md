@@ -138,3 +138,7 @@ Completed **2026-09-30T20:05:37.106Z**: all 5,775 distinct typed URLs were attem
 `npm run prepare:vercel` writes ignored `.deploy-vercel/` with only runtime metadata modules, whitelisted registry fields and cached health. It excludes the portal, database, customer tokens, validator and audit runner. The hosted tools have no operator check tool. Production is project `world-news-sources-mcp` under `mylee04s-projects`; deployment commands and evidence are in `DEPLOYMENT.md`. Hosting requires an HTTPS public hostname, Node 22 runtime and an access policy appropriate to public metadata. Do not deploy the old application root for this service.
 
 Transport and SDK choices follow the [official MCP transport specification](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports) and [TypeScript SDK v2](https://github.com/modelcontextprotocol/typescript-sdk) (`@modelcontextprotocol/server` 2.2.0, pinned in the lockfile).
+
+## Public plugin draft
+
+The local English directory package is in [`plugin/`](plugin/). Run `npm run plugin:package` to create the draft ZIP, and review [`publication/READINESS.md`](publication/READINESS.md) for validation evidence and missing submission requirements. This package has not been uploaded or listed in the public directory.

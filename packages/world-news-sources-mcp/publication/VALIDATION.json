@@ -1,0 +1,44 @@
+{
+  "local_structure": "passed",
+  "portable_schemas": "Agent Plugins 1.0.0",
+  "files": [
+    "plugin.json",
+    "mcp.json",
+    "assets/icon.svg",
+    "skills/find-news-sources/SKILL.md",
+    "skills/find-news-sources/agents/openai.yaml"
+  ],
+  "sha256": {
+    "plugin.json": "5a66e6edea5bb300037c37649a67aa523c48b9b7c80d0f7b4523c52c444582eb",
+    "mcp.json": "19a11ce01db089c1d24586226b597f04ebe0d5e40876bd95246c66651685e75a",
+    "assets/icon.svg": "b90b2444d1a2684b1fdaea21f2b0136b13cbaa9351bdfa7b1cf00a510dbb1eb4",
+    "skills/find-news-sources/SKILL.md": "993fea6178771ddff51cf6b1835f606852e8565263e84d35a1f6fab90fd1e249",
+    "skills/find-news-sources/agents/openai.yaml": "09065e478f895ff6a85290620dba56e9bf2fd9522c0553cac32748cb33c41152"
+  },
+  "review_scenarios": {
+    "positive": 5,
+    "negative": 3,
+    "natural_language_executed_in_chatgpt": false
+  },
+  "submission_ready": false,
+  "missing_package_fields": [
+    "Verified publisher identity / developerName",
+    "supportURL",
+    "privacyPolicyURL",
+    "termsOfServiceURL",
+    "Reviewer-accessible demo_recording_url"
+  ],
+  "external_gates": [
+    "Identity verification",
+    "Organization submission permission",
+    "Approved public site/policy content",
+    "Domain ownership challenge",
+    "ChatGPT review tests and video",
+    "Explicit submission and publication approval"
+  ],
+  "archive": {
+    "path": "publication/dist/world-news-sources-0.1.0-draft.zip",
+    "sha256": "4831610527aa0257e1030c8e289630be70e8b81eebf1e6196df93a619f2ee96f",
+    "integrity": "passed"
+  }
+}
