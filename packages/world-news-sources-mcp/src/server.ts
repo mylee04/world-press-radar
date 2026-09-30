@@ -16,7 +16,7 @@ export function createServer(catalog: Catalog, health: HealthStore) {
     inputSchema: searchSchema, annotations,
   }, async input => result(search(catalog, input)));
   server.registerTool('get_source', {
-    description: 'Get a source by stable source_id, with separate typed RSS/sitemap endpoints and cached health. Sitemap success never makes RSS healthy.',
+    description: 'Get a source by stable source_id, separate typed RSS/sitemap endpoints and cached health. Includes recorded activation/deactivation time, reason and up to 20 transitions; historical dates can be unknown. Sitemap success never makes RSS healthy.',
     inputSchema: detailsSchema, annotations,
   }, async input => {
     const source = catalog.sources.find(s => s.id === input.source_id);

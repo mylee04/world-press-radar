@@ -1,5 +1,7 @@
 # World News Sources
 
+Source activation/deactivation timestamps and operator workflow: [STATUS-HISTORY.md](STATUS-HISTORY.md). Existing unknown historical dates remain null. Health audits do not change the enabled flag.
+
 `world-news-sources-mcp` is a small, database-free MCP package for configured publisher RSS and sitemap metadata. It reads this repository's `data/rss-atlas.json` directly. No article ingestion, PostgreSQL, Next.js, customer token or LLM/API key is needed to run it.
 
 ## Run locally
@@ -141,4 +143,6 @@ Transport and SDK choices follow the [official MCP transport specification](http
 
 ## Public plugin draft
 
-The local English directory package is in [`plugin/`](plugin/). Run `npm run plugin:package` to create the draft ZIP, and review [`publication/READINESS.md`](publication/READINESS.md) for validation evidence and missing submission requirements. This package has not been uploaded or listed in the public directory.
+The English directory package is in [`plugin/`](plugin/). Run `npm run plugin:package` to create the ZIP. A draft was uploaded to the verified mylee organization; domain ownership and all four MCP tools passed the Platform scan. It is **not submitted or publicly listed**. See [`publication/READINESS.md`](publication/READINESS.md) for the remaining demo/review gates. The public [website](https://news.bymyleslee.com), [support](https://news.bymyleslee.com/support), [privacy](https://news.bymyleslee.com/privacy) and [terms](https://news.bymyleslee.com/terms) identify Myungeun Lee and the approved support contact.
+
+Optional long-term aggregate counters are described in [`metrics/README.md`](metrics/README.md). No query database or user profiles are used; deployment evidence records when collection becomes active. Local package tests include atomic concurrent increments, durability, privacy projection and protocol/error classification.

@@ -1,0 +1,38 @@
+Privacy — World News Sources
+Skip to content
+World News Sources
+Home
+Support
+Privacy
+Terms
+Privacy
+Effective date:
+September 30, 2026
+Operator:
+Myungeun Lee
+Contact:
+myungeun2dc@gmail.com
+Information processed
+When an MCP client calls the service, it sends a tool name and parameters, such as a country, publisher search term, language, category, pagination setting or source/endpoint ID. The service processes these parameters to return source metadata and cached health. It does not require an account, payment details or an API key. Please do not send sensitive personal information in tool parameters.
+The current application has no user-query database and does not intentionally write request bodies or full conversations to application logs. It has no advertising integration and sets no custom tracking cookies. These statements describe the application code and do not imply that hosting creates no logs.
+For operational usage statistics, identifiable MCP tool-call attempts contribute to aggregate counters grouped by UTC day, fixed tool name, declared inspection traffic or unclassified traffic, success or error, and response-duration totals, maximum and buckets. Initialize, tool listing, service-health requests and website visits are excluded. These counters do not measure unique users. The aggregate store contains no IP address, user identifier, request identifier, query, tool parameters, prompt, conversation, article text or individual event history.
+A dedicated Cloudflare Worker and D1 database receive only the bounded aggregate increment from our hosting server. The calling MCP client’s IP address is not forwarded to this collector. Cloudflare may process hosting connection and security metadata under its
+privacy policy
+. The application does not log collector request bodies. Inspection hints can be supplied by clients and are not an identity mechanism.
+Vercel hosts the service and may process connection and operational information, including the calling client's IP address, request time, route, HTTP status, diagnostic information and request identifiers. A client such as ChatGPT may make requests from its own servers. Vercel's
+privacy notice
+and
+runtime-log documentation
+describe its processing and logging.
+If you email support, the support mailbox receives your email address, message and any attachments you choose to send. Email is handled through Gmail and is subject to the email provider's processing.
+Purposes and recipients
+Tool parameters are used to answer the requested metadata lookup. Hosting and diagnostic information support service delivery, security and troubleshooting. Aggregate counters help understand service usage, errors and response times. Support messages are used to respond to inquiries. Vercel, Cloudflare and the email provider process information needed for those functions. Your MCP client handles its own conversation, account and connection data under its own policies; this service's notice does not replace those policies.
+Publisher URLs are not fetched during tool calls. Operator checks of publicly configured feeds and sitemaps occur separately and do not receive your tool parameters or conversations. Following a returned publisher link creates a separate interaction governed by that publisher's policies.
+Retention and controls
+The application does not persist a history of user tool queries. The project currently uses Vercel's Hobby plan, whose documented runtime-log retention is one hour. There are no configured third-party project integrations or external log drains. This runtime-log window does not specify retention of every type of infrastructure or security data; those remain subject to Vercel's applicable policies. If hosting settings change materially, this notice will be updated.
+Non-identifying daily aggregate usage statistics are maintained over the long term for service operation and comparison. Collection can have gaps during outages or free-quota limits, and tests or automated scans may contribute to counts. Provider backup and infrastructure retention follow the providers’ applicable policies.
+Support correspondence will be retained only as needed to handle inquiries, provide necessary support, meet applicable legal obligations or address ongoing disputes. You may email support to request access, correction or deletion of information held by the operator; applicable obligations and provider capabilities may affect what can be deleted. The email provider may retain backups under its own policies. Disconnecting the plugin stops future use through that connection and does not automatically delete existing provider logs or support messages. There is no automatic deletion schedule or fixed retention period.
+Material changes to this notice will be reflected on this page with an updated effective date.
+World News Sources · Myungeun Lee
+myungeun2dc@gmail.com
+· Published September 30, 2026

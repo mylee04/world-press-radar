@@ -1,0 +1,34 @@
+{
+  "verified_at": "2026-09-30T22:37:07.104309+00:00",
+  "inspection_before": {
+    "calls": 7,
+    "successes": 7,
+    "errors": 0
+  },
+  "inspection_after": {
+    "calls": 15,
+    "successes": 11,
+    "errors": 4
+  },
+  "durable_delta": {
+    "calls": 8,
+    "successes": 4,
+    "errors": 4
+  },
+  "control_requests_not_counted": true,
+  "stored_columns": [
+    "day",
+    "tool",
+    "traffic",
+    "calls",
+    "successes",
+    "errors",
+    "duration_sum_ms",
+    "duration_max_ms",
+    "latency_le_100",
+    "latency_101_500",
+    "latency_501_2000",
+    "latency_gt_2000"
+  ],
+  "note": "Eight real concurrent MCP calls; four expected validation/tool errors. No synthetic collector events. Unclassified calls include ChatGPT tests and cannot identify users."
+}

@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
 import { z } from 'zod';
+import { statusFields, statusMetadata, unknownStatus, type StatusMetadata } from './status.js';
 
 export const endpointType = z.enum(['rss', 'sitemap']);
 export type EndpointType = z.infer<typeof endpointType>;
@@ -12,6 +13,7 @@ const registrySchema = z.object({
       name: text, url, sitemapUrl: url, row: z.number().int().optional(),
       enabled: z.boolean().optional(), category: z.string().max(256).optional(),
       language: z.string().max(128).optional(), tier: z.union([z.string(), z.number()]).optional(),
+      ...statusFields,
     })),
   })),
 });
@@ -30,7 +32,7 @@ export function canonicalUrl(raw: string): string {
   } catch { throw new Error('Registry endpoint must be an HTTP(S) URL without credentials'); }
 }
 export type Endpoint = { id: string; type: EndpointType; url: string };
-export type Source = {
+export type Source = StatusMetadata & {
   id: string; name: string; countryCode: string; countryName: string; enabled: boolean;
   category: string | null; language: string | null; tier: string | null;
   registrationCount: number; rows: number[]; endpoints: Endpoint[];
@@ -63,7 +65,10 @@ export function normalizeRegistry(input: unknown): Catalog {
       }
       const id = stableId('src', [code, feed.name.normalize('NFKC').toLowerCase(), ...list.map(e => e.id).sort()]);
       const previous = sources.get(id);
+      const status = statusMetadata(feed);
       if (previous) {
+        const previousStatus = Object.fromEntries(Object.keys(status).map(key => [key, previous[key as keyof Source]]));
+        if (previous.enabled !== (feed.enabled !== false) || JSON.stringify(previousStatus) !== JSON.stringify(status)) Object.assign(previous, unknownStatus());
         previous.registrationCount++;
         previous.enabled ||= feed.enabled !== false;
         if (feed.row !== undefined && previous.rows.length < 50 && !previous.rows.includes(feed.row)) previous.rows.push(feed.row);
@@ -73,6 +78,7 @@ export function normalizeRegistry(input: unknown): Catalog {
           id, name: feed.name, countryCode: code, countryName: country.name, enabled: feed.enabled !== false,
           category: feed.category ?? null, language: feed.language ?? null, tier: feed.tier == null ? null : String(feed.tier).slice(0, 128),
           registrationCount: 1, rows: feed.row === undefined ? [] : [feed.row], endpoints: list,
+          ...status,
         });
       }
     }

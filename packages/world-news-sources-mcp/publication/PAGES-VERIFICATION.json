@@ -1,0 +1,36 @@
+{
+  "verified_at": "2026-09-30T22:37:06.563Z",
+  "checks": [
+    {
+      "route": "/",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "f17456d46d4b287d94c498bb99978d7c710a868f93a26c82b8349440018244be"
+    },
+    {
+      "route": "/support",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "355049c3213854cf34890dfa4d4c52fecf42428a7e7baa665c6b763bb728e8e0"
+    },
+    {
+      "route": "/privacy",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "48f53e7adc87e4bc38c14370d446d28f99ad50869d6ce04af9231eadd7109afb"
+    },
+    {
+      "route": "/terms",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "377e87ac0e26f3122b09ce36b70f7af788cc110eb05a8e27d2767e85c48d0701"
+    },
+    {
+      "route": "/.well-known/openai-apps-challenge",
+      "status": 200,
+      "content_type": "text/plain; charset=utf-8",
+      "sha256": "219cca61f58377df627dd04b328a5a80d1c9dea06c77b1d1d5024a25dc2cda1c"
+    }
+  ],
+  "privacy_matches_active_aggregate_service": true
+}

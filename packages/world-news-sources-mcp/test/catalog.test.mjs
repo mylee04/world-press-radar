@@ -68,3 +68,13 @@ test('real registry loads independently with expected configuration counts', () 
   assert.ok(catalog.sources.length<=catalog.configuredRows);
   assert.ok([...catalog.endpoints.values()].some(e=>e.type==='sitemap'));
 });
+test('fresh audit null fields never inherit historical warning or HTTP code',()=>{
+  const c=normalizeRegistry(registry);const source=c.sources.find(s=>s.name==='Example News');const rss=source.endpoints[0];
+  const legacy={results:[{countryCode:'US',outlet:'Example News',url:rss.url,checkedAt:'2026-04-03T15:44:36.689Z',valid:true,httpCode:200}]};
+  const observation={endpointId:rss.id,type:'rss',url:rss.url,checkedAt:'2026-09-30T11:00:00Z',outcome:'healthy',httpStatus:200,reason:null,format:'rss'};
+  const now=Date.parse('2026-09-30T12:00:00Z');
+  const fresh=new HealthStore({version:1,observations:[observation]},legacy).get(rss,[source],now);
+  assert.equal(fresh.validation,'xml_structure');assert.equal(fresh.reason,null);assert.equal(fresh.http_status,200);
+  const failed=new HealthStore({version:1,observations:[{...observation,outcome:'unhealthy',httpStatus:null,reason:'Network timeout',format:null}]},legacy).get(rss,[source],now);
+  assert.equal(failed.http_status,null);assert.equal(failed.reason,'Network timeout');assert.equal(failed.format,null);
+});

@@ -31,7 +31,11 @@
           "Show cached health and check times for a news source."
         ],
         "logo": "./assets/icon.svg",
-        "composerIcon": "./assets/icon.svg"
+        "composerIcon": "./assets/icon.svg",
+        "developerName": "Myungeun Lee",
+        "supportURL": "https://news.bymyleslee.com/support",
+        "privacyPolicyURL": "https://news.bymyleslee.com/privacy",
+        "termsOfServiceURL": "https://news.bymyleslee.com/terms"
       },
       "review": {
         "test_cases": {
@@ -91,6 +95,8 @@
     }
   },
   "author": {
-    "email": "myungeun2dc@gmail.com"
+    "name": "Myungeun Lee",
+    "email": "myungeun2dc@gmail.com",
+    "url": "https://news.bymyleslee.com"
   }
 }

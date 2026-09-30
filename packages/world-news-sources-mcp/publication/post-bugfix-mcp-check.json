@@ -1,0 +1,112 @@
+{
+  "endpoint": "https://news.bymyleslee.com/mcp",
+  "service": {
+    "name": "world-news-sources-mcp",
+    "status": "ok",
+    "configured_rows": 5393,
+    "countries": 73,
+    "last_completed_full_audit_at": "2026-09-30T20:05:37.106Z",
+    "current_audit_finished_at": "2026-09-30T20:05:37.106Z",
+    "endpoints_total": 5775,
+    "endpoints_checked": 5775,
+    "endpoints_skipped": 0,
+    "statuses": {
+      "malformed": 653,
+      "working_nonempty": 4550,
+      "http_error": 236,
+      "blocked": 224,
+      "timeout": 42,
+      "valid_empty": 41,
+      "incomplete": 16,
+      "network_error": 13
+    },
+    "by_endpoint_type": {
+      "rss": {
+        "checked": 4009,
+        "statuses": {
+          "working_nonempty": 3057,
+          "malformed": 614,
+          "blocked": 108,
+          "http_error": 165,
+          "valid_empty": 32,
+          "incomplete": 11,
+          "timeout": 9,
+          "network_error": 13
+        },
+        "content_freshness": {
+          "recent": 2907,
+          "missing": 55,
+          "stale": 115,
+          "unreliable": 12
+        }
+      },
+      "sitemap": {
+        "checked": 1766,
+        "statuses": {
+          "working_nonempty": 1493,
+          "blocked": 116,
+          "http_error": 71,
+          "timeout": 33,
+          "malformed": 39,
+          "incomplete": 5,
+          "valid_empty": 9
+        },
+        "content_freshness": {
+          "missing": 650,
+          "recent": 805,
+          "stale": 41,
+          "unreliable": 6
+        }
+      }
+    },
+    "live_feed_checks": true,
+    "usage_statistics": {
+      "configured": false,
+      "counts": "identifiable tools/call attempts",
+      "unique_users_measured": false,
+      "note": "Aggregate collection may have outage gaps; inspection hints are client supplied."
+    }
+  },
+  "tools": [
+    "search_sources",
+    "get_source",
+    "list_countries",
+    "get_endpoint_health"
+  ],
+  "sample": {
+    "source_id": "src_00c015d5f3f4a8b7417f79ee",
+    "name": "Texas Tribune",
+    "endpoint_type": "sitemap",
+    "health": "unhealthy",
+    "checked_at": "2026-09-30T20:00:05.731Z",
+    "entry_count": null
+  },
+  "output_examples": [
+    {
+      "type": "rss",
+      "endpoint_id": "ep_000d84f7c3b123b75b36bfc2",
+      "format": "rss",
+      "checked_at": "2026-09-30T19:46:41.180Z",
+      "entry_count": 100,
+      "sample_urls": [
+        "https://www.latercera.com/finde/noticia/safa-2026-asi-sera-la-primera-semana-del-arte-de-santiago/",
+        "https://www.latercera.com/servicios/noticia/a-que-hora-y-donde-ver-el-amistoso-de-alianza-lima-vs-palestino/",
+        "https://www.latercera.com/pulso/noticia/tras-cifras-sectoriales-economistas-anticipan-otra-caida-del-imacec-en-agosto-expectativas-llegan-hasta-12/"
+      ]
+    },
+    {
+      "type": "sitemap",
+      "endpoint_id": "ep_0056c36c8c272e6342e0417f",
+      "format": "urlset",
+      "checked_at": "2026-09-30T19:46:42.327Z",
+      "entry_count": 448,
+      "sample_urls": [
+        "https://net.hr/magazin/ljubimci/pas-vam-je-unistio-kucu-strucnjaci-savjetuju-kako-da-ostanete-smireni-ce6c082e-bc99-11f1-936f-9600040c8f8e",
+        "https://net.hr/hot/zvijezde/jude-bellingham-stigao-u-hrvatsku-i-objavio-fotografiju-0f6423ce-bd06-11f1-936f-9600040c8f8e",
+        "https://net.hr/sport/nogomet/elvis-scoria-analizirao-hrvatsku-nakon-spanjolske-i-najavio-englesku-88320b08-bcff-11f1-936f-9600040c8f8e"
+      ]
+    }
+  ],
+  "protocol": "2025-06-18",
+  "verified": "HTTPS SDK calls plus legacy initialize, tools/list, tools/call and matching cached audit"
+}

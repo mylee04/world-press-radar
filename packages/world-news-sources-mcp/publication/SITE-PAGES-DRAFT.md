@@ -1,6 +1,6 @@
 # English site and policy drafts
 
-**Local review draft; not published.** Intended destination: the independent `news.bymyleslee.com` project only. Use the actual first publication date as the effective date. The verified developer identity must be filled in before launch. Public support email **myungeun2dc@gmail.com** is approved. The proposed mailbox retention below requires approval and is not a claim about current practice. The bracketed fields below are review items, not proposed public text.
+**Approved original review text, retained for history.** The final pages in `site/` were published September 30, 2026 with the confirmed publisher **Myungeun Lee**. The live privacy page is authoritative; later aggregate-statistics changes are separately recorded in metrics documentation and deployment evidence.
 
 ## Homepage — `/`
 
@@ -17,7 +17,7 @@ The service provides read-only source metadata. Article search and full article 
 MCP address: `https://news.bymyleslee.com/mcp`
 [Service status](/health) · [Support](/support) · [Privacy](/privacy) · [Terms](/terms)
 
-Developer: **[Verified public developer identity — not yet visible]**
+Developer: **Myungeun Lee**
 Support: [myungeun2dc@gmail.com](mailto:myungeun2dc@gmail.com)
 
 ## Support — `/support`
@@ -30,14 +30,14 @@ For a source issue, include the publisher name, configured endpoint URL or ID, t
 
 Publisher websites and feeds are operated independently. Cached health is an observation at the recorded time; the service cannot guarantee publisher uptime, article access, update frequency or a response time for support.
 
-Developer: **[Verified public developer identity — not yet visible]**
+Developer: **Myungeun Lee**
 
 ## Privacy — `/privacy`
 
 # Privacy
 
 Effective date: **[Actual first publication date]**
-Operator: **[Verified public developer identity — not yet visible]**
+Operator: **Myungeun Lee**
 Contact: [myungeun2dc@gmail.com](mailto:myungeun2dc@gmail.com)
 
 ### Information processed
@@ -69,7 +69,7 @@ Material changes to this notice will be reflected on this page with an updated e
 # Terms of Use
 
 Effective date: **[Actual first publication date]**
-Operator: **[Verified public developer identity — not yet visible]**
+Operator: **Myungeun Lee**
 
 World News Sources supplies configured news source metadata and cached endpoint observations through read-only MCP tools. Its supported features are source discovery, source details, country listings and endpoint health. Article search, full article retrieval, publisher access bypasses and registry modifications are outside the service's capabilities.
 

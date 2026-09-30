@@ -1,0 +1,59 @@
+{
+  "endpoint": "https://news.bymyleslee.com/mcp",
+  "started_at": "2026-09-30T22:35:35.350Z",
+  "finished_at": "2026-09-30T22:35:37.524Z",
+  "concurrent_actual_tool_calls": 8,
+  "traffic": "inspection",
+  "expected_durable_delta": {
+    "calls": 8,
+    "successes": 4,
+    "errors": 4
+  },
+  "excluded_control_requests": [
+    "initialize",
+    "tools/list",
+    "health"
+  ],
+  "results": [
+    {
+      "tool": "list_countries",
+      "outcome": "success",
+      "metrics_ack": "recorded"
+    },
+    {
+      "tool": "list_countries",
+      "outcome": "success",
+      "metrics_ack": "recorded"
+    },
+    {
+      "tool": "list_countries",
+      "outcome": "success",
+      "metrics_ack": "recorded"
+    },
+    {
+      "tool": "list_countries",
+      "outcome": "success",
+      "metrics_ack": "recorded"
+    },
+    {
+      "tool": "search_sources",
+      "outcome": "error",
+      "metrics_ack": "recorded"
+    },
+    {
+      "tool": "search_sources",
+      "outcome": "error",
+      "metrics_ack": "recorded"
+    },
+    {
+      "tool": "get_source",
+      "outcome": "error",
+      "metrics_ack": "recorded"
+    },
+    {
+      "tool": "get_source",
+      "outcome": "error",
+      "metrics_ack": "recorded"
+    }
+  ]
+}

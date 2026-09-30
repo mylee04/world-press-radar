@@ -1,62 +1,38 @@
 # Public directory readiness
 
-Prepared September 30, 2026. This is a local draft; it has not been uploaded, submitted, approved or published in the directory.
+Updated September 30, 2026. **Draft uploaded; not submitted, approved or publicly listed.**
 
-## Ready locally
+## Completed
 
-Portable `plugin/` contains the English manifest, remote MCP configuration, one focused discovery/health skill and a 96×96 SVG draft icon. It points at the existing verified-live `https://news.bymyleslee.com/mcp`, requires no authentication, and bundles no credentials, server code or source datasets. Five positive and three negative reviewer scenarios are included. English copy: [LISTING-COPY.md](LISTING-COPY.md).
+- English portable package `plugin/`: manifest, public Streamable HTTP MCP configuration, one focused source-discovery skill and 96×96 SVG icon. No credentials, article datasets or server code in ZIP.
+- Verified individual identity in **mylee**; uploaded preview developer **Myungeun Lee**. Approved public support **myungeun2dc@gmail.com**.
+- Four approved HTTPS pages published at [website](https://news.bymyleslee.com), [support](https://news.bymyleslee.com/support), [privacy](https://news.bymyleslee.com/privacy) and [terms](https://news.bymyleslee.com/terms).
+- Exact OpenAI ownership token published as plain text at the requested well-known path. Platform reports **Domain verified**, **MCP Configured**, no authentication, all four tools discovered and **No issues found in the latest MCP scan**. Challenge preserved by every bundle preparation.
+- Skill scan **Checks passed**. Five positive and three negative review cases imported, complete.
+- TypeScript build/typecheck and 24 core tests passed. Optional aggregate-metrics work adds five passing tests (29 total). Real HTTPS SDK and legacy initialize/list/call remained successful after page/domain deployments; cached audit time and output counts matched local data.
 
-## Local validation and draft archive
+[Platform evidence](PLATFORM-EVIDENCE.json), [HTTPS page hashes](PAGES-VERIFICATION.json), [post-domain MCP evidence](post-domain-mcp-check.json). The full registry audit is recorded separately; these transport tests do not establish healthy publishers.
 
-From `packages/world-news-sources-mcp`, run:
+## Remaining
+
+| Item | Evidence / next action |
+| --- | --- |
+| Metadata category | **Productivity** is a documented valid title and shown in the preview. Scan warning: “We couldn’t confirm the selected category. Review the category and make sure the listing clearly explains the plugin’s main purpose.” The portal exposes no selector. Keep the warning disclosed; automated findings other than required setup/validation errors may be considered by the reviewer. |
+| Real client test cases | Personal no-auth MCP connection installed in ChatGPT. Actual public-source scenarios and safe unsupported requests are being recorded. This is MCP testing, not proof that the complete packaged skill is installed. Record all eight observed outcomes before review. |
+| Demo URL | Required `extensions.com.openai.review.demo_recording_url` missing. Prepare a real, privacy-safe walkthrough; obtain content/public-hosting approval, then add URL and upload a new ZIP. No recording published yet. |
+| Attestations/final submission | **Not approved/performed.** Show exact required portal attestations before accepting and submitting. Directory publication is a later separate action after review approval. |
+
+No new costs, GitHub push, public repository, paid API, account-wide token, article retrieval, or source expansion is part of this submission phase. Metrics activation and its privacy notice are documented separately in `metrics/README.md`; no claim of historical usage is made.
+
+## Local archive validation
 
 ```sh
-npm ci --ignore-scripts
-npm run plugin:validate
 npm run plugin:package
 npm run plugin:validate -- --submission-ready
 ```
 
-The package command creates `publication/dist/world-news-sources-0.1.0-draft.zip` with `plugin.json` and `mcp.json` at the archive root. It validates the two vendored official schemas, checks the listing's documented limits and focused skill dependency, includes exactly five approved local files, and verifies archive contents against the source files. `publication/VALIDATION.json` records the file/archive hashes and unmet gates. The final command intentionally exits **2** while required package fields or external gates remain unresolved; normal structural validation exits **0**. External gates must be confirmed from Platform evidence before this draft can be described as submission-ready.
+The first command validates vendored Agent Plugins 1.0.0 schemas, documented metadata limits, exact five-file whitelist and deterministic ZIP integrity, producing `publication/dist/world-news-sources-0.1.0-draft.zip`. The second intentionally exits **2** while review/video/final-approval gates remain. Local checks cannot replace Platform scans or review. `VALIDATION.json` records actual confirmed gates separately from remaining ones.
 
-Validation on September 30, 2026: portable schemas and ZIP integrity passed; the skill-creator quick validator reported **Skill is valid**; TypeScript typecheck/build and **24 package tests passed**. The natural-language reviewer scenarios have not been executed in ChatGPT. The draft has not been uploaded.
+## References
 
-## Remaining requirements and approvals
-
-| Item | Current evidence | Next concrete step |
-| --- | --- | --- |
-| Identity verification | **Completed**: mylee Organization shows **Verified**; expanded details show Individual **Approved** | Exact public developer name remains unshown; directory name follows the verified identity |
-| Submission permission | Authenticated Plugins dashboard shows **Upload new or existing plugin**; precise Apps Management permission not yet confirmed | Check organization owner role or `api.apps.write` before creating the draft |
-| Publisher text | `developerName` and author name omitted because the exact public identity is not visible | Confirm the public developer name from verified identity or submission preview |
-| Public support | User approved **myungeun2dc@gmail.com**; inserted in local listing metadata and page drafts | Approve support-page content and publishing it; HTTPS supportURL remains omitted until live |
-| Product website | Existing minimal endpoint landing page works, but publisher identification is not yet approved | Approve English product/support/policy content and adding pages only to the independent news project |
-| Privacy and terms | English drafts prepared; Vercel Hobby/no integrations/no drains and one-hour runtime-log window confirmed read-only; required live policy URLs omitted | Confirm public publisher name, approve proposed mailbox retention and page wording/publication |
-| Icon/category | Draft SVG included; Productivity proposed | Approve asset and confirm available dashboard category |
-| Domain ownership | HTTPS works; OpenAI challenge has not been obtained | After an authorized draft upload, host the exact portal token at its displayed `/.well-known/openai-apps-challenge` URL; approve that targeted server change |
-| Review scenarios | Tool-level automated tests exist; five positive and three negative natural-language scenarios drafted | Run the scenarios in ChatGPT with the installed draft and record observations; local tests cannot prove routing/refusal behavior |
-| Demo | No recording created or published | Record the approved test walkthrough and approve its reviewer-accessible hosting destination |
-| Attestations/submission/publication | None accepted or performed | Review exact portal attestations and obtain explicit authorization at those steps |
-
-Updated read-only observation September 30, 2026: https://platform.openai.com/settings/organization/general with **mylee** selected shows **Verified**. Expanded details show Individual **Approved**; Business still shows **Start**. No verification flow was started by the agent and no identity documents were accessed. The exact public personal/publisher name is not displayed; mylee is the organization label, not confirmed directory developer text. [Local evidence](PLATFORM-EVIDENCE.json) records the observation without account identifiers. The user-approved public support email is included; private credentials are excluded. The observed dashboard is https://platform.openai.com/plugins.
-
-The package includes approved support contact in `author.email` and the long description, and omits `author.name`/`developerName` and missing review URLs. The portable schema permits a draft without these fields; OpenAI's submission gate requires the completed publisher and listing fields. Run the readiness validator again after adding confirmed fields. Local structural validation does not replace OpenAI scans or review.
-
-## Approval content to prepare next
-
-Reviewable English content is in [SITE-PAGES-DRAFT.md](SITE-PAGES-DRAFT.md). It is not published. Publish only within `news.bymyleslee.com`, after approval:
-
-- `/`: English product description, scope, publisher identity and links to support/privacy/terms.
-- `/support`: approved public support channel, issue-reporting instructions, no feed-uptime guarantee.
-- `/privacy`: tool parameters, Vercel/Gmail processing, confirmed Hobby runtime-log window, user controls/contact, and proposed support retention only as needed for inquiries, necessary support, legal obligations or ongoing disputes. No automatic deletion schedule or custom mailbox rule is proposed. Hosting metadata processing remains disclosed; no blanket “no data collection” claim.
-- `/terms`: metadata-only service, cached and fallible observations, independent third-party publishers and their own access conditions, no publisher affiliation/endorsement, no article-access grant, public support contact and approved service terms.
-
-Do not put review credentials or internal operational files into the ZIP. No account is required here, so dedicated reviewer credentials are unnecessary. Omit publication country targeting until the user chooses availability; configured source countries are not a directory availability allowlist.
-
-## Authoritative references
-
-- [OpenAI packaging](https://developers.openai.com/plugins/build/plugins): portable layout and MCP transport declaration.
-- [OpenAI submission](https://developers.openai.com/plugins/deploy/submission): identity, listing metadata, domain challenge, review scenarios and demo.
-- [MCP review requirements](https://developers.openai.com/plugins/deploy/app-review): remote endpoint and organization permission requirements.
-- [Plugin guidelines](https://developers.openai.com/plugins/plugin-guidelines): accurate capabilities, authorized third-party access and privacy disclosure.
-
-The user must assess permission to publish source metadata and the operator's ongoing endpoint-check practices against applicable publisher access conditions before making policy attestations. This report records actual failures and does not establish universal third-party approval. No additional crawl was run for this packaging phase.
+[Submission requirements](https://developers.openai.com/plugins/deploy/submission), [testing guide](https://developers.openai.com/plugins/deploy/connect-chatgpt), [package layout](https://developers.openai.com/plugins/build/plugins), [guidelines](https://developers.openai.com/plugins/plugin-guidelines).

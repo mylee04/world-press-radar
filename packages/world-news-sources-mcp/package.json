@@ -20,6 +20,7 @@
     "health:check": "node dist/check.js",
     "audit": "node dist/audit.js",
     "refresh:deploy": "node scripts/refresh-deploy.mjs",
+    "source:status": "node scripts/set-source-status.mjs",
     "plugin:validate": "node scripts/package-plugin.mjs",
     "plugin:package": "node scripts/package-plugin.mjs --package"
   },
