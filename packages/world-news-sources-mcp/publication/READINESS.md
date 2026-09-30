@@ -47,7 +47,7 @@ Reviewable English content is in [SITE-PAGES-DRAFT.md](SITE-PAGES-DRAFT.md). It 
 
 - `/`: English product description, scope, publisher identity and links to support/privacy/terms.
 - `/support`: approved public support channel, issue-reporting instructions, no feed-uptime guarantee.
-- `/privacy`: tool parameters, Vercel/Gmail processing, confirmed Hobby runtime-log window, user controls/contact, and proposed 90-day retention after support resolution. Hosting metadata processing remains disclosed; no blanket “no data collection” claim.
+- `/privacy`: tool parameters, Vercel/Gmail processing, confirmed Hobby runtime-log window, user controls/contact, and proposed support retention only as needed for inquiries, necessary support, legal obligations or ongoing disputes. No automatic deletion schedule or custom mailbox rule is proposed. Hosting metadata processing remains disclosed; no blanket “no data collection” claim.
 - `/terms`: metadata-only service, cached and fallible observations, independent third-party publishers and their own access conditions, no publisher affiliation/endorsement, no article-access grant, public support contact and approved service terms.
 
 Do not put review credentials or internal operational files into the ZIP. No account is required here, so dedicated reviewer credentials are unnecessary. Omit publication country targeting until the user chooses availability; configured source countries are not a directory availability allowlist.

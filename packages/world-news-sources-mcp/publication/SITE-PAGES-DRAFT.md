@@ -60,7 +60,7 @@ Publisher URLs are not fetched during tool calls. Operator checks of publicly co
 
 The application does not persist a history of user tool queries. The project currently uses Vercel's Hobby plan, whose documented runtime-log retention is one hour. There are no configured third-party project integrations or external log drains. This runtime-log window does not specify retention of every type of infrastructure or security data; those remain subject to Vercel's applicable policies. If hosting settings change materially, this notice will be updated.
 
-**[Proposed mailbox policy for approval; not current practice:]** After this policy takes effect, support correspondence will be retained while an inquiry is open and deleted within 90 days after resolution, unless a legal obligation or ongoing dispute requires longer retention. The email provider may retain backups under its own policies. You may email support to request access, correction or deletion of information held by the operator; applicable obligations and provider capabilities may affect what can be deleted. Disconnecting the plugin stops future use through that connection and does not automatically delete existing provider logs or support messages.
+**[Proposed mailbox policy for approval:]** Support correspondence will be retained only as needed to handle inquiries, provide necessary support, meet applicable legal obligations or address ongoing disputes. You may email support to request access, correction or deletion of information held by the operator; applicable obligations and provider capabilities may affect what can be deleted. The email provider may retain backups under its own policies. Disconnecting the plugin stops future use through that connection and does not automatically delete existing provider logs or support messages. This proposal does not create an automatic deletion schedule or a fixed retention period.
 
 Material changes to this notice will be reflected on this page with an updated effective date.
 
@@ -84,7 +84,7 @@ For support or questions about these terms, contact [myungeun2dc@gmail.com](mail
 ## Facts and approval needed before publishing
 
 1. Confirm the exact verified public developer identity; the Platform organization label **mylee** is not sufficient evidence of that name.
-2. Approve the proposed support-mailbox rule: delete messages within 90 days after resolution, with legal/ongoing-dispute exceptions. This rule is a proposal; no mailbox change or deletion has occurred.
+2. Approve retaining support correspondence only as needed for inquiry handling, necessary support, legal obligations or ongoing disputes, with deletion requests subject to applicable obligations/provider capabilities. No automatic deletion schedule or custom mailbox rule is proposed; no mailbox changes or deletions have occurred.
 3. Approve the privacy/terms wording and publication of these four pages to the independent news project. Fill the effective date with the actual first publication date. The portfolio and other projects are outside this scope.
 
 ### Hosting facts resolved read-only
