@@ -1,0 +1,15 @@
+{
+  "runId": "2026-09-30",
+  "registryHash": "181923b34bd66e3534d3ec4e2650acc48152553ff2c29e0335ab3b954c1e31af",
+  "startedAt": "2026-09-30T19:46:40.607Z",
+  "endpointCount": 5775,
+  "globalConcurrency": 8,
+  "perHostConcurrency": 1,
+  "minimumHostGapMs": 2000,
+  "timeoutMs": 8000,
+  "maxAttempts": 2,
+  "rssMaxBytes": 4194304,
+  "sitemapMaxBytes": 8388608,
+  "validatorVersion": "2",
+  "correction": "Recheck previously rejected public 192.0.66/78 and ordinary 2001 IPv6 addresses; private/special-use destinations remain blocked."
+}

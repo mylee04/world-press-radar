@@ -1,0 +1,50 @@
+import assert from 'node:assert/strict';
+import { existsSync, readFileSync } from 'node:fs';
+import { Client, StreamableHTTPClientTransport } from '@modelcontextprotocol/client';
+const address=process.argv[2]??'http://127.0.0.1:3000/mcp';
+const client=new Client({name:'world-news-sources-live-smoke',version:'0.1.0'});
+const verifiedExamples=[];
+try{
+  const status=await fetch(new URL('/health',address),{signal:AbortSignal.timeout(15000)});
+  assert.equal(status.status,200);const summary=await status.json();assert.equal(summary.configured_rows,5393);
+  await client.connect(new StreamableHTTPClientTransport(new URL(address)));
+  const tools=(await client.listTools()).tools;assert.equal(tools.length,4);
+  const sources=(await client.callTool({name:'search_sources',arguments:{country:'US',endpoint_type:'sitemap',limit:1}})).structuredContent;
+  assert.equal(sources.items.length,1);
+  const source=sources.items[0];
+  const details=(await client.callTool({name:'get_source',arguments:{source_id:source.id}})).structuredContent;
+  assert.equal(details.id,source.id);
+  const health=(await client.callTool({name:'get_endpoint_health',arguments:{endpoint_ids:[source.endpoints[0].id]}})).structuredContent;
+  assert.ok(['unknown','stale','healthy','unhealthy'].includes(health.endpoints[0].status));
+  const snapshotPath=new URL('../audits/health-latest.json',import.meta.url);
+  if(existsSync(snapshotPath)){
+    const expected=JSON.parse(readFileSync(snapshotPath,'utf8'));
+    assert.equal(summary.last_completed_full_audit_at,expected.audit.lastCompletedFullAuditAt);
+    assert.equal(summary.endpoints_checked,expected.audit.checked);
+    const observation=expected.observations.find(o=>o.endpointId===source.endpoints[0].id);
+    assert.equal(health.endpoints[0].checked_at,observation.checkedAt);
+    assert.equal(health.endpoints[0].entry_count,observation.entryCount??null);
+    for(const type of ['rss','sitemap']){
+      const working=expected.observations.find(o=>o.type===type&&o.auditStatus==='working_nonempty'&&o.sampleUrls?.length);
+      assert.ok(working);
+      const actual=(await client.callTool({name:'get_endpoint_health',arguments:{endpoint_ids:[working.endpointId]}})).structuredContent.endpoints[0];
+      assert.equal(actual.checked_at,working.checkedAt);assert.equal(actual.entry_count,working.entryCount);
+      assert.equal(actual.audit_status,'working_nonempty');assert.deepEqual(actual.sample_urls,working.sampleUrls);
+      verifiedExamples.push({type,endpoint_id:actual.endpoint_id,format:actual.format,checked_at:actual.checked_at,entry_count:actual.entry_count,sample_urls:actual.sample_urls});
+    }
+  }
+  const countries=(await client.callTool({name:'list_countries',arguments:{limit:1}})).structuredContent;
+  assert.equal(countries.total,73);
+  const rpc=async(body,version)=>{
+    const response=await fetch(address,{method:'POST',headers:{'content-type':'application/json',accept:'application/json, text/event-stream',...(version?{'mcp-protocol-version':version}:{})},body:JSON.stringify(body),signal:AbortSignal.timeout(15000)});
+    assert.equal(response.status,200);const text=await response.text();
+    const result=response.headers.get('content-type')?.includes('text/event-stream')?JSON.parse(text.split('\n').find(line=>line.startsWith('data: ')).slice(6)):JSON.parse(text);
+    assert.equal(result.error,undefined);return result.result;
+  };
+  const initialized=await rpc({jsonrpc:'2.0',id:1,method:'initialize',params:{protocolVersion:'2025-06-18',capabilities:{},clientInfo:{name:'live-legacy-smoke',version:'1'}}});
+  assert.equal(initialized.serverInfo.name,'world-news-sources-mcp');
+  assert.equal((await rpc({jsonrpc:'2.0',id:2,method:'tools/list'},initialized.protocolVersion)).tools.length,4);
+  const called=await rpc({jsonrpc:'2.0',id:3,method:'tools/call',params:{name:'list_countries',arguments:{limit:1}}},initialized.protocolVersion);
+  assert.equal(called.structuredContent.total,73);
+  console.log(JSON.stringify({endpoint:address,service:summary,tools:tools.map(t=>t.name),sample:{source_id:source.id,name:source.name,endpoint_type:source.endpoints[0].type,health:health.endpoints[0].status,checked_at:health.endpoints[0].checked_at,entry_count:health.endpoints[0].entry_count},output_examples:verifiedExamples,protocol:initialized.protocolVersion,verified:'HTTPS SDK calls plus legacy initialize, tools/list, tools/call and matching cached audit'},null,2));
+}finally{await client.close();}

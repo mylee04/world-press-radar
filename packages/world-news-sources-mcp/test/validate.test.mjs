@@ -19,8 +19,8 @@ test('XML markers and HTTP-like content cannot establish endpoint validity',()=>
 });
 test('safe fetch boundary rejects local, reserved, credential and port targets',()=>{
   for(const url of ['http://127.0.0.1/a','http://localhost/a','http://192.168.1.1/a','http://[::1]/a','https://example.com:8443/a','http://user:secret@example.com/a']) assert.throws(()=>safeUrl(url));
-  for(const ip of ['0.0.0.0','10.0.0.1','172.16.0.1','100.64.1.1','169.254.169.254','198.18.0.1','203.0.113.1','::ffff:127.0.0.1','2001:db8::1','fc00::1']) assert.equal(isPublicIp(ip),false,ip);
-  for(const ip of ['8.8.8.8','1.1.1.1','2606:4700:4700::1111']) assert.equal(isPublicIp(ip),true,ip);
+  for(const ip of ['0.0.0.0','10.0.0.1','172.16.0.1','100.64.1.1','169.254.169.254','192.0.0.1','192.0.2.1','198.18.0.1','203.0.113.1','::ffff:127.0.0.1','2001:db8::1','2001:2::1','2001::1','fc00::1']) assert.equal(isPublicIp(ip),false,ip);
+  for(const ip of ['8.8.8.8','1.1.1.1','192.0.66.184','192.0.78.254','2001:4860:4860::8888','2001:500:2f::f','2606:4700:4700::1111']) assert.equal(isPublicIp(ip),true,ip);
 });
 test('actual per-endpoint completion timestamp and finite failure status',async()=>{
   const url='http://127.0.0.1/feed';const start=Date.now();

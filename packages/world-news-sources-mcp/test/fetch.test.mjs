@@ -26,6 +26,7 @@ function fakeRequest(url,options,callback){
 mock.module('node:http',{namedExports:{request:fakeRequest}});
 mock.module('node:https',{namedExports:{request:fakeRequest}});
 const {fetchXml,validateXml}=await import('../dist/validate.js');
+const {auditEndpoint,isTransient}=await import('../dist/audit-check.js');
 function reset(){answers=[{address:'8.8.8.8',family:4}];responses=[];requests=[];pinned=null;lookups=0;}
 test('fetch pins approved DNS to socket and decodes bounded gzip XML',async()=>{
   reset();responses.push({status:200,headers:{'content-encoding':'gzip'},body:gzipSync(Buffer.from(rss))});
@@ -50,4 +51,20 @@ test('both wire and gzip output sizes are bounded',async()=>{
   await assert.rejects(fetchXml('https://example.com/feed'),/BODY_TOO_LARGE/);
   reset();responses.push({status:200,body:gzipSync(Buffer.alloc(2*1024*1024+1))});
   await assert.rejects(fetchXml('https://example.com/feed'));
+});
+test('live audit separates parsed outputs, empty documents, block and transient failure',async()=>{
+  const endpoint={id:'ep_'+'a'.repeat(24),type:'rss',url:'https://example.com/feed'};
+  reset();responses.push({status:200,body:Buffer.from(rss)});
+  let result=await auditEndpoint(endpoint);assert.equal(result.auditStatus,'working_nonempty');assert.equal(result.entryCount,1);assert.equal(result.contentFreshness,'missing');
+  reset();responses.push({status:200,body:Buffer.from(rss.replace('<item><title>One</title></item>',''))});
+  assert.equal((await auditEndpoint(endpoint)).auditStatus,'valid_empty');
+  reset();responses.push({status:403});result=await auditEndpoint(endpoint);assert.equal(result.auditStatus,'blocked');assert.equal(isTransient(result),false);
+  reset();responses.push({status:503});result=await auditEndpoint(endpoint);assert.equal(result.auditStatus,'http_error');assert.equal(isTransient(result),true);
+  reset();responses.push({status:200,body:Buffer.from('<html>challenge</html>')});assert.equal((await auditEndpoint(endpoint)).auditStatus,'malformed');
+});
+test('request governor also covers actual redirect hosts',async()=>{
+  reset();responses.push({status:302,headers:{location:'https://other.example/feed'}},{status:200,body:Buffer.from(rss)});
+  const hosts=[];let releases=0;
+  await fetchXml('https://example.com/feed',8000,2097152,async host=>{hosts.push(host);return()=>{releases++;};});
+  assert.deepEqual(hosts,['example.com','other.example']);assert.equal(releases,2);
 });

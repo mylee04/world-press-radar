@@ -33,7 +33,9 @@ export function createServer(catalog: Catalog, health: HealthStore) {
   }, async input => {
     const ids = [...new Set(input.endpoint_ids)];
     if (ids.some(id => !catalog.endpoints.has(id))) return { isError: true, content: [{ type: 'text' as const, text: 'Unknown endpoint_id' }] };
-    return result({ endpoints: ids.map(id => health.get(catalog.endpoints.get(id)!, sourcesByEndpoint.get(id) ?? [])) });
+    const responses = ids.map(id => health.get(catalog.endpoints.get(id)!, sourcesByEndpoint.get(id) ?? []));
+    const bounded = page(responses, 0, ids.length);
+    return result({ endpoints: bounded.items, remaining_endpoint_ids: ids.slice(bounded.items.length), audit: health.summary() });
   });
   return server;
 }

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { Client } from '@modelcontextprotocol/client';
 import { StdioClientTransport } from '@modelcontextprotocol/client/stdio';
 import { fileURLToPath } from 'node:url';
+import { existsSync, readFileSync } from 'node:fs';
 
 test('SDK client initializes real stdio server and exercises all four tools', {timeout:15000}, async()=>{
   const transport=new StdioClientTransport({command:process.execPath,args:[fileURLToPath(new URL('../dist/stdio.js',import.meta.url))],cwd:'/tmp',env:{},stderr:'pipe'});
@@ -21,7 +22,13 @@ test('SDK client initializes real stdio server and exercises all four tools', {t
     const id=source.endpoints[0].id;
     const health=await client.callTool({name:'get_endpoint_health',arguments:{endpoint_ids:[id,id]}});
     assert.equal(health.structuredContent.endpoints.length,1);
-    assert.ok(['stale','unknown'].includes(health.structuredContent.endpoints[0].status));
+    const snapshotPath=new URL('../audits/health-latest.json',import.meta.url);
+    if(existsSync(snapshotPath)){
+      const snapshot=JSON.parse(readFileSync(snapshotPath,'utf8'));const observation=snapshot.observations.find(o=>o.endpointId===id);
+      assert.equal(health.structuredContent.endpoints[0].checked_at,observation.checkedAt);
+      assert.equal(health.structuredContent.endpoints[0].entry_count,observation.entryCount??null);
+      assert.equal(health.structuredContent.audit.last_completed_full_audit_at,snapshot.audit.lastCompletedFullAuditAt);
+    }else assert.ok(['stale','unknown'].includes(health.structuredContent.endpoints[0].status));
     const unknown=await client.callTool({name:'get_source',arguments:{source_id:'src_'+'0'.repeat(24)}});assert.equal(unknown.isError,true);
     const missing=await client.callTool({name:'get_endpoint_health',arguments:{endpoint_ids:['ep_'+'0'.repeat(24)]}});assert.equal(missing.isError,true);
     const invalid=await client.callTool({name:'search_sources',arguments:{limit:51}});assert.equal(invalid.isError,true);
