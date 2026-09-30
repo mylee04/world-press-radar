@@ -13,5 +13,43 @@
     "email": "myungeun2dc@gmail.com",
     "public_use_approved": true,
     "approval_scope": "Local listing and support/policy page drafts. Publishing pages remains pending."
+  },
+  "hosting": {
+    "observed_at": "2026-09-30T21:01:08Z",
+    "provider": "Vercel",
+    "project": "world-news-sources-mcp",
+    "plan": "Hobby",
+    "plan_evidence_url": "https://vercel.com/mylee04s-projects/world-news-sources-mcp",
+    "integrations": {
+      "installed": 0,
+      "visible_text": "No Integrations Installed",
+      "url": "https://vercel.com/mylee04s-projects/world-news-sources-mcp/settings/integrations"
+    },
+    "drains": {
+      "configured": 0,
+      "visible_text": "Upgrade to Pro to create your first Drain.",
+      "url": "https://vercel.com/mylee04s-projects/world-news-sources-mcp/settings/drains"
+    },
+    "tracing": {
+      "custom_sampling_rules": 0,
+      "visible_text": "No sampling rules configured",
+      "url": "https://vercel.com/mylee04s-projects/world-news-sources-mcp/settings/tracing",
+      "note": "Does not imply the hosting platform has no automatic traces."
+    },
+    "runtime_logs": {
+      "documented_hobby_retention": "1 hour",
+      "source": "https://vercel.com/docs/logs/runtime",
+      "scope": "Runtime logs only; not an assertion about all infrastructure/security data.",
+      "ui_evidence": {
+        "url": "https://vercel.com/mylee04s-projects/world-news-sources-mcp/logs",
+        "available": "Last hour",
+        "longer_windows": "Last 12 hours and Last day grouped under Upgrade to Pro"
+      }
+    },
+    "analytics": {
+      "application_integration": false,
+      "dashboard_enable_button_visible": true
+    },
+    "settings_changed": false
   }
 }

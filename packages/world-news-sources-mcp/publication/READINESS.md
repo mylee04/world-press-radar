@@ -30,7 +30,7 @@ Validation on September 30, 2026: portable schemas and ZIP integrity passed; the
 | Publisher text | `developerName` and author name omitted because the exact public identity is not visible | Confirm the public developer name from verified identity or submission preview |
 | Public support | User approved **myungeun2dc@gmail.com**; inserted in local listing metadata and page drafts | Approve support-page content and publishing it; HTTPS supportURL remains omitted until live |
 | Product website | Existing minimal endpoint landing page works, but publisher identification is not yet approved | Approve English product/support/policy content and adding pages only to the independent news project |
-| Privacy and terms | Required URLs deliberately omitted; no fake or unapproved policy URLs | Confirm publisher, support contact, hosting log retention/processing and policy wording; then authorize publishing dedicated pages |
+| Privacy and terms | English drafts prepared; Vercel Hobby/no integrations/no drains and one-hour runtime-log window confirmed read-only; required live policy URLs omitted | Confirm public publisher name, approve proposed mailbox retention and page wording/publication |
 | Icon/category | Draft SVG included; Productivity proposed | Approve asset and confirm available dashboard category |
 | Domain ownership | HTTPS works; OpenAI challenge has not been obtained | After an authorized draft upload, host the exact portal token at its displayed `/.well-known/openai-apps-challenge` URL; approve that targeted server change |
 | Review scenarios | Tool-level automated tests exist; five positive and three negative natural-language scenarios drafted | Run the scenarios in ChatGPT with the installed draft and record observations; local tests cannot prove routing/refusal behavior |
@@ -47,7 +47,7 @@ Reviewable English content is in [SITE-PAGES-DRAFT.md](SITE-PAGES-DRAFT.md). It 
 
 - `/`: English product description, scope, publisher identity and links to support/privacy/terms.
 - `/support`: approved public support channel, issue-reporting instructions, no feed-uptime guarantee.
-- `/privacy`: accurate request/query handling, recipients (OpenAI/hosting provider as applicable), retention, user controls/contact. Application tools do not persist user searches; hosting can process request metadata. Confirm actual provider logging/retention before asserting durations or “no data collection.”
+- `/privacy`: tool parameters, Vercel/Gmail processing, confirmed Hobby runtime-log window, user controls/contact, and proposed 90-day retention after support resolution. Hosting metadata processing remains disclosed; no blanket “no data collection” claim.
 - `/terms`: metadata-only service, cached and fallible observations, independent third-party publishers and their own access conditions, no publisher affiliation/endorsement, no article-access grant, public support contact and approved service terms.
 
 Do not put review credentials or internal operational files into the ZIP. No account is required here, so dedicated reviewer credentials are unnecessary. Omit publication country targeting until the user chooses availability; configured source countries are not a directory availability allowlist.

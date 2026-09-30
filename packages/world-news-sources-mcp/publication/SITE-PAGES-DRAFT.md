@@ -1,6 +1,6 @@
 # English site and policy drafts
 
-**Local review draft; not published.** Intended destination: the independent `news.bymyleslee.com` project only. Publication date and verified developer identity must be filled in before launch. The approved public support email is **myungeun2dc@gmail.com**. The bracketed fields below are unresolved review items, not proposed public text.
+**Local review draft; not published.** Intended destination: the independent `news.bymyleslee.com` project only. Use the actual first publication date as the effective date. The verified developer identity must be filled in before launch. Public support email **myungeun2dc@gmail.com** is approved. The proposed mailbox retention below requires approval and is not a claim about current practice. The bracketed fields below are review items, not proposed public text.
 
 ## Homepage — `/`
 
@@ -36,7 +36,7 @@ Developer: **[Verified public developer identity — not yet visible]**
 
 # Privacy
 
-Effective date: **[Date approved for publication]**
+Effective date: **[Actual first publication date]**
 Operator: **[Verified public developer identity — not yet visible]**
 Contact: [myungeun2dc@gmail.com](mailto:myungeun2dc@gmail.com)
 
@@ -58,9 +58,9 @@ Publisher URLs are not fetched during tool calls. Operator checks of publicly co
 
 ### Retention and controls
 
-The application does not persist a history of user tool queries. Hosting logs and diagnostic information follow the provider's applicable retention and settings. Vercel runtime-log visibility varies by plan; it is not a guarantee about all infrastructure data. **[Confirm actual project plan, logging integrations/drains and relevant retention before publication.]**
+The application does not persist a history of user tool queries. The project currently uses Vercel's Hobby plan, whose documented runtime-log retention is one hour. There are no configured third-party project integrations or external log drains. This runtime-log window does not specify retention of every type of infrastructure or security data; those remain subject to Vercel's applicable policies. If hosting settings change materially, this notice will be updated.
 
-Support correspondence remains in the support mailbox until deleted. **[Approve an operational retention period or retention criteria before publication.]** You may email support to request access, correction or deletion of information held by the operator; applicable obligations and provider capabilities may affect what can be deleted. Disconnecting the plugin stops future use through that connection and does not automatically delete existing provider logs or support messages.
+**[Proposed mailbox policy for approval; not current practice:]** After this policy takes effect, support correspondence will be retained while an inquiry is open and deleted within 90 days after resolution, unless a legal obligation or ongoing dispute requires longer retention. The email provider may retain backups under its own policies. You may email support to request access, correction or deletion of information held by the operator; applicable obligations and provider capabilities may affect what can be deleted. Disconnecting the plugin stops future use through that connection and does not automatically delete existing provider logs or support messages.
 
 Material changes to this notice will be reflected on this page with an updated effective date.
 
@@ -68,7 +68,7 @@ Material changes to this notice will be reflected on this page with an updated e
 
 # Terms of Use
 
-Effective date: **[Date approved for publication]**
+Effective date: **[Actual first publication date]**
 Operator: **[Verified public developer identity — not yet visible]**
 
 World News Sources supplies configured news source metadata and cached endpoint observations through read-only MCP tools. Its supported features are source discovery, source details, country listings and endpoint health. Article search, full article retrieval, publisher access bypasses and registry modifications are outside the service's capabilities.
@@ -84,12 +84,15 @@ For support or questions about these terms, contact [myungeun2dc@gmail.com](mail
 ## Facts and approval needed before publishing
 
 1. Confirm the exact verified public developer identity; the Platform organization label **mylee** is not sufficient evidence of that name.
-2. Confirm the actual Vercel plan, project logging/drains/integrations and applicable retention. Current documentation lists runtime-log visibility as one hour for Hobby, one day for Pro, and longer periods for certain plans/add-ons. Those values are not inserted as this service's retention guarantee.
-3. Approve support-mailbox retention criteria and the privacy/terms wording. No new retention behavior is silently promised or implemented.
-4. Fill the effective date and authorize publishing these four pages to the independent news project. The portfolio and other projects are outside this scope.
+2. Approve the proposed support-mailbox rule: delete messages within 90 days after resolution, with legal/ongoing-dispute exceptions. This rule is a proposal; no mailbox change or deletion has occurred.
+3. Approve the privacy/terms wording and publication of these four pages to the independent news project. Fill the effective date with the actual first publication date. The portfolio and other projects are outside this scope.
+
+### Hosting facts resolved read-only
+
+The project dashboard labels the team **Hobby**. Its Integrations page states **No Integrations Installed**. Its Drains page states **Upgrade to Pro to create your first Drain**, with Add Drain disabled and no configured drains. Its Tracing page states **No sampling rules configured**; this does not prove that the provider creates no automatic traces. The overview offers **Enable Web Analytics**, and the application has no analytics integration. Vercel's current runtime-log documentation lists a one-hour window for Hobby. These findings are recorded with the settings URLs in [PLATFORM-EVIDENCE.json](PLATFORM-EVIDENCE.json); no account settings were changed.
 
 ### Implementation evidence
 
 Reviewed `src/server.ts`, `src/http.ts` and `scripts/prepare-vercel.mjs`: four read-only tools, stateless HTTP, no account authentication, no application query store or analytics integration, bundled registry/cache, no publisher fetch during calls. Source health observations and catalog snapshots are operator data and are separate from visitor request data. The deployed minimal homepage currently has no contact/policy pages; this artifact proposes their content without changing the live service.
 
-Provider references checked September 30, 2026: [Vercel runtime logs](https://vercel.com/docs/logs/runtime), [Vercel privacy notice](https://vercel.com/legal/privacy-notice). Account-specific settings remain unconfirmed. This draft requires operator review before it becomes a public policy.
+Provider references checked September 30, 2026: [Vercel runtime logs](https://vercel.com/docs/logs/runtime), [Vercel privacy notice](https://vercel.com/legal/privacy-notice), [Drains](https://vercel.com/docs/drains). The relevant account settings were inspected read-only. This draft requires operator review before it becomes a public policy.
