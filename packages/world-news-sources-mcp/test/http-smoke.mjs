@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { Client, StreamableHTTPClientTransport } from '@modelcontextprotocol/client';
+import {normalizeRegistry} from '../dist/catalog.js';
 const address=process.argv[2]??'http://127.0.0.1:3000/mcp';
 const client=new Client({name:'world-news-sources-live-smoke',version:'0.1.0'});
 const verifiedExamples=[];
@@ -15,7 +16,8 @@ try{
   const source=sources.items[0];
   const details=(await client.callTool({name:'get_source',arguments:{source_id:source.id}})).structuredContent;
   assert.equal(details.id,source.id);
-  if('enabled_changed_at' in details){assert.equal(details.enabled_changed_at,null);assert.equal(details.status_reason,null);assert.deepEqual(details.status_history,[]);}
+  const registryPath=new URL('../../../data/rss-atlas.json',import.meta.url);
+  if(existsSync(registryPath)){const expectedSource=normalizeRegistry(JSON.parse(readFileSync(registryPath,'utf8'))).sources.find(s=>s.id===details.id);assert.ok(expectedSource);for(const key of ['enabled','enabled_changed_at','status_reason','status_history','status_transition_count','status_history_consistent'])assert.deepEqual(details[key],expectedSource[key]);}
   const health=(await client.callTool({name:'get_endpoint_health',arguments:{endpoint_ids:[source.endpoints[0].id]}})).structuredContent;
   assert.ok(['unknown','stale','healthy','unhealthy'].includes(health.endpoints[0].status));
   const snapshotPath=new URL('../audits/health-latest.json',import.meta.url);

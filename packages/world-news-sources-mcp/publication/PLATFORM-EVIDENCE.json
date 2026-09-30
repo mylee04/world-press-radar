@@ -140,5 +140,17 @@
     ],
     "privacy_acknowledgment": "User explicitly approved Wrangler privacy acknowledgment and Authorize; completed successfully.",
     "privacy_policy": "https://www.cloudflare.com/privacypolicy/"
+  },
+  "review_tests": {
+    "all_eight_executed": true,
+    "report": "REVIEW-TESTS.json",
+    "complete_packaged_skill_installed": false,
+    "note": "Actual personal MCP tests; initial Chile regression fixed and rerun. Does not prove packaged skill routing."
+  },
+  "demo": {
+    "local_artifact": "dist/world-news-sources-review-demo-draft.mp4",
+    "format": "edited genuine ChatGPT captures, not continuous recording",
+    "publication_approved": false,
+    "public_url": null
   }
 }

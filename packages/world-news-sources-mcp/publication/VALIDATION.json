@@ -18,7 +18,7 @@
   "review_scenarios": {
     "positive": 5,
     "negative": 3,
-    "natural_language_executed_in_chatgpt": false
+    "natural_language_executed_in_chatgpt": true
   },
   "submission_ready": false,
   "missing_package_fields": [
@@ -28,10 +28,10 @@
     "Individual identity verification",
     "Organization submission permission and ZIP upload",
     "Approved live public site/policy pages",
-    "Domain ownership and configured MCP"
+    "Domain ownership and configured MCP",
+    "ChatGPT review tests"
   ],
   "external_gates": [
-    "ChatGPT review tests",
     "Reviewed accessible demo video",
     "Explicit final submission approval"
   ],
