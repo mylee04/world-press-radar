@@ -32,7 +32,12 @@ try {
   ledger.syncRegistry(catalog,new Date().toISOString());
   // An ambiguous DB/write failure leaves this complete URL payload on disk. Replays use the same ID.
   const pending=readdirSync(spool).filter(f=>f.endsWith('.json')).map(f=>({path:join(spool,f),data:JSON.parse(readFileSync(join(spool,f),'utf8'))})).sort((a,b)=>a.data.checked_at.localeCompare(b.data.checked_at));
-  for(const item of pending){ledger.acquire(owner,new Date().toISOString(),120);const result=ledger.commit(item.data,bindings.get(item.data.endpoint.id)??[],owner);replayed+=+result.replayed;unlinkSync(item.path);}
+  for(const item of pending){
+    ledger.acquire(owner,new Date().toISOString(),120);
+    const alreadyCommitted=ledger.db.prepare('SELECT 1 FROM collections WHERE id=?').get(item.data.id);
+    if(!alreadyCommitted&&!Array.isArray(item.data.source_bindings))throw new Error('LEGACY_PENDING_PROVENANCE_UNKNOWN');
+    const result=ledger.commit(item.data,item.data.source_bindings??[],owner);replayed+=+result.replayed;unlinkSync(item.path);
+  }
   if(!args.includes('--export-only')){
     const explicit=[];for(let i=0;i<args.length;i++)if(args[i]==='--endpoint')explicit.push(args[++i]);
     if(explicit.some(id=>!bindings.has(id)))throw new Error('Unknown or disabled endpoint');
@@ -49,7 +54,7 @@ try {
         ledger.acquire(owner,new Date().toISOString(),120);try{ledger.reserveRequest(new Date().toISOString(),dailyBudget);}catch(error){if(error.message==='DAILY_REQUEST_BUDGET_EXHAUSTED'){exhausted=true;console.log(JSON.stringify({stopped:error.message}));break;}throw error;}
         let observation=await auditEndpoint(endpoint,gate,true);
         if(isTransient(observation)){try{ledger.reserveRequest(new Date().toISOString(),dailyBudget);observation=await auditEndpoint(endpoint,gate,true);}catch(error){if(error.message!=='DAILY_REQUEST_BUDGET_EXHAUSTED')throw error;}}
-        const collection={id:collectionId(id,observation.checkedAt,observation.observedUrls??[]),endpoint,checked_at:observation.checkedAt,status:observation.auditStatus??'network_error',format:observation.format??null,reason:observation.reason??null,urls:observation.observedUrls??[],traffic:lane};
+        const collection={id:collectionId(id,observation.checkedAt,observation.observedUrls??[]),endpoint,checked_at:observation.checkedAt,status:observation.auditStatus??'network_error',format:observation.format??null,reason:observation.reason??null,urls:observation.observedUrls??[],traffic:lane,source_bindings:bindings.get(id).map(({id,countryCode})=>({id,countryCode}))};
         const path=join(spool,`${collection.id}.json`);atomicJson(path,collection);
         if(aborted)return; // Retain later in-flight payloads, so recovery can commit in chronological order.
         ledger.acquire(owner,new Date().toISOString(),120);ledger.commit(collection,bindings.get(id),owner);unlinkSync(path);completed++;if(!['working_nonempty','valid_empty'].includes(collection.status))failed++;
@@ -58,6 +63,6 @@ try {
     }));
     const rejected=workers.find(result=>result.status==='rejected');if(rejected)throw rejected.reason;
   }
-  const snapshot=ledger.snapshot(catalog);if(Buffer.byteLength(JSON.stringify(snapshot))>14*1024*1024)throw new Error('SNAPSHOT_SIZE_LIMIT');atomicJson(snapshotPath,snapshot);
+  const snapshot=ledger.snapshot(catalog);atomicJson(snapshotPath,snapshot);
   console.log(JSON.stringify({lane,db:dbPath,snapshot:snapshotPath,tracking_start:snapshot.tracking_start,completed,failed,replayed,cadence:'operator only; no timer created',daily_request_budget:dailyBudget}));
 }finally{ledger.release(owner);ledger.close();}

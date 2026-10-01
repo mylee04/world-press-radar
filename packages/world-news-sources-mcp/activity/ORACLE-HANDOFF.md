@@ -37,3 +37,13 @@ Only after manual collect→DB→export→API deploy→MCP smoke succeeds should
 ChatGPT refresh/reconnection is required to discover three new tools. Updated plugin ZIP validates locally; new natural-language review tests/demo and portal reupload remain pending. Old demo illustrates the original four tools only. Final directory submission and GitHub push remain held.
 
 Final live deployment: `EmrBUiQ4dNZj8yxqbL5jxX6gEjpy`. Tests: 54/54; fresh HTTPS proof is `activity/LIVE-MCP-VERIFICATION.json`; France/pre-tracking null and New York/rolling24h proof is `activity/SCOPE-TIMEZONE-VERIFICATION.json`.
+
+## Subsequent isolated semantic review
+
+The separately pinned `codex/activity-semantic-review` patch has 61 passing tests. It requires no database migration and does not change the production ledger, existing deployment or timers. Adopt the new pin between runs, never replace code beneath an in-flight collection.
+
+New pending spool files preserve the source/country bindings observed at collection time. Already committed old files remain safe to replay. An **uncommitted** old spool without these bindings now stops with `LEGACY_PENDING_PROVENANCE_UNKNOWN`; preserve it for operator provenance review rather than silently attributing it to today's registry. Unknown or mismatched bindings are rejected transactionally.
+
+Hosted snapshots are capped at 25,000 collections and 10 MiB, below the scoped deploy adapter's 12 MiB per-file limit. Exports retain complete timestamp cohorts and report `history_available_since` and `snapshot_coverage`. At 5,403 checks/day, the record cap permits about **4.6 days**, potentially less under the byte cap. Full SQLite history remains durable, but month/year history is **not currently queryable through the MCP cache**; older recorded periods return unavailable/null, not zero. A 31-day accepted input range is not a promise of 31-day available data.
+
+The corrected plugin draft contains the official five positive and three negative review cases, covering all seven tools. Its new ZIP version is 0.2.0. ChatGPT refresh, the revised actual-client tests/demo and portal reupload remain unexecuted; this environment exposes no browser tool. Final submission remains held.

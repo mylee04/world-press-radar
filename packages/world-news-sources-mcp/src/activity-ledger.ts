@@ -3,7 +3,8 @@ import { createHash } from 'node:crypto';
 import type { Catalog, Endpoint, Source } from './catalog.js';
 import { normalizeArticleUrl, NORMALIZATION_VERSION } from './article-url.js';
 
-export type Collection = { id: string; endpoint: Endpoint; checked_at: string; status: string; format: string | null; urls: string[]; reason: string | null; traffic: 'production' | 'inspection' };
+export type CollectionBinding = Pick<Source, 'id' | 'countryCode'>;
+export type Collection = { id: string; endpoint: Endpoint; checked_at: string; status: string; format: string | null; urls: string[]; reason: string | null; traffic: 'production' | 'inspection'; source_bindings?: CollectionBinding[] };
 export const ACTIVITY_SCHEMA = `
 PRAGMA journal_mode=WAL;
 PRAGMA foreign_keys=ON;
@@ -56,7 +57,7 @@ export class ActivityLedger {
   }
   // Every URL relationship, scope discovery, initialization and collection checkpoint commits together.
   // Inspection uses a separate ledger file; it is never copied into a production snapshot.
-  commit(collection: Collection, sources: Source[], owner: string, now = new Date().toISOString()) {
+  commit(collection: Collection, sources: CollectionBinding[], owner: string, now = new Date().toISOString()) {
     if (collection.traffic !== 'production' && this.db.prepare("SELECT value FROM metadata WHERE key='lane'").get()?.value === 'production') throw new Error('TRAFFIC_LANE_MISMATCH');
     if (!Number.isFinite(Date.parse(collection.checked_at))) throw new Error('INVALID_CHECK_TIME');
     return this.transaction(() => {
@@ -64,6 +65,11 @@ export class ActivityLedger {
       if (!lock || lock.owner !== owner || String(lock.expires_at) <= now) throw new Error('COLLECTOR_LEASE_LOST');
       const previous = this.db.prepare('SELECT details FROM collections WHERE id=?').get(collection.id);
       if (previous) return { ...JSON.parse(String(previous.details)), replayed: true };
+      if (!sources.length || new Set(sources.map(source => source.id)).size !== sources.length) throw new Error('UNREGISTERED_COLLECTION_BINDING');
+      for (const source of sources) {
+        const binding = this.db.prepare('SELECT country FROM bindings WHERE source_id=? AND endpoint_id=?').get(source.id, collection.endpoint.id);
+        if (!binding || binding.country !== source.countryCode) throw new Error('UNREGISTERED_COLLECTION_BINDING');
+      }
       const latest = this.db.prepare('SELECT MAX(checked_at) AS at FROM collections').get();
       if (latest?.at && String(latest.at) > collection.checked_at) throw new Error('OUT_OF_ORDER_COLLECTION');
       this.db.prepare(`INSERT INTO metadata VALUES('lane',?) ON CONFLICT DO NOTHING`).run(collection.traffic);
@@ -114,18 +120,31 @@ export class ActivityLedger {
       return { ...details, replayed: false };
     });
   }
-  snapshot(catalog: Catalog, at = new Date().toISOString(), days = 180) {
+  snapshot(catalog: Catalog, at = new Date().toISOString(), days = 180, options: { maxRecords?: number; maxBytes?: number } = {}) {
+    const maxRecords = options.maxRecords ?? 25000, maxBytes = options.maxBytes ?? 10 * 1024 * 1024;
+    if (!Number.isInteger(maxRecords) || maxRecords < 1 || maxRecords > 25000 || !Number.isInteger(maxBytes) || maxBytes < 1 || maxBytes > 10 * 1024 * 1024) throw new Error('INVALID_SNAPSHOT_BUDGET');
     const since = new Date(Date.parse(at) - days * 86400000).toISOString();
     const start = this.db.prepare("SELECT value FROM metadata WHERE key='tracking_start'").get()?.value ?? null;
     const lane = this.db.prepare("SELECT value FROM metadata WHERE key='lane'").get()?.value ?? 'production';
-    const all = this.db.prepare('SELECT * FROM collections WHERE checked_at>=? ORDER BY checked_at DESC,id DESC LIMIT 25000').all(since).reverse();
-    const collections = all.map(row => ({ id: row.id, endpoint_id: row.endpoint_id, checked_at: row.checked_at, status: row.status, format: row.format, reason: row.reason, ...JSON.parse(String(row.details)) }));
-    const availableSince = all.length === 25000 ? String(all[0].checked_at) : since;
+    const all = this.db.prepare('SELECT * FROM collections WHERE checked_at>=? ORDER BY checked_at DESC,id DESC LIMIT ?').all(since, maxRecords + 1).reverse();
+    const records = all.map(row => ({ id: row.id, endpoint_id: row.endpoint_id, checked_at: String(row.checked_at), status: row.status, format: row.format, reason: row.reason, ...JSON.parse(String(row.details)) }));
     const bindings = this.db.prepare('SELECT * FROM bindings').all();
     const starts = (field: string) => Object.fromEntries(this.db.prepare(`SELECT j.value AS scope,MIN(c.checked_at) AS at FROM collections c,json_each(c.details,'$.${field}') j GROUP BY j.value`).all().map(row => [String(row.scope),String(row.at)]));
-    return { version: 1, lane, generated_at: at, tracking_start: start, available_since: availableSince, normalization_version: NORMALIZATION_VERSION,
-      bindings, collections, scope_starts: { source: starts('source_ids'), country: starts('countries') }, registry_at: this.db.prepare("SELECT value FROM metadata WHERE key='registry_at'").get()?.value ?? null,
+    const base = { version: 1, lane, generated_at: at, tracking_start: start, normalization_version: NORMALIZATION_VERSION,
+      bindings, scope_starts: { source: starts('source_ids'), country: starts('countries') }, registry_at: this.db.prepare("SELECT value FROM metadata WHERE key='registry_at'").get()?.value ?? null,
       registry_digest: createHash('sha256').update(JSON.stringify(catalog.sources)).digest('hex'),
       semantics: 'First discovered unique candidate URL in each scope after that endpoint/source binding baseline. Not published articles; no semantic content dedup. Index children excluded; homepage/section/forum heuristics reported separately. Full durable URL history remains in the operator SQLite ledger.' };
+    const make = (count: number) => {
+      let offset = records.length - count;
+      // Never export half of a timestamp cohort and then call that boundary complete.
+      if (offset > 0) while (offset < records.length && records[offset].checked_at === records[offset - 1].checked_at) offset++;
+      const collections = records.slice(offset), truncated = offset > 0;
+      return { ...base, collections, available_since: truncated ? collections[0]?.checked_at ?? at : since,
+        snapshot_coverage: { requested_since: since, exported_collections: collections.length, record_limit: maxRecords, byte_limit: maxBytes, complete_stored_window: !truncated, durable_history_retained: true } };
+    };
+    if (Buffer.byteLength(JSON.stringify(make(0))) > maxBytes) throw new Error('SNAPSHOT_METADATA_SIZE_LIMIT');
+    let low = 0, high = Math.min(maxRecords, records.length);
+    while (low < high) { const mid = Math.ceil((low + high) / 2); if (Buffer.byteLength(JSON.stringify(make(mid))) <= maxBytes) low = mid; else high = mid - 1; }
+    return make(low);
   }
 }

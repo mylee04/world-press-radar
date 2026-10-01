@@ -25,3 +25,7 @@ Publisher **Myungeun Lee** is confirmed by the verified individual identity and 
 ## October 1 activity update — submission held
 
 Read cached first-discovered unique article-candidate URL activity by source or country, plus active registration inventory. Every new endpoint/source binding begins with an excluded baseline; country counts deduplicate across sources. Unknown history returns null, and incomplete initialization/collection is shown. Discovery counts are not publication counts or feed entry counts. The first production sample covers four endpoints in three countries only. The existing 108-second demonstration shows the original four-tool core and does not demonstrate these three additions. Updated manifest/skills are prepared locally; final submission and revised ChatGPT demonstration remain pending.
+
+## Reviewed package 0.2.0
+
+Five positive cases now cover all seven tools; three negative cases preserve the read-only/full-text/no-bypass boundaries. Official initial MCP review requires exactly five positive and three negative cases. The eight-positive draft is superseded and must not be submitted. Source/country activity describes recent cached candidate URL discoveries. Public history is limited by records and bytes (about 4.6 days at 5,403 daily checks before the byte limit), while the operator retains the durable ledger. No new ChatGPT test run or recording is claimed until actual browser execution is available.

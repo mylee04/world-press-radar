@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "world-news-sources",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Discover publisher RSS feeds, sitemaps, cached health and first-discovered article-URL activity.",
   "homepage": "https://news.bymyleslee.com",
   "keywords": [
@@ -17,7 +17,7 @@
       "interface": {
         "displayName": "World News Sources",
         "shortDescription": "Find RSS feeds and sitemaps",
-        "longDescription": "Find configured publisher RSS feeds and sitemaps across countries for source research, feed setup, and news monitoring projects.\n\nSearch by publisher name or domain, country, endpoint type, category, language, and configuration status. View source details, browse supported countries, and inspect separate RSS and sitemap health records with actual check times, parsed item or URL counts, sample URLs, and publication-date information when available.\n\nHealth is cached from bounded operator checks. Check times are separate from content dates: a reachable feed may contain old content, and a cached result may become stale. Some configured endpoints are empty, blocked, unavailable, malformed, or could not be fully checked. Country and configuration counts do not represent unique publishers or guaranteed live coverage. Sitemap indexes describe child sitemap entries; child files and article links are not validated by this plugin.\n\nRead active source-registration inventory and cached first-discovered unique article-candidate URL activity by source or country. Country counts deduplicate across sources. Every new endpoint/source binding begins with an excluded baseline; untracked periods return null, and partial initialization or collection is explicit. Calendar days use a requested IANA timezone or UTC; rolling 24 hours is separate. These counts are discoveries, not publications or feed entry counts. Homepage/section/forum heuristics are separated; sitemap-index children are excluded. No semantic content deduplication is performed.\n\nWorld News Sources provides read-only source metadata and observation aggregates. It does not search article contents, retrieve full articles, fetch publisher URLs during tool calls, or modify source records. No account or API key is required to use its public MCP endpoint.\n\nFor support, contact myungeun2dc@gmail.com.",
+        "longDescription": "Find configured publisher RSS feeds and sitemaps across countries for source research, feed setup, and news monitoring projects.\n\nSearch by publisher name or domain, country, endpoint type, category, language, and configuration status. View source details, browse supported countries, and inspect separate RSS and sitemap health records with actual check times, parsed item or URL counts, sample URLs, and publication-date information when available.\n\nHealth is cached from bounded operator checks. Check times are separate from content dates: a reachable feed may contain old content, and a cached result may become stale. Some configured endpoints are empty, blocked, unavailable, malformed, or could not be fully checked. Country and configuration counts do not represent unique publishers or guaranteed live coverage. Sitemap indexes describe child sitemap entries; child files and article links are not validated by this plugin.\n\nRead active source-registration inventory and cached first-discovered unique article-candidate URL activity by source or country. Country counts deduplicate across sources. Every new endpoint/source binding begins with an excluded baseline; untracked periods return null, and partial initialization or collection is explicit. Calendar days use a requested IANA timezone or UTC; rolling 24 hours is separate. Public activity history is a bounded recent snapshot; older recorded periods can be unavailable even though the operator retains durable history. These counts are discoveries, not publications or feed entry counts. Homepage/section/forum heuristics are separated; sitemap-index children are excluded. No semantic content deduplication is performed.\n\nWorld News Sources provides read-only source metadata and observation aggregates. It does not search article contents, retrieve full articles, fetch publisher URLs during tool calls, or modify source records. No account or API key is required to use its public MCP endpoint.\n\nFor support, contact myungeun2dc@gmail.com.",
         "category": "Productivity",
         "capabilities": [
           "Find RSS and sitemap sources",
@@ -43,52 +43,34 @@
         "test_cases": {
           "positive": [
             {
-              "description": "Discover configured RSS sources by country",
-              "prompt": "Find up to five enabled RSS sources in the United States and include their configured feed URLs.",
+              "description": "Discover configured RSS sources and separate cached endpoint health",
+              "prompt": "Find up to five enabled RSS sources in the United States. Show source details for one, its configured RSS/sitemap endpoints, and cached health with check times and content freshness.",
+              "tools_triggered": "search_sources, get_source, get_endpoint_health",
+              "expected_behavior": "Return matching configured source registrations and typed endpoints. Enabled is configuration, not health. Present actual cached check times separately from content dates. Do not infer RSS success from sitemap health or fetch articles."
+            },
+            {
+              "description": "Discover sitemap metadata without article availability claims",
+              "prompt": "Find up to five configured sitemap sources in Croatia. Show source names and sitemap URLs, and explain what a sitemap index health result does and does not verify.",
               "tools_triggered": "search_sources",
-              "expected_behavior": "Return at most five matching configured sources with RSS endpoints. Explain enabled is a configuration flag and does not establish current health."
+              "expected_behavior": "Return bounded configured sitemap registrations. Explain index entries are child sitemap references; no child crawl, article-body access or all-healthy claim is made."
             },
             {
-              "description": "Discover sitemap source metadata without article claims",
-              "prompt": "Find up to five configured sitemap sources in Croatia. Show the source names and sitemap URLs.",
-              "tools_triggered": "search_sources",
-              "expected_behavior": "Return matching source registrations and separate sitemap endpoints; do not describe these as article-search results or verified article URLs."
+              "description": "Paginate supported countries and read current active registration inventory",
+              "prompt": "List the first ten countries supported by World News Sources and the next ten. Then show current active source-registration and distinct RSS/sitemap endpoint counts for the United States.",
+              "tools_triggered": "list_countries, get_country_source_inventory",
+              "expected_behavior": "Use next_offset for country pages. Inventory must come from stored registry with a timestamp. Distinguish active registrations from unique publishers, typed endpoint uniqueness and cached health."
             },
             {
-              "description": "Read source details and independent endpoint health",
-              "prompt": "Find the Texas Tribune source in the United States and show its RSS and sitemap endpoints with cached check times and health.",
-              "tools_triggered": "search_sources, get_source",
-              "expected_behavior": "Use a returned source ID for details, show available typed endpoints separately and their recorded outcomes. Do not let sitemap health override RSS health or invent missing endpoints."
-            },
-            {
-              "description": "Browse supported countries with pagination",
-              "prompt": "List the first ten countries supported by World News Sources, then show the next ten.",
-              "tools_triggered": "list_countries",
-              "expected_behavior": "Return two pages using next_offset. Label counts as configured rows or normalized source records, not unique publishers or working feed counts."
-            },
-            {
-              "description": "Inspect audited output counts and date provenance",
-              "prompt": "Find an RSS source in Chile. Check its cached endpoint health and show checked time, item count, sample URLs, and content freshness when recorded.",
-              "tools_triggered": "search_sources, get_endpoint_health",
-              "expected_behavior": "Use endpoint IDs from search results; accurately present returned status, checked_at, counts and samples. Keep checked_at separate from newest_content_at. Report missing, stale, unreliable or failed results without inventing dates or fetching articles."
-            },
-            {
-              "description": "Read country inventory without publisher or health claims",
-              "prompt": "Show the current active source-registration and distinct RSS/sitemap endpoint counts for the United States.",
-              "tools_triggered": "get_country_source_inventory",
-              "expected_behavior": "Return actual stored registry counts and timestamp; distinguish registrations from publishers and configuration from health."
-            },
-            {
-              "description": "Read scope-deduplicated activity and partial initialization",
-              "prompt": "Show first-discovered article-URL activity for the United States on October 1, 2026 in UTC, with tracking start and coverage.",
+              "description": "Read country discovery activity with baseline, partial coverage and pre-tracking nulls",
+              "prompt": "Show cached first-discovered article-URL activity for the United States for the current UTC calendar day. Compare September 30, 2026 UTC, before recording began. Explain initialization, excluded baseline checks, targeted/successful endpoints and any incomplete coverage.",
               "tools_triggered": "get_country_article_activity",
-              "expected_behavior": "Present stored counts, excluded baseline semantics, partial initialization and successful/targeted endpoints. Do not sum source counts or call discoveries publications."
+              "expected_behavior": "Use real scope-deduplicated counts; do not sum source counts or use feed entry_count. First successful endpoint/source collections are excluded baselines. Pre-tracking periods return null/not_tracked, not zero. Explain recent snapshot history limits, unknown/incomplete states and discovery versus publication semantics."
             },
             {
-              "description": "Read source rolling observation window",
-              "prompt": "Find LA Times - Politics in the United States and show its cached first-discovered article-URL activity for the rolling last 24 hours.",
+              "description": "Read source rolling activity and a non-UTC calendar window",
+              "prompt": "Find LA Times - Politics in the United States. Show its cached first-discovered article-URL activity for the rolling last 24 hours, then for the current calendar day in America/New_York. Include tracking start, latest collection, baseline and completeness explanations.",
               "tools_triggered": "search_sources, get_source_article_activity",
-              "expected_behavior": "Use a returned source ID. Report tracking start, latest collection, excluded baseline and rolling24h semantics. Null means untracked/failed rather than zero."
+              "expected_behavior": "Use a returned source ID. Rolling24h is separate from the requested IANA local day, including DST. Report source-scope URL deduplication, cached timestamps and unavailable/partial history. Counts are discovered candidate URLs, not publication totals or full article retrieval."
             }
           ],
           "negative": [

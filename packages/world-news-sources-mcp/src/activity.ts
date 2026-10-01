@@ -7,7 +7,7 @@ const activityFields = { mode: z.enum(['calendar_days', 'rolling_24h']).default(
 export const sourceActivitySchema = z.object({ source_id: z.string().regex(/^src_[a-f0-9]{24}$/), ...activityFields }).strict();
 export const countryActivitySchema = z.object({ country: z.string().min(2).max(8), ...activityFields }).strict();
 export const inventorySchema = z.object({ country: z.string().min(2).max(8).optional(), include_disabled: z.boolean().default(false), ...pagination }).strict();
-export type ActivitySnapshot = { version: number; lane: string; generated_at: string; tracking_start: string | null; available_since: string; registry_at: string | null; semantics: string; bindings: Array<Record<string, unknown>>; collections: Array<Record<string, any>>; scope_starts?: { source: Record<string,string>; country: Record<string,string> } };
+export type ActivitySnapshot = { version: number; lane: string; generated_at: string; tracking_start: string | null; available_since: string; registry_at: string | null; semantics: string; bindings: Array<Record<string, unknown>>; collections: Array<Record<string, any>>; scope_starts?: { source: Record<string,string>; country: Record<string,string> }; snapshot_coverage?: Record<string,unknown> };
 export function localDate(at: number, zone: string) {
   const parts = new Intl.DateTimeFormat('en', { timeZone: zone, year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(at);
   const get = (key: string) => parts.find(p => p.type === key)!.value;
@@ -64,6 +64,7 @@ export class ActivityStore {
     return { scope_kind: kind, scope_id: scope, metric: 'first_discovered_unique_candidate_url_after_binding_baseline', timezone: input.timezone, mode: input.mode,
       tracking_start: snapshot?.tracking_start ?? null, scope_tracking_start: scopeStart,
       latest_collection: events.at(-1)?.checked_at ?? null, snapshot_at: snapshot?.generated_at ?? null, coverage_registry_at: snapshot?.registry_at ?? null,
+      history_available_since: snapshot?.available_since ?? null, snapshot_coverage: snapshot?.snapshot_coverage ?? null,
       coverage_semantics: 'Complete means every currently configured endpoint had at least one successful non-index check in the interval. It does not prove every article was seen; the interval may still be open.',
       initialized_bindings: initializedBindings.length, expected_bindings: sources.reduce((n, s) => n + s.endpoints.length, 0),
       initialization: !initializedBindings.length ? 'not_initialized' : initializedBindings.length < sources.reduce((n, s) => n + s.endpoints.length, 0) ? 'partial' : 'initialized',
