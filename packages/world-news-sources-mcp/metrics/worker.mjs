@@ -9,7 +9,8 @@ export const UPSERT = `INSERT INTO daily_tool_usage
  latency_101_500=latency_101_500+excluded.latency_101_500,
  latency_501_2000=latency_501_2000+excluded.latency_501_2000,
  latency_gt_2000=latency_gt_2000+excluded.latency_gt_2000`;
-const toolNames = new Set(['search_sources','get_source','list_countries','get_endpoint_health','unknown']);
+export const ACTIVITY_UPSERT = UPSERT.replace('daily_tool_usage', 'daily_activity_tool_usage');
+const toolNames = new Set(['search_sources','get_source','list_countries','get_endpoint_health','get_source_article_activity','get_country_article_activity','get_country_source_inventory','unknown']);
 export function validateAggregate(value) {
   if (!value || Array.isArray(value) || typeof value !== 'object') throw new Error('Invalid aggregate');
   if (Object.keys(value).sort().join(',') !== 'duration_ms,outcome,tool,traffic') throw new Error('Unexpected fields');
@@ -49,7 +50,7 @@ export default {
     if(request.method!=='POST')return new Response('Method not allowed',{status:405});
     if(!await authorized(request,env.METRICS_WRITE_SECRET))return new Response('Unauthorized',{status:401});
     let value;try{value=validateAggregate(await boundedJson(request));}catch{return new Response('Invalid aggregate',{status:400});}
-    try{await env.DB.prepare(UPSERT).bind(...parameters(value)).run();}
+    try{await env.DB.prepare(value.tool.includes('article_activity') || value.tool === 'get_country_source_inventory' ? ACTIVITY_UPSERT : UPSERT).bind(...parameters(value)).run();}
     catch{return new Response('Collector unavailable',{status:503});}
     return new Response(null,{status:204,headers:{'cache-control':'no-store'}});
   }

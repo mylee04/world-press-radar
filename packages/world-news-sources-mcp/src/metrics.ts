@@ -1,4 +1,4 @@
-const tools = new Set(['search_sources', 'get_source', 'list_countries', 'get_endpoint_health']);
+const tools = new Set(['search_sources', 'get_source', 'list_countries', 'get_endpoint_health', 'get_source_article_activity', 'get_country_article_activity', 'get_country_source_inventory']);
 export interface CallAggregate {
   tool: string;
   traffic: 'unclassified' | 'inspection';

@@ -43,8 +43,8 @@ for (const field of ['websiteURL', 'supportURL', 'privacyPolicyURL', 'termsOfSer
   requireValue(url.protocol === 'https:' && !url.username && !url.password, `Invalid HTTPS ${field}`);
 }
 const review = openai.review;
-requireValue(review.test_cases.positive.length === 5 && review.test_cases.negative.length === 3, 'Review needs exactly five positive and three negative scenarios');
-const toolNames = new Set(['search_sources', 'get_source', 'list_countries', 'get_endpoint_health']);
+requireValue(review.test_cases.positive.length === 8 && review.test_cases.negative.length === 3, 'Review needs exactly eight positive and three negative scenarios');
+const toolNames = new Set(['search_sources', 'get_source', 'list_countries', 'get_endpoint_health','get_country_source_inventory','get_source_article_activity','get_country_article_activity']);
 for (const scenario of review.test_cases.positive) {
   for (const field of ['description','prompt','tools_triggered','expected_behavior']) bounded(scenario[field], 4000, field);
   for (const tool of scenario.tools_triggered.split(',').map(s => s.trim())) requireValue(toolNames.has(tool), `Unknown review tool ${tool}`);
@@ -89,12 +89,12 @@ const gates = [
   [evidence.plugin_upload?.status === 'draft_uploaded', 'Organization submission permission and ZIP upload'],
   [evidence.approved_actions?.website_pages_publication && evidence.website_publication?.verified_https, 'Approved live public site/policy pages'],
   [evidence.plugin_upload?.domain_verified && evidence.plugin_upload?.mcp_configured, 'Domain ownership and configured MCP'],
-  [evidence.review_tests?.all_eight_executed === true, 'ChatGPT review tests'],
+  [false, 'Updated seven-tool ChatGPT review tests'],
   [!!review.demo_recording_url && evidence.demo?.publication_approved === true, 'Reviewed accessible demo video'],
   [evidence.approved_actions?.final_submit === true, 'Explicit final submission approval'],
 ];
 const report = { local_structure:'passed', portable_schemas:'Agent Plugins 1.0.0', files, sha256:hashes,
-  review_scenarios:{positive:5,negative:3,natural_language_executed_in_chatgpt:evidence.review_tests?.all_eight_executed === true},
+  review_scenarios:{positive:8,negative:3,natural_language_executed_in_chatgpt:false},
   submission_ready:false, missing_package_fields:missing,
   confirmed_external_gates:gates.filter(([confirmed])=>confirmed).map(([,label])=>label),
   external_gates:gates.filter(([confirmed])=>!confirmed).map(([,label])=>label),

@@ -10,7 +10,7 @@ test('SDK client initializes real stdio server and exercises all four tools', {t
   const client=new Client({name:'world-news-sources-test',version:'0.1.0'});
   try {
     await client.connect(transport);
-    const {tools}=await client.listTools();assert.equal(tools.length,4);
+    const {tools}=await client.listTools();assert.equal(tools.length,7);
     assert.ok(tools.every(t=>t.annotations.readOnlyHint));
     const countries=await client.callTool({name:'list_countries',arguments:{limit:2}});
     assert.equal(countries.structuredContent.configured_rows,5393);

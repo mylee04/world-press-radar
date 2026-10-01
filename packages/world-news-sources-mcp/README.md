@@ -146,3 +146,15 @@ Transport and SDK choices follow the [official MCP transport specification](http
 The English directory package is in [`plugin/`](plugin/). Run `npm run plugin:package` to create the ZIP. A draft was uploaded to the verified mylee organization; domain ownership and all four MCP tools passed the Platform scan. It is **not submitted or publicly listed**. See [`publication/READINESS.md`](publication/READINESS.md) for the remaining demo/review gates. The public [website](https://news.bymyleslee.com), [support](https://news.bymyleslee.com/support), [privacy](https://news.bymyleslee.com/privacy) and [terms](https://news.bymyleslee.com/terms) identify Myungeun Lee and the approved support contact.
 
 Optional long-term aggregate counters are described in [`metrics/README.md`](metrics/README.md). No query database or user profiles are used; deployment evidence records when collection becomes active. Local package tests include atomic concurrent increments, durability, privacy projection and protocol/error classification.
+
+## Article-URL activity and current inventory
+
+Seven read tools are now available, including `get_country_source_inventory`, `get_source_article_activity` and `get_country_article_activity`. [Activity operator documentation](activity/README.md) defines excluded initialization baselines, scope-specific discovery, deduplication, timezone/DST, partial coverage and the separate durable SQLite ledger. No tool crawls a publisher. Counts describe first-discovered candidate URLs, not publications or entry counts.
+
+```json
+{"name":"get_country_source_inventory","arguments":{"country":"US","include_disabled":true}}
+{"name":"get_country_article_activity","arguments":{"country":"US","start_date":"2026-10-01","end_date":"2026-10-01","timezone":"America/New_York"}}
+{"name":"get_source_article_activity","arguments":{"source_id":"<ID returned by search_sources>","mode":"rolling_24h"}}
+```
+
+Use `npm run activity:collect` to collect/export without deployment, or `node scripts/refresh-activity.mjs` for the bounded collection→tests/export→deployment→real MCP smoke workflow. `WNS_DEPLOY_API=1` selects the existing project-scoped Vercel REST adapter for Oracle. The weekly `refresh:deploy` health audit remains separate. No timer is created here. Refresh the ChatGPT connection to discover the new tools. Directory submission and demo revision are held until this updated release is represented truthfully.

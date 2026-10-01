@@ -35,7 +35,7 @@ export type Endpoint = { id: string; type: EndpointType; url: string };
 export type Source = StatusMetadata & {
   id: string; name: string; countryCode: string; countryName: string; enabled: boolean;
   category: string | null; language: string | null; tier: string | null;
-  registrationCount: number; rows: number[]; endpoints: Endpoint[];
+  registrationCount: number; activeRegistrationCount: number; disabledRegistrationCount: number; rows: number[]; endpoints: Endpoint[];
 };
 export type Catalog = {
   sources: Source[]; endpoints: Map<string, Endpoint>;
@@ -70,6 +70,8 @@ export function normalizeRegistry(input: unknown): Catalog {
         const previousStatus = Object.fromEntries(Object.keys(status).map(key => [key, previous[key as keyof Source]]));
         if (previous.enabled !== (feed.enabled !== false) || JSON.stringify(previousStatus) !== JSON.stringify(status)) Object.assign(previous, unknownStatus());
         previous.registrationCount++;
+        previous.activeRegistrationCount += +(feed.enabled !== false);
+        previous.disabledRegistrationCount += +(feed.enabled === false);
         previous.enabled ||= feed.enabled !== false;
         if (feed.row !== undefined && previous.rows.length < 50 && !previous.rows.includes(feed.row)) previous.rows.push(feed.row);
       } else {
@@ -77,7 +79,7 @@ export function normalizeRegistry(input: unknown): Catalog {
         sources.set(id, {
           id, name: feed.name, countryCode: code, countryName: country.name, enabled: feed.enabled !== false,
           category: feed.category ?? null, language: feed.language ?? null, tier: feed.tier == null ? null : String(feed.tier).slice(0, 128),
-          registrationCount: 1, rows: feed.row === undefined ? [] : [feed.row], endpoints: list,
+          registrationCount: 1, activeRegistrationCount: +(feed.enabled !== false), disabledRegistrationCount: +(feed.enabled === false), rows: feed.row === undefined ? [] : [feed.row], endpoints: list,
           ...status,
         });
       }

@@ -2,7 +2,7 @@
 
 The application collector records **tools/call attempts**, including validation and tool errors. Initialize, tools/list, ping, notifications, `/health` and static pages are excluded. A successful tool returning an unhealthy publisher endpoint is a successful tool call.
 
-The only persisted fields are UTC day, one of four fixed tool names (or `unknown`), a traffic hint, calls, successes, errors, duration sum/max and four latency buckets. No individual event log, request ID, IP, user ID, query, argument, prompt, conversation or result content is stored. Calls are not users; unique-user count is unavailable. Durations measure MCP handler completion, excluding the collector request; client network/model time is not measured. Values above 120 seconds are capped.
+The only persisted fields are UTC day, one of seven fixed tool names (or `unknown`), a traffic hint, calls, successes, errors, duration sum/max and four latency buckets. No individual event log, request ID, IP, user ID, query, argument, prompt, conversation or result content is stored. Calls are not users; unique-user count is unavailable. Durations measure MCP handler completion, excluding the collector request; client network/model time is not measured. Values above 120 seconds are capped.
 
 ## Durability and limits
 
@@ -33,3 +33,5 @@ The MCP uses `METRICS_COLLECTOR_URL` (exact HTTPS `/v1/aggregate` endpoint) and 
 Before enabling, publish a privacy notice matching the actual aggregate fields, Cloudflare processing and long-term aggregate retention. The public MCP remains unauthenticated; only aggregate writes require the secret.
 
 Sources: [D1 pricing](https://developers.cloudflare.com/d1/platform/pricing/), [D1 limits](https://developers.cloudflare.com/d1/platform/limits/), [Workers limits](https://developers.cloudflare.com/workers/platform/limits/).
+
+The three activity/inventory tool counters use `daily_activity_tool_usage`. Existing four-tool totals remain unchanged in `daily_tool_usage`; `report.sql` combines them. Public article-URL observations are stored separately in the operator SQLite ledger, never in usage counters.

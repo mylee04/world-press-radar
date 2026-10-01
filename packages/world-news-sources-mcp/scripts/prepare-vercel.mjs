@@ -20,7 +20,11 @@ writeJson('metadata/legacy-health.json', { results: (legacy.results ?? []).map((
 const snapshotPath = new URL('audits/health-latest.json', root);
 const snapshot = existsSync(snapshotPath) ? snapshotSchema.parse(JSON.parse(readFileSync(snapshotPath, 'utf8'))) : undefined;
 writeJson('metadata/health.json', snapshot ?? { version: 1, observations: [] });
-for (const file of ['catalog.js', 'status.js', 'health.js', 'http.js', 'server.js', 'metrics.js']) copyFileSync(new URL(`dist/${file}`, root), new URL(`dist/${file}`, output));
+const activityPath = new URL('activity/activity-snapshot.json', root);
+const activity = existsSync(activityPath) ? JSON.parse(readFileSync(activityPath, 'utf8')) : null;
+if(activity && (activity.version !== 1 || activity.lane !== 'production')) throw new Error('Invalid production activity snapshot');
+writeJson('metadata/activity.json', activity);
+for (const file of ['catalog.js', 'status.js', 'health.js', 'http.js', 'server.js', 'metrics.js', 'activity.js']) copyFileSync(new URL(`dist/${file}`, root), new URL(`dist/${file}`, output));
 const pkg = JSON.parse(readFileSync(new URL('package.json', root), 'utf8'));
 writeJson('package.json', { ...pkg, scripts: {}, engines: { node: '22.x' } });
 const lock = JSON.parse(readFileSync(new URL('package-lock.json', root), 'utf8'));
@@ -36,13 +40,15 @@ writeJson('vercel.json', {
 writeFileSync(new URL('dist/hosted.mjs', output), `import registry from '../metadata/registry.json' with {type:'json'};
 import legacy from '../metadata/legacy-health.json' with {type:'json'};
 import snapshot from '../metadata/health.json' with {type:'json'};
+import activity from '../metadata/activity.json' with {type:'json'};
+import {ActivityStore} from './activity.js';
 import {normalizeRegistry} from './catalog.js';
 import {HealthStore} from './health.js';
 import {createHttpHandler} from './http.js';
 import {createAggregateSink} from './metrics.js';
 const hosts = ['news.bymyleslee.com', process.env.VERCEL_URL, process.env.VERCEL_PROJECT_PRODUCTION_URL].filter(Boolean);
 export const handler = createHttpHandler(normalizeRegistry(registry), new HealthStore(snapshot, legacy), hosts,
-  createAggregateSink(process.env.METRICS_COLLECTOR_URL,process.env.METRICS_WRITE_SECRET));
+  createAggregateSink(process.env.METRICS_COLLECTOR_URL,process.env.METRICS_WRITE_SECRET),new ActivityStore(activity ?? undefined));
 `);
 for (const route of ['mcp', 'health']) writeFileSync(new URL(`api/${route}.mjs`, output),
   `import {handler} from '../dist/hosted.mjs';\nexport default {fetch(request){const url=new URL(request.url);url.pathname='/${route}';return handler.fetch(new Request(url,request));}};\n`);

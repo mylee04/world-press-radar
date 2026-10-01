@@ -9,16 +9,16 @@
     "skills/find-news-sources/agents/openai.yaml"
   ],
   "sha256": {
-    "plugin.json": "e8f2b075b3cbb6a7cb27eb3c1d2a43b4e73480206b91140bc8d03265d596c00f",
+    "plugin.json": "9c24c0362385f61a0a851ecb502999bc0a32926cafe9e183b0df5cc32e6895c9",
     "mcp.json": "19a11ce01db089c1d24586226b597f04ebe0d5e40876bd95246c66651685e75a",
     "assets/icon.svg": "b90b2444d1a2684b1fdaea21f2b0136b13cbaa9351bdfa7b1cf00a510dbb1eb4",
-    "skills/find-news-sources/SKILL.md": "993fea6178771ddff51cf6b1835f606852e8565263e84d35a1f6fab90fd1e249",
-    "skills/find-news-sources/agents/openai.yaml": "09065e478f895ff6a85290620dba56e9bf2fd9522c0553cac32748cb33c41152"
+    "skills/find-news-sources/SKILL.md": "a6d4079633b647191148b53b5ff0b25b2657c55e3bb8f46ce5ec5e1618a6c570",
+    "skills/find-news-sources/agents/openai.yaml": "a2ef8a42bcc482cac4592879db4b7af910bf391681066b4f507a82c50ca0ef27"
   },
   "review_scenarios": {
-    "positive": 5,
+    "positive": 8,
     "negative": 3,
-    "natural_language_executed_in_chatgpt": true
+    "natural_language_executed_in_chatgpt": false
   },
   "submission_ready": false,
   "missing_package_fields": [
@@ -28,10 +28,10 @@
     "Individual identity verification",
     "Organization submission permission and ZIP upload",
     "Approved live public site/policy pages",
-    "Domain ownership and configured MCP",
-    "ChatGPT review tests"
+    "Domain ownership and configured MCP"
   ],
   "external_gates": [
+    "Updated seven-tool ChatGPT review tests",
     "Reviewed accessible demo video",
     "Explicit final submission approval"
   ],
@@ -40,7 +40,7 @@
   ],
   "archive": {
     "path": "publication/dist/world-news-sources-0.1.0-draft.zip",
-    "sha256": "8a96ee7d02c63571dd382b2b616ec15fba0265d6d6428108be8cb0b67e932198",
+    "sha256": "3998dfbf949f50d6585fef50a5f9e17f96f0f7d51d8a147f6f2b37c33ee75b35",
     "integrity": "passed"
   }
 }

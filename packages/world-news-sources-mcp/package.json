@@ -22,7 +22,9 @@
     "refresh:deploy": "node scripts/refresh-deploy.mjs",
     "source:status": "node scripts/set-source-status.mjs",
     "plugin:validate": "node scripts/package-plugin.mjs",
-    "plugin:package": "node scripts/package-plugin.mjs --package"
+    "plugin:package": "node scripts/package-plugin.mjs --package",
+    "activity:collect": "node scripts/collect-activity.mjs",
+    "activity:export": "node scripts/collect-activity.mjs --export-only"
   },
   "dependencies": {
     "@modelcontextprotocol/node": "2.1.0",

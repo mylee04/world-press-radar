@@ -21,3 +21,7 @@ For support, contact myungeun2dc@gmail.com.
 - Compare cached endpoint availability and publication freshness before configuring a monitoring project.
 
 Publisher **Myungeun Lee** is confirmed by the verified individual identity and uploaded preview. Public support **myungeun2dc@gmail.com** and the four HTTPS pages are approved and published. The preview uses **Productivity**, a documented category title, but its automated scan still says it could not confirm the category. This warning is disclosed rather than described as a pass. The skill and MCP scans passed. The package is uploaded as a draft, not submitted or publicly listed. Weekly refresh is not an uptime guarantee.
+
+## October 1 activity update — submission held
+
+Read cached first-discovered unique article-candidate URL activity by source or country, plus active registration inventory. Every new endpoint/source binding begins with an excluded baseline; country counts deduplicate across sources. Unknown history returns null, and incomplete initialization/collection is shown. Discovery counts are not publication counts or feed entry counts. The first production sample covers four endpoints in three countries only. The existing 108-second demonstration shows the original four-tool core and does not demonstrate these three additions. Updated manifest/skills are prepared locally; final submission and revised ChatGPT demonstration remain pending.

@@ -3,8 +3,8 @@ import { toNodeHandler } from '@modelcontextprotocol/node';
 import { createHttpHandler } from './http.js';
 import { loadData } from './config.js';
 
-const { catalog, health } = loadData();
-const handler = createHttpHandler(catalog, health, ['127.0.0.1', 'localhost', '[::1]']);
+const { catalog, health, activity } = loadData();
+const handler = createHttpHandler(catalog, health, ['127.0.0.1', 'localhost', '[::1]'], undefined, activity);
 const server = createServer(toNodeHandler(handler));
 server.requestTimeout = 10000;
 server.headersTimeout = 10000;

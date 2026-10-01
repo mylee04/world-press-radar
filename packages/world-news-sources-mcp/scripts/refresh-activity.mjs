@@ -1,0 +1,21 @@
+import {spawnSync} from 'node:child_process';
+import {readFileSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import {resolve} from 'node:path';
+const root=fileURLToPath(new URL('../',import.meta.url));
+const runId=process.env.WNS_ACTIVITY_RUN_ID??new Date().toISOString().replace(/[:.]/g,'-');
+if(!/^[a-zA-Z0-9T-]{1,100}$/.test(runId))throw new Error('Invalid activity run ID');
+const arguments_=process.argv.slice(2);
+if(arguments_.includes('--inspection'))throw new Error('Inspection snapshots cannot be deployed');
+const snapshotOption=arguments_.indexOf('--snapshot');
+if(snapshotOption>=0&&resolve(arguments_[snapshotOption+1])!==resolve(root,'activity/activity-snapshot.json'))throw new Error('Deploy requires the production snapshot at activity/activity-snapshot.json');
+function run(command,args,cwd=root){const result=spawnSync(command,args,{cwd,stdio:'inherit'});if(result.error||result.status!==0)throw new Error(`${command} failed`);}
+run('npm',['run','typecheck']);run('npm',['test']);
+run(process.execPath,['scripts/collect-activity.mjs',...process.argv.slice(2)]);
+run('npm',['run','prepare:vercel']);
+const directory=fileURLToPath(new URL('../.deploy-vercel/',import.meta.url));
+const linked=JSON.parse(readFileSync(`${directory}/.vercel/project.json`,'utf8'));
+if(linked.projectId!=='prj_BJ4NiHnL2RbmtjojGUogPS2faQJs'||linked.orgId!=='team_L8qng538xRzhNBoq38X6p8sN')throw new Error('Wrong deployment project');
+if(process.env.WNS_DEPLOY_API==='1')run(process.execPath,['scripts/deploy-project-api.mjs',directory,fileURLToPath(new URL(`../activity/deployment-${runId}.json`,import.meta.url))]);
+else run('vercel',['deploy','--prod','--yes','--scope','mylee04s-projects'],directory);
+run('npm',['run','smoke:http','--','https://news.bymyleslee.com/mcp']);

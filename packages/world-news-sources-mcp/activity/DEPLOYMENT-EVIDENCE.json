@@ -1,0 +1,76 @@
+{
+  "store": "separate operator SQLite; D1 usage-only",
+  "new_credentials_required": false,
+  "new_paid_resources": false,
+  "cadence": "initial full active pass, daily due active endpoints; failed endpoints bounded backoff; no timer activated",
+  "request_budget": 12000,
+  "max_distinct_endpoints_per_run": 10000,
+  "global_concurrency": 2,
+  "per_host_concurrency": 1,
+  "per_host_gap_ms": 2000,
+  "estimated_full_run_minutes": [
+    40,
+    120
+  ],
+  "storage_soft_cap_mib": 8192,
+  "oracle_initial_backup": {
+    "file": "activity/oracle-initial-2026-10-01.sqlite",
+    "sha256": "2692c0443cda9e569de969db7f39e4902acd8ac326df0d6e1a2e0335677b478e",
+    "bytes": 2580480
+  },
+  "vercel": {
+    "id": "EmrBUiQ4dNZj8yxqbL5jxX6gEjpy",
+    "live_url": "https://news.bymyleslee.com/mcp",
+    "smoke": "all seven tools + SDK and legacy initialize/list/call passed",
+    "inspection_tool_calls": 24,
+    "new_tool_d1_rows": "First verified three new-tool rows: one inspection success each; final smoke adds another call each plus four country/timezone inspection calls."
+  },
+  "api_adapter": {
+    "whitelisted_files": 24,
+    "inline_request_bytes": 8573265,
+    "actual_scoped_api_POST": "pending Oracle manual compatible-release run; Mac CLI production already succeeded"
+  },
+  "activity": {
+    "tracking_start": "2026-10-01T01:36:12.370Z",
+    "latest_collection": "2026-10-01T01:42:19.454Z",
+    "counts": {
+      "urls": 335,
+      "scope_urls": 670,
+      "endpoint_urls": 335,
+      "binding_urls": 335,
+      "collections": 8
+    },
+    "initialized_bindings": 4,
+    "regions": [
+      {
+        "country": "GB",
+        "bindings": 1
+      },
+      {
+        "country": "JP",
+        "bindings": 1
+      },
+      {
+        "country": "US",
+        "bindings": 2
+      }
+    ],
+    "inventory": {
+      "active_countries": 72,
+      "active_source_registrations": 5023,
+      "unique_active_rss_endpoints": 3661,
+      "unique_active_sitemap_endpoints": 1742
+    },
+    "db_bytes": 2744320
+  },
+  "remaining": "Oracle df/capacity verification, safe database transfer and full baseline/manual run before scheduler; updated ChatGPT tests/demo/ZIP portal upload and final approval; no GitHub push",
+  "tests": {
+    "typecheck": "passed",
+    "build": "passed",
+    "package_tests": 54,
+    "package_test_failures": 0,
+    "adapter_tests_after_local_ignore_fix": 9,
+    "plugin_structure": "passed",
+    "new_chatgpt_natural_language_review": "pending"
+  }
+}

@@ -7,10 +7,11 @@ export type XmlSummary = {
   newestContentAt: string | null;
   contentFreshness: 'recent' | 'stale' | 'missing' | 'unreliable';
   dateKind: 'feed_item_date' | 'sitemap_lastmod';
+  observedUrls?: string[];
 };
 
 // Extract counts, a few URLs and dates only. No article text is retained.
-export function inspectXml(buffer: Buffer, type: EndpointType, now = Date.now(), maxBytes = 2 * 1024 * 1024): XmlSummary {
+export function inspectXml(buffer: Buffer, type: EndpointType, now = Date.now(), maxBytes = 2 * 1024 * 1024, fullUrls = false): XmlSummary {
   if (buffer.length > maxBytes) throw new Error('BODY_TOO_LARGE');
   const xml = new TextDecoder('utf-8', { fatal: true }).decode(buffer);
   const parser = new SaxesParser({ xmlns: true });
@@ -19,10 +20,11 @@ export function inspectXml(buffer: Buffer, type: EndpointType, now = Date.now(),
   let entryCount = 0; let entriesWithUrl = 0; let inEntry = false; let entryDepth = 0; let entryUrl = false;
   let active: { name: string; depth: number; value: string; kind: 'field' | 'url' | 'date' } | null = null;
   let newest = 0; let badDate = false; const sampleUrls: string[] = [];
+  const observedUrls = new Set<string>();
   const atomNs = 'http://www.w3.org/2005/Atom'; const rssNs = 'http://purl.org/rss/1.0/';
   const sitemapNs = 'http://www.sitemaps.org/schemas/sitemap/0.9';
   const recordUrl = (value: string, required = false) => {
-    try { const url = canonicalUrl(value.trim()); entryUrl = true; if (sampleUrls.length < 3 && !sampleUrls.includes(url)) sampleUrls.push(url); }
+    try { const url = canonicalUrl(value.trim()); entryUrl = true; if (fullUrls && root !== 'sitemapindex') observedUrls.add(url); if (sampleUrls.length < 3 && !sampleUrls.includes(url)) sampleUrls.push(url); }
     catch { if (required) throw new Error('INVALID_ENTRY_URL'); }
   };
   const recordDate = (value: string) => {
@@ -89,5 +91,5 @@ export function inspectXml(buffer: Buffer, type: EndpointType, now = Date.now(),
   if (!format) throw new Error('WRONG_ENDPOINT_FORMAT');
   return { format, entryCount, entriesWithUrl, sampleUrls, newestContentAt: newest ? new Date(newest).toISOString() : null,
     contentFreshness: badDate ? 'unreliable' : !newest ? 'missing' : now - newest > 30 * 24 * 60 * 60 * 1000 ? 'stale' : 'recent',
-    dateKind: type === 'rss' ? 'feed_item_date' : 'sitemap_lastmod' };
+    dateKind: type === 'rss' ? 'feed_item_date' : 'sitemap_lastmod', ...(fullUrls ? { observedUrls: [...observedUrls] } : {}) };
 }

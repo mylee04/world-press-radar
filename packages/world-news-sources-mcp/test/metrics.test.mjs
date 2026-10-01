@@ -69,7 +69,7 @@ test('atomic SQLite increments survive concurrent writers and reopen; no event h
     })));
     const reopened=new DatabaseSync(path);const row=reopened.prepare('SELECT * FROM daily_tool_usage').get();
     assert.equal(row.calls,400);assert.equal(row.successes,400);assert.equal(row.errors,0);assert.equal(row.duration_sum_ms,48000);assert.equal(row.duration_max_ms,120);assert.equal(row.latency_101_500,400);
-    assert.deepEqual(reopened.prepare("SELECT name FROM sqlite_master WHERE type='table'").all().map(x=>x.name),['daily_tool_usage']);reopened.close();
+    assert.deepEqual(reopened.prepare("SELECT name FROM sqlite_master WHERE type='table'").all().map(x=>x.name),['daily_tool_usage','daily_activity_tool_usage']);reopened.close();
   }finally{rmSync(dir,{recursive:true,force:true});}
 });
 

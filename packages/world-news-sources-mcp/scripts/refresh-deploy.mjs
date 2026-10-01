@@ -13,6 +13,7 @@ run('npm',['run','prepare:vercel']);
 const deploymentDir=fileURLToPath(new URL('../.deploy-vercel/',import.meta.url));
 const linked=JSON.parse(readFileSync(`${deploymentDir}/.vercel/project.json`,'utf8'));
 if(linked.projectId!=='prj_BJ4NiHnL2RbmtjojGUogPS2faQJs'||linked.orgId!=='team_L8qng538xRzhNBoq38X6p8sN')throw new Error('Refusing deployment to a different project');
-run('vercel',['deploy','--prod','--yes','--scope','mylee04s-projects'],deploymentDir);
+if(process.env.WNS_DEPLOY_API==='1')run(process.execPath,['scripts/deploy-project-api.mjs',deploymentDir,fileURLToPath(new URL(`../audits/${runId}/deployment-api-state.json`,import.meta.url))]);
+else run('vercel',['deploy','--prod','--yes','--scope','mylee04s-projects'],deploymentDir);
 run('npm',['run','smoke:http','--','https://news.bymyleslee.com/mcp']);
 console.log(`Audit ${runId} deployed and HTTPS MCP verified. Review audit failures before describing data readiness.`);

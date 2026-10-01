@@ -10,7 +10,7 @@ try{
   const status=await fetch(new URL('/health',address),{signal:AbortSignal.timeout(15000)});
   assert.equal(status.status,200);const summary=await status.json();assert.equal(summary.configured_rows,5393);
   await client.connect(new StreamableHTTPClientTransport(new URL(address),{fetch:async(input,init)=>{const headers=new Headers(init?.headers);headers.set('x-world-news-traffic','inspection');const response=await fetch(input,{...init,headers});const ack=response.headers.get('x-world-news-metrics');if(ack)metricsAcks.push(ack);return response;}}));
-  const tools=(await client.listTools()).tools;assert.equal(tools.length,4);
+  const tools=(await client.listTools()).tools;assert.equal(tools.length,7);
   const sources=(await client.callTool({name:'search_sources',arguments:{country:'US',endpoint_type:'sitemap',limit:1}})).structuredContent;
   assert.equal(sources.items.length,1);
   const source=sources.items[0];
@@ -40,6 +40,15 @@ try{
   }
   const countries=(await client.callTool({name:'list_countries',arguments:{limit:1}})).structuredContent;
   assert.equal(countries.total,73);
+  const inventory=(await client.callTool({name:'get_country_source_inventory',arguments:{country:'US',limit:1}})).structuredContent;
+  assert.ok(inventory.items[0].active_source_registrations>0);
+  const activityPath=new URL('../activity/activity-snapshot.json',import.meta.url);
+  const activitySnapshot=existsSync(activityPath)?JSON.parse(readFileSync(activityPath,'utf8')):null;
+  const activitySource=activitySnapshot?.collections[0]?.source_ids[0]??source.id;
+  const activityDay=activitySnapshot?.tracking_start?.slice(0,10)??new Date().toISOString().slice(0,10);
+  const activity=(await client.callTool({name:'get_source_article_activity',arguments:{source_id:activitySource,start_date:activityDay,end_date:activityDay}})).structuredContent;
+  const countryActivity=(await client.callTool({name:'get_country_article_activity',arguments:{country:'US',start_date:activityDay,end_date:activityDay}})).structuredContent;
+  if(activitySnapshot){assert.equal(activity.tracking_start,activitySnapshot.tracking_start);assert.equal(activity.snapshot_at,activitySnapshot.generated_at);assert.equal(summary.article_activity.tracking_start,activitySnapshot.tracking_start);assert.ok(activity.initialized_bindings>0);}
   const rpc=async(body,version)=>{
     const response=await fetch(address,{method:'POST',headers:{'content-type':'application/json',accept:'application/json, text/event-stream','x-world-news-traffic':'inspection',...(version?{'mcp-protocol-version':version}:{})},body:JSON.stringify(body),signal:AbortSignal.timeout(15000)});
     assert.equal(response.status,200);const ack=response.headers.get('x-world-news-metrics');if(ack)metricsAcks.push(ack);const text=await response.text();
@@ -48,9 +57,9 @@ try{
   };
   const initialized=await rpc({jsonrpc:'2.0',id:1,method:'initialize',params:{protocolVersion:'2025-06-18',capabilities:{},clientInfo:{name:'live-legacy-smoke',version:'1'}}});
   assert.equal(initialized.serverInfo.name,'world-news-sources-mcp');
-  assert.equal((await rpc({jsonrpc:'2.0',id:2,method:'tools/list'},initialized.protocolVersion)).tools.length,4);
+  assert.equal((await rpc({jsonrpc:'2.0',id:2,method:'tools/list'},initialized.protocolVersion)).tools.length,7);
   const called=await rpc({jsonrpc:'2.0',id:3,method:'tools/call',params:{name:'list_countries',arguments:{limit:1}}},initialized.protocolVersion);
   assert.equal(called.structuredContent.total,73);
-  if(summary.usage_statistics?.configured){assert.equal(metricsAcks.length,7);assert.ok(metricsAcks.every(ack=>ack==='recorded'));}
-  console.log(JSON.stringify({endpoint:address,service:summary,metrics_acknowledgments:metricsAcks,tools:tools.map(t=>t.name),sample:{source_id:source.id,name:source.name,endpoint_type:source.endpoints[0].type,health:health.endpoints[0].status,checked_at:health.endpoints[0].checked_at,entry_count:health.endpoints[0].entry_count},output_examples:verifiedExamples,protocol:initialized.protocolVersion,verified:'HTTPS SDK calls plus legacy initialize, tools/list, tools/call and matching cached audit'},null,2));
+  if(summary.usage_statistics?.configured){assert.equal(metricsAcks.length,10);assert.ok(metricsAcks.every(ack=>ack==='recorded'));}
+  console.log(JSON.stringify({endpoint:address,service:summary,metrics_acknowledgments:metricsAcks,tools:tools.map(t=>t.name),sample:{source_id:source.id,name:source.name,endpoint_type:source.endpoints[0].type,health:health.endpoints[0].status,checked_at:health.endpoints[0].checked_at,entry_count:health.endpoints[0].entry_count},output_examples:verifiedExamples,inventory,source_activity:activity,country_activity:countryActivity,protocol:initialized.protocolVersion,verified:'HTTPS SDK calls plus legacy initialize, tools/list, tools/call and matching cached audit'},null,2));
 }finally{await client.close();}

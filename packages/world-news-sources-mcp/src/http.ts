@@ -3,9 +3,10 @@ import type { Catalog } from './catalog.js';
 import type { HealthStore } from './health.js';
 import { createServer } from './server.js';
 import { callMetadata, callOutcome, readRpcResponse, type AggregateSink } from './metrics.js';
+import { ActivityStore } from './activity.js';
 
-export function createHttpHandler(catalog: Catalog, health: HealthStore, allowedHosts: string[], metrics?: AggregateSink) {
-  const mcp = createMcpHandler(() => createServer(catalog, health), {
+export function createHttpHandler(catalog: Catalog, health: HealthStore, allowedHosts: string[], metrics?: AggregateSink, activity = new ActivityStore()) {
+  const mcp = createMcpHandler(() => createServer(catalog, health, activity), {
     legacy: 'stateless', responseMode: 'json', maxRequestBodySize: 64 * 1024,
     maxSubscriptions: 0, keepAliveMs: 0,
   });
@@ -25,6 +26,7 @@ export function createHttpHandler(catalog: Catalog, health: HealthStore, allowed
       if (url.pathname === '/health' && request.method === 'GET') return Response.json({
         name: 'world-news-sources-mcp', status: 'ok', configured_rows: catalog.configuredRows,
         countries: catalog.countries.length, ...health.summary(),
+        article_activity: { tracking_start: activity.snapshot?.tracking_start ?? null, snapshot_at: activity.snapshot?.generated_at ?? null, cached_only: true },
         usage_statistics: { configured: !!metrics, counts: 'identifiable tools/call attempts', unique_users_measured: false,
           note: 'Aggregate collection may have outage gaps; inspection hints are client supplied.' },
       });

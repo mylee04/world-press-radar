@@ -1,12 +1,14 @@
 import { McpServer } from '@modelcontextprotocol/server';
 import { countrySchema, detailsSchema, healthSchema, page, search, searchSchema, type Catalog } from './catalog.js';
 import { HealthStore } from './health.js';
+import { ActivityStore, countryActivitySchema, sourceActivitySchema, inventorySchema, countryInventory } from './activity.js';
 
-export function createServer(catalog: Catalog, health: HealthStore) {
+export function createServer(catalog: Catalog, health: HealthStore, activity = new ActivityStore()) {
   const server = new McpServer({ name: 'world-news-sources-mcp', title: 'World News Sources', version: '0.1.0' });
   const annotations = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false };
   const result = (value: Record<string, unknown>) => ({ content: [{ type: 'text' as const, text: JSON.stringify(value) }], structuredContent: value });
   const sourcesByEndpoint = new Map<string, Catalog['sources']>();
+  const inventoryAt = activity.snapshot?.registry_at ?? new Date().toISOString();
   for (const source of catalog.sources) for (const endpoint of source.endpoints) {
     const list = sourcesByEndpoint.get(endpoint.id) ?? [];
     list.push(source); sourcesByEndpoint.set(endpoint.id, list);
@@ -37,5 +39,12 @@ export function createServer(catalog: Catalog, health: HealthStore) {
     const bounded = page(responses, 0, ids.length);
     return result({ endpoints: bounded.items, remaining_endpoint_ids: ids.slice(bounded.items.length), audit: health.summary() });
   });
+  server.registerTool('get_country_source_inventory', { description: 'Current stored registry inventory: active source registrations (not publishers), distinct typed RSS and sitemap endpoint IDs, country totals and snapshot time. Counts are configuration, not health.', inputSchema: inventorySchema, annotations }, async input => result(countryInventory(catalog, input, inventoryAt)));
+  for (const kind of ['source', 'country'] as const) {
+    server.registerTool(kind === 'source' ? 'get_source_article_activity' : 'get_country_article_activity', {
+      description: `Read cached ${kind} first-discovered unique article-candidate URL activity, deduplicated in this scope. Every new endpoint/source binding starts with an excluded baseline. Not publication counts or feed item counts. Partial/untracked coverage, UTC check times, timezone calendar days and rolling 24h are explicit. No live feed fetch.`,
+      inputSchema: kind === 'source' ? sourceActivitySchema : countryActivitySchema, annotations,
+    }, async (input: unknown) => { try { return result(activity.query(catalog, kind, input)); } catch (error) { return { isError: true, content: [{ type: 'text' as const, text: error instanceof Error ? error.message : 'Invalid activity input' }] }; } });
+  }
   return server;
 }

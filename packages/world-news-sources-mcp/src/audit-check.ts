@@ -3,7 +3,7 @@ import type { Observation } from './health.js';
 import { fetchXml, type RequestGate } from './validate.js';
 import { inspectXml } from './inspect.js';
 
-export async function auditEndpoint(endpoint: Endpoint, gate?: RequestGate): Promise<Observation> {
+export async function auditEndpoint(endpoint: Endpoint, gate?: RequestGate, fullUrls = false): Promise<Observation & { observedUrls?: string[] }> {
   const started = Date.now(); let status: number | null = null;
   let reason: string | null = null; let summary: ReturnType<typeof inspectXml> | undefined; let finalUrl: string | undefined;
   let auditStatus: Observation['auditStatus'] = 'network_error';
@@ -12,7 +12,7 @@ export async function auditEndpoint(endpoint: Endpoint, gate?: RequestGate): Pro
     const maxBytes = endpoint.type === 'sitemap' ? 8 * 1024 * 1024 : 4 * 1024 * 1024;
     const response = await fetchXml(endpoint.url, 8000, maxBytes, gate); status = response.status; finalUrl = response.finalUrl;
     if (status < 200 || status >= 300) throw new Error(`HTTP_${status}`);
-    summary = inspectXml(response.body, endpoint.type, Date.now(), maxBytes);
+    summary = inspectXml(response.body, endpoint.type, Date.now(), maxBytes, fullUrls);
     auditStatus = summary.entryCount ? 'working_nonempty' : 'valid_empty';
   } catch (error) {
     const message = error instanceof Error ? error.message : '';

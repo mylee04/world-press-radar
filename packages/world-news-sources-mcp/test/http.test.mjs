@@ -16,7 +16,7 @@ test('HTTP SDK client discovers/lists/calls all tools with stateless transport',
   const handler=create();const client=new Client({name:'http-test',version:'1.0.0'});
   try{
     await client.connect(new StreamableHTTPClientTransport(new URL('https://example.com/mcp'),{fetch:(input,init)=>handler.fetch(new Request(input,init))}));
-    assert.equal((await client.listTools()).tools.length,4);
+    assert.equal((await client.listTools()).tools.length,7);
     const result=await client.callTool({name:'search_sources',arguments:{country:'US',limit:1}});
     assert.equal(result.structuredContent.items.length,1);
     assert.equal((await client.callTool({name:'list_countries',arguments:{}})).structuredContent.total,2);
@@ -32,7 +32,7 @@ test('legacy initialize and tools calls succeed without a persistent session',as
     assert.equal(response.status,200);assert.equal(response.headers.get('mcp-session-id'),null);
     assert.equal((await payload(response)).result.serverInfo.name,'world-news-sources-mcp');
     const tools=await post(handler,{jsonrpc:'2.0',id:2,method:'tools/list'}, {'mcp-protocol-version':'2025-06-18'});
-    assert.equal((await payload(tools)).result.tools.length,4);
+    assert.equal((await payload(tools)).result.tools.length,7);
   }finally{await handler.close();}
 });
 test('HTTP boundary rejects invalid hosts, origins, paths, methods and oversized requests',async()=>{

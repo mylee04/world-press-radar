@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "world-news-sources",
   "version": "0.1.0",
-  "description": "Discover configured news publisher RSS feeds and sitemaps with cached per-endpoint health.",
+  "description": "Discover publisher RSS feeds, sitemaps, cached health and first-discovered article-URL activity.",
   "homepage": "https://news.bymyleslee.com",
   "keywords": [
     "news sources",
@@ -17,12 +17,14 @@
       "interface": {
         "displayName": "World News Sources",
         "shortDescription": "Find RSS feeds and sitemaps",
-        "longDescription": "Find configured publisher RSS feeds and sitemaps across countries for source research, feed setup, and news monitoring projects.\n\nSearch by publisher name or domain, country, endpoint type, category, language, and configuration status. View source details, browse supported countries, and inspect separate RSS and sitemap health records with actual check times, parsed item or URL counts, sample URLs, and publication-date information when available.\n\nHealth is cached from bounded operator checks. Check times are separate from content dates: a reachable feed may contain old content, and a cached result may become stale. Some configured endpoints are empty, blocked, unavailable, malformed, or could not be fully checked. Country and configuration counts do not represent unique publishers or guaranteed live coverage. Sitemap indexes describe child sitemap entries; child files and article links are not validated by this plugin.\n\nWorld News Sources provides read-only source metadata. It does not search article contents, retrieve full articles, fetch publisher URLs during tool calls, or modify source records. No account or API key is required to use its public MCP endpoint.\n\nFor support, contact myungeun2dc@gmail.com.",
+        "longDescription": "Find configured publisher RSS feeds and sitemaps across countries for source research, feed setup, and news monitoring projects.\n\nSearch by publisher name or domain, country, endpoint type, category, language, and configuration status. View source details, browse supported countries, and inspect separate RSS and sitemap health records with actual check times, parsed item or URL counts, sample URLs, and publication-date information when available.\n\nHealth is cached from bounded operator checks. Check times are separate from content dates: a reachable feed may contain old content, and a cached result may become stale. Some configured endpoints are empty, blocked, unavailable, malformed, or could not be fully checked. Country and configuration counts do not represent unique publishers or guaranteed live coverage. Sitemap indexes describe child sitemap entries; child files and article links are not validated by this plugin.\n\nRead active source-registration inventory and cached first-discovered unique article-candidate URL activity by source or country. Country counts deduplicate across sources. Every new endpoint/source binding begins with an excluded baseline; untracked periods return null, and partial initialization or collection is explicit. Calendar days use a requested IANA timezone or UTC; rolling 24 hours is separate. These counts are discoveries, not publications or feed entry counts. Homepage/section/forum heuristics are separated; sitemap-index children are excluded. No semantic content deduplication is performed.\n\nWorld News Sources provides read-only source metadata and observation aggregates. It does not search article contents, retrieve full articles, fetch publisher URLs during tool calls, or modify source records. No account or API key is required to use its public MCP endpoint.\n\nFor support, contact myungeun2dc@gmail.com.",
         "category": "Productivity",
         "capabilities": [
           "Find RSS and sitemap sources",
           "Browse supported countries",
-          "Read cached endpoint health"
+          "Read cached endpoint health",
+          "Read source and country URL activity",
+          "Read active source inventory"
         ],
         "websiteURL": "https://news.bymyleslee.com",
         "defaultPrompt": [
@@ -69,6 +71,24 @@
               "prompt": "Find an RSS source in Chile. Check its cached endpoint health and show checked time, item count, sample URLs, and content freshness when recorded.",
               "tools_triggered": "search_sources, get_endpoint_health",
               "expected_behavior": "Use endpoint IDs from search results; accurately present returned status, checked_at, counts and samples. Keep checked_at separate from newest_content_at. Report missing, stale, unreliable or failed results without inventing dates or fetching articles."
+            },
+            {
+              "description": "Read country inventory without publisher or health claims",
+              "prompt": "Show the current active source-registration and distinct RSS/sitemap endpoint counts for the United States.",
+              "tools_triggered": "get_country_source_inventory",
+              "expected_behavior": "Return actual stored registry counts and timestamp; distinguish registrations from publishers and configuration from health."
+            },
+            {
+              "description": "Read scope-deduplicated activity and partial initialization",
+              "prompt": "Show first-discovered article-URL activity for the United States on October 1, 2026 in UTC, with tracking start and coverage.",
+              "tools_triggered": "get_country_article_activity",
+              "expected_behavior": "Present stored counts, excluded baseline semantics, partial initialization and successful/targeted endpoints. Do not sum source counts or call discoveries publications."
+            },
+            {
+              "description": "Read source rolling observation window",
+              "prompt": "Find LA Times - Politics in the United States and show its cached first-discovered article-URL activity for the rolling last 24 hours.",
+              "tools_triggered": "search_sources, get_source_article_activity",
+              "expected_behavior": "Use a returned source ID. Report tracking start, latest collection, excluded baseline and rolling24h semantics. Null means untracked/failed rather than zero."
             }
           ],
           "negative": [
@@ -90,7 +110,7 @@
         "commerce_description": "This plugin does not sell products or process payments."
       },
       "publication": {
-        "release_notes": "Initial source discovery and cached RSS/sitemap health tools. Configured sources include unsuccessful and incomplete checks."
+        "release_notes": "Adds cached first-discovered article-candidate URL activity and active source inventory. Initial production coverage is partial; every new endpoint/source binding uses an excluded baseline. No article full text or live publisher fetch on tool calls."
       }
     }
   },
