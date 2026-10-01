@@ -1,0 +1,531 @@
+{
+  "request_budget_per_invocation": 32,
+  "requests_this_invocation": 20,
+  "global_concurrency": 1,
+  "per_host_concurrency": 1,
+  "host_gap_ms": 2000,
+  "no_registry_mutation": true,
+  "results": [
+    {
+      "country": "CA",
+      "name": "The Maple",
+      "language": "en",
+      "home": "https://www.readthemaple.com/",
+      "kind": "new_publisher",
+      "resources": [
+        {
+          "url": "https://www.readthemaple.com/",
+          "final_url": "https://www.readthemaple.com/",
+          "status": 200,
+          "checked_at": "2026-10-01T19:41:01.531Z",
+          "sha256": "850ed3689720e73bbb317da2d8d1eb87b1dd25639187728af2f23307b195a915"
+        },
+        {
+          "url": "https://www.readthemaple.com/robots.txt",
+          "final_url": "https://www.readthemaple.com/robots.txt",
+          "status": 200,
+          "checked_at": "2026-10-01T19:41:03.789Z",
+          "sha256": "07e6985c0fe6ddf3f473ce164a9da6e1ddb016986277fa39444b199ceec0b4ad"
+        },
+        {
+          "url": "https://www.readthemaple.com/sitemap.xml",
+          "final_url": "https://www.readthemaple.com/sitemap.xml",
+          "status": 200,
+          "checked_at": "2026-10-01T19:41:10.691Z",
+          "sha256": "c6393d02b158991179af7f2735ff26fa64c1fcbaf0f2f08b4d464870ca8d1151"
+        }
+      ],
+      "checked": [
+        {
+          "url": "https://www.readthemaple.com/rss/",
+          "type": "rss",
+          "kind": "official_html_feed_link",
+          "source_url": "https://www.readthemaple.com/",
+          "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"The Maple\" href=\"https://www.readthemaple.com/rss/\">",
+          "found_at": "2026-10-01T19:41:01.531Z",
+          "page_sha256": "850ed3689720e73bbb317da2d8d1eb87b1dd25639187728af2f23307b195a915",
+          "endpoint_id": "ep_19f015aca4c596d818830ac8",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_19f015aca4c596d818830ac8",
+            "type": "rss",
+            "url": "https://www.readthemaple.com/rss/",
+            "checkedAt": "2026-10-01T19:41:06.182Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 15,
+            "entriesWithUrl": 15,
+            "sampleUrls": [
+              "https://www.readthemaple.com/how-pro-israel-voices-warped-the-belleville-shooting-narrative/",
+              "https://www.readthemaple.com/bill-c-39-poses-an-existential-risk-to-strike-rights/",
+              "https://www.readthemaple.com/theres-no-evidence-tying-palestine-movement-to-shootings/"
+            ],
+            "newestContentAt": "2026-09-29T17:59:56.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.readthemaple.com/rss/",
+            "durationMs": 2391,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 15,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "54ee15ac7b1b64834f21e6574082f29d22623c9369ef429e3030feddb83a8040"
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.readthemaple.com/sitemap.xml",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://www.readthemaple.com/robots.txt",
+          "found_at": "2026-10-01T19:41:03.789Z",
+          "page_sha256": "07e6985c0fe6ddf3f473ce164a9da6e1ddb016986277fa39444b199ceec0b4ad",
+          "declaration": "Sitemap: https://www.readthemaple.com/sitemap.xml",
+          "endpoint_id": "ep_b6e2f0f7971c846ba1252a53",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_b6e2f0f7971c846ba1252a53",
+            "type": "sitemap",
+            "url": "https://www.readthemaple.com/sitemap.xml",
+            "checkedAt": "2026-10-01T19:41:08.515Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 4,
+            "entriesWithUrl": 4,
+            "sampleUrls": [
+              "https://www.readthemaple.com/sitemap-pages.xml",
+              "https://www.readthemaple.com/sitemap-posts.xml",
+              "https://www.readthemaple.com/sitemap-authors.xml"
+            ],
+            "newestContentAt": "2026-10-01T15:45:14.062Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.readthemaple.com/sitemap.xml",
+            "durationMs": 2332,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 0,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.readthemaple.com/sitemap-posts.xml",
+          "kind": "official_sitemap_index_enumerated_child",
+          "source_url": "https://www.readthemaple.com/sitemap.xml",
+          "declared_lastmod": "2026-09-29T17:59:56.000Z",
+          "found_at": "2026-10-01T19:41:10.691Z",
+          "page_sha256": "c6393d02b158991179af7f2735ff26fa64c1fcbaf0f2f08b4d464870ca8d1151",
+          "endpoint_id": "ep_28f2219a7ba17213c01388da",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_28f2219a7ba17213c01388da",
+            "type": "sitemap",
+            "url": "https://www.readthemaple.com/sitemap-posts.xml",
+            "checkedAt": "2026-10-01T19:41:13.144Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 1393,
+            "entriesWithUrl": 1393,
+            "sampleUrls": [
+              "https://www.readthemaple.com/how-pro-israel-voices-warped-the-belleville-shooting-narrative/",
+              "https://www.readthemaple.com/here-are-the-10-mps-most-lobbied-by-cija/",
+              "https://www.readthemaple.com/bill-c-39-poses-an-existential-risk-to-strike-rights/"
+            ],
+            "newestContentAt": "2026-09-29T17:59:56.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.readthemaple.com/sitemap-posts.xml",
+            "durationMs": 2452,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 1393,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "f6d5fcbb7a6fcee955ff7f37f14ea7d7b3666e9346643494ab6ac66b92d7ca1e"
+        }
+      ]
+    },
+    {
+      "country": "GB",
+      "name": "Novara Media",
+      "language": "en",
+      "home": "https://novaramedia.com/",
+      "kind": "new_publisher",
+      "resources": [
+        {
+          "url": "https://novaramedia.com/",
+          "final_url": "https://novaramedia.com/",
+          "status": 200,
+          "checked_at": "2026-10-01T19:41:13.429Z",
+          "sha256": "bb9e232d2f101347817ecfdb8364574838b817b3bd4e6aca4e8b1b673df74c7d"
+        },
+        {
+          "url": "https://novaramedia.com/robots.txt",
+          "final_url": "https://novaramedia.com/robots.txt",
+          "status": 200,
+          "checked_at": "2026-10-01T19:41:15.926Z",
+          "sha256": "eb694bf69d09f1b5aa691f8176f3029762b6dd1b631006f4f57b48586caa0694"
+        }
+      ],
+      "checked": [
+        {
+          "url": "https://novaramedia.com/feed/",
+          "type": "rss",
+          "kind": "official_html_feed_link",
+          "source_url": "https://novaramedia.com/",
+          "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Novara Media RSS Feed\" href=\"https://novaramedia.com/feed/\" />",
+          "found_at": "2026-10-01T19:41:13.429Z",
+          "page_sha256": "bb9e232d2f101347817ecfdb8364574838b817b3bd4e6aca4e8b1b673df74c7d",
+          "endpoint_id": "ep_0f17eeafc6eb846f413fa1b9",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_0f17eeafc6eb846f413fa1b9",
+            "type": "rss",
+            "url": "https://novaramedia.com/feed/",
+            "checkedAt": "2026-10-01T19:41:18.077Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 10,
+            "entriesWithUrl": 10,
+            "sampleUrls": [
+              "https://novaramedia.com/2026/10/01/tories-lib-dems-scramble-for-response-to-burnham-speech/",
+              "https://novaramedia.com/2026/10/01/spains-tenants-rights-protesters-win-reforms-after-87-year-old-evicted/",
+              "https://novaramedia.com/2026/10/01/stop-helping-saudi-arabia-bomb-yemen-rights-experts-tell-burnham/"
+            ],
+            "newestContentAt": "2026-10-01T19:14:36.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://novaramedia.com/feed/",
+            "durationMs": 2148,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 10,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "7f1b291f64ee446e1ee7da226fe607d0356189fb6256c168e103b79b7c609efd"
+        },
+        {
+          "type": "sitemap",
+          "url": "https://novaramedia.com/wp-sitemap.xml",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://novaramedia.com/robots.txt",
+          "found_at": "2026-10-01T19:41:15.926Z",
+          "page_sha256": "eb694bf69d09f1b5aa691f8176f3029762b6dd1b631006f4f57b48586caa0694",
+          "declaration": "Sitemap: https://novaramedia.com/wp-sitemap.xml",
+          "endpoint_id": "ep_795069cdc0d697f3b771821b",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_795069cdc0d697f3b771821b",
+            "type": "sitemap",
+            "url": "https://novaramedia.com/wp-sitemap.xml",
+            "checkedAt": "2026-10-01T19:41:20.407Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "valid_empty",
+            "entryCount": 0,
+            "entriesWithUrl": 0,
+            "sampleUrls": [],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://novaramedia.com/wp-sitemap.xml",
+            "durationMs": 2330,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 0,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      ]
+    },
+    {
+      "country": "FR",
+      "name": "Basta!",
+      "language": "fr",
+      "home": "https://basta.media/",
+      "kind": "new_publisher",
+      "resources": [
+        {
+          "url": "https://basta.media/",
+          "final_url": "https://basta.media/",
+          "status": 200,
+          "checked_at": "2026-10-01T19:41:21.390Z",
+          "sha256": "01a49bee6deb8d1cee36af4ae343b5be33406dae023866850f8e63c72020fd07"
+        },
+        {
+          "url": "https://basta.media/robots.txt",
+          "final_url": "https://basta.media/robots.txt",
+          "status": 200,
+          "checked_at": "2026-10-01T19:41:23.884Z",
+          "sha256": "b091dd0952f08eaa588154f85514700b7bde4664341b075c765be2db312d5157"
+        }
+      ],
+      "checked": [
+        {
+          "url": "https://basta.media/spip.php?page=backend",
+          "type": "rss",
+          "kind": "official_html_feed_link",
+          "source_url": "https://basta.media/",
+          "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Syndiquer tout le site\" href=\"spip.php?page=backend\" />",
+          "found_at": "2026-10-01T19:41:21.390Z",
+          "page_sha256": "01a49bee6deb8d1cee36af4ae343b5be33406dae023866850f8e63c72020fd07",
+          "endpoint_id": "ep_457e3c06ded097f1c7a220c6",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_457e3c06ded097f1c7a220c6",
+            "type": "rss",
+            "url": "https://basta.media/spip.php?page=backend",
+            "checkedAt": "2026-10-01T19:41:26.488Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 11,
+            "entriesWithUrl": 11,
+            "sampleUrls": [
+              "https://basta.media/budget-2027-tout-le-monde-devra-contribuer-aux-efforts-pas-vraiment",
+              "https://basta.media/Election-presidentielle-Bresil-plus-grand-pays-Amerique-latine-va-t-il-basculer-extreme-droite-Bolsonaro-Lula",
+              "https://basta.media/on-pensait-que-le-rectorat-ferait-ce-qu-il-fallait-des-profs-punies-pour-avoir-denonce-des-violences-sexistes-sexuelles-VSS"
+            ],
+            "newestContentAt": "2026-10-01T16:48:31.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://basta.media/spip.php?page=backend",
+            "durationMs": 2601,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 11,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "bfec52447bf24aafbabd9be9d85ce1329e77ee74000bf442a958b79eed7a3b2e"
+        },
+        {
+          "type": "sitemap",
+          "url": "https://basta.media/sitemap.xml",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://basta.media/robots.txt",
+          "found_at": "2026-10-01T19:41:23.884Z",
+          "page_sha256": "b091dd0952f08eaa588154f85514700b7bde4664341b075c765be2db312d5157",
+          "declaration": "Sitemap: https://basta.media/sitemap.xml",
+          "endpoint_id": "ep_1259fa35044abbb4dbb7c528",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_1259fa35044abbb4dbb7c528",
+            "type": "sitemap",
+            "url": "https://basta.media/sitemap.xml",
+            "checkedAt": "2026-10-01T19:41:31.155Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 8100,
+            "entriesWithUrl": 8100,
+            "sampleUrls": [
+              "https://basta.media/",
+              "https://basta.media/rapports-de-force",
+              "https://basta.media/societe"
+            ],
+            "newestContentAt": "2026-10-01T17:14:07.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://basta.media/sitemap.xml",
+            "durationMs": 4667,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 8098,
+          "uncertain_url_count": 1,
+          "url_set_sha256": "b912da06245622d0cad4801f000240016a0041c0f36b991e54634822c5a23ff9"
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "name": "Grist",
+      "language": "en",
+      "home": "https://grist.org/",
+      "kind": "new_publisher",
+      "index": "https://grist.org/sitemap_index.xml",
+      "resources": [
+        {
+          "url": "https://grist.org/sitemap_index.xml",
+          "final_url": "https://grist.org/sitemap_index.xml",
+          "status": 200,
+          "checked_at": "2026-10-01T19:41:31.324Z",
+          "sha256": "d7806a83052b0292ab490a3800b0e9c601f3151377371f8cfee0c8a974c4e74a"
+        }
+      ],
+      "checked": [
+        {
+          "type": "sitemap",
+          "url": "https://grist.org/post-sitemap63.xml",
+          "kind": "official_sitemap_index_enumerated_child",
+          "source_url": "https://grist.org/sitemap_index.xml",
+          "declared_lastmod": "2026-10-01T19:16:43+00:00",
+          "found_at": "2026-10-01T19:41:31.324Z",
+          "page_sha256": "d7806a83052b0292ab490a3800b0e9c601f3151377371f8cfee0c8a974c4e74a",
+          "endpoint_id": "ep_32aae890790131d52e71c104",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_32aae890790131d52e71c104",
+            "type": "sitemap",
+            "url": "https://grist.org/post-sitemap63.xml",
+            "checkedAt": "2026-10-01T19:41:33.528Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 612,
+            "entriesWithUrl": 612,
+            "sampleUrls": [
+              "https://grist.org/food/super-cows-so-last-year-meet-the-double-bacon-hog/",
+              "https://grist.org/living/celebrate-independence-day-with-these-rad-women-and-popsicles/",
+              "https://grist.org/living/mary-iverson-makes-climate-change-paintings-that-are-actually-cool/"
+            ],
+            "newestContentAt": "2026-10-01T19:16:43.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://grist.org/post-sitemap63.xml",
+            "durationMs": 2202,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 612,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "49f43b9d31f0a68b75eb148d4a1b3254383d6546a84151f350ba6a91430f52ab"
+        }
+      ]
+    },
+    {
+      "country": "CA",
+      "name": "The Narwhal",
+      "language": "en",
+      "home": "https://thenarwhal.ca/",
+      "kind": "new_publisher",
+      "index": "https://thenarwhal.ca/sitemap_index.xml",
+      "resources": [
+        {
+          "url": "https://thenarwhal.ca/sitemap_index.xml",
+          "final_url": "https://thenarwhal.ca/sitemap_index.xml",
+          "status": 200,
+          "checked_at": "2026-10-01T19:41:34.242Z",
+          "sha256": "621ac61e649847a87dc6e29d9e3193b4e3780177e145da9348372de0ab296d58"
+        }
+      ],
+      "checked": [
+        {
+          "type": "sitemap",
+          "url": "https://thenarwhal.ca/post-sitemap3.xml",
+          "kind": "official_sitemap_index_enumerated_child",
+          "source_url": "https://thenarwhal.ca/sitemap_index.xml",
+          "declared_lastmod": "2026-08-31T13:45:12+00:00",
+          "found_at": "2026-10-01T19:41:34.242Z",
+          "page_sha256": "621ac61e649847a87dc6e29d9e3193b4e3780177e145da9348372de0ab296d58",
+          "endpoint_id": "ep_ab12ae564cd7d7d6a7a77ab7",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_ab12ae564cd7d7d6a7a77ab7",
+            "type": "sitemap",
+            "url": "https://thenarwhal.ca/post-sitemap3.xml",
+            "checkedAt": "2026-10-01T19:41:36.996Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 1201,
+            "entriesWithUrl": 1201,
+            "sampleUrls": [
+              "https://thenarwhal.ca/scientists-60-countries-condemn-cuts-vital-climate-research-australia-s-csiro-agency/",
+              "https://thenarwhal.ca/trudeau-premier-clark-urged-halt-site-c-construction-honour-relations-first-nations/",
+              "https://thenarwhal.ca/alberta-s-unprotected-foothills-forest-no-longer-refuge-threatened-species/"
+            ],
+            "newestContentAt": "2016-02-12T01:54:22.000Z",
+            "contentFreshness": "stale",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://thenarwhal.ca/post-sitemap3.xml",
+            "durationMs": 2753,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 1201,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "e0831dfa17ecf40a6f5df226ba859c81aa62e18413bd4a4e737ca2233c47d3bd"
+        }
+      ]
+    },
+    {
+      "country": "IT",
+      "name": "Il Post",
+      "language": "it",
+      "home": "https://www.ilpost.it/",
+      "kind": "new_publisher",
+      "index": "https://www.ilpost.it/sitemaps/sitemap-posts-index.xml",
+      "resources": [
+        {
+          "url": "https://www.ilpost.it/sitemaps/sitemap-posts-index.xml",
+          "final_url": "https://www.ilpost.it/sitemaps/sitemap-posts-index.xml",
+          "status": 200,
+          "checked_at": "2026-10-01T19:41:37.154Z",
+          "sha256": "c3dc7b76bfc7a9ecdcbd0ed6b18e843de50ffbc4a9bd833534fcc5bc3ed9436f"
+        }
+      ],
+      "checked": [
+        {
+          "type": "sitemap",
+          "url": "https://www.ilpost.it/sitemaps/posts/sitemap-2026-10.xml",
+          "kind": "official_sitemap_index_enumerated_child",
+          "source_url": "https://www.ilpost.it/sitemaps/sitemap-posts-index.xml",
+          "declared_lastmod": "2026-09-30",
+          "found_at": "2026-10-01T19:41:37.154Z",
+          "page_sha256": "c3dc7b76bfc7a9ecdcbd0ed6b18e843de50ffbc4a9bd833534fcc5bc3ed9436f",
+          "endpoint_id": "ep_4975152f0e5987773a9e1807",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_4975152f0e5987773a9e1807",
+            "type": "sitemap",
+            "url": "https://www.ilpost.it/sitemaps/posts/sitemap-2026-10.xml",
+            "checkedAt": "2026-10-01T19:41:39.612Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "valid_empty",
+            "entryCount": 0,
+            "entriesWithUrl": 0,
+            "sampleUrls": [],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.ilpost.it/sitemaps/posts/sitemap-2026-10.xml",
+            "durationMs": 2454,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 0,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      ]
+    }
+  ]
+}

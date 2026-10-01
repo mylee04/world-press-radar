@@ -1,0 +1,1528 @@
+{
+  "scope": "G7 first bounded pass in approved registered-major20 countries",
+  "no_registry_mutation": true,
+  "request_budget_per_invocation": 96,
+  "requests_this_invocation": 67,
+  "global_concurrency": 2,
+  "per_host_concurrency": 1,
+  "host_gap_ms": 2000,
+  "results": [
+    {
+      "country": "GB",
+      "name": "The Bureau of Investigative Journalism",
+      "home": {
+        "url": "https://www.thebureauinvestigates.com/",
+        "final_url": "https://www.thebureauinvestigates.com/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:30:24.533Z",
+        "sha256": "7d0c95e9d1cefc89bdb566042ed1aa02455493cb9336d6d6e3c722bb0fa9802e"
+      },
+      "language": "en",
+      "kind": "new_publisher",
+      "robots": {
+        "url": "https://www.thebureauinvestigates.com/robots.txt",
+        "final_url": "https://www.thebureauinvestigates.com/robots.txt",
+        "status": 200,
+        "checked_at": "2026-10-01T19:30:26.798Z",
+        "sha256": "3a3996b114cee2dd23d9cb054e1046f21a43f0cf4e1ffcbca08d0ebe2c1e8394"
+      },
+      "declared_candidates": 0,
+      "checked": []
+    },
+    {
+      "country": "US",
+      "name": "Grist",
+      "home": {
+        "url": "https://grist.org/",
+        "final_url": "https://grist.org/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:30:24.575Z",
+        "sha256": "a80ce4e09b1173552dbf78e1bae81c9d19f8f8dbfd9905ce489c1a5f8e4b6220"
+      },
+      "language": "en",
+      "kind": "new_publisher",
+      "robots": {
+        "url": "https://grist.org/robots.txt",
+        "final_url": "https://grist.org/robots.txt",
+        "status": 200,
+        "checked_at": "2026-10-01T19:30:26.697Z",
+        "sha256": "450b576989d6cf418d913d6913317afbdc4365ca7a30e57b7c1c9838542792bd"
+      },
+      "declared_candidates": 2,
+      "checked": [
+        {
+          "url": "https://grist.org/sitemap_index.xml",
+          "type": "sitemap",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://grist.org/robots.txt",
+          "found_at": "2026-10-01T19:30:26.697Z",
+          "page_sha256": "450b576989d6cf418d913d6913317afbdc4365ca7a30e57b7c1c9838542792bd",
+          "declaration": "Sitemap: https://grist.org/sitemap_index.xml",
+          "endpoint_id": "ep_26294c36677ca48f38c3ea9d",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_26294c36677ca48f38c3ea9d",
+            "type": "sitemap",
+            "url": "https://grist.org/sitemap_index.xml",
+            "checkedAt": "2026-10-01T19:30:28.823Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 80,
+            "entriesWithUrl": 80,
+            "sampleUrls": [
+              "https://grist.org/post-sitemap.xml",
+              "https://grist.org/post-sitemap2.xml",
+              "https://grist.org/post-sitemap3.xml"
+            ],
+            "newestContentAt": "2026-10-01T13:46:08.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://grist.org/sitemap_index.xml",
+            "durationMs": 2124,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://grist.org/post-sitemap.xml",
+          "kind": "official_sitemap_index_child",
+          "source_url": "https://grist.org/sitemap_index.xml",
+          "found_at": "2026-10-01T19:30:28.823Z",
+          "endpoint_id": "ep_84d6bbfb0b6759e4a12aff02",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_84d6bbfb0b6759e4a12aff02",
+            "type": "sitemap",
+            "url": "https://grist.org/post-sitemap.xml",
+            "checkedAt": "2026-10-01T19:30:30.981Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 1000,
+            "entriesWithUrl": 1000,
+            "sampleUrls": [
+              "https://grist.org/article/clean-air-maybe-in-time-for-y3k/",
+              "https://grist.org/article/not-just-fueling-around/",
+              "https://grist.org/article/one-more-reason-war-is-hell/"
+            ],
+            "newestContentAt": "1999-12-16T20:00:49.000Z",
+            "contentFreshness": "stale",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://grist.org/post-sitemap.xml",
+            "durationMs": 2157,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "url": "https://grist.org/grist-50/sitemap_index.xml",
+          "type": "sitemap",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://grist.org/robots.txt",
+          "found_at": "2026-10-01T19:30:26.697Z",
+          "page_sha256": "450b576989d6cf418d913d6913317afbdc4365ca7a30e57b7c1c9838542792bd",
+          "declaration": "Sitemap: https://grist.org/grist-50/sitemap_index.xml",
+          "endpoint_id": "ep_a0502c330e5e366a337ba35c",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_a0502c330e5e366a337ba35c",
+            "type": "sitemap",
+            "url": "https://grist.org/grist-50/sitemap_index.xml",
+            "checkedAt": "2026-10-01T19:30:33.099Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 1,
+            "entriesWithUrl": 1,
+            "sampleUrls": [
+              "https://grist.org/grist-50/grist-50-sitemap.xml"
+            ],
+            "newestContentAt": "2022-01-28T22:15:47.000Z",
+            "contentFreshness": "stale",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://grist.org/grist-50/sitemap_index.xml",
+            "durationMs": 2118,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://grist.org/grist-50/grist-50-sitemap.xml",
+          "kind": "official_sitemap_index_child",
+          "source_url": "https://grist.org/grist-50/sitemap_index.xml",
+          "found_at": "2026-10-01T19:30:33.099Z",
+          "endpoint_id": "ep_84c1d54347048273260ca24a",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_84c1d54347048273260ca24a",
+            "type": "sitemap",
+            "url": "https://grist.org/grist-50/grist-50-sitemap.xml",
+            "checkedAt": "2026-10-01T19:30:35.240Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 7,
+            "entriesWithUrl": 7,
+            "sampleUrls": [
+              "https://grist.org/grist-50/climate-and-energy/",
+              "https://grist.org/grist-50/2021/",
+              "https://grist.org/grist-50/2018/"
+            ],
+            "newestContentAt": "2022-01-28T22:15:47.000Z",
+            "contentFreshness": "stale",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://grist.org/grist-50/grist-50-sitemap.xml",
+            "durationMs": 2141,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        }
+      ]
+    },
+    {
+      "country": "FR",
+      "name": "Reporterre",
+      "home": {
+        "url": "https://reporterre.net/",
+        "final_url": "https://reporterre.net/",
+        "status": 403,
+        "checked_at": "2026-10-01T19:30:35.452Z",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "language": "fr",
+      "kind": "new_publisher",
+      "robots": {
+        "url": "https://reporterre.net/robots.txt",
+        "final_url": "https://reporterre.net/robots.txt",
+        "status": 403,
+        "checked_at": "2026-10-01T19:30:37.566Z",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "declared_candidates": 0,
+      "checked": []
+    },
+    {
+      "country": "CA",
+      "name": "The Narwhal",
+      "home": {
+        "url": "https://thenarwhal.ca/",
+        "final_url": "https://thenarwhal.ca/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:30:27.300Z",
+        "sha256": "48731e74be7eb004dd7626245b945a866cb1fa6e03990b46695f8edb7fd0fecf"
+      },
+      "language": "en",
+      "kind": "new_publisher",
+      "robots": {
+        "url": "https://thenarwhal.ca/robots.txt",
+        "final_url": "https://thenarwhal.ca/robots.txt",
+        "status": 200,
+        "checked_at": "2026-10-01T19:30:29.433Z",
+        "sha256": "b4178d2a6e3fc2a92ae5b282a79eb05c143f134028c497ba0b02f7dc8d27d726"
+      },
+      "declared_candidates": 1,
+      "checked": [
+        {
+          "url": "https://thenarwhal.ca/sitemap_index.xml",
+          "type": "sitemap",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://thenarwhal.ca/robots.txt",
+          "found_at": "2026-10-01T19:30:29.433Z",
+          "page_sha256": "b4178d2a6e3fc2a92ae5b282a79eb05c143f134028c497ba0b02f7dc8d27d726",
+          "declaration": "Sitemap: https://thenarwhal.ca/sitemap_index.xml",
+          "endpoint_id": "ep_a51ddf38769af730bb35f38e",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_a51ddf38769af730bb35f38e",
+            "type": "sitemap",
+            "url": "https://thenarwhal.ca/sitemap_index.xml",
+            "checkedAt": "2026-10-01T19:30:31.899Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 10,
+            "entriesWithUrl": 10,
+            "sampleUrls": [
+              "https://thenarwhal.ca/post-sitemap1.xml",
+              "https://thenarwhal.ca/post-sitemap2.xml",
+              "https://thenarwhal.ca/post-sitemap3.xml"
+            ],
+            "newestContentAt": "2026-09-01T12:20:31.000Z",
+            "contentFreshness": "stale",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://thenarwhal.ca/sitemap_index.xml",
+            "durationMs": 2465,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://thenarwhal.ca/post-sitemap1.xml",
+          "kind": "official_sitemap_index_child",
+          "source_url": "https://thenarwhal.ca/sitemap_index.xml",
+          "found_at": "2026-10-01T19:30:31.899Z",
+          "endpoint_id": "ep_6330b8068f1f4f36047c4a42",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_6330b8068f1f4f36047c4a42",
+            "type": "sitemap",
+            "url": "https://thenarwhal.ca/post-sitemap1.xml",
+            "checkedAt": "2026-10-01T19:30:39.902Z",
+            "outcome": "unhealthy",
+            "httpStatus": null,
+            "reason": "TIMEOUT",
+            "format": null,
+            "auditStatus": "timeout",
+            "durationMs": 8003,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        }
+      ]
+    },
+    {
+      "country": "IT",
+      "name": "Il Post",
+      "home": {
+        "url": "https://www.ilpost.it/",
+        "final_url": "https://www.ilpost.it/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:30:40.190Z",
+        "sha256": "453f1675f34154ad969427ba4b2c2acd2fd35fbea705ec0e6bf076bf352aa198"
+      },
+      "language": "it",
+      "kind": "new_publisher",
+      "robots": {
+        "url": "https://www.ilpost.it/robots.txt",
+        "final_url": "https://www.ilpost.it/robots.txt",
+        "status": 200,
+        "checked_at": "2026-10-01T19:30:42.296Z",
+        "sha256": "b513f71fb8915b14fad336ffc3a419ac1ea11b3b5c505dc6ab34d93d30e711dd"
+      },
+      "declared_candidates": 2,
+      "checked": [
+        {
+          "url": "https://www.ilpost.it/sitemaps/sitemap.xml",
+          "type": "sitemap",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://www.ilpost.it/robots.txt",
+          "found_at": "2026-10-01T19:30:42.296Z",
+          "page_sha256": "b513f71fb8915b14fad336ffc3a419ac1ea11b3b5c505dc6ab34d93d30e711dd",
+          "declaration": "Sitemap: https://www.ilpost.it/sitemaps/sitemap.xml",
+          "endpoint_id": "ep_c513a8134d268b46331142e9",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_c513a8134d268b46331142e9",
+            "type": "sitemap",
+            "url": "https://www.ilpost.it/sitemaps/sitemap.xml",
+            "checkedAt": "2026-10-01T19:30:44.811Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 3,
+            "entriesWithUrl": 3,
+            "sampleUrls": [
+              "https://www.ilpost.it/sitemaps/sitemap-tag.xml",
+              "https://www.ilpost.it/sitemaps/sitemap-category.xml",
+              "https://www.ilpost.it/sitemaps/sitemap-general.xml"
+            ],
+            "newestContentAt": "2026-09-29T00:00:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.ilpost.it/sitemaps/sitemap.xml",
+            "durationMs": 2512,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.ilpost.it/sitemaps/sitemap-tag.xml",
+          "kind": "official_sitemap_index_child",
+          "source_url": "https://www.ilpost.it/sitemaps/sitemap.xml",
+          "found_at": "2026-10-01T19:30:44.811Z",
+          "endpoint_id": "ep_377720b7f1655e67a238908f",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_377720b7f1655e67a238908f",
+            "type": "sitemap",
+            "url": "https://www.ilpost.it/sitemaps/sitemap-tag.xml",
+            "checkedAt": "2026-10-01T19:30:47.845Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 7903,
+            "entriesWithUrl": 7903,
+            "sampleUrls": [
+              "https://www.ilpost.it/tag/stati-uniti",
+              "https://www.ilpost.it/tag/calcio",
+              "https://www.ilpost.it/tag/giornali"
+            ],
+            "newestContentAt": "2026-09-29T00:00:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.ilpost.it/sitemaps/sitemap-tag.xml",
+            "durationMs": 3034,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "url": "https://www.ilpost.it/sitemaps/sitemap-posts-index.xml",
+          "type": "sitemap",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://www.ilpost.it/robots.txt",
+          "found_at": "2026-10-01T19:30:42.296Z",
+          "page_sha256": "b513f71fb8915b14fad336ffc3a419ac1ea11b3b5c505dc6ab34d93d30e711dd",
+          "declaration": "Sitemap: https://www.ilpost.it/sitemaps/sitemap-posts-index.xml",
+          "endpoint_id": "ep_9d928f2c2b0c0c9aad81a97d",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_9d928f2c2b0c0c9aad81a97d",
+            "type": "sitemap",
+            "url": "https://www.ilpost.it/sitemaps/sitemap-posts-index.xml",
+            "checkedAt": "2026-10-01T19:30:50.393Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 202,
+            "entriesWithUrl": 202,
+            "sampleUrls": [
+              "https://www.ilpost.it/sitemaps/posts/sitemap-1970-01.xml",
+              "https://www.ilpost.it/sitemaps/posts/sitemap-2009-01.xml",
+              "https://www.ilpost.it/sitemaps/posts/sitemap-2010-03.xml"
+            ],
+            "newestContentAt": "2026-09-30T00:00:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.ilpost.it/sitemaps/sitemap-posts-index.xml",
+            "durationMs": 2548,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.ilpost.it/sitemaps/posts/sitemap-1970-01.xml",
+          "kind": "official_sitemap_index_child",
+          "source_url": "https://www.ilpost.it/sitemaps/sitemap-posts-index.xml",
+          "found_at": "2026-10-01T19:30:50.393Z",
+          "endpoint_id": "ep_0823ca946131ac3651b5a0bd",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_0823ca946131ac3651b5a0bd",
+            "type": "sitemap",
+            "url": "https://www.ilpost.it/sitemaps/posts/sitemap-1970-01.xml",
+            "checkedAt": "2026-10-01T19:30:52.864Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "valid_empty",
+            "entryCount": 0,
+            "entriesWithUrl": 0,
+            "sampleUrls": [],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.ilpost.it/sitemaps/posts/sitemap-1970-01.xml",
+            "durationMs": 2471,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        }
+      ]
+    },
+    {
+      "country": "DE",
+      "name": "CORRECTIV",
+      "home": {
+        "url": "https://correctiv.org/",
+        "final_url": "https://correctiv.org/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:30:45.348Z",
+        "sha256": "07082914f6cce77d466b31b92a52a2e258b17294ddcb692e3d2a3adab2ad4994"
+      },
+      "language": "de",
+      "kind": "new_publisher",
+      "robots": {
+        "url": "https://correctiv.org/robots.txt",
+        "final_url": "https://correctiv.org/robots.txt",
+        "status": 200,
+        "checked_at": "2026-10-01T19:30:47.976Z",
+        "sha256": "3a0323e87d56f9ebf91edd7986d177e79ebf278acf784edff415e41c22dcbb92"
+      },
+      "declared_candidates": 2,
+      "checked": [
+        {
+          "url": "https://www.correctiv.org/sitemap.xml",
+          "type": "sitemap",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://correctiv.org/robots.txt",
+          "found_at": "2026-10-01T19:30:47.976Z",
+          "page_sha256": "3a0323e87d56f9ebf91edd7986d177e79ebf278acf784edff415e41c22dcbb92",
+          "declaration": "Sitemap: https://www.correctiv.org/sitemap.xml",
+          "endpoint_id": "ep_7d1f4b7e7945d90aa8c81aab",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_7d1f4b7e7945d90aa8c81aab",
+            "type": "sitemap",
+            "url": "https://www.correctiv.org/sitemap.xml",
+            "checkedAt": "2026-10-01T19:30:51.621Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 500,
+            "entriesWithUrl": 500,
+            "sampleUrls": [
+              "https://correctiv.org/",
+              "https://correctiv.org/thema/top-stories/",
+              "https://correctiv.org/thema/aktuelles/"
+            ],
+            "newestContentAt": "2019-02-25T12:07:01.000Z",
+            "contentFreshness": "stale",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://correctiv.org/sitemap.xml",
+            "durationMs": 3643,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "url": "https://www.correctiv.org/sitemap_index.xml",
+          "type": "sitemap",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://correctiv.org/robots.txt",
+          "found_at": "2026-10-01T19:30:47.976Z",
+          "page_sha256": "3a0323e87d56f9ebf91edd7986d177e79ebf278acf784edff415e41c22dcbb92",
+          "declaration": "Sitemap: https://www.correctiv.org/sitemap_index.xml",
+          "endpoint_id": "ep_940b85f3c5a5ab8cc9922bf3",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_940b85f3c5a5ab8cc9922bf3",
+            "type": "sitemap",
+            "url": "https://www.correctiv.org/sitemap_index.xml",
+            "checkedAt": "2026-10-01T19:30:54.247Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 13,
+            "entriesWithUrl": 13,
+            "sampleUrls": [
+              "https://correctiv.org/post-sitemap.xml",
+              "https://correctiv.org/post-sitemap2.xml",
+              "https://correctiv.org/post-sitemap3.xml"
+            ],
+            "newestContentAt": "2026-10-01T14:51:10.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://correctiv.org/sitemap_index.xml",
+            "durationMs": 2626,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://correctiv.org/post-sitemap.xml",
+          "kind": "official_sitemap_index_child",
+          "source_url": "https://www.correctiv.org/sitemap_index.xml",
+          "found_at": "2026-10-01T19:30:54.247Z",
+          "endpoint_id": "ep_50d20d5df6cc77c694dd5ce5",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_50d20d5df6cc77c694dd5ce5",
+            "type": "sitemap",
+            "url": "https://correctiv.org/post-sitemap.xml",
+            "checkedAt": "2026-10-01T19:31:02.248Z",
+            "outcome": "unhealthy",
+            "httpStatus": null,
+            "reason": "TIMEOUT",
+            "format": null,
+            "auditStatus": "timeout",
+            "durationMs": 8001,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "name": "Nippon.com - Japanese",
+      "home": {
+        "url": "https://www.nippon.com/ja/",
+        "final_url": "https://www.nippon.com/ja/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:30:53.444Z",
+        "sha256": "f58c8624d4ee21534d148a26cf0cc20b6e6643918b6aab7dbc39c162f954f191"
+      },
+      "language": "ja",
+      "kind": "additional_language",
+      "robots": {
+        "url": "https://www.nippon.com/robots.txt",
+        "final_url": "https://www.nippon.com/robots.txt",
+        "status": 200,
+        "checked_at": "2026-10-01T19:30:55.826Z",
+        "sha256": "b86520ab999a046890a0588dd0b2cd318f239d37fb9092a5b06edd158b50f58b"
+      },
+      "declared_candidates": 2,
+      "checked": [
+        {
+          "url": "https://www.nippon.com/ja/sitemap.xml",
+          "type": "sitemap",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://www.nippon.com/robots.txt",
+          "found_at": "2026-10-01T19:30:55.826Z",
+          "page_sha256": "b86520ab999a046890a0588dd0b2cd318f239d37fb9092a5b06edd158b50f58b",
+          "declaration": "Sitemap: https://www.nippon.com/ja/sitemap.xml",
+          "endpoint_id": "ep_a4906ebbcb26ad98080d5cfa",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_a4906ebbcb26ad98080d5cfa",
+            "type": "sitemap",
+            "url": "https://www.nippon.com/ja/sitemap.xml",
+            "checkedAt": "2026-10-01T19:30:58.170Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 6,
+            "entriesWithUrl": 6,
+            "sampleUrls": [
+              "https://www.nippon.com/ja/site.xml",
+              "https://www.nippon.com/ja/articles.xml",
+              "https://www.nippon.com/ja/articles_1.xml"
+            ],
+            "newestContentAt": "2026-10-01T12:03:02.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.nippon.com/ja/sitemap.xml",
+            "durationMs": 2343,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.nippon.com/ja/articles.xml",
+          "kind": "official_sitemap_index_child",
+          "source_url": "https://www.nippon.com/ja/sitemap.xml",
+          "found_at": "2026-10-01T19:30:58.170Z",
+          "endpoint_id": "ep_9f992b8b56df6da618683de6",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_9f992b8b56df6da618683de6",
+            "type": "sitemap",
+            "url": "https://www.nippon.com/ja/articles.xml",
+            "checkedAt": "2026-10-01T19:31:01.889Z",
+            "outcome": "unhealthy",
+            "httpStatus": null,
+            "reason": "BODY_TOO_LARGE",
+            "format": null,
+            "auditStatus": "incomplete",
+            "durationMs": 3719,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "url": "https://www.nippon.com/en/sitemap.xml",
+          "type": "sitemap",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://www.nippon.com/robots.txt",
+          "found_at": "2026-10-01T19:30:55.826Z",
+          "page_sha256": "b86520ab999a046890a0588dd0b2cd318f239d37fb9092a5b06edd158b50f58b",
+          "declaration": "Sitemap: https://www.nippon.com/en/sitemap.xml",
+          "endpoint_id": "ep_3550057da7f238e2e19174df",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_3550057da7f238e2e19174df",
+            "type": "sitemap",
+            "url": "https://www.nippon.com/en/sitemap.xml",
+            "checkedAt": "2026-10-01T19:31:04.207Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 4,
+            "entriesWithUrl": 4,
+            "sampleUrls": [
+              "https://www.nippon.com/en/site.xml",
+              "https://www.nippon.com/en/articles.xml",
+              "https://www.nippon.com/en/googleNews.xml"
+            ],
+            "newestContentAt": "2026-10-01T12:06:01.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.nippon.com/en/sitemap.xml",
+            "durationMs": 2318,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.nippon.com/en/articles.xml",
+          "kind": "official_sitemap_index_child",
+          "source_url": "https://www.nippon.com/en/sitemap.xml",
+          "found_at": "2026-10-01T19:31:04.207Z",
+          "endpoint_id": "ep_6697c3af1f2e24bf15445de4",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_6697c3af1f2e24bf15445de4",
+            "type": "sitemap",
+            "url": "https://www.nippon.com/en/articles.xml",
+            "checkedAt": "2026-10-01T19:31:07.818Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 17521,
+            "entriesWithUrl": 17521,
+            "sampleUrls": [
+              "https://www.nippon.com/en/news/yjj2026100100960/",
+              "https://www.nippon.com/en/news/yjj2026100100761/",
+              "https://www.nippon.com/en/news/yjj2026100100799/"
+            ],
+            "newestContentAt": "2026-10-01T11:02:14.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.nippon.com/en/articles.xml",
+            "durationMs": 3611,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "name": "War on the Rocks",
+      "home": {
+        "url": "https://warontherocks.com/",
+        "final_url": "https://warontherocks.com/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:31:02.657Z",
+        "sha256": "ea2318cb74b1a5768775fd6438ac060c4a6118650e6dc72cbb9c8f8bbcc5cd61"
+      },
+      "language": "en",
+      "kind": "failed_endpoint_alternative",
+      "robots": {
+        "url": "https://warontherocks.com/robots.txt",
+        "final_url": "https://warontherocks.com/robots.txt",
+        "status": 200,
+        "checked_at": "2026-10-01T19:31:04.929Z",
+        "sha256": "93a2b1f91c696d38093e6567eacb464015e9282e6c7f60a188382b4add189010"
+      },
+      "declared_candidates": 1,
+      "checked": [
+        {
+          "url": "https://warontherocks.com/sitemap_index.xml",
+          "type": "sitemap",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://warontherocks.com/robots.txt",
+          "found_at": "2026-10-01T19:31:04.929Z",
+          "page_sha256": "93a2b1f91c696d38093e6567eacb464015e9282e6c7f60a188382b4add189010",
+          "declaration": "Sitemap: https://warontherocks.com/sitemap_index.xml",
+          "endpoint_id": "ep_8e0ab2184da05e0330df1706",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_8e0ab2184da05e0330df1706",
+            "type": "sitemap",
+            "url": "https://warontherocks.com/sitemap_index.xml",
+            "checkedAt": "2026-10-01T19:31:07.398Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 15,
+            "entriesWithUrl": 15,
+            "sampleUrls": [
+              "https://warontherocks.com/post-sitemap.xml",
+              "https://warontherocks.com/post-sitemap2.xml",
+              "https://warontherocks.com/post-sitemap3.xml"
+            ],
+            "newestContentAt": "2026-10-01T16:57:27.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://warontherocks.com/sitemap_index.xml",
+            "durationMs": 2468,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://warontherocks.com/post-sitemap.xml",
+          "kind": "official_sitemap_index_child",
+          "source_url": "https://warontherocks.com/sitemap_index.xml",
+          "found_at": "2026-10-01T19:31:07.398Z",
+          "endpoint_id": "ep_9bb7c362036cf7c2ebbdb9f3",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_9bb7c362036cf7c2ebbdb9f3",
+            "type": "sitemap",
+            "url": "https://warontherocks.com/post-sitemap.xml",
+            "checkedAt": "2026-10-01T19:31:11.331Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 1000,
+            "entriesWithUrl": 1000,
+            "sampleUrls": [
+              "https://warontherocks.com/review-the-guns-at-last-light/",
+              "https://warontherocks.com/hoffman-contrasting-clausewitz-and-contemporary-conflict/",
+              "https://warontherocks.com/hasty-ambush/deploying-differently-to-korea/"
+            ],
+            "newestContentAt": "2015-11-03T07:50:50.000Z",
+            "contentFreshness": "stale",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://warontherocks.com/post-sitemap.xml",
+            "durationMs": 3932,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        }
+      ]
+    },
+    {
+      "country": "CA",
+      "name": "The Georgia Straight",
+      "home": {
+        "url": "https://www.straight.com/",
+        "final_url": "https://www.straight.com/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:31:11.834Z",
+        "sha256": "a2a0ba766a9152e596c642ca3e10e2824105fc711acb1eb0757cfae962994b23"
+      },
+      "language": "en",
+      "kind": "failed_endpoint_alternative",
+      "robots": {
+        "url": "https://www.straight.com/robots.txt",
+        "final_url": "https://www.straight.com/robots.txt",
+        "status": 200,
+        "checked_at": "2026-10-01T19:31:13.943Z",
+        "sha256": "7b581692ceada0c98ab88c9e58993fff7df3587ad6f32601775d855915e1b7bb"
+      },
+      "declared_candidates": 1,
+      "checked": [
+        {
+          "url": "https://www.straight.com/sitemap_index.xml",
+          "type": "sitemap",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://www.straight.com/robots.txt",
+          "found_at": "2026-10-01T19:31:13.943Z",
+          "page_sha256": "7b581692ceada0c98ab88c9e58993fff7df3587ad6f32601775d855915e1b7bb",
+          "declaration": "Sitemap: https://www.straight.com/sitemap_index.xml",
+          "endpoint_id": "ep_51f8455ff73babaef03fe132",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_51f8455ff73babaef03fe132",
+            "type": "sitemap",
+            "url": "https://www.straight.com/sitemap_index.xml",
+            "checkedAt": "2026-10-01T19:31:16.054Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 1,
+            "entriesWithUrl": 1,
+            "sampleUrls": [
+              "https://www.straight.com/sitemap_google_news_articles.xml"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.straight.com/sitemap_index.xml",
+            "durationMs": 2109,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.straight.com/sitemap_google_news_articles.xml",
+          "kind": "official_sitemap_index_child",
+          "source_url": "https://www.straight.com/sitemap_index.xml",
+          "found_at": "2026-10-01T19:31:16.054Z",
+          "endpoint_id": "ep_48e45907823d031fd4bfc959",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_48e45907823d031fd4bfc959",
+            "type": "sitemap",
+            "url": "https://www.straight.com/sitemap_google_news_articles.xml",
+            "checkedAt": "2026-10-01T19:31:18.394Z",
+            "outcome": "unhealthy",
+            "httpStatus": 200,
+            "reason": "WRONG_ENDPOINT_FORMAT",
+            "format": null,
+            "auditStatus": "malformed",
+            "finalUrl": "https://www.straight.com/sitemap_google_news_articles.xml",
+            "durationMs": 2340,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        }
+      ]
+    },
+    {
+      "country": "GB",
+      "name": "Halifax Courier",
+      "home": {
+        "url": "https://www.halifaxcourier.co.uk/",
+        "final_url": "https://www.halifaxcourier.co.uk/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:31:08.255Z",
+        "sha256": "18f4fc88e37e2ab334415dd6a436239d421ebd88359911bd61820624345867be"
+      },
+      "language": "en",
+      "kind": "failed_endpoint_alternative",
+      "robots": {
+        "url": "https://www.halifaxcourier.co.uk/robots.txt",
+        "final_url": "https://www.halifaxcourier.co.uk/robots.txt",
+        "status": 200,
+        "checked_at": "2026-10-01T19:31:10.383Z",
+        "sha256": "bad687b68ea12068a5d57cee6e3fb08ed427eef227d8bb385964bae8b829fce0"
+      },
+      "declared_candidates": 3,
+      "checked": [
+        {
+          "url": "https://www.halifaxcourier.co.uk/rss",
+          "kind": "official_html_feed_link",
+          "source_url": "https://www.halifaxcourier.co.uk/",
+          "tag": "<link rel=\"alternate\" href=\"https://www.halifaxcourier.co.uk/rss\" title=\"RSS\" type=\"application/rss+xml\"/>",
+          "type": "rss",
+          "found_at": "2026-10-01T19:31:08.255Z",
+          "page_sha256": "18f4fc88e37e2ab334415dd6a436239d421ebd88359911bd61820624345867be",
+          "endpoint_id": "ep_7552174fec33c35d520774d0",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_7552174fec33c35d520774d0",
+            "type": "rss",
+            "url": "https://www.halifaxcourier.co.uk/rss",
+            "checkedAt": "2026-10-01T19:31:12.593Z",
+            "outcome": "unhealthy",
+            "httpStatus": 200,
+            "reason": "WRONG_ENDPOINT_FORMAT",
+            "format": null,
+            "auditStatus": "malformed",
+            "finalUrl": "https://www.halifaxcourier.co.uk/rss",
+            "durationMs": 2206,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "url": "https://www.halifaxcourier.co.uk/sitemaps/googlenews",
+          "type": "sitemap",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://www.halifaxcourier.co.uk/robots.txt",
+          "found_at": "2026-10-01T19:31:10.383Z",
+          "page_sha256": "bad687b68ea12068a5d57cee6e3fb08ed427eef227d8bb385964bae8b829fce0",
+          "declaration": "Sitemap: https://www.halifaxcourier.co.uk/sitemaps/googlenews",
+          "endpoint_id": "ep_f9a7dc905a473eadc6cdcdf5",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_f9a7dc905a473eadc6cdcdf5",
+            "type": "sitemap",
+            "url": "https://www.halifaxcourier.co.uk/sitemaps/googlenews",
+            "checkedAt": "2026-10-01T19:31:14.967Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 51,
+            "entriesWithUrl": 51,
+            "sampleUrls": [
+              "https://www.halifaxcourier.co.uk/news/people/crowds-gathered-to-cheer-on-sir-kevin-sinfield-through-calderdale-during-7-in-7-challenge-9246614",
+              "https://www.halifaxcourier.co.uk/news/crime/hundreds-of-pills-seized-after-arrest-in-halifax-town-centre-9246442",
+              "https://www.halifaxcourier.co.uk/news/crime/police-seal-off-halifax-street-as-man-rushed-to-hospital-with-head-injury-9246261"
+            ],
+            "newestContentAt": "2026-10-01T15:38:05.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.halifaxcourier.co.uk/sitemaps/googlenews",
+            "durationMs": 2374,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "url": "https://www.halifaxcourier.co.uk/sitemap.xml",
+          "type": "sitemap",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://www.halifaxcourier.co.uk/robots.txt",
+          "found_at": "2026-10-01T19:31:10.383Z",
+          "page_sha256": "bad687b68ea12068a5d57cee6e3fb08ed427eef227d8bb385964bae8b829fce0",
+          "declaration": "Sitemap: https://www.halifaxcourier.co.uk/sitemap.xml",
+          "endpoint_id": "ep_5ee5692a6cb0cba687b792fc",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_5ee5692a6cb0cba687b792fc",
+            "type": "sitemap",
+            "url": "https://www.halifaxcourier.co.uk/sitemap.xml",
+            "checkedAt": "2026-10-01T19:31:17.380Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 197,
+            "entriesWithUrl": 197,
+            "sampleUrls": [
+              "https://www.halifaxcourier.co.uk/sitemaps/sitemap-recent.xml",
+              "https://www.halifaxcourier.co.uk/sitemaps/sitemap-sections.xml",
+              "https://www.halifaxcourier.co.uk/sitemaps/sitemap-authors-a-g.xml"
+            ],
+            "newestContentAt": "2026-10-01T18:32:30.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.halifaxcourier.co.uk/sitemap.xml",
+            "durationMs": 2413,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.halifaxcourier.co.uk/sitemaps/sitemap-recent.xml",
+          "kind": "official_sitemap_index_child",
+          "source_url": "https://www.halifaxcourier.co.uk/sitemap.xml",
+          "found_at": "2026-10-01T19:31:17.380Z",
+          "endpoint_id": "ep_f4255bc4b004a76c2d99ef86",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_f4255bc4b004a76c2d99ef86",
+            "type": "sitemap",
+            "url": "https://www.halifaxcourier.co.uk/sitemaps/sitemap-recent.xml",
+            "checkedAt": "2026-10-01T19:31:19.509Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 20,
+            "entriesWithUrl": 20,
+            "sampleUrls": [
+              "https://www.halifaxcourier.co.uk/must-read/pr-newswire-ai-search-visibility-event-9244061",
+              "https://www.halifaxcourier.co.uk/sport/football/trues-my-number-one-town-boss-mcgrath-backs-grant-to-continue-as-first-choice-keeper-9243682",
+              "https://www.halifaxcourier.co.uk/sport/football/former-halifax-boss-looks-set-to-become-new-hartlepool-manager-9237792"
+            ],
+            "newestContentAt": "2026-10-01T07:22:39.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.halifaxcourier.co.uk/sitemaps/sitemap-recent.xml",
+            "durationMs": 2129,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        }
+      ]
+    },
+    {
+      "country": "FR",
+      "name": "Capital",
+      "home": {
+        "url": "https://www.capital.fr/",
+        "final_url": "https://www.capital.fr/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:31:18.985Z",
+        "sha256": "891364346a0df04a6874a37642d9200c7e23a9c2eb8200d8e171585e1dea6450"
+      },
+      "language": "fr",
+      "kind": "failed_endpoint_alternative",
+      "robots": {
+        "url": "https://www.capital.fr/robots.txt",
+        "final_url": "https://www.capital.fr/robots.txt",
+        "status": 200,
+        "checked_at": "2026-10-01T19:31:21.229Z",
+        "sha256": "8b8ab0dc3ba70cb297e9a9a206589a061a15dbf250ea79a4fe586df7a62e498b"
+      },
+      "declared_candidates": 3,
+      "checked": [
+        {
+          "url": "https://feed.prismamediadigital.com/v1/cap/rss?limit=20",
+          "kind": "official_html_feed_link",
+          "source_url": "https://www.capital.fr/",
+          "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Flux RSS pour capital.fr\" href=\"https://feed.prismamediadigital.com/v1/cap/rss?limit=20\">",
+          "type": "rss",
+          "found_at": "2026-10-01T19:31:18.985Z",
+          "page_sha256": "891364346a0df04a6874a37642d9200c7e23a9c2eb8200d8e171585e1dea6450",
+          "endpoint_id": "ep_26877d49facaaeddc20cbeb2",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_26877d49facaaeddc20cbeb2",
+            "type": "rss",
+            "url": "https://feed.prismamediadigital.com/v1/cap/rss?limit=20",
+            "checkedAt": "2026-10-01T19:31:22.165Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 10,
+            "entriesWithUrl": 10,
+            "sampleUrls": [
+              "https://www.capital.fr/votre-retraite/majoration-des-pensions-pour-trois-enfants-qui-va-y-gagner-et-qui-va-y-perdre-1530658",
+              "https://www.capital.fr/auto/vers-un-retour-de-la-vignette-automobile-une-redevance-de-30-a-910-euros-est-proposee-1530657",
+              "https://www.capital.fr/votre-retraite/ils-travailleront-jusqu-a-67-ans-bruno-le-maire-sur-la-retraite-defendue-par-edouard-philippe-1530656"
+            ],
+            "newestContentAt": "2026-10-01T19:07:49.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://feed.prismamediadigital.com/v1/cap/rss?limit=20",
+            "durationMs": 934,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "url": "https://www.capital.fr/sitemap/articles.xml",
+          "type": "sitemap",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://www.capital.fr/robots.txt",
+          "found_at": "2026-10-01T19:31:21.229Z",
+          "page_sha256": "8b8ab0dc3ba70cb297e9a9a206589a061a15dbf250ea79a4fe586df7a62e498b",
+          "declaration": "Sitemap: https://www.capital.fr/sitemap/articles.xml",
+          "endpoint_id": "ep_098b592c5eaa8500e3d89cdb",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_098b592c5eaa8500e3d89cdb",
+            "type": "sitemap",
+            "url": "https://www.capital.fr/sitemap/articles.xml",
+            "checkedAt": "2026-10-01T19:31:23.666Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 550,
+            "entriesWithUrl": 550,
+            "sampleUrls": [
+              "https://www.capital.fr/sitemap/articles/page-549.xml",
+              "https://www.capital.fr/sitemap/articles/page-548.xml",
+              "https://www.capital.fr/sitemap/articles/page-547.xml"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.capital.fr/sitemap/articles.xml",
+            "durationMs": 1500,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.capital.fr/sitemap/articles/page-549.xml",
+          "kind": "official_sitemap_index_child",
+          "source_url": "https://www.capital.fr/sitemap/articles.xml",
+          "found_at": "2026-10-01T19:31:23.666Z",
+          "endpoint_id": "ep_73871782b6d58d35ce988959",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_73871782b6d58d35ce988959",
+            "type": "sitemap",
+            "url": "https://www.capital.fr/sitemap/articles/page-549.xml",
+            "checkedAt": "2026-10-01T19:31:26.522Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 121,
+            "entriesWithUrl": 121,
+            "sampleUrls": [
+              "https://www.capital.fr/votre-retraite/majoration-des-pensions-pour-trois-enfants-qui-va-y-gagner-et-qui-va-y-perdre-1530658",
+              "https://www.capital.fr/auto/vers-un-retour-de-la-vignette-automobile-une-redevance-de-30-a-910-euros-est-proposee-1530657",
+              "https://www.capital.fr/votre-retraite/ils-travailleront-jusqu-a-67-ans-bruno-le-maire-sur-la-retraite-defendue-par-edouard-philippe-1530656"
+            ],
+            "newestContentAt": "2026-10-01T19:07:49.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.capital.fr/sitemap/articles/page-549.xml",
+            "durationMs": 2856,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "url": "https://www.capital.fr/sitemap/news.xml",
+          "type": "sitemap",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://www.capital.fr/robots.txt",
+          "found_at": "2026-10-01T19:31:21.229Z",
+          "page_sha256": "8b8ab0dc3ba70cb297e9a9a206589a061a15dbf250ea79a4fe586df7a62e498b",
+          "declaration": "Sitemap: https://www.capital.fr/sitemap/news.xml",
+          "endpoint_id": "ep_e8b61b63238ce7c7245cb81f",
+          "already_cataloged": true,
+          "observation": {
+            "endpointId": "ep_e8b61b63238ce7c7245cb81f",
+            "type": "sitemap",
+            "url": "https://www.capital.fr/sitemap/news.xml",
+            "checkedAt": "2026-10-01T19:31:31.233Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 67,
+            "entriesWithUrl": 67,
+            "sampleUrls": [
+              "https://www.capital.fr/votre-retraite/majoration-des-pensions-pour-trois-enfants-qui-va-y-gagner-et-qui-va-y-perdre-1530658",
+              "https://www.capital.fr/auto/vers-un-retour-de-la-vignette-automobile-une-redevance-de-30-a-910-euros-est-proposee-1530657",
+              "https://www.capital.fr/votre-retraite/ils-travailleront-jusqu-a-67-ans-bruno-le-maire-sur-la-retraite-defendue-par-edouard-philippe-1530656"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.capital.fr/sitemap/google-news.xml",
+            "durationMs": 4711,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        }
+      ]
+    },
+    {
+      "country": "DE",
+      "name": "Kölner Stadt-Anzeiger",
+      "home": {
+        "url": "https://www.ksta.de/",
+        "final_url": "https://www.ksta.de/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:31:20.068Z",
+        "sha256": "787725283b7cff3a0d1f1fb449b60a6f83bebf83e8bab777c69fec765562c403"
+      },
+      "language": "de",
+      "kind": "failed_endpoint_alternative",
+      "robots": {
+        "url": "https://www.ksta.de/robots.txt",
+        "final_url": "https://www.ksta.de/robots.txt",
+        "status": 200,
+        "checked_at": "2026-10-01T19:31:22.324Z",
+        "sha256": "5a5a1e9c57698e03c67871a6a0cc6f23f6fda5f000629c39f51677fa6e39403c"
+      },
+      "declared_candidates": 2,
+      "checked": [
+        {
+          "url": "https://www.ksta.de/xml/newssitemap.xml",
+          "type": "sitemap",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://www.ksta.de/robots.txt",
+          "found_at": "2026-10-01T19:31:22.324Z",
+          "page_sha256": "5a5a1e9c57698e03c67871a6a0cc6f23f6fda5f000629c39f51677fa6e39403c",
+          "declaration": "Sitemap: https://www.ksta.de/xml/newssitemap.xml",
+          "endpoint_id": "ep_9ba261768403f3bb62e201b2",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_9ba261768403f3bb62e201b2",
+            "type": "sitemap",
+            "url": "https://www.ksta.de/xml/newssitemap.xml",
+            "checkedAt": "2026-10-01T19:31:25.209Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 302,
+            "entriesWithUrl": 302,
+            "sampleUrls": [
+              "https://www.ksta.de/panorama/promis/koenigin-mary-glaenzt-in-galauniform-royals-machen-den-abflug-2-1383925",
+              "https://www.ksta.de/region/euskirchen-eifel/stadt-euskirchen/vermisste-frau-aus-euskirchen-tot-aufgefunden-ehemann-festgenommen-1385401",
+              "https://www.ksta.de/koeln/karneval-in-koeln/weiberfastnacht-2027-in-koeln-alle-termine-und-infos-1-379717"
+            ],
+            "newestContentAt": "2026-10-01T19:00:26.662Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.ksta.de/xml/newssitemap.xml",
+            "durationMs": 2879,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "url": "https://www.ksta.de/sitemap/monitoring-pagetype-article-sitemap.xml",
+          "type": "sitemap",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://www.ksta.de/robots.txt",
+          "found_at": "2026-10-01T19:31:22.324Z",
+          "page_sha256": "5a5a1e9c57698e03c67871a6a0cc6f23f6fda5f000629c39f51677fa6e39403c",
+          "declaration": "Sitemap: https://www.ksta.de/sitemap/monitoring-pagetype-article-sitemap.xml",
+          "endpoint_id": "ep_aa8c305029ed068308f709fd",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_aa8c305029ed068308f709fd",
+            "type": "sitemap",
+            "url": "https://www.ksta.de/sitemap/monitoring-pagetype-article-sitemap.xml",
+            "checkedAt": "2026-10-01T19:31:27.489Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 7,
+            "entriesWithUrl": 7,
+            "sampleUrls": [
+              "https://www.ksta.de/sitemap/monitoring-pagetype-article-sitemap-1.xml",
+              "https://www.ksta.de/sitemap/monitoring-pagetype-article-sitemap-2.xml",
+              "https://www.ksta.de/sitemap/monitoring-pagetype-article-sitemap-3.xml"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.ksta.de/sitemap/monitoring-pagetype-article-sitemap.xml",
+            "durationMs": 2280,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.ksta.de/sitemap/monitoring-pagetype-article-sitemap-1.xml",
+          "kind": "official_sitemap_index_child",
+          "source_url": "https://www.ksta.de/sitemap/monitoring-pagetype-article-sitemap.xml",
+          "found_at": "2026-10-01T19:31:27.489Z",
+          "endpoint_id": "ep_5a449e7d20cec25eaec16981",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_5a449e7d20cec25eaec16981",
+            "type": "sitemap",
+            "url": "https://www.ksta.de/sitemap/monitoring-pagetype-article-sitemap-1.xml",
+            "checkedAt": "2026-10-01T19:31:31.705Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 50000,
+            "entriesWithUrl": 50000,
+            "sampleUrls": [
+              "https://www.ksta.de/agb/allgemeine-geschaeftsbedingungen-110979",
+              "https://www.ksta.de/cookies-tracking/cookies-und-tracking-111101",
+              "https://www.ksta.de/koeln/summerjam-2022-in-koeln-spektakulaere-show-zum-jubilaeum-geplant-113488"
+            ],
+            "newestContentAt": "2026-08-10T00:00:00.000Z",
+            "contentFreshness": "stale",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.ksta.de/sitemap/monitoring-pagetype-article-sitemap-1.xml",
+            "durationMs": 4216,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "name": "The Mainichi - Official RSS guide",
+      "home": {
+        "url": "https://mainichi.jp/english/rss/",
+        "final_url": "https://mainichi.jp/english/rss/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:31:32.516Z",
+        "sha256": "09c5396aa911b6279a5d86ac64f18246007d752d6a02297ad1cf698113a3a722"
+      },
+      "language": "en",
+      "kind": "failed_endpoint_alternative",
+      "robots": {
+        "url": "https://mainichi.jp/robots.txt",
+        "final_url": "https://mainichi.jp/robots.txt",
+        "status": 200,
+        "checked_at": "2026-10-01T19:31:34.831Z",
+        "sha256": "d32bd5f1fc523bde2ecb29edc3b9be5513572884057c14babe0836568d64fdf2"
+      },
+      "declared_candidates": 1,
+      "checked": [
+        {
+          "url": "https://mainichi.jp/english/rss/",
+          "kind": "official_html_feed_link",
+          "source_url": "https://mainichi.jp/english/rss/",
+          "tag": "<a href=\"/english/rss/\" title=\"RSS\">",
+          "type": "rss",
+          "found_at": "2026-10-01T19:31:32.516Z",
+          "page_sha256": "09c5396aa911b6279a5d86ac64f18246007d752d6a02297ad1cf698113a3a722",
+          "endpoint_id": "ep_d38a8c8bb23834f45ce882f1",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_d38a8c8bb23834f45ce882f1",
+            "type": "rss",
+            "url": "https://mainichi.jp/english/rss/",
+            "checkedAt": "2026-10-01T19:31:37.277Z",
+            "outcome": "unhealthy",
+            "httpStatus": 200,
+            "reason": "DTD_NOT_ALLOWED",
+            "format": null,
+            "auditStatus": "malformed",
+            "finalUrl": "https://mainichi.jp/english/rss/",
+            "durationMs": 2445,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        }
+      ]
+    },
+    {
+      "country": "IT",
+      "name": "Il Giornale",
+      "home": {
+        "url": "https://www.ilgiornale.it/",
+        "final_url": "https://www.ilgiornale.it/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:31:31.706Z",
+        "sha256": "88e4815ba05737c8c77f4a041b66ef10210f4b1fa82ec7bb48ec38c47ce38612"
+      },
+      "language": "it",
+      "kind": "failed_endpoint_alternative",
+      "robots": {
+        "url": "https://www.ilgiornale.it/robots.txt",
+        "final_url": "https://www.ilgiornale.it/robots.txt",
+        "status": 200,
+        "checked_at": "2026-10-01T19:31:34.274Z",
+        "sha256": "e13704507c9eb4779ea0fa1259c883599a80980d961f5bb236f7803ddad86ab3"
+      },
+      "declared_candidates": 2,
+      "checked": [
+        {
+          "url": "https://www.ilgiornale.it/arc/outboundfeeds/sitemap-index/?outputType=xml",
+          "type": "sitemap",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://www.ilgiornale.it/robots.txt",
+          "found_at": "2026-10-01T19:31:34.274Z",
+          "page_sha256": "e13704507c9eb4779ea0fa1259c883599a80980d961f5bb236f7803ddad86ab3",
+          "declaration": "Sitemap: https://www.ilgiornale.it/arc/outboundfeeds/sitemap-index/?outputType=xml",
+          "endpoint_id": "ep_208fd29a60627dab2a9be267",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_208fd29a60627dab2a9be267",
+            "type": "sitemap",
+            "url": "https://www.ilgiornale.it/arc/outboundfeeds/sitemap-index/?outputType=xml",
+            "checkedAt": "2026-10-01T19:31:37.103Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 7824,
+            "entriesWithUrl": 7824,
+            "sampleUrls": [
+              "https://www.ilgiornale.it/arc/outboundfeeds/sitemap/latest/?outputType=xml",
+              "https://www.ilgiornale.it/arc/outboundfeeds/sitemap/2026-09-30/?outputType=xml",
+              "https://www.ilgiornale.it/arc/outboundfeeds/sitemap2/2026-09-29/?outputType=xml"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.ilgiornale.it/arc/outboundfeeds/sitemap-index/?outputType=xml",
+            "durationMs": 2828,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.ilgiornale.it/arc/outboundfeeds/sitemap/latest/?outputType=xml",
+          "kind": "official_sitemap_index_child",
+          "source_url": "https://www.ilgiornale.it/arc/outboundfeeds/sitemap-index/?outputType=xml",
+          "found_at": "2026-10-01T19:31:37.103Z",
+          "endpoint_id": "ep_fe2355ee3b8df08d6ae0ac81",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_fe2355ee3b8df08d6ae0ac81",
+            "type": "sitemap",
+            "url": "https://www.ilgiornale.it/arc/outboundfeeds/sitemap/latest/?outputType=xml",
+            "checkedAt": "2026-10-01T19:31:39.748Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 133,
+            "entriesWithUrl": 133,
+            "sampleUrls": [
+              "https://www.ilgiornale.it/news/guerra/la-roosevelt-fa-rotta-verso-il-medio-oriente-gli-usa-spostano-unaltra-portaerei-nella-regione/",
+              "https://www.ilgiornale.it/news/ciclismo/leroica-in-bici-una-corsa-dellaltro-mondo/",
+              "https://www.ilgiornale.it/news/europa/meloni-allue-alta-inflazione-pesa-su-spesa-che-vale-il-204-del-pil/"
+            ],
+            "newestContentAt": "2026-10-01T19:07:07.900Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.ilgiornale.it/arc/outboundfeeds/sitemap/latest/?outputType=xml",
+            "durationMs": 2645,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "url": "https://www.ilgiornale.it/arc/outboundfeeds/sitemap-news/latest/",
+          "type": "sitemap",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://www.ilgiornale.it/robots.txt",
+          "found_at": "2026-10-01T19:31:34.274Z",
+          "page_sha256": "e13704507c9eb4779ea0fa1259c883599a80980d961f5bb236f7803ddad86ab3",
+          "declaration": "Sitemap: https://www.ilgiornale.it/arc/outboundfeeds/sitemap-news/latest/",
+          "endpoint_id": "ep_4b2c2e26bdd803a16271b1be",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_4b2c2e26bdd803a16271b1be",
+            "type": "sitemap",
+            "url": "https://www.ilgiornale.it/arc/outboundfeeds/sitemap-news/latest/",
+            "checkedAt": "2026-10-01T19:31:42.315Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 133,
+            "entriesWithUrl": 133,
+            "sampleUrls": [
+              "https://www.ilgiornale.it/news/guerra/la-roosevelt-fa-rotta-verso-il-medio-oriente-gli-usa-spostano-unaltra-portaerei-nella-regione/",
+              "https://www.ilgiornale.it/news/ciclismo/leroica-in-bici-una-corsa-dellaltro-mondo/",
+              "https://www.ilgiornale.it/news/europa/meloni-allue-alta-inflazione-pesa-su-spesa-che-vale-il-204-del-pil/"
+            ],
+            "newestContentAt": "2026-10-01T19:07:07.900Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.ilgiornale.it/arc/outboundfeeds/sitemap-news/latest/",
+            "durationMs": 2567,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        }
+      ]
+    }
+  ]
+}

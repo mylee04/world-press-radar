@@ -1,0 +1,459 @@
+{
+  "version": 1,
+  "run_id": "g7-official-first-pass-2026-10-01",
+  "prepared_at": "2026-10-01T19:55:41.618Z",
+  "registry_sha256": "1558d9cdcd56c7dfdcad3b3db07e31ba0970076785544d357b078c9fdc0ed741",
+  "selected_countries": [
+    "US",
+    "GB",
+    "CA",
+    "FR",
+    "DE",
+    "IT",
+    "JP",
+    "CN",
+    "IN",
+    "BR",
+    "AU",
+    "KR",
+    "MX",
+    "ID",
+    "TR",
+    "RU",
+    "SA",
+    "ZA",
+    "AR",
+    "ES"
+  ],
+  "additions": [
+    {
+      "country": "CA",
+      "name": "The Maple",
+      "language": "en",
+      "homepage": "https://www.readthemaple.com/",
+      "kind": "new_domain",
+      "publisher_reference": "https://www.readthemaple.com/about-us/",
+      "scope_note": "Publisher RSS plus explicitly declared posts-only sitemap. Both endpoints share one new source; overlapping URLs are deduplicated by the collector.",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.readthemaple.com/rss/",
+          "endpoint_id": "ep_19f015aca4c596d818830ac8",
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.readthemaple.com/",
+            "found_at": "2026-10-01T19:41:01.531Z",
+            "page_sha256": "850ed3689720e73bbb317da2d8d1eb87b1dd25639187728af2f23307b195a915",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"The Maple\" href=\"https://www.readthemaple.com/rss/\">"
+          },
+          "observation": {
+            "endpointId": "ep_19f015aca4c596d818830ac8",
+            "type": "rss",
+            "url": "https://www.readthemaple.com/rss/",
+            "checkedAt": "2026-10-01T19:41:06.182Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 15,
+            "entriesWithUrl": 15,
+            "sampleUrls": [
+              "https://www.readthemaple.com/how-pro-israel-voices-warped-the-belleville-shooting-narrative/",
+              "https://www.readthemaple.com/bill-c-39-poses-an-existential-risk-to-strike-rights/",
+              "https://www.readthemaple.com/theres-no-evidence-tying-palestine-movement-to-shootings/"
+            ],
+            "newestContentAt": "2026-09-29T17:59:56.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.readthemaple.com/rss/",
+            "durationMs": 2391,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.readthemaple.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T19:54:36.848Z",
+            "decision": "allowed",
+            "matched_rule": null
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.readthemaple.com/sitemap-posts.xml",
+          "endpoint_id": "ep_28f2219a7ba17213c01388da",
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://www.readthemaple.com/sitemap.xml",
+            "found_at": "2026-10-01T19:41:10.691Z",
+            "page_sha256": "c6393d02b158991179af7f2735ff26fa64c1fcbaf0f2f08b4d464870ca8d1151",
+            "declared_lastmod": "2026-09-29T17:59:56.000Z"
+          },
+          "observation": {
+            "endpointId": "ep_28f2219a7ba17213c01388da",
+            "type": "sitemap",
+            "url": "https://www.readthemaple.com/sitemap-posts.xml",
+            "checkedAt": "2026-10-01T19:41:13.144Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 1393,
+            "entriesWithUrl": 1393,
+            "sampleUrls": [
+              "https://www.readthemaple.com/how-pro-israel-voices-warped-the-belleville-shooting-narrative/",
+              "https://www.readthemaple.com/here-are-the-10-mps-most-lobbied-by-cija/",
+              "https://www.readthemaple.com/bill-c-39-poses-an-existential-risk-to-strike-rights/"
+            ],
+            "newestContentAt": "2026-09-29T17:59:56.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.readthemaple.com/sitemap-posts.xml",
+            "durationMs": 2452,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.readthemaple.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T19:54:36.848Z",
+            "decision": "allowed",
+            "matched_rule": null
+          }
+        }
+      ]
+    },
+    {
+      "country": "GB",
+      "name": "Novara Media",
+      "language": "en",
+      "homepage": "https://novaramedia.com/",
+      "kind": "new_domain",
+      "publisher_reference": "https://novaramedia.com/about/",
+      "scope_note": "Official RSS. The valid-empty sitemap is not included.",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://novaramedia.com/feed/",
+          "endpoint_id": "ep_0f17eeafc6eb846f413fa1b9",
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://novaramedia.com/",
+            "found_at": "2026-10-01T19:41:13.429Z",
+            "page_sha256": "bb9e232d2f101347817ecfdb8364574838b817b3bd4e6aca4e8b1b673df74c7d",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Novara Media RSS Feed\" href=\"https://novaramedia.com/feed/\" />"
+          },
+          "observation": {
+            "endpointId": "ep_0f17eeafc6eb846f413fa1b9",
+            "type": "rss",
+            "url": "https://novaramedia.com/feed/",
+            "checkedAt": "2026-10-01T19:41:18.077Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 10,
+            "entriesWithUrl": 10,
+            "sampleUrls": [
+              "https://novaramedia.com/2026/10/01/tories-lib-dems-scramble-for-response-to-burnham-speech/",
+              "https://novaramedia.com/2026/10/01/spains-tenants-rights-protesters-win-reforms-after-87-year-old-evicted/",
+              "https://novaramedia.com/2026/10/01/stop-helping-saudi-arabia-bomb-yemen-rights-experts-tell-burnham/"
+            ],
+            "newestContentAt": "2026-10-01T19:14:36.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://novaramedia.com/feed/",
+            "durationMs": 2148,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://novaramedia.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T19:54:37.042Z",
+            "decision": "allowed",
+            "matched_rule": null
+          }
+        }
+      ]
+    },
+    {
+      "country": "FR",
+      "name": "Capital (Official RSS)",
+      "language": "fr",
+      "homepage": "https://www.capital.fr/",
+      "kind": "existing_publisher_alternative",
+      "publisher_reference": "https://www.capital.fr/",
+      "scope_note": "Official homepage declares this provider-hosted RSS. Existing failed RSS and existing news sitemap are unchanged.",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://feed.prismamediadigital.com/v1/cap/rss?limit=20",
+          "endpoint_id": "ep_26877d49facaaeddc20cbeb2",
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.capital.fr/",
+            "found_at": "2026-10-01T19:31:18.985Z",
+            "page_sha256": "891364346a0df04a6874a37642d9200c7e23a9c2eb8200d8e171585e1dea6450",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Flux RSS pour capital.fr\" href=\"https://feed.prismamediadigital.com/v1/cap/rss?limit=20\">"
+          },
+          "observation": {
+            "endpointId": "ep_26877d49facaaeddc20cbeb2",
+            "type": "rss",
+            "url": "https://feed.prismamediadigital.com/v1/cap/rss?limit=20",
+            "checkedAt": "2026-10-01T19:31:22.165Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 10,
+            "entriesWithUrl": 10,
+            "sampleUrls": [
+              "https://www.capital.fr/votre-retraite/majoration-des-pensions-pour-trois-enfants-qui-va-y-gagner-et-qui-va-y-perdre-1530658",
+              "https://www.capital.fr/auto/vers-un-retour-de-la-vignette-automobile-une-redevance-de-30-a-910-euros-est-proposee-1530657",
+              "https://www.capital.fr/votre-retraite/ils-travailleront-jusqu-a-67-ans-bruno-le-maire-sur-la-retraite-defendue-par-edouard-philippe-1530656"
+            ],
+            "newestContentAt": "2026-10-01T19:07:49.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://feed.prismamediadigital.com/v1/cap/rss?limit=20",
+            "durationMs": 934,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://feed.prismamediadigital.com/robots.txt",
+            "http_status": 404,
+            "checked_at": "2026-10-01T19:54:38.061Z",
+            "decision": "allowed_robots_absent",
+            "matched_rule": null
+          }
+        }
+      ]
+    },
+    {
+      "country": "GB",
+      "name": "Halifax Courier (News Sitemap)",
+      "language": "en",
+      "homepage": "https://www.halifaxcourier.co.uk/",
+      "kind": "existing_publisher_alternative",
+      "publisher_reference": "https://www.halifaxcourier.co.uk/",
+      "scope_note": "Official robots-declared news sitemap is a separate endpoint type; failed RSS remains failed.",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://www.halifaxcourier.co.uk/sitemaps/googlenews",
+          "endpoint_id": "ep_f9a7dc905a473eadc6cdcdf5",
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://www.halifaxcourier.co.uk/robots.txt",
+            "found_at": "2026-10-01T19:31:10.383Z",
+            "page_sha256": "bad687b68ea12068a5d57cee6e3fb08ed427eef227d8bb385964bae8b829fce0",
+            "declaration": "Sitemap: https://www.halifaxcourier.co.uk/sitemaps/googlenews"
+          },
+          "observation": {
+            "endpointId": "ep_f9a7dc905a473eadc6cdcdf5",
+            "type": "sitemap",
+            "url": "https://www.halifaxcourier.co.uk/sitemaps/googlenews",
+            "checkedAt": "2026-10-01T19:31:14.967Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 51,
+            "entriesWithUrl": 51,
+            "sampleUrls": [
+              "https://www.halifaxcourier.co.uk/news/people/crowds-gathered-to-cheer-on-sir-kevin-sinfield-through-calderdale-during-7-in-7-challenge-9246614",
+              "https://www.halifaxcourier.co.uk/news/crime/hundreds-of-pills-seized-after-arrest-in-halifax-town-centre-9246442",
+              "https://www.halifaxcourier.co.uk/news/crime/police-seal-off-halifax-street-as-man-rushed-to-hospital-with-head-injury-9246261"
+            ],
+            "newestContentAt": "2026-10-01T15:38:05.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.halifaxcourier.co.uk/sitemaps/googlenews",
+            "durationMs": 2374,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.halifaxcourier.co.uk/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T19:54:38.245Z",
+            "decision": "allowed",
+            "matched_rule": null
+          }
+        }
+      ]
+    },
+    {
+      "country": "DE",
+      "name": "Kölner Stadt-Anzeiger (News Sitemap)",
+      "language": "de",
+      "homepage": "https://www.ksta.de/",
+      "kind": "existing_publisher_alternative",
+      "publisher_reference": "https://www.ksta.de/",
+      "scope_note": "Official robots-declared news sitemap. Mixed 50,000-entry archive excluded; failed RSS unchanged.",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://www.ksta.de/xml/newssitemap.xml",
+          "endpoint_id": "ep_9ba261768403f3bb62e201b2",
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://www.ksta.de/robots.txt",
+            "found_at": "2026-10-01T19:31:22.324Z",
+            "page_sha256": "5a5a1e9c57698e03c67871a6a0cc6f23f6fda5f000629c39f51677fa6e39403c",
+            "declaration": "Sitemap: https://www.ksta.de/xml/newssitemap.xml"
+          },
+          "observation": {
+            "endpointId": "ep_9ba261768403f3bb62e201b2",
+            "type": "sitemap",
+            "url": "https://www.ksta.de/xml/newssitemap.xml",
+            "checkedAt": "2026-10-01T19:31:25.209Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 302,
+            "entriesWithUrl": 302,
+            "sampleUrls": [
+              "https://www.ksta.de/panorama/promis/koenigin-mary-glaenzt-in-galauniform-royals-machen-den-abflug-2-1383925",
+              "https://www.ksta.de/region/euskirchen-eifel/stadt-euskirchen/vermisste-frau-aus-euskirchen-tot-aufgefunden-ehemann-festgenommen-1385401",
+              "https://www.ksta.de/koeln/karneval-in-koeln/weiberfastnacht-2027-in-koeln-alle-termine-und-infos-1-379717"
+            ],
+            "newestContentAt": "2026-10-01T19:00:26.662Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.ksta.de/xml/newssitemap.xml",
+            "durationMs": 2879,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.ksta.de/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T19:54:38.993Z",
+            "decision": "allowed",
+            "matched_rule": null
+          }
+        }
+      ]
+    },
+    {
+      "country": "IT",
+      "name": "Il Giornale (News Sitemap)",
+      "language": "it",
+      "homepage": "https://www.ilgiornale.it/",
+      "kind": "existing_publisher_alternative",
+      "publisher_reference": "https://www.ilgiornale.it/",
+      "scope_note": "Official robots-declared rolling news sitemap. Duplicate latest XML alternative omitted; old RSS unchanged.",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://www.ilgiornale.it/arc/outboundfeeds/sitemap-news/latest/",
+          "endpoint_id": "ep_4b2c2e26bdd803a16271b1be",
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://www.ilgiornale.it/robots.txt",
+            "found_at": "2026-10-01T19:31:34.274Z",
+            "page_sha256": "e13704507c9eb4779ea0fa1259c883599a80980d961f5bb236f7803ddad86ab3",
+            "declaration": "Sitemap: https://www.ilgiornale.it/arc/outboundfeeds/sitemap-news/latest/"
+          },
+          "observation": {
+            "endpointId": "ep_4b2c2e26bdd803a16271b1be",
+            "type": "sitemap",
+            "url": "https://www.ilgiornale.it/arc/outboundfeeds/sitemap-news/latest/",
+            "checkedAt": "2026-10-01T19:31:42.315Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 133,
+            "entriesWithUrl": 133,
+            "sampleUrls": [
+              "https://www.ilgiornale.it/news/guerra/la-roosevelt-fa-rotta-verso-il-medio-oriente-gli-usa-spostano-unaltra-portaerei-nella-regione/",
+              "https://www.ilgiornale.it/news/ciclismo/leroica-in-bici-una-corsa-dellaltro-mondo/",
+              "https://www.ilgiornale.it/news/europa/meloni-allue-alta-inflazione-pesa-su-spesa-che-vale-il-204-del-pil/"
+            ],
+            "newestContentAt": "2026-10-01T19:07:07.900Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.ilgiornale.it/arc/outboundfeeds/sitemap-news/latest/",
+            "durationMs": 2567,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.ilgiornale.it/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T19:54:39.583Z",
+            "decision": "allowed",
+            "matched_rule": null
+          }
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "name": "Nippon.com (Japanese News Sitemap)",
+      "language": "ja",
+      "homepage": "https://www.nippon.com/ja/",
+      "kind": "existing_publisher_additional_language",
+      "publisher_reference": "https://www.nippon.com/ja/",
+      "scope_note": "Explicitly enumerated Japanese news sitemap. Dates are unreliable; no current-publication count is inferred. Oversized Japanese article sitemap excluded.",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://www.nippon.com/ja/googleNews.xml",
+          "endpoint_id": "ep_381c6eee40f1450626d39393",
+          "provenance": {
+            "kind": "official_sitemap_index_child_ranked",
+            "source_url": "https://www.nippon.com/ja/sitemap.xml",
+            "found_at": "2026-10-01T19:36:55.472Z",
+            "page_sha256": "e6c6169fd4d884708b1a2c1118677421e79be0d325d4c26a1dfeb40268b37cdb",
+            "declared_lastmod": "2026-10-01T21:03:02+09:00"
+          },
+          "observation": {
+            "endpointId": "ep_381c6eee40f1450626d39393",
+            "type": "sitemap",
+            "url": "https://www.nippon.com/ja/googleNews.xml",
+            "checkedAt": "2026-10-01T19:36:58.323Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 1623,
+            "entriesWithUrl": 1623,
+            "sampleUrls": [
+              "https://www.nippon.com/ja/news/kd1478360554111451188/",
+              "https://www.nippon.com/ja/news/kd1478359589331107860/",
+              "https://www.nippon.com/ja/news/kd1478358925093782382/"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "unreliable",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.nippon.com/ja/googleNews.xml",
+            "durationMs": 2851,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.nippon.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T19:54:39.732Z",
+            "decision": "allowed",
+            "matched_rule": null
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "verified_at": "2026-10-01T20:04:10.237Z",
+  "base_commit": "80265a77559e6710e78a821085396686d7ac26c1",
+  "commands": [
+    {
+      "command": "npm test",
+      "exit_code": 0,
+      "tests": 75,
+      "passed": 75,
+      "failed": 0,
+      "includes_build": true
+    },
+    {
+      "command": "npm run typecheck",
+      "exit_code": 0
+    },
+    {
+      "command": "node scripts/add-registry-sources.mjs expansion/registry-additions.json",
+      "exit_code": 0,
+      "mode": "dry_run",
+      "registrations": 7,
+      "typed_endpoints": 8
+    }
+  ],
+  "production_mutations": false,
+  "existing_registry_sha256": "1558d9cdcd56c7dfdcad3b3db07e31ba0970076785544d357b078c9fdc0ed741",
+  "test_lane": "Temporary inspection SQLite, discarded after test; production snapshot rejects this lane.",
+  "files_sha256": {
+    "src/operator-additions.ts": "ea384350f84625f918f852051c337ac0342e9b0791dbb8a05067de51845af819",
+    "scripts/add-registry-sources.mjs": "bc4c9cc1f6608d4f8021d0a3a826885b53d441ee59de59ab7e442a8bfc106e96",
+    "test/operator-additions.test.mjs": "21e46a7d793fa2d502ee51b5625c8740041821a68f111d7c1be9f653ec952400",
+    "expansion/registry-additions.json": "c782acd2f7e191740634bb299f8c56c2f00414614f34c81b68adf5464e7c5f25",
+    "expansion/report.json": "6d31f83f2a53fbbda598661c2129242607fe7bfa26283489b4af669c94034b87",
+    "expansion/robots-review.json": "a207b37b09385348c058377f8ada3862bdfd569f1b52742a66d0ea70c78b160a"
+  }
+}
