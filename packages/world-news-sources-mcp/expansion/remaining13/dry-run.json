@@ -1,0 +1,40 @@
+{
+  "batch_id": "major20-remaining13-2026-10-01",
+  "mode": "dry_run_against_reconstructed_live_registry",
+  "registry_mutated": false,
+  "new_registrations": 4,
+  "endpoint_ids": [
+    "ep_d190feee82cb307d2b16a32e",
+    "ep_ceec6fb072057baaafe95c3f",
+    "ep_23006ccdbf78046d78c92d67",
+    "ep_e4b077ef0e49094bcbecac34",
+    "ep_8d6c4a632aff762d8bf47f3e"
+  ],
+  "new_sources": [
+    {
+      "id": "src_07911e607dca9c692d483d38",
+      "name": "elDiarioAR",
+      "country": "AR",
+      "initial_enabled_at": null
+    },
+    {
+      "id": "src_0e9949708ad04d56bed9b421",
+      "name": "Mediazona",
+      "country": "RU",
+      "initial_enabled_at": null
+    },
+    {
+      "id": "src_29e88635db52d6560d28e7bd",
+      "name": "Medyascope",
+      "country": "TR",
+      "initial_enabled_at": null
+    },
+    {
+      "id": "src_9472b5888984a75a09de55d4",
+      "name": "GroundUp",
+      "country": "ZA",
+      "initial_enabled_at": null
+    }
+  ],
+  "baseline_required": true
+}

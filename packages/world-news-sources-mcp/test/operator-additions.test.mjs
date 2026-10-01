@@ -9,9 +9,12 @@ import {ActivityLedger} from '../dist/activity-ledger.js';
 import {countryInventory,ActivityStore} from '../dist/activity.js';
 import {HealthStore} from '../dist/health.js';
 import {updateRegistryStatus} from '../dist/operator-status.js';
+import {createHash} from 'node:crypto';
+import {withoutExpansionBatches} from './fixtures.mjs';
 
-const at='2026-10-01T21:00:00.000Z',registry=readFileSync(new URL('../../../data/rss-atlas.json',import.meta.url),'utf8');
+const at='2026-10-01T21:00:00.000Z',registry=withoutExpansionBatches(readFileSync(new URL('../../../data/rss-atlas.json',import.meta.url),'utf8'));
 const batch=JSON.parse(readFileSync(new URL('../expansion/registry-additions.json',import.meta.url),'utf8'));
+batch.registry_sha256=createHash('sha256').update(registry).digest('hex'); // isolated fixture only
 const proposal=()=>prepareRegistryAdditions(registry,batch,new Date(at));
 test('verified batch adds seven registrations / eight typed endpoints in existing countries; original rows and IDs unchanged',()=>{
   const result=proposal(),before=JSON.parse(registry),old=normalizeRegistry(before),after=normalizeRegistry(result.registry);
@@ -21,7 +24,7 @@ test('verified batch adds seven registrations / eight typed endpoints in existin
   for(const s of old.sources)assert.deepEqual(after.sources.find(x=>x.id===s.id),s);
   for(const s of result.sources){assert.equal(s.enabled_changed_at,at);assert.equal(s.status_transition_count,0);assert.deepEqual(s.status_history,[]);}
   const sum=c=>countryInventory(c,{limit:50}).items.concat(countryInventory(c,{offset:50,limit:50}).items).reduce((n,r)=>n+r.active_source_registrations,0);
-  assert.equal(sum(after),5030);assert.equal(new Set(after.sources.filter(s=>s.enabled).flatMap(s=>s.endpoints.map(e=>e.id))).size,5411);
+  assert.equal(sum(after),sum(old)+7);assert.equal(new Set(after.sources.filter(s=>s.enabled).flatMap(s=>s.endpoints.map(e=>e.id))).size,new Set(old.sources.filter(s=>s.enabled).flatMap(s=>s.endpoints.map(e=>e.id))).size+8);
 });
 test('batch replay preserves state/history, including later operator deactivation',()=>{
   const result=proposal(),disabled=updateRegistryStatus(result.registry,result.sources[0].id,false,'Operator review',new Date('2026-10-01T22:00:00Z'));

@@ -126,9 +126,11 @@ test('full extraction stores more than health samples, excludes sitemap indexes,
   assert.throws(()=>inspectXml(Buffer.from(xml.slice(0,-4)),'sitemap',Date.now(),1024*1024,true));
 });
 test('inventory is recomputed from actual registry, counts mixed duplicates honestly and pages',()=>{
-  const real=normalizeRegistry(JSON.parse(readFileSync(new URL('../../../data/rss-atlas.json',import.meta.url),'utf8')));const rows=countryInventory(real,{limit:50}).items.concat(countryInventory(real,{offset:50,limit:50}).items);
-  assert.equal(rows.reduce((n,r)=>n+r.active_source_registrations,0),5023);assert.equal(rows.filter(r=>r.active_source_registrations).length,72);
-  assert.equal(new Set(real.sources.filter(s=>s.enabled).flatMap(s=>s.endpoints.map(e=>e.id))).size,5403);
+  const raw=JSON.parse(readFileSync(new URL('../../../data/rss-atlas.json',import.meta.url),'utf8')),real=normalizeRegistry(raw);const rows=countryInventory(real,{limit:50}).items.concat(countryInventory(real,{offset:50,limit:50}).items);
+  const active=raw.countries.flatMap(c=>c.feeds.filter(f=>f.enabled!==false));
+  const rawTyped=new Set(active.flatMap(f=>[['rss',f.url],['sitemap',f.sitemapUrl]].filter(([,url])=>url).map(([type,url])=>{const u=new URL(url);u.hash='';return JSON.stringify([type,u.href]);})));
+  assert.equal(rows.reduce((n,r)=>n+r.active_source_registrations,0),active.length);assert.equal(rows.filter(r=>r.active_source_registrations).length,new Set(raw.countries.filter(c=>c.feeds.some(f=>f.enabled!==false)).map(c=>c.code.toUpperCase())).size);
+  assert.equal(new Set(real.sources.filter(s=>s.enabled).flatMap(s=>s.endpoints.map(e=>e.id))).size,rawTyped.size);
   const dup=normalizeRegistry({countries:[{code:'US',name:'US',feeds:[{name:'A',url:'https://x.example/rss',enabled:true},{name:'A',url:'https://x.example/rss',enabled:false}]}]});
   const row=countryInventory(dup,{include_disabled:true}).items[0];assert.equal(row.active_source_registrations,1);assert.equal(row.disabled_source_registrations,1);assert.equal(row.unique_active_rss_endpoints,1);
 });

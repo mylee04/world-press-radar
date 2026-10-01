@@ -1,0 +1,1750 @@
+{
+  "phase": "registered-major20 remaining13 + outstanding US",
+  "no_registry_mutation": true,
+  "registry_sha256_before": "ec64bf054b506c0184dd7bd172338b709bb3ab69f0320a97998cae9a3b332b10",
+  "registry_reconstruction": "First approved additive batch, exact live enabled_changed_at; operator must verify against authoritative registry.",
+  "request_budget_per_invocation": 144,
+  "requests_this_invocation": 6,
+  "lifetime_governed_attempts": 75,
+  "global_concurrency": 2,
+  "per_host_concurrency": 1,
+  "minimum_host_gap_ms": 2000,
+  "results": [
+    {
+      "country": "IN",
+      "name": "The Wire",
+      "home": "https://thewire.in/",
+      "language": "en",
+      "home_access": {
+        "robots_url": "https://thewire.in/robots.txt",
+        "http_status": 200,
+        "checked_at": "2026-10-01T20:22:09.517Z",
+        "decision": "allowed",
+        "matched_rule": {
+          "allow": true,
+          "pattern": "/"
+        }
+      },
+      "resources": [
+        {
+          "url": "https://thewire.in/robots.txt",
+          "final_url": "https://thewire.in/robots.txt",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:09.517Z",
+          "sha256": "e0a560778fcf503dbaa2bc9e474a60af286d1809e1a4af3d917c7560754b375b"
+        },
+        {
+          "url": "https://thewire.in/",
+          "final_url": "https://thewire.in/",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:11.709Z",
+          "sha256": "6ea5cb45c16d1966aa7f46cab6b678e42b5a1ab1fbd875021127ddcf70e31a8b"
+        }
+      ],
+      "checked": [],
+      "scope_result": "NO_DECLARED_ENDPOINT_IN_BOUNDED_SCOPE"
+    },
+    {
+      "country": "IN",
+      "name": "Newslaundry",
+      "home": "https://www.newslaundry.com/",
+      "language": "en",
+      "home_access": {
+        "robots_url": "https://www.newslaundry.com/robots.txt",
+        "http_status": 200,
+        "checked_at": "2026-10-01T20:22:11.930Z",
+        "decision": "allowed",
+        "matched_rule": null
+      },
+      "resources": [
+        {
+          "url": "https://www.newslaundry.com/robots.txt",
+          "final_url": "https://www.newslaundry.com/robots.txt",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:11.930Z",
+          "sha256": "de0facec3d8699cd66ce4a63df0c91717f530b6bc5cf4b089cb487cc3814a6d3"
+        },
+        {
+          "url": "https://www.newslaundry.com/",
+          "final_url": "https://www.newslaundry.com/",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:14.311Z",
+          "sha256": "851dc01ac6c209a530884fac53dce8cb016fb183ce1d2b58b410d934196e1209"
+        }
+      ],
+      "checked": [],
+      "scope_result": "NO_DECLARED_ENDPOINT_IN_BOUNDED_SCOPE"
+    },
+    {
+      "country": "CN",
+      "name": "Sixth Tone",
+      "home": "https://www.sixthtone.com/",
+      "language": "en",
+      "home_access": {
+        "robots_url": "https://www.sixthtone.com/robots.txt",
+        "http_status": 404,
+        "checked_at": "2026-10-01T20:22:09.732Z",
+        "decision": "allowed_robots_absent",
+        "matched_rule": null
+      },
+      "resources": [
+        {
+          "url": "https://www.sixthtone.com/robots.txt",
+          "final_url": "https://www.sixthtone.com/robots.txt",
+          "status": 404,
+          "checked_at": "2026-10-01T20:22:09.732Z",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "url": "https://www.sixthtone.com/",
+          "final_url": "https://www.sixthtone.com/",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:12.198Z",
+          "sha256": "622c9ef8c1cbb833932cb3faafaa3ef4b699f595d582ef7c8286aeccb3f050c9"
+        }
+      ],
+      "checked": [
+        {
+          "url": "http://www.sixthtone.com/rss/index.xml",
+          "type": "rss",
+          "kind": "official_html_feed_link",
+          "source_url": "https://www.sixthtone.com/",
+          "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Sixthtone Rss\" href=\"http://www.sixthtone.com/rss/index.xml\"/>",
+          "found_at": "2026-10-01T20:22:12.198Z",
+          "page_sha256": "622c9ef8c1cbb833932cb3faafaa3ef4b699f595d582ef7c8286aeccb3f050c9",
+          "access_review": {
+            "robots_url": "http://www.sixthtone.com/robots.txt",
+            "http_status": 404,
+            "checked_at": "2026-10-01T20:22:16.619Z",
+            "decision": "allowed_robots_absent",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_fe1c0cd78e7d47b7f058200b",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_fe1c0cd78e7d47b7f058200b",
+            "type": "rss",
+            "url": "http://www.sixthtone.com/rss/index.xml",
+            "checkedAt": "2026-10-01T20:22:21.733Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 51,
+            "entriesWithUrl": 51,
+            "sampleUrls": [
+              "https://www.sixthtone.com/news/1019092/Bug%20Bounty:%20Beijing%20Park%20Recruits%20Visitors%20Against%20Invasive%20Moth",
+              "https://www.sixthtone.com/news/1019091/In%20Photos:%20China%20Begins%20Its%20Weeklong%20National%20Day%20Holiday",
+              "https://www.sixthtone.com/news/1019083/Chinese%20Olympic%20Diver%E2%80%99s%20Mother%20in%20Hot%20Water%20Over%20Toxic%20Parenting"
+            ],
+            "newestContentAt": "2026-10-01T05:00:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://api.sixthtone.com/cont/output/rssApi",
+            "durationMs": 5113,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 51,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "89eb16e4e4fde0b209ab102af8189e8ea9a902aab75b030d39dd955950d99b66"
+        }
+      ],
+      "scope_result": "OFFICIAL_CANDIDATES_CHECKED"
+    },
+    {
+      "country": "BR",
+      "name": "Brasil de Fato",
+      "home": "https://www.brasildefato.com.br/",
+      "language": "pt",
+      "home_access": {
+        "robots_url": "https://www.brasildefato.com.br/robots.txt",
+        "http_status": 200,
+        "checked_at": "2026-10-01T20:22:14.622Z",
+        "decision": "allowed",
+        "matched_rule": null
+      },
+      "resources": [
+        {
+          "url": "https://www.brasildefato.com.br/robots.txt",
+          "final_url": "https://www.brasildefato.com.br/robots.txt",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:14.622Z",
+          "sha256": "61cecab516e83a00071e8997edf715c1468fa11f49f38b4f0253f49636f26b09"
+        },
+        {
+          "url": "https://www.brasildefato.com.br/",
+          "final_url": "https://www.brasildefato.com.br/",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:16.931Z",
+          "sha256": "3393a3ee8339f65efbef4df6cb9977cdb9ee63b51bffd01d8f4c34d9c15b627e"
+        }
+      ],
+      "checked": [
+        {
+          "type": "sitemap",
+          "url": "https://www.brasildefato.com.br/sitemap.xml",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://www.brasildefato.com.br/robots.txt",
+          "found_at": "2026-10-01T20:22:14.622Z",
+          "page_sha256": "61cecab516e83a00071e8997edf715c1468fa11f49f38b4f0253f49636f26b09",
+          "declaration": "Sitemap: https://www.brasildefato.com.br/sitemap.xml",
+          "access_review": {
+            "robots_url": "https://www.brasildefato.com.br/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:14.622Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_1b52c93bcabb7dd46cf7b210",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_1b52c93bcabb7dd46cf7b210",
+            "type": "sitemap",
+            "url": "https://www.brasildefato.com.br/sitemap.xml",
+            "checkedAt": "2026-10-01T20:22:19.229Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 307,
+            "entriesWithUrl": 307,
+            "sampleUrls": [
+              "https://www.brasildefato.com.br/",
+              "https://www.brasildefato.com.br/ultimas-noticias/",
+              "https://www.brasildefato.com.br/pagina-principal-copy/"
+            ],
+            "newestContentAt": "2026-10-01T20:18:44.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.brasildefato.com.br/sitemap.xml",
+            "durationMs": 2289,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 306,
+          "uncertain_url_count": 1,
+          "url_set_sha256": "4504f7b1ff4bda8e985f87b7bc0151e0bddeab2ceca3cb42517dbca7bdfd3aca"
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.brasildefato.com.br/sitemap.xml?lang=en",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://www.brasildefato.com.br/robots.txt",
+          "found_at": "2026-10-01T20:22:14.622Z",
+          "page_sha256": "61cecab516e83a00071e8997edf715c1468fa11f49f38b4f0253f49636f26b09",
+          "declaration": "Sitemap: https://www.brasildefato.com.br/sitemap.xml?lang=en",
+          "access_review": {
+            "robots_url": "https://www.brasildefato.com.br/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:14.622Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_76d670a19e5e920ccc63ede5",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_76d670a19e5e920ccc63ede5",
+            "type": "sitemap",
+            "url": "https://www.brasildefato.com.br/sitemap.xml?lang=en",
+            "checkedAt": "2026-10-01T20:22:22.129Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 254,
+            "entriesWithUrl": 254,
+            "sampleUrls": [
+              "https://www.brasildefato.com.br/english/",
+              "https://www.brasildefato.com.br/ultimas-noticias/",
+              "https://www.brasildefato.com.br/about-us/"
+            ],
+            "newestContentAt": "2026-09-30T15:45:26.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.brasildefato.com.br/sitemap.xml?lang=en",
+            "durationMs": 2898,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 254,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "4669603a4edf4e2327f18c78f8b816dd6097fab666031c0a1480d779bb8acc23"
+        }
+      ],
+      "scope_result": "OFFICIAL_CANDIDATES_CHECKED"
+    },
+    {
+      "country": "AU",
+      "name": "Michael West Media",
+      "home": "https://michaelwest.com.au/",
+      "language": "en",
+      "home_access": {
+        "robots_url": "https://michaelwest.com.au/robots.txt",
+        "http_status": 200,
+        "checked_at": "2026-10-01T20:22:22.102Z",
+        "decision": "allowed",
+        "matched_rule": null
+      },
+      "resources": [
+        {
+          "url": "https://michaelwest.com.au/robots.txt",
+          "final_url": "https://michaelwest.com.au/robots.txt",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:22.102Z",
+          "sha256": "649ed31efde06d31d371c3b099867b9296cbca66c90c3f370de64c8f3fc5ed6e"
+        },
+        {
+          "url": "https://michaelwest.com.au/",
+          "final_url": "https://michaelwest.com.au/",
+          "status": 403,
+          "checked_at": "2026-10-01T20:22:24.295Z",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "checked": [],
+      "scope_result": "HOMEPAGE_HTTP_OR_NETWORK_FAILURE"
+    },
+    {
+      "country": "KR",
+      "name": "Korea Pro",
+      "home": "https://koreapro.org/",
+      "language": "en",
+      "home_access": {
+        "robots_url": "https://koreapro.org/robots.txt",
+        "http_status": 200,
+        "checked_at": "2026-10-01T20:22:22.287Z",
+        "decision": "allowed",
+        "matched_rule": null
+      },
+      "resources": [
+        {
+          "url": "https://koreapro.org/robots.txt",
+          "final_url": "https://koreapro.org/robots.txt",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:22.287Z",
+          "sha256": "5922de46f2a41b784e13533943180bb5bdb216f1e1ae3189b153cc9cd4d38211"
+        },
+        {
+          "url": "https://koreapro.org/",
+          "final_url": "https://koreapro.org/",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:24.979Z",
+          "sha256": "b9efdc5617e67fc8303316b2357fe772a9b091833c8428c18f6b42296d0efe7f"
+        }
+      ],
+      "checked": [],
+      "scope_result": "NO_DECLARED_ENDPOINT_IN_BOUNDED_SCOPE"
+    },
+    {
+      "country": "ID",
+      "name": "Project Multatuli",
+      "home": "https://projectmultatuli.org/",
+      "language": "id",
+      "home_access": {
+        "robots_url": "https://projectmultatuli.org/robots.txt",
+        "http_status": 200,
+        "checked_at": "2026-10-01T20:22:25.770Z",
+        "decision": "allowed",
+        "matched_rule": null
+      },
+      "resources": [
+        {
+          "url": "https://projectmultatuli.org/robots.txt",
+          "final_url": "https://projectmultatuli.org/robots.txt",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:25.770Z",
+          "sha256": "67051345154768d5d1d9036735984e2c4f44c22ca79a0921976aef71c362d4d8"
+        },
+        {
+          "url": "https://projectmultatuli.org/",
+          "final_url": "https://projectmultatuli.org/",
+          "status": 403,
+          "checked_at": "2026-10-01T20:22:27.954Z",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "checked": [],
+      "scope_result": "HOMEPAGE_HTTP_OR_NETWORK_FAILURE"
+    },
+    {
+      "country": "MX",
+      "name": "Pie de Página",
+      "home": "https://piedepagina.mx/",
+      "language": "es",
+      "home_access": {
+        "robots_url": "https://piedepagina.mx/robots.txt",
+        "http_status": 200,
+        "checked_at": "2026-10-01T20:22:24.990Z",
+        "decision": "allowed",
+        "matched_rule": null
+      },
+      "resources": [
+        {
+          "url": "https://piedepagina.mx/robots.txt",
+          "final_url": "https://piedepagina.mx/robots.txt",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:24.990Z",
+          "sha256": "e1f21c9aa28d50ca112ed357f34b67c550597effd4d42fd55b4e27300dd8f9c1"
+        },
+        {
+          "url": "https://piedepagina.mx/",
+          "final_url": "https://piedepagina.mx/",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:29.340Z",
+          "sha256": "42aabe7b69c761af0d1e10b222d7f262a1a412edf8cf942a0b77776ca18800dd"
+        }
+      ],
+      "checked": [
+        {
+          "url": "https://piedepagina.mx/feed/",
+          "type": "rss",
+          "kind": "official_html_feed_link",
+          "source_url": "https://piedepagina.mx/",
+          "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Pie de Página &raquo; Feed\" href=\"https://piedepagina.mx/feed/\" />",
+          "found_at": "2026-10-01T20:22:29.340Z",
+          "page_sha256": "42aabe7b69c761af0d1e10b222d7f262a1a412edf8cf942a0b77776ca18800dd",
+          "access_review": {
+            "robots_url": "https://piedepagina.mx/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:24.990Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_662fdcdfb31acd1dc6ff4ff4",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_662fdcdfb31acd1dc6ff4ff4",
+            "type": "rss",
+            "url": "https://piedepagina.mx/feed/",
+            "checkedAt": "2026-10-01T20:22:31.777Z",
+            "outcome": "unhealthy",
+            "httpStatus": 200,
+            "reason": "WRONG_ENDPOINT_FORMAT",
+            "format": null,
+            "auditStatus": "malformed",
+            "finalUrl": "https://piedepagina.mx/feed/",
+            "durationMs": 2436,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 0,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      ],
+      "scope_result": "OFFICIAL_CANDIDATES_CHECKED"
+    },
+    {
+      "country": "TR",
+      "name": "Medyascope",
+      "home": "https://medyascope.tv/",
+      "language": "tr",
+      "home_access": {
+        "robots_url": "https://medyascope.tv/robots.txt",
+        "http_status": 200,
+        "checked_at": "2026-10-01T20:22:28.125Z",
+        "decision": "allowed",
+        "matched_rule": null
+      },
+      "resources": [
+        {
+          "url": "https://medyascope.tv/robots.txt",
+          "final_url": "https://medyascope.tv/robots.txt",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:28.125Z",
+          "sha256": "584dab8b3a7d54051de93b2efd16b7bc2e870cbddc3612ef292448f7575fe372"
+        },
+        {
+          "url": "https://medyascope.tv/",
+          "final_url": "https://medyascope.tv/",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:30.322Z",
+          "sha256": "d03d20517fbddfabb188d7293a531d537c8e43b976f42c3fa22871910d2a9815"
+        },
+        {
+          "url": "https://medyascope.tv/sitemap_index.xml",
+          "final_url": "https://medyascope.tv/sitemap_index.xml",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:36.975Z",
+          "sha256": "1f35410064a0018f8c97f154557886142ef8e07caa2d89d8bee2900782bd9c41"
+        }
+      ],
+      "checked": [
+        {
+          "url": "https://medyascope.tv/feed/",
+          "type": "rss",
+          "kind": "official_html_feed_link",
+          "source_url": "https://medyascope.tv/",
+          "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Medyascope &raquo; akışı\" href=\"https://medyascope.tv/feed/\" />",
+          "found_at": "2026-10-01T20:22:30.322Z",
+          "page_sha256": "d03d20517fbddfabb188d7293a531d537c8e43b976f42c3fa22871910d2a9815",
+          "access_review": {
+            "robots_url": "https://medyascope.tv/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:28.125Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_d190feee82cb307d2b16a32e",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_d190feee82cb307d2b16a32e",
+            "type": "rss",
+            "url": "https://medyascope.tv/feed/",
+            "checkedAt": "2026-10-01T20:22:32.450Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 12,
+            "entriesWithUrl": 12,
+            "sampleUrls": [
+              "https://medyascope.tv/2026/10/01/degistirmek-degisim-midir/",
+              "https://medyascope.tv/2026/10/01/hakem-yasin-kol-gozaltina-alindi/",
+              "https://medyascope.tv/2026/10/01/gershon-baskin-israil-secimlerini-medyascopea-degerlendirdi-amerikalilar-yeni-basbakan-gormeye-hazir/"
+            ],
+            "newestContentAt": "2026-10-01T20:11:49.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://medyascope.tv/feed/",
+            "durationMs": 2120,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 12,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "028e4c7959c9aa1e47b8ea34527e4f55684a6dc69d55ff20200d66fb403f37a6"
+        },
+        {
+          "type": "sitemap",
+          "url": "https://medyascope.tv/sitemap_index.xml",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://medyascope.tv/robots.txt",
+          "found_at": "2026-10-01T20:22:28.125Z",
+          "page_sha256": "584dab8b3a7d54051de93b2efd16b7bc2e870cbddc3612ef292448f7575fe372",
+          "declaration": "Sitemap: https://medyascope.tv/sitemap_index.xml",
+          "access_review": {
+            "robots_url": "https://medyascope.tv/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:28.125Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_10ff8f87f0dd4ea002e2053e",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_10ff8f87f0dd4ea002e2053e",
+            "type": "sitemap",
+            "url": "https://medyascope.tv/sitemap_index.xml",
+            "checkedAt": "2026-10-01T20:22:34.847Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 98,
+            "entriesWithUrl": 98,
+            "sampleUrls": [
+              "https://medyascope.tv/post-sitemap.xml",
+              "https://medyascope.tv/post-sitemap2.xml",
+              "https://medyascope.tv/post-sitemap3.xml"
+            ],
+            "newestContentAt": "2026-10-01T20:11:52.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://medyascope.tv/sitemap_index.xml",
+            "durationMs": 2396,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 0,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "type": "sitemap",
+          "url": "https://medyascope.tv/post-sitemap75.xml",
+          "kind": "official_sitemap_index_enumerated_child",
+          "source_url": "https://medyascope.tv/sitemap_index.xml",
+          "found_at": "2026-10-01T20:22:36.975Z",
+          "page_sha256": "1f35410064a0018f8c97f154557886142ef8e07caa2d89d8bee2900782bd9c41",
+          "declared_lastmod": "2026-10-01T20:11:52+00:00",
+          "access_review": {
+            "robots_url": "https://medyascope.tv/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:28.125Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_ad6ee35bf53e9a97f0a80a67",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_ad6ee35bf53e9a97f0a80a67",
+            "type": "sitemap",
+            "url": "https://medyascope.tv/post-sitemap75.xml",
+            "checkedAt": "2026-10-01T20:22:39.648Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 259,
+            "entriesWithUrl": 259,
+            "sampleUrls": [
+              "https://medyascope.tv/2026/09/29/stand-up-comedian-freed-following-88-days-of-pre-trial-detention/",
+              "https://medyascope.tv/2026/09/29/iff-antalya-isci-sinifi-hareketinin-yeni-dogrultusu-isimli-panel-duzenledi/",
+              "https://medyascope.tv/2026/09/29/casusluk-davasi-ertelendi-saniklarin-tutukluluguna-devam-karari-verildi/"
+            ],
+            "newestContentAt": "2026-10-01T20:11:52.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://medyascope.tv/post-sitemap75.xml",
+            "durationMs": 2667,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 259,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "8f5e2e6264f27f2300c551f2060c9ddbe902d5f8947beace1a97e666b9cba1af"
+        }
+      ],
+      "scope_result": "OFFICIAL_CANDIDATES_CHECKED"
+    },
+    {
+      "country": "RU",
+      "name": "Mediazona",
+      "home": "https://zona.media/",
+      "language": "ru",
+      "home_access": {
+        "robots_url": "https://zona.media/robots.txt",
+        "http_status": 200,
+        "checked_at": "2026-10-01T20:22:31.917Z",
+        "decision": "allowed",
+        "matched_rule": null
+      },
+      "resources": [
+        {
+          "url": "https://zona.media/robots.txt",
+          "final_url": "https://zona.media/robots.txt",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:31.917Z",
+          "sha256": "ff3a9e7d6cc314a6c418b256e9e585600cc7aba833c39703c8375b6596a208c4"
+        },
+        {
+          "url": "https://zona.media/",
+          "final_url": "https://zona.media/",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:34.568Z",
+          "sha256": "738db986cec98a965206d396cffe83389ab7b8a09f39b9aa06fed700b20ef288"
+        },
+        {
+          "url": "https://zona.media/sitemap.xml",
+          "final_url": "https://zona.media/sitemap.xml",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:41.391Z",
+          "sha256": "b3baa4b7df4966f23bc64409b8d0a24928ebfe41a2c8f422fe7559bff9666ac7"
+        }
+      ],
+      "checked": [
+        {
+          "type": "sitemap",
+          "url": "https://zona.media/sitemap.xml",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://zona.media/robots.txt",
+          "found_at": "2026-10-01T20:22:31.917Z",
+          "page_sha256": "ff3a9e7d6cc314a6c418b256e9e585600cc7aba833c39703c8375b6596a208c4",
+          "declaration": "Sitemap: https://zona.media/sitemap.xml",
+          "access_review": {
+            "robots_url": "https://zona.media/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:31.917Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_ac2fb5c120e10d0634a4a8e6",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_ac2fb5c120e10d0634a4a8e6",
+            "type": "sitemap",
+            "url": "https://zona.media/sitemap.xml",
+            "checkedAt": "2026-10-01T20:22:37.996Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 149,
+            "entriesWithUrl": 149,
+            "sampleUrls": [
+              "https://zona.media/sitemap-static.xml",
+              "https://zona.media/news-sitemap.xml",
+              "https://zona.media/sitemap/2026/9/item.xml"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://zona.media/sitemap.xml",
+            "durationMs": 3426,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 0,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "type": "sitemap",
+          "url": "https://zona.media/sitemap/2026/9/item.xml",
+          "kind": "official_sitemap_index_enumerated_child",
+          "source_url": "https://zona.media/sitemap.xml",
+          "found_at": "2026-10-01T20:22:41.391Z",
+          "page_sha256": "b3baa4b7df4966f23bc64409b8d0a24928ebfe41a2c8f422fe7559bff9666ac7",
+          "declared_lastmod": null,
+          "access_review": {
+            "robots_url": "https://zona.media/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:31.917Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_e7bbfe993f0ff2ed468bee94",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_e7bbfe993f0ff2ed468bee94",
+            "type": "sitemap",
+            "url": "https://zona.media/sitemap/2026/9/item.xml",
+            "checkedAt": "2026-10-01T20:22:43.890Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 12,
+            "entriesWithUrl": 12,
+            "sampleUrls": [
+              "https://zona.media/news/2026/10/01/matushevskaya",
+              "https://zona.media/news/2026/10/01/odintsova",
+              "https://zona.media/news/2026/10/01/olimpiady"
+            ],
+            "newestContentAt": "2026-10-01T19:49:51.328Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://zona.media/sitemap/2026/9/item.xml",
+            "durationMs": 2495,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 12,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "6d1ca2696d29e2d1152406d9fcb6185a7cc17c7718402f336eed3d8f2338a857"
+        }
+      ],
+      "scope_result": "OFFICIAL_CANDIDATES_CHECKED"
+    },
+    {
+      "country": "SA",
+      "name": "Saudi Gazette",
+      "home": "https://saudigazette.com.sa/",
+      "language": "en",
+      "home_access": {
+        "robots_url": "https://saudigazette.com.sa/robots.txt",
+        "http_status": 200,
+        "checked_at": "2026-10-01T20:22:39.785Z",
+        "decision": "allowed",
+        "matched_rule": null
+      },
+      "resources": [
+        {
+          "url": "https://saudigazette.com.sa/robots.txt",
+          "final_url": "https://saudigazette.com.sa/robots.txt",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:39.785Z",
+          "sha256": "34e4b88a462a8957b516cbeffafc82ce06bde62ae49f863edff9d1e7dc498e49"
+        },
+        {
+          "url": "https://saudigazette.com.sa/",
+          "final_url": "https://saudigazette.com.sa/",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:42.022Z",
+          "sha256": "9dda10be247137fa2d47c26b83cba6671993a434ac64302b15a388d3ac7788f9"
+        },
+        {
+          "url": "https://saudigazette.com.sa/sitemaps/sitemap_0.xml",
+          "final_url": "https://saudigazette.com.sa/sitemaps/sitemap_0.xml",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:49.892Z",
+          "sha256": "d60e2aef085f6b28ae8712766f1c1f9215e816a0441593c24a1f9b160a917be9"
+        }
+      ],
+      "checked": [
+        {
+          "type": "sitemap",
+          "url": "https://saudigazette.com.sa/sitemaps/news_sitemap.xml",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://saudigazette.com.sa/robots.txt",
+          "found_at": "2026-10-01T20:22:39.785Z",
+          "page_sha256": "34e4b88a462a8957b516cbeffafc82ce06bde62ae49f863edff9d1e7dc498e49",
+          "declaration": "Sitemap: https://saudigazette.com.sa/sitemaps/news_sitemap.xml",
+          "access_review": {
+            "robots_url": "https://saudigazette.com.sa/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:39.785Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_0dd194d09050f4ed636b9b83",
+          "already_cataloged": true,
+          "observation": {
+            "endpointId": "ep_0dd194d09050f4ed636b9b83",
+            "type": "sitemap",
+            "url": "https://saudigazette.com.sa/sitemaps/news_sitemap.xml",
+            "checkedAt": "2026-10-01T20:22:44.659Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 60,
+            "entriesWithUrl": 60,
+            "sampleUrls": [
+              "https://saudigazette.com.sa/article/665037/saudi-arabia/coalition-says-houthi-drone-targeted-power-station-supplying-prophets-mosque-in-madinah",
+              "https://saudigazette.com.sa/article/665036/saudi-arabia/tga-operates-shuttle-bus-service-between-dammam-airport-and-jubail-khafji",
+              "https://saudigazette.com.sa/article/665035/saudi-arabia/national-greening-season-to-kick-off-on-october-7"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://saudigazette.com.sa/sitemaps/news_sitemap.xml",
+            "durationMs": 2635,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 60,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "ece0de5df25dbddb09493c1d363d6a7b2c3b6465ee3d61ca78cbb634b57a79d4"
+        },
+        {
+          "type": "sitemap",
+          "url": "https://saudigazette.com.sa/sitemaps/sitemap_0.xml",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://saudigazette.com.sa/robots.txt",
+          "found_at": "2026-10-01T20:22:39.785Z",
+          "page_sha256": "34e4b88a462a8957b516cbeffafc82ce06bde62ae49f863edff9d1e7dc498e49",
+          "declaration": "Sitemap: https://saudigazette.com.sa/sitemaps/sitemap_0.xml",
+          "access_review": {
+            "robots_url": "https://saudigazette.com.sa/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:39.785Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_5c33645378aac0e7a50a2121",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_5c33645378aac0e7a50a2121",
+            "type": "sitemap",
+            "url": "https://saudigazette.com.sa/sitemaps/sitemap_0.xml",
+            "checkedAt": "2026-10-01T20:22:47.263Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 118,
+            "entriesWithUrl": 118,
+            "sampleUrls": [
+              "https://saudigazette.com.sa/sitemaps/1907/12/sitemap_0.xml?v=1.1",
+              "https://saudigazette.com.sa/sitemaps/2017/2/sitemap_0.xml?v=1.1",
+              "https://saudigazette.com.sa/sitemaps/2017/3/sitemap_0.xml?v=1.1"
+            ],
+            "newestContentAt": "2026-10-01T16:56:46.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://saudigazette.com.sa/sitemaps/sitemap_0.xml",
+            "durationMs": 2604,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 0,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "type": "sitemap",
+          "url": "https://saudigazette.com.sa/sitemaps/2026/10/sitemap_0.xml?v=1.1",
+          "kind": "official_sitemap_index_enumerated_child",
+          "source_url": "https://saudigazette.com.sa/sitemaps/sitemap_0.xml",
+          "found_at": "2026-10-01T20:22:49.892Z",
+          "page_sha256": "d60e2aef085f6b28ae8712766f1c1f9215e816a0441593c24a1f9b160a917be9",
+          "declared_lastmod": "2026-10-01T19:56:46+03:00",
+          "access_review": {
+            "robots_url": "https://saudigazette.com.sa/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:39.785Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_5db1ab6e80961c41d60f838d",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_5db1ab6e80961c41d60f838d",
+            "type": "sitemap",
+            "url": "https://saudigazette.com.sa/sitemaps/2026/10/sitemap_0.xml?v=1.1",
+            "checkedAt": "2026-10-01T20:22:52.522Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 34,
+            "entriesWithUrl": 34,
+            "sampleUrls": [
+              "https://saudigazette.com.sa/article/665037/saudi-arabia/coalition-says-houthi-drone-targeted-power-station-supplying-prophets-mosque-in-madinah",
+              "https://saudigazette.com.sa/article/665036/saudi-arabia/tga-operates-shuttle-bus-service-between-dammam-airport-and-jubail-khafji",
+              "https://saudigazette.com.sa/article/665035/saudi-arabia/national-greening-season-to-kick-off-on-october-7"
+            ],
+            "newestContentAt": "2026-10-01T16:56:49.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://saudigazette.com.sa/sitemaps/2026/10/sitemap_0.xml?v=1.1",
+            "durationMs": 2625,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 34,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "27ad797950f0a6399030db79374a9a38cb6084adf4de9380e60c23fad112c150"
+        }
+      ],
+      "scope_result": "OFFICIAL_CANDIDATES_CHECKED"
+    },
+    {
+      "country": "ZA",
+      "name": "GroundUp",
+      "home": "https://groundup.org.za/",
+      "language": "en",
+      "home_access": {
+        "robots_url": "https://groundup.org.za/robots.txt",
+        "http_status": 200,
+        "checked_at": "2026-10-01T20:22:44.119Z",
+        "decision": "allowed",
+        "matched_rule": null
+      },
+      "resources": [
+        {
+          "url": "https://groundup.org.za/robots.txt",
+          "final_url": "https://groundup.org.za/robots.txt",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:44.119Z",
+          "sha256": "123021fc42664c79c9cbd3ccb1d1c8d0fd633938fb2e96026bb90b7c8199246e"
+        },
+        {
+          "url": "https://groundup.org.za/",
+          "final_url": "https://groundup.org.za/",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:47.839Z",
+          "sha256": "24e2198355eff92446fc68d67db6b54b684964ca1fdc9b63671be1f955d4f886"
+        }
+      ],
+      "checked": [
+        {
+          "url": "https://www.groundup.org.za/sitenews/rss/",
+          "type": "rss",
+          "kind": "official_html_feed_link",
+          "source_url": "https://groundup.org.za/",
+          "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" href=\"https://www.groundup.org.za/sitenews/rss/\" />",
+          "found_at": "2026-10-01T20:22:47.839Z",
+          "page_sha256": "24e2198355eff92446fc68d67db6b54b684964ca1fdc9b63671be1f955d4f886",
+          "access_review": {
+            "robots_url": "https://www.groundup.org.za/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:49.999Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_ceec6fb072057baaafe95c3f",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_ceec6fb072057baaafe95c3f",
+            "type": "rss",
+            "url": "https://www.groundup.org.za/sitenews/rss/",
+            "checkedAt": "2026-10-01T20:22:53.311Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 15,
+            "entriesWithUrl": 15,
+            "sampleUrls": [
+              "https://groundup.org.za/article/promises-made-and-millions-spent-but-north-west-families-left-in-shacks/",
+              "https://groundup.org.za/article/trumps-funding-cuts-have-shrunk-breakfast-portions-at-lesotho-schools/",
+              "https://groundup.org.za/article/20-years-of-sassa-how-the-srd-grant-became-a-lifeline-for-millions/"
+            ],
+            "newestContentAt": "2026-10-01T12:26:33.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://groundup.org.za/sitenews/rss/",
+            "durationMs": 3311,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 15,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "01eac0a5764307130f5ef801c9669504e74c2de9217b615e6de12b795a82bf26"
+        },
+        {
+          "type": "sitemap",
+          "url": "https://groundup.org.za/sitemap.xml",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://groundup.org.za/robots.txt",
+          "found_at": "2026-10-01T20:22:44.119Z",
+          "page_sha256": "123021fc42664c79c9cbd3ccb1d1c8d0fd633938fb2e96026bb90b7c8199246e",
+          "declaration": "Sitemap: https://groundup.org.za/sitemap.xml",
+          "access_review": {
+            "robots_url": "https://groundup.org.za/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:44.119Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_f4ade8fb06ef1fe2dec5c393",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_f4ade8fb06ef1fe2dec5c393",
+            "type": "sitemap",
+            "url": "https://groundup.org.za/sitemap.xml",
+            "checkedAt": "2026-10-01T20:22:59.725Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 20021,
+            "entriesWithUrl": 20021,
+            "sampleUrls": [
+              "https://groundup.org.za/article/promises-made-and-millions-spent-but-north-west-families-left-in-shacks/",
+              "https://groundup.org.za/article/trumps-funding-cuts-have-shrunk-breakfast-portions-at-lesotho-schools/",
+              "https://groundup.org.za/article/20-years-of-sassa-how-the-srd-grant-became-a-lifeline-for-millions/"
+            ],
+            "newestContentAt": "2026-10-01T00:00:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://groundup.org.za/sitemap.xml",
+            "durationMs": 6413,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 20021,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "fdeec14550ed06effe79b5c4082a23df5b2e1b4531e0a1a6f995c38f7b01f6ca"
+        }
+      ],
+      "scope_result": "OFFICIAL_CANDIDATES_CHECKED"
+    },
+    {
+      "country": "ES",
+      "name": "El Salto",
+      "home": "https://www.elsaltodiario.com/",
+      "language": "es",
+      "home_access": {
+        "robots_url": "https://www.elsaltodiario.com/robots.txt",
+        "http_status": 406,
+        "checked_at": "2026-10-01T20:23:00.693Z",
+        "decision": "unknown",
+        "matched_rule": null
+      },
+      "resources": [
+        {
+          "url": "https://www.elsaltodiario.com/robots.txt",
+          "final_url": "https://www.elsaltodiario.com/robots.txt",
+          "status": 406,
+          "checked_at": "2026-10-01T20:23:00.693Z",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "checked": [],
+      "scope_result": "HOMEPAGE_POLICY_UNAVAILABLE_OR_DISALLOWED"
+    },
+    {
+      "country": "AR",
+      "name": "elDiarioAR",
+      "home": "https://www.eldiarioar.com/",
+      "language": "es",
+      "home_access": {
+        "robots_url": "https://www.eldiarioar.com/robots.txt",
+        "http_status": 200,
+        "checked_at": "2026-10-01T20:22:52.871Z",
+        "decision": "allowed",
+        "matched_rule": null
+      },
+      "resources": [
+        {
+          "url": "https://www.eldiarioar.com/robots.txt",
+          "final_url": "https://www.eldiarioar.com/robots.txt",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:52.871Z",
+          "sha256": "79b3c1417c8a568f505e672329589638043de7b4f1ca51a4dd24de295288a365"
+        },
+        {
+          "url": "https://www.eldiarioar.com/",
+          "final_url": "https://www.eldiarioar.com/",
+          "status": 200,
+          "checked_at": "2026-10-01T20:22:55.713Z",
+          "sha256": "edc990c2155c264c4499438c2b3c5af29f399ec9270ca1b171e574d296828f78"
+        },
+        {
+          "url": "https://www.eldiarioar.com/sitemap_index_a59a1.xml",
+          "final_url": "https://www.eldiarioar.com/sitemap_index_a59a1.xml",
+          "status": 200,
+          "checked_at": "2026-10-01T20:23:05.685Z",
+          "sha256": "9b058c4ee8cdd2205e57b17fd0987b22a7a52e61a2ae5d098ca9cd5bcb8d937e"
+        }
+      ],
+      "checked": [
+        {
+          "url": "https://www.eldiarioar.com/rss/",
+          "type": "rss",
+          "kind": "official_html_feed_link",
+          "source_url": "https://www.eldiarioar.com/",
+          "tag": "<link rel=\"alternate\" title=\"Últimas Noticias de eldiario.es | elDiarioAR.com\" href=\"/rss/\" type=\"application/rss+xml\">",
+          "found_at": "2026-10-01T20:22:55.713Z",
+          "page_sha256": "edc990c2155c264c4499438c2b3c5af29f399ec9270ca1b171e574d296828f78",
+          "access_review": {
+            "robots_url": "https://www.eldiarioar.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:52.871Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_23006ccdbf78046d78c92d67",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_23006ccdbf78046d78c92d67",
+            "type": "rss",
+            "url": "https://www.eldiarioar.com/rss/",
+            "checkedAt": "2026-10-01T20:22:58.565Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 98,
+            "entriesWithUrl": 98,
+            "sampleUrls": [
+              "https://www.eldiarioar.com/politica/estados-unidos-pidio-desescalar-tension-argentina-reino-unido-malvinas_1_13555375.html",
+              "https://www.eldiarioar.com/politica/malvinas-gobierno-defendio-arbitraje-internacional-rechazo-cuestionamientos-reino-unido_1_13555077.html",
+              "https://www.eldiarioar.com/politica/escala-tension-malvinas-reino-unido-convoco-embajadora-argentina-rechazar-arbitraje-internacional_1_13552100.html"
+            ],
+            "newestContentAt": "2026-10-01T20:04:30.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.eldiarioar.com/rss/",
+            "durationMs": 2848,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 98,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "6ba173cebd7ad886c3c47f827adc974e248cc1e99e8e736a02c6e04e409ce2ca"
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.eldiarioar.com/sitemap_google_news_a59a1.xml",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://www.eldiarioar.com/robots.txt",
+          "found_at": "2026-10-01T20:22:52.871Z",
+          "page_sha256": "79b3c1417c8a568f505e672329589638043de7b4f1ca51a4dd24de295288a365",
+          "declaration": "Sitemap: https://www.eldiarioar.com/sitemap_google_news_a59a1.xml",
+          "access_review": {
+            "robots_url": "https://www.eldiarioar.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:52.871Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_e4b077ef0e49094bcbecac34",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_e4b077ef0e49094bcbecac34",
+            "type": "sitemap",
+            "url": "https://www.eldiarioar.com/sitemap_google_news_a59a1.xml",
+            "checkedAt": "2026-10-01T20:23:00.903Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 58,
+            "entriesWithUrl": 58,
+            "sampleUrls": [
+              "https://www.eldiarioar.com/politica/estados-unidos-pidio-desescalar-tension-argentina-reino-unido-malvinas_1_13555375.html",
+              "https://www.eldiarioar.com/politica/milei-reunio-macron-palacio-eliseo-gobernadores-empresarios_1_13555319.html",
+              "https://www.eldiarioar.com/sociedad/medio-ambiente/arrasaron-3-300-hectareas-bosques-salta-avance-territorios-comunidades-wichi_1_13555162.html"
+            ],
+            "newestContentAt": "2026-10-01T20:04:30.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.eldiarioar.com/sitemap_google_news_a59a1.xml",
+            "durationMs": 2337,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 58,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "6ab5f6ac5d343e912e799fa9d1c118e1d8d98c3e75016e78ca9c1dcb48c8bb99"
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.eldiarioar.com/sitemap_index_a59a1.xml",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://www.eldiarioar.com/robots.txt",
+          "found_at": "2026-10-01T20:22:52.871Z",
+          "page_sha256": "79b3c1417c8a568f505e672329589638043de7b4f1ca51a4dd24de295288a365",
+          "declaration": "Sitemap: https://www.eldiarioar.com/sitemap_index_a59a1.xml",
+          "access_review": {
+            "robots_url": "https://www.eldiarioar.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:52.871Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_3ce3dc7191de3252ff517e6d",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_3ce3dc7191de3252ff517e6d",
+            "type": "sitemap",
+            "url": "https://www.eldiarioar.com/sitemap_index_a59a1.xml",
+            "checkedAt": "2026-10-01T20:23:03.405Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 53,
+            "entriesWithUrl": 53,
+            "sampleUrls": [
+              "https://www.eldiarioar.com/sitemap_contents_2026_10_a59a1_001.xml",
+              "https://www.eldiarioar.com/sitemap_google_news_a59a1.xml",
+              "https://www.eldiarioar.com/sitemap_tag_a59a1_002.xml"
+            ],
+            "newestContentAt": "2026-10-01T20:04:34.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.eldiarioar.com/sitemap_index_a59a1.xml",
+            "durationMs": 2501,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 0,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.eldiarioar.com/sitemap_google_news_a59a1.xml",
+          "kind": "official_sitemap_index_enumerated_child",
+          "source_url": "https://www.eldiarioar.com/sitemap_index_a59a1.xml",
+          "found_at": "2026-10-01T20:23:05.685Z",
+          "page_sha256": "9b058c4ee8cdd2205e57b17fd0987b22a7a52e61a2ae5d098ca9cd5bcb8d937e",
+          "declared_lastmod": "2026-10-01T22:04:31+02:00",
+          "access_review": {
+            "robots_url": "https://www.eldiarioar.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:52.871Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_e4b077ef0e49094bcbecac34",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_e4b077ef0e49094bcbecac34",
+            "type": "sitemap",
+            "url": "https://www.eldiarioar.com/sitemap_google_news_a59a1.xml",
+            "checkedAt": "2026-10-01T20:23:07.976Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 58,
+            "entriesWithUrl": 58,
+            "sampleUrls": [
+              "https://www.eldiarioar.com/politica/estados-unidos-pidio-desescalar-tension-argentina-reino-unido-malvinas_1_13555375.html",
+              "https://www.eldiarioar.com/politica/milei-reunio-macron-palacio-eliseo-gobernadores-empresarios_1_13555319.html",
+              "https://www.eldiarioar.com/sociedad/medio-ambiente/arrasaron-3-300-hectareas-bosques-salta-avance-territorios-comunidades-wichi_1_13555162.html"
+            ],
+            "newestContentAt": "2026-10-01T20:04:30.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.eldiarioar.com/sitemap_google_news_a59a1.xml",
+            "durationMs": 2291,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 58,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "6ab5f6ac5d343e912e799fa9d1c118e1d8d98c3e75016e78ca9c1dcb48c8bb99"
+        }
+      ],
+      "scope_result": "OFFICIAL_CANDIDATES_CHECKED"
+    },
+    {
+      "country": "US",
+      "name": "Grist",
+      "home": "https://grist.org/",
+      "language": "en",
+      "home_access": {
+        "robots_url": "https://grist.org/robots.txt",
+        "http_status": 200,
+        "checked_at": "2026-10-01T20:23:00.956Z",
+        "decision": "allowed",
+        "matched_rule": null
+      },
+      "resources": [
+        {
+          "url": "https://grist.org/robots.txt",
+          "final_url": "https://grist.org/robots.txt",
+          "status": 200,
+          "checked_at": "2026-10-01T20:23:00.956Z",
+          "sha256": "450b576989d6cf418d913d6913317afbdc4365ca7a30e57b7c1c9838542792bd"
+        },
+        {
+          "url": "https://grist.org/",
+          "final_url": "https://grist.org/",
+          "status": 200,
+          "checked_at": "2026-10-01T20:23:03.156Z",
+          "sha256": "f260e4ad71619058b1bca1668de774db38f389cc9c996b599a9948b4d59e5b1c"
+        },
+        {
+          "url": "https://grist.org/sitemap_index.xml",
+          "final_url": "https://grist.org/sitemap_index.xml",
+          "status": 200,
+          "checked_at": "2026-10-01T20:23:07.410Z",
+          "sha256": "d7806a83052b0292ab490a3800b0e9c601f3151377371f8cfee0c8a974c4e74a"
+        },
+        {
+          "url": "https://grist.org/grist-50/sitemap_index.xml",
+          "final_url": "https://grist.org/grist-50/sitemap_index.xml",
+          "status": 200,
+          "checked_at": "2026-10-01T20:23:13.821Z",
+          "sha256": "413af027a4fe14b4842e2724474a90bd10558ea32a235d7d3bcefe53a564acfe"
+        }
+      ],
+      "checked": [
+        {
+          "type": "sitemap",
+          "url": "https://grist.org/sitemap_index.xml",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://grist.org/robots.txt",
+          "found_at": "2026-10-01T20:23:00.956Z",
+          "page_sha256": "450b576989d6cf418d913d6913317afbdc4365ca7a30e57b7c1c9838542792bd",
+          "declaration": "Sitemap: https://grist.org/sitemap_index.xml",
+          "access_review": {
+            "robots_url": "https://grist.org/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:23:00.956Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_26294c36677ca48f38c3ea9d",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_26294c36677ca48f38c3ea9d",
+            "type": "sitemap",
+            "url": "https://grist.org/sitemap_index.xml",
+            "checkedAt": "2026-10-01T20:23:05.289Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 80,
+            "entriesWithUrl": 80,
+            "sampleUrls": [
+              "https://grist.org/post-sitemap.xml",
+              "https://grist.org/post-sitemap2.xml",
+              "https://grist.org/post-sitemap3.xml"
+            ],
+            "newestContentAt": "2026-10-01T19:16:43.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://grist.org/sitemap_index.xml",
+            "durationMs": 2130,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 0,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "type": "sitemap",
+          "url": "https://grist.org/post-sitemap63.xml",
+          "kind": "official_sitemap_index_enumerated_child",
+          "source_url": "https://grist.org/sitemap_index.xml",
+          "found_at": "2026-10-01T20:23:07.410Z",
+          "page_sha256": "d7806a83052b0292ab490a3800b0e9c601f3151377371f8cfee0c8a974c4e74a",
+          "declared_lastmod": "2026-10-01T19:16:43+00:00",
+          "access_review": {
+            "robots_url": "https://grist.org/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:23:00.956Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_32aae890790131d52e71c104",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_32aae890790131d52e71c104",
+            "type": "sitemap",
+            "url": "https://grist.org/post-sitemap63.xml",
+            "checkedAt": "2026-10-01T20:23:09.573Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 612,
+            "entriesWithUrl": 612,
+            "sampleUrls": [
+              "https://grist.org/food/super-cows-so-last-year-meet-the-double-bacon-hog/",
+              "https://grist.org/living/celebrate-independence-day-with-these-rad-women-and-popsicles/",
+              "https://grist.org/living/mary-iverson-makes-climate-change-paintings-that-are-actually-cool/"
+            ],
+            "newestContentAt": "2026-10-01T19:16:43.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://grist.org/post-sitemap63.xml",
+            "durationMs": 2162,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 612,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "49f43b9d31f0a68b75eb148d4a1b3254383d6546a84151f350ba6a91430f52ab"
+        },
+        {
+          "type": "sitemap",
+          "url": "https://grist.org/grist-50/sitemap_index.xml",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://grist.org/robots.txt",
+          "found_at": "2026-10-01T20:23:00.956Z",
+          "page_sha256": "450b576989d6cf418d913d6913317afbdc4365ca7a30e57b7c1c9838542792bd",
+          "declaration": "Sitemap: https://grist.org/grist-50/sitemap_index.xml",
+          "access_review": {
+            "robots_url": "https://grist.org/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:23:00.956Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_a0502c330e5e366a337ba35c",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_a0502c330e5e366a337ba35c",
+            "type": "sitemap",
+            "url": "https://grist.org/grist-50/sitemap_index.xml",
+            "checkedAt": "2026-10-01T20:23:11.701Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 1,
+            "entriesWithUrl": 1,
+            "sampleUrls": [
+              "https://grist.org/grist-50/grist-50-sitemap.xml"
+            ],
+            "newestContentAt": "2022-01-28T22:15:47.000Z",
+            "contentFreshness": "stale",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://grist.org/grist-50/sitemap_index.xml",
+            "durationMs": 2126,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 0,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "type": "sitemap",
+          "url": "https://grist.org/grist-50/grist-50-sitemap.xml",
+          "kind": "official_sitemap_index_enumerated_child",
+          "source_url": "https://grist.org/grist-50/sitemap_index.xml",
+          "found_at": "2026-10-01T20:23:13.821Z",
+          "page_sha256": "413af027a4fe14b4842e2724474a90bd10558ea32a235d7d3bcefe53a564acfe",
+          "declared_lastmod": "2022-01-28T22:15:47+00:00",
+          "access_review": {
+            "robots_url": "https://grist.org/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:23:00.956Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_84c1d54347048273260ca24a",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_84c1d54347048273260ca24a",
+            "type": "sitemap",
+            "url": "https://grist.org/grist-50/grist-50-sitemap.xml",
+            "checkedAt": "2026-10-01T20:23:15.940Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 7,
+            "entriesWithUrl": 7,
+            "sampleUrls": [
+              "https://grist.org/grist-50/climate-and-energy/",
+              "https://grist.org/grist-50/2021/",
+              "https://grist.org/grist-50/2018/"
+            ],
+            "newestContentAt": "2022-01-28T22:15:47.000Z",
+            "contentFreshness": "stale",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://grist.org/grist-50/grist-50-sitemap.xml",
+            "durationMs": 2119,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 7,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "799599c4607d8bb34eb845d10f802ca530b0ba1d03ab9664921dfbe58e3efc23"
+        }
+      ],
+      "scope_result": "OFFICIAL_CANDIDATES_CHECKED"
+    },
+    {
+      "country": "US",
+      "name": "War on the Rocks",
+      "home": "https://warontherocks.com/",
+      "language": "en",
+      "home_access": {
+        "robots_url": "https://warontherocks.com/robots.txt",
+        "http_status": 200,
+        "checked_at": "2026-10-01T20:23:08.241Z",
+        "decision": "allowed",
+        "matched_rule": null
+      },
+      "resources": [
+        {
+          "url": "https://warontherocks.com/robots.txt",
+          "final_url": "https://warontherocks.com/robots.txt",
+          "status": 200,
+          "checked_at": "2026-10-01T20:23:08.241Z",
+          "sha256": "93a2b1f91c696d38093e6567eacb464015e9282e6c7f60a188382b4add189010"
+        },
+        {
+          "url": "https://warontherocks.com/",
+          "final_url": "https://warontherocks.com/",
+          "status": 200,
+          "checked_at": "2026-10-01T20:23:10.542Z",
+          "sha256": "192d96219309d82869a9723f030edddcbc4b9acf56a4e094c42e1812c6d00889"
+        },
+        {
+          "url": "https://warontherocks.com/sitemap_index.xml",
+          "final_url": "https://warontherocks.com/sitemap_index.xml",
+          "status": 200,
+          "checked_at": "2026-10-01T20:23:15.414Z",
+          "sha256": "eeea30905b95ef2aea4b88645e0b23da5a04218e8affd36ea82f20b57f3691b0"
+        }
+      ],
+      "checked": [
+        {
+          "type": "sitemap",
+          "url": "https://warontherocks.com/sitemap_index.xml",
+          "kind": "official_robots_sitemap",
+          "source_url": "https://warontherocks.com/robots.txt",
+          "found_at": "2026-10-01T20:23:08.241Z",
+          "page_sha256": "93a2b1f91c696d38093e6567eacb464015e9282e6c7f60a188382b4add189010",
+          "declaration": "Sitemap: https://warontherocks.com/sitemap_index.xml",
+          "access_review": {
+            "robots_url": "https://warontherocks.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:23:08.241Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_8e0ab2184da05e0330df1706",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_8e0ab2184da05e0330df1706",
+            "type": "sitemap",
+            "url": "https://warontherocks.com/sitemap_index.xml",
+            "checkedAt": "2026-10-01T20:23:13.109Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "sitemapindex",
+            "auditStatus": "working_nonempty",
+            "entryCount": 15,
+            "entriesWithUrl": 15,
+            "sampleUrls": [
+              "https://warontherocks.com/post-sitemap.xml",
+              "https://warontherocks.com/post-sitemap2.xml",
+              "https://warontherocks.com/post-sitemap3.xml"
+            ],
+            "newestContentAt": "2026-10-01T19:58:38.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://warontherocks.com/sitemap_index.xml",
+            "durationMs": 2565,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 0,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "type": "sitemap",
+          "url": "https://warontherocks.com/post_tag-sitemap.xml",
+          "kind": "official_sitemap_index_enumerated_child",
+          "source_url": "https://warontherocks.com/sitemap_index.xml",
+          "found_at": "2026-10-01T20:23:15.414Z",
+          "page_sha256": "eeea30905b95ef2aea4b88645e0b23da5a04218e8affd36ea82f20b57f3691b0",
+          "declared_lastmod": "2026-10-01T19:58:38+00:00",
+          "access_review": {
+            "robots_url": "https://warontherocks.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:23:08.241Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "endpoint_id": "ep_0a1a43c216c1eeb32769d554",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_0a1a43c216c1eeb32769d554",
+            "type": "sitemap",
+            "url": "https://warontherocks.com/post_tag-sitemap.xml",
+            "checkedAt": "2026-10-01T20:23:17.995Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 259,
+            "entriesWithUrl": 259,
+            "sampleUrls": [
+              "https://warontherocks.com/tag/acquisition/",
+              "https://warontherocks.com/tag/afghanistan/",
+              "https://warontherocks.com/tag/afghanistan-war/"
+            ],
+            "newestContentAt": "2026-10-01T19:58:38.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://warontherocks.com/post_tag-sitemap.xml",
+            "durationMs": 2579,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 0,
+          "uncertain_url_count": 259,
+          "url_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      ],
+      "scope_result": "OFFICIAL_CANDIDATES_CHECKED"
+    },
+    {
+      "country": "IN",
+      "name": "The News Minute",
+      "home": "https://www.thenewsminute.com/",
+      "language": "en",
+      "home_access": {
+        "robots_url": "https://www.thenewsminute.com/robots.txt",
+        "http_status": 200,
+        "checked_at": "2026-10-01T20:27:05.685Z",
+        "decision": "allowed",
+        "matched_rule": null
+      },
+      "resources": [
+        {
+          "url": "https://www.thenewsminute.com/robots.txt",
+          "final_url": "https://www.thenewsminute.com/robots.txt",
+          "status": 200,
+          "checked_at": "2026-10-01T20:27:05.685Z",
+          "sha256": "406fd5f2a6561d0e7657229e1c5527eaad090030bbd7040966846a0487c01cda"
+        },
+        {
+          "url": "https://www.thenewsminute.com/",
+          "final_url": "https://www.thenewsminute.com/",
+          "status": 200,
+          "checked_at": "2026-10-01T20:27:07.981Z",
+          "sha256": "2a71b67075b178051d77ab0c76e414d98e998e9939c36d24ba3243c573433f34"
+        }
+      ],
+      "checked": [],
+      "scope_result": "NO_DECLARED_ENDPOINT_IN_BOUNDED_SCOPE"
+    },
+    {
+      "country": "KR",
+      "name": "Newstapa",
+      "home": "https://newstapa.org/",
+      "language": "ko",
+      "home_access": {
+        "robots_url": "https://newstapa.org/robots.txt",
+        "http_status": 404,
+        "checked_at": "2026-10-01T20:27:06.458Z",
+        "decision": "allowed_robots_absent",
+        "matched_rule": null
+      },
+      "resources": [
+        {
+          "url": "https://newstapa.org/robots.txt",
+          "final_url": "https://newstapa.org/robots.txt",
+          "status": 404,
+          "checked_at": "2026-10-01T20:27:06.458Z",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "url": "https://newstapa.org/",
+          "final_url": "https://newstapa.org/",
+          "status": 200,
+          "checked_at": "2026-10-01T20:27:09.833Z",
+          "sha256": "8a81f252ccd178ff2f0ae08f38166ec64901958531b9dfac372e1a669aa2cde1"
+        }
+      ],
+      "checked": [],
+      "scope_result": "NO_DECLARED_ENDPOINT_IN_BOUNDED_SCOPE"
+    },
+    {
+      "country": "ES",
+      "name": "El Confidencial",
+      "home": "https://www.elconfidencial.com/",
+      "language": "es",
+      "home_access": {
+        "robots_url": "https://www.elconfidencial.com/robots.txt",
+        "http_status": 200,
+        "checked_at": "2026-10-01T20:27:08.244Z",
+        "decision": "allowed",
+        "matched_rule": null
+      },
+      "resources": [
+        {
+          "url": "https://www.elconfidencial.com/robots.txt",
+          "final_url": "https://www.elconfidencial.com/robots.txt",
+          "status": 200,
+          "checked_at": "2026-10-01T20:27:08.244Z",
+          "sha256": "8b1d2c7f14ba773ed115b8c4352dbf4ce6a6453c38327fa143608d400e97ff02"
+        },
+        {
+          "url": "https://www.elconfidencial.com/",
+          "final_url": "https://www.elconfidencial.com/",
+          "status": 200,
+          "checked_at": "2026-10-01T20:27:10.803Z",
+          "sha256": "dd930f0ba83d899b2f56b56c95fe9834ea462386cd080daaa5f992cc25450370"
+        }
+      ],
+      "checked": [],
+      "scope_result": "NO_DECLARED_ENDPOINT_IN_BOUNDED_SCOPE"
+    }
+  ]
+}

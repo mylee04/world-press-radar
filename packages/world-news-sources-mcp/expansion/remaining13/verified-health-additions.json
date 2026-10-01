@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "observations": [
+    {
+      "endpointId": "ep_d190feee82cb307d2b16a32e",
+      "type": "rss",
+      "url": "https://medyascope.tv/feed/",
+      "checkedAt": "2026-10-01T20:22:32.450Z",
+      "outcome": "healthy",
+      "httpStatus": 200,
+      "reason": null,
+      "format": "rss",
+      "auditStatus": "working_nonempty",
+      "entryCount": 12,
+      "entriesWithUrl": 12,
+      "sampleUrls": [
+        "https://medyascope.tv/2026/10/01/degistirmek-degisim-midir/",
+        "https://medyascope.tv/2026/10/01/hakem-yasin-kol-gozaltina-alindi/",
+        "https://medyascope.tv/2026/10/01/gershon-baskin-israil-secimlerini-medyascopea-degerlendirdi-amerikalilar-yeni-basbakan-gormeye-hazir/"
+      ],
+      "newestContentAt": "2026-10-01T20:11:49.000Z",
+      "contentFreshness": "recent",
+      "dateKind": "feed_item_date",
+      "finalUrl": "https://medyascope.tv/feed/",
+      "durationMs": 2120,
+      "attempts": 1,
+      "validatorVersion": "2"
+    },
+    {
+      "endpointId": "ep_ceec6fb072057baaafe95c3f",
+      "type": "rss",
+      "url": "https://www.groundup.org.za/sitenews/rss/",
+      "checkedAt": "2026-10-01T20:22:53.311Z",
+      "outcome": "healthy",
+      "httpStatus": 200,
+      "reason": null,
+      "format": "rss",
+      "auditStatus": "working_nonempty",
+      "entryCount": 15,
+      "entriesWithUrl": 15,
+      "sampleUrls": [
+        "https://groundup.org.za/article/promises-made-and-millions-spent-but-north-west-families-left-in-shacks/",
+        "https://groundup.org.za/article/trumps-funding-cuts-have-shrunk-breakfast-portions-at-lesotho-schools/",
+        "https://groundup.org.za/article/20-years-of-sassa-how-the-srd-grant-became-a-lifeline-for-millions/"
+      ],
+      "newestContentAt": "2026-10-01T12:26:33.000Z",
+      "contentFreshness": "recent",
+      "dateKind": "feed_item_date",
+      "finalUrl": "https://groundup.org.za/sitenews/rss/",
+      "durationMs": 3311,
+      "attempts": 1,
+      "validatorVersion": "2"
+    },
+    {
+      "endpointId": "ep_23006ccdbf78046d78c92d67",
+      "type": "rss",
+      "url": "https://www.eldiarioar.com/rss/",
+      "checkedAt": "2026-10-01T20:22:58.565Z",
+      "outcome": "healthy",
+      "httpStatus": 200,
+      "reason": null,
+      "format": "rss",
+      "auditStatus": "working_nonempty",
+      "entryCount": 98,
+      "entriesWithUrl": 98,
+      "sampleUrls": [
+        "https://www.eldiarioar.com/politica/estados-unidos-pidio-desescalar-tension-argentina-reino-unido-malvinas_1_13555375.html",
+        "https://www.eldiarioar.com/politica/malvinas-gobierno-defendio-arbitraje-internacional-rechazo-cuestionamientos-reino-unido_1_13555077.html",
+        "https://www.eldiarioar.com/politica/escala-tension-malvinas-reino-unido-convoco-embajadora-argentina-rechazar-arbitraje-internacional_1_13552100.html"
+      ],
+      "newestContentAt": "2026-10-01T20:04:30.000Z",
+      "contentFreshness": "recent",
+      "dateKind": "feed_item_date",
+      "finalUrl": "https://www.eldiarioar.com/rss/",
+      "durationMs": 2848,
+      "attempts": 1,
+      "validatorVersion": "2"
+    },
+    {
+      "endpointId": "ep_e4b077ef0e49094bcbecac34",
+      "type": "sitemap",
+      "url": "https://www.eldiarioar.com/sitemap_google_news_a59a1.xml",
+      "checkedAt": "2026-10-01T20:23:07.976Z",
+      "outcome": "healthy",
+      "httpStatus": 200,
+      "reason": null,
+      "format": "urlset",
+      "auditStatus": "working_nonempty",
+      "entryCount": 58,
+      "entriesWithUrl": 58,
+      "sampleUrls": [
+        "https://www.eldiarioar.com/politica/estados-unidos-pidio-desescalar-tension-argentina-reino-unido-malvinas_1_13555375.html",
+        "https://www.eldiarioar.com/politica/milei-reunio-macron-palacio-eliseo-gobernadores-empresarios_1_13555319.html",
+        "https://www.eldiarioar.com/sociedad/medio-ambiente/arrasaron-3-300-hectareas-bosques-salta-avance-territorios-comunidades-wichi_1_13555162.html"
+      ],
+      "newestContentAt": "2026-10-01T20:04:30.000Z",
+      "contentFreshness": "recent",
+      "dateKind": "sitemap_lastmod",
+      "finalUrl": "https://www.eldiarioar.com/sitemap_google_news_a59a1.xml",
+      "durationMs": 2291,
+      "attempts": 1,
+      "validatorVersion": "2"
+    },
+    {
+      "endpointId": "ep_8d6c4a632aff762d8bf47f3e",
+      "type": "sitemap",
+      "url": "https://zona.media/news-sitemap.xml",
+      "checkedAt": "2026-10-01T20:28:19.105Z",
+      "outcome": "healthy",
+      "httpStatus": 200,
+      "reason": null,
+      "format": "urlset",
+      "auditStatus": "working_nonempty",
+      "entryCount": 26,
+      "entriesWithUrl": 26,
+      "sampleUrls": [
+        "https://zona.media/news/2026/10/01/matushevskaya",
+        "https://zona.media/news/2026/10/01/odintsova",
+        "https://zona.media/news/2026/10/01/olimpiady"
+      ],
+      "newestContentAt": "2026-10-01T19:49:51.328Z",
+      "contentFreshness": "recent",
+      "dateKind": "sitemap_lastmod",
+      "finalUrl": "https://zona.media/news-sitemap.xml",
+      "durationMs": 2425,
+      "attempts": 1,
+      "validatorVersion": "2"
+    }
+  ]
+}

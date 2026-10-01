@@ -1,0 +1,44 @@
+{
+  "verified_at": "2026-10-01T20:45:20.399Z",
+  "base_commit": "a01678f3506c7d7418743e8aa24477992d2f163e",
+  "commands": [
+    {
+      "command": "npm test",
+      "exit_code": 0,
+      "tests": 78,
+      "passed": 78,
+      "failed": 0,
+      "includes_build": true
+    },
+    {
+      "command": "isolated post-addition registry copy: node --test test/activity.test.mjs test/operator-additions.test.mjs test/remaining13.test.mjs",
+      "exit_code": 0,
+      "passed": 20,
+      "registry_state": "Both batches locally applied in temporary copy; production and working registry untouched."
+    },
+    {
+      "command": "npm run typecheck",
+      "exit_code": 0
+    },
+    {
+      "command": "in-memory current registry reconstruction + prepareRegistryAdditions(second batch)",
+      "exit_code": 0,
+      "mode": "dry_run",
+      "registrations": 4,
+      "typed_endpoints": 5
+    }
+  ],
+  "production_mutated": false,
+  "first_batch_activation_time_from_live_mcp": "2026-10-01T20:11:07.987Z",
+  "registry_expected_sha256": "ec64bf054b506c0184dd7bd172338b709bb3ab69f0320a97998cae9a3b332b10",
+  "files_sha256": {
+    "expansion/robots-policy.mjs": "b20401efa60a6af88a323abd8c732e8ae04bb1df294a99e505c799c76eb4211b",
+    "test/remaining13.test.mjs": "c6806ac68b0967286e40b356bb91da13fcec6bf73b2ee6f592fb30784b156832",
+    "test/fixtures.mjs": "fd916220515748a35c26b3ff39bfce296014a7e8a451952ebbc3022c7a11f080",
+    "test/operator-additions.test.mjs": "91279fc3e4479504e3e2ad092ff2dbd37bfe7f3e132fad20dedb1de1b082c0df",
+    "test/activity.test.mjs": "a408b9e9281ccb677e0effa20017140a35390ba156459142faa4fdbe782e73cd",
+    "expansion/remaining13/registry-additions.json": "4b7f1924473f9e7abc86f52d833c73e1f1b8261a238ae8977fdc65d8e332f605",
+    "expansion/remaining13/report.json": "fe950df5404b3d99a5909860e5d440b9022866f56ba392dc0506235f67a8928c",
+    "expansion/remaining13/dry-run.json": "ae0d6505c547798fcea1232f472ec329aea321b810c0d1154cab8789132077a0"
+  }
+}

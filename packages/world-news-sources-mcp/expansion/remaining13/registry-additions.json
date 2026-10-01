@@ -1,0 +1,293 @@
+{
+  "version": 1,
+  "run_id": "major20-remaining13-2026-10-01",
+  "prepared_at": "2026-10-01T20:31:52.995Z",
+  "registry_sha256": "ec64bf054b506c0184dd7bd172338b709bb3ab69f0320a97998cae9a3b332b10",
+  "selected_countries": [
+    "US",
+    "GB",
+    "CA",
+    "FR",
+    "DE",
+    "IT",
+    "JP",
+    "CN",
+    "IN",
+    "BR",
+    "AU",
+    "KR",
+    "MX",
+    "ID",
+    "TR",
+    "RU",
+    "SA",
+    "ZA",
+    "AR",
+    "ES"
+  ],
+  "additions": [
+    {
+      "country": "TR",
+      "name": "Medyascope",
+      "language": "tr",
+      "homepage": "https://medyascope.tv/",
+      "publisher_reference": "https://medyascope.tv/kunye/",
+      "kind": "new_domain",
+      "scope_note": "Official Turkish news RSS. Numbered archive sitemap excluded to avoid freezing a current partition as a permanent stream.",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://medyascope.tv/feed/",
+          "endpoint_id": "ep_d190feee82cb307d2b16a32e",
+          "access_review": {
+            "robots_url": "https://medyascope.tv/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:28.125Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://medyascope.tv/",
+            "found_at": "2026-10-01T20:22:30.322Z",
+            "page_sha256": "d03d20517fbddfabb188d7293a531d537c8e43b976f42c3fa22871910d2a9815",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Medyascope &raquo; akışı\" href=\"https://medyascope.tv/feed/\" />"
+          },
+          "observation": {
+            "endpointId": "ep_d190feee82cb307d2b16a32e",
+            "type": "rss",
+            "url": "https://medyascope.tv/feed/",
+            "checkedAt": "2026-10-01T20:22:32.450Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 12,
+            "entriesWithUrl": 12,
+            "sampleUrls": [
+              "https://medyascope.tv/2026/10/01/degistirmek-degisim-midir/",
+              "https://medyascope.tv/2026/10/01/hakem-yasin-kol-gozaltina-alindi/",
+              "https://medyascope.tv/2026/10/01/gershon-baskin-israil-secimlerini-medyascopea-degerlendirdi-amerikalilar-yeni-basbakan-gormeye-hazir/"
+            ],
+            "newestContentAt": "2026-10-01T20:11:49.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://medyascope.tv/feed/",
+            "durationMs": 2120,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        }
+      ]
+    },
+    {
+      "country": "ZA",
+      "name": "GroundUp",
+      "language": "en",
+      "homepage": "https://groundup.org.za/",
+      "publisher_reference": "https://groundup.org.za/about/",
+      "kind": "new_domain",
+      "scope_note": "Official South African news RSS. Large mixed archive sitemap deferred; no 20,021-entry archive baseline is added here.",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.groundup.org.za/sitenews/rss/",
+          "endpoint_id": "ep_ceec6fb072057baaafe95c3f",
+          "access_review": {
+            "robots_url": "https://www.groundup.org.za/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:49.999Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://groundup.org.za/",
+            "found_at": "2026-10-01T20:22:47.839Z",
+            "page_sha256": "24e2198355eff92446fc68d67db6b54b684964ca1fdc9b63671be1f955d4f886",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" href=\"https://www.groundup.org.za/sitenews/rss/\" />"
+          },
+          "observation": {
+            "endpointId": "ep_ceec6fb072057baaafe95c3f",
+            "type": "rss",
+            "url": "https://www.groundup.org.za/sitenews/rss/",
+            "checkedAt": "2026-10-01T20:22:53.311Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 15,
+            "entriesWithUrl": 15,
+            "sampleUrls": [
+              "https://groundup.org.za/article/promises-made-and-millions-spent-but-north-west-families-left-in-shacks/",
+              "https://groundup.org.za/article/trumps-funding-cuts-have-shrunk-breakfast-portions-at-lesotho-schools/",
+              "https://groundup.org.za/article/20-years-of-sassa-how-the-srd-grant-became-a-lifeline-for-millions/"
+            ],
+            "newestContentAt": "2026-10-01T12:26:33.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://groundup.org.za/sitenews/rss/",
+            "durationMs": 3311,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        }
+      ]
+    },
+    {
+      "country": "AR",
+      "name": "elDiarioAR",
+      "language": "es",
+      "homepage": "https://www.eldiarioar.com/",
+      "publisher_reference": "https://www.eldiarioar.com/quienes-somos/",
+      "kind": "new_domain",
+      "scope_note": "Official Argentine publisher RSS plus explicitly declared rolling news sitemap, sharing one source for overlap deduplication.",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.eldiarioar.com/rss/",
+          "endpoint_id": "ep_23006ccdbf78046d78c92d67",
+          "access_review": {
+            "robots_url": "https://www.eldiarioar.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:52.871Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.eldiarioar.com/",
+            "found_at": "2026-10-01T20:22:55.713Z",
+            "page_sha256": "edc990c2155c264c4499438c2b3c5af29f399ec9270ca1b171e574d296828f78",
+            "tag": "<link rel=\"alternate\" title=\"Últimas Noticias de eldiario.es | elDiarioAR.com\" href=\"/rss/\" type=\"application/rss+xml\">"
+          },
+          "observation": {
+            "endpointId": "ep_23006ccdbf78046d78c92d67",
+            "type": "rss",
+            "url": "https://www.eldiarioar.com/rss/",
+            "checkedAt": "2026-10-01T20:22:58.565Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 98,
+            "entriesWithUrl": 98,
+            "sampleUrls": [
+              "https://www.eldiarioar.com/politica/estados-unidos-pidio-desescalar-tension-argentina-reino-unido-malvinas_1_13555375.html",
+              "https://www.eldiarioar.com/politica/malvinas-gobierno-defendio-arbitraje-internacional-rechazo-cuestionamientos-reino-unido_1_13555077.html",
+              "https://www.eldiarioar.com/politica/escala-tension-malvinas-reino-unido-convoco-embajadora-argentina-rechazar-arbitraje-internacional_1_13552100.html"
+            ],
+            "newestContentAt": "2026-10-01T20:04:30.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.eldiarioar.com/rss/",
+            "durationMs": 2848,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.eldiarioar.com/sitemap_google_news_a59a1.xml",
+          "endpoint_id": "ep_e4b077ef0e49094bcbecac34",
+          "access_review": {
+            "robots_url": "https://www.eldiarioar.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:22:52.871Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://www.eldiarioar.com/sitemap_index_a59a1.xml",
+            "found_at": "2026-10-01T20:23:05.685Z",
+            "page_sha256": "9b058c4ee8cdd2205e57b17fd0987b22a7a52e61a2ae5d098ca9cd5bcb8d937e",
+            "declared_lastmod": "2026-10-01T22:04:31+02:00"
+          },
+          "observation": {
+            "endpointId": "ep_e4b077ef0e49094bcbecac34",
+            "type": "sitemap",
+            "url": "https://www.eldiarioar.com/sitemap_google_news_a59a1.xml",
+            "checkedAt": "2026-10-01T20:23:07.976Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 58,
+            "entriesWithUrl": 58,
+            "sampleUrls": [
+              "https://www.eldiarioar.com/politica/estados-unidos-pidio-desescalar-tension-argentina-reino-unido-malvinas_1_13555375.html",
+              "https://www.eldiarioar.com/politica/milei-reunio-macron-palacio-eliseo-gobernadores-empresarios_1_13555319.html",
+              "https://www.eldiarioar.com/sociedad/medio-ambiente/arrasaron-3-300-hectareas-bosques-salta-avance-territorios-comunidades-wichi_1_13555162.html"
+            ],
+            "newestContentAt": "2026-10-01T20:04:30.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.eldiarioar.com/sitemap_google_news_a59a1.xml",
+            "durationMs": 2291,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        }
+      ]
+    },
+    {
+      "country": "RU",
+      "name": "Mediazona",
+      "language": "ru",
+      "homepage": "https://zona.media/",
+      "publisher_reference": "https://zona.media/",
+      "kind": "new_domain",
+      "scope_note": "Official rolling news sitemap. RU indicates Russian-language/Russian-affairs editorial scope, not current legal headquarters. Recent sitemap lastmod is not article publication time; no publication metric is inferred.",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://zona.media/news-sitemap.xml",
+          "endpoint_id": "ep_8d6c4a632aff762d8bf47f3e",
+          "access_review": {
+            "robots_url": "https://zona.media/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-01T20:28:16.679Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://zona.media/sitemap.xml",
+            "found_at": "2026-10-01T20:22:41.391Z",
+            "page_sha256": "b3baa4b7df4966f23bc64409b8d0a24928ebfe41a2c8f422fe7559bff9666ac7"
+          },
+          "observation": {
+            "endpointId": "ep_8d6c4a632aff762d8bf47f3e",
+            "type": "sitemap",
+            "url": "https://zona.media/news-sitemap.xml",
+            "checkedAt": "2026-10-01T20:28:19.105Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 26,
+            "entriesWithUrl": 26,
+            "sampleUrls": [
+              "https://zona.media/news/2026/10/01/matushevskaya",
+              "https://zona.media/news/2026/10/01/odintsova",
+              "https://zona.media/news/2026/10/01/olimpiady"
+            ],
+            "newestContentAt": "2026-10-01T19:49:51.328Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://zona.media/news-sitemap.xml",
+            "durationMs": 2425,
+            "attempts": 1,
+            "validatorVersion": "2"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "observations": [
+    {
+      "endpointId": "ep_e83c47b544ccca8b9b929000",
+      "type": "rss",
+      "url": "https://www.sixthtone.com/rss/index.xml",
+      "checkedAt": "2026-10-01T20:28:16.581Z",
+      "outcome": "healthy",
+      "httpStatus": 200,
+      "reason": null,
+      "format": "rss",
+      "auditStatus": "working_nonempty",
+      "entryCount": 51,
+      "entriesWithUrl": 51,
+      "sampleUrls": [
+        "https://www.sixthtone.com/news/1019092/Bug%20Bounty:%20Beijing%20Park%20Recruits%20Visitors%20Against%20Invasive%20Moth",
+        "https://www.sixthtone.com/news/1019091/In%20Photos:%20China%20Begins%20Its%20Weeklong%20National%20Day%20Holiday",
+        "https://www.sixthtone.com/news/1019083/Chinese%20Olympic%20Diver%E2%80%99s%20Mother%20in%20Hot%20Water%20Over%20Toxic%20Parenting"
+      ],
+      "newestContentAt": "2026-10-01T05:00:00.000Z",
+      "contentFreshness": "recent",
+      "dateKind": "feed_item_date",
+      "finalUrl": "https://api.sixthtone.com/cont/output/rssApi",
+      "durationMs": 2623,
+      "attempts": 1,
+      "validatorVersion": "2"
+    }
+  ]
+}
