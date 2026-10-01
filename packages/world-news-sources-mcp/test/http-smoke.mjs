@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { Client, StreamableHTTPClientTransport } from '@modelcontextprotocol/client';
+import {ActivityStore} from '../dist/activity.js';
+import {fileURLToPath} from 'node:url';
 import {normalizeRegistry} from '../dist/catalog.js';
 const address=process.argv[2]??'http://127.0.0.1:3000/mcp';
 const client=new Client({name:'world-news-sources-live-smoke',version:'0.1.0'});
@@ -44,10 +46,14 @@ try{
   assert.ok(inventory.items[0].active_source_registrations>0);
   const activityPath=new URL('../activity/activity-snapshot.json',import.meta.url);
   const activitySnapshot=existsSync(activityPath)?JSON.parse(readFileSync(activityPath,'utf8')):null;
-  const activitySource=activitySnapshot?.collections[0]?.source_ids[0]??source.id;
-  const activityDay=activitySnapshot?.tracking_start?.slice(0,10)??new Date().toISOString().slice(0,10);
+  const activitySource=activitySnapshot?.collections[0]?.source_ids[0]??activitySnapshot?.bindings.find(b=>b.baseline_at)?.source_id??source.id;
+  const activityDay=(activitySnapshot?.scope_starts?.source[activitySource]??activitySnapshot?.tracking_start)?.slice(0,10)??new Date().toISOString().slice(0,10);
   const activity=(await client.callTool({name:'get_source_article_activity',arguments:{source_id:activitySource,start_date:activityDay,end_date:activityDay}})).structuredContent;
   const countryActivity=(await client.callTool({name:'get_country_article_activity',arguments:{country:'US',start_date:activityDay,end_date:activityDay}})).structuredContent;
+  if(activitySnapshot?.history){
+    const catalog=normalizeRegistry(JSON.parse(readFileSync(registryPath,'utf8'))),expected=new ActivityStore(activitySnapshot,fileURLToPath(new URL('../activity/history/',import.meta.url))).query(catalog,'source',{source_id:activitySource,start_date:activityDay,end_date:activityDay});
+    assert.deepEqual(activity.items,expected.items);assert.deepEqual(activity.snapshot_coverage,activitySnapshot.snapshot_coverage);assert.notEqual(activity.items[0].state,'history_not_in_snapshot');
+  }
   if(activitySnapshot){assert.equal(activity.tracking_start,activitySnapshot.tracking_start);assert.equal(activity.snapshot_at,activitySnapshot.generated_at);assert.equal(summary.article_activity.tracking_start,activitySnapshot.tracking_start);assert.ok(activity.initialized_bindings>0);}
   const rpc=async(body,version)=>{
     const response=await fetch(address,{method:'POST',headers:{'content-type':'application/json',accept:'application/json, text/event-stream','x-world-news-traffic':'inspection',...(version?{'mcp-protocol-version':version}:{})},body:JSON.stringify(body),signal:AbortSignal.timeout(15000)});

@@ -1,0 +1,464 @@
+{
+  "kind": "local_generated_hosted_bundle_real_ledger_archive_inspection",
+  "live_deployment": false,
+  "external_metrics_sent": false,
+  "tools": [
+    "search_sources",
+    "get_source",
+    "list_countries",
+    "get_endpoint_health",
+    "get_country_source_inventory",
+    "get_source_article_activity",
+    "get_country_article_activity"
+  ],
+  "results": [
+    {
+      "tool": "search_sources",
+      "input": {
+        "country": "GB",
+        "limit": 1
+      },
+      "result": {
+        "items": [
+          {
+            "id": "src_024454a4062a6b47abbc47a5",
+            "name": "Halifax Courier",
+            "countryCode": "GB",
+            "countryName": "United Kingdom",
+            "enabled": true,
+            "category": null,
+            "language": null,
+            "tier": null,
+            "registrationCount": 1,
+            "activeRegistrationCount": 1,
+            "disabledRegistrationCount": 0,
+            "rows": [],
+            "endpoints": [
+              {
+                "id": "ep_e4181b7720f1ecc6ef7402a6",
+                "type": "rss",
+                "url": "https://halifaxcourier.co.uk/rss/"
+              }
+            ],
+            "enabled_changed_at": null,
+            "status_reason": null,
+            "status_history": [],
+            "status_transition_count": null,
+            "status_history_consistent": true
+          }
+        ],
+        "total": 161,
+        "offset": 0,
+        "next_offset": 1
+      }
+    },
+    {
+      "tool": "get_source",
+      "input": {
+        "source_id": "src_0f3ef4ab96c2548a42bd3811"
+      },
+      "result": {
+        "id": "src_0f3ef4ab96c2548a42bd3811",
+        "name": "Gloucestershire Live",
+        "countryCode": "GB",
+        "countryName": "United Kingdom",
+        "enabled": true,
+        "category": null,
+        "language": null,
+        "tier": null,
+        "registrationCount": 1,
+        "activeRegistrationCount": 1,
+        "disabledRegistrationCount": 0,
+        "rows": [],
+        "endpoints": [
+          {
+            "id": "ep_004f9875cd71417671ac8921",
+            "type": "rss",
+            "url": "https://gloucestershirelive.co.uk/?service=rss",
+            "health": {
+              "endpoint_id": "ep_004f9875cd71417671ac8921",
+              "type": "rss",
+              "url": "https://gloucestershirelive.co.uk/?service=rss",
+              "status": "healthy",
+              "checked_at": "2026-09-30T19:46:42.741Z",
+              "stale_after_seconds": 604800,
+              "last_outcome": "healthy",
+              "validation": "xml_structure",
+              "http_status": 200,
+              "reason": null,
+              "format": "rss",
+              "audit_status": "working_nonempty",
+              "entry_count": 25,
+              "entries_with_url": 25,
+              "sample_urls": [
+                "https://www.gloucestershirelive.co.uk/sport/rugby/rugby-news/its-real-coup-us-gloucester-11179019",
+                "https://www.gloucestershirelive.co.uk/news/regional-news/strong-indications-iran-role-raf-11178937",
+                "https://www.gloucestershirelive.co.uk/news/regional-news/raf-fairford-latest-five-custody-11174626"
+              ],
+              "newest_content_at": "2026-09-30T18:00:00.000Z",
+              "content_freshness": "recent",
+              "date_kind": "feed_item_date"
+            }
+          }
+        ],
+        "enabled_changed_at": null,
+        "status_reason": null,
+        "status_history": [],
+        "status_transition_count": null,
+        "status_history_consistent": true
+      }
+    },
+    {
+      "tool": "list_countries",
+      "input": {
+        "limit": 1
+      },
+      "result": {
+        "items": [
+          {
+            "code": "AE",
+            "name": "United Arab Emirates",
+            "configuredRows": 23,
+            "sources": 23
+          }
+        ],
+        "total": 73,
+        "offset": 0,
+        "next_offset": 1,
+        "configured_rows": 5393,
+        "normalized_sources": 5393
+      }
+    },
+    {
+      "tool": "get_endpoint_health",
+      "input": {
+        "endpoint_ids": [
+          "ep_004f9875cd71417671ac8921"
+        ]
+      },
+      "result": {
+        "endpoints": [
+          {
+            "endpoint_id": "ep_004f9875cd71417671ac8921",
+            "type": "rss",
+            "url": "https://gloucestershirelive.co.uk/?service=rss",
+            "status": "healthy",
+            "checked_at": "2026-09-30T19:46:42.741Z",
+            "stale_after_seconds": 604800,
+            "last_outcome": "healthy",
+            "validation": "xml_structure",
+            "http_status": 200,
+            "reason": null,
+            "format": "rss",
+            "audit_status": "working_nonempty",
+            "entry_count": 25,
+            "entries_with_url": 25,
+            "sample_urls": [
+              "https://www.gloucestershirelive.co.uk/sport/rugby/rugby-news/its-real-coup-us-gloucester-11179019",
+              "https://www.gloucestershirelive.co.uk/news/regional-news/strong-indications-iran-role-raf-11178937",
+              "https://www.gloucestershirelive.co.uk/news/regional-news/raf-fairford-latest-five-custody-11174626"
+            ],
+            "newest_content_at": "2026-09-30T18:00:00.000Z",
+            "content_freshness": "recent",
+            "date_kind": "feed_item_date"
+          }
+        ],
+        "remaining_endpoint_ids": [],
+        "audit": {
+          "last_completed_full_audit_at": "2026-09-30T20:05:37.106Z",
+          "current_audit_finished_at": "2026-09-30T20:05:37.106Z",
+          "endpoints_total": 5775,
+          "endpoints_checked": 5775,
+          "endpoints_skipped": 0,
+          "statuses": {
+            "malformed": 653,
+            "working_nonempty": 4550,
+            "http_error": 236,
+            "blocked": 224,
+            "timeout": 42,
+            "valid_empty": 41,
+            "incomplete": 16,
+            "network_error": 13
+          },
+          "by_endpoint_type": {
+            "rss": {
+              "checked": 4009,
+              "statuses": {
+                "working_nonempty": 3057,
+                "malformed": 614,
+                "blocked": 108,
+                "http_error": 165,
+                "valid_empty": 32,
+                "incomplete": 11,
+                "timeout": 9,
+                "network_error": 13
+              },
+              "content_freshness": {
+                "recent": 2907,
+                "missing": 55,
+                "stale": 115,
+                "unreliable": 12
+              }
+            },
+            "sitemap": {
+              "checked": 1766,
+              "statuses": {
+                "working_nonempty": 1493,
+                "blocked": 116,
+                "http_error": 71,
+                "timeout": 33,
+                "malformed": 39,
+                "incomplete": 5,
+                "valid_empty": 9
+              },
+              "content_freshness": {
+                "missing": 650,
+                "recent": 805,
+                "stale": 41,
+                "unreliable": 6
+              }
+            }
+          },
+          "live_feed_checks": true
+        }
+      }
+    },
+    {
+      "tool": "get_country_source_inventory",
+      "input": {
+        "country": "GB"
+      },
+      "result": {
+        "registry_snapshot_at": "2026-10-01T02:49:25.615Z",
+        "global_totals": {
+          "active_countries": 72,
+          "active_source_registrations": 5023,
+          "unique_active_rss_endpoints": 3661,
+          "unique_active_sitemap_endpoints": 1742
+        },
+        "semantics": "Source registrations, not unique publishers; unique endpoint IDs preserve RSS and sitemap type. Configuration counts, not health or article coverage.",
+        "items": [
+          {
+            "country": "GB",
+            "name": "United Kingdom",
+            "active_source_registrations": 161,
+            "active_normalized_sources": 161,
+            "unique_active_rss_endpoints": 147,
+            "unique_active_sitemap_endpoints": 21
+          }
+        ],
+        "total": 1,
+        "offset": 0,
+        "next_offset": null
+      }
+    },
+    {
+      "tool": "get_source_article_activity",
+      "input": {
+        "source_id": "src_0f3ef4ab96c2548a42bd3811",
+        "start_date": "2026-10-01",
+        "end_date": "2026-10-01"
+      },
+      "result": {
+        "scope_kind": "source",
+        "scope_id": "src_0f3ef4ab96c2548a42bd3811",
+        "metric": "first_discovered_unique_candidate_url_after_binding_baseline",
+        "timezone": "UTC",
+        "mode": "calendar_days",
+        "tracking_start": "2026-10-01T01:36:12.370Z",
+        "scope_tracking_start": "2026-10-01T01:36:13.028Z",
+        "latest_collection": "2026-10-01T01:42:18.938Z",
+        "snapshot_at": "2026-10-01T02:49:25.635Z",
+        "coverage_registry_at": "2026-10-01T02:49:25.615Z",
+        "history_available_since": "2026-10-01T00:00:00.000Z",
+        "snapshot_coverage": {
+          "complete_stored_window": true,
+          "durable_history_retained": true,
+          "exported_collections": 8,
+          "format": "monthly_gzip_scope_counts",
+          "compressed_bytes": 385
+        },
+        "coverage_semantics": "Complete means every currently configured endpoint had at least one successful non-index check in the interval. It does not prove every article was seen; the interval may still be open.",
+        "initialized_bindings": 1,
+        "expected_bindings": 1,
+        "initialization": "initialized",
+        "semantics": "First discovered unique candidate URL in each scope after that endpoint/source binding baseline. Not published articles; no semantic content dedup. Index children excluded; homepage/section/forum heuristics reported separately. Full durable URL history remains in the operator SQLite ledger.",
+        "items": [
+          {
+            "period": "2026-10-01",
+            "from": "2026-10-01T00:00:00.000Z",
+            "to_exclusive": "2026-10-02T00:00:00.000Z",
+            "new_unique_candidate_urls": 0,
+            "state": "complete",
+            "expected_endpoints": 1,
+            "targeted_endpoints": 1,
+            "successful_article_endpoints": 1,
+            "failed_checks": 0,
+            "index_only_checks": 0,
+            "uncertain_url_observations": 0,
+            "baseline_checks": 1
+          }
+        ],
+        "total": 1,
+        "offset": 0,
+        "next_offset": null
+      }
+    },
+    {
+      "tool": "get_country_article_activity",
+      "input": {
+        "country": "GB",
+        "start_date": "2026-10-01",
+        "end_date": "2026-10-01"
+      },
+      "result": {
+        "scope_kind": "country",
+        "scope_id": "GB",
+        "metric": "first_discovered_unique_candidate_url_after_binding_baseline",
+        "timezone": "UTC",
+        "mode": "calendar_days",
+        "tracking_start": "2026-10-01T01:36:12.370Z",
+        "scope_tracking_start": "2026-10-01T01:36:13.028Z",
+        "latest_collection": "2026-10-01T01:42:18.938Z",
+        "snapshot_at": "2026-10-01T02:49:25.635Z",
+        "coverage_registry_at": "2026-10-01T02:49:25.615Z",
+        "history_available_since": "2026-10-01T00:00:00.000Z",
+        "snapshot_coverage": {
+          "complete_stored_window": true,
+          "durable_history_retained": true,
+          "exported_collections": 8,
+          "format": "monthly_gzip_scope_counts",
+          "compressed_bytes": 385
+        },
+        "coverage_semantics": "Complete means every currently configured endpoint had at least one successful non-index check in the interval. It does not prove every article was seen; the interval may still be open.",
+        "initialized_bindings": 1,
+        "expected_bindings": 171,
+        "initialization": "partial",
+        "semantics": "First discovered unique candidate URL in each scope after that endpoint/source binding baseline. Not published articles; no semantic content dedup. Index children excluded; homepage/section/forum heuristics reported separately. Full durable URL history remains in the operator SQLite ledger.",
+        "items": [
+          {
+            "period": "2026-10-01",
+            "from": "2026-10-01T00:00:00.000Z",
+            "to_exclusive": "2026-10-02T00:00:00.000Z",
+            "new_unique_candidate_urls": 0,
+            "state": "partial",
+            "expected_endpoints": 168,
+            "targeted_endpoints": 1,
+            "successful_article_endpoints": 1,
+            "failed_checks": 0,
+            "index_only_checks": 0,
+            "uncertain_url_observations": 0,
+            "baseline_checks": 1
+          }
+        ],
+        "total": 1,
+        "offset": 0,
+        "next_offset": null
+      }
+    },
+    {
+      "tool": "get_country_article_activity",
+      "input": {
+        "country": "GB",
+        "start_date": "2026-09-30",
+        "end_date": "2026-09-30"
+      },
+      "result": {
+        "scope_kind": "country",
+        "scope_id": "GB",
+        "metric": "first_discovered_unique_candidate_url_after_binding_baseline",
+        "timezone": "UTC",
+        "mode": "calendar_days",
+        "tracking_start": "2026-10-01T01:36:12.370Z",
+        "scope_tracking_start": "2026-10-01T01:36:13.028Z",
+        "latest_collection": "2026-10-01T01:42:18.938Z",
+        "snapshot_at": "2026-10-01T02:49:25.635Z",
+        "coverage_registry_at": "2026-10-01T02:49:25.615Z",
+        "history_available_since": "2026-10-01T00:00:00.000Z",
+        "snapshot_coverage": {
+          "complete_stored_window": true,
+          "durable_history_retained": true,
+          "exported_collections": 8,
+          "format": "monthly_gzip_scope_counts",
+          "compressed_bytes": 385
+        },
+        "coverage_semantics": "Complete means every currently configured endpoint had at least one successful non-index check in the interval. It does not prove every article was seen; the interval may still be open.",
+        "initialized_bindings": 1,
+        "expected_bindings": 171,
+        "initialization": "partial",
+        "semantics": "First discovered unique candidate URL in each scope after that endpoint/source binding baseline. Not published articles; no semantic content dedup. Index children excluded; homepage/section/forum heuristics reported separately. Full durable URL history remains in the operator SQLite ledger.",
+        "items": [
+          {
+            "period": "2026-09-30",
+            "from": "2026-09-30T00:00:00.000Z",
+            "to_exclusive": "2026-10-01T00:00:00.000Z",
+            "new_unique_candidate_urls": null,
+            "state": "not_tracked",
+            "expected_endpoints": 168,
+            "targeted_endpoints": 0,
+            "successful_article_endpoints": 0,
+            "failed_checks": 0,
+            "index_only_checks": 0,
+            "uncertain_url_observations": 0,
+            "baseline_checks": 0
+          }
+        ],
+        "total": 1,
+        "offset": 0,
+        "next_offset": null
+      }
+    },
+    {
+      "tool": "get_country_article_activity",
+      "input": {
+        "country": "AE",
+        "start_date": "2026-10-01",
+        "end_date": "2026-10-01"
+      },
+      "result": {
+        "scope_kind": "country",
+        "scope_id": "AE",
+        "metric": "first_discovered_unique_candidate_url_after_binding_baseline",
+        "timezone": "UTC",
+        "mode": "calendar_days",
+        "tracking_start": "2026-10-01T01:36:12.370Z",
+        "scope_tracking_start": null,
+        "latest_collection": null,
+        "snapshot_at": "2026-10-01T02:49:25.635Z",
+        "coverage_registry_at": "2026-10-01T02:49:25.615Z",
+        "history_available_since": "2026-10-01T00:00:00.000Z",
+        "snapshot_coverage": {
+          "complete_stored_window": true,
+          "durable_history_retained": true,
+          "exported_collections": 8,
+          "format": "monthly_gzip_scope_counts",
+          "compressed_bytes": 385
+        },
+        "coverage_semantics": "Complete means every currently configured endpoint had at least one successful non-index check in the interval. It does not prove every article was seen; the interval may still be open.",
+        "initialized_bindings": 0,
+        "expected_bindings": 26,
+        "initialization": "not_initialized",
+        "semantics": "First discovered unique candidate URL in each scope after that endpoint/source binding baseline. Not published articles; no semantic content dedup. Index children excluded; homepage/section/forum heuristics reported separately. Full durable URL history remains in the operator SQLite ledger.",
+        "items": [
+          {
+            "period": "2026-10-01",
+            "from": "2026-10-01T00:00:00.000Z",
+            "to_exclusive": "2026-10-02T00:00:00.000Z",
+            "new_unique_candidate_urls": null,
+            "state": "not_tracked",
+            "expected_endpoints": 26,
+            "targeted_endpoints": 0,
+            "successful_article_endpoints": 0,
+            "failed_checks": 0,
+            "index_only_checks": 0,
+            "uncertain_url_observations": 0,
+            "baseline_checks": 0
+          }
+        ],
+        "total": 1,
+        "offset": 0,
+        "next_offset": null
+      }
+    }
+  ]
+}

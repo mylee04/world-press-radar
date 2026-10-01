@@ -9,13 +9,19 @@ const NAME='world-news-sources-mcp';
 const DOMAINS=['news.bymyleslee.com','world-news-sources-mcp.vercel.app'];
 const ALLOWED=new Set(['package.json','package-lock.json','vercel.json',
   'api/mcp.mjs','api/health.mjs',
-  ...['catalog','status','health','http','server','metrics','activity'].map(x=>`dist/${x}.js`),'dist/hosted.mjs',
+  ...['catalog','status','health','http','server','metrics','activity','activity-history'].map(x=>`dist/${x}.js`),'dist/hosted.mjs',
   'metadata/registry.json','metadata/legacy-health.json','metadata/health.json','metadata/activity.json',
   ...['index.html','support.html','privacy.html','terms.html','styles.css','icon.svg'].map(x=>`public/${x}`),
   'public/.well-known/openai-apps-challenge']);
 export const expectedBundlePaths=()=>[...ALLOWED];
 export async function collectBundle(directory,allowed=ALLOWED){
   const files=[];
+  const archiveAllowed=new Map();
+  let metadata;try{metadata=JSON.parse(await readFile(join(directory,'metadata/activity.json'),'utf8'));}catch{throw Error('Invalid activity metadata');}
+  for(const shard of metadata?.history?.shards??[]){
+    if(!/^\d{4}-(0[1-9]|1[0-2])$/.test(shard.month)||!/^[a-f0-9]{64}$/.test(shard.sha256)||shard.file!==`${shard.month}-${shard.sha256}.json.gz`||archiveAllowed.has(shard.file)||!Number.isInteger(shard.bytes)||shard.bytes<1||shard.bytes>10*1024*1024)throw Error('Invalid history shard manifest');
+    archiveAllowed.set(`metadata/activity-history/${shard.file}`,shard);
+  }
   async function walk(relative=''){
     for(const name of (await readdir(join(directory,relative))).sort()){
       const file=relative?`${relative}/${name}`:name;
@@ -28,14 +34,15 @@ export async function collectBundle(directory,allowed=ALLOWED){
       }
       if(s.isSymbolicLink())throw Error('Bundle contains a symlink');
       if(s.isDirectory()){await walk(file);continue;}
-      if(!s.isFile()||!allowed.has(file))throw Error('Bundle contains an unapproved file');
+      if(!s.isFile()||!allowed.has(file)&&!archiveAllowed.has(file))throw Error('Bundle contains an unapproved file');
       const bytes=await readFile(join(directory,file));
+      const shard=archiveAllowed.get(file);if(shard&&(bytes.length!==shard.bytes||createHash('sha256').update(bytes).digest('hex')!==shard.sha256))throw Error('History shard integrity mismatch');
       if(bytes.length>12*1024*1024)throw Error('Bundle file exceeds limit');
       files.push({file,data:bytes.toString('base64'),encoding:'base64'});
     }
   }
   await walk();
-  for(const required of ALLOWED)if(!files.some(x=>x.file===required))throw Error('Bundle is incomplete');
+  for(const required of [...ALLOWED,...archiveAllowed.keys()])if(!files.some(x=>x.file===required))throw Error('Bundle is incomplete');
   return files;
 }
 export function createBody(files){
@@ -45,6 +52,25 @@ export function createBody(files){
   const serialized=JSON.stringify(body);
   if(Buffer.byteLength(serialized)>24*1024*1024)throw Error('Deployment request exceeds local safety limit');
   return serialized;
+}
+export function deploymentPlan(files){
+  const sourceBytes=files.reduce((n,f)=>n+Buffer.from(f.data,'base64').length,0);
+  if(sourceBytes>80*1024*1024)throw Error('Free source capacity budget reached; retain history and current deployment, review storage before proceeding');
+  const uploads=[];
+  const references=files.map(f=>{
+    if(!f.file.startsWith('metadata/activity-history/'))return f;
+    const bytes=Buffer.from(f.data,'base64'),sha=createHash('sha1').update(bytes).digest('hex');uploads.push({file:f.file,bytes,sha});
+    return {file:f.file,sha,size:bytes.length};
+  });
+  return {body:createBody(references),uploads,sourceBytes};
+}
+export async function uploadArchive({bytes,sha},token,fetchImpl=fetch){
+  let response;
+  try{response=await fetchImpl(`https://api.vercel.com/v2/files?teamId=${TEAM}`,{method:'POST',body:bytes,
+    headers:{Authorization:`Bearer ${token}`,'Content-Type':'application/octet-stream','Content-Length':String(bytes.length),'x-vercel-digest':sha},
+    redirect:'error',signal:AbortSignal.timeout(60000)});}catch{throw Error('Content-addressed archive upload unavailable; no deployment was submitted');}
+  if(response.status!==200)throw Error(`Archive upload HTTP ${response.status}; no deployment was submitted`);
+  // The documented successful response may have an empty body. Never expose it or credentials.
 }
 export function client(token,fetchImpl=fetch){
   if(!token||/[\r\n]/.test(token))throw Error('Missing or invalid credential');
@@ -66,7 +92,7 @@ export async function preflight(api){
   for(const name of DOMAINS)if(!(d.domains??[]).some(x=>x.name===name))throw Error('Expected production domain missing');
 }
 export async function deploy({directory,stateFile,token,fetchImpl=fetch,sleep=ms=>new Promise(r=>setTimeout(r,ms)),polls=120}){
-  const files=await collectBundle(directory);const body=createBody(files);
+  const files=await collectBundle(directory);const {body,uploads}=deploymentPlan(files);
   const digest=createHash('sha256').update(body).digest('hex');const api=client(token,fetchImpl);
   await preflight(api);
   let state;
@@ -75,6 +101,9 @@ export async function deploy({directory,stateFile,token,fetchImpl=fetch,sleep=ms
   if(state&&state.digest!==digest)throw Error('Payload changed; review and choose a new submission state file');
   if(state&&!state.id)throw Error('Prior submission outcome uncertain; reconcile project deployments before retrying');
   if(!state){
+    // Fixed SHA uploads are idempotent. A failure here has not started a deployment;
+    // rerunning may upload the same bytes, never broaden credentials or retry deploy POST.
+    for(const file of uploads)await uploadArchive(file,token,fetchImpl);
     state={digest,status:'submission-intent',project:PROJECT};await save(state);
     // Intentionally no automatic POST retries after 429, 5xx or network uncertainty.
     const d=await api('/v13/deployments',{method:'POST',body});
@@ -101,8 +130,8 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).hr
   if(!directory||!stateFile){console.error('Use deploy-project-api.mjs BUNDLE STATE_FILE [--preflight]');process.exitCode=2;}
   else try{
     if(mode==='--preflight'){
-      const files=await collectBundle(directory);const body=createBody(files);
-      await preflight(client(process.env.VERCEL_TOKEN));console.log(JSON.stringify({project:PROJECT,files:files.length,requestBytes:Buffer.byteLength(body),status:'preflight-passed-no-deployment'}));
+      const files=await collectBundle(directory);const {body,uploads,sourceBytes}=deploymentPlan(files);
+      await preflight(client(process.env.VERCEL_TOKEN));console.log(JSON.stringify({project:PROJECT,files:files.length,archiveFiles:uploads.length,sourceBytes,requestBytes:Buffer.byteLength(body),status:'preflight-passed-no-deployment'}));
     }else if(mode){throw Error('Unknown mode');}
     else console.log(JSON.stringify(await deploy({directory,stateFile,token:process.env.VERCEL_TOKEN})));
   }catch(e){console.error(e.message);process.exitCode=1;}

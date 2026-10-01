@@ -10,7 +10,9 @@ Search by publisher name or domain, country, endpoint type, category, language, 
 
 Health is cached from bounded operator checks. Check times are separate from content dates: a reachable feed may contain old content, and a cached result may become stale. Some configured endpoints are empty, blocked, unavailable, malformed, or could not be fully checked. Country and configuration counts do not represent unique publishers or guaranteed live coverage. Sitemap indexes describe child sitemap entries; child files and article links are not validated by this plugin.
 
-World News Sources provides read-only source metadata. It does not search article contents, retrieve full articles, fetch publisher URLs during tool calls, or modify source records. No account or API key is required to use its public MCP endpoint.
+Read active source-registration inventory and cached first-discovered unique article-candidate URL activity by source or country. Country counts deduplicate across sources. Every new endpoint/source binding begins with an excluded baseline; untracked periods return null, and partial initialization or collection is explicit. Calendar days use a requested IANA timezone or UTC; rolling 24 hours is separate. Activity queries read retained aggregate history in bounded ranges of up to 31 calendar days per request. Older stored dates remain queryable; periods before real recording are not reconstructed. These counts are discoveries, not publications or feed entry counts. Homepage/section/forum heuristics are separated; sitemap-index children are excluded. No semantic content deduplication is performed.
+
+World News Sources provides read-only source metadata and observation aggregates. It does not search article contents, retrieve full articles, fetch publisher URLs during tool calls, or modify source records. No account or API key is required to use its public MCP endpoint.
 
 For support, contact myungeun2dc@gmail.com.
 
@@ -28,4 +30,4 @@ Read cached first-discovered unique article-candidate URL activity by source or 
 
 ## Reviewed package 0.2.0
 
-Five positive cases now cover all seven tools; three negative cases preserve the read-only/full-text/no-bypass boundaries. Official initial MCP review requires exactly five positive and three negative cases. The eight-positive draft is superseded and must not be submitted. Source/country activity describes recent cached candidate URL discoveries. Public history is limited by records and bytes (about 4.6 days at 5,403 daily checks before the byte limit), while the operator retains the durable ledger. No new ChatGPT test run or recording is claimed until actual browser execution is available.
+Five positive cases now cover all seven tools; three negative cases preserve the read-only/full-text/no-bypass boundaries. Official initial MCP review requires exactly five positive and three negative cases. The eight-positive draft is superseded and must not be submitted. Source/country activity reads all retained aggregate months. Date requests are bounded to 31 calendar days; older stored dates remain queryable. Tracking/coverage reflects actual collections. No new ChatGPT test run or recording is claimed until actual browser execution is available.

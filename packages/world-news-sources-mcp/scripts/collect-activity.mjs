@@ -12,7 +12,7 @@ const option = (name, fallback) => { const pos = args.indexOf(name); return pos 
 const allowed = new Set(['--db','--snapshot','--limit','--daily-budget','--endpoint','--inspection','--export-only','--force','--max-db-mib']);
 for (let i=0;i<args.length;i++) { if(!allowed.has(args[i])) throw new Error(`Unknown option ${args[i]}`); if(!['--inspection','--export-only','--force'].includes(args[i])) i++; }
 const lane = args.includes('--inspection') ? 'inspection' : 'production';
-const dbPath = resolve(option('--db', `activity/${lane}.sqlite`));
+const dbPath = resolve(option('--db', lane==='production'?(process.env.WNS_ACTIVITY_DB??`activity/${lane}.sqlite`):`activity/${lane}.sqlite`));
 const snapshotPath = resolve(option('--snapshot', lane === 'production' ? 'activity/activity-snapshot.json' : 'activity/inspection-snapshot.json'));
 const positive = (name, fallback, max) => { const value=Number(option(name,fallback)); if(!Number.isInteger(value)||value<1||value>max) throw new Error(`Invalid ${name}`); return value; };
 const limit = positive('--limit', 10000, 10000), dailyBudget = positive('--daily-budget', 12000, 20000), maxDb = positive('--max-db-mib', 8192, 16384)*1024*1024;
@@ -63,6 +63,6 @@ try {
     }));
     const rejected=workers.find(result=>result.status==='rejected');if(rejected)throw rejected.reason;
   }
-  const snapshot=ledger.snapshot(catalog);atomicJson(snapshotPath,snapshot);
+  const snapshot=ledger.archive(catalog,join(dirname(snapshotPath),'history'));atomicJson(snapshotPath,snapshot);
   console.log(JSON.stringify({lane,db:dbPath,snapshot:snapshotPath,tracking_start:snapshot.tracking_start,completed,failed,replayed,cadence:'operator only; no timer created',daily_request_budget:dailyBudget}));
 }finally{ledger.release(owner);ledger.close();}

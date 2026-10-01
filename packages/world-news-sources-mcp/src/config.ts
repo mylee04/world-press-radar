@@ -1,4 +1,5 @@
 import { existsSync, readFileSync, statSync } from 'node:fs';
+import {dirname,join} from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { normalizeRegistry } from './catalog.js';
 import { HealthStore } from './health.js';
@@ -17,7 +18,7 @@ export function loadData() {
   if (process.env.WNS_HEALTH_PATH && !existsSync(snapshotPath)) throw new Error('WNS_HEALTH_PATH does not exist');
   return {
     catalog: normalizeRegistry(readJson(atlasPath)), snapshotPath,
-    activity: new ActivityStore(existsSync(activityPath) ? readJson(activityPath) as ActivitySnapshot : undefined),
+    activity: new ActivityStore(existsSync(activityPath) ? readJson(activityPath) as ActivitySnapshot : undefined,join(dirname(activityPath),'history')),
     health: new HealthStore(existsSync(snapshotPath) ? readJson(snapshotPath) : undefined,
       existsSync(legacyPath) ? readJson(legacyPath) : undefined),
   };

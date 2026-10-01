@@ -9,10 +9,10 @@
     "skills/find-news-sources/agents/openai.yaml"
   ],
   "sha256": {
-    "plugin.json": "da4dbd21938de97a90dfe173ebe36f52d35344e16a90b39a866c070211bbdfaa",
+    "plugin.json": "87da8efe19f17befb6351881a22ef6408fb4a1a0eda5d09bef4a20cbcb751427",
     "mcp.json": "19a11ce01db089c1d24586226b597f04ebe0d5e40876bd95246c66651685e75a",
     "assets/icon.svg": "b90b2444d1a2684b1fdaea21f2b0136b13cbaa9351bdfa7b1cf00a510dbb1eb4",
-    "skills/find-news-sources/SKILL.md": "1c62ff6cbf4304f5686830dcdc84d9b80beecebacb120845960e14fbf00aadd4",
+    "skills/find-news-sources/SKILL.md": "d17e3d1dfe2ad53a9a8c7f7c9f5b8f351d404f725c0cf3afd5a1f424cb2ebbcc",
     "skills/find-news-sources/agents/openai.yaml": "a2ef8a42bcc482cac4592879db4b7af910bf391681066b4f507a82c50ca0ef27"
   },
   "review_scenarios": {
@@ -40,7 +40,7 @@
   ],
   "archive": {
     "path": "publication/dist/world-news-sources-0.2.0-draft.zip",
-    "sha256": "5e2d89dde57642daf189111c75e6317fe7d69edeea919f167321f7168bbdcb13",
+    "sha256": "29ade9a55dd28ae5af2c055b617fc804be4e2587be8b0e4227959df7e2f9380a",
     "integrity": "passed"
   }
 }

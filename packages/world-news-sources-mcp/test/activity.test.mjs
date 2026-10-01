@@ -24,7 +24,7 @@ function visit(ledger,name,index,urls,status='working_nonempty',format=null,id=n
   return {value,result:ledger.commit(value,[s],'writer',now)};
 }
 test('binding baselines, RSS+sitemap source dedup and country cross-source dedup; country discovery is independent of global',()=>{
-  sequence=0;const {ledger,cleanup}=setup();
+  sequence=0;const {ledger,path,cleanup}=setup();
   try{
     const old='https://publisher.example/article/old',fresh='https://publisher.example/article/new';
     assert.equal(visit(ledger,'A',0,[old]).result.country_new.US,0);
@@ -41,6 +41,10 @@ test('binding baselines, RSS+sitemap source dedup and country cross-source dedup
     const us=store.query(catalog,'country',{country:'US',start_date:'2026-10-01',end_date:'2026-10-01'},Date.parse(now));
     assert.equal(us.items[0].new_unique_candidate_urls,1);assert.equal(us.items[0].state,'complete');
     assert.equal(ledger.db.prepare('SELECT COUNT(*) n FROM endpoint_urls WHERE url=?').get(fresh).n,4);
+    const archiveDir=`${path}.history`,archived=new ActivityStore(ledger.archive(catalog,archiveDir,now),archiveDir);
+    const query=(kind,scope)=>archived.query(catalog,kind,{...(kind==='country'?{country:scope}:{source_id:scope}),start_date:'2026-10-01',end_date:'2026-10-01'},Date.parse(now)).items[0];
+    assert.equal(query('country','US').new_unique_candidate_urls,1);assert.equal(query('country','CA').new_unique_candidate_urls,1);
+    assert.equal(query('source',source('A').id).new_unique_candidate_urls,1);assert.equal(query('source',source('B').id).new_unique_candidate_urls,1);assert.equal(query('country','US').baseline_checks,3);
   }finally{cleanup();}
 });
 test('a later binding baseline does not turn an old archive into source or country NEW',()=>{

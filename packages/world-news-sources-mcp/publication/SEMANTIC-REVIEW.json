@@ -3,7 +3,7 @@
   "isolated_worktree": "/Users/myungeunlee/Documents/Codex/2026-09-30/task/world-news-sources-review",
   "shared_checkout_mutated": false,
   "tests": {
-    "passed": 61,
+    "passed": 69,
     "failed": 0,
     "typecheck": "passed",
     "plugin_structure": "passed",
@@ -12,7 +12,12 @@
       "actual subprocess recovery retains observed country/source after registry changes",
       "committed legacy recovery is idempotent; unknown uncommitted provenance is preserved and rejected",
       "exact record cap, timestamp cohorts, byte cap, metadata-only overflow",
-      "actual America/New_York 23-hour DST-day event counts"
+      "actual America/New_York 23-hour DST-day event counts",
+      "complete retained archives beyond 25000 checks and 180 days",
+      "month-crossing fractional midnight, DST and rolling windows",
+      "immutable shard manifests, corruption/missing archive tool errors",
+      "seven-tool archived HTTP MCP and strict dynamic deployment whitelist",
+      "SHA archive uploads, scoped denials, no broad credential fallback, deploy resume"
     ]
   },
   "fixes": [
@@ -28,17 +33,26 @@
     {
       "issue": "Eight-positive draft violates official initial MCP review requirement",
       "fix": "Five positive cases cover seven tools, plus three negative; plugin ZIP version0.2.0."
+    },
+    {
+      "issue": "Previously retained SQLite history unavailable beyond recent cache",
+      "fix": "Export every retained month into content-addressed gzip count/coverage shards; load only requested months/scope, up to 31 calendar days per request, and preserve exact observation instants. No raw article URL ledger endpoint. Weekly health refresh reexports authoritative WNS_ACTIVITY_DB before deployment.",
+      "db_migration_required": false,
+      "new_resource_or_credential_required": false
     }
   ],
   "remaining_limitations": [
     {
-      "issue": "Public snapshot recent history only",
-      "detail": "25000 checks at5403/day is approximately4.6days before byte cap. Durable older history exists inSQLite but is not served by MCP; do not imply31/180-day availability.",
-      "user_decision": "Engineering gap: month/year history remains durable in SQLite but is not currently queryable through the public cache. A compact read architecture is needed if that view is required; additional persistent access would require its own approval."
-    },
-    {
       "issue": "No current browser/computer/environment tool is exposed",
       "detail": "Unable to refresh personalChatGPT connection, execute new natural-language review cases, record new actualChatGPT scenes or portal-upload ZIP in this environment. Existing SDK evidence is not substituted forChatGPT tests."
+    },
+    {
+      "issue": "Free capacity is finite",
+      "detail": "Synthetic actual-registry-scale estimate29.1MB/year compressed. 80MiB source-bundle gate stays below Hobby100MB; stop/report before capacity, never silently truncate retained history or upgrade. Approximately2.5years under this synthetic assumption; measure real growth."
+    },
+    {
+      "issue": "Final pin live deployment pending Oracle",
+      "detail": "New SHA file-upload path is locally tested; first actual upload with existing restricted project token and live hosted shard read must be verified on Oracle before declaring deployment success. A403 must stop without broadening credentials."
     }
   ],
   "new_review_cases": {
@@ -65,13 +79,13 @@
         "description": "Read country discovery activity with baseline, partial coverage and pre-tracking nulls",
         "prompt": "Show cached first-discovered article-URL activity for the United States for the current UTC calendar day. Compare September 30, 2026 UTC, before recording began. Explain initialization, excluded baseline checks, targeted/successful endpoints and any incomplete coverage.",
         "tools_triggered": "get_country_article_activity",
-        "expected_behavior": "Use real scope-deduplicated counts; do not sum source counts or use feed entry_count. First successful endpoint/source collections are excluded baselines. Pre-tracking periods return null/not_tracked, not zero. Explain recent snapshot history limits, unknown/incomplete states and discovery versus publication semantics."
+        "expected_behavior": "Use real scope-deduplicated counts; do not sum source counts or use feed entry_count. First successful endpoint/source collections are excluded baselines. Pre-tracking periods return null/not_tracked, not zero. Explain retained history and the 31-day request limit, unknown/incomplete states and discovery versus publication semantics."
       },
       {
         "description": "Read source rolling activity and a non-UTC calendar window",
         "prompt": "Find LA Times - Politics in the United States. Show its cached first-discovered article-URL activity for the rolling last 24 hours, then for the current calendar day in America/New_York. Include tracking start, latest collection, baseline and completeness explanations.",
         "tools_triggered": "search_sources, get_source_article_activity",
-        "expected_behavior": "Use a returned source ID. Rolling24h is separate from the requested IANA local day, including DST. Report source-scope URL deduplication, cached timestamps and unavailable/partial history. Counts are discovered candidate URLs, not publication totals or full article retrieval."
+        "expected_behavior": "Use a returned source ID. Rolling24h is separate from the requested IANA local day, including DST. Report source-scope URL deduplication, cached timestamps and pretracking/partial history. Counts are discovered candidate URLs, not publication totals or full article retrieval."
       }
     ],
     "negative": [
@@ -96,5 +110,7 @@
     "changed": false,
     "publicly_hosted": false,
     "new_recording": false
-  }
+  },
+  "history_archive_evidence": "activity/HISTORY-LOCAL-MCP-VERIFICATION.json",
+  "capacity_estimate": "activity/HISTORY-CAPACITY-ESTIMATE.json"
 }

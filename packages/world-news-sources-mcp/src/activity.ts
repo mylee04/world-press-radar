@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { page, pagination, type Catalog } from './catalog.js';
+import {readHistory,historyMonths,validateHistory,type HistoryManifest} from './activity-history.js';
 
 const day = z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine(value => { const at = Date.parse(value); return Number.isFinite(at) && new Date(at).toISOString().slice(0, 10) === value; }, 'Invalid date');
 const timezone = z.string().max(100).default('UTC').refine(value => { try { new Intl.DateTimeFormat('en', { timeZone: value }); return true; } catch { return false; } }, 'Invalid IANA timezone');
@@ -7,7 +8,7 @@ const activityFields = { mode: z.enum(['calendar_days', 'rolling_24h']).default(
 export const sourceActivitySchema = z.object({ source_id: z.string().regex(/^src_[a-f0-9]{24}$/), ...activityFields }).strict();
 export const countryActivitySchema = z.object({ country: z.string().min(2).max(8), ...activityFields }).strict();
 export const inventorySchema = z.object({ country: z.string().min(2).max(8).optional(), include_disabled: z.boolean().default(false), ...pagination }).strict();
-export type ActivitySnapshot = { version: number; lane: string; generated_at: string; tracking_start: string | null; available_since: string; registry_at: string | null; semantics: string; bindings: Array<Record<string, unknown>>; collections: Array<Record<string, any>>; scope_starts?: { source: Record<string,string>; country: Record<string,string> }; snapshot_coverage?: Record<string,unknown> };
+export type ActivitySnapshot = { version: number; lane: string; generated_at: string; tracking_start: string | null; available_since: string; registry_at: string | null; semantics: string; bindings: Array<Record<string, unknown>>; collections: Array<Record<string, any>>; history?: HistoryManifest; scope_latest?: {source:Record<string,string>;country:Record<string,string>}; scope_starts?: { source: Record<string,string>; country: Record<string,string> }; snapshot_coverage?: Record<string,unknown> };
 export function localDate(at: number, zone: string) {
   const parts = new Intl.DateTimeFormat('en', { timeZone: zone, year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(at);
   const get = (key: string) => parts.find(p => p.type === key)!.value;
@@ -21,8 +22,9 @@ export function dayBoundary(date: string, zone: string) {
 }
 const nextDay = (value: string) => new Date(Date.parse(value) + 86400000).toISOString().slice(0, 10);
 export class ActivityStore {
-  constructor(readonly snapshot?: ActivitySnapshot) {
+  constructor(readonly snapshot?: ActivitySnapshot, readonly historyDirectory?:string) {
     if (snapshot && (snapshot.version !== 1 || snapshot.lane !== 'production' || !Array.isArray(snapshot.bindings) || !Array.isArray(snapshot.collections))) throw new Error('Invalid production activity snapshot');
+    if(snapshot?.history)validateHistory(snapshot.history);
   }
   query(catalog: Catalog, kind: 'source' | 'country', raw: unknown, now = Date.now()) {
     const input = kind === 'source' ? sourceActivitySchema.parse(raw) : countryActivitySchema.parse(raw);
@@ -32,8 +34,8 @@ export class ActivityStore {
     const expected = new Set(sources.flatMap(s => s.endpoints.map(e => e.id)));
     const sourceIds = new Set(sources.map(s => s.id));
     const snapshot = this.snapshot;
-    const events = (snapshot?.collections ?? []).filter(e => kind === 'source' ? e.source_ids.includes(scope) : e.countries.includes(scope));
-    const scopeStart = snapshot?.scope_starts?.[kind][scope] ?? events[0]?.checked_at ?? null;
+    let recordsAll = snapshot?.collections ?? [];
+    const scopeStart = snapshot?.scope_starts?.[kind][scope] ?? recordsAll.find(e=>kind==='source'?e.source_ids.includes(scope):e.countries.includes(scope))?.checked_at ?? null;
     const binding = (snapshot?.bindings ?? []).filter(b => sourceIds.has(String(b.source_id)) && expected.has(String(b.endpoint_id)));
     const initializedBindings = binding.filter(b => b.baseline_at);
     let ranges: Array<{ label: string; from: number; to: number }> = [];
@@ -45,6 +47,12 @@ export class ActivityStore {
       if (start > end || Date.parse(end) - Date.parse(start) > 30 * 86400000 || end > localDate(now, input.timezone)) throw new Error('Date range must be past/present and at most 31 days');
       for (let date = start; date <= end; date = nextDay(date)) ranges.push({ label: date, from: dayBoundary(date, input.timezone), to: dayBoundary(nextDay(date), input.timezone) });
     }
+    if(snapshot?.history){
+      if(!this.historyDirectory)throw Error('ACTIVITY_HISTORY_NOT_CONFIGURED');
+      const needed=new Set(historyMonths(ranges[0].from,ranges.at(-1)!.to));
+      recordsAll=snapshot.history.shards.filter(s=>needed.has(s.month)).flatMap(s=>readHistory(this.historyDirectory!,s,{kind,scope,from:ranges[0].from,to:ranges.at(-1)!.to}));
+    }
+    const events=recordsAll.filter(e=>kind==='source'?e.source_ids.includes(scope):e.countries.includes(scope));
     const periods = ranges.map(range => {
       const records = events.filter(e => Date.parse(e.checked_at) >= range.from && Date.parse(e.checked_at) < range.to);
       const successful = records.filter(e => ['working_nonempty', 'valid_empty'].includes(e.status) && e.format !== 'sitemapindex');
@@ -63,7 +71,7 @@ export class ActivityStore {
     });
     return { scope_kind: kind, scope_id: scope, metric: 'first_discovered_unique_candidate_url_after_binding_baseline', timezone: input.timezone, mode: input.mode,
       tracking_start: snapshot?.tracking_start ?? null, scope_tracking_start: scopeStart,
-      latest_collection: events.at(-1)?.checked_at ?? null, snapshot_at: snapshot?.generated_at ?? null, coverage_registry_at: snapshot?.registry_at ?? null,
+      latest_collection: snapshot?.scope_latest?.[kind][scope] ?? events.at(-1)?.checked_at ?? null, snapshot_at: snapshot?.generated_at ?? null, coverage_registry_at: snapshot?.registry_at ?? null,
       history_available_since: snapshot?.available_since ?? null, snapshot_coverage: snapshot?.snapshot_coverage ?? null,
       coverage_semantics: 'Complete means every currently configured endpoint had at least one successful non-index check in the interval. It does not prove every article was seen; the interval may still be open.',
       initialized_bindings: initializedBindings.length, expected_bindings: sources.reduce((n, s) => n + s.endpoints.length, 0),

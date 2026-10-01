@@ -1,13 +1,16 @@
 import { spawnSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { readFileSync,existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 const packageDir=fileURLToPath(new URL('../',import.meta.url));
 const runId=process.argv[2]??new Date().toISOString().slice(0,10);
 if(!/^\d{4}-\d{2}-\d{2}(?:-[a-z0-9]+)?$/.test(runId))throw new Error('Expected YYYY-MM-DD[-suffix] audit ID');
 function run(command,args,cwd=packageDir){const result=spawnSync(command,args,{cwd,stdio:'inherit'});if(result.error||result.status!==0)throw new Error(`${command} failed: ${result.status??result.error?.code}`);}
+const activityDb=process.env.WNS_ACTIVITY_DB??fileURLToPath(new URL('../activity/production.sqlite',import.meta.url));
+if(!existsSync(activityDb))throw new Error('Set WNS_ACTIVITY_DB to the authoritative production ledger; weekly deployment must preserve article history');
 run('npm',['run','typecheck']);run('npm',['test']);run('npm',['run','audit','--',runId]);
 const snapshot=JSON.parse(readFileSync(new URL('../audits/health-latest.json',import.meta.url),'utf8'));
 if(snapshot.audit?.runId!==runId||!snapshot.audit.finishedAt)throw new Error('No completed audit for requested run; deployment stopped');
+run(process.execPath,['scripts/collect-activity.mjs','--export-only','--db',activityDb]);
 // Failures remain reported and are useful health metadata. They do not make endpoints healthy.
 run('npm',['run','prepare:vercel']);
 const deploymentDir=fileURLToPath(new URL('../.deploy-vercel/',import.meta.url));

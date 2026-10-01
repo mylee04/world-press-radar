@@ -1,5 +1,8 @@
 import { DatabaseSync } from 'node:sqlite';
 import { createHash } from 'node:crypto';
+import {mkdirSync,writeFileSync,renameSync} from 'node:fs';
+import {join} from 'node:path';
+import {encodeHistory,type HistoryShard} from './activity-history.js';
 import type { Catalog, Endpoint, Source } from './catalog.js';
 import { normalizeArticleUrl, NORMALIZATION_VERSION } from './article-url.js';
 
@@ -119,6 +122,23 @@ export class ActivityLedger {
       this.db.prepare(`INSERT INTO metadata VALUES('tracking_start',?) ON CONFLICT DO NOTHING`).run(collection.checked_at);
       return { ...details, replayed: false };
     });
+  }
+  archive(catalog:Catalog,directory:string,at=new Date().toISOString()) {
+    mkdirSync(directory,{recursive:true,mode:0o700});
+    const shards:HistoryShard[]=[];
+    const months=this.db.prepare('SELECT DISTINCT substr(checked_at,1,7) AS month FROM collections ORDER BY month').all();
+    for(const {month} of months){
+      if(!/^\d{4}-\d{2}$/.test(String(month)))throw Error('INVALID_HISTORY_MONTH');
+      const rows=this.db.prepare('SELECT * FROM collections WHERE checked_at>=? AND checked_at<? ORDER BY checked_at,id LIMIT 500001').all(`${month}-01`,`${month}-32`);
+      const records=rows.map(r=>({endpoint_id:r.endpoint_id,checked_at:r.checked_at,status:r.status,format:r.format,...JSON.parse(String(r.details))}));
+      const bytes=encodeHistory(records),sha256=createHash('sha256').update(bytes).digest('hex'),file=`${month}-${sha256}.json.gz`,path=join(directory,file);
+      writeFileSync(`${path}.tmp`,bytes,{mode:0o600});renameSync(`${path}.tmp`,path);
+      shards.push({month:String(month),file,sha256,bytes:bytes.length,records:records.length});
+    }
+    const snapshot=this.snapshot(catalog,at,180,{maxRecords:1}),latest=(field:string)=>Object.fromEntries(this.db.prepare(`SELECT j.value AS scope,MAX(c.checked_at) AS at FROM collections c,json_each(c.details,'$.${field}') j GROUP BY j.value`).all().map(r=>[String(r.scope),String(r.at)]));
+    return {...snapshot,collections:[],available_since:shards[0]?`${shards[0].month}-01T00:00:00.000Z`:at,
+      scope_latest:{source:latest('source_ids'),country:latest('countries')},history:{version:1 as const,complete:true as const,shards},
+      snapshot_coverage:{complete_stored_window:true,durable_history_retained:true,exported_collections:shards.reduce((n,s)=>n+s.records,0),format:'monthly_gzip_scope_counts',compressed_bytes:shards.reduce((n,s)=>n+s.bytes,0)}};
   }
   snapshot(catalog: Catalog, at = new Date().toISOString(), days = 180, options: { maxRecords?: number; maxBytes?: number } = {}) {
     const maxRecords = options.maxRecords ?? 25000, maxBytes = options.maxBytes ?? 10 * 1024 * 1024;
