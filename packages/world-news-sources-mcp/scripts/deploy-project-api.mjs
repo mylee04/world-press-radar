@@ -34,7 +34,7 @@ export async function collectBundle(directory,allowed=ALLOWED){
       }
       if(s.isSymbolicLink())throw Error('Bundle contains a symlink');
       if(s.isDirectory()){await walk(file);continue;}
-      if(!s.isFile()||!allowed.has(file)&&!archiveAllowed.has(file))throw Error('Bundle contains an unapproved file');
+      if(!s.isFile()||!allowed.has(file)&&!archiveAllowed.has(file)&&file!=='public/demo/world-news-sources.mp4')throw Error('Bundle contains an unapproved file');
       const bytes=await readFile(join(directory,file));
       const shard=archiveAllowed.get(file);if(shard&&(bytes.length!==shard.bytes||createHash('sha256').update(bytes).digest('hex')!==shard.sha256))throw Error('History shard integrity mismatch');
       if(bytes.length>12*1024*1024)throw Error('Bundle file exceeds limit');
@@ -50,7 +50,7 @@ export function createBody(files){
   // Existing project environment and domain configuration remain authoritative.
   const body={name:NAME,project:PROJECT,target:'production',files};
   const serialized=JSON.stringify(body);
-  if(Buffer.byteLength(serialized)>24*1024*1024)throw Error('Deployment request exceeds local safety limit');
+  if(Buffer.byteLength(serialized)>9*1024*1024)throw Error('Deployment request exceeds local safety limit');
   return serialized;
 }
 export function deploymentPlan(files){
@@ -58,7 +58,7 @@ export function deploymentPlan(files){
   if(sourceBytes>80*1024*1024)throw Error('Free source capacity budget reached; retain history and current deployment, review storage before proceeding');
   const uploads=[];
   const references=files.map(f=>{
-    if(!f.file.startsWith('metadata/activity-history/'))return f;
+    if(!f.file.startsWith('metadata/activity-history/')&&f.file!=='public/demo/world-news-sources.mp4'&&Buffer.from(f.data,'base64').length<=256*1024)return f;
     const bytes=Buffer.from(f.data,'base64'),sha=createHash('sha1').update(bytes).digest('hex');uploads.push({file:f.file,bytes,sha});
     return {file:f.file,sha,size:bytes.length};
   });
