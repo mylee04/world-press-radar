@@ -1,0 +1,61 @@
+{
+  "batch_id": "g7-official-first-pass-2026-10-01",
+  "mode": "dry_run",
+  "changed": false,
+  "proposed_registrations": 7,
+  "endpoint_ids": [
+    "ep_19f015aca4c596d818830ac8",
+    "ep_28f2219a7ba17213c01388da",
+    "ep_0f17eeafc6eb846f413fa1b9",
+    "ep_26877d49facaaeddc20cbeb2",
+    "ep_f9a7dc905a473eadc6cdcdf5",
+    "ep_9ba261768403f3bb62e201b2",
+    "ep_4b2c2e26bdd803a16271b1be",
+    "ep_381c6eee40f1450626d39393"
+  ],
+  "new_sources": [
+    {
+      "id": "src_0025fbc0cef37fa5382cb85d",
+      "name": "Capital (Official RSS)",
+      "country": "FR",
+      "initial_enabled_at": null
+    },
+    {
+      "id": "src_045ffef26dbc3ab9c007675d",
+      "name": "Halifax Courier (News Sitemap)",
+      "country": "GB",
+      "initial_enabled_at": null
+    },
+    {
+      "id": "src_18b0af67ee1df8b1a17ab7b7",
+      "name": "Novara Media",
+      "country": "GB",
+      "initial_enabled_at": null
+    },
+    {
+      "id": "src_1f6da7d949c8fca872f874bc",
+      "name": "The Maple",
+      "country": "CA",
+      "initial_enabled_at": null
+    },
+    {
+      "id": "src_4d93f3638a3554d6425d1455",
+      "name": "Nippon.com (Japanese News Sitemap)",
+      "country": "JP",
+      "initial_enabled_at": null
+    },
+    {
+      "id": "src_6a6ecb1960ac095c5f76ba8c",
+      "name": "Kölner Stadt-Anzeiger (News Sitemap)",
+      "country": "DE",
+      "initial_enabled_at": null
+    },
+    {
+      "id": "src_7e3d8a45597606d7c9761581",
+      "name": "Il Giornale (News Sitemap)",
+      "country": "IT",
+      "initial_enabled_at": null
+    }
+  ],
+  "activity": "No ledger changes. The authoritative collector must initialize each new binding as an excluded baseline."
+}

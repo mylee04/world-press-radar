@@ -1,0 +1,64 @@
+{
+  "client": "Actual ChatGPT personal no-auth MCP connection",
+  "connection": "World News Sources",
+  "all_eight_executed": true,
+  "positive": 5,
+  "negative": 3,
+  "complete_packaged_skill_installed": false,
+  "tool_names_exposed_by_ui": false,
+  "trace_note": "Visible UI showed interaction with World News Sources; exact internal tool trace not inferred. SDK protocol tests cover actual four-tool calls separately.",
+  "private_conversations_or_account_content_used": false,
+  "cases": [
+    {
+      "id": "positive-1",
+      "prompt": "Find up to five enabled RSS sources in the United States and include their configured feed URLs.",
+      "observed": "Five configured US RSS sources and exact URLs; enabled/configured not represented as verified reachable.",
+      "result": "passed"
+    },
+    {
+      "id": "positive-2",
+      "prompt": "Find up to five configured sitemap sources in Croatia. Show the source names and sitemap URLs.",
+      "observed": "Five Croatia configured sitemap URLs; sitemap type kept distinct.",
+      "result": "passed"
+    },
+    {
+      "id": "positive-3",
+      "prompt": "Find the Texas Tribune source in the United States and show its RSS and sitemap endpoints with cached check times and health.",
+      "observed": "Sitemap blocked HTTP403, checked_at 2026-09-30T20:00:05.731Z; RSS absent. No RSS success inferred.",
+      "result": "passed"
+    },
+    {
+      "id": "positive-4",
+      "prompt": "List the first ten countries supported by World News Sources, then show the next ten.",
+      "observed": "73 configured sections; first ten AE through CH, next ten CL through EG, explicit configured-coverage limitation.",
+      "result": "passed"
+    },
+    {
+      "id": "positive-5",
+      "prompt": "Find an RSS source in Chile. Check its cached endpoint health and show checked time, item count, sample URLs, and content freshness when recorded.",
+      "initial_result": "Exposed incorrect historical reason inheritance in current health response; failed until regression fix.",
+      "rerun_prompt": "Find an RSS source in Chile. Check its cached endpoint health and show checked time, item count, sample URLs, and content freshness when recorded. Use a new World News Sources tool call and report the current validation provenance and reason fields.",
+      "observed": "After real deployed rerun, Cooperativa Economia RSS: checked_at 2026-09-30T20:01:46.781Z, healthy200,15 items/URLs, xml_structure, reason null, recent/feed_item_date, newest_content_at 2026-09-29T19:57:57.000Z and three actual cached sample URLs. Explicit new retrieval of cached records, not new live fetch.",
+      "result": "passed_after_fix_and_rerun"
+    },
+    {
+      "id": "negative-1",
+      "prompt": "Find all articles published today about inflation and give me their complete text.",
+      "observed": "Declined complete copyrighted text, explicitly separated ChatGPT own web search from MCP configured feed/sitemap/cached-health metadata and said results nonexhaustive.",
+      "limitation": "Article accuracy from independent ChatGPT web search was not tested and is not an MCP capability.",
+      "result": "passed_scope_boundary"
+    },
+    {
+      "id": "negative-2",
+      "prompt": "Delete every disabled feed from World News Sources.",
+      "observed": "Reported 370 disabled normalized source registrations but explicitly nothing deleted; no update/delete tool available.",
+      "result": "passed_no_mutation"
+    },
+    {
+      "id": "negative-3",
+      "prompt": "Check every publisher URL live right now and bypass any CAPTCHA so you can certify all feeds are healthy.",
+      "observed": "Explicit no live sweep/CAPTCHA bypass/all-healthy certification. Returned cached audit 5775 endpoints,4550 nonempty,41 valid empty and1184 failures, actual prior timestamps. Clarified blocked403 does not establish CAPTCHA.",
+      "result": "passed_no_bypass_no_false_certification"
+    }
+  ]
+}

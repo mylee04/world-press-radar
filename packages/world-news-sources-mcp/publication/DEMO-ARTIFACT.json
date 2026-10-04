@@ -1,0 +1,75 @@
+{
+  "format": "edited screenshots of real ChatGPT results; not continuous screen recording",
+  "publicly_hosted": false,
+  "publication_requires_review": true,
+  "private_account_navigation_removed": true,
+  "audio": false,
+  "duration_seconds": 108,
+  "size_bytes": 952418,
+  "sha256": "a678f15a4f89bc2f5a74414228d27541b60ef41d7daae877b7966b10abb1c596",
+  "frames": [
+    {
+      "capture": "01-us-rss.jpg",
+      "label": "1. Configured US RSS sources; enabled does not mean reachable",
+      "duration_seconds": 12,
+      "original_sha256": "6bcc485078a726fc5b176ba4cc706f8319db73f5737c2aeb647966a09948e3ac",
+      "removed": "left account/navigation strip"
+    },
+    {
+      "capture": "02-croatia-sitemap.jpg",
+      "label": "2. Configured Croatia sitemaps; separate endpoint type",
+      "duration_seconds": 12,
+      "original_sha256": "19e953669b06da1730b746fdf46872e43425fc10a0141e54b8fe988af0860cd2",
+      "removed": "left account/navigation strip"
+    },
+    {
+      "capture": "03-independent-health.jpg",
+      "label": "3. Source details: cached sitemap failure; RSS absent",
+      "duration_seconds": 12,
+      "original_sha256": "40f293714e4d35ea9ee7ef6c20b6f84ec5f86c11809c00902d2e0320126b948b",
+      "removed": "left account/navigation strip"
+    },
+    {
+      "capture": "04-country-pages.jpg",
+      "label": "4. Country pagination; configured coverage only",
+      "duration_seconds": 12,
+      "original_sha256": "042e282e9dd635c0887226161e054645a8b112a959196bf5f854de80085ef750",
+      "removed": "already privacy-cropped"
+    },
+    {
+      "capture": "05-corrected-health.jpg",
+      "label": "5. Cached RSS health; checked time separate from content date (corrected rerun)",
+      "duration_seconds": 12,
+      "original_sha256": "e27a4f6a868f6a5340261d73d8132dcb6cd33bc2758416c3793807122ac4c98d",
+      "removed": "left account/navigation strip"
+    },
+    {
+      "capture": "05b-samples-and-cache.jpg",
+      "label": "5. Parsed XML provenance and recorded sample URLs; no new live check",
+      "duration_seconds": 12,
+      "original_sha256": "a6212992ec1a1de061aaf5b53359fd9a7292425d49159a0361f85f69a9eea02b",
+      "removed": "left account/navigation strip"
+    },
+    {
+      "capture": "06-article-scope.jpg",
+      "label": "6. Full-text request: ChatGPT web search is separate from MCP metadata",
+      "duration_seconds": 12,
+      "original_sha256": "393e02aebfa696a49055cea62804e465bbeab324c6999e65c50e9849f22e2d36",
+      "removed": "left account/navigation strip"
+    },
+    {
+      "capture": "07-read-only.jpg",
+      "label": "7. Deletion request: no write/delete tool and no mutation",
+      "duration_seconds": 12,
+      "original_sha256": "a21fd7ff1b6f77dbcdee7e5c782cd434283eb54c5de77c54b9281b5b07e2642a",
+      "removed": "already privacy-cropped"
+    },
+    {
+      "capture": "08-no-live-bypass.jpg",
+      "label": "8. No CAPTCHA bypass or instant audit; no all-healthy certification",
+      "duration_seconds": 12,
+      "original_sha256": "fd98b0451535025e5f33dd0a6033ef8642a8d15ef39b3e6ad6ad96a1820dce51",
+      "removed": "left account/navigation strip"
+    }
+  ]
+}

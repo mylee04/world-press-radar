@@ -1,0 +1,7 @@
+dist/
+health-snapshot.local.json
+.deploy-vercel/
+audits/*/observations.jsonl
+audits/*/snapshot.json
+activity/*.sqlite*
+activity/*.spool/

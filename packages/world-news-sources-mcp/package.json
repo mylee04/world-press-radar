@@ -1,0 +1,41 @@
+{
+  "name": "world-news-sources-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "World News Sources: read-only publisher RSS and sitemap metadata over MCP.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --experimental-test-module-mocks --test test/*.test.mjs",
+    "start": "node dist/stdio.js",
+    "start:http": "node dist/http-local.js",
+    "prepare:vercel": "npm run build && node scripts/prepare-vercel.mjs",
+    "smoke:http": "node test/http-smoke.mjs",
+    "smoke": "node test/smoke.mjs",
+    "health:check": "node dist/check.js",
+    "audit": "node dist/audit.js",
+    "refresh:deploy": "node scripts/refresh-deploy.mjs",
+    "source:status": "node scripts/set-source-status.mjs",
+    "plugin:validate": "node scripts/package-plugin.mjs",
+    "plugin:package": "node scripts/package-plugin.mjs --package",
+    "activity:collect": "node scripts/collect-activity.mjs",
+    "activity:export": "node scripts/collect-activity.mjs --export-only"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/node": "2.1.0",
+    "@modelcontextprotocol/server": "2.2.0",
+    "saxes": "6.0.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "2.2.0",
+    "@types/node": "^22.0.0",
+    "ajv": "^8.20.0",
+    "typescript": "^5.7.3"
+  }
+}

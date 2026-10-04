@@ -1,0 +1,156 @@
+{
+  "identity_verification": {
+    "organization_label": "mylee",
+    "status": "verified",
+    "kind": "individual",
+    "individual_status": "approved",
+    "observed_at": "2026-09-30T20:53:19Z",
+    "url": "https://platform.openai.com/settings/organization/general",
+    "public_developer_name": "Myungeun Lee",
+    "note": "User confirmed verified name; upload dialog identity and draft Developer preview agree.",
+    "upload_identity_label": "Individual \u2014 MYUNGEUN LEE"
+  },
+  "support_contact": {
+    "email": "myungeun2dc@gmail.com",
+    "public_use_approved": true,
+    "approval_scope": "Public support and listing use approved; website published September 30, 2026."
+  },
+  "hosting": {
+    "observed_at": "2026-09-30T21:01:08Z",
+    "provider": "Vercel",
+    "project": "world-news-sources-mcp",
+    "plan": "Hobby",
+    "plan_evidence_url": "https://vercel.com/mylee04s-projects/world-news-sources-mcp",
+    "integrations": {
+      "installed": 0,
+      "visible_text": "No Integrations Installed",
+      "url": "https://vercel.com/mylee04s-projects/world-news-sources-mcp/settings/integrations"
+    },
+    "drains": {
+      "configured": 0,
+      "visible_text": "Upgrade to Pro to create your first Drain.",
+      "url": "https://vercel.com/mylee04s-projects/world-news-sources-mcp/settings/drains"
+    },
+    "tracing": {
+      "custom_sampling_rules": 0,
+      "visible_text": "No sampling rules configured",
+      "url": "https://vercel.com/mylee04s-projects/world-news-sources-mcp/settings/tracing",
+      "note": "Does not imply the hosting platform has no automatic traces."
+    },
+    "runtime_logs": {
+      "documented_hobby_retention": "1 hour",
+      "source": "https://vercel.com/docs/logs/runtime",
+      "scope": "Runtime logs only; not an assertion about all infrastructure/security data.",
+      "ui_evidence": {
+        "url": "https://vercel.com/mylee04s-projects/world-news-sources-mcp/logs",
+        "available": "Last hour",
+        "longer_windows": "Last 12 hours and Last day grouped under Upgrade to Pro"
+      }
+    },
+    "analytics": {
+      "application_integration": false,
+      "dashboard_enable_button_visible": true
+    },
+    "settings_changed": false
+  },
+  "approved_actions": {
+    "website_pages_publication": true,
+    "plugin_zip_upload": true,
+    "final_submit": false,
+    "directory_publication": false,
+    "github_push": false,
+    "cost_constraint": "Hobby only; no paid upgrades, add-ons, trials or purchases"
+  },
+  "website_publication": {
+    "date": "2026-09-30",
+    "url": "https://news.bymyleslee.com",
+    "pages": [
+      "/",
+      "/support",
+      "/privacy",
+      "/terms"
+    ],
+    "verified_https": true,
+    "deployment_inspect_url": "https://vercel.com/mylee04s-projects/world-news-sources-mcp/8uqdPrtY3QHEeE9CmArbyJ4FmHrV",
+    "latest_deployment_inspect_url": "https://vercel.com/mylee04s-projects/world-news-sources-mcp/ECjWXcDUBiM9oy5PREiM8qELyTFD"
+  },
+  "plugin_upload": {
+    "status": "draft_uploaded",
+    "organization_label": "mylee",
+    "version": "0.1.0",
+    "url": "https://platform.openai.com/plugins/manage/plugin_asdk_app_6abd7c20121c8191a04bc4ca47c47da8?tab=details&version=appsub_6abd7c20125c819195361426396ef558",
+    "review_status": "not_submitted",
+    "publication_status": "not_published",
+    "positive_cases_imported": 5,
+    "negative_cases_imported": 3,
+    "domain_verified": true,
+    "demo_recording_url": null,
+    "mcp_configured": true,
+    "mcp_authentication": "none",
+    "mcp_tools_discovered": [
+      "search_sources",
+      "get_source",
+      "list_countries",
+      "get_endpoint_health"
+    ],
+    "mcp_scan": "No issues found in the latest MCP scan.",
+    "skill_scan": "Checks passed",
+    "metadata_warning": "We couldn\u2019t confirm the selected category. Review the category and make sure the listing clearly explains the plugin\u2019s main purpose."
+  },
+  "domain_verification": {
+    "challenge_url": "https://news.bymyleslee.com/.well-known/openai-apps-challenge",
+    "exact_body_verified": true,
+    "content_type": "text/plain; charset=utf-8",
+    "status": "Domain verified",
+    "deployment_inspect_url": "https://vercel.com/mylee04s-projects/world-news-sources-mcp/9Yv79X7CDSQNYZBD2weWVEQxvieE",
+    "preserved_by_bundle_script": true
+  },
+  "chatgpt_connection": {
+    "kind": "personal_no_auth_mcp",
+    "installed": true,
+    "url": "https://chatgpt.com/plugins/plugin_asdk_app_6abd82a6aebc81918b9113bffb754624",
+    "complete_packaged_skill_installed": false,
+    "note": "MCP connection testing; not public directory installation or packaged-skill routing validation.",
+    "review_cases_observed": {
+      "positive": 5,
+      "negative": 3,
+      "initial_chile_case": "Found fallback bug; corrected after deploy and real rerun"
+    }
+  },
+  "aggregate_metrics": {
+    "provider": "Cloudflare Workers Free + D1 Free",
+    "worker": "world-news-sources-metrics",
+    "collector_url": "https://world-news-sources-metrics.mylee.workers.dev/v1/aggregate",
+    "database": "world-news-sources-metrics",
+    "worker_observability_enabled": false,
+    "authenticated_owner_console": "https://dash.cloudflare.com/2241c539af4ee9cc0248040227fe30c5/workers/d1/databases/534301aa-7c0f-4e45-a8cc-84053bfe98b8/console",
+    "deployment_created_at": "2026-09-30T22:31:19.826Z",
+    "live_verified_at": "2026-09-30T22:37:06.563Z",
+    "activation_note": "Deployment creation and later successful live verification are recorded; exact production alias switch time was not captured.",
+    "inspection_verification_calls": 15,
+    "inspection_expected_errors": 4,
+    "unique_users_measured": false,
+    "calls_before_activation_not_backfilled": true,
+    "oauth_scopes": [
+      "account:read",
+      "user:read",
+      "workers_scripts:write",
+      "d1:write",
+      "offline_access"
+    ],
+    "privacy_acknowledgment": "User explicitly approved Wrangler privacy acknowledgment and Authorize; completed successfully.",
+    "privacy_policy": "https://www.cloudflare.com/privacypolicy/"
+  },
+  "review_tests": {
+    "all_eight_executed": true,
+    "report": "REVIEW-TESTS.json",
+    "complete_packaged_skill_installed": false,
+    "note": "Actual personal MCP tests; initial Chile regression fixed and rerun. Does not prove packaged skill routing."
+  },
+  "demo": {
+    "local_artifact": "dist/world-news-sources-review-demo-draft.mp4",
+    "format": "edited genuine ChatGPT captures, not continuous recording",
+    "publication_approved": false,
+    "public_url": null
+  }
+}

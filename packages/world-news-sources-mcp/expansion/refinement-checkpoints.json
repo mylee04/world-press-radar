@@ -1,0 +1,339 @@
+{
+  "request_budget_per_invocation": 48,
+  "requests_this_invocation": 18,
+  "global_concurrency": 1,
+  "per_host_concurrency": 1,
+  "host_gap_ms": 2000,
+  "no_registry_mutation": true,
+  "results": [
+    {
+      "country": "GB",
+      "name": "The Bureau of Investigative Journalism",
+      "language": "en",
+      "kind": "new_publisher",
+      "home": {
+        "url": "https://www.thebureauinvestigates.com/",
+        "final_url": "https://www.thebureauinvestigates.com/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:30:24.533Z",
+        "sha256": "7d0c95e9d1cefc89bdb566042ed1aa02455493cb9336d6d6e3c722bb0fa9802e"
+      },
+      "resources": [
+        {
+          "url": "https://www.thebureauinvestigates.com/",
+          "final_url": "https://www.thebureauinvestigates.com/",
+          "status": 200,
+          "checked_at": "2026-10-01T19:36:25.323Z",
+          "sha256": "ca1f72e6180d811e722144805c2aac9579b861134b9470b9567363685cbd76bb"
+        }
+      ],
+      "checked": []
+    },
+    {
+      "country": "US",
+      "name": "Grist",
+      "language": "en",
+      "kind": "new_publisher",
+      "home": {
+        "url": "https://grist.org/",
+        "final_url": "https://grist.org/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:30:24.575Z",
+        "sha256": "a80ce4e09b1173552dbf78e1bae81c9d19f8f8dbfd9905ce489c1a5f8e4b6220"
+      },
+      "resources": [
+        {
+          "url": "https://grist.org/",
+          "final_url": "https://grist.org/",
+          "status": 200,
+          "checked_at": "2026-10-01T19:36:25.500Z",
+          "sha256": "a80ce4e09b1173552dbf78e1bae81c9d19f8f8dbfd9905ce489c1a5f8e4b6220"
+        }
+      ],
+      "checked": [
+        {
+          "type": "sitemap",
+          "url": "https://grist.org/post-sitemap63.xml",
+          "kind": "official_sitemap_index_child_ranked",
+          "source_url": "https://grist.org/sitemap_index.xml",
+          "declared_lastmod": "2026-10-01T19:16:43+00:00",
+          "found_at": "2026-10-01T19:36:27.641Z",
+          "page_sha256": "d7806a83052b0292ab490a3800b0e9c601f3151377371f8cfee0c8a974c4e74a",
+          "endpoint_id": "ep_32aae890790131d52e71c104",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_32aae890790131d52e71c104",
+            "type": "sitemap",
+            "url": "https://grist.org/post-sitemap63.xml",
+            "checkedAt": "2026-10-01T19:36:29.830Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 610,
+            "entriesWithUrl": 610,
+            "sampleUrls": [
+              "https://grist.org/food/super-cows-so-last-year-meet-the-double-bacon-hog/",
+              "https://grist.org/living/celebrate-independence-day-with-these-rad-women-and-popsicles/",
+              "https://grist.org/living/mary-iverson-makes-climate-change-paintings-that-are-actually-cool/"
+            ],
+            "newestContentAt": "2026-10-01T08:45:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://grist.org/post-sitemap63.xml",
+            "durationMs": 2188,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 610,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "ea2926cfc705f04eaa1f78b4ddbd8482d4dde557a4c6ff19f6f61615a5271753"
+        }
+      ]
+    },
+    {
+      "country": "CA",
+      "name": "The Narwhal",
+      "language": "en",
+      "kind": "new_publisher",
+      "home": {
+        "url": "https://thenarwhal.ca/",
+        "final_url": "https://thenarwhal.ca/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:30:27.300Z",
+        "sha256": "48731e74be7eb004dd7626245b945a866cb1fa6e03990b46695f8edb7fd0fecf"
+      },
+      "resources": [
+        {
+          "url": "https://thenarwhal.ca/",
+          "final_url": "https://thenarwhal.ca/",
+          "status": 200,
+          "checked_at": "2026-10-01T19:36:30.288Z",
+          "sha256": "48731e74be7eb004dd7626245b945a866cb1fa6e03990b46695f8edb7fd0fecf"
+        }
+      ],
+      "checked": []
+    },
+    {
+      "country": "IT",
+      "name": "Il Post",
+      "language": "it",
+      "kind": "new_publisher",
+      "home": {
+        "url": "https://www.ilpost.it/",
+        "final_url": "https://www.ilpost.it/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:30:40.190Z",
+        "sha256": "453f1675f34154ad969427ba4b2c2acd2fd35fbea705ec0e6bf076bf352aa198"
+      },
+      "resources": [
+        {
+          "url": "https://www.ilpost.it/",
+          "final_url": "https://www.ilpost.it/",
+          "status": 200,
+          "checked_at": "2026-10-01T19:36:33.266Z",
+          "sha256": "775f04d80564f41111bcaaad4ac5e273f29b3721a7f83dfcf030faec881ab5f2"
+        }
+      ],
+      "checked": []
+    },
+    {
+      "country": "DE",
+      "name": "CORRECTIV",
+      "language": "de",
+      "kind": "new_publisher",
+      "home": {
+        "url": "https://correctiv.org/",
+        "final_url": "https://correctiv.org/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:30:45.348Z",
+        "sha256": "07082914f6cce77d466b31b92a52a2e258b17294ddcb692e3d2a3adab2ad4994"
+      },
+      "resources": [
+        {
+          "url": "https://correctiv.org/",
+          "final_url": "https://correctiv.org/",
+          "status": 200,
+          "checked_at": "2026-10-01T19:36:42.555Z",
+          "sha256": "f81991a7a9edac2e010a8d7b958d3cc0ab1cd72c1a33fab423d79727261e0a20"
+        }
+      ],
+      "checked": [
+        {
+          "type": "sitemap",
+          "url": "https://correctiv.org/post-sitemap8.xml",
+          "kind": "official_sitemap_index_child_ranked",
+          "source_url": "https://www.correctiv.org/sitemap_index.xml",
+          "declared_lastmod": "2026-10-01T13:07:39+00:00",
+          "found_at": "2026-10-01T19:36:45.172Z",
+          "page_sha256": "5181ed17932a5035022c5dd60afbf9d3cfbd56e24c83aee2a72f1989ae036f84",
+          "endpoint_id": "ep_ba0fc58da796049af9cedcaa",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_ba0fc58da796049af9cedcaa",
+            "type": "sitemap",
+            "url": "https://correctiv.org/post-sitemap8.xml",
+            "checkedAt": "2026-10-01T19:36:53.174Z",
+            "outcome": "unhealthy",
+            "httpStatus": null,
+            "reason": "TIMEOUT",
+            "format": null,
+            "auditStatus": "timeout",
+            "durationMs": 8002,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 0,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "name": "Nippon.com - Japanese",
+      "language": "ja",
+      "kind": "additional_language",
+      "home": {
+        "url": "https://www.nippon.com/ja/",
+        "final_url": "https://www.nippon.com/ja/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:30:53.444Z",
+        "sha256": "f58c8624d4ee21534d148a26cf0cc20b6e6643918b6aab7dbc39c162f954f191"
+      },
+      "resources": [
+        {
+          "url": "https://www.nippon.com/ja/",
+          "final_url": "https://www.nippon.com/ja/",
+          "status": 200,
+          "checked_at": "2026-10-01T19:36:53.331Z",
+          "sha256": "f58c8624d4ee21534d148a26cf0cc20b6e6643918b6aab7dbc39c162f954f191"
+        }
+      ],
+      "checked": [
+        {
+          "type": "sitemap",
+          "url": "https://www.nippon.com/ja/googleNews.xml",
+          "kind": "official_sitemap_index_child_ranked",
+          "source_url": "https://www.nippon.com/ja/sitemap.xml",
+          "declared_lastmod": "2026-10-01T21:03:02+09:00",
+          "found_at": "2026-10-01T19:36:55.472Z",
+          "page_sha256": "e6c6169fd4d884708b1a2c1118677421e79be0d325d4c26a1dfeb40268b37cdb",
+          "endpoint_id": "ep_381c6eee40f1450626d39393",
+          "already_cataloged": false,
+          "observation": {
+            "endpointId": "ep_381c6eee40f1450626d39393",
+            "type": "sitemap",
+            "url": "https://www.nippon.com/ja/googleNews.xml",
+            "checkedAt": "2026-10-01T19:36:58.323Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 1623,
+            "entriesWithUrl": 1623,
+            "sampleUrls": [
+              "https://www.nippon.com/ja/news/kd1478360554111451188/",
+              "https://www.nippon.com/ja/news/kd1478359589331107860/",
+              "https://www.nippon.com/ja/news/kd1478358925093782382/"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "unreliable",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.nippon.com/ja/googleNews.xml",
+            "durationMs": 2851,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 1623,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "2a7e12e2263c91ba2f76d01668811dd5289a1954e3035acaffed09f0f988df1d"
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "name": "The Mainichi - Official RSS guide",
+      "language": "en",
+      "kind": "failed_endpoint_alternative",
+      "home": {
+        "url": "https://mainichi.jp/english/rss/",
+        "final_url": "https://mainichi.jp/english/rss/",
+        "status": 200,
+        "checked_at": "2026-10-01T19:31:32.516Z",
+        "sha256": "09c5396aa911b6279a5d86ac64f18246007d752d6a02297ad1cf698113a3a722"
+      },
+      "resources": [
+        {
+          "url": "https://mainichi.jp/english/rss/",
+          "final_url": "https://mainichi.jp/english/rss/",
+          "status": 200,
+          "checked_at": "2026-10-01T19:36:59.092Z",
+          "sha256": "09c5396aa911b6279a5d86ac64f18246007d752d6a02297ad1cf698113a3a722"
+        }
+      ],
+      "checked": [
+        {
+          "url": "https://mainichi.jp/rss/etc/english_latest.rss",
+          "kind": "official_html_feed_anchor",
+          "source_url": "https://mainichi.jp/english/rss/",
+          "link_label": "The Mainichi",
+          "type": "rss",
+          "found_at": "2026-10-01T19:36:59.092Z",
+          "page_sha256": "09c5396aa911b6279a5d86ac64f18246007d752d6a02297ad1cf698113a3a722",
+          "endpoint_id": "ep_18d147f0546b3b320ca00bf1",
+          "already_cataloged": true,
+          "observation": {
+            "endpointId": "ep_18d147f0546b3b320ca00bf1",
+            "type": "rss",
+            "url": "https://mainichi.jp/rss/etc/english_latest.rss",
+            "checkedAt": "2026-10-01T19:37:01.437Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rdf",
+            "auditStatus": "working_nonempty",
+            "entryCount": 20,
+            "entriesWithUrl": 20,
+            "sampleUrls": [
+              "https://mainichi.jp/english/articles/20261001/p2g/00m/0sp/042000c",
+              "https://mainichi.jp/english/articles/20261001/p2g/00m/0na/040000c",
+              "https://mainichi.jp/english/articles/20261001/p2g/00m/0in/028000c"
+            ],
+            "newestContentAt": "2026-10-01T11:30:09.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://mainichi.jp/rss/etc/english_latest.rss",
+            "durationMs": 2345,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "parsed_unique_candidate_urls": 20,
+          "uncertain_url_count": 0,
+          "url_set_sha256": "ecfe00997b292ae16a2d3788a25bc73925c6f89a8927c3f0f6f9959736823a55"
+        }
+      ]
+    },
+    {
+      "country": "GB",
+      "name": "Byline Times",
+      "language": "en",
+      "kind": "new_publisher",
+      "home": {
+        "url": "https://bylinetimes.com/"
+      },
+      "resources": [
+        {
+          "url": "https://bylinetimes.com/",
+          "final_url": "https://bylinetimes.com/",
+          "status": 200,
+          "checked_at": "2026-10-01T19:37:03.359Z",
+          "sha256": "9eeb7ab5c63e1fb88428a9c82f3f32c24ce3b368983c06a0d566624d76fefd1e"
+        }
+      ],
+      "checked": []
+    }
+  ]
+}

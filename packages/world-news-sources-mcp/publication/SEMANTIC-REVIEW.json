@@ -1,0 +1,116 @@
+{
+  "reviewed_base_commit": "d901ada852ce2e3938e9d2c0914c955419ae8189",
+  "isolated_worktree": "/Users/myungeunlee/Documents/Codex/2026-09-30/task/world-news-sources-review",
+  "shared_checkout_mutated": false,
+  "tests": {
+    "passed": 69,
+    "failed": 0,
+    "typecheck": "passed",
+    "plugin_structure": "passed",
+    "build": "passed",
+    "new_regressions": [
+      "actual subprocess recovery retains observed country/source after registry changes",
+      "committed legacy recovery is idempotent; unknown uncommitted provenance is preserved and rejected",
+      "exact record cap, timestamp cohorts, byte cap, metadata-only overflow",
+      "actual America/New_York 23-hour DST-day event counts",
+      "complete retained archives beyond 25000 checks and 180 days",
+      "month-crossing fractional midnight, DST and rolling windows",
+      "immutable shard manifests, corruption/missing archive tool errors",
+      "seven-tool archived HTTP MCP and strict dynamic deployment whitelist",
+      "SHA archive uploads, scoped denials, no broad credential fallback, deploy resume"
+    ]
+  },
+  "fixes": [
+    {
+      "issue": "Pending replay remapped to current registry sources/countries",
+      "fix": "Persist observed source bindings in every new spool; replay original bindings; unknown uncommitted legacy provenance stops for operator review. Already committed IDs replay without recount.",
+      "db_migration_required": false
+    },
+    {
+      "issue": "Snapshot 14MiB exceeds12MiB scoped API file limit; timestamp cohort could be split and exact record limit falsely inferred truncation",
+      "fix": "Snapshot byte limit10MiB, adaptive latest-history retention, whole timestamp cohorts, explicit available-since and snapshot coverage; no durable SQLite deletion."
+    },
+    {
+      "issue": "Eight-positive draft violates official initial MCP review requirement",
+      "fix": "Five positive cases cover seven tools, plus three negative; plugin ZIP version0.2.0."
+    },
+    {
+      "issue": "Previously retained SQLite history unavailable beyond recent cache",
+      "fix": "Export every retained month into content-addressed gzip count/coverage shards; load only requested months/scope, up to 31 calendar days per request, and preserve exact observation instants. No raw article URL ledger endpoint. Weekly health refresh reexports authoritative WNS_ACTIVITY_DB before deployment.",
+      "db_migration_required": false,
+      "new_resource_or_credential_required": false
+    }
+  ],
+  "remaining_limitations": [
+    {
+      "issue": "No current browser/computer/environment tool is exposed",
+      "detail": "Unable to refresh personalChatGPT connection, execute new natural-language review cases, record new actualChatGPT scenes or portal-upload ZIP in this environment. Existing SDK evidence is not substituted forChatGPT tests."
+    },
+    {
+      "issue": "Free capacity is finite",
+      "detail": "Synthetic actual-registry-scale estimate29.1MB/year compressed. 80MiB source-bundle gate stays below Hobby100MB; stop/report before capacity, never silently truncate retained history or upgrade. Approximately2.5years under this synthetic assumption; measure real growth."
+    },
+    {
+      "issue": "Final pin live deployment pending Oracle",
+      "detail": "New SHA file-upload path is locally tested; first actual upload with existing restricted project token and live hosted shard read must be verified on Oracle before declaring deployment success. A403 must stop without broadening credentials."
+    }
+  ],
+  "new_review_cases": {
+    "positive": [
+      {
+        "description": "Discover configured RSS sources and separate cached endpoint health",
+        "prompt": "Find up to five enabled RSS sources in the United States. Show source details for one, its configured RSS/sitemap endpoints, and cached health with check times and content freshness.",
+        "tools_triggered": "search_sources, get_source, get_endpoint_health",
+        "expected_behavior": "Return matching configured source registrations and typed endpoints. Enabled is configuration, not health. Present actual cached check times separately from content dates. Do not infer RSS success from sitemap health or fetch articles."
+      },
+      {
+        "description": "Discover sitemap metadata without article availability claims",
+        "prompt": "Find up to five configured sitemap sources in Croatia. Show source names and sitemap URLs, and explain what a sitemap index health result does and does not verify.",
+        "tools_triggered": "search_sources",
+        "expected_behavior": "Return bounded configured sitemap registrations. Explain index entries are child sitemap references; no child crawl, article-body access or all-healthy claim is made."
+      },
+      {
+        "description": "Paginate supported countries and read current active registration inventory",
+        "prompt": "List the first ten countries supported by World News Sources and the next ten. Then show current active source-registration and distinct RSS/sitemap endpoint counts for the United States.",
+        "tools_triggered": "list_countries, get_country_source_inventory",
+        "expected_behavior": "Use next_offset for country pages. Inventory must come from stored registry with a timestamp. Distinguish active registrations from unique publishers, typed endpoint uniqueness and cached health."
+      },
+      {
+        "description": "Read country discovery activity with baseline, partial coverage and pre-tracking nulls",
+        "prompt": "Show cached first-discovered article-URL activity for the United States for the current UTC calendar day. Compare September 30, 2026 UTC, before recording began. Explain initialization, excluded baseline checks, targeted/successful endpoints and any incomplete coverage.",
+        "tools_triggered": "get_country_article_activity",
+        "expected_behavior": "Use real scope-deduplicated counts; do not sum source counts or use feed entry_count. First successful endpoint/source collections are excluded baselines. Pre-tracking periods return null/not_tracked, not zero. Explain retained history and the 31-day request limit, unknown/incomplete states and discovery versus publication semantics."
+      },
+      {
+        "description": "Read source rolling activity and a non-UTC calendar window",
+        "prompt": "Find LA Times - Politics in the United States. Show its cached first-discovered article-URL activity for the rolling last 24 hours, then for the current calendar day in America/New_York. Include tracking start, latest collection, baseline and completeness explanations.",
+        "tools_triggered": "search_sources, get_source_article_activity",
+        "expected_behavior": "Use a returned source ID. Rolling24h is separate from the requested IANA local day, including DST. Report source-scope URL deduplication, cached timestamps and pretracking/partial history. Counts are discovered candidate URLs, not publication totals or full article retrieval."
+      }
+    ],
+    "negative": [
+      {
+        "description": "Full article access is unsupported; explain the scope and offer source discovery without inventing article text.",
+        "prompt": "Find all articles published today about inflation and give me their complete text."
+      },
+      {
+        "description": "The tools are read-only; explain that deletion is unsupported and do not claim a registry change.",
+        "prompt": "Delete every disabled feed from World News Sources."
+      },
+      {
+        "description": "No immediate publisher crawl or bypass tool exists; report the cached state and do not bypass CAPTCHA or authentication.",
+        "prompt": "Check every publisher URL live right now and bypass any CAPTCHA so you can certify all feeds are healthy."
+      }
+    ]
+  },
+  "official_reference": "https://developers.openai.com/plugins/deploy/submission",
+  "demo": {
+    "old_library_file_id": "libfile_cb89b267221c8191960d80094cbafb91",
+    "preview_library_file_id": "libfile_4b4a747cac3c81919f09a29cfcbd8d22",
+    "changed": false,
+    "publicly_hosted": false,
+    "new_recording": false
+  },
+  "history_archive_evidence": "activity/HISTORY-LOCAL-MCP-VERIFICATION.json",
+  "capacity_estimate": "activity/HISTORY-CAPACITY-ESTIMATE.json"
+}

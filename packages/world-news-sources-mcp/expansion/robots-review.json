@@ -1,0 +1,140 @@
+{
+  "budget": 16,
+  "governed_requests": 8,
+  "global_concurrency": 1,
+  "per_host_concurrency": 1,
+  "minimum_host_gap_ms": 2000,
+  "no_registry_mutation": true,
+  "no_xml_refetch": true,
+  "results": [
+    {
+      "url": "https://www.readthemaple.com/robots.txt",
+      "final_url": "https://www.readthemaple.com/robots.txt",
+      "status": 200,
+      "checked_at": "2026-10-01T19:54:36.848Z",
+      "sha256": "07e6985c0fe6ddf3f473ce164a9da6e1ddb016986277fa39444b199ceec0b4ad",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_19f015aca4c596d818830ac8",
+          "url": "https://www.readthemaple.com/rss/",
+          "decision": "allowed",
+          "matched_rule": null
+        },
+        {
+          "endpoint_id": "ep_28f2219a7ba17213c01388da",
+          "url": "https://www.readthemaple.com/sitemap-posts.xml",
+          "decision": "allowed",
+          "matched_rule": null
+        }
+      ]
+    },
+    {
+      "url": "https://novaramedia.com/robots.txt",
+      "final_url": "https://novaramedia.com/robots.txt",
+      "status": 200,
+      "checked_at": "2026-10-01T19:54:37.042Z",
+      "sha256": "eb694bf69d09f1b5aa691f8176f3029762b6dd1b631006f4f57b48586caa0694",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_0f17eeafc6eb846f413fa1b9",
+          "url": "https://novaramedia.com/feed/",
+          "decision": "allowed",
+          "matched_rule": null
+        }
+      ]
+    },
+    {
+      "url": "https://basta.media/robots.txt",
+      "final_url": "https://basta.media/robots.txt",
+      "status": 200,
+      "checked_at": "2026-10-01T19:54:37.493Z",
+      "sha256": "b091dd0952f08eaa588154f85514700b7bde4664341b075c765be2db312d5157",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_457e3c06ded097f1c7a220c6",
+          "url": "https://basta.media/spip.php?page=backend",
+          "decision": "disallowed",
+          "matched_rule": {
+            "allow": false,
+            "pattern": "/spip.php?page=backend*"
+          }
+        }
+      ]
+    },
+    {
+      "url": "https://feed.prismamediadigital.com/robots.txt",
+      "final_url": "https://feed.prismamediadigital.com/robots.txt",
+      "status": 404,
+      "checked_at": "2026-10-01T19:54:38.061Z",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_26877d49facaaeddc20cbeb2",
+          "url": "https://feed.prismamediadigital.com/v1/cap/rss?limit=20",
+          "decision": "allowed_robots_absent",
+          "matched_rule": null
+        }
+      ]
+    },
+    {
+      "url": "https://www.halifaxcourier.co.uk/robots.txt",
+      "final_url": "https://www.halifaxcourier.co.uk/robots.txt",
+      "status": 200,
+      "checked_at": "2026-10-01T19:54:38.245Z",
+      "sha256": "bad687b68ea12068a5d57cee6e3fb08ed427eef227d8bb385964bae8b829fce0",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_f9a7dc905a473eadc6cdcdf5",
+          "url": "https://www.halifaxcourier.co.uk/sitemaps/googlenews",
+          "decision": "allowed",
+          "matched_rule": null
+        }
+      ]
+    },
+    {
+      "url": "https://www.ksta.de/robots.txt",
+      "final_url": "https://www.ksta.de/robots.txt",
+      "status": 200,
+      "checked_at": "2026-10-01T19:54:38.993Z",
+      "sha256": "5a5a1e9c57698e03c67871a6a0cc6f23f6fda5f000629c39f51677fa6e39403c",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_9ba261768403f3bb62e201b2",
+          "url": "https://www.ksta.de/xml/newssitemap.xml",
+          "decision": "allowed",
+          "matched_rule": null
+        }
+      ]
+    },
+    {
+      "url": "https://www.ilgiornale.it/robots.txt",
+      "final_url": "https://www.ilgiornale.it/robots.txt",
+      "status": 200,
+      "checked_at": "2026-10-01T19:54:39.583Z",
+      "sha256": "e13704507c9eb4779ea0fa1259c883599a80980d961f5bb236f7803ddad86ab3",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_4b2c2e26bdd803a16271b1be",
+          "url": "https://www.ilgiornale.it/arc/outboundfeeds/sitemap-news/latest/",
+          "decision": "allowed",
+          "matched_rule": null
+        }
+      ]
+    },
+    {
+      "url": "https://www.nippon.com/robots.txt",
+      "final_url": "https://www.nippon.com/robots.txt",
+      "status": 200,
+      "checked_at": "2026-10-01T19:54:39.732Z",
+      "sha256": "b86520ab999a046890a0588dd0b2cd318f239d37fb9092a5b06edd158b50f58b",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_381c6eee40f1450626d39393",
+          "url": "https://www.nippon.com/ja/googleNews.xml",
+          "decision": "allowed",
+          "matched_rule": null
+        }
+      ]
+    }
+  ]
+}

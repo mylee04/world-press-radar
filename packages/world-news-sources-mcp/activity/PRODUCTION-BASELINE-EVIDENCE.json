@@ -1,0 +1,33 @@
+{
+  "tracking_start": "2026-10-01T01:36:12.370Z",
+  "latest_collection": "2026-10-01T01:42:19.454Z",
+  "counts": {
+    "urls": 335,
+    "scope_urls": 670,
+    "endpoint_urls": 335,
+    "binding_urls": 335,
+    "collections": 8
+  },
+  "initialized_bindings": 4,
+  "regions": [
+    {
+      "country": "GB",
+      "bindings": 1
+    },
+    {
+      "country": "JP",
+      "bindings": 1
+    },
+    {
+      "country": "US",
+      "bindings": 2
+    }
+  ],
+  "inventory": {
+    "active_countries": 72,
+    "active_source_registrations": 5023,
+    "unique_active_rss_endpoints": 3661,
+    "unique_active_sitemap_endpoints": 1742
+  },
+  "db_bytes": 2744320
+}

@@ -1,0 +1,204 @@
+{
+  "request_budget": 20,
+  "governed_attempts": 9,
+  "no_registry_mutation": true,
+  "results": [
+    {
+      "country": "CN",
+      "name": "Sixth Tone existing HTTPS comparison",
+      "type": "rss",
+      "url": "https://www.sixthtone.com/rss/index.xml",
+      "kind": "existing_registry_comparison",
+      "source_url": "existing_registry",
+      "found_at": "2026-10-01T20:28:13.584Z",
+      "endpoint_id": "ep_e83c47b544ccca8b9b929000",
+      "access_review": {
+        "robots_url": "https://www.sixthtone.com/robots.txt",
+        "http_status": 404,
+        "checked_at": "2026-10-01T20:28:13.957Z",
+        "decision": "allowed_robots_absent",
+        "matched_rule": null
+      },
+      "observation": {
+        "endpointId": "ep_e83c47b544ccca8b9b929000",
+        "type": "rss",
+        "url": "https://www.sixthtone.com/rss/index.xml",
+        "checkedAt": "2026-10-01T20:28:16.581Z",
+        "outcome": "healthy",
+        "httpStatus": 200,
+        "reason": null,
+        "format": "rss",
+        "auditStatus": "working_nonempty",
+        "entryCount": 51,
+        "entriesWithUrl": 51,
+        "sampleUrls": [
+          "https://www.sixthtone.com/news/1019092/Bug%20Bounty:%20Beijing%20Park%20Recruits%20Visitors%20Against%20Invasive%20Moth",
+          "https://www.sixthtone.com/news/1019091/In%20Photos:%20China%20Begins%20Its%20Weeklong%20National%20Day%20Holiday",
+          "https://www.sixthtone.com/news/1019083/Chinese%20Olympic%20Diver%E2%80%99s%20Mother%20in%20Hot%20Water%20Over%20Toxic%20Parenting"
+        ],
+        "newestContentAt": "2026-10-01T05:00:00.000Z",
+        "contentFreshness": "recent",
+        "dateKind": "feed_item_date",
+        "finalUrl": "https://api.sixthtone.com/cont/output/rssApi",
+        "durationMs": 2623,
+        "attempts": 1,
+        "validatorVersion": "2"
+      },
+      "parsed_unique_candidate_urls": 51,
+      "url_set_sha256": "89eb16e4e4fde0b209ab102af8189e8ea9a902aab75b030d39dd955950d99b66",
+      "path_scope": {
+        "total_urls": 51,
+        "article_path_prefix": 0,
+        "dated_path": 0,
+        "home_or_known_navigation": 0
+      }
+    },
+    {
+      "country": "RU",
+      "name": "Mediazona",
+      "type": "sitemap",
+      "url": "https://zona.media/news-sitemap.xml",
+      "kind": "official_sitemap_index_enumerated_child",
+      "source_url": "https://zona.media/sitemap.xml",
+      "found_at": "2026-10-01T20:22:41.391Z",
+      "page_sha256": "b3baa4b7df4966f23bc64409b8d0a24928ebfe41a2c8f422fe7559bff9666ac7",
+      "endpoint_id": "ep_8d6c4a632aff762d8bf47f3e",
+      "access_review": {
+        "robots_url": "https://zona.media/robots.txt",
+        "http_status": 200,
+        "checked_at": "2026-10-01T20:28:16.679Z",
+        "decision": "allowed",
+        "matched_rule": null
+      },
+      "observation": {
+        "endpointId": "ep_8d6c4a632aff762d8bf47f3e",
+        "type": "sitemap",
+        "url": "https://zona.media/news-sitemap.xml",
+        "checkedAt": "2026-10-01T20:28:19.105Z",
+        "outcome": "healthy",
+        "httpStatus": 200,
+        "reason": null,
+        "format": "urlset",
+        "auditStatus": "working_nonempty",
+        "entryCount": 26,
+        "entriesWithUrl": 26,
+        "sampleUrls": [
+          "https://zona.media/news/2026/10/01/matushevskaya",
+          "https://zona.media/news/2026/10/01/odintsova",
+          "https://zona.media/news/2026/10/01/olimpiady"
+        ],
+        "newestContentAt": "2026-10-01T19:49:51.328Z",
+        "contentFreshness": "recent",
+        "dateKind": "sitemap_lastmod",
+        "finalUrl": "https://zona.media/news-sitemap.xml",
+        "durationMs": 2425,
+        "attempts": 1,
+        "validatorVersion": "2"
+      },
+      "parsed_unique_candidate_urls": 26,
+      "url_set_sha256": "a9a2291573420431dd74dd214b6b64d391a0fa7f6e70531fc2087514dd449499",
+      "path_scope": {
+        "total_urls": 26,
+        "article_path_prefix": 0,
+        "dated_path": 26,
+        "home_or_known_navigation": 0
+      }
+    },
+    {
+      "country": "ZA",
+      "name": "GroundUp path-scope confirmation",
+      "type": "sitemap",
+      "url": "https://groundup.org.za/sitemap.xml",
+      "kind": "already_checked_scope_review",
+      "endpoint_id": "ep_f4ade8fb06ef1fe2dec5c393",
+      "access_review": {
+        "robots_url": "https://groundup.org.za/robots.txt",
+        "http_status": 200,
+        "checked_at": "2026-10-01T20:28:19.297Z",
+        "decision": "allowed",
+        "matched_rule": null
+      },
+      "observation": {
+        "endpointId": "ep_f4ade8fb06ef1fe2dec5c393",
+        "type": "sitemap",
+        "url": "https://groundup.org.za/sitemap.xml",
+        "checkedAt": "2026-10-01T20:28:25.805Z",
+        "outcome": "healthy",
+        "httpStatus": 200,
+        "reason": null,
+        "format": "urlset",
+        "auditStatus": "working_nonempty",
+        "entryCount": 20021,
+        "entriesWithUrl": 20021,
+        "sampleUrls": [
+          "https://groundup.org.za/article/promises-made-and-millions-spent-but-north-west-families-left-in-shacks/",
+          "https://groundup.org.za/article/trumps-funding-cuts-have-shrunk-breakfast-portions-at-lesotho-schools/",
+          "https://groundup.org.za/article/20-years-of-sassa-how-the-srd-grant-became-a-lifeline-for-millions/"
+        ],
+        "newestContentAt": "2026-10-01T00:00:00.000Z",
+        "contentFreshness": "recent",
+        "dateKind": "sitemap_lastmod",
+        "finalUrl": "https://groundup.org.za/sitemap.xml",
+        "durationMs": 6507,
+        "attempts": 1,
+        "validatorVersion": "2"
+      },
+      "parsed_unique_candidate_urls": 20021,
+      "url_set_sha256": "fdeec14550ed06effe79b5c4082a23df5b2e1b4531e0a1a6f995c38f7b01f6ca",
+      "path_scope": {
+        "total_urls": 20021,
+        "article_path_prefix": 16971,
+        "dated_path": 0,
+        "home_or_known_navigation": 0
+      }
+    },
+    {
+      "country": "BR",
+      "name": "Brasil de Fato path-scope confirmation",
+      "type": "sitemap",
+      "url": "https://www.brasildefato.com.br/sitemap.xml",
+      "kind": "already_checked_scope_review",
+      "endpoint_id": "ep_1b52c93bcabb7dd46cf7b210",
+      "access_review": {
+        "robots_url": "https://www.brasildefato.com.br/robots.txt",
+        "http_status": 200,
+        "checked_at": "2026-10-01T20:28:26.243Z",
+        "decision": "allowed",
+        "matched_rule": null
+      },
+      "observation": {
+        "endpointId": "ep_1b52c93bcabb7dd46cf7b210",
+        "type": "sitemap",
+        "url": "https://www.brasildefato.com.br/sitemap.xml",
+        "checkedAt": "2026-10-01T20:28:28.665Z",
+        "outcome": "healthy",
+        "httpStatus": 200,
+        "reason": null,
+        "format": "urlset",
+        "auditStatus": "working_nonempty",
+        "entryCount": 307,
+        "entriesWithUrl": 307,
+        "sampleUrls": [
+          "https://www.brasildefato.com.br/",
+          "https://www.brasildefato.com.br/ultimas-noticias/",
+          "https://www.brasildefato.com.br/pagina-principal-copy/"
+        ],
+        "newestContentAt": "2026-10-01T20:21:40.000Z",
+        "contentFreshness": "recent",
+        "dateKind": "sitemap_lastmod",
+        "finalUrl": "https://www.brasildefato.com.br/sitemap.xml",
+        "durationMs": 2422,
+        "attempts": 1,
+        "validatorVersion": "2"
+      },
+      "parsed_unique_candidate_urls": 306,
+      "url_set_sha256": "2228f2e7620c60a2ed4f63732c14009d86ab5d0c5365dc2d62c82d704cb6ba34",
+      "path_scope": {
+        "total_urls": 307,
+        "article_path_prefix": 0,
+        "dated_path": 250,
+        "home_or_known_navigation": 1
+      }
+    }
+  ]
+}

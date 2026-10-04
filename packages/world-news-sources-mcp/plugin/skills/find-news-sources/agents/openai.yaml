@@ -1,0 +1,7 @@
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "world-news-sources"
+      description: "Configured RSS/sitemap metadata, cached health, active inventory and first-discovered URL activity"
+      transport: "streamable_http"
+      url: "https://news.bymyleslee.com/mcp"
