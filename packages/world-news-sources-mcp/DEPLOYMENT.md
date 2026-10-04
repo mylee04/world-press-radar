@@ -59,3 +59,12 @@ Real remote verification: seven successful inspection calls received durable ack
 Activation/deactivation timestamps and bounded transition history are available in source metadata. Existing unknown history remains null, and no production source enabled states were changed. Operator workflow: [STATUS-HISTORY.md](STATUS-HISTORY.md).
 
 Metrics deployment was created **2026-09-30T22:31:19.826Z**; successful collection and matching privacy were verified by **2026-09-30T22:37:06.563Z**. The exact production alias switch instant was not captured. No pre-activation calls were backfilled.
+
+
+## October 4, 2026 source reconciliation and release
+
+The current Oracle runner executes the approved daily activity collector and Sunday health audit under the existing shared lock. The active source includes the cause-aware persistent recovery policy, daily request budget, partial-audit preservation, eleven approved additive registrations, approved demo and SHA-based deployment-size fix. Source, static assets, registry and compiled output match the [operational manifest](activity/OPERATIONAL-SOURCE-MANIFEST.json). No Mac OAuth credentials or runtime databases are committed.
+
+The preserved October 4 weekly results were published as `dpl_7cyct15nkUMsGZSWJgdWSTyv2hUd`: 4,705 checked, 4,414 successful, 291 failed and 1,083 policy-deferred. This is partial coverage, so the last full-audit timestamp stays September 30. Historical per-type observations can include retained earlier checks; they must not be presented as counts of this run. The activity export timestamp is distinct from actual collection time. See [deployment repair evidence](activity/DEPLOYMENT-SIZE-REPAIR.md).
+
+The release workflow is the existing GitHub PR into `develop`, with repository preflight and Node 22 MCP package checks. This reconciliation does not redeploy the MCP or switch the Oracle release: it records code already running there. A future operational release must preserve the authoritative ledger and prepare fresh exports from it under the shared lock; never deploy older checked-in audit/activity snapshots over newer production data.

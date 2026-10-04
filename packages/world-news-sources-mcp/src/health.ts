@@ -15,6 +15,10 @@ export const observationSchema = z.object({
   finalUrl: z.string().max(2048).optional(), attempts: z.number().int().min(1).max(2).optional(),
   durationMs: z.number().int().nonnegative().optional(),
   validatorVersion: z.string().max(32).optional(),
+  diagnostics: z.object({ phase:z.enum(['fetch','inspect','complete']), contentType:z.string().max(128).nullable(),
+    bodyKind:z.enum(['html','other_or_unknown','not_received']), requestHost:z.string().max(253).optional(),
+    retryAfterAt:z.string().datetime().nullable(), cooldownUntil:z.string().datetime().optional(),
+  }).strict().optional(),
 }).strict();
 export type Observation = z.infer<typeof observationSchema>;
 export const auditMetaSchema = z.object({
@@ -86,6 +90,7 @@ export class HealthStore {
       reason: observation ? observation.reason : (legacy ? 'Historical marker check; full XML/feed validity was not established' : null),
       format: observation?.format ?? null,
       audit_status: observation?.auditStatus ?? null,
+      diagnostics: observation?.diagnostics ?? null,
       entry_count: observation?.entryCount ?? null, entries_with_url: observation?.entriesWithUrl ?? null,
       sample_urls: observation?.sampleUrls ?? [],
       newest_content_at: observation?.newestContentAt ?? null,

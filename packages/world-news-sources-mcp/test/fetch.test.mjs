@@ -68,3 +68,15 @@ test('request governor also covers actual redirect hosts',async()=>{
   await fetchXml('https://example.com/feed',8000,2097152,async host=>{hosts.push(host);return()=>{releases++;};});
   assert.deepEqual(hosts,['example.com','other.example']);assert.equal(releases,2);
 });
+test('safe header evidence and actual HTML body are distinguished from wrong-format XML and invalid UTF-8',async()=>{
+ const endpoint={id:'ep_'+'a'.repeat(24),type:'rss',url:'https://example.com/feed'};
+ reset();responses.push({status:429,headers:{'retry-after':'120','content-type':'text/html; token=never-store'}});let o=await auditEndpoint(endpoint);assert.equal(o.httpStatus,429);assert.equal(o.diagnostics.contentType,'text/html');assert.ok(o.diagnostics.retryAfterAt);assert.ok(!JSON.stringify(o).includes('never-store'));
+ reset();responses.push({status:200,headers:{'content-type':'text/html'},body:Buffer.from('<html><body>not a feed</body></html>')});o=await auditEndpoint(endpoint);assert.equal(o.reason,'WRONG_ENDPOINT_FORMAT');assert.equal(o.diagnostics.bodyKind,'html');
+ reset();responses.push({status:200,body:Buffer.from('<not-a-feed/>')});o=await auditEndpoint(endpoint);assert.equal(o.reason,'WRONG_ENDPOINT_FORMAT');assert.equal(o.diagnostics.bodyKind,'other_or_unknown');
+ reset();responses.push({status:200,body:Buffer.from([255])});o=await auditEndpoint(endpoint);assert.equal(o.reason,'INVALID_UTF8');assert.equal(o.auditStatus,'malformed');
+});
+test('bounded response failures retain known HTTP/header evidence without storing bodies',async()=>{
+ const endpoint={id:'ep_'+'a'.repeat(24),type:'rss',url:'https://example.com/feed'};
+ reset();responses.push({status:200,headers:{'content-type':'application/rss+xml'},body:Buffer.alloc(4*1024*1024+1)});let o=await auditEndpoint(endpoint);assert.equal(o.reason,'BODY_TOO_LARGE');assert.equal(o.httpStatus,200);assert.equal(o.diagnostics.contentType,'application/rss+xml');
+ reset();responses.push({status:200,headers:{'content-encoding':'gzip'},body:Buffer.from('not gzip')});o=await auditEndpoint(endpoint);assert.equal(o.reason,'INVALID_COMPRESSION');assert.equal(o.auditStatus,'incomplete');assert.equal(o.httpStatus,200);
+});

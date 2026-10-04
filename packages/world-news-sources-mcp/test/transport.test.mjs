@@ -13,7 +13,7 @@ test('SDK client initializes real stdio server and exercises all four tools', {t
     const {tools}=await client.listTools();assert.equal(tools.length,7);
     assert.ok(tools.every(t=>t.annotations.readOnlyHint));
     const countries=await client.callTool({name:'list_countries',arguments:{limit:2}});
-    assert.equal(countries.structuredContent.configured_rows,5393);
+    assert.equal(countries.structuredContent.configured_rows,JSON.parse(readFileSync(new URL("../../../data/rss-atlas.json",import.meta.url),"utf8")).countries.reduce((n,c)=>n+c.feeds.length,0));
     assert.equal(countries.structuredContent.items.length,2);
     const found=await client.callTool({name:'search_sources',arguments:{country:'GB',endpoint_type:'rss',limit:1}});
     const source=found.structuredContent.items[0];assert.ok(source);

@@ -4,7 +4,7 @@ import { randomUUID } from 'node:crypto';
 import { hostname } from 'node:os';
 import { loadData } from '../dist/config.js';
 import { ActivityLedger, collectionId } from '../dist/activity-ledger.js';
-import { auditEndpoint } from '../dist/audit-check.js';
+import { auditEndpoint, isTransient } from '../dist/audit-check.js';
 import { createHostGate } from '../dist/host-gate.js';
 
 const args = process.argv.slice(2);
@@ -20,10 +20,10 @@ mkdirSync(dirname(dbPath),{recursive:true});mkdirSync(dirname(snapshotPath),{rec
 const spool = `${dbPath}.spool`;mkdirSync(spool,{recursive:true});
 const ledger = new ActivityLedger(dbPath);chmodSync(dbPath,0o600);
 const owner = `${hostname()}:${process.pid}:${randomUUID()}`;
-const {catalog} = loadData(); const gate = ledger.recovery.gate(createHostGate(2000));
+const {catalog} = loadData(); const gate = createHostGate(2000);
 const bindings = new Map(); for(const source of catalog.sources.filter(s=>s.enabled)) for(const endpoint of source.endpoints){const list=bindings.get(endpoint.id)??[];list.push(source);bindings.set(endpoint.id,list);}
 const atomicJson = (path,value) => { const tmp=`${path}.${process.pid}.tmp`;writeFileSync(tmp,JSON.stringify(value)+'\n',{mode:0o600});renameSync(tmp,path); };
-let completed=0, failed=0, replayed=0,deferredCount=0;
+let completed=0, failed=0, replayed=0;
 try {
   ledger.acquire(owner,new Date().toISOString(),120);
   const existingLane=ledger.db.prepare("SELECT value FROM metadata WHERE key='lane'").get()?.value;
@@ -38,7 +38,6 @@ try {
     if(!alreadyCommitted&&!Array.isArray(item.data.source_bindings))throw new Error('LEGACY_PENDING_PROVENANCE_UNKNOWN');
     const result=ledger.commit(item.data,item.data.source_bindings??[],owner);replayed+=+result.replayed;unlinkSync(item.path);
   }
-  ledger.recovery.seedFromLedger(catalog);
   if(!args.includes('--export-only')){
     const explicit=[];for(let i=0;i<args.length;i++)if(args[i]==='--endpoint')explicit.push(args[++i]);
     if(explicit.some(id=>!bindings.has(id)))throw new Error('Unknown or disabled endpoint');
@@ -47,26 +46,24 @@ try {
     const states=new Map(state.map(row=>[row.endpoint_id,row]));
     const endpoints=[...bindings.keys()].filter(id=>!explicit.length||explicit.includes(id)).filter(id=>args.includes('--force')||!states.get(id)?.next_due||states.get(id).next_due<=now)
       .sort((a,b)=>String(states.get(a)?.last_attempt_at??'').localeCompare(String(states.get(b)?.last_attempt_at??''))||a.localeCompare(b)).slice(0,limit);
-    let cursor=0, exhausted=false, aborted=false; const deferred=[];
+    let cursor=0, exhausted=false, aborted=false;
     const workers=await Promise.allSettled(Array.from({length:2},async()=>{
       try { while(cursor<endpoints.length && !exhausted && !aborted){
         const id=endpoints[cursor++], endpoint=catalog.endpoints.get(id);
-        const eligibility=ledger.recovery.eligible(endpoint,undefined,args.includes('--force')?'health':'activity');if(!eligibility.eligible){deferred.push({endpoint_id:id,...eligibility});deferredCount++;continue;}
         const bytes=[dbPath,`${dbPath}-wal`].reduce((n,path)=>n+(existsSync(path)?statSync(path).size:0),0);if(bytes>=maxDb)throw new Error('SQLITE_STORAGE_BUDGET_EXHAUSTED');
         ledger.acquire(owner,new Date().toISOString(),120);try{ledger.reserveRequest(new Date().toISOString(),dailyBudget);}catch(error){if(error.message==='DAILY_REQUEST_BUDGET_EXHAUSTED'){exhausted=true;console.log(JSON.stringify({stopped:error.message}));break;}throw error;}
-        const observation=await auditEndpoint(endpoint,gate,true);
-
-        const collection={id:collectionId(id,observation.checkedAt,observation.observedUrls??[]),endpoint,checked_at:observation.checkedAt,status:observation.auditStatus??'network_error',format:observation.format??null,reason:observation.reason??null,urls:observation.observedUrls??[],traffic:lane,http_status:observation.httpStatus,attempts:observation.attempts,diagnostics:observation.diagnostics,source_bindings:bindings.get(id).map(({id,countryCode})=>({id,countryCode}))};
+        let observation=await auditEndpoint(endpoint,gate,true);
+        if(isTransient(observation)){try{ledger.reserveRequest(new Date().toISOString(),dailyBudget);observation=await auditEndpoint(endpoint,gate,true);}catch(error){if(error.message!=='DAILY_REQUEST_BUDGET_EXHAUSTED')throw error;}}
+        writeFileSync(`expansion/remaining13/baseline-observation-${id}.json`,JSON.stringify(observation));
+        const collection={id:collectionId(id,observation.checkedAt,observation.observedUrls??[]),endpoint,checked_at:observation.checkedAt,status:observation.auditStatus??'network_error',format:observation.format??null,reason:observation.reason??null,urls:observation.observedUrls??[],traffic:lane,source_bindings:bindings.get(id).map(({id,countryCode})=>({id,countryCode}))};
         const path=join(spool,`${collection.id}.json`);atomicJson(path,collection);
         if(aborted)return; // Retain later in-flight payloads, so recovery can commit in chronological order.
         ledger.acquire(owner,new Date().toISOString(),120);ledger.commit(collection,bindings.get(id),owner);unlinkSync(path);completed++;if(!['working_nonempty','valid_empty'].includes(collection.status))failed++;
         console.log(JSON.stringify({endpoint_id:id,status:collection.status,checked_at:collection.checked_at,full_urls:collection.urls.length,completed}));
       }}catch(error){aborted=true;throw error;}
     }));
-    atomicJson(join(dirname(snapshotPath),'recovery-deferred.json'),{deferred});
     const rejected=workers.find(result=>result.status==='rejected');if(rejected)throw rejected.reason;
   }
-  atomicJson(join(dirname(snapshotPath),'recovery-latest.json'),ledger.recovery.report());
   const snapshot=ledger.archive(catalog,join(dirname(snapshotPath),'history'));atomicJson(snapshotPath,snapshot);
-  console.log(JSON.stringify({lane,db:dbPath,snapshot:snapshotPath,tracking_start:snapshot.tracking_start,completed,failed,replayed,deferred:deferredCount,inline_retries:0,recovery_policy:'cause-aware-1',cadence:'operator only; no timer created',daily_request_budget:dailyBudget}));
+  console.log(JSON.stringify({lane,db:dbPath,snapshot:snapshotPath,tracking_start:snapshot.tracking_start,completed,failed,replayed,cadence:'operator only; no timer created',daily_request_budget:dailyBudget}));
 }finally{ledger.release(owner);ledger.close();}

@@ -2,12 +2,14 @@ import { DatabaseSync } from 'node:sqlite';
 import { createHash } from 'node:crypto';
 import {mkdirSync,writeFileSync,renameSync} from 'node:fs';
 import {join} from 'node:path';
+import {RecoveryStore} from './recovery-store.js';
+import type {Observation} from './health.js';
 import {encodeHistory,type HistoryShard} from './activity-history.js';
 import type { Catalog, Endpoint, Source } from './catalog.js';
 import { normalizeArticleUrl, NORMALIZATION_VERSION } from './article-url.js';
 
 export type CollectionBinding = Pick<Source, 'id' | 'countryCode'>;
-export type Collection = { id: string; endpoint: Endpoint; checked_at: string; status: string; format: string | null; urls: string[]; reason: string | null; traffic: 'production' | 'inspection'; source_bindings?: CollectionBinding[] };
+export type Collection = { id: string; endpoint: Endpoint; checked_at: string; status: string; format: string | null; urls: string[]; reason: string | null; traffic: 'production' | 'inspection'; source_bindings?: CollectionBinding[]; http_status?:number|null; attempts?:number; diagnostics?:Observation['diagnostics'] };
 export const ACTIVITY_SCHEMA = `
 PRAGMA journal_mode=WAL;
 PRAGMA foreign_keys=ON;
@@ -29,7 +31,8 @@ export function collectionId(endpointId: string, checkedAt: string, urls: string
 }
 export class ActivityLedger {
   readonly db: DatabaseSync;
-  constructor(path: string) { this.db = new DatabaseSync(path); this.db.exec('PRAGMA busy_timeout=5000'); this.db.exec(ACTIVITY_SCHEMA); }
+  readonly recovery:RecoveryStore;
+  constructor(path: string) { this.db = new DatabaseSync(path); this.db.exec('PRAGMA busy_timeout=5000'); this.db.exec(ACTIVITY_SCHEMA);this.recovery=new RecoveryStore(this.db); }
   close() { this.db.close(); }
   transaction<T>(action: () => T): T {
     this.db.exec('BEGIN IMMEDIATE');
@@ -110,13 +113,13 @@ export class ActivityLedger {
           if (!existed && initialized && article.kind === 'candidate') sourceNew[source.id]++;
         }
       }
-      const details = { source_ids: sources.map(s => s.id), countries: [...new Set(sources.map(s => s.countryCode))], source_new: sourceNew, country_new: countryNew,
+      const recovery=this.recovery.record(collection.endpoint,{endpointId:collection.endpoint.id,type:collection.endpoint.type,url:collection.endpoint.url,checkedAt:collection.checked_at,outcome:successful?'healthy':'unhealthy',httpStatus:collection.http_status??null,reason:collection.reason,format:collection.format as Observation['format'],auditStatus:collection.status as Observation['auditStatus'],diagnostics:collection.diagnostics,attempts:collection.attempts as Observation['attempts']},collection.id,undefined,true);
+      const details = { recovery,source_ids: sources.map(s => s.id), countries: [...new Set(sources.map(s => s.countryCode))], source_new: sourceNew, country_new: countryNew,
         baseline_sources: baselineSources, observed_urls: urls.length, uncertain_urls: urls.filter(u => u.kind === 'uncertain').length, index_children_excluded: index };
       this.db.prepare('INSERT INTO collections VALUES(?,?,?,?,?,?,?)').run(collection.id, collection.endpoint.id, collection.checked_at, collection.status, collection.format, collection.reason, JSON.stringify(details));
       for (const { source } of bindingStates) {
-        const row = this.db.prepare('SELECT failures FROM bindings WHERE source_id=? AND endpoint_id=?').get(source.id, collection.endpoint.id);
-        const failures = successful ? 0 : Number(row?.failures ?? 0) + 1;
-        const next = new Date(successful ? Date.parse(collection.checked_at.slice(0,10)) + (index ? 7 : 1) * 86400000 : Date.parse(collection.checked_at) + Math.min(7 * 86400000, 3600000 * 2 ** Math.min(failures, 8))).toISOString();
+        const failures = recovery.failedChecks;
+        const next = recovery.nextEligibleAt;
         this.db.prepare(`UPDATE bindings SET baseline_at=CASE WHEN ? THEN COALESCE(baseline_at,?) ELSE baseline_at END,last_success_at=CASE WHEN ? THEN ? ELSE last_success_at END,last_attempt_at=?,last_status=?,failures=?,next_due=? WHERE source_id=? AND endpoint_id=?`).run(+(successful && !index), collection.checked_at, +successful, collection.checked_at, collection.checked_at, collection.status, failures, next, source.id, collection.endpoint.id);
       }
       this.db.prepare(`INSERT INTO metadata VALUES('tracking_start',?) ON CONFLICT DO NOTHING`).run(collection.checked_at);

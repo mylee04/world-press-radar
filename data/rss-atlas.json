@@ -3270,6 +3270,33 @@
           "status": "⏩ OFFICIAL",
           "checkedDate": "04/13/2026",
           "valid": "needs verification"
+        },
+        {
+          "name": "Nippon.com (Japanese News Sitemap)",
+          "language": "ja",
+          "url": null,
+          "sitemapUrl": "https://www.nippon.com/ja/googleNews.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:11:07.987Z",
+          "status_reason": "Initial registration from verified official declarations (g7-official-first-pass-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "g7-official-first-pass-2026-10-01",
+          "source_homepage": "https://www.nippon.com/ja/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://www.nippon.com/ja/googleNews.xml",
+              "kind": "official_sitemap_index_child_ranked",
+              "source_url": "https://www.nippon.com/ja/sitemap.xml",
+              "found_at": "2026-10-01T19:36:55.472Z",
+              "page_sha256": "e6c6169fd4d884708b1a2c1118677421e79be0d325d4c26a1dfeb40268b37cdb",
+              "declared_lastmod": "2026-10-01T21:03:02+09:00",
+              "checked_at": "2026-10-01T19:36:58.323Z",
+              "format": "urlset",
+              "scope_note": "Explicitly enumerated Japanese news sitemap. Dates are unreliable; no current-publication count is inferred. Oversized Japanese article sitemap excluded."
+            }
+          ]
         }
       ]
     },
@@ -4207,6 +4234,33 @@
         {
           "name": "Augsburger Allgemeine - News Sitemap",
           "sitemapUrl": "https://www.augsburger-allgemeine.de/news.xml"
+        },
+        {
+          "name": "Kölner Stadt-Anzeiger (News Sitemap)",
+          "language": "de",
+          "url": null,
+          "sitemapUrl": "https://www.ksta.de/xml/newssitemap.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:11:07.987Z",
+          "status_reason": "Initial registration from verified official declarations (g7-official-first-pass-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "g7-official-first-pass-2026-10-01",
+          "source_homepage": "https://www.ksta.de/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://www.ksta.de/xml/newssitemap.xml",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://www.ksta.de/robots.txt",
+              "found_at": "2026-10-01T19:31:22.324Z",
+              "page_sha256": "5a5a1e9c57698e03c67871a6a0cc6f23f6fda5f000629c39f51677fa6e39403c",
+              "declaration": "Sitemap: https://www.ksta.de/xml/newssitemap.xml",
+              "checked_at": "2026-10-01T19:31:25.209Z",
+              "format": "urlset",
+              "scope_note": "Official robots-declared news sitemap. Mixed 50,000-entry archive excluded; failed RSS unchanged."
+            }
+          ]
         }
       ]
     },
@@ -5656,6 +5710,60 @@
           "status": "NEW",
           "checkedDate": "04/12/2026",
           "valid": "valid"
+        },
+        {
+          "name": "Novara Media",
+          "language": "en",
+          "url": "https://novaramedia.com/feed/",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:11:07.987Z",
+          "status_reason": "Initial registration from verified official declarations (g7-official-first-pass-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "g7-official-first-pass-2026-10-01",
+          "source_homepage": "https://novaramedia.com/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://novaramedia.com/feed/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://novaramedia.com/",
+              "found_at": "2026-10-01T19:41:13.429Z",
+              "page_sha256": "bb9e232d2f101347817ecfdb8364574838b817b3bd4e6aca4e8b1b673df74c7d",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Novara Media RSS Feed\" href=\"https://novaramedia.com/feed/\" />",
+              "checked_at": "2026-10-01T19:41:18.077Z",
+              "format": "rss",
+              "scope_note": "Official RSS. The valid-empty sitemap is not included."
+            }
+          ]
+        },
+        {
+          "name": "Halifax Courier (News Sitemap)",
+          "language": "en",
+          "url": null,
+          "sitemapUrl": "https://www.halifaxcourier.co.uk/sitemaps/googlenews",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:11:07.987Z",
+          "status_reason": "Initial registration from verified official declarations (g7-official-first-pass-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "g7-official-first-pass-2026-10-01",
+          "source_homepage": "https://www.halifaxcourier.co.uk/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://www.halifaxcourier.co.uk/sitemaps/googlenews",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://www.halifaxcourier.co.uk/robots.txt",
+              "found_at": "2026-10-01T19:31:10.383Z",
+              "page_sha256": "bad687b68ea12068a5d57cee6e3fb08ed427eef227d8bb385964bae8b829fce0",
+              "declaration": "Sitemap: https://www.halifaxcourier.co.uk/sitemaps/googlenews",
+              "checked_at": "2026-10-01T19:31:14.967Z",
+              "format": "urlset",
+              "scope_note": "Official robots-declared news sitemap is a separate endpoint type; failed RSS remains failed."
+            }
+          ]
         }
       ]
     },
@@ -6233,6 +6341,33 @@
           "sitemapUrl": "https://www.lesnumeriques.com/sitemap-google-news.xml",
           "language": "fr",
           "tier": "primary"
+        },
+        {
+          "name": "Capital (Official RSS)",
+          "language": "fr",
+          "url": "https://feed.prismamediadigital.com/v1/cap/rss?limit=20",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:11:07.987Z",
+          "status_reason": "Initial registration from verified official declarations (g7-official-first-pass-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "g7-official-first-pass-2026-10-01",
+          "source_homepage": "https://www.capital.fr/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://feed.prismamediadigital.com/v1/cap/rss?limit=20",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.capital.fr/",
+              "found_at": "2026-10-01T19:31:18.985Z",
+              "page_sha256": "891364346a0df04a6874a37642d9200c7e23a9c2eb8200d8e171585e1dea6450",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Flux RSS pour capital.fr\" href=\"https://feed.prismamediadigital.com/v1/cap/rss?limit=20\">",
+              "checked_at": "2026-10-01T19:31:22.165Z",
+              "format": "rss",
+              "scope_note": "Official homepage declares this provider-hosted RSS. Existing failed RSS and existing news sitemap are unchanged."
+            }
+          ]
         }
       ]
     },
@@ -6947,6 +7082,33 @@
         {
           "name": "Corriere dello Sport",
           "url": "https://www.corrieredellosport.it/rss/home.xml"
+        },
+        {
+          "name": "Il Giornale (News Sitemap)",
+          "language": "it",
+          "url": null,
+          "sitemapUrl": "https://www.ilgiornale.it/arc/outboundfeeds/sitemap-news/latest/",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:11:07.987Z",
+          "status_reason": "Initial registration from verified official declarations (g7-official-first-pass-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "g7-official-first-pass-2026-10-01",
+          "source_homepage": "https://www.ilgiornale.it/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://www.ilgiornale.it/arc/outboundfeeds/sitemap-news/latest/",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://www.ilgiornale.it/robots.txt",
+              "found_at": "2026-10-01T19:31:34.274Z",
+              "page_sha256": "e13704507c9eb4779ea0fa1259c883599a80980d961f5bb236f7803ddad86ab3",
+              "declaration": "Sitemap: https://www.ilgiornale.it/arc/outboundfeeds/sitemap-news/latest/",
+              "checked_at": "2026-10-01T19:31:42.315Z",
+              "format": "urlset",
+              "scope_note": "Official robots-declared rolling news sitemap. Duplicate latest XML alternative omitted; old RSS unchanged."
+            }
+          ]
         }
       ]
     },
@@ -8589,6 +8751,45 @@
         {
           "name": "The Recorder",
           "url": "https://www.recorder.ca/feed"
+        },
+        {
+          "name": "The Maple",
+          "language": "en",
+          "url": "https://www.readthemaple.com/rss/",
+          "sitemapUrl": "https://www.readthemaple.com/sitemap-posts.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:11:07.987Z",
+          "status_reason": "Initial registration from verified official declarations (g7-official-first-pass-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "g7-official-first-pass-2026-10-01",
+          "source_homepage": "https://www.readthemaple.com/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.readthemaple.com/rss/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.readthemaple.com/",
+              "found_at": "2026-10-01T19:41:01.531Z",
+              "page_sha256": "850ed3689720e73bbb317da2d8d1eb87b1dd25639187728af2f23307b195a915",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"The Maple\" href=\"https://www.readthemaple.com/rss/\">",
+              "checked_at": "2026-10-01T19:41:06.182Z",
+              "format": "rss",
+              "scope_note": "Publisher RSS plus explicitly declared posts-only sitemap. Both endpoints share one new source; overlapping URLs are deduplicated by the collector."
+            },
+            {
+              "type": "sitemap",
+              "url": "https://www.readthemaple.com/sitemap-posts.xml",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://www.readthemaple.com/sitemap.xml",
+              "found_at": "2026-10-01T19:41:10.691Z",
+              "page_sha256": "c6393d02b158991179af7f2735ff26fa64c1fcbaf0f2f08b4d464870ca8d1151",
+              "declared_lastmod": "2026-09-29T17:59:56.000Z",
+              "checked_at": "2026-10-01T19:41:13.144Z",
+              "format": "urlset",
+              "scope_note": "Publisher RSS plus explicitly declared posts-only sitemap. Both endpoints share one new source; overlapping URLs are deduplicated by the collector."
+            }
+          ]
         }
       ]
     },
@@ -9005,6 +9206,32 @@
           "name": "Rambler News (Portal News)",
           "url": "https://news.rambler.ru/rss/",
           "enabled": false
+        },
+        {
+          "name": "Mediazona",
+          "language": "ru",
+          "url": null,
+          "sitemapUrl": "https://zona.media/news-sitemap.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:52:57.439Z",
+          "status_reason": "Initial registration from verified official declarations (major20-remaining13-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-remaining13-2026-10-01",
+          "source_homepage": "https://zona.media/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://zona.media/news-sitemap.xml",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://zona.media/sitemap.xml",
+              "found_at": "2026-10-01T20:22:41.391Z",
+              "page_sha256": "b3baa4b7df4966f23bc64409b8d0a24928ebfe41a2c8f422fe7559bff9666ac7",
+              "checked_at": "2026-10-01T20:28:19.105Z",
+              "format": "urlset",
+              "scope_note": "Official rolling news sitemap. RU indicates Russian-language/Russian-affairs editorial scope, not current legal headquarters. Recent sitemap lastmod is not article publication time; no publication metric is inferred."
+            }
+          ]
         }
       ]
     },
@@ -16665,6 +16892,33 @@
           "status": "NEW",
           "checkedDate": "03/18/2026",
           "valid": "valid"
+        },
+        {
+          "name": "Medyascope",
+          "language": "tr",
+          "url": "https://medyascope.tv/feed/",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:52:57.439Z",
+          "status_reason": "Initial registration from verified official declarations (major20-remaining13-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-remaining13-2026-10-01",
+          "source_homepage": "https://medyascope.tv/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://medyascope.tv/feed/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://medyascope.tv/",
+              "found_at": "2026-10-01T20:22:30.322Z",
+              "page_sha256": "d03d20517fbddfabb188d7293a531d537c8e43b976f42c3fa22871910d2a9815",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Medyascope &raquo; akışı\" href=\"https://medyascope.tv/feed/\" />",
+              "checked_at": "2026-10-01T20:22:32.450Z",
+              "format": "rss",
+              "scope_note": "Official Turkish news RSS. Numbered archive sitemap excluded to avoid freezing a current partition as a permanent stream."
+            }
+          ]
         }
       ]
     },
@@ -21907,6 +22161,45 @@
           "valid": "valid",
           "row": 108,
           "sitemapUrl": "https://www.mendozapost.com/files/sitemap/sitemap.xml.gz"
+        },
+        {
+          "name": "elDiarioAR",
+          "language": "es",
+          "url": "https://www.eldiarioar.com/rss/",
+          "sitemapUrl": "https://www.eldiarioar.com/sitemap_google_news_a59a1.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:52:57.439Z",
+          "status_reason": "Initial registration from verified official declarations (major20-remaining13-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-remaining13-2026-10-01",
+          "source_homepage": "https://www.eldiarioar.com/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.eldiarioar.com/rss/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.eldiarioar.com/",
+              "found_at": "2026-10-01T20:22:55.713Z",
+              "page_sha256": "edc990c2155c264c4499438c2b3c5af29f399ec9270ca1b171e574d296828f78",
+              "tag": "<link rel=\"alternate\" title=\"Últimas Noticias de eldiario.es | elDiarioAR.com\" href=\"/rss/\" type=\"application/rss+xml\">",
+              "checked_at": "2026-10-01T20:22:58.565Z",
+              "format": "rss",
+              "scope_note": "Official Argentine publisher RSS plus explicitly declared rolling news sitemap, sharing one source for overlap deduplication."
+            },
+            {
+              "type": "sitemap",
+              "url": "https://www.eldiarioar.com/sitemap_google_news_a59a1.xml",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://www.eldiarioar.com/sitemap_index_a59a1.xml",
+              "found_at": "2026-10-01T20:23:05.685Z",
+              "page_sha256": "9b058c4ee8cdd2205e57b17fd0987b22a7a52e61a2ae5d098ca9cd5bcb8d937e",
+              "declared_lastmod": "2026-10-01T22:04:31+02:00",
+              "checked_at": "2026-10-01T20:23:07.976Z",
+              "format": "urlset",
+              "scope_note": "Official Argentine publisher RSS plus explicitly declared rolling news sitemap, sharing one source for overlap deduplication."
+            }
+          ]
         }
       ]
     },
@@ -34883,6 +35176,33 @@
           "status": "NEW",
           "checkedDate": "03/31/2026",
           "valid": "valid"
+        },
+        {
+          "name": "GroundUp",
+          "language": "en",
+          "url": "https://www.groundup.org.za/sitenews/rss/",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:52:57.439Z",
+          "status_reason": "Initial registration from verified official declarations (major20-remaining13-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-remaining13-2026-10-01",
+          "source_homepage": "https://groundup.org.za/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.groundup.org.za/sitenews/rss/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://groundup.org.za/",
+              "found_at": "2026-10-01T20:22:47.839Z",
+              "page_sha256": "24e2198355eff92446fc68d67db6b54b684964ca1fdc9b63671be1f955d4f886",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" href=\"https://www.groundup.org.za/sitenews/rss/\" />",
+              "checked_at": "2026-10-01T20:22:53.311Z",
+              "format": "rss",
+              "scope_note": "Official South African news RSS. Large mixed archive sitemap deferred; no 20,021-entry archive baseline is added here."
+            }
+          ]
         }
       ]
     },

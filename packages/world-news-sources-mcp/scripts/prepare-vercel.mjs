@@ -65,3 +65,10 @@ for (const file of ['index.html', 'support.html', 'privacy.html', 'terms.html', 
 mkdirSync(new URL('public/.well-known/', output), { recursive: true });
 copyFileSync(new URL('site/.well-known/openai-apps-challenge', root), new URL('public/.well-known/openai-apps-challenge', output));
 console.log(`Prepared metadata-only Vercel bundle: ${fileURLToPath(output)}`);
+
+// Approved static demo, retained by every scheduled bundle preparation.
+const demoSource = new URL('site/demo/world-news-sources.mp4', root);
+if (existsSync(demoSource)) {
+  mkdirSync(new URL('public/demo/', output), {recursive: true});
+  copyFileSync(demoSource, new URL('public/demo/world-news-sources.mp4', output));
+}

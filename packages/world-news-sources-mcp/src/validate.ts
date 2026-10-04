@@ -4,6 +4,7 @@ import { request as httpsRequest } from 'node:https';
 import { isIP, type LookupFunction } from 'node:net';
 import { gunzipSync } from 'node:zlib';
 import { inspectXml } from './inspect.js';
+import {parseRetryAfter} from './recovery-policy.js';
 import { canonicalUrl, type Endpoint, type EndpointType } from './catalog.js';
 import type { Observation } from './health.js';
 
@@ -41,13 +42,14 @@ async function bounded<T>(promise: Promise<T>, milliseconds: number): Promise<T>
   })]); } finally { clearTimeout(timer!); }
 }
 export type RequestGate = (hostname: string, deadline: number) => Promise<() => void>;
-export async function fetchXml(raw: string, timeoutMs = 8000, maxBytes = MAX_BYTES, gate?: RequestGate): Promise<{ status: number; body: Buffer; finalUrl: string }> {
+export async function fetchXml(raw: string, timeoutMs = 8000, maxBytes = MAX_BYTES, gate?: RequestGate): Promise<{ status: number; body: Buffer; finalUrl: string; contentType: string | null; retryAfterAt:string|null }> {
   const deadline = Date.now() + timeoutMs;
   let current = raw;
   for (let redirects = 0; redirects <= 3; redirects++) {
     if (Date.now() >= deadline) throw new Error('TIMEOUT');
     const url = safeUrl(current);
     const hostname = url.hostname.replace(/^\[|\]$/g, '');
+    const responseEvidence={httpStatus:null as number|null,contentType:null as string|null,retryAfterAt:null as string|null,requestHost:hostname};
     const release = gate ? await gate(hostname, deadline) : () => {};
     try {
     const ips = await bounded(lookup(hostname, { all: true, verbatim: true }), deadline - Date.now());
@@ -57,15 +59,20 @@ export async function fetchXml(raw: string, timeoutMs = 8000, maxBytes = MAX_BYT
     const pinnedLookup: LookupFunction = (_host, options, callback) => {
       if (options.all) callback(null, [pinned]); else callback(null, pinned.address, pinned.family);
     };
-    const response = await new Promise<{ status: number; body: Buffer; location?: string; encoding?: string }>((resolve, reject) => {
+    const response = await new Promise<{ status: number; body: Buffer; location?: string; encoding?: string; contentType:string|null; retryAfterAt:string|null }>((resolve, reject) => {
       const request = (url.protocol === 'https:' ? httpsRequest : httpRequest)(url, {
         lookup: pinnedLookup, agent: false,
         headers: { 'user-agent': 'WorldNewsSourcesMCP/0.1 (bounded metadata validation)', accept: 'application/xml, application/rss+xml, application/atom+xml, text/xml', 'accept-encoding': 'identity' },
       }, response => {
         const status = response.statusCode ?? 0;
+        const rawType=response.headers['content-type'];
+        const media=typeof rawType==='string'?rawType.split(';')[0].trim().toLowerCase():'';
+        const contentType=/^[a-z0-9.+-]+\/[a-z0-9.+-]+$/.test(media)&&media.length<=128?media:null;
+        const retryAfterAt=parseRetryAfter(response.headers['retry-after']);
+        Object.assign(responseEvidence,{httpStatus:status>=100&&status<=599?status:null,contentType,retryAfterAt});
         if (status < 200 || status >= 300) {
           response.destroy();
-          resolve({ status, body: Buffer.alloc(0), location: response.headers.location });
+          resolve({ status, body: Buffer.alloc(0), location: response.headers.location,contentType,retryAfterAt });
           return;
         }
         const chunks: Buffer[] = []; let length = 0;
@@ -74,7 +81,7 @@ export async function fetchXml(raw: string, timeoutMs = 8000, maxBytes = MAX_BYT
           if (length > maxBytes) request.destroy(new Error('BODY_TOO_LARGE')); else chunks.push(chunk);
         });
         response.on('error', reject);
-        response.on('end', () => resolve({ status, body: Buffer.concat(chunks), encoding: response.headers['content-encoding'] }));
+        response.on('end', () => resolve({ status, body: Buffer.concat(chunks), encoding: response.headers['content-encoding'],contentType,retryAfterAt }));
       });
       const timer = setTimeout(() => request.destroy(new Error('TIMEOUT')), Math.max(1, deadline - Date.now()));
       request.on('close', () => clearTimeout(timer));
@@ -88,9 +95,9 @@ export async function fetchXml(raw: string, timeoutMs = 8000, maxBytes = MAX_BYT
     }
     let body = response.body;
     if (response.encoding && !['identity', 'gzip'].includes(response.encoding)) throw new Error('UNSUPPORTED_ENCODING');
-    if (response.encoding === 'gzip' || (body[0] === 0x1f && body[1] === 0x8b)) body = gunzipSync(body, { maxOutputLength: maxBytes });
-    return { status: response.status, body, finalUrl: url.href };
-    } finally { release(); }
+    if (response.encoding === 'gzip' || (body[0] === 0x1f && body[1] === 0x8b)){try{body=gunzipSync(body,{maxOutputLength:maxBytes});}catch(error){throw new Error((error as NodeJS.ErrnoException).code==='ERR_BUFFER_TOO_LARGE'?'BODY_TOO_LARGE':'INVALID_COMPRESSION');}}
+    return { status: response.status, body, finalUrl: url.href,contentType:response.contentType,retryAfterAt:response.retryAfterAt };
+    } catch(error){if(error instanceof Error)Object.assign(error,{responseEvidence});throw error;} finally { release(); }
   }
   throw new Error('TOO_MANY_REDIRECTS');
 }

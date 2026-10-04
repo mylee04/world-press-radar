@@ -13,7 +13,7 @@ export type XmlSummary = {
 // Extract counts, a few URLs and dates only. No article text is retained.
 export function inspectXml(buffer: Buffer, type: EndpointType, now = Date.now(), maxBytes = 2 * 1024 * 1024, fullUrls = false): XmlSummary {
   if (buffer.length > maxBytes) throw new Error('BODY_TOO_LARGE');
-  const xml = new TextDecoder('utf-8', { fatal: true }).decode(buffer);
+  let xml:string;try{xml=new TextDecoder('utf-8',{fatal:true}).decode(buffer);}catch{throw new Error('INVALID_UTF8');}
   const parser = new SaxesParser({ xmlns: true });
   const stack: string[] = []; const fields = new Map<string, string>();
   let root = ''; let namespace = ''; let channel = false;

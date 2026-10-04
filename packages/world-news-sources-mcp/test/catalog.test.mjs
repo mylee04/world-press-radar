@@ -1,3 +1,4 @@
+import {readFileSync} from "node:fs";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { normalizeRegistry, search, page, healthSchema, countrySchema, canonicalUrl } from '../dist/catalog.js';
@@ -64,7 +65,7 @@ test('health keeps true checked time, stale/unknown and RSS fallback separate', 
   assert.throws(()=>new HealthStore({version:1,observations:[{...observation(rss,'healthy'),type:'sitemap'}]}));
 });
 test('real registry loads independently with expected configuration counts', () => {
-  const {catalog}=loadData();assert.equal(catalog.configuredRows,5393);assert.equal(catalog.countries.length,73);
+  const {catalog}=loadData();assert.equal(catalog.configuredRows,JSON.parse(readFileSync(new URL("../../../data/rss-atlas.json",import.meta.url),"utf8")).countries.reduce((n,c)=>n+c.feeds.length,0));assert.equal(catalog.countries.length,73);
   assert.ok(catalog.sources.length<=catalog.configuredRows);
   assert.ok([...catalog.endpoints.values()].some(e=>e.type==='sitemap'));
 });

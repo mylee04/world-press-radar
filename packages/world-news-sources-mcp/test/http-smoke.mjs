@@ -10,7 +10,7 @@ const verifiedExamples=[];
 const metricsAcks=[];
 try{
   const status=await fetch(new URL('/health',address),{signal:AbortSignal.timeout(15000)});
-  assert.equal(status.status,200);const summary=await status.json();assert.equal(summary.configured_rows,5393);
+  assert.equal(status.status,200);const summary=await status.json();assert.equal(summary.configured_rows,normalizeRegistry(JSON.parse(readFileSync(new URL("../../../data/rss-atlas.json",import.meta.url),"utf8"))).configuredRows);
   await client.connect(new StreamableHTTPClientTransport(new URL(address),{fetch:async(input,init)=>{const headers=new Headers(init?.headers);headers.set('x-world-news-traffic','inspection');const response=await fetch(input,{...init,headers});const ack=response.headers.get('x-world-news-metrics');if(ack)metricsAcks.push(ack);return response;}}));
   const tools=(await client.listTools()).tools;assert.equal(tools.length,7);
   const sources=(await client.callTool({name:'search_sources',arguments:{country:'US',endpoint_type:'sitemap',limit:1}})).structuredContent;
