@@ -161,27 +161,29 @@ export class ActivityLedger {
       const upsertUrl = this.db.prepare(`INSERT INTO urls VALUES(?,?,?,?,?) ON CONFLICT(url) DO UPDATE SET last_seen=MAX(last_seen,excluded.last_seen)`);
       const endpointUrl = this.db.prepare(`INSERT INTO endpoint_urls VALUES(?,?,?,?) ON CONFLICT(endpoint_id,url) DO UPDATE SET last_seen=MAX(last_seen,excluded.last_seen)`);
       const bindingUrl = this.db.prepare(`INSERT INTO binding_urls VALUES(?,?,?,?,?,?) ON CONFLICT(source_id,endpoint_id,url) DO UPDATE SET last_seen=MAX(last_seen,excluded.last_seen)`);
-      const scope = this.db.prepare(`INSERT INTO scope_urls VALUES(?,?,?,?,?,?,?) ON CONFLICT(scope_kind,scope_id,url) DO UPDATE SET last_seen=MAX(last_seen,excluded.last_seen) RETURNING first_seen,baseline,kind`);
+      const scope = this.db.prepare(`INSERT INTO scope_urls VALUES(?,?,?,?,?,?,?) ON CONFLICT(scope_kind,scope_id,url) DO UPDATE SET last_seen=MAX(last_seen,excluded.last_seen)`);
+      const scopeExists = this.db.prepare('SELECT 1 FROM scope_urls WHERE scope_kind=? AND scope_id=? AND url=?');
       const bindingStates = sources.map(source => ({ source, initialized: !!this.db.prepare('SELECT baseline_at FROM bindings WHERE source_id=? AND endpoint_id=?').get(source.id, collection.endpoint.id)?.baseline_at }));
       for (const { source, initialized } of bindingStates) {
         sourceNew[source.id] = 0; countryNew[source.countryCode] ??= 0;
         if (!initialized && successful && !index) baselineSources.push(source.id);
       }
+      const countryBaselines = [...new Set(sources.map(source => source.countryCode))]
+        .map(country => ({ country, baseline: bindingStates.some(binding => binding.source.countryCode === country && !binding.initialized) }));
       for (const article of urls) {
         upsertUrl.run(article.url, NORMALIZATION_VERSION, article.kind, collection.checked_at, collection.checked_at);
         endpointUrl.run(collection.endpoint.id, article.url, collection.checked_at, collection.checked_at);
         // A newly initialized binding excludes its old archive from BOTH source and country NEW.
         // Country baseline wins when several bindings share the same endpoint on its first visit.
-        for (const country of new Set(sources.map(source => source.countryCode))) {
-          const baseline = bindingStates.some(b => b.source.countryCode === country && !b.initialized);
-          const existed = this.db.prepare('SELECT 1 FROM scope_urls WHERE scope_kind=? AND scope_id=? AND url=?').get('country', country, article.url);
-          scope.get('country', country, article.url, collection.checked_at, collection.checked_at, +baseline, article.kind);
+        for (const { country, baseline } of countryBaselines) {
+          const existed = scopeExists.get('country', country, article.url);
+          scope.run('country', country, article.url, collection.checked_at, collection.checked_at, +baseline, article.kind);
           if (!existed && !baseline && article.kind === 'candidate') countryNew[country]++;
         }
         for (const { source, initialized } of bindingStates) {
           bindingUrl.run(source.id, collection.endpoint.id, source.countryCode, article.url, collection.checked_at, collection.checked_at);
-          const existed = this.db.prepare('SELECT 1 FROM scope_urls WHERE scope_kind=? AND scope_id=? AND url=?').get('source', source.id, article.url);
-          scope.get('source', source.id, article.url, collection.checked_at, collection.checked_at, +!initialized, article.kind);
+          const existed = scopeExists.get('source', source.id, article.url);
+          scope.run('source', source.id, article.url, collection.checked_at, collection.checked_at, +!initialized, article.kind);
           if (!existed && initialized && article.kind === 'candidate') sourceNew[source.id]++;
         }
       }
