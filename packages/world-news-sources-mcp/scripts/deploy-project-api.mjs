@@ -9,11 +9,14 @@ const NAME='world-news-sources-mcp';
 const DOMAINS=['news.bymyleslee.com','world-news-sources-mcp.vercel.app'];
 const ALLOWED=new Set(['package.json','package-lock.json','vercel.json',
   'api/mcp.mjs','api/health.mjs','api/quality.mjs',
-  ...['catalog','status','health','http','server','metrics','activity','activity-history','quality','quality-history','quality-inventory','quality-http','quality-remote','investigation','openai-runtime','openai-investigation','jev-runtime','jev-investigation','quality-decision','repair-workflow','host-gate','inspect','validate'].map(x=>`dist/${x}.js`),'dist/hosted.mjs',
+  ...['catalog','status','health','http','server','metrics','activity','activity-history','quality','quality-history','quality-inventory','quality-http','quality-remote','quality-cloud-auth','publisher-inventory','investigation','openai-runtime','openai-investigation','jev-runtime','jev-investigation','quality-decision','repair-workflow','host-gate','inspect','validate'].map(x=>`dist/${x}.js`),'dist/hosted.mjs','dist/quality-cloud-gateway.mjs',
   ...['index.html','app.js','styles.css'].map(x=>`dashboard/${x}`),
   'metadata/registry.json','metadata/legacy-health.json','metadata/health.json','metadata/activity.json','metadata/quality-overview.json',
   ...['index.html','support.html','privacy.html','terms.html','styles.css','icon.svg'].map(x=>`public/${x}`),
   'public/.well-known/openai-apps-challenge']);
+// Pure collector helpers may enter the public runtime import graph. They are
+// allowed code, never evidence databases, operator state, or runtime credentials.
+const OPTIONAL=new Set(['dist/article-url.js','dist/collection-schedule.js']);
 export const expectedBundlePaths=()=>[...ALLOWED];
 export async function collectBundle(directory,allowed=ALLOWED){
   const files=[];
@@ -35,7 +38,7 @@ export async function collectBundle(directory,allowed=ALLOWED){
       }
       if(s.isSymbolicLink())throw Error('Bundle contains a symlink');
       if(s.isDirectory()){await walk(file);continue;}
-      if(!s.isFile()||!allowed.has(file)&&!archiveAllowed.has(file))throw Error('Bundle contains an unapproved file');
+      if(!s.isFile()||!allowed.has(file)&&!OPTIONAL.has(file)&&!archiveAllowed.has(file))throw Error('Bundle contains an unapproved file');
       const bytes=await readFile(join(directory,file));
       const shard=archiveAllowed.get(file);if(shard&&(bytes.length!==shard.bytes||createHash('sha256').update(bytes).digest('hex')!==shard.sha256))throw Error('History shard integrity mismatch');
       if(bytes.length>12*1024*1024)throw Error('Bundle file exceeds limit');

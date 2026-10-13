@@ -13,7 +13,7 @@ const digest = value => createHash('sha256').update(JSON.stringify(value)).diges
 
 export function dailyOptions(args, now = Date.now(), env = process.env) {
   const flags = new Set(['--local', '--scheduled', '--rerun', '--no-registry', '--no-investigate']);
-  const values = new Set(['--date', '--output', '--history', '--max-investigations', '--not-before-utc-hour', '--max-history-mib']);
+  const values = new Set(['--date', '--output', '--history', '--runtime', '--max-investigations', '--not-before-utc-hour', '--max-history-mib']);
   const parsed = {};
   for (let index = 0; index < args.length; index++) {
     const [name, ...tail] = args[index].split('=');
@@ -34,8 +34,11 @@ export function dailyOptions(args, now = Date.now(), env = process.env) {
   };
   const output = resolve(parsed['--output'] ?? join(packageRoot, 'output/news-quality/daily'));
   const history = resolve(parsed['--history'] ?? env.WNS_QUALITY_HISTORY_PATH ?? join(packageRoot, 'output/news-quality/history.sqlite'));
-  if ([output, history].some(value => /[\u0000-\u001f]/.test(value))) throw Error('QUALITY_DAILY_INVALID_PATH');
-  return { date, output, history, remote: !parsed['--local'], scheduled: !!parsed['--scheduled'], rerun: !!parsed['--rerun'],
+  const runtimeValue = parsed['--runtime'] ?? env.WNS_QUALITY_RUNTIME_PATH;
+  if (runtimeValue !== undefined && (typeof runtimeValue !== 'string' || !runtimeValue.trim())) throw Error('QUALITY_DAILY_INVALID_PATH');
+  const runtime = runtimeValue === undefined ? null : resolve(runtimeValue);
+  if ([output, history, runtime].some(value => value && /[\u0000-\u001f]/.test(value))) throw Error('QUALITY_DAILY_INVALID_PATH');
+  return { date, output, history, runtime, remote: !parsed['--local'], scheduled: !!parsed['--scheduled'], rerun: !!parsed['--rerun'],
     captureRegistry: !parsed['--no-registry'], investigate: !parsed['--no-investigate'],
     maxInvestigations: integer('--max-investigations', 5, 1, 5), notBeforeUtcHour: integer('--not-before-utc-hour', 9, 0, 23),
     maxHistoryBytes: integer('--max-history-mib', 512, 1, 16384) * 1024 * 1024 };
@@ -106,38 +109,53 @@ export function investigationCountries(overview, maximum) {
 }
 
 async function defaultRuntime(options) {
-  const [{ loadData }, { getCountryQualityOverview }, { RemoteQualityStore, REMOTE_NEWS_MCP_URL }, { InvestigationStore }, { QualityHistoryStore }] = await Promise.all([
+  const [{ loadData }, { getCountryQualityOverview }, { RemoteQualityStore, REMOTE_NEWS_MCP_URL }, { InvestigationStore }, { QualityHistoryStore }, { QualityRunStore }] = await Promise.all([
     import('../dist/config.js'), import('../dist/quality.js'), import('../dist/quality-remote.js'), import('../dist/investigation.js'), import('../dist/quality-history.js'),
+    import('../dist/quality-runtime-storage.js'),
   ]);
   const data = loadData(), history = new QualityHistoryStore(options.history);
-  let client; let calls = 0; const started = Date.now();
+  let client, runStore, investigations, connected = !options.remote; let calls = 0; const started = Date.now();
+  const close = async () => {
+    // A failed close must not prevent the other SQLite connection or MCP client from closing.
+    await Promise.allSettled([history, runStore, client].filter(Boolean).map(resource => Promise.resolve().then(() => resource.close())));
+  };
   const call = async (name, args) => {
     if (!allowedReadTools.has(name) || calls++ >= 400 || Date.now() - started > 240000) throw Error('QUALITY_DAILY_MCP_LIMIT');
     const response = await client.callTool({ name, arguments: args }, { timeout: 15000 });
     if (response.isError || !response.structuredContent || typeof response.structuredContent !== 'object' || Array.isArray(response.structuredContent)) throw Error('QUALITY_DAILY_MCP_READ_FAILED');
     return response.structuredContent;
   };
-  if (options.remote) {
-    const { Client, StreamableHTTPClientTransport } = await import('@modelcontextprotocol/client');
-    client = new Client({ name: 'news-quality-daily-read-only', version: '0.1.0' });
-    try {
+  try {
+    if (options.remote) {
+      const { Client, StreamableHTTPClientTransport } = await import('@modelcontextprotocol/client');
+      client = new Client({ name: 'news-quality-daily-read-only', version: '0.1.0' });
       await client.connect(new StreamableHTTPClientTransport(new URL(REMOTE_NEWS_MCP_URL), { fetch: (input, init) => {
         const headers = new Headers(init?.headers); headers.set('x-world-news-traffic', 'inspection');
         return fetch(input, { ...init, headers, signal: AbortSignal.timeout(15000) });
       } }));
-    } catch { await client.close().catch(() => {}); history.close(); throw Error('QUALITY_DAILY_MCP_CONNECTION_FAILED'); }
+      connected = true;
+    }
+    // The daily dispatcher is a separate, concurrent writer of rules evidence.
+    // It must never acquire the server's runtime owner lease or reconcile its active jobs.
+    if (options.runtime) runStore = new QualityRunStore(options.runtime);
+    investigations = new InvestigationStore(data.catalog, data.health, data.activity, options.remote, { store: runStore });
+  } catch (error) {
+    await close();
+    if (!connected) throw Error('QUALITY_DAILY_MCP_CONNECTION_FAILED');
+    throw error;
   }
-  const investigations = new InvestigationStore(data.catalog, data.health, data.activity, options.remote);
   return {
     history,
     overview: async date => {
       if (options.remote) return new RemoteQualityStore(call).overview(date);
+      // The overview contains only actual snapshot cycle evidence; observeOverview
+      // persists terminal cycles and ignores running cycles without inventing earlier runs.
       const first = getCountryQualityOverview(data.catalog, data.activity, data.health, { date, limit: 50 }), items = [...first.items];
       let offset = first.next_offset;
       while (offset !== null) { const next = getCountryQualityOverview(data.catalog, data.activity, data.health, { date, offset, limit: 50 }); items.push(...next.items); offset = next.next_offset; }
       return { ...first, items, next_offset: null };
     },
-    registry: observedAt => options.remote ? captureRemoteRegistry(call)
+    registry: observedAt => options.remote ? captureRemoteRegistry(call, observedAt)
       : { observed_at: observedAt, registry_snapshot_at: data.activity.snapshot?.registry_at ?? null, complete: true,
         sources: data.catalog.sources.map(source => ({ source_id: source.id, country: source.countryCode, name: source.name, enabled: source.enabled,
           registration_count: source.registrationCount, endpoints: source.endpoints.map(endpoint => ({ endpoint_id: endpoint.id, type: endpoint.type, url: endpoint.url })) })) },
@@ -146,7 +164,7 @@ async function defaultRuntime(options) {
       while (run.status === 'running') await new Promise(resolve => setTimeout(resolve, 100));
       return run;
     },
-    close: async () => { history.close(); await client?.close().catch(() => {}); },
+    close,
   };
 }
 
@@ -154,6 +172,11 @@ export async function runDaily(options, services = {}) {
   const now = services.now ?? (() => Date.now()), started = now();
   if (options.scheduled && new Date(started).getUTCHours() < options.notBeforeUtcHour) return { status: 'waiting_for_daily_window', date: options.date, model_calls: 0 };
   await safeDirectory(options.output); await safeDirectory(dirname(options.history));
+  if (options.runtime) {
+    await safeDirectory(dirname(options.runtime));
+    try { const stat = await lstat(options.runtime); if (!stat.isFile() || stat.isSymbolicLink()) throw Error('QUALITY_DAILY_UNSAFE_RUNTIME'); }
+    catch (error) { if (error.code !== 'ENOENT') throw error; }
+  }
   let historyBytes = 0;
   for (const path of [options.history, `${options.history}-wal`]) {
     try { const stat = await lstat(path); if (!stat.isFile() || stat.isSymbolicLink()) throw Error('QUALITY_DAILY_UNSAFE_HISTORY');
@@ -162,7 +185,7 @@ export async function runDaily(options, services = {}) {
   }
   if (historyBytes >= options.maxHistoryBytes) throw Error('QUALITY_DAILY_HISTORY_STORAGE_LIMIT');
   const mode = options.remote ? 'remote' : 'local', receiptPath = join(options.output, `${options.date}-${mode}.receipt.json`);
-  const configuration = digest({ source: mode, history: options.history, capture_registry: options.captureRegistry,
+  const configuration = digest({ source: mode, history: options.history, runtime: options.runtime ?? null, capture_registry: options.captureRegistry,
     investigate: options.investigate, max_investigations: options.maxInvestigations });
   const lockPath = join(options.output, '.quality-daily.lock'); let lock;
   try { lock = await open(lockPath, 'wx', 0o600); }

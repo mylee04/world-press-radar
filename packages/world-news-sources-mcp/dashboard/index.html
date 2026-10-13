@@ -16,7 +16,7 @@
       <span class="brand-mark" aria-hidden="true">W<span>·</span>P</span>
       <span class="brand-name">World Press Radar</span>
     </a>
-    <div class="environment"><span class="status-dot" aria-hidden="true"></span>저장 기록 기준</div>
+    <div class="masthead-actions"><div class="environment"><span class="status-dot" aria-hidden="true"></span>저장 기록 기준</div><button id="admin-access" type="button" class="admin-access" hidden>관리자</button></div>
   </header>
   <main id="main">
     <section class="page-intro" aria-labelledby="page-title">
@@ -90,6 +90,7 @@
       <div class="investigation-layout">
         <aside class="investigation-sidebar">
           <p class="investigation-intro">검사 결과와 과거 기록을 비교해 원인을 찾습니다.</p>
+          <form id="admin-login-form" class="admin-login-form" hidden><label for="admin-password">관리자 비밀번호</label><input id="admin-password" type="password" autocomplete="current-password" required maxlength="256"><button id="admin-login-submit" class="primary-button" type="submit">로그인</button><p id="admin-login-error" class="small-note" role="alert" hidden></p></form>
           <form id="investigation-form"><label for="investigation-country">조사할 국가</label><select id="investigation-country" required><option value="">국가를 선택하세요</option></select><label for="investigation-engine">조사 방식</label><select id="investigation-engine"><option value="rules">규칙 기반 · API 비용 없음</option><option value="openai" disabled>OpenAI · 준비 중</option><option value="jev" disabled>Jev · 준비 중</option></select><p id="openai-note" class="small-note">조사 방식을 선택하세요.</p><button id="start-investigation" class="primary-button" type="submit">조사 실행 <span aria-hidden="true">↗</span></button></form>
           <p id="runtime-note" class="small-note" hidden></p>
           <details id="run-history" class="method-details" hidden><summary>이전 조사</summary><div id="run-history-list"></div></details>

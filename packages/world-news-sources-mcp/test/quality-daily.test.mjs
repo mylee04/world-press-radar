@@ -3,8 +3,15 @@ import assert from 'node:assert/strict';
 import { mkdtemp, rm, readFile, writeFile, symlink, realpath, readdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
+import { randomUUID } from 'node:crypto';
+import { fileURLToPath } from 'node:url';
 import { dailyOptions, runDaily, captureRemoteRegistry, investigationCountries } from '../scripts/quality-daily.mjs';
 import { scheduleOptions, scheduleFiles, prepareSchedule } from '../scripts/install-quality-schedule.mjs';
+import { normalizeRegistry } from '../dist/catalog.js';
+import { QualityRunStore, QualityRuntimeLease } from '../dist/quality-runtime-storage.js';
+import { QualityHistoryStore } from '../dist/quality-history.js';
 
 const NOW = Date.parse('2026-10-13T12:00:00Z');
 async function temporary(action) {
@@ -33,6 +40,10 @@ test('daily options reject current UTC days, invalid limits and paid engine opti
   assert.throws(() => dailyOptions(['--date=2026-02-30'], NOW, {}), /CLOSED_UTC_DAY/);
   assert.throws(() => dailyOptions(['--max-investigations=6'], NOW, {}), /INVALID_LIMIT/);
   assert.throws(() => dailyOptions(['--engine=openai'], NOW, {}), /UNKNOWN_OPTION/);
+  assert.equal(dailyOptions([], NOW, {}).runtime, null);
+  assert.equal(dailyOptions([], NOW, { WNS_QUALITY_RUNTIME_PATH: '/tmp/quality/runtime.sqlite' }).runtime, '/tmp/quality/runtime.sqlite');
+  assert.equal(dailyOptions(['--runtime=/tmp/explicit.sqlite'], NOW, { WNS_QUALITY_RUNTIME_PATH: '/tmp/env.sqlite' }).runtime, '/tmp/explicit.sqlite');
+  assert.throws(() => dailyOptions(['--runtime='], NOW, {}), /INVALID_PATH/);
 });
 
 test('bounded selection requires actual comparable baseline or existing review signal', () => {
@@ -81,6 +92,78 @@ test('concurrent lock, symlink history and inherited paid engines fail closed', 
   await rm(join(options.output, '.quality-daily.lock'));
   await writeFile(join(directory, 'elsewhere'), 'unchanged'); await symlink(join(directory, 'elsewhere'), options.history);
   await assert.rejects(runDaily(options, { now: () => NOW }), /UNSAFE_HISTORY/);
+}));
+
+test('shared runtime path rejects symlink files and directories before starting a run', async () => temporary(async directory => {
+  const options = config(directory), existing = join(directory, 'existing.sqlite');
+  await writeFile(existing, 'unchanged');
+  const linked = join(directory, 'linked.sqlite'); await symlink(existing, linked);
+  const runtimeFactory = async () => { throw Error('SHOULD_NOT_RUN'); };
+  await assert.rejects(runDaily({ ...options, runtime: linked }, { now: () => NOW, runtimeFactory }), /UNSAFE_RUNTIME/);
+  await assert.rejects(runDaily({ ...options, runtime: directory }, { now: () => NOW, runtimeFactory }), /UNSAFE_RUNTIME/);
+  assert.equal(await readFile(existing, 'utf8'), 'unchanged');
+}));
+
+test('a separate daily process persists actual rules runs alongside active server jobs and recorded cycle cohorts', async () => temporary(async directory => {
+  const registry = { countries: [{ code: 'US', name: 'United States', feeds: [{ name: 'Synthetic Daily Fixture', url: 'https://daily.fixture.example/rss.xml' }] }] };
+  const catalog = normalizeRegistry(registry), source = catalog.sources[0], endpoint = source.endpoints[0];
+  const terminalDates = ['2026-09-21', '2026-09-28', '2026-10-05', '2026-10-12'];
+  const cycle = (date, running = false) => ({ id: `synthetic-cycle-${date}`, lane: 'production',
+    started_at: `${date}T03:00:00.000Z`, finished_at: running ? null : `${date}T04:00:00.000Z`,
+    status: running ? 'running' : 'completed', scope: 'due_endpoints', registry_digest: 'a'.repeat(64),
+    country_endpoints: { US: [endpoint.id] }, eligible_endpoint_ids: [endpoint.id], planned_endpoint_ids: [endpoint.id],
+    attempted_endpoint_ids: running ? [] : [endpoint.id], successful_article_endpoint_ids: !running && date !== '2026-10-12' ? [endpoint.id] : [], failure_reason: null });
+  const snapshot = { version: 1, lane: 'production', generated_at: '2026-10-13T04:00:00.000Z',
+    registry_at: '2026-10-13T01:00:00.000Z', tracking_start: '2026-09-01T00:00:00.000Z', available_since: '2026-09-01T00:00:00.000Z',
+    semantics: 'Synthetic saved evidence fixture; no publisher network requests',
+    bindings: [{ source_id: source.id, endpoint_id: endpoint.id, baseline_at: '2026-09-01T00:00:00.000Z' }],
+    collections: terminalDates.map(date => ({ endpoint_id: endpoint.id, checked_at: `${date}T03:30:00.000Z`,
+      status: date === '2026-10-12' ? 'timeout' : 'working_nonempty', format: date === '2026-10-12' ? null : 'rss',
+      source_ids: [source.id], countries: ['US'], source_new: { [source.id]: date === '2026-10-12' ? null : 0 },
+      country_new: { US: date === '2026-10-12' ? null : 0 }, baseline_sources: [], uncertain_urls: 0 })),
+    collection_cycles: [...terminalDates.map(date => cycle(date)), cycle('2026-10-13', true)] };
+  const registryPath = join(directory, 'registry.json'), activityPath = join(directory, 'activity.json'), healthPath = join(directory, 'health.json');
+  await Promise.all([writeFile(registryPath, JSON.stringify(registry)), writeFile(activityPath, JSON.stringify(snapshot)),
+    writeFile(healthPath, JSON.stringify({ version: 1, observations: [] }))]);
+  const options = dailyOptions(['--local', `--output=${directory}/reports`, `--history=${directory}/history.sqlite`,
+    `--runtime=${directory}/runtime.sqlite`, '--date=2026-10-12'], NOW, {});
+  const lease = new QualityRuntimeLease(options.runtime), serverStore = new QualityRunStore(options.runtime);
+  const unrelatedRun = { id: randomUUID(), request_id: randomUUID(), country: 'US', date: '2026-10-12',
+    status: 'running', started_at: '2026-10-13T05:00:00.000Z', finished_at: null,
+    events: [], findings: [], summary: null, cost: { provider: 'openai', model_calls: 1, model_cost_usd: null, server_cost_usd: null } };
+  serverStore.save(unrelatedRun);
+  const env = { ...process.env, WNS_REGISTRY_PATH: registryPath, WNS_ACTIVITY_PATH: activityPath, WNS_HEALTH_PATH: healthPath,
+    WNS_LEGACY_HEALTH_PATH: join(directory, 'absent-legacy.json') };
+  const invoke = () => promisify(execFile)(process.execPath, [fileURLToPath(new URL('../scripts/quality-daily.mjs', import.meta.url)),
+    '--local', `--output=${options.output}`, `--history=${options.history}`, `--runtime=${options.runtime}`, '--date=2026-10-12'], { env, timeout: 15000 });
+  try {
+    const first = JSON.parse((await invoke()).stdout);
+    assert.equal(first.status, 'completed'); assert.equal(first.model_calls, 0);
+    assert.deepEqual(serverStore.get(unrelatedRun.id), unrelatedRun, 'the daily process never reconciles or changes a live paid server job');
+    const persisted = serverStore.list(20).filter(run => run.id !== unrelatedRun.id);
+    assert.equal(persisted.length, 1);
+    assert.equal(persisted[0].status, 'completed'); assert.equal(persisted[0].mode, 'rules_only_cached_mcp');
+    assert.equal(persisted[0].cost.provider, 'rules'); assert.equal(persisted[0].cost.model_calls, 0);
+    assert.ok(persisted[0].tool_calls > 0); assert.ok(persisted[0].events.some(event => event.tool && event.result && event.status === 'completed'));
+    const reader = new QualityRunStore(options.runtime);
+    try { assert.deepEqual(reader.get(persisted[0].id), persisted[0]); } finally { reader.close(); }
+    const history = new QualityHistoryStore(options.history);
+    try {
+      const cycles = history.db.prepare('SELECT id,payload FROM quality_cycles ORDER BY id').all();
+      assert.deepEqual(cycles.map(row => row.id), terminalDates.map(date => `synthetic-cycle-${date}`));
+      assert.ok(cycles.every(row => JSON.parse(row.payload).status === 'completed'));
+      const baseline = history.decorateOverview({ date: '2026-10-12', items: [{ country: 'US', period: { date: '2026-10-12' } }] }).items[0].completed_cycle_baseline;
+      assert.equal(baseline.state, 'comparable_completed_cycles'); assert.equal(baseline.samples, 3);
+      assert.equal(baseline.reasons[0].current, 0);
+      assert.equal(history.db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='quality_runtime_owner'").get(), undefined,
+        'owner state exists only in the runtime database, not the quality history');
+    } finally { history.close(); }
+    const second = JSON.parse((await invoke()).stdout);
+    assert.equal(second.status, 'already_recorded'); assert.equal(second.report_path, first.report_path);
+    assert.equal(serverStore.list(20).length, 2, 'completed receipt prevents a second actual rules start');
+    assert.throws(() => new QualityRuntimeLease(options.runtime), /ALREADY_RUNNING/, 'the server still owns its original runtime lease');
+    await assert.rejects(runDaily({ ...options, runtime: null }, { now: () => NOW, runtimeFactory: async () => { throw Error('SHOULD_NOT_RUN'); } }), /RECEIPT_CONFIG_CONFLICT/);
+  } finally { serverStore.close(); lease.close(); }
 }));
 
 test('complete remote registry capture includes disabled sources and rejects changing or incomplete pages', async () => {

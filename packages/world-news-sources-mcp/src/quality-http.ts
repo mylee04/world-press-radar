@@ -11,6 +11,7 @@ import { RemoteQualityStore } from './quality-remote.js';
 import { estimateGlobalPublisherInventory } from './publisher-inventory.js';
 import type { QualityHistoryStore } from './quality-history.js';
 import { repairApprovalSchema, repairApplySchema, type RepairPrincipal, type RepairWorkflowStore } from './repair-workflow.js';
+import { publicInvestigation, type CloudQualityAccess } from './quality-cloud-auth.js';
 
 const staticFiles: Record<string, [string, string]> = {
   '/quality': ['index.html', 'text/html; charset=utf-8'],
@@ -23,6 +24,7 @@ const json = (value: unknown, status = 200) => Response.json(value, { status,
 export type QualityRuntimeOptions = {
   investigations?: ConstructorParameters<typeof InvestigationStore>[4];
   history?: QualityHistoryStore; repair?: RepairWorkflowStore; localOwner?: boolean;
+  cloudAccess?: CloudQualityAccess;
   savedRemoteOverview?: (date?: string) => Record<string, any> | undefined;
 };
 const ADMIN_COOKIE = 'wns_quality_admin';
@@ -55,8 +57,9 @@ export function createQualityHandler(catalog: Catalog, health: HealthStore, acti
   const investigations = new InvestigationStore(catalog, health, activity, remote, options.investigations);
   const remoteQuality = remote ? new RemoteQualityStore() : null;
   const sessions = new Map<string, { origin: string; expires: number }>();
-  const repair = options.localOwner ? options.repair : undefined;
+  const repair = options.localOwner || options.cloudAccess ? options.repair : undefined;
   function session(request: Request, url: URL): RepairPrincipal | null {
+    if (options.cloudAccess) return options.cloudAccess.authenticate(request, url);
     if (!options.localOwner || !loopback(url) || !sameOrigin(request, url)) return null;
     const cookie = request.headers.get('cookie')?.split(';').map(part => part.trim()).find(part => part.startsWith(`${ADMIN_COOKIE}=`));
     const id = cookie?.slice(ADMIN_COOKIE.length + 1);
@@ -69,17 +72,20 @@ export function createQualityHandler(catalog: Catalog, health: HealthStore, acti
     return { actor_id: 'local_owner', session_id: reference };
   }
   function authenticated(request: Request, url: URL) {
-    const principal = session(request, url); if (!principal) throw Error('WORKFLOW_AUTH_REQUIRED'); return principal;
+    const principal = session(request, url); if (!principal) throw Error(options.cloudAccess ? 'QUALITY_ADMIN_AUTH_REQUIRED' : 'WORKFLOW_AUTH_REQUIRED'); return principal;
   }
-  function runtime() {
+  function runtime(principal: RepairPrincipal | null = null) {
     const persisted = Boolean(options.investigations && 'store' in options.investigations && options.investigations.store);
     const openai = investigations.modelReadiness();
     const jev = investigations.jevReadiness();
-    return { investigations_enabled: allowInvestigations, model_provider: 'rules', model_api_configured: openai.available || jev.available,
-      openai, jev, event_retention: persisted ? 'SQLite; saved across server restarts. Interrupted runs are not automatically restarted.'
+    const publicCloud = Boolean(options.cloudAccess && !principal);
+    return { investigations_enabled: allowInvestigations && !publicCloud, model_provider: 'rules', model_api_configured: !publicCloud && (openai.available || jev.available),
+      ...(options.cloudAccess ? { public_access: 'read_only', admin_auth_required: true, admin_login_enabled: options.cloudAccess.adminAvailable() } : {}),
+      openai: publicCloud ? { available: false, reason: 'administrator_access_required' } : openai,
+      jev: publicCloud ? { available: false, reason: 'administrator_access_required' } : jev, event_retention: persisted ? 'SQLite; saved across server restarts. Interrupted runs are not automatically restarted.'
         : 'In-memory, at most 20 runs for one hour; cleared on server restart.',
       sources_read_only: true, publisher_fetches: false,
-      repair_workflow: { enabled: Boolean(repair), scope: 'local_registry', approval_required: true,
+      repair_workflow: { enabled: Boolean(repair) && !publicCloud, scope: options.cloudAccess ? 'cloud_registry' : 'local_registry', approval_required: true,
         publisher_fetches: 'explicit_review_only', deployed: false } };
   }
   function decorate(payload: Record<string, any>) {
@@ -88,9 +94,10 @@ export function createQualityHandler(catalog: Catalog, health: HealthStore, acti
     return options.history.decorateOverview(payload);
   }
   return async function fetchQuality(request: Request): Promise<Response | null> {
-    const url = new URL(request.url);
+    let url = new URL(request.url);
     if (!url.pathname.startsWith('/quality')) return null;
     try {
+      if (options.cloudAccess) url = options.cloudAccess.publicUrl(request);
       const staticFile = staticFiles[url.pathname];
       if (staticFile) {
         if (request.method !== 'GET') return new Response('Method not allowed', { status: 405, headers: { allow: 'GET' } });
@@ -100,6 +107,7 @@ export function createQualityHandler(catalog: Catalog, health: HealthStore, acti
           'content-security-policy': "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; base-uri 'none'; frame-ancestors 'none'" } });
       }
       if (url.pathname === '/quality/api/admin/session' && request.method === 'GET') {
+        if (options.cloudAccess) return await options.cloudAccess.sessionResponse(request, url);
         if (!options.localOwner || !loopback(url) || !sameOrigin(request, url)) return json({ error: 'Local owner access required' }, 403);
         const current = session(request, url);
         if (current) return json({ authenticated: true, actor: 'local_owner', scope: 'local_registry' });
@@ -110,11 +118,15 @@ export function createQualityHandler(catalog: Catalog, health: HealthStore, acti
         response.headers.set('set-cookie', `${ADMIN_COOKIE}=${id}; HttpOnly; SameSite=Strict; Path=/quality/api/; Max-Age=${SESSION_MS / 1000}${url.protocol === 'https:' ? '; Secure' : ''}`);
         return response;
       }
+      if (url.pathname === '/quality/api/admin/session' && options.cloudAccess && ['POST', 'DELETE'].includes(request.method))
+        return await options.cloudAccess.sessionResponse(request, url);
+      const principal = session(request, url);
+      const publicCloud = Boolean(options.cloudAccess && !principal);
       const date = url.searchParams.get('date') ?? undefined;
       if (url.pathname === '/quality/api/overview' && request.method === 'GET') {
         if (remoteQuality) {
           const overview = options.savedRemoteOverview?.(date) ?? await remoteQuality.overview(date);
-          return json({ ...decorate(overview), runtime: { ...overview.runtime, ...runtime() } });
+          return json({ ...decorate(overview), runtime: { ...overview.runtime, ...runtime(principal) } });
         }
         const first = getCountryQualityOverview(catalog, activity, health, { date, limit: 50 });
         const items = [...first.items]; let offset = first.next_offset;
@@ -129,7 +141,7 @@ export function createQualityHandler(catalog: Catalog, health: HealthStore, acti
             active_source_registrations: active.reduce((sum, s) => sum + s.activeRegistrationCount, 0),
             unique_active_rss_endpoints: distinct('rss'), unique_active_sitemap_endpoints: distinct('sitemap'), ...estimateGlobalPublisherInventory(active) },
           inventory_changes: getInventoryChanges(catalog, rawRegistry, first.date, health),
-          runtime: runtime() }));
+          runtime: runtime(principal) }));
       }
       if (url.pathname === '/quality/api/country' && request.method === 'GET') {
         if (remoteQuality) return json(await remoteQuality.country(url.searchParams.get('country') ?? '', date));
@@ -144,11 +156,13 @@ export function createQualityHandler(catalog: Catalog, health: HealthStore, acti
         ? await remoteQuality.source(url.searchParams.get('source_id') ?? '', date)
         : getSourceQualityDetail(catalog, activity, health, { source_id: url.searchParams.get('source_id'), date }));
       if (url.pathname === '/quality/api/investigations' && request.method === 'GET') {
-        return json({ items: investigations.list(20) });
+        const runs = investigations.list(20);
+        return json({ items: publicCloud ? runs.filter(run => run.status !== 'running').map(publicInvestigation) : runs });
       }
       if (url.pathname === '/quality/api/investigations' && request.method === 'POST') {
         if (!allowInvestigations) return json({ error: 'Investigation runs are disabled here. Use the local dashboard runtime.' }, 503);
-        if (!sameOrigin(request, url)) return json({ error: 'Same-origin request required' }, 403);
+        if (!(options.cloudAccess ? options.cloudAccess.sameOrigin(request, url) : sameOrigin(request, url))) return json({ error: 'Same-origin request required' }, 403);
+        if (options.cloudAccess) authenticated(request, url);
         const input = investigationSchema.parse(await readSmallJson(request));
         // Preserve idempotent request conflict detection before the paid execution gate.
         // This branch never starts a run or makes a model request.
@@ -159,6 +173,7 @@ export function createQualityHandler(catalog: Catalog, health: HealthStore, acti
         return json(investigations.start(input), 202);
       }
       if (url.pathname === '/quality/api/proposals' && ['GET', 'POST'].includes(request.method)) {
+        if (options.cloudAccess) authenticated(request, url);
         if (!repair) return json({ error: 'Local repair workflow is unavailable' }, 503);
         if (request.method === 'GET') return json(repair.list());
         authenticated(request, url);
@@ -167,6 +182,7 @@ export function createQualityHandler(catalog: Catalog, health: HealthStore, acti
       }
       const proposalMatch = /^\/quality\/api\/proposals\/([a-f0-9-]{36})(?:\/(approve|apply|verify|rollback))?$/.exec(url.pathname);
       if (proposalMatch) {
+        if (options.cloudAccess) authenticated(request, url);
         if (!repair) return json({ error: 'Local repair workflow is unavailable' }, 503);
         const proposalId = z.string().uuid().parse(proposalMatch[1]);
         const action = proposalMatch[2];
@@ -188,12 +204,14 @@ export function createQualityHandler(catalog: Catalog, health: HealthStore, acti
       if (requestMatch && request.method === 'GET') {
         const requestId = z.string().uuid().parse(requestMatch[1]);
         const run = investigations.getByRequestId(requestId);
+        if (publicCloud) return json({ error: 'QUALITY_ADMIN_AUTH_REQUIRED' }, 403);
         return run ? json(run) : json({ error: 'Investigation request not found or no longer retained' }, 404);
       }
       const match = /^\/quality\/api\/investigations\/([a-f0-9-]{36})$/.exec(url.pathname);
       if (match && request.method === 'GET') {
         const run = investigations.get(match[1]);
-        return run ? json(run) : json({ error: 'Run not found or no longer retained' }, 404);
+        if (publicCloud && run?.status === 'running') return json({ error: 'Run not found or no longer retained' }, 404);
+        return run ? json(publicCloud ? publicInvestigation(run) : run) : json({ error: 'Run not found or no longer retained' }, 404);
       }
       if (url.pathname.startsWith('/quality/api/')) return json({ error: 'Route not found or method not allowed' }, 404);
       return new Response('Not found', { status: 404 });
@@ -201,7 +219,7 @@ export function createQualityHandler(catalog: Catalog, health: HealthStore, acti
       const raw = error instanceof Error ? error.message : '';
       const message = error instanceof z.ZodError ? 'Invalid request' : /^(?:WORKFLOW|INVESTIGATION|OPENAI|JEV|QUALITY|ACTIVITY|JSON|REQUEST)_[A-Z0-9_]{1,110}$/.test(raw)
         ? raw : ['Unknown country', 'Invalid investigation date'].includes(raw) ? raw : 'Quality request failed';
-      const status = ['OPENAI_EXECUTION_NOT_AUTHORIZED', 'JEV_EXECUTION_NOT_AUTHORIZED', 'WORKFLOW_AUTH_REQUIRED'].includes(message) ? 403
+      const status = ['OPENAI_EXECUTION_NOT_AUTHORIZED', 'JEV_EXECUTION_NOT_AUTHORIZED', 'WORKFLOW_AUTH_REQUIRED', 'QUALITY_GATEWAY_AUTH_REQUIRED', 'QUALITY_ADMIN_AUTH_REQUIRED', 'QUALITY_PUBLIC_ORIGIN_INVALID'].includes(message) ? 403
         : ['INVESTIGATION_BUSY', 'WORKFLOW_BUSY', 'WORKFLOW_DISCOVERY_BUSY'].includes(message) ? 429 : message === 'REQUEST_TOO_LARGE' ? 413
           : message === 'WORKFLOW_PROPOSAL_NOT_FOUND' ? 404 : ['WORKFLOW_REGISTRY_CHANGED', 'WORKFLOW_PROPOSAL_CHANGED', 'WORKFLOW_STATE_CHANGED', 'WORKFLOW_ALREADY_APPLIED', 'WORKFLOW_VALIDATION_EXPIRED'].includes(message) ? 409
             : message.startsWith('ACTIVITY_HISTORY_') ? 503 : 400;

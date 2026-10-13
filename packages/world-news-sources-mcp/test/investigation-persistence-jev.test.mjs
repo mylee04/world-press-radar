@@ -4,6 +4,7 @@ import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
+import { DatabaseSync } from 'node:sqlite';
 import { normalizeRegistry } from '../dist/catalog.js';
 import { HealthStore } from '../dist/health.js';
 import { ActivityStore } from '../dist/activity.js';
@@ -33,7 +34,7 @@ function durable(t) {
   const dir = mkdtempSync(join(tmpdir(), 'investigation-durable-'));
   const path = join(dir, 'runtime.sqlite'), storage = new QualityRunStore(path), budget = new PersistentModelBudget(path, 1, 'fixture');
   t.after(() => { storage.close(); budget.close(); rmSync(dir, { recursive: true, force: true }); });
-  return { storage, budget };
+  return { storage, budget, path };
 }
 test('Actual MCP run events and final findings persist and request IDs recover without duplicate execution', async t => {
   const { storage, budget } = durable(t);
@@ -54,12 +55,14 @@ test('Actual MCP run events and final findings persist and request IDs recover w
   assert.throws(() => restarted.start({ country: 'US', date: '2026-10-11', request_id: requestId }), /REQUEST_ID_CONFLICT/);
 });
 test('Durable runs remain retrievable beyond memory retention and startup reconciliation is explicit', async t => {
-  const { storage, budget } = durable(t), store = new InvestigationStore(catalog, new HealthStore(), activity(), false, { store: storage, budget });
+  const { storage, budget, path } = durable(t), store = new InvestigationStore(catalog, new HealthStore(), activity(), false, { store: storage, budget });
   const run = await finished(store.start({ country: 'US', date: '2026-10-12' }));
   run.started_at = new Date(Date.now() - 7200000).toISOString(); storage.save(run);
   assert.equal(store.get(run.id).id, run.id); assert.equal(store.runs.has(run.id), false);
   const pending = { ...run, id: randomUUID(), started_at: new Date().toISOString(), status: 'running', finished_at: null, request_id: randomUUID() };
   storage.save(pending);
+  const legacy = new DatabaseSync(path);
+  try { legacy.prepare('UPDATE quality_runs SET owner_pid=NULL WHERE id=?').run(pending.id); } finally { legacy.close(); }
   const restarted = new InvestigationStore(catalog, new HealthStore(), activity(), false, { store: storage, budget });
   assert.equal(restarted.get(pending.id).status, 'running');
   assert.equal(storage.reconcileInterrupted(), 1); assert.equal(restarted.get(pending.id).status, 'failed');

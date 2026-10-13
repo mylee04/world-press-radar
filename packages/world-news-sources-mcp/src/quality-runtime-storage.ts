@@ -95,25 +95,46 @@ export class QualityRunStore {
   private readonly db: DatabaseSync;
   constructor(path: string) {
     this.db = database(path);
-    this.db.exec('CREATE TABLE IF NOT EXISTS quality_runs(id TEXT PRIMARY KEY,request_id TEXT UNIQUE,started_at TEXT NOT NULL,status TEXT NOT NULL,payload TEXT NOT NULL); CREATE INDEX IF NOT EXISTS quality_run_date ON quality_runs(started_at);');
+    try {
+      this.db.exec('CREATE TABLE IF NOT EXISTS quality_runs(id TEXT PRIMARY KEY,request_id TEXT UNIQUE,started_at TEXT NOT NULL,status TEXT NOT NULL,payload TEXT NOT NULL,owner_pid INTEGER); CREATE INDEX IF NOT EXISTS quality_run_date ON quality_runs(started_at);');
+      const hasOwner = () => this.db.prepare('PRAGMA table_info(quality_runs)').all().some(row => row.name === 'owner_pid');
+      if (!hasOwner()) {
+        try { this.db.exec('ALTER TABLE quality_runs ADD COLUMN owner_pid INTEGER'); }
+        catch (error) {
+          // Suppress only a confirmed duplicate from another process's identical migration.
+          if (!(error instanceof Error) || !/duplicate column name:\s*owner_pid/i.test(error.message) || !hasOwner()) throw error;
+        }
+      }
+    } catch (error) { this.db.close(); throw error; }
   }
   save(run: InvestigationRun) {
     const payload = JSON.stringify(run);
     if (Buffer.byteLength(payload) > 2 * 1024 * 1024) throw Error('QUALITY_RUN_STORAGE_LIMIT');
-    this.db.prepare('INSERT INTO quality_runs VALUES(?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET status=excluded.status,payload=excluded.payload').run(run.id,run.request_id??null,run.started_at,run.status,payload);
+    // Ownership is private SQLite metadata and remains with the original writer.
+    // Reading or reconciling a saved run never transfers it to the HTTP process.
+    this.db.prepare('INSERT INTO quality_runs(id,request_id,started_at,status,payload,owner_pid) VALUES(?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET status=excluded.status,payload=excluded.payload').run(run.id,run.request_id??null,run.started_at,run.status,payload,process.pid);
   }
   get(id: string) { const row = this.db.prepare('SELECT payload FROM quality_runs WHERE id=?').get(id); return row ? JSON.parse(String(row.payload)) as InvestigationRun : undefined; }
   getByRequestId(id: string) { const row = this.db.prepare('SELECT payload FROM quality_runs WHERE request_id=?').get(id); return row ? JSON.parse(String(row.payload)) as InvestigationRun : undefined; }
   list(limit = 20) { return this.db.prepare('SELECT payload FROM quality_runs ORDER BY started_at DESC LIMIT ?').all(Math.min(100,Math.max(1,limit))).map(row=>JSON.parse(String(row.payload)) as InvestigationRun); }
   reconcileInterrupted() {
-    const rows = this.db.prepare("SELECT payload FROM quality_runs WHERE status='running'").all();
+    const rows = this.db.prepare("SELECT id,payload,owner_pid FROM quality_runs WHERE status='running'").all();
+    let reconciled = 0;
     for (const row of rows) {
+      const owner = Number(row.owner_pid);
+      if (Number.isSafeInteger(owner) && owner > 0) {
+        let alive = true;
+        try { process.kill(owner, 0); }
+        catch (error) { alive = (error as NodeJS.ErrnoException).code !== 'ESRCH'; }
+        if (alive) continue; // An independent daily dispatcher may still be completing this job.
+      }
       const run = JSON.parse(String(row.payload)) as InvestigationRun;
       run.status = 'failed'; run.finished_at = new Date().toISOString(); run.summary = '서버 재시작으로 조사가 중단됐습니다. 저장된 근거만 표시하며 자동 재실행하지 않았습니다.';
       if (run.cost.provider !== 'rules') { run.cost.estimated_model_cost_usd = null; run.cost.cost_basis = 'interrupted; conservative_reservations_retained'; }
-      this.save(run);
+      const changed = this.db.prepare("UPDATE quality_runs SET status='failed',payload=? WHERE id=? AND status='running' AND payload=?").run(JSON.stringify(run),row.id,row.payload);
+      reconciled += Number(changed.changes);
     }
-    return rows.length;
+    return reconciled;
   }
   close() { this.db.close(); }
 }

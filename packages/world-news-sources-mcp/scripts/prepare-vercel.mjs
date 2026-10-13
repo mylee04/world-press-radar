@@ -1,6 +1,6 @@
 import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync,rmSync,realpathSync,statSync } from 'node:fs';
-import { relative,isAbsolute } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { relative,isAbsolute,resolve,dirname,join } from 'node:path';
+import { fileURLToPath,pathToFileURL } from 'node:url';
 import { normalizeRegistry } from '../dist/catalog.js';
 import {readHistory} from '../dist/activity-history.js';
 import { snapshotSchema } from '../dist/health.js';
@@ -9,23 +9,33 @@ import { estimatePublisherInventory, estimateGlobalPublisherInventory } from '..
 
 const root = new URL('../', import.meta.url);
 const output = new URL('../.deploy-vercel/', import.meta.url);
+const metadataPath = (variable, fallback) => process.env[variable] ? pathToFileURL(resolve(process.env[variable])) : new URL(fallback, root);
+const readMetadata = path => {
+  if (statSync(path).size > 16 * 1024 * 1024) throw Error('Metadata file exceeds 16 MiB limit');
+  return JSON.parse(readFileSync(path, 'utf8'));
+};
+const registryPath = metadataPath('WNS_REGISTRY_PATH', '../../data/rss-atlas.json');
+const legacyPath = metadataPath('WNS_LEGACY_HEALTH_PATH', '../../audits/readme_rss_health_latest.json');
+const snapshotPath = metadataPath('WNS_HEALTH_PATH', 'audits/health-latest.json');
+const activityPath = metadataPath('WNS_ACTIVITY_PATH', 'activity/activity-snapshot.json');
+for (const [name, path] of [['WNS_REGISTRY_PATH', registryPath], ['WNS_LEGACY_HEALTH_PATH', legacyPath], ['WNS_HEALTH_PATH', snapshotPath], ['WNS_ACTIVITY_PATH', activityPath]]) {
+  if (process.env[name] && !existsSync(path)) throw Error(`${name} does not exist`);
+}
 for (const dir of ['api', 'dist', 'metadata', 'public']) mkdirSync(new URL(`${dir}/`, output), { recursive: true });
 const writeJson = (path, value) => writeFileSync(new URL(path, output), JSON.stringify(value) + '\n');
-const raw = JSON.parse(readFileSync(new URL('../../data/rss-atlas.json', root), 'utf8'));
+const raw = readMetadata(registryPath);
 normalizeRegistry(raw); // Validate before preparing any upload.
 const fields = ['name', 'url', 'sitemapUrl', 'row', 'enabled', 'category', 'language', 'tier', 'enabled_changed_at', 'status_reason', 'status_history', 'status_transition_count', 'registry_addition_batch', 'source_homepage', 'endpoint_provenance'];
 const registry = { countries: raw.countries.map(country => ({ code: country.code, name: country.name,
   feeds: country.feeds.map(feed => Object.fromEntries(fields.filter(key => feed[key] !== undefined).map(key => [key, feed[key]]))),
 })) };
-const legacy = JSON.parse(readFileSync(new URL('../../audits/readme_rss_health_latest.json', root), 'utf8'));
+const legacy = readMetadata(legacyPath);
 writeJson('metadata/registry.json', registry);
 writeJson('metadata/legacy-health.json', { results: (legacy.results ?? []).map(({ countryCode, outlet, url, checkedAt, valid, httpCode }) =>
   ({ countryCode, outlet, url, checkedAt, valid, httpCode })) });
-const snapshotPath = new URL('audits/health-latest.json', root);
-const snapshot = existsSync(snapshotPath) ? snapshotSchema.parse(JSON.parse(readFileSync(snapshotPath, 'utf8'))) : undefined;
+const snapshot = existsSync(snapshotPath) ? snapshotSchema.parse(readMetadata(snapshotPath)) : undefined;
 writeJson('metadata/health.json', snapshot ?? { version: 1, observations: [] });
-const activityPath = new URL('activity/activity-snapshot.json', root);
-const activity = existsSync(activityPath) ? JSON.parse(readFileSync(activityPath, 'utf8')) : null;
+const activity = existsSync(activityPath) ? readMetadata(activityPath) : null;
 if(activity && (activity.version !== 1 || activity.lane !== 'production')) throw new Error('Invalid production activity snapshot');
 writeJson('metadata/activity.json', activity);
 // A real complete daily MCP report makes the first dashboard load independent of 73 network reads.
@@ -71,11 +81,12 @@ if (existsSync(receiptFile)) {
 writeJson('metadata/quality-overview.json', savedOverview);
 const historyOutput=new URL('metadata/activity-history/',output);rmSync(historyOutput,{recursive:true,force:true});mkdirSync(historyOutput,{recursive:true});
 for(const shard of activity?.history?.shards??[]){
-  readHistory(fileURLToPath(new URL('activity/history/',root)),shard);
-  copyFileSync(new URL(`activity/history/${shard.file}`,root),new URL(shard.file,historyOutput));
+  const historyDirectory = join(dirname(fileURLToPath(activityPath)), 'history');
+  readHistory(historyDirectory,shard);
+  copyFileSync(join(historyDirectory,shard.file),new URL(shard.file,historyOutput));
 }
 // Copy the complete runtime import graph, never operator state, keys or collector databases.
-const modules = new Set(['http.js']);
+const modules = new Set(['http.js', 'activity.js', 'catalog.js', 'health.js', 'metrics.js']);
 const pendingModules = [...modules];
 while (pendingModules.length) {
   const file = pendingModules.shift();
@@ -84,7 +95,10 @@ while (pendingModules.length) {
     if (!modules.has(match[1])) { modules.add(match[1]); pendingModules.push(match[1]); }
   }
 }
+// Remove old generated modules instead of accidentally uploading stale code.
+rmSync(new URL('dist/', output), { recursive: true, force: true }); mkdirSync(new URL('dist/', output), { recursive: true });
 for (const file of modules) copyFileSync(new URL(`dist/${file}`, root), new URL(`dist/${file}`, output));
+copyFileSync(new URL('scripts/quality-cloud-gateway.mjs', root), new URL('dist/quality-cloud-gateway.mjs', output));
 mkdirSync(new URL('dashboard/', output), { recursive: true });
 for (const file of ['index.html', 'app.js', 'styles.css']) copyFileSync(new URL(`dashboard/${file}`, root), new URL(`dashboard/${file}`, output));
 const pkg = JSON.parse(readFileSync(new URL('package.json', root), 'utf8'));
@@ -118,7 +132,7 @@ export const handler = createHttpHandler(normalizeRegistry(registry), new Health
 for (const route of ['mcp', 'health']) writeFileSync(new URL(`api/${route}.mjs`, output),
   `import {handler} from '../dist/hosted.mjs';\nexport default {fetch(request){const url=new URL(request.url);url.pathname='/${route}';return handler.fetch(new Request(url,request));}};\n`);
 writeFileSync(new URL('api/quality.mjs', output),
-  `import {handler} from '../dist/hosted.mjs';\nexport default {fetch(request){const url=new URL(request.url);const path=url.searchParams.get('path')??'';url.pathname='/quality/'+path;url.searchParams.delete('path');return handler.fetch(new Request(url,request));}};\n`);
+  `import {handler} from '../dist/hosted.mjs';\nimport {createQualityCloudGateway} from '../dist/quality-cloud-gateway.mjs';\nconst gateway=createQualityCloudGateway({backendUrl:process.env.WNS_QUALITY_BACKEND_URL,gatewayToken:process.env.WNS_QUALITY_GATEWAY_TOKEN,publicOrigins:[process.env.WNS_QUALITY_PUBLIC_ORIGIN]});\nexport default {async fetch(request){const url=new URL(request.url);const path=url.searchParams.get('path')??'';url.pathname='/quality/'+path;url.searchParams.delete('path');const forwarded=new Request(url,request);if(url.pathname.startsWith('/quality/api/')&&process.env.WNS_QUALITY_BACKEND_URL)return gateway(forwarded);return handler.fetch(forwarded);}};\n`);
 for (const file of ['index.html', 'support.html', 'privacy.html', 'terms.html', 'styles.css', 'icon.svg']) {
   copyFileSync(new URL(`site/${file}`, root), new URL(`public/${file}`, output));
 }

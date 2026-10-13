@@ -2,7 +2,7 @@
 
 // Rendering uses text nodes only. Source names, URLs and tool results are untrusted data.
 const $ = (id) => document.getElementById(id);
-const state = { overview: null, countries: [], selected: null, countryData: null, countryRequest: 0, overviewRequest: 0, sourceCache: new Map(), run: null, poll: null, activeTab: 'status', pendingStart: null, pollFailures: 0, adminSession: null, reloadRequiredProposals: new Set() };
+const state = { overview: null, countries: [], selected: null, countryData: null, countryRequest: 0, overviewRequest: 0, accessRevision: 0, sourceCache: new Map(), run: null, poll: null, activeTab: 'status', pendingStart: null, pollFailures: 0, adminSession: null, reloadRequiredProposals: new Set() };
 const numberFormat = new Intl.NumberFormat('ko-KR');
 const koreanRegionNames = new Intl.DisplayNames(['ko'], { type: 'region', fallback: 'none' });
 const koreanCountries = { US: '미국', KR: '한국', JP: '일본', GB: '영국', CN: '중국', FR: '프랑스', DE: '독일', IN: '인도', AU: '호주', CA: '캐나다', BR: '브라질', IT: '이탈리아', ES: '스페인', RU: '러시아', MX: '멕시코', ID: '인도네시아', TR: '튀르키예', SA: '사우디아라비아', AR: '아르헨티나', ZA: '남아프리카공화국' };
@@ -97,7 +97,7 @@ function humanInvestigationError(value) {
 }
 function errorMessage(error) {
   const text = error instanceof Error ? error.message : '데이터를 불러오지 못했습니다.';
-  const messages = { WORKFLOW_AUTH_REQUIRED: '이 환경에서는 수정 권한이 없습니다.', WORKFLOW_EXACT_APPROVAL_REQUIRED: '현재 관리자 세션에서 이 수정안을 다시 승인해 주세요.', WORKFLOW_REGISTRY_CHANGED: '등록 상태가 바뀌었습니다. 후보를 다시 검토해 주세요.', WORKFLOW_VALIDATION_EXPIRED: '검사 기록이 오래됐습니다. 후보를 다시 검사해 주세요.', WORKFLOW_SOURCE_ENDPOINT_NOT_FOUND: '현재 등록에서 해당 소스 주소를 찾지 못했습니다.', WORKFLOW_ALREADY_APPLIED: '이미 적용된 제안입니다. 기록을 다시 확인해 주세요.', OPENAI_EXECUTION_NOT_AUTHORIZED: 'OpenAI 실행 설정을 확인해 주세요.', JEV_EXECUTION_NOT_AUTHORIZED: 'Jev 실행 설정을 확인해 주세요.', INVESTIGATION_BUSY: '진행 중인 조사가 있습니다. 완료 후 다시 실행해 주세요.' };
+  const messages = { QUALITY_ADMIN_AUTH_REQUIRED: '관리자 로그인 정보를 확인해 주세요.', QUALITY_CLOUD_UNAVAILABLE: '서버에 연결하지 못했습니다. 잠시 후 다시 확인해 주세요.', QUALITY_CLOUD_TIMEOUT: '조회 시간이 초과됐습니다. 잠시 후 다시 확인해 주세요.', WORKFLOW_AUTH_REQUIRED: '관리자 로그인이 필요합니다.', WORKFLOW_EXACT_APPROVAL_REQUIRED: '현재 관리자 세션에서 이 수정안을 다시 승인해 주세요.', WORKFLOW_REGISTRY_CHANGED: '등록 상태가 바뀌었습니다. 후보를 다시 검토해 주세요.', WORKFLOW_VALIDATION_EXPIRED: '검사 기록이 오래됐습니다. 후보를 다시 검사해 주세요.', WORKFLOW_SOURCE_ENDPOINT_NOT_FOUND: '현재 등록에서 해당 소스 주소를 찾지 못했습니다.', WORKFLOW_ALREADY_APPLIED: '이미 적용된 제안입니다. 기록을 다시 확인해 주세요.', OPENAI_EXECUTION_NOT_AUTHORIZED: 'OpenAI 실행 설정을 확인해 주세요.', JEV_EXECUTION_NOT_AUTHORIZED: 'Jev 실행 설정을 확인해 주세요.', INVESTIGATION_BUSY: '진행 중인 조사가 있습니다. 완료 후 다시 실행해 주세요.' };
   return messages[text] ?? humanInvestigationError(text);
 }
 function showError(id, error) { $(id).textContent = error ? errorMessage(error) : ''; $(id).hidden = !error; }
@@ -293,10 +293,33 @@ function renderSummary(data) {
   const selectedEngine = $('investigation-engine').selectedOptions[0];
   if (selectedEngine?.disabled) $('investigation-engine').value = 'rules';
   renderEngineStatus();
-  $('start-investigation').disabled = !investigationsEnabled || state.run?.status === 'running';
-  $('investigate-selected').disabled = !investigationsEnabled || state.run?.status === 'running';
-  $('runtime-note').hidden = investigationsEnabled;
+  renderExecutionAccess();
+}
+
+function canRunInvestigation() {
+  const runtime = state.overview?.runtime ?? {};
+  return runtime.investigations_enabled !== false && (!runtime.admin_auth_required || state.adminSession?.authenticated === true);
+}
+function renderExecutionAccess() {
+  const runtime = state.overview?.runtime ?? {};
+  const cloud = runtime.admin_auth_required === true;
+  const authenticated = state.adminSession?.authenticated === true;
+  const allowed = canRunInvestigation();
+  const busy = ['running', 'queued'].includes(state.run?.status);
+  $('start-investigation').disabled = !allowed || busy;
+  $('investigate-selected').disabled = !allowed || busy;
+  $('investigate-selected').hidden = cloud && !authenticated;
+  $('investigation-form').hidden = cloud && !authenticated;
+  $('admin-access').hidden = !cloud || !runtime.admin_login_enabled;
+  $('admin-access').textContent = authenticated ? '로그아웃' : '관리자';
+  if (authenticated || !cloud) $('admin-login-form').hidden = true;
+  $('runtime-note').hidden = allowed || cloud;
   $('runtime-note').textContent = '이 환경에서는 조사 실행을 사용할 수 없습니다.';
+  $('run-history').open = cloud && !authenticated;
+  if (cloud && !authenticated && !state.run) {
+    $('investigation-empty').querySelector('h3').textContent = '저장된 조사 결과를 확인하세요.';
+    $('investigation-empty').querySelector('p').textContent = '완료된 조사와 근거가 이곳에 표시됩니다.';
+  }
 }
 
 function renderEngineStatus() {
@@ -397,9 +420,10 @@ async function loadOverview() {
     if (request !== state.overviewRequest) return;
     state.overview = data; state.countries = data.items ?? data.countries ?? []; state.sourceCache.clear();
     renderSummary(data); renderCountries(); renderInventory();
-    if (data.runtime?.investigations_enabled !== false) loadRunHistory().catch(() => {});
-    if (data.runtime?.repair_workflow?.enabled) {
-      try { state.adminSession = await api('admin/session'); await loadProposals(); } catch { state.adminSession = null; }
+    loadRunHistory().catch(() => {});
+    if (data.runtime?.repair_workflow?.enabled || data.runtime?.admin_auth_required) {
+      try { state.adminSession = await api('admin/session'); if (data.runtime?.repair_workflow?.enabled) await loadProposals(); } catch { state.adminSession = null; }
+      renderExecutionAccess();
     }
     const select = $('investigation-country'), previous = select.value; select.replaceChildren(node('option', '', '국가를 선택하세요')); select.firstChild.value = '';
     state.countries.forEach((country) => { const option = node('option', '', countryName(country)); option.value = countryCode(country); select.append(option); });
@@ -631,8 +655,7 @@ function renderRun(run) {
   else if (run.truncated && !sampled) footer.append(node('span', '', '일부 기록 제외'));
   $('execution-summary').textContent = `실제 실행 기록 · ${(run.events ?? []).length}개 이벤트`;
   $('execution-summary').title = `실행 ID ${run.id}${typeof cost.input_tokens === 'number' ? ` · 입력 ${cost.input_tokens} / 출력 ${cost.output_tokens} 토큰` : ''}`;
-  $('start-investigation').disabled = state.overview?.runtime?.investigations_enabled === false || run.status === 'running' || run.status === 'queued';
-  $('investigate-selected').disabled = $('start-investigation').disabled;
+  renderExecutionAccess();
   $('screen-status').textContent = `조사 ${describeState(run.status)}. 실제 실행 이벤트 ${(run.events ?? []).length}개.`;
 }
 
@@ -733,7 +756,9 @@ function renderRepairProposal(target, proposal, reloadRequired = false) {
   target.append(card);
 }
 async function loadProposals() {
+  const revision = state.accessRevision;
   const data = await api('proposals');
+  if (revision !== state.accessRevision || state.overview?.runtime?.admin_auth_required && !state.adminSession?.authenticated) return;
   const items = Array.isArray(data) ? data : data.items ?? data.proposals ?? [];
   $('repair-records').hidden = !items.length;
   $('repair-records-title').textContent = `수정 제안 ${items.length}건`;
@@ -750,7 +775,9 @@ function followRun(run) {
   if (['running', 'queued'].includes(run.status)) state.poll = window.setTimeout(() => pollRun(run.id), 900);
 }
 async function loadRunHistory() {
+  const revision = state.accessRevision;
   const data = await api('investigations');
+  if (revision !== state.accessRevision) return;
   const runs = (Array.isArray(data) ? data : data.items ?? []).slice(0, 10);
   const list = $('run-history-list'); list.replaceChildren();
   $('run-history').hidden = !runs.length;
@@ -765,6 +792,10 @@ async function loadRunHistory() {
       finally { button.disabled = false; }
     }); list.append(button);
   });
+  if (state.overview?.runtime?.admin_auth_required && !state.adminSession?.authenticated && !state.run && runs[0]) {
+    const latest = await api(`investigations/${encodeURIComponent(runs[0].id)}`);
+    if (revision === state.accessRevision && !state.run) renderRun(latest);
+  }
 }
 
 async function recoverStart(requestId) {
@@ -799,6 +830,7 @@ async function pollRun(id) {
   }
 }
 async function startInvestigation(country) {
+  if (state.overview?.runtime?.admin_auth_required && !state.adminSession?.authenticated) { showError('investigation-error', new Error('관리자 로그인이 필요합니다.')); return; }
   if (state.overview?.runtime?.investigations_enabled === false) { showError('investigation-error', new Error('이 환경에서는 조사 실행이 비활성화되어 있습니다.')); return; }
   if (!country) { $('investigation-country').focus(); return; }
   if (state.poll) window.clearTimeout(state.poll);
@@ -819,7 +851,7 @@ async function startInvestigation(country) {
       await recoverStart(request.request_id);
     } else {
       state.pendingStart = null; showError('investigation-error', error);
-      $('start-investigation').disabled = false; $('investigate-selected').disabled = false;
+      renderExecutionAccess();
     }
   }
 }
@@ -836,6 +868,34 @@ $('country-sort').addEventListener('change', renderCountries);
 $('source-search').addEventListener('input', renderSources);
 $('investigate-selected').addEventListener('click', () => startInvestigation(state.selected));
 $('investigation-engine').addEventListener('change', renderEngineStatus);
+$('admin-access').addEventListener('click', async () => {
+  if (state.adminSession?.authenticated) {
+    $('admin-access').disabled = true;
+    try {
+      await api('admin/session', { method: 'DELETE' });
+      state.accessRevision++;
+      state.adminSession = null;
+      if (state.poll) window.clearTimeout(state.poll);
+      state.run = null; state.pendingStart = null; $('investigation-run').hidden = true; $('investigation-empty').hidden = false;
+      $('repair-records').hidden = true; $('repair-record-list').replaceChildren(); $('run-history-list').replaceChildren();
+      await loadOverview();
+    } catch (error) { showError('investigation-error', error); }
+    finally { $('admin-access').disabled = false; }
+  } else {
+    setTab('investigations'); $('admin-login-form').hidden = !$('admin-login-form').hidden;
+    if (!$('admin-login-form').hidden) $('admin-password').focus();
+  }
+});
+$('admin-login-form').addEventListener('submit', async (event) => {
+  event.preventDefault(); $('admin-login-submit').disabled = true; showError('admin-login-error', null);
+  const password = $('admin-password').value; $('admin-password').value = '';
+  try {
+    state.adminSession = await api('admin/session', { method: 'POST', body: JSON.stringify({ password }) });
+    state.accessRevision++;
+    $('admin-login-form').hidden = true; await loadOverview();
+  } catch (error) { showError('admin-login-error', error); }
+  finally { $('admin-login-submit').disabled = false; }
+});
 $('reconnect-investigation').addEventListener('click', () => {
   if (state.poll) window.clearTimeout(state.poll);
   state.pollFailures = 0;

@@ -9,12 +9,41 @@ import { QualityHistoryStore } from './quality-history.js';
 import { RepairWorkflowStore, type CollectorRecoveryEvidence } from './repair-workflow.js';
 import type { QualityRuntimeOptions } from './quality-http.js';
 import { readRemoteNewsTool } from './quality-remote.js';
+import { CloudQualityAccess } from './quality-cloud-auth.js';
 
 /** Owner-only Node runtime. Hosted public functions never enable this configuration. */
 export function createLocalQualityRuntime(env: NodeJS.ProcessEnv = process.env) {
+  return createQualityRuntime(env);
+}
+
+/** One durable process behind the public gateway, with paid execution disabled unless explicitly configured. */
+export function createCloudQualityRuntime(env: NodeJS.ProcessEnv = process.env) {
+  if (!env.WNS_QUALITY_STATE_DIR || !isAbsolute(env.WNS_QUALITY_STATE_DIR)) throw Error('QUALITY_CLOUD_STATE_DIRECTORY_REQUIRED');
+  return createQualityRuntime(env, new CloudQualityAccess(env));
+}
+
+function createQualityRuntime(env: NodeJS.ProcessEnv, cloudAccess?: CloudQualityAccess) {
   const packageRoot = fileURLToPath(new URL('../', import.meta.url));
   const repositoryRoot = resolve(packageRoot, '../..');
   const directory = resolve(env.WNS_QUALITY_STATE_DIR ?? join(packageRoot, 'output/news-quality'));
+  let registryPath = resolve(env.WNS_REGISTRY_PATH ?? join(repositoryRoot, 'data/rss-atlas.json'));
+  let allowedRegistryRoot = cloudAccess && env.WNS_QUALITY_REGISTRY_ROOT ? resolve(env.WNS_QUALITY_REGISTRY_ROOT) : repositoryRoot;
+  if (cloudAccess && env.WNS_QUALITY_REGISTRY_ROOT && !isAbsolute(env.WNS_QUALITY_REGISTRY_ROOT)) throw Error('QUALITY_REGISTRY_ROOT_INVALID');
+  const rel = relative(allowedRegistryRoot, registryPath);
+  // Foreign registries stay read-only unless the cloud operator explicitly approves their exact root.
+  const editable = !isAbsolute(rel) && rel !== '..' && !rel.startsWith('../');
+  if (cloudAccess && env.WNS_QUALITY_REPAIR_ENABLED === '1' && (!env.WNS_QUALITY_REGISTRY_ROOT || !env.WNS_REGISTRY_PATH || !editable))
+    throw Error('QUALITY_CLOUD_REPAIR_ROOT_REQUIRED');
+  let repairDirectory = cloudAccess ? resolve(env.WNS_QUALITY_REPAIR_STATE_DIR ?? join(allowedRegistryRoot, 'output/news-quality/repairs')) : join(directory, 'repairs');
+  if (cloudAccess && env.WNS_QUALITY_REPAIR_ENABLED === '1') {
+    const repairRel = relative(allowedRegistryRoot, repairDirectory);
+    if (isAbsolute(repairRel) || repairRel === '..' || repairRel.startsWith('../')) throw Error('WORKFLOW_PATH_OUTSIDE_APPROVED_ROOT');
+    // A configured current-release alias is the sole allowed symlink. Resolve that root once;
+    // the workflow still rejects every symlink in paths below the physical approved directory.
+    allowedRegistryRoot = realpathSync(allowedRegistryRoot);
+    registryPath = resolve(allowedRegistryRoot, rel);
+    repairDirectory = resolve(allowedRegistryRoot, repairRel);
+  }
   const lease = new QualityRuntimeLease(join(directory, 'runtime.sqlite'));
   const history = new QualityHistoryStore(env.WNS_QUALITY_HISTORY_PATH ?? join(directory, 'history.sqlite'));
   const store = new QualityRunStore(join(directory, 'runtime.sqlite'));
@@ -29,10 +58,6 @@ export function createLocalQualityRuntime(env: NodeJS.ProcessEnv = process.env) 
     policy.totalBudgetUsd = Math.min(policy.totalBudgetUsd, commonLimit);
     jev.totalBudgetUsd = Math.min(jev.totalBudgetUsd, commonLimit);
   }
-  const registryPath = resolve(env.WNS_REGISTRY_PATH ?? join(repositoryRoot, 'data/rss-atlas.json'));
-  const rel = relative(repositoryRoot, registryPath);
-  // A caller may preview a foreign registry, but this runtime may only edit its own checkout.
-  const editable = !isAbsolute(rel) && rel !== '..' && !rel.startsWith('../');
   const collectorPath = resolve(env.WNS_ACTIVITY_DB ?? join(packageRoot, 'activity/production.sqlite'));
   async function readCollectorEvidence(endpointId: string, sourceId: string, after: string): Promise<CollectorRecoveryEvidence | null> {
     if (!existsSync(collectorPath) || !lstatSync(collectorPath).isFile() || lstatSync(collectorPath).isSymbolicLink()) return null;
@@ -51,9 +76,15 @@ export function createLocalQualityRuntime(env: NodeJS.ProcessEnv = process.env) 
         newest_content_at: details.newest_content_at ?? null };
     } catch { return null; } finally { db.close(); }
   }
-  const repair = editable ? new RepairWorkflowStore({ directory: join(directory, 'repairs'), registryPath,
-    allowedRegistryRoot: repositoryRoot, authorizeMutation: principal => principal.actor_id === 'local_owner'
-      && /^[A-Za-z0-9_-]{43}$/.test(principal.session_id), readCollectorEvidence }) : undefined;
+  let repair: RepairWorkflowStore | undefined;
+  try {
+    repair = editable && (!cloudAccess || env.WNS_QUALITY_REPAIR_ENABLED === '1') ? new RepairWorkflowStore({ directory: repairDirectory, registryPath,
+      allowedRegistryRoot, authorizeMutation: principal => principal.actor_id === (cloudAccess ? 'cloud_admin' : 'local_owner')
+        && /^[A-Za-z0-9_-]{43}$/.test(principal.session_id), readCollectorEvidence }) : undefined;
+  } catch (error) {
+    // A rejected repair path must not leave a live process holding the state-directory lease.
+    history.close(); store.close(); budget?.close(); lease.close(); throw error;
+  }
   function savedRemoteOverview(date?: string) {
     const selected = date ?? new Date(Date.now() - 86400000).toISOString().slice(0, 10);
     if (!/^\d{4}-\d{2}-\d{2}$/.test(selected)) return undefined;
@@ -70,7 +101,7 @@ export function createLocalQualityRuntime(env: NodeJS.ProcessEnv = process.env) 
           report_observed_at: report.observed_at, report_status: report.status } };
     } catch { return undefined; }
   }
-  const options: QualityRuntimeOptions = { localOwner: true, history, repair,
+  const options: QualityRuntimeOptions = { localOwner: !cloudAccess, cloudAccess, history, repair,
     savedRemoteOverview, investigations: { policy, jevPolicy: jev, budget, store } };
   return { options, store, history, budget, async close() {
     // An accepted paid request is allowed to settle before the budget database closes.
