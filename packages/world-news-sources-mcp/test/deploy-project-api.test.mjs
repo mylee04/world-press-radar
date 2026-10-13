@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {mkdtemp,mkdir,writeFile,readFile,symlink,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join,dirname} from 'node:path';
-import {PROJECT,TEAM,collectBundle,createBody,deploy,client,preflight,expectedBundlePaths} from '../scripts/deploy-project-api.mjs';
+import {PROJECT,TEAM,collectBundle,createBody,deploymentPlan,deploy,client,preflight,expectedBundlePaths} from '../scripts/deploy-project-api.mjs';
 const project={id:PROJECT,name:'world-news-sources-mcp',accountId:TEAM,
   env:['METRICS_WRITE_SECRET','METRICS_COLLECTOR_URL'].map(key=>({key,target:['production']}))};
 const domains={domains:['news.bymyleslee.com','world-news-sources-mcp.vercel.app'].map(name=>({name}))};
@@ -20,12 +20,12 @@ test('public cloud import graph is explicit and private runtime data remains for
     await writeFile(join(f.directory,file),'private fixture');await assert.rejects(collectBundle(f.directory),/unapproved/);await rm(join(f.directory,file));
   }
 });
-test('ready deployment submits once, polls, checks identity and persists resume ID',async t=>{const f=await fixture(t),calls=[];f.fetchImpl=mock(calls,async path=>path==='/v13/deployments'?{id:'dpl_test'}:{id:'dpl_test',projectId:PROJECT,target:'production',readyState:'READY',aliasAssigned:true,alias:domains.domains.map(x=>x.name)});assert.equal((await deploy(f)).status,'READY');assert.equal(calls.filter(x=>x.method==='POST').length,1);await deploy(f);assert.equal(calls.filter(x=>x.method==='POST').length,1);assert.equal(JSON.parse(await readFile(f.stateFile,'utf8')).status,'ready');assert.ok(calls.every(x=>!x.path.includes('/user')));});
-test('uncertain POST is durably blocked from blind retries and errors cannot leak token',async t=>{const f=await fixture(t),calls=[];f.fetchImpl=mock(calls,async()=>{throw Error(f.token);});await assert.rejects(deploy(f),e=>!e.message.includes(f.token));await assert.rejects(deploy(f),/uncertain/);assert.equal(calls.filter(x=>x.method==='POST').length,1);});
+test('ready deployment submits once, polls, checks identity and persists resume ID',async t=>{const f=await fixture(t),calls=[];f.fetchImpl=mock(calls,async path=>path==='/v13/deployments'?{id:'dpl_test'}:{id:'dpl_test',projectId:PROJECT,target:'production',readyState:'READY',aliasAssigned:true,alias:domains.domains.map(x=>x.name)});assert.equal((await deploy(f)).status,'READY');assert.equal(calls.filter(x=>x.method==='POST'&&x.path==='/v13/deployments').length,1);await deploy(f);assert.equal(calls.filter(x=>x.method==='POST'&&x.path==='/v13/deployments').length,1);assert.equal(JSON.parse(await readFile(f.stateFile,'utf8')).status,'ready');assert.ok(calls.every(x=>!x.path.includes('/user')));});
+test('uncertain POST is durably blocked from blind retries and errors cannot leak token',async t=>{const f=await fixture(t),calls=[];f.fetchImpl=mock(calls,async path=>{if(path==='/v13/deployments')throw Error(f.token);return {};});await assert.rejects(deploy(f),e=>!e.message.includes(f.token));await assert.rejects(deploy(f),/uncertain/);assert.equal(calls.filter(x=>x.method==='POST'&&x.path==='/v13/deployments').length,1);});
 test('403 never falls back to broader credentials or raw server message',async()=>{const api=client('test-private-value',async()=>new Response('test-private-value',{status:403}));await assert.rejects(api('/v13/deployments'),e=>e.message==='Vercel API HTTP 403');});
 test('preflight blocks wrong owner and missing production metrics before mutation',async()=>{await assert.rejects(preflight(async()=>({...project,accountId:'other'})),/identity/);await assert.rejects(preflight(async()=>({...project,env:[]})),/environment/);});
 test('failed build and alias failure cannot report successful deployment',async t=>{for(const extra of [{readyState:'ERROR'},{readyState:'READY',aliasError:{code:'error'}}]){const f=await fixture(t);f.fetchImpl=mock([],async path=>path==='/v13/deployments'?{id:'dpl_test'}:{projectId:PROJECT,target:'production',...extra});await assert.rejects(deploy(f),/ended|alias/);}});
-test('changed payload on resume requires review and no second POST',async t=>{const f=await fixture(t),calls=[];f.fetchImpl=mock(calls,async path=>path==='/v13/deployments'?{id:'dpl_test'}:{projectId:PROJECT,target:'production',readyState:'READY',aliasAssigned:true,alias:domains.domains.map(x=>x.name)});await deploy(f);await writeFile(join(f.directory,'metadata/health.json'),'changed');await assert.rejects(deploy(f),/Payload changed/);assert.equal(calls.filter(x=>x.method==='POST').length,1);});
+test('changed payload on resume requires review and no second POST',async t=>{const f=await fixture(t),calls=[];f.fetchImpl=mock(calls,async path=>path==='/v13/deployments'?{id:'dpl_test'}:{projectId:PROJECT,target:'production',readyState:'READY',aliasAssigned:true,alias:domains.domains.map(x=>x.name)});await deploy(f);await writeFile(join(f.directory,'metadata/health.json'),'changed');await assert.rejects(deploy(f),/Payload changed/);assert.equal(calls.filter(x=>x.method==='POST'&&x.path==='/v13/deployments').length,1);});
 test('READY without production aliases cannot report success',async t=>{const f=await fixture(t);f.polls=1;f.fetchImpl=mock([],async path=>path==='/v13/deployments'?{id:'dpl_test'}:{projectId:PROJECT,target:'production',readyState:'READY',aliasAssigned:false,alias:[]});await assert.rejects(deploy(f),/aliases not ready/);});
 test('history deployment whitelist follows the exact manifest and verifies every shard; no extra archive or secret is uploaded',async t=>{
   const {createHash}=await import('node:crypto');const f=await fixture(t),bytes=Buffer.from('archive-test-bytes'),sha256=createHash('sha256').update(bytes).digest('hex');
@@ -40,17 +40,37 @@ async function archivedFixture(t){
   const {createHash}=await import('node:crypto');const f=await fixture(t),bytes=Buffer.from('fixed aggregate-only fixture'),sha256=createHash('sha256').update(bytes).digest('hex'),shard={month:'2026-10',file:`2026-10-${sha256}.json.gz`,sha256,bytes:bytes.length,records:1};
   await mkdir(join(f.directory,'metadata/activity-history'));await writeFile(join(f.directory,'metadata/activity.json'),JSON.stringify({history:{version:1,complete:true,shards:[shard]}}));await writeFile(join(f.directory,'metadata/activity-history',shard.file),bytes);return {...f,bytes};
 }
-test('archives upload by exact SHA before one project deployment; empty success is supported and resume never reuploads',async t=>{
-  const f=await archivedFixture(t),calls=[];
-  f.fetchImpl=async(url,opts)=>{const path=new URL(url).pathname;calls.push({path,opts,url});if(path==='/v2/files'){assert.equal(new URL(url).searchParams.get('teamId'),TEAM);assert.equal(opts.headers['Content-Length'],String(f.bytes.length));assert.deepEqual(Buffer.from(opts.body),f.bytes);return new Response(null,{status:200});}return mock([],async p=>p==='/v13/deployments'?{id:'dpl_archive'}:{projectId:PROJECT,target:'production',readyState:'READY',aliasAssigned:true,alias:domains.domains.map(x=>x.name)})(url,opts);};
-  assert.equal((await deploy(f)).status,'READY');const d=JSON.parse(calls.find(c=>c.path==='/v13/deployments').opts.body),ref=d.files.find(f=>f.file.includes('activity-history/'));assert.deepEqual(Object.keys(ref).sort(),['file','sha','size']);assert.match(ref.sha,/^[a-f0-9]{40}$/);assert.equal(ref.size,f.bytes.length);
-  assert.ok(calls.findIndex(c=>c.path==='/v2/files')<calls.findIndex(c=>c.path==='/v13/deployments'));
-  await deploy(f);assert.equal(calls.filter(c=>c.path==='/v2/files').length,1);assert.equal(calls.filter(c=>c.path==='/v13/deployments'&&c.opts.method==='POST').length,1);
+test('all source code, metadata and archives upload by exact SHA before a compact deployment; resume never reuploads',async t=>{
+  const {createHash}=await import('node:crypto');const f=await archivedFixture(t),calls=[],files=await collectBundle(f.directory),plan=deploymentPlan(files);
+  assert.equal(plan.uploads.length,files.length);
+  f.fetchImpl=async(url,opts)=>{const path=new URL(url).pathname;calls.push({path,opts,url});if(path==='/v2/files'){
+    assert.equal(new URL(url).searchParams.get('teamId'),TEAM);const bytes=Buffer.from(opts.body);
+    assert.equal(opts.headers['Content-Length'],String(bytes.length));assert.equal(opts.headers['x-vercel-digest'],createHash('sha1').update(bytes).digest('hex'));
+    return new Response(null,{status:200});
+  }return mock([],async p=>p==='/v13/deployments'?{id:'dpl_archive'}:{projectId:PROJECT,target:'production',readyState:'READY',aliasAssigned:true,alias:domains.domains.map(x=>x.name)})(url,opts);};
+  assert.equal((await deploy(f)).status,'READY');const submission=calls.find(c=>c.path==='/v13/deployments'),d=JSON.parse(submission.opts.body);
+  assert.equal(new URL(submission.url).searchParams.get('teamId'),TEAM);
+  for(const ref of d.files){
+    assert.deepEqual(Object.keys(ref).sort(),['file','sha','size']);assert.match(ref.sha,/^[a-f0-9]{40}$/);
+    const expected=plan.uploads.find(upload=>upload.file===ref.file);assert.equal(ref.sha,expected.sha);assert.equal(ref.size,expected.bytes.length);
+  }
+  assert.ok(d.files.some(file=>file.file==='api/quality.mjs'));assert.ok(d.files.some(file=>file.file==='metadata/health.json'));assert.ok(d.files.some(file=>file.file.includes('activity-history/')));
+  assert.equal(calls.filter(c=>c.path==='/v2/files').length,files.length);
+  assert.equal(calls.slice(calls.findIndex(c=>c.path==='/v13/deployments')).filter(c=>c.path==='/v2/files').length,0);
+  await deploy(f);assert.equal(calls.filter(c=>c.path==='/v2/files').length,files.length);assert.equal(calls.filter(c=>c.path==='/v13/deployments'&&c.opts.method==='POST').length,1);
+});
+
+test('large valid metadata remains out of the deployment JSON and source capacity guards remain enforced',()=>{
+  const large=Buffer.alloc(10*1024*1024,32),files=[{file:'metadata/health.json',data:large.toString('base64'),encoding:'base64'}],plan=deploymentPlan(files);
+  assert.equal(plan.sourceBytes,large.length);assert.ok(Buffer.byteLength(plan.body)<1024);
+  assert.deepEqual(Object.keys(JSON.parse(plan.body).files[0]).sort(),['file','sha','size']);
+  const tooLarge=Buffer.alloc(12*1024*1024+1).toString('base64');assert.throws(()=>deploymentPlan([{file:'metadata/health.json',data:tooLarge,encoding:'base64'}]),/file exceeds/);
+  assert.throws(()=>deploymentPlan(Array.from({length:9},(_,i)=>({file:`fixture${i}`,data:files[0].data,encoding:'base64'}))),/capacity budget/);
 });
 test('file-upload denial/uncertainty never submits a deployment or falls back to broader credentials',async t=>{
   const f=await archivedFixture(t),calls=[];
   f.fetchImpl=async(url,opts)=>{const path=new URL(url).pathname;calls.push(path);if(path==='/v2/files')return new Response(f.token,{status:403});return mock([],async()=>({}))(url,opts);};
-  await assert.rejects(deploy(f),e=>e.message.includes('Archive upload HTTP 403')&&!e.message.includes(f.token));assert.ok(!calls.includes('/v13/deployments'));
+  await assert.rejects(deploy(f),e=>e.message.includes('Source file upload HTTP 403')&&!e.message.includes(f.token));assert.ok(!calls.includes('/v13/deployments'));
   f.fetchImpl=async(url,opts)=>{if(new URL(url).pathname==='/v2/files')throw Error(f.token);return mock([],async()=>({}))(url,opts);};await assert.rejects(deploy(f),e=>e.message.includes('no deployment was submitted')&&!e.message.includes(f.token));
   // SHA writes can be retried explicitly; there is no ambiguous deployment intent to bypass.
   f.fetchImpl=async(url,opts)=>new URL(url).pathname==='/v2/files'?new Response(null,{status:200}):mock([],async p=>p==='/v13/deployments'?{id:'dpl_retry_file'}:{projectId:PROJECT,target:'production',readyState:'READY',aliasAssigned:true,alias:domains.domains.map(x=>x.name)})(url,opts);

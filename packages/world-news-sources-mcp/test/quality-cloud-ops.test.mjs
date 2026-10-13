@@ -81,6 +81,8 @@ test('cloud units are rules-only, graceful always-on service and separate hourly
   const { options } = await fixture(t), files = cloudUnitFiles(options), web = files.find(file => file.name.includes('-web.')),
     daily = files.find(file => file.name.endsWith('-daily.service')), timer = files.find(file => file.name.endsWith('.timer'));
   assert.match(web.text, /http-cloud\.js/); assert.match(web.text, /Restart=on-failure/); assert.match(web.text, /TimeoutStopSec=160/);
+  assert.match(web.text, new RegExp(`WorkingDirectory=${options.base.replaceAll('/', '\\/')}/current\\n`));
+  assert.ok(!/^(?:WorkingDirectory|EnvironmentFile)=["']/m.test(web.text));
   assert.match(daily.text, /--local --scheduled/); assert.match(daily.text, /--runtime=.*runtime\.sqlite/); assert.match(daily.text, /--not-before-utc-hour=9/); assert.match(timer.text, /OnCalendar=hourly/);
   assert.ok(files.every(file => !/collect-activity|OPENAI_API_KEY|TYPESAFE_API_KEY|--force/.test(file.text)));
   await mkdir(options.unitsDirectory); await writeFile(join(options.unitsDirectory, web.name), '[Service]\nExecStart=unrelated\n');
@@ -118,7 +120,7 @@ test('stage then activation records actual previous release once and preserves r
     if (binary === 'npm') { mkdirSync(join(cwd, 'node_modules/@modelcontextprotocol/node'), { recursive: true });
       writeFileSync(join(cwd, 'node_modules/@modelcontextprotocol/node/package.json'), '{}'); }
   };
-  const services = { platform: 'linux', command };
+  const services = { platform: 'linux', command, health: async () => {}, unitStatus: () => ({ loadState: 'loaded', activeState: 'active' }) };
   const staged = await installCloud({ ...options, stage: true }, services); assert.equal(staged.status, 'staged_not_activated');
   const bundleB = join(directory, 'bundle-b'); await prepareQualityCloud({ packageRoot: code, output: bundleB, revision: 'newer-b' });
   const activeB = await installCloud({ ...options, bundle: bundleB, stage: true, activate: true }, services);
@@ -131,4 +133,59 @@ test('stage then activation records actual previous release once and preserves r
   assert.equal(retry.previous_release, activeB.release); assert.deepEqual(await readFile(receiptPath), receiptBefore); assert.deepEqual(await readFile(backup), backupBefore);
   assert.ok(calls.filter(call => call.binary === 'systemctl').every(call => call.args.every(arg => !arg.includes('world-news-audit'))));
   assert.equal((await readFile(options.activityDb)).toString(), 'production ledger must not change');
+});
+
+test('systemd scalar paths are unquoted and ambiguous spellings are rejected', async t => {
+  const { options } = await fixture(t);
+  for (const path of ['/app path', '/app"path', '/app\\path', '/app%path'])
+    assert.throws(() => cloudUnitFiles({ ...options, base: path }), /UNSUPPORTED_SYSTEMD_PATH/);
+  assert.throws(() => cloudUnitFiles({ ...options, envFile: '/config path/runtime.env' }), /UNSUPPORTED_SYSTEMD_PATH/);
+});
+
+test('inactive web or timer never returns activated even when enable succeeds', async t => {
+  const { options } = await fixture(t); let checked = 0;
+  const command = (binary, args, cwd) => {
+    if (binary === 'npm') { mkdirSync(join(cwd, 'node_modules/@modelcontextprotocol/node'), { recursive: true });
+      writeFileSync(join(cwd, 'node_modules/@modelcontextprotocol/node/package.json'), '{}'); }
+    if (binary === 'systemctl' && args.includes('is-active')) { checked++; throw Error('inactive'); }
+  };
+  await assert.rejects(installCloud({ ...options, stage: true, activate: true }, { platform: 'linux', command, health: async () => {} }), /ACTIVATION_NOT_READY/);
+  assert.equal(checked, 1);
+});
+
+test('Linux systemd validation stops deployment before any live units are installed', async t => {
+  const { options, directory } = await fixture(t), calls = [];
+  const command = (binary, args, cwd) => {
+    calls.push(binary);
+    if (binary === 'npm') { mkdirSync(join(cwd, 'node_modules/@modelcontextprotocol/node'), { recursive: true });
+      writeFileSync(join(cwd, 'node_modules/@modelcontextprotocol/node/package.json'), '{}'); }
+    if (binary === 'systemd-analyze') throw Error('invalid definition');
+  };
+  await assert.rejects(installCloud({ ...options, stage: true, activate: true }, { platform: 'linux', command, health: async () => {} }), /SYSTEMD_UNIT_VERIFICATION_FAILED/);
+  assert.equal((await readdir(directory)).includes('units'), false); assert.ok(!calls.includes('systemctl'));
+});
+
+test('inactive timer never passes when the web unit alone is active', async t => {
+  const { options } = await fixture(t), checked = [];
+  const command = (binary, args, cwd) => {
+    if (binary === 'npm') { mkdirSync(join(cwd, 'node_modules/@modelcontextprotocol/node'), { recursive: true });
+      writeFileSync(join(cwd, 'node_modules/@modelcontextprotocol/node/package.json'), '{}'); }
+    if (binary === 'systemctl' && args.includes('is-active')) { checked.push(args.at(-1)); if (args.at(-1).endsWith('.timer')) throw Error('inactive timer'); }
+  };
+  await assert.rejects(installCloud({ ...options, stage: true, activate: true }, { platform: 'linux', command, health: async () => {} }), /ACTIVATION_NOT_READY/);
+  assert.deepEqual(checked, ['world-press-radar-quality-web.service', 'world-press-radar-quality-daily.timer']);
+});
+
+test('invalid inactive owned definitions can be repaired without stopping a nonexistent process', async t => {
+  const { options, code, directory } = await fixture(t), stopped = [];
+  const command = (binary, args, cwd) => {
+    if (binary === 'npm') { mkdirSync(join(cwd, 'node_modules/@modelcontextprotocol/node'), { recursive: true });
+      writeFileSync(join(cwd, 'node_modules/@modelcontextprotocol/node/package.json'), '{}'); }
+    if (binary === 'systemctl' && args.includes('stop')) stopped.push(args.at(-1));
+  };
+  const services = { platform: 'linux', command, health: async () => {}, unitStatus: () => ({ loadState: 'bad-setting', activeState: 'inactive' }) };
+  await installCloud({ ...options, stage: true, activate: true }, services);
+  const bundle = join(directory, 'repair-bundle'); await prepareQualityCloud({ packageRoot: code, output: bundle, revision: 'repair-b' });
+  await installCloud({ ...options, bundle, stage: true, activate: true }, services);
+  assert.deepEqual(stopped, []);
 });

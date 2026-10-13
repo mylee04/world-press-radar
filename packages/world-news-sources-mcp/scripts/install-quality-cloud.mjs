@@ -12,6 +12,12 @@ const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const contained = (base, path) => { const rel = relative(base, path); return rel !== '..' && !rel.startsWith('../') && !isAbsolute(rel); };
 const unit = value => `"${value.replaceAll('\\', '\\\\').replaceAll('"', '\\"').replaceAll('%', '%%').replaceAll('$', () => '$$')}"`;
 const fail = code => { throw Error(`QUALITY_CLOUD_${code}`); };
+// Scalar path settings do not use ExecStart's argument quoting. Restrict paths to an
+// unambiguous absolute spelling; never emit literal quotes around WorkingDirectory.
+const unitPath = value => {
+  if (!isAbsolute(value) || /[\s\\"'%\u0000-\u001f]/.test(value)) fail('UNSUPPORTED_SYSTEMD_PATH');
+  return value;
+};
 const envNames = new Set(['WNS_PORT', 'WNS_REGISTRY_PATH', 'WNS_LEGACY_HEALTH_PATH', 'WNS_HEALTH_PATH', 'WNS_ACTIVITY_PATH', 'WNS_ACTIVITY_DB', 'WNS_QUALITY_MODE',
   'WNS_QUALITY_STATE_DIR', 'WNS_QUALITY_HISTORY_PATH', 'WNS_QUALITY_RUNTIME_PATH', 'WNS_QUALITY_BUDGET_PATH', 'WNS_QUALITY_BUDGET_ID', 'WNS_QUALITY_TOTAL_BUDGET_USD',
   'WNS_QUALITY_REMOTE', 'WNS_QUALITY_PUBLIC_ORIGINS', 'WNS_QUALITY_GATEWAY_TOKEN_FILE', 'WNS_QUALITY_ADMIN_TOKEN_FILE',
@@ -86,8 +92,8 @@ export async function verifyCloudBundle(path, revision) {
 
 export function cloudUnitFiles(options) {
   const current = join(options.base, 'current'), history = join(options.state, 'history.sqlite'), runtime = join(options.state, 'runtime.sqlite'), reports = join(options.state, 'daily');
-  return [{ name: WEB, text: `${UNIT_MARKER}\n[Unit]\nDescription=World Press Radar public quality application\nAfter=network-online.target\nWants=network-online.target\n\n[Service]\nType=simple\nWorkingDirectory=${unit(current)}\nEnvironmentFile=${unit(options.envFile)}\nExecStart=${unit(options.node)} ${unit(join(current, 'dist/http-cloud.js'))}\nRestart=on-failure\nRestartSec=5\nTimeoutStopSec=160\nUMask=0077\nNoNewPrivileges=true\nStandardOutput=journal\nStandardError=journal\n\n[Install]\nWantedBy=default.target\n` },
-    { name: DAILY, text: `${UNIT_MARKER}\n[Unit]\nDescription=World Press Radar daily read-only quality analysis\nAfter=network-online.target\nWants=network-online.target\n\n[Service]\nType=oneshot\nWorkingDirectory=${unit(current)}\nEnvironmentFile=${unit(options.envFile)}\nExecStart=${unit(options.node)} ${unit(join(current, 'scripts/quality-daily.mjs'))} --local --scheduled ${unit(`--output=${reports}`)} ${unit(`--history=${history}`)} ${unit(`--runtime=${runtime}`)} --not-before-utc-hour=9\nUMask=0077\nNoNewPrivileges=true\nTimeoutStartSec=600\nStandardOutput=journal\nStandardError=journal\n` },
+  return [{ name: WEB, text: `${UNIT_MARKER}\n[Unit]\nDescription=World Press Radar public quality application\nAfter=network-online.target\nWants=network-online.target\n\n[Service]\nType=simple\nWorkingDirectory=${unitPath(current)}\nEnvironmentFile=${unitPath(options.envFile)}\nExecStart=${unit(options.node)} ${unit(join(current, 'dist/http-cloud.js'))}\nRestart=on-failure\nRestartSec=5\nTimeoutStopSec=160\nUMask=0077\nNoNewPrivileges=true\nStandardOutput=journal\nStandardError=journal\n\n[Install]\nWantedBy=default.target\n` },
+    { name: DAILY, text: `${UNIT_MARKER}\n[Unit]\nDescription=World Press Radar daily read-only quality analysis\nAfter=network-online.target\nWants=network-online.target\n\n[Service]\nType=oneshot\nWorkingDirectory=${unitPath(current)}\nEnvironmentFile=${unitPath(options.envFile)}\nExecStart=${unit(options.node)} ${unit(join(current, 'scripts/quality-daily.mjs'))} --local --scheduled ${unit(`--output=${reports}`)} ${unit(`--history=${history}`)} ${unit(`--runtime=${runtime}`)} --not-before-utc-hour=9\nUMask=0077\nNoNewPrivileges=true\nTimeoutStartSec=600\nStandardOutput=journal\nStandardError=journal\n` },
     { name: TIMER, text: `${UNIT_MARKER}\n[Unit]\nDescription=World Press Radar quality report dispatcher\n\n[Timer]\nOnCalendar=hourly\nPersistent=true\nRandomizedDelaySec=60\nUnit=${DAILY}\n\n[Install]\nWantedBy=timers.target\n` }];
 }
 
@@ -188,6 +194,50 @@ function command(binary, args, cwd) {
   if (result.error || result.status !== 0) fail('INSTALL_COMMAND_FAILED');
 }
 
+async function verifySystemdDefinitions(options, release, run) {
+  const directory = join(release, 'systemd-verify'); await safeCloudDirectory(directory, true);
+  const files = cloudUnitFiles({ ...options, base: release });
+  // Use the staged real code path for verification: first installation has no current link yet.
+  for (const file of files) {
+    const text = file.text.replaceAll(join(release, 'current'), release), destination = join(directory, file.name);
+    try {
+      await regular(destination); if (await readFile(destination, 'utf8') !== text) fail('STAGED_VERIFY_CONFIG_MISMATCH');
+    } catch (error) { if (error.code !== 'ENOENT') throw error; await writeFile(destination, text, { flag: 'wx', mode: 0o600 }); }
+  }
+  try { run('systemd-analyze', ['--user', 'verify', ...files.map(file => join(directory, file.name))]); }
+  catch { fail('SYSTEMD_UNIT_VERIFICATION_FAILED'); }
+}
+
+async function loopbackHealth(port) {
+  for (let attempt = 0; attempt < 10; attempt++) {
+    try {
+      const response = await fetch(`http://127.0.0.1:${port}/health`, { signal: AbortSignal.timeout(1000), redirect: 'error' });
+      if (response.ok) {
+        const payload = await response.json();
+        if (payload.status === 'ok' && payload.service === 'news-quality' && payload.persistence === 'sqlite' && payload.metadata_reload_failed === false) return;
+      }
+    } catch { /* Initial process startup may not have bound the loopback socket yet. */ }
+    if (attempt < 9) await new Promise(resolve => setTimeout(resolve, 200));
+  }
+  fail('ACTIVATION_HEALTH_FAILED');
+}
+
+function managedUnitStatus(name) {
+  const result = spawnSync('systemctl', ['--user', 'show', '--property=LoadState', '--property=ActiveState', name], { encoding: 'utf8', timeout: 5000 });
+  if (result.error || result.status !== 0) fail('UNIT_STATUS_UNAVAILABLE');
+  const values = Object.fromEntries(result.stdout.trim().split('\n').map(line => line.split('=')));
+  if (!values.LoadState || !values.ActiveState) fail('UNIT_STATUS_UNAVAILABLE');
+  return { loadState: values.LoadState, activeState: values.ActiveState };
+}
+
+function stopManagedUnit(name, run, status) {
+  const state = status(name);
+  // A previous invalid definition has no process to stop and systemctl stop can itself fail.
+  // Skip only that verified inactive condition; any live/starting service still has to stop.
+  if (['bad-setting', 'not-found'].includes(state.loadState) && ['inactive', 'failed'].includes(state.activeState)) return;
+  run('systemctl', ['--user', 'stop', name]);
+}
+
 async function verifyInstalledRelease(options, checked) {
   await safeCloudDirectory(checked.release);
   await safeCloudDirectory(join(checked.release, 'systemd'));
@@ -241,6 +291,7 @@ export async function installCloud(options, services = {}) {
       const definitions = join(checked.release, 'systemd'); await safeCloudDirectory(definitions, true);
       for (const file of cloudUnitFiles(options)) await writeFile(join(definitions, file.name), file.text, { flag: 'wx', mode: 0o600 });
     }
+    if ((services.platform ?? process.platform) === 'linux') await verifySystemdDefinitions(options, checked.release, run);
     if (!options.activate) return { ...checked.result, status: 'staged_not_activated', release: checked.release };
     if ((services.platform ?? process.platform) !== 'linux') fail('SYSTEMD_LINUX_REQUIRED');
     // Durable app storage remains outside every code release. No history is reset or replaced.
@@ -265,12 +316,21 @@ export async function installCloud(options, services = {}) {
       await writeFile(receiptPath, JSON.stringify(receipt) + '\n', { flag: 'wx', mode: 0o600 });
     }
     // Stop only our own units; a scheduled collector is never stopped or changed here.
-    if (checked.current && checked.current !== checked.release) { run('systemctl', ['--user', 'stop', TIMER]); run('systemctl', ['--user', 'stop', DAILY]); run('systemctl', ['--user', 'stop', WEB]); }
+    if (checked.current && checked.current !== checked.release)
+      for (const name of [TIMER, DAILY, WEB]) stopManagedUnit(name, run, services.unitStatus ?? managedUnitStatus);
     if (checked.current !== checked.release) {
       const link = join(options.base, `.current-${randomUUID()}`); await symlink(checked.release, link); await rename(link, join(options.base, 'current'));
     }
     for (const file of cloudUnitFiles(options)) await writeFile(join(options.unitsDirectory, file.name), file.text, { mode: 0o600 });
     run('systemctl', ['--user', 'daemon-reload']); run('systemctl', ['--user', 'enable', '--now', WEB, TIMER]);
+    // is-active with several units succeeds when only one is active; require each individually.
+    try {
+      run('systemctl', ['--user', 'is-active', '--quiet', WEB]); run('systemctl', ['--user', 'is-active', '--quiet', TIMER]);
+    } catch { fail('ACTIVATION_NOT_READY'); }
+    await (services.health ?? loopbackHealth)(checked.runtime.listen_port);
+    try {
+      run('systemctl', ['--user', 'is-active', '--quiet', WEB]); run('systemctl', ['--user', 'is-active', '--quiet', TIMER]);
+    } catch { fail('ACTIVATION_NOT_READY'); }
     return { ...checked.result, status: 'activated', release: checked.release, previous_release: receipt.previous_release, service_activated: true,
       quality_daily_timer_activated: true, collector_timer_changed: false, persistent_user_manager_required: true };
   } finally { await lock.close(); await unlink(lockPath).catch(() => {}); }

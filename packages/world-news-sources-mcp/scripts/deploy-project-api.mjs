@@ -58,12 +58,13 @@ export function createBody(files){
   return serialized;
 }
 export function deploymentPlan(files){
-  const sourceBytes=files.reduce((n,f)=>n+Buffer.from(f.data,'base64').length,0);
-  if(sourceBytes>80*1024*1024)throw Error('Free source capacity budget reached; retain history and current deployment, review storage before proceeding');
-  const uploads=[];
+  let sourceBytes=0;const uploads=[];
   const references=files.map(f=>{
-    if(!f.file.startsWith('metadata/activity-history/'))return f;
-    const bytes=Buffer.from(f.data,'base64'),sha=createHash('sha1').update(bytes).digest('hex');uploads.push({file:f.file,bytes,sha});
+    const bytes=Buffer.from(f.data,'base64');
+    if(bytes.length>12*1024*1024)throw Error('Bundle file exceeds limit');
+    sourceBytes+=bytes.length;
+    if(sourceBytes>80*1024*1024)throw Error('Free source capacity budget reached; retain history and current deployment, review storage before proceeding');
+    const sha=createHash('sha1').update(bytes).digest('hex');uploads.push({file:f.file,bytes,sha});
     return {file:f.file,sha,size:bytes.length};
   });
   return {body:createBody(references),uploads,sourceBytes};
@@ -72,8 +73,8 @@ export async function uploadArchive({bytes,sha},token,fetchImpl=fetch){
   let response;
   try{response=await fetchImpl(`https://api.vercel.com/v2/files?teamId=${TEAM}`,{method:'POST',body:bytes,
     headers:{Authorization:`Bearer ${token}`,'Content-Type':'application/octet-stream','Content-Length':String(bytes.length),'x-vercel-digest':sha},
-    redirect:'error',signal:AbortSignal.timeout(60000)});}catch{throw Error('Content-addressed archive upload unavailable; no deployment was submitted');}
-  if(response.status!==200)throw Error(`Archive upload HTTP ${response.status}; no deployment was submitted`);
+    redirect:'error',signal:AbortSignal.timeout(60000)});}catch{throw Error('Content-addressed source file upload unavailable; no deployment was submitted');}
+  if(response.status!==200)throw Error(`Source file upload HTTP ${response.status}; no deployment was submitted`);
   // The documented successful response may have an empty body. Never expose it or credentials.
 }
 export function client(token,fetchImpl=fetch){
@@ -110,12 +111,12 @@ export async function deploy({directory,stateFile,token,fetchImpl=fetch,sleep=ms
     for(const file of uploads)await uploadArchive(file,token,fetchImpl);
     state={digest,status:'submission-intent',project:PROJECT};await save(state);
     // Intentionally no automatic POST retries after 429, 5xx or network uncertainty.
-    const d=await api('/v13/deployments',{method:'POST',body});
+    const d=await api(`/v13/deployments?teamId=${TEAM}`,{method:'POST',body});
     if(typeof d.id!=='string'||!d.id.startsWith('dpl_'))throw Error('Deployment response missing ID; reconcile before retrying');
     state={...state,id:d.id,status:'submitted'};await save(state);
   }
   for(let i=0;i<polls;i++){
-    const d=await api(`/v13/deployments/${encodeURIComponent(state.id)}`);
+    const d=await api(`/v13/deployments/${encodeURIComponent(state.id)}?teamId=${TEAM}`);
     if(d.projectId!==PROJECT||d.target!=='production')throw Error('Deployment identity or target mismatch');
     if(d.readyState==='READY'){
       if(d.aliasError)throw Error('Production alias assignment failed');
@@ -135,7 +136,7 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).hr
   else try{
     if(mode==='--preflight'){
       const files=await collectBundle(directory);const {body,uploads,sourceBytes}=deploymentPlan(files);
-      await preflight(client(process.env.VERCEL_TOKEN));console.log(JSON.stringify({project:PROJECT,files:files.length,archiveFiles:uploads.length,sourceBytes,requestBytes:Buffer.byteLength(body),status:'preflight-passed-no-deployment'}));
+      await preflight(client(process.env.VERCEL_TOKEN));console.log(JSON.stringify({project:PROJECT,files:files.length,sourceFiles:uploads.length,archiveFiles:uploads.filter(file=>file.file.startsWith('metadata/activity-history/')).length,sourceBytes,requestBytes:Buffer.byteLength(body),status:'preflight-passed-no-deployment'}));
     }else if(mode){throw Error('Unknown mode');}
     else console.log(JSON.stringify(await deploy({directory,stateFile,token:process.env.VERCEL_TOKEN})));
   }catch(e){console.error(e.message);process.exitCode=1;}

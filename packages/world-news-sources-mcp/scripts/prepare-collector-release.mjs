@@ -10,7 +10,7 @@ const fixtureFiles = new Set(['expansion/registry-additions.json', 'expansion/ve
   'expansion/remaining13/checkpoints.json', 'expansion/remaining13/targeted.json', 'expansion/remaining13/registry-additions.json',
   'expansion/remaining13/verified-health-additions.json', 'expansion/remaining13/verified-existing-health.json']);
 export const collectorCodePath = path => fixed.includes(path) || fixtureFiles.has(path)
-  || /^(?:src\/[A-Za-z0-9_-]+\.ts|dist\/[A-Za-z0-9_-]+\.(?:js|d\.ts)|scripts\/[A-Za-z0-9_-]+\.(?:mjs|py)|test\/[A-Za-z0-9_-]+\.mjs|dashboard\/(?:index\.html|app\.js|styles\.css)|site\/(?:[A-Za-z0-9_-]+\.(?:html|css|svg)|\.well-known\/openai-apps-challenge)|metrics\/(?:worker\.mjs|schema\.sql|report\.sql)|plugin\/(?:plugin\.json|mcp\.json|skills\/find-news-sources\/(?:SKILL\.md|agents\/openai\.yaml)))$/.test(path);
+  || /^(?:src\/[A-Za-z0-9_-]+\.ts|dist\/[A-Za-z0-9_-]+\.(?:js|d\.ts)|scripts\/[A-Za-z0-9_-]+\.(?:mjs|py)|test\/[A-Za-z0-9_-]+(?:\.test)?\.mjs|dashboard\/(?:index\.html|app\.js|styles\.css)|site\/(?:[A-Za-z0-9_-]+\.(?:html|css|svg)|\.well-known\/openai-apps-challenge)|metrics\/(?:worker\.mjs|schema\.sql|report\.sql)|plugin\/(?:plugin\.json|mcp\.json|skills\/find-news-sources\/(?:SKILL\.md|agents\/openai\.yaml)))$/.test(path);
 
 export async function prepareCollectorRelease({ packageRoot = root, output, revision }) {
   if (!output || !/^[A-Za-z0-9][A-Za-z0-9._-]{0,79}$/.test(revision ?? '')) throw Error('COLLECTOR_RELEASE_INVALID_OPTIONS');

@@ -20,7 +20,7 @@ import time
 
 PACKAGE = Path('packages/world-news-sources-mcp')
 KIND = 'world-press-radar-collector-code-only'
-CODE = re.compile(r'^(?:package(?:-lock)?\.json|tsconfig\.json|src/[A-Za-z0-9_-]+\.ts|dist/[A-Za-z0-9_-]+\.(?:js|d\.ts)|scripts/[A-Za-z0-9_-]+\.(?:mjs|py)|test/[A-Za-z0-9_-]+\.mjs|dashboard/(?:index\.html|app\.js|styles\.css)|site/(?:[A-Za-z0-9_-]+\.(?:html|css|svg)|\.well-known/openai-apps-challenge)|metrics/(?:worker\.mjs|schema\.sql|report\.sql)|plugin/(?:plugin\.json|mcp\.json|skills/find-news-sources/(?:SKILL\.md|agents/openai\.yaml))|expansion/(?:robots-policy\.mjs|(?:registry-additions|verified-health-additions|second-pass-live-before|first-pass-checkpoints)\.json|remaining13/(?:registry-additions|verified-health-additions|verified-existing-health|checkpoints|targeted)\.json))$')
+CODE = re.compile(r'^(?:package(?:-lock)?\.json|tsconfig\.json|src/[A-Za-z0-9_-]+\.ts|dist/[A-Za-z0-9_-]+\.(?:js|d\.ts)|scripts/[A-Za-z0-9_-]+\.(?:mjs|py)|test/[A-Za-z0-9_-]+(?:\.test)?\.mjs|dashboard/(?:index\.html|app\.js|styles\.css)|site/(?:[A-Za-z0-9_-]+\.(?:html|css|svg)|\.well-known/openai-apps-challenge)|metrics/(?:worker\.mjs|schema\.sql|report\.sql)|plugin/(?:plugin\.json|mcp\.json|skills/find-news-sources/(?:SKILL\.md|agents/openai\.yaml))|expansion/(?:robots-policy\.mjs|(?:registry-additions|verified-health-additions|second-pass-live-before|first-pass-checkpoints)\.json|remaining13/(?:registry-additions|verified-health-additions|verified-existing-health|checkpoints|targeted)\.json))$')
 
 
 def fail(code):
@@ -68,6 +68,15 @@ def offline_environment():
                'SSL_CERT_FILE', 'SSL_CERT_DIR', 'NODE_EXTRA_CA_CERTS'}
     return dict({key: value for key, value in os.environ.items() if key in allowed},
                 PATH='/usr/bin:/bin', NPM_CONFIG_UPDATE_NOTIFIER='false')
+
+
+def tested_cases(log, manifest):
+    test_files = sum(bool(re.fullmatch(r'test/[A-Za-z0-9_-]+\.test\.mjs', file['path'])) for file in manifest['files'])
+    summaries = re.findall(r'^# tests (\d+)\s*$', log.read_text(), re.MULTILINE)
+    failures = re.findall(r'^# fail (\d+)\s*$', log.read_text(), re.MULTILINE)
+    if test_files < 20 or not summaries or int(summaries[-1]) < test_files or not failures or int(failures[-1]) != 0:
+        fail('OFFLINE_TEST_SUITE_INCOMPLETE')
+    return int(summaries[-1])
 
 
 def verify_activation_metadata(expected, release, data_hashes):
@@ -222,18 +231,22 @@ def run(options):
             command(['/usr/bin/npm', 'ci', '--ignore-scripts', '--no-audit', '--no-fund'], log, release / PACKAGE, env=env)
             command(['/usr/bin/npm', 'run', 'typecheck'], log, release / PACKAGE, env=env)
             command(['/usr/bin/npm', 'test'], log, release / PACKAGE, timeout=900, env=env)
+            passed = tested_cases(log, manifest)
             for path, digest in data_hashes.items():
                 if hash_file(expected / path) != digest or hash_file(release / path) != digest:
                     fail('PRODUCTION_DATA_CHANGED_DURING_STAGE')
             private_json(release / 'COLLECTOR-STAGED.json', {'kind': KIND, 'revision': manifest['revision'], 'previous_release': str(expected),
                          'registry_sha256': registry_hash, 'data_hashes': data_hashes, 'timer_hashes': timer_hashes,
-                         'activity_generated_at': prior_activity.get('generated_at'), 'staged_at': datetime.datetime.now(datetime.timezone.utc).isoformat()})
+                         'activity_generated_at': prior_activity.get('generated_at'), 'offline_test_cases_passed': passed,
+                         'staged_at': datetime.datetime.now(datetime.timezone.utc).isoformat()})
             emit(status='staged_not_activated', release=str(release), registry_sha256=registry_hash, history_shards=len(prior_activity['history']['shards']),
-                 current_release=str(expected), timer_changed=False, publisher_requests=0, model_calls=0)
+                 current_release=str(expected), offline_test_cases_passed=passed, timer_changed=False, publisher_requests=0, model_calls=0)
             return
         marker = json.loads(regular(release / 'COLLECTOR-STAGED.json').read_text())
         if marker.get('previous_release') != str(expected) or marker.get('registry_sha256') != registry_hash or marker.get('timer_hashes') != timer_hashes:
             fail('STAGED_BASELINE_CHANGED')
+        if marker.get('offline_test_cases_passed') != tested_cases(release / 'STAGE-VALIDATION.log', manifest):
+            fail('STAGED_TEST_VALIDATION_CHANGED')
         for file in manifest['files']:
             if hash_file(release / PACKAGE / file['path']) != file['sha256']:
                 fail('STAGED_CODE_HASH_MISMATCH')
