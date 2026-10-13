@@ -4,6 +4,8 @@ This extends World Press Radar's existing news MCP. Harvard CS2680 inspired the 
 
 The application has a minimal country dashboard, actual MCP investigations, an adaptive OpenAI agent, a Jev evidence classifier, durable observation/run/budget stores, and an approval-controlled local repair workflow. Rules are the default. Models inspect evidence; code owns counts, dates, deduplication and supported failure classifications.
 
+The implementation stays in TypeScript/Node.js. The user excluded Rust migration from the project plan on October 13, 2026.
+
 ## Start
 
 ```sh
