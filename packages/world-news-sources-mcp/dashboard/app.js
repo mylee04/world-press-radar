@@ -45,6 +45,18 @@ function countryName(country) {
 }
 function inventory(country) { return country.inventory ?? country; }
 function metrics(country) { return country.metrics ?? country; }
+function publisherCountText(counts) {
+  const value = counts.unique_publishers;
+  if (typeof value !== 'number' || !Number.isFinite(value)) return '—';
+  return `${counts.publisher_count_state === 'estimated_from_registry_identity' ? '≈ ' : ''}${valueText(value)}`;
+}
+function publisherCountNote(counts) {
+  if (typeof counts.publisher_count_semantics === 'string' && counts.publisher_count_semantics) return counts.publisher_count_semantics;
+  if (typeof counts.unique_publishers !== 'number' || !Number.isFinite(counts.unique_publishers)) return '언론사 식별 근거가 없어 계산할 수 없습니다. 0개를 뜻하지 않습니다.';
+  return counts.publisher_count_state === 'estimated_from_registry_identity' ? '등록된 소스의 식별 정보를 묶은 언론사 수 추정치입니다.' : '활성 등록에서 중복을 제거한 고유 언론사 수입니다.';
+}
+function publisherCountCell(counts) { const cell = node('td', 'numeric publisher-count', publisherCountText(counts)); cell.title = publisherCountNote(counts); return cell; }
+function countryTableColumns() { return 9 - Number($('freshness-heading').hidden) - Number($('observation-heading').hidden); }
 function timeText(value) {
   if (!value) return '—';
   const date = new Date(value);
@@ -166,6 +178,28 @@ function renderMetric(metric, unavailableLabel) {
   return element;
 }
 
+function appendCollectionSchedule(cell, country) {
+  const schedule = country.collection_schedule;
+  if (schedule?.policy !== 'daily_all_active' || !schedule.as_of || !Number.isFinite(Date.parse(schedule.as_of))) return;
+  const reportDate = country.date ?? country.period?.date ?? state.overview?.date ?? $('date-input').value;
+  if (reportDate && new Date(schedule.as_of).toISOString().slice(0, 10) !== reportDate) return;
+  const notes = node('div', 'collection-schedule');
+  const positive = (count) => typeof count === 'number' && Number.isFinite(count) && count > 0;
+  const observed = `확인 ${timeText(schedule.as_of)}`;
+  if (positive(schedule.deferred_endpoints)) {
+    const note = node('span', 'schedule-deferred', `서버 대기 ${valueText(schedule.deferred_endpoints)}`);
+    note.title = `서버가 요청한 재검사 대기시간을 따릅니다. ${schedule.next_recheck_at ? `다음 재검사 ${timeText(schedule.next_recheck_at)} · ` : ''}${observed}`;
+    notes.append(note);
+  }
+  if (positive(schedule.unattempted_unrestricted_endpoints)) {
+    const running = schedule.cycle_status === 'running';
+    const note = node('span', 'schedule-unattempted', `${running ? '검사 전' : '미검사'} ${valueText(schedule.unattempted_unrestricted_endpoints)}`);
+    note.title = `서버 제한 대기 없이 ${running ? '이번 회차 검사를 기다리는' : '아직 검사 기록이 없는'} 주소입니다. ${observed}`;
+    notes.append(note);
+  }
+  if (notes.childElementCount) cell.append(notes);
+}
+
 function countryAssessment(country) {
   const baseline = country.completed_cycle_baseline;
   if (baseline?.state === 'comparable_completed_cycles') return { state: baseline.reasons?.length ? 'review_needed' : 'no_drop_signal', reasons: baseline.reasons ?? [], scope: 'completed_cycles' };
@@ -205,12 +239,13 @@ function renderCountries() {
   const showObservation = state.countries.some((country) => ['review_needed', 'no_drop_signal'].includes(countryAssessment(country).state));
   $('observation-heading').hidden = !showObservation;
   const tbody = $('country-rows'); tbody.replaceChildren();
-  if (!countries.length) { emptyRow(tbody, 8, state.countries.length ? '검색 조건에 맞는 국가가 없습니다.' : '조회 가능한 국가 기록이 없습니다.'); return; }
+  if (!countries.length) { emptyRow(tbody, countryTableColumns(), state.countries.length ? '검색 조건에 맞는 국가가 없습니다.' : '조회 가능한 국가 기록이 없습니다.'); return; }
   countries.forEach((country) => {
     const code = countryCode(country), row = node('tr', `country-row${state.selected === code ? ' selected' : ''}`);
     const nameCell = node('td'), button = node('button', 'country-button'); button.type = 'button';
     const title = node('span', 'country-name', countryName(country));
     button.append(title); button.addEventListener('click', () => selectCountry(code, true)); nameCell.append(button); row.append(nameCell);
+    row.append(publisherCountCell(inventory(country)));
     const details = metrics(country);
     ['attempt_coverage', 'success_rate', 'freshness'].forEach((kind) => {
       const cell = node('td'); cell.hidden = kind === 'freshness' && !showFreshness;
@@ -219,7 +254,9 @@ function renderCountries() {
         : details[kind]?.denominator === 0 ? kind === 'success_rate' ? '검사 기록 없음' : '활성 주소 없음'
         : country.period?.state === 'not_tracked' ? '추적 기록 없음'
         : country.period?.state === 'history_unavailable' ? '저장 이력 범위 밖' : '검사 자료 없음';
-      cell.append(renderMetric(details[kind], unavailableLabel)); row.append(cell);
+      cell.append(renderMetric(details[kind], unavailableLabel));
+      if (kind === 'attempt_coverage') appendCollectionSchedule(cell, country);
+      row.append(cell);
     });
     const counts = inventory(country); row.append(node('td', 'numeric', valueText(counts.active_source_registrations)));
     const endpointCell = node('td', 'numeric endpoint-pair'); endpointCell.append(document.createTextNode(valueText(counts.unique_active_rss_endpoints)), node('span', '', '/'), document.createTextNode(valueText(counts.unique_active_sitemap_endpoints))); row.append(endpointCell);
@@ -290,15 +327,19 @@ function renderInventory() {
   const tbody = $('inventory-rows'); tbody.replaceChildren();
   countries.forEach((country) => {
     const row = node('tr'), counts = inventory(country); row.append(node('td', 'country-name', countryName(country)));
+    row.append(publisherCountCell(counts));
     ['active_source_registrations', 'disabled_source_registrations', 'unique_active_rss_endpoints', 'unique_active_sitemap_endpoints'].forEach((key) => row.append(node('td', 'numeric', valueText(counts[key], country.lookup_error ? '조회 실패' : '—'))));
     tbody.append(row);
   });
-  if (!countries.length) emptyRow(tbody, 5, '국가별 등록 상태를 불러오지 못했습니다.');
+  if (!countries.length) emptyRow(tbody, 6, '국가별 등록 상태를 불러오지 못했습니다.');
   const registryAt = data.registry_snapshot_at ?? view.registryAt;
   $('inventory-note').textContent = `등록 기준 ${registryAt ? timeText(registryAt) : '시각 없음'} · 보유량 순`;
-  const publisherKnown = countries.length > 0 && countries.every((country) => typeof inventory(country).unique_publishers === 'number');
+  const publisherKnown = countries.length > 0 && countries.every((country) => typeof inventory(country).unique_publishers === 'number' && Number.isFinite(inventory(country).unique_publishers));
+  const publisherEstimated = countries.some((country) => inventory(country).publisher_count_state === 'estimated_from_registry_identity');
+  const publisherNotes = [...new Set(countries.filter((country) => typeof inventory(country).unique_publishers === 'number').map((country) => publisherCountNote(inventory(country))))];
+  document.querySelectorAll('.publisher-heading').forEach((heading) => { heading.title = publisherNotes.length === 1 ? publisherNotes[0] : '활성 등록의 언론사 식별 정보를 기준으로 중복 제거합니다. 추정치에는 ≈를 표시합니다.'; });
   const availability = $('inventory-availability'); availability.replaceChildren(); $('inventory-availability-title').textContent = '언론사 수와 이력의 집계 기준';
-  availability.append(node('p', '', publisherKnown ? '언론사 수는 식별 정보가 제공된 경우에만 계산합니다.' : '언론사 식별 정보가 없어 등록 항목을 언론사 수로 세지 않습니다.'));
+  availability.append(node('p', '', publisherNotes.length === 1 ? publisherNotes[0] : publisherEstimated ? '≈는 등록된 소스의 식별 정보를 묶은 언론사 수 추정치입니다. 국가별 수에 집계 기준을 표시합니다.' : publisherKnown ? '언론사 수는 활성 등록의 식별 정보를 기준으로 중복 제거합니다.' : '언론사 식별 근거가 없는 국가는 —로 표시합니다. 등록 항목을 언론사 수로 세지 않습니다.'));
   availability.append(node('p', '', view.mode === 'observed' ? '완전한 등록 목록의 관측 사이에서 달라진 정규화 소스를 셉니다. 첫 관측은 최초 기준선이며, 실제 등록일·삭제일을 뜻하지 않습니다.' : view.mode === 'actual' ? '변화는 기록된 이벤트만 셉니다. 이력이 완전해야 순증을 계산합니다.' : '과거 변경 이력이 없어 이전 증가량을 계산하지 않습니다.'));
   $('inventory-history-title').textContent = view.mode === 'observed' ? '관측된 등록 변화' : '등록 변화와 신규 소스';
   $('inventory-change-heading').textContent = view.mode === 'observed' ? '국가별 관측 변화' : '등록 변화';
@@ -365,7 +406,7 @@ async function loadOverview() {
     $('screen-status').textContent = `${state.countries.length}개 국가의 저장 기록을 불러왔습니다.`;
   } catch (error) {
     if (request !== state.overviewRequest) return;
-    showError('page-error', error); emptyRow($('country-rows'), 8, '기록 조회에 실패했습니다. 다시 조회해 주세요.');
+    showError('page-error', error); emptyRow($('country-rows'), countryTableColumns(), '기록 조회에 실패했습니다. 다시 조회해 주세요.');
     $('snapshot-status').textContent = '조회 실패 · 저장 데이터 연결을 확인하세요'; $('screen-status').textContent = '국가별 기록을 불러오지 못했습니다.';
   } finally { if (request === state.overviewRequest) $('refresh').disabled = false; }
 }
@@ -384,7 +425,7 @@ async function selectCountry(code, scroll = false) {
     const info = data.country && typeof data.country === 'object' ? data.country : country;
     const counts = inventory(info ?? {}); const meta = $('country-detail-meta');
     appendMeta(meta, '활성 등록', valueText(counts.active_source_registrations));
-    if (typeof counts.unique_publishers === 'number') appendMeta(meta, '언론사', valueText(counts.unique_publishers));
+    if (typeof counts.unique_publishers === 'number' && Number.isFinite(counts.unique_publishers)) { appendMeta(meta, '고유 언론사', publisherCountText(counts)); meta.lastChild.title = publisherCountNote(counts); }
     appendMeta(meta, '마지막 검사', timeText(info?.period?.last_collection_at ?? data.latest_collection));
     const completed = country?.completed_cycle_baseline ?? info?.completed_cycle_baseline;
     if (completed?.state === 'comparable_completed_cycles') appendMeta(meta, '비교 기준', `${valueText(completed.samples)}개 같은 요일 완료 회차`);

@@ -68,7 +68,7 @@ test('successful zero, regression, recovery, stale content and unknown tracking 
   assert.equal(detail('Daily NK').endpoints[0].daily.attributed_source_new_urls, null);
 });
 
-test('attempt coverage and success have separate denominators; freshness and publisher identity are unavailable', () => {
+test('attempt coverage and success have separate denominators; publisher counts are labelled estimates', () => {
   const result = getCountryQualityOverview(catalog, activity, health, { date: '2026-10-12', limit: 50 }, now);
   const kr = result.items.find(row => row.country === 'KR'), us = result.items.find(row => row.country === 'US');
   assert.equal(kr.metrics.attempt_coverage.numerator, 2);
@@ -80,7 +80,8 @@ test('attempt coverage and success have separate denominators; freshness and pub
   assert.equal(us.metrics.success_rate.value, 100);
   assert.equal(us.metrics.freshness.value, null);
   assert.equal(us.metrics.freshness.denominator, 0);
-  assert.equal(us.inventory.unique_publishers, null);
+  assert.equal(us.inventory.unique_publishers, 2);
+  assert.equal(us.inventory.publisher_count_state, 'estimated_from_registry_identity');
   assert.equal(kr.anomaly.operational_failure_confirmed, false);
   assert.equal(kr.investigation_candidates[0].reason, 'failure_after_prior_success');
 });

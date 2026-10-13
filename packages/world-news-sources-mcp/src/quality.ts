@@ -1,8 +1,9 @@
 import { z } from 'zod';
 import { page, pagination, type Catalog, type Source, type Endpoint } from './catalog.js';
-import { ActivityStore } from './activity.js';
+import { ActivityStore, countryCollectionSchedule } from './activity.js';
 import { historyMonths, readHistory } from './activity-history.js';
 import { HealthStore } from './health.js';
+import { estimatePublisherInventory } from './publisher-inventory.js';
 import { completedCycleBaseline, empiricalFreshness, summarizeCollectionCycle } from './quality-history.js';
 
 const DAY = 86400000;
@@ -90,9 +91,9 @@ function inventory(catalog: Catalog, country: string) {
   const endpoints = (type: 'rss' | 'sitemap') => new Set(active.flatMap(source => source.endpoints.filter(e => e.type === type).map(e => e.id))).size;
   return { active_source_registrations: all.reduce((n, source) => n + source.activeRegistrationCount, 0),
     active_normalized_sources: active.length, disabled_source_registrations: all.reduce((n, source) => n + source.disabledRegistrationCount, 0),
-    unique_publishers: null, publisher_count_state: 'publisher_entity_identity_not_recorded',
+    ...estimatePublisherInventory(active),
     unique_active_rss_endpoints: endpoints('rss'), unique_active_sitemap_endpoints: endpoints('sitemap'),
-    count_semantics: 'Current source registrations and distinct typed endpoint IDs. Feed names and hosts do not establish unique publisher identities.' };
+    count_semantics: 'Current source registrations and distinct typed endpoint IDs. Publisher counts are brand estimates from domains and explicit aliases, not verified legal entities or ownership groups.' };
 }
 function contentEvidence(endpoint: Endpoint, sources: Source[], health: HealthStore, now: number, records: RecordRow[], evidenceAt: number) {
   const check = health.get(endpoint, sources, now);
@@ -199,6 +200,7 @@ export function getCountryQualityOverview(catalog: Catalog, activity: ActivitySt
         .map(source => candidate(source, 'uninitialized_binding', 5));
     }).sort((a, b) => a.priority - b.priority || a.source_id.localeCompare(b.source_id));
     return { country: country.code, name: country.name, inventory: inventory(catalog, country.code), period: current.period,
+      collection_schedule: countryCollectionSchedule(cycles, country.code, Date.parse(selected.date), Date.parse(selected.date) + DAY, now, expected.size),
       metrics: { attempt_coverage: current.attempt_coverage, success_rate: current.success_rate,
         successful_registered_coverage: current.successful_registered_coverage,
         freshness: { ...ratio(freshnessEligible.length ? freshnessEligible.filter(finding => finding.health.comparable_update_cadence.value).length : null, freshnessEligible.length),

@@ -4,10 +4,24 @@ import { mkdirSync, lstatSync, existsSync, chmodSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { z } from 'zod';
 import { canonicalUrl, stableId, type Catalog } from './catalog.js';
+import { estimatePublisherInventory } from './publisher-inventory.js';
 
 const DAY = 86400000;
 const iso = z.string().datetime({ offset: true });
 const id = z.string().regex(/^ep_[a-f0-9]{24}$/);
+const endpointIds = z.array(id).max(10000);
+const deferralSchema = z.object({ endpoint_id: id, next_due: iso,
+  reason: z.enum(['rate_limited', 'server_retry_after']), http_status: z.number().int().min(100).max(599).nullable() }).strict();
+const schedulingSchema = z.object({ policy: z.literal('daily_all_active'), as_of: iso,
+  force_recheck: z.boolean().optional(),
+  active_endpoint_ids: endpointIds, already_checked_today_endpoint_ids: endpointIds,
+  deferred_endpoints: z.array(deferralSchema).max(10000), country_active_endpoints: z.record(z.string(), endpointIds) }).strict();
+const countSchema = z.number().int().min(0).max(10000);
+const schedulingSummarySchema = z.object({ policy: z.literal('daily_all_active'), as_of: iso,
+  country_metrics: z.record(z.string(), z.object({ active_endpoints: countSchema, already_checked_today_endpoints: countSchema,
+    eligible_endpoints: countSchema, planned_endpoints: countSchema, attempted_endpoints: countSchema,
+    deferred_endpoints: countSchema, unattempted_deferred_endpoints: countSchema,
+    unattempted_unrestricted_endpoints: countSchema, next_recheck_at: iso.nullable() }).strict()) }).strict();
 export const collectionCycleSchema = z.object({
   id: z.string().min(1).max(128), lane: z.enum(['production', 'inspection']),
   started_at: iso, finished_at: iso.nullable(), status: z.enum(['running', 'completed', 'partial', 'failed']),
@@ -16,6 +30,7 @@ export const collectionCycleSchema = z.object({
   eligible_endpoint_ids: z.array(id).max(10000), planned_endpoint_ids: z.array(id).max(10000),
   attempted_endpoint_ids: z.array(id).max(10000), successful_article_endpoint_ids: z.array(id).max(10000),
   failure_reason: z.string().max(128).nullable(),
+  scheduling: schedulingSchema.optional(),
 }).strict();
 export type CollectionCycle = z.infer<typeof collectionCycleSchema>;
 const cycleSummarySchema = z.object({ summary_version: z.literal(1), id: z.string().min(1).max(128), lane: z.enum(['production', 'inspection']),
@@ -24,6 +39,7 @@ const cycleSummarySchema = z.object({ summary_version: z.literal(1), id: z.strin
   eligible_endpoints: z.number().int().min(0).max(10000), planned_endpoints: z.number().int().min(0).max(10000), attempted_endpoints: z.number().int().min(0).max(10000), successful_article_endpoints: z.number().int().min(0).max(10000),
   country_metrics: z.record(z.string(), z.object({ cohort_sha256: z.string().regex(/^[a-f0-9]{64}$/), eligible_endpoints: z.number().int().min(1).max(10000),
     planned_endpoints: z.number().int().min(0).max(10000), attempted_endpoints: z.number().int().min(0).max(10000), successful_article_endpoints: z.number().int().min(0).max(10000) }).strict()),
+  scheduling: schedulingSummarySchema.optional(),
 }).strict();
 export type CollectionCycleSummary = z.infer<typeof cycleSummarySchema>;
 export type CollectionCycleEvidence = CollectionCycle | CollectionCycleSummary;
@@ -39,6 +55,17 @@ export function validateCollectionCycle(value: unknown): CollectionCycle {
     || row.finished_at && Date.parse(row.finished_at) < Date.parse(row.started_at)
     || row.status === 'running' && row.finished_at !== null || row.status !== 'running' && row.finished_at === null
     || row.status === 'completed' && (planned.size !== eligible.size || attempted.size !== planned.size)) throw Error('INVALID_COLLECTION_CYCLE');
+  if (row.scheduling) {
+    const schedule = row.scheduling, active = new Set(schedule.active_endpoint_ids);
+    if (![schedule.active_endpoint_ids, schedule.already_checked_today_endpoint_ids, schedule.deferred_endpoints.map(value => value.endpoint_id), ...Object.values(schedule.country_active_endpoints)].every(unique)
+      || schedule.already_checked_today_endpoint_ids.some(value => !active.has(value))
+      || schedule.deferred_endpoints.some(value => !active.has(value.endpoint_id) || Date.parse(value.next_due) <= Date.parse(schedule.as_of))
+      || row.eligible_endpoint_ids.some(value => !active.has(value) || !schedule.force_recheck && schedule.already_checked_today_endpoint_ids.includes(value))
+      || Object.values(schedule.country_active_endpoints).flat().some(value => !active.has(value))
+      || [...active].some(value => !Object.values(schedule.country_active_endpoints).some(ids => ids.includes(value)))
+      || Date.parse(schedule.as_of) < Date.parse(row.started_at)
+      || row.finished_at && Date.parse(schedule.as_of) > Date.parse(row.finished_at)) throw Error('INVALID_COLLECTION_SCHEDULING');
+  }
   return row;
 }
 /** Public export retains cohort identity and measured counts without repeating thousands of endpoint IDs. */
@@ -51,6 +78,13 @@ export function summarizeCollectionCycle(input: CollectionCycleEvidence): Collec
       || row.status === 'completed' && (!complete(row) || Object.values(row.country_metrics).some(country => !complete(country)))
       || row.status === 'running' && row.finished_at !== null || row.status !== 'running' && row.finished_at === null
       || row.finished_at && Date.parse(row.finished_at) < Date.parse(row.started_at)) throw Error('INVALID_COLLECTION_CYCLE_SUMMARY');
+    if (row.scheduling) {
+      if (Date.parse(row.scheduling.as_of) < Date.parse(row.started_at) || row.finished_at && Date.parse(row.scheduling.as_of) > Date.parse(row.finished_at)
+        || Object.values(row.scheduling.country_metrics).some(value => value.attempted_endpoints > value.planned_endpoints || value.planned_endpoints > value.eligible_endpoints
+          || value.active_endpoints !== value.already_checked_today_endpoints + value.attempted_endpoints + value.unattempted_deferred_endpoints + value.unattempted_unrestricted_endpoints
+          || value.deferred_endpoints > value.active_endpoints || value.unattempted_deferred_endpoints > value.deferred_endpoints
+          || value.next_recheck_at && Date.parse(value.next_recheck_at) <= Date.parse(row.scheduling!.as_of))) throw Error('INVALID_COLLECTION_SCHEDULING_SUMMARY');
+    }
     return row;
   }
   const row = validateCollectionCycle(input), count = (eligible: string[], values: string[]) => eligible.filter(id => values.includes(id)).length;
@@ -59,7 +93,19 @@ export function summarizeCollectionCycle(input: CollectionCycleEvidence): Collec
     attempted_endpoints: row.attempted_endpoint_ids.length, successful_article_endpoints: row.successful_article_endpoint_ids.length,
     country_metrics: Object.fromEntries(Object.entries(row.country_endpoints).map(([country, ids]) => [country, {
       cohort_sha256: createHash('sha256').update(JSON.stringify([...ids].sort())).digest('hex'), eligible_endpoints: ids.length,
-      planned_endpoints: count(ids, row.planned_endpoint_ids), attempted_endpoints: count(ids, row.attempted_endpoint_ids), successful_article_endpoints: count(ids, row.successful_article_endpoint_ids) }])) };
+      planned_endpoints: count(ids, row.planned_endpoint_ids), attempted_endpoints: count(ids, row.attempted_endpoint_ids), successful_article_endpoints: count(ids, row.successful_article_endpoint_ids) }])),
+    ...(row.scheduling ? { scheduling: { policy: row.scheduling.policy, as_of: row.scheduling.as_of,
+      country_metrics: Object.fromEntries(Object.entries(row.scheduling.country_active_endpoints).map(([country, ids]) => {
+        const checked = new Set([...row.scheduling!.already_checked_today_endpoint_ids, ...row.attempted_endpoint_ids]);
+        const deferred = row.scheduling!.deferred_endpoints.filter(value => ids.includes(value.endpoint_id));
+        return [country, { active_endpoints: ids.length,
+          already_checked_today_endpoints: count(ids, row.scheduling!.already_checked_today_endpoint_ids.filter(value => !row.attempted_endpoint_ids.includes(value))),
+          eligible_endpoints: count(ids, row.eligible_endpoint_ids), planned_endpoints: count(ids, row.planned_endpoint_ids),
+          attempted_endpoints: count(ids, row.attempted_endpoint_ids), deferred_endpoints: deferred.length,
+          unattempted_deferred_endpoints: deferred.filter(value => !checked.has(value.endpoint_id)).length,
+          unattempted_unrestricted_endpoints: ids.filter(value => !checked.has(value) && !deferred.some(item => item.endpoint_id === value)).length,
+          next_recheck_at: deferred.map(value => value.next_due).sort().at(0) ?? null }];
+      })) } } : {}) };
 }
 
 const median = (values: number[]) => { const a = [...values].sort((x, y) => x - y), i = Math.floor(a.length / 2); return a.length % 2 ? a[i] : (a[i - 1] + a[i]) / 2; };
@@ -103,6 +149,7 @@ export function completedCycleBaseline(input: CollectionCycleEvidence[], country
   if (!selected || selected.status !== 'completed' || selected.scope !== 'due_endpoints') return { ...empty, state: selected ? 'incomplete_or_explicit_cycle' : empty.state };
   const cohort = selected.country_metrics[country], signature = cohort.cohort_sha256, start = Date.parse(date) - days * DAY, weekday = new Date(date).getUTCDay();
   const previous = cycles.filter(row => row.lane === 'production' && row.status === 'completed' && row.scope === 'due_endpoints'
+    && (row.scheduling?.policy ?? 'legacy_due_policy') === (selected.scheduling?.policy ?? 'legacy_due_policy')
     && Date.parse(row.started_at) >= start && row.started_at < selected.started_at && row.started_at.slice(0, 10) < date
     && new Date(row.started_at).getUTCDay() === weekday && row.country_metrics[country]?.cohort_sha256 === signature);
   // Several runs on one day do not multiply the number of independent weekday samples.
@@ -212,7 +259,20 @@ export class QualityHistoryStore {
   }
   decorateOverview(payload: Record<string, any>) {
     const date = String(payload.date ?? payload.items?.[0]?.period?.date ?? ''), cycles = this.db.prepare('SELECT payload FROM quality_cycles').all().map(row => summarizeCollectionCycle(JSON.parse(String(row.payload))));
-    const rows = (payload.items ?? []).map((row: any) => ({ ...row, completed_cycle_baseline: completedCycleBaseline(cycles, row.country, row.period?.date ?? date) }));
+    // Only use a complete registry observation from this exact inventory revision.
+    // A local catalog or a newer observation must not silently fill remote counts.
+    const registryAt = typeof payload.registry_snapshot_at === 'string' && Number.isFinite(Date.parse(payload.registry_snapshot_at))
+      ? new Date(Date.parse(payload.registry_snapshot_at)).toISOString() : null;
+    const registry = registryAt ? this.db.prepare('SELECT observed_at,sources FROM quality_registry WHERE registry_snapshot_at=? ORDER BY observed_at DESC,id DESC LIMIT 1').get(registryAt) : null;
+    const sources: RegistrySource[] | null = registry ? JSON.parse(String(registry.sources)) : null;
+    const rows = (payload.items ?? []).map((row: any) => {
+      const selected = sources?.filter(source => source.country === row.country);
+      const inventoryMatches = selected && selected.filter(source => source.enabled).length === row.inventory?.active_normalized_sources;
+      return { ...row, inventory: inventoryMatches && row.inventory?.unique_publishers == null
+        ? { ...row.inventory, ...estimatePublisherInventory(selected), publisher_inventory_snapshot_at: registryAt,
+          publisher_inventory_observed_at: String(registry!.observed_at) } : row.inventory,
+        completed_cycle_baseline: completedCycleBaseline(cycles, row.country, row.period?.date ?? date) };
+    });
     const all = [...new Set(cycles.flatMap(cycle => Object.keys(cycle.country_metrics)))].map(country => ({ country, baseline: completedCycleBaseline(cycles, country, date) }));
     const eligible = all.filter(row => row.baseline.state === 'comparable_completed_cycles'), failed = eligible.filter(row => row.baseline.reasons.some(reason => reason.metric === 'success_rate'));
     return { ...payload, items: rows, history: this.summary(date), completed_cycle_common_signal: {

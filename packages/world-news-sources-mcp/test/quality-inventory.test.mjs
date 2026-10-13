@@ -37,7 +37,8 @@ test('records exact operator initial additions and keeps validation and registra
   assert.equal(got.unknown_addition_timestamp_count, 2);
   const us = got.per_country.find(country => country.country === 'US');
   assert.equal(us.additions, 1); assert.equal(us.deletions, null); assert.equal(us.net_change, null);
-  assert.equal(us.current_holdings.unique_publishers, null);
+  assert.equal(us.current_holdings.unique_publishers, 2);
+  assert.equal(us.current_holdings.publisher_count_state, 'estimated_from_registry_identity');
   assert.equal(us.history_complete, false);
 });
 
@@ -112,7 +113,7 @@ test('authoritative registry without an addition ledger has current holdings but
   const got = project(raw), catalog = normalizeRegistry(raw);
   assert.equal(got.unknown_addition_timestamp_count + got.known_addition_timestamp_count, catalog.sources.length);
   assert.equal(got.per_country.reduce((count, country) => count + country.current_holdings.configured_source_registrations, 0), catalog.configuredRows);
-  assert.ok(got.per_country.every(country => country.unique_publishers === undefined && country.current_holdings.unique_publishers === null
+  assert.ok(got.per_country.every(country => country.unique_publishers === undefined && typeof country.current_holdings.unique_publishers === 'number'
     && country.deletions === null && country.net_change === null && !country.history_complete));
   // Today's raw file has no batch evidence. A future explicitly recorded addition
   // may legitimately make known_addition_timestamp_count nonzero.

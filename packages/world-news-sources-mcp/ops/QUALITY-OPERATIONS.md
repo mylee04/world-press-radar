@@ -2,6 +2,8 @@
 
 The existing repository and `news.bymyleslee.com` MCP remain the product. The daily worker reads saved MCP records, stores its observations, and investigates only supported country decline signals. It never edits registrations, fetches publisher pages, invokes a paid model, deploys, or changes the article collector schedule.
 
+The collection policy is a separate component. Its implemented default targets all active addresses daily with six global workers (maximum sixteen), one in-flight request per host and a two-second host gap. Each HTTP attempt has an eight-second deadline and at most three redirects; at most one transient retry is permitted. The default 12,000 daily request budget includes HTTP-hop reservations, redirects and retries. 429 and server `Retry-After` waiting are respected and recorded as deferred/partial coverage. This policy is implemented in the checkout but is not yet installed on the authoritative production runner; its existing 03:00 UTC timer remains unchanged.
+
 ## Run once
 
 From `packages/world-news-sources-mcp`, after building the package:
@@ -47,7 +49,7 @@ The initial real remote observation is retained in `output/news-quality/ops-smok
 
 ## Production topology
 
-The prepared Vercel configuration currently has 10-second functions and no durable process. Keep the existing public MCP and read-only dashboard there. A complete agent investigation can take longer and cannot safely rely on its process memory. The local Node runtime implements SQLite observations, retained investigation records, persistent budget reservations and an owner session. Cloud execution still needs a durable host and cloud-appropriate authentication. Keep model credentials only at that worker; the browser receives readiness, usage and completed results.
+The existing deployed Vercel configuration was last inspected with a 10-second function ceiling. The prepared bundle uses a 60-second ceiling and saved daily overview, but still has no durable agent process. Keep the public MCP and read-only dashboard there. The local Node runtime implements SQLite observations, retained investigation records, persistent budget reservations and an owner session. Cloud execution still needs a durable host and cloud-appropriate authentication. Keep model credentials only at that worker; the browser receives readiness, usage and completed results.
 
 The existing Cloudflare worker stores aggregate MCP tool counters in D1. It has no quality read API or scheduled handler. These counters are not the source registry or article ledger. A future Cloudflare quality worker would need a reviewed schema migration, an authenticated read/write design, and an investigation transport appropriate to the Node Agents SDK; none is implied by the existing metrics binding.
 
@@ -56,3 +58,7 @@ Read-only preflight on 2026-10-13 confirmed the existing Vercel project identity
 Both provider pilot calls have succeeded using the authorized $5 shared cap. TypeSafe account/key setup is complete; no additional account setup is a current blocker. Usage costs are estimates from reported tokens, not provider billing receipts. The daily worker remains rules only.
 
 The prepared scheduler, worker and Vercel bundle require the separate activation/deployment step. Preparing definitions or bundles does not deploy, install a schedule or change a production source. Official replacement proposals apply only after individual approval; production rollout and subsequent authoritative collection are still required for production recovery.
+
+Use the [activity rollout checklist](../activity/README.md#deployoracle-handoff) before changing the production runner. Preserve its current registry, health audit, private SQLite ledger, monthly shards, pending spools and 03:00 UTC timer. The local October 1 snapshot is not a replacement for newer production history. Preparing the complete production dependency lock includes the newsroom estimator's `tldts` dependency; an old prepared bundle must be rebuilt before review.
+
+Post-deploy activity verification allows an explicit degraded usage-statistics result. MCP functionality, protocol/data identity and exported history remain strict. Missing/unavailable metrics acknowledgments yield a warning and `status: degraded`; that is neither failed article collection nor complete usage counters. The standalone HTTP smoke remains strict unless `--allow-metrics-degraded` is supplied.

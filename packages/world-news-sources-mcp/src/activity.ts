@@ -22,6 +22,24 @@ export function dayBoundary(date: string, zone: string) {
   return low;
 }
 const nextDay = (value: string) => new Date(Date.parse(value) + 86400000).toISOString().slice(0, 10);
+/** Scheduling evidence belongs to its measured UTC day, never to the snapshot export date. */
+export function countryCollectionSchedule(cycles: CollectionCycleEvidence[], country: string, from: number, to: number, now: number, expectedEndpoints?: number) {
+  const selected = cycles.map(summarizeCollectionCycle).filter(cycle => {
+    const scheduling = cycle.scheduling;
+    const started = Date.parse(cycle.started_at), observed = scheduling ? Date.parse(scheduling.as_of) : NaN;
+    // A cycle crossing midnight cannot certify a single day's scheduling counts.
+    return cycle.lane === 'production' && cycle.scope === 'due_endpoints' && scheduling?.country_metrics[country]
+      && (expectedEndpoints === undefined || scheduling.country_metrics[country].active_endpoints === expectedEndpoints)
+      && started >= from && started < to && observed >= started && observed < to && observed <= now
+      && (!cycle.finished_at || Date.parse(cycle.finished_at) < to);
+  }).sort((a, b) => a.started_at.localeCompare(b.started_at)).at(-1);
+  if (!selected) return null;
+  const scheduling = selected.scheduling!;
+  return { ...scheduling.country_metrics[country], policy: scheduling.policy, as_of: scheduling.as_of,
+    cycle_id: selected.id, cycle_status: selected.status, cycle_started_at: selected.started_at, cycle_finished_at: selected.finished_at,
+    evidence_scope: 'latest_recorded_cycle_within_selected_utc_day',
+    semantics: 'Scheduling counts describe this recorded run. Attempt coverage remains the actual daily attempted/current active endpoint ratio; server deferrals never count as successful checks.' };
+}
 export class ActivityStore {
   constructor(readonly snapshot?: ActivitySnapshot, readonly historyDirectory?:string) {
     if (snapshot && (snapshot.version !== 1 || snapshot.lane !== 'production' || !Array.isArray(snapshot.bindings) || !Array.isArray(snapshot.collections))) throw new Error('Invalid production activity snapshot');
@@ -68,6 +86,8 @@ export class ActivityStore {
         state, expected_endpoints: expected.size, targeted_endpoints: targeted.size, successful_article_endpoints: successIds.size,
         failed_checks: records.filter(e => !['working_nonempty', 'valid_empty'].includes(e.status)).length,
         index_only_checks: records.filter(e => e.format === 'sitemapindex').length,
+        collection_schedule: kind === 'country' && input.mode === 'calendar_days' && input.timezone === 'UTC'
+          && !beforeTracking && !unavailable ? countryCollectionSchedule(snapshot?.collection_cycles ?? [], scope, range.from, range.to, now, expected.size) : null,
         uncertain_url_observations: successful.reduce((total, e) => total + e.uncertain_urls, 0),
         baseline_checks: successful.filter(e => e.baseline_sources.some((id: string) => sourceIds.has(id))).length };
     });

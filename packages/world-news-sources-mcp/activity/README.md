@@ -1,6 +1,6 @@
 # Durable article-URL observations
 
-The authoritative store is an isolated operator SQLite ledger, separate from usage D1 and every legacy database. No article bodies, user queries or new credentials are needed. The existing Oracle audit runner can own this file after a verified transfer. Do not run its superseded release/timer. There is currently **no activity scheduler activated by this package**.
+The authoritative store is an isolated operator SQLite ledger, separate from usage D1 and every legacy database. No article bodies, user queries or new credentials are needed. The existing production VM timer runs at **03:00 UTC daily** and remains unchanged. This checkout's new daily-all-active collection policy is implemented but has **not been rolled out to that production runner**. No new activity or quality scheduler was activated by this work.
 
 ## Semantics
 
@@ -16,11 +16,17 @@ Node 22.13+ (Node SQLite) and the normal package dependencies are sufficient:
 
 ```sh
 npm run build
-npm run activity:collect -- --db /private/operator/activity.sqlite --snapshot activity/activity-snapshot.json --limit 10000 --daily-budget 12000
+npm run activity:collect -- --db /private/operator/activity.sqlite --snapshot activity/activity-snapshot.json --limit 10000 --daily-budget 12000 --concurrency 6
 npm run activity:export -- --db /private/operator/activity.sqlite --snapshot activity/activity-snapshot.json
 ```
 
-Run once daily **after** the parent has coordinated the Oracle runner's compatible release. Activity collection is distinct from the weekly full endpoint-health audit. Production default: full active endpoint pass (up to 10,000 distinct endpoints), at most 12,000 attempts per UTC day (retries included), two global workers, one request per host and a two-second host gap; DNS pinning, private-address rejection, 8-second timeout and bounded decompression/XML bodies are reused. Typed endpoint IDs are deduplicated across registrations. RSS and sitemap sharing the exact URL remain separate typed checks. Only transient failures receive at most one retry. Blocked/auth/WAF responses receive no bypass. Failed bindings have bounded exponential backoff; sitemap indexes are revisited weekly. Disabled registrations are excluded from collection.
+The implemented default targets **every active typed endpoint each UTC day**, including previously failing endpoints and sitemap indexes. An already checked endpoint need not be duplicated on a same-day rerun. `--concurrency` defaults to six global workers and is bounded at sixteen; each host has one in-flight request and a two-second gap, including redirect destinations. Workers choose another available host instead of filling their slots with one publisher. Disabled registrations are excluded, and typed endpoint IDs are deduplicated across registrations. RSS and sitemap sharing the same URL remain separate typed checks.
+
+Each fetch attempt has an eight-second deadline across DNS, host gating and at most three redirects, with public-IP pinning and bounded decompression/XML bodies. At most one transient retry is allowed; 401/403/429, WAF/CAPTCHA and structural failures are not automatically retried or bypassed. A valid `Retry-After` deadline is retained across restarts and honored for the affected host/endpoint. A 429 without a usable deadline still defers further same-host requests. Every HTTP-hop reservation, redirect and retry consumes the shared default 12,000-request UTC-day budget; concurrency never raises that budget.
+
+The cycle records all active targets, already-checked endpoints, planned and attempted endpoints, and deferred endpoints with reasons/deadlines. Budget exhaustion, endpoint limits, server waiting and incomplete work remain explicit partial coverage. A failed attempt is an attempt, not a successful collection; a deferred endpoint is not a successful zero-article result. No old failure backoff or weekly sitemap-index schedule silently removes an active address from the daily target.
+
+These are checkout defaults, not a claim about the currently installed production release. Coordinate an approved rollout to the authoritative runner before relying on the policy. Activity collection remains distinct from the weekly full endpoint-health audit.
 
 `--endpoint ep_ID` may be repeated for a small selection. `--force` ignores due dates, not daily budget or writer lock. `--inspection` uses a separate ledger/snapshot and never enters a production bundle. Never pass production DB paths to fixture/test runs. Production initialization is real tracking, even when operators inspect its output; MCP verification calls are independently labelled `inspection` for usage statistics.
 
@@ -28,7 +34,7 @@ Every successful document retains **all extracted URLs**, not three health sampl
 
 ## Free resource budget and coverage
 
-Current registry: 72 active countries, 5,023 active registrations, 5,403 distinct typed active endpoints (3,674 RSS references, 1,757 sitemap references). A 250-endpoint engineering sample takes at least 22 days to rotate through the registry and can miss short-lived RSS links; it is **not the production coverage cadence**. Production targets every due active endpoint daily, with initial full baseline, bounded backoff and explicit unsuccessful coverage. Successful bindings become due at the next UTC calendar day, not 24 hours after a late-running check. At global concurrency two, allow roughly 40–120 minutes per full run; blocked/timeout retries and per-host waits can make it longer. This is an estimate to measure on Oracle, not a runtime guarantee. The previous health audit reported roughly 816,807 entries across 3,883 active non-index working endpoints; these are workload estimates, not tracked articles or deduplicated URLs.
+A prior local registry measurement had 72 active countries, 5,023 active registrations and 5,403 distinct typed active endpoints (3,674 RSS references, 1,757 sitemap references). Recompute the authoritative inventory before rollout rather than treating that dated measurement as the current production registry. A 250-endpoint engineering sample takes roughly 22 days to rotate through that scale and can miss short-lived RSS links; it is not the new daily-all-active target. Same-day checks and explicit server deferrals remain separate from unattempted work. Six global workers improve cross-host progress, but actual duration depends on host concentration, response time, deferrals and retry budget; measure on the production runner. The previous health audit's roughly 816,807 entries across 3,883 active non-index working endpoints are workload estimates, not tracked articles or deduplicated URLs.
 
 SQLite requires no per-write cloud charge and uses existing VM disk/CPU. Budget roughly **1–3 GB** for initial URL/relationship/index storage, dependent on URL length and overlap; verify actual VM free disk before activating. Default soft storage stop is 8,192 MiB (`--max-db-mib`), checked before each new document; Oracle must have sufficient existing free disk before activation; a bounded document/transaction can cross it slightly. No deletion, retention purge, paid upgrade or purchase is automatic. Stop/report exhausted capacity. Request bodies are bounded (RSS 4 MiB, sitemap 8 MiB); huge/unsupported XML remains incomplete. Repeated checks extend `last_seen`; absent URLs are not declared deleted.
 
@@ -41,6 +47,16 @@ A shard is bounded to 500,000 checks, 64 MiB expanded and 10 MiB compressed; exc
 ## Deploy/Oracle handoff
 
 `scripts/refresh-deploy.mjs` retains the weekly complete health audit. It supports `WNS_DEPLOY_API=1` with the already approved project-scoped Vercel token and narrow `scripts/deploy-project-api.mjs`; no account-user CLI lookup or broader credential is needed. Use the new `scripts/refresh-activity.mjs` for collect/test/export/deploy without a full health crawl. Set WNS_ACTIVITY_DB to the authoritative production ledger for both jobs. The weekly pipeline reexports that ledger after its health audit and refuses deployment if the ledger is unavailable, preserving article history across health updates. Keep uncertain API submission state; never blindly repeat a deployment POST.
+
+The post-deploy activity smoke explicitly uses `--allow-metrics-degraded`. Every functional MCP, legacy protocol, identity, cached audit and article-history assertion still must pass. Only missing/unavailable usage-counter acknowledgments produce `status: degraded`, a warning and `functional_status: passed` instead of falsely marking collection refresh as failed. This does not repair the counter collector or certify its totals. Standalone `npm run smoke:http -- MCP_URL` remains strict by default; add the flag explicitly for that separate degraded outcome.
+
+Before an approved production rollout:
+
+1. Confirm the installed 03:00 UTC unit, one authoritative writer and the current production registry/audits/activity paths. Record their timestamps and checksums; preserve the timer settings.
+2. Take a consistent SQLite backup of the authoritative ledger with its original tracking/baseline timestamps. Keep its history shards and pending spools; do not initialize a replacement ledger from the checkout's October 1 snapshot.
+3. Stage the new package code, tests and production dependency lock beside the existing release. Preserve VM-local credentials and the current registry/audit files. Do not replace them with old checkout metadata or copy Mac keys.
+4. Run offline type/tests against fixtures. Export the current authoritative ledger and verify that the prepared Vercel manifest, required history shards and current registry/audits match that export. New runtime dependencies must be present in the prepared package/lock.
+5. After release approval, switch the existing runner's code without changing its 03:00 UTC timer. Check the real completed/partial cycle and deferred counts, then verify actual MCP history. A usage ACK warning remains a separate observability issue; any functional mismatch still fails rollout verification.
 
 Transfer only package source/scripts/tests/metrics/site/plugin/audits snapshots, package manifests, required registry metadata and an SQLite backup made with `VACUUM INTO` while this Mac collector is stopped. Preserve the initial production tracking timestamps. Exclude `.vercel` credential state, Wrangler config, `.npm`, `.ssh`, video/evidence folders, `.env`, secrets and private token files. Populate only the existing verified nonsecret project link on VM; its project-scoped token remains VM-local. Do not copy any Mac credential. Choose one production writer; no incompatible timers.
 

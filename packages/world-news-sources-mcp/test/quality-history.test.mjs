@@ -22,6 +22,36 @@ function cycle(date, good = true, patch = {}) { const endpoints = [...catalog.en
   registry_digest: 'a'.repeat(64), country_endpoints: Object.fromEntries(catalog.countries.map(country => [country.code, catalog.sources.filter(source => source.countryCode === country.code).flatMap(source => source.endpoints.map(endpoint => endpoint.id))])),
   eligible_endpoint_ids: endpoints, planned_endpoint_ids: endpoints, attempted_endpoint_ids: endpoints, successful_article_endpoint_ids: good ? endpoints : [], failure_reason: null, ...patch }; }
 
+test('daily all-active policy does not reuse older weekly/backoff-policy baselines', () => {
+  const current = cycle('2026-10-12'), previous = [cycle('2026-10-05'), cycle('2026-09-28')];
+  assert.equal(completedCycleBaseline([...previous, current], 'US', '2026-10-12').samples, 2);
+  current.scheduling = { policy: 'daily_all_active', as_of: '2026-10-12T04:00:00.000Z',
+    active_endpoint_ids: current.eligible_endpoint_ids, already_checked_today_endpoint_ids: [], deferred_endpoints: [],
+    country_active_endpoints: current.country_endpoints };
+  const changed = completedCycleBaseline([...previous, current], 'US', '2026-10-12');
+  assert.equal(changed.samples, 0);
+  assert.equal(changed.state, 'insufficient_completed_cycle_history');
+});
+
+test('remote publisher estimates use only a complete matching registry revision, never a newer or partial listing', t => {
+  const { path } = setup(t), store = new QualityHistoryStore(path); t.after(() => store.close());
+  const payload = (registryAt, count = 2) => ({ date: '2026-10-12', registry_snapshot_at: registryAt,
+    items: [{ country: 'US', inventory: { active_normalized_sources: count, unique_publishers: null } }] });
+  const revision = at('2026-10-11');
+  assert.equal(store.decorateOverview(payload(revision)).items[0].inventory.unique_publishers, null);
+  store.observeCatalog(catalog, at('2026-10-12'), revision);
+  const matched = store.decorateOverview(payload(revision)).items[0].inventory;
+  assert.equal(matched.unique_publishers, 1);
+  assert.equal(matched.publisher_count_state, 'estimated_from_registry_identity');
+  assert.equal(matched.publisher_inventory_snapshot_at, revision);
+  assert.equal(store.decorateOverview(payload(at('2026-10-10'))).items[0].inventory.unique_publishers, null);
+  assert.equal(store.decorateOverview(payload(at('2026-10-13'))).items[0].inventory.unique_publishers, null);
+  assert.equal(store.decorateOverview(payload(null)).items[0].inventory.unique_publishers, null);
+  assert.equal(store.decorateOverview(payload(revision, 3)).items[0].inventory.unique_publishers, null);
+  store.observeRegistry({ observed_at: at('2026-10-13'), registry_snapshot_at: at('2026-10-13'), complete: false, sources: [] });
+  assert.equal(store.decorateOverview(payload(at('2026-10-13'))).items[0].inventory.unique_publishers, null);
+});
+
 test('complete registry first observation is a durable baseline, never an inferred creation batch', t => {
   const { path } = setup(t); let store = new QualityHistoryStore(path);
   assert.equal(store.observeCatalog(catalog, at('2026-10-12'), at('2026-10-11')).state, 'initial_observation_baseline');

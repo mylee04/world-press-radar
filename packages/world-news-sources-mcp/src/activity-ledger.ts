@@ -6,10 +6,13 @@ import {encodeHistory,type HistoryShard} from './activity-history.js';
 import type { Catalog, Endpoint, Source } from './catalog.js';
 import { normalizeArticleUrl, NORMALIZATION_VERSION } from './article-url.js';
 import { validateCollectionCycle, summarizeCollectionCycle, type CollectionCycle } from './quality-history.js';
+import { collectionNextDue, endpointDue, type CollectionScheduling, type DeferredEndpoint, type RetryAfterSource, type SchedulingState } from './collection-schedule.js';
 
 export type CollectionBinding = Pick<Source, 'id' | 'countryCode'>;
 export type Collection = { id: string; endpoint: Endpoint; checked_at: string; status: string; format: string | null; urls: string[]; reason: string | null; traffic: 'production' | 'inspection'; source_bindings?: CollectionBinding[];
-  cycle_id?: string; newest_content_at?: string | null; date_kind?: 'feed_item_date' | 'sitemap_lastmod' };
+  cycle_id?: string; newest_content_at?: string | null; date_kind?: 'feed_item_date' | 'sitemap_lastmod';
+  http_status?: number | null; retry_after_at?: string | null; retry_after_source?: RetryAfterSource | null; request_host?: string; response_host?: string; attempts?: number;
+  requested_hops?: number; server_deferral?: { until: string; http_status: number | null; hostname?: string } };
 export const ACTIVITY_SCHEMA = `
 PRAGMA journal_mode=WAL;
 PRAGMA foreign_keys=ON;
@@ -23,9 +26,13 @@ CREATE TABLE IF NOT EXISTS binding_urls(source_id TEXT NOT NULL,endpoint_id TEXT
 CREATE TABLE IF NOT EXISTS bindings(source_id TEXT NOT NULL,endpoint_id TEXT NOT NULL,country TEXT NOT NULL,baseline_at TEXT,last_success_at TEXT,last_attempt_at TEXT,last_status TEXT,failures INTEGER NOT NULL DEFAULT 0,next_due TEXT,PRIMARY KEY(source_id,endpoint_id));
 CREATE TABLE IF NOT EXISTS collections(id TEXT PRIMARY KEY,endpoint_id TEXT NOT NULL,checked_at TEXT NOT NULL,status TEXT NOT NULL,format TEXT,reason TEXT,details TEXT NOT NULL);
 CREATE INDEX IF NOT EXISTS collection_time ON collections(checked_at);
+CREATE INDEX IF NOT EXISTS collection_endpoint_time ON collections(endpoint_id,checked_at DESC,id DESC);
 CREATE TABLE IF NOT EXISTS writer_lock(id INTEGER PRIMARY KEY CHECK(id=1),owner TEXT NOT NULL,expires_at TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS request_budget(day TEXT PRIMARY KEY,requests INTEGER NOT NULL);
 CREATE TABLE IF NOT EXISTS collection_cycles(id TEXT PRIMARY KEY,payload TEXT NOT NULL);
+CREATE TABLE IF NOT EXISTS endpoint_recovery(endpoint_id TEXT PRIMARY KEY,request_host TEXT NOT NULL,response_host TEXT,failed_checks INTEGER,last_checked_at TEXT,category TEXT,action TEXT,next_eligible_at TEXT,review_required INTEGER,record TEXT);
+CREATE TABLE IF NOT EXISTS recovery_events(event_key TEXT PRIMARY KEY,endpoint_id TEXT,checked_at TEXT,record TEXT);
+CREATE TABLE IF NOT EXISTS host_cooldowns(host TEXT PRIMARY KEY,until_at TEXT,category TEXT);
 `;
 export function collectionId(endpointId: string, checkedAt: string, urls: string[]) {
   return createHash('sha256').update(JSON.stringify([endpointId, checkedAt, urls])).digest('hex');
@@ -61,20 +68,60 @@ export class ActivityLedger {
       this.db.prepare(`INSERT INTO metadata VALUES('registry_at',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value`).run(at);
     });
   }
-  beginCycle(catalog: Catalog, input: { id: string; lane: 'production' | 'inspection'; at: string; eligible_endpoint_ids: string[]; planned_endpoint_ids: string[]; scope: 'due_endpoints' | 'explicit_endpoints' }) {
+  beginCycle(catalog: Catalog, input: { id: string; lane: 'production' | 'inspection'; at: string; eligible_endpoint_ids: string[]; planned_endpoint_ids: string[]; scope: 'due_endpoints' | 'explicit_endpoints'; scheduling?: CollectionScheduling }) {
     const eligible = new Set(input.eligible_endpoint_ids), active = catalog.sources.filter(source => source.enabled);
     if ([...eligible].some(id => !active.some(source => source.endpoints.some(endpoint => endpoint.id === id)))) throw Error('UNREGISTERED_CYCLE_ENDPOINT');
     const countries = Object.fromEntries(catalog.countries.map(country => [country.code, [...new Set(active.filter(source => source.countryCode === country.code).flatMap(source => source.endpoints.map(endpoint => endpoint.id)))].filter(id => eligible.has(id))]).filter(([, ids]) => ids.length));
     const row = validateCollectionCycle({ id: input.id, lane: input.lane, started_at: input.at, finished_at: null, status: 'running', scope: input.scope,
       registry_digest: createHash('sha256').update(JSON.stringify(catalog.sources)).digest('hex'), country_endpoints: countries,
-      eligible_endpoint_ids: input.eligible_endpoint_ids, planned_endpoint_ids: input.planned_endpoint_ids, attempted_endpoint_ids: [], successful_article_endpoint_ids: [], failure_reason: null });
+      eligible_endpoint_ids: input.eligible_endpoint_ids, planned_endpoint_ids: input.planned_endpoint_ids, attempted_endpoint_ids: [], successful_article_endpoint_ids: [], failure_reason: null, ...(input.scheduling ? { scheduling: input.scheduling } : {}) });
     this.db.prepare('INSERT INTO collection_cycles VALUES(?,?)').run(row.id, JSON.stringify(row)); return row;
+  }
+  deferCycleEndpoint(id: string, deferred: DeferredEndpoint) {
+    const value = this.db.prepare('SELECT payload FROM collection_cycles WHERE id=?').get(id); if (!value) throw Error('UNKNOWN_COLLECTION_CYCLE');
+    const prior = JSON.parse(String(value.payload)); if (prior.status !== 'running' || !prior.scheduling || !prior.scheduling.active_endpoint_ids.includes(deferred.endpoint_id)) throw Error('COLLECTION_CYCLE_MISMATCH');
+    const rows = new Map<string, DeferredEndpoint>(prior.scheduling.deferred_endpoints.map((row: DeferredEndpoint) => [row.endpoint_id, row])); rows.set(deferred.endpoint_id, deferred);
+    prior.scheduling.deferred_endpoints = [...rows.values()];
+    this.db.prepare('UPDATE collection_cycles SET payload=? WHERE id=?').run(JSON.stringify(validateCollectionCycle(prior)), id);
+  }
+  hostCooldowns(at: string) {
+    return this.db.prepare("SELECT host,until_at,category FROM host_cooldowns WHERE category IN ('rate_limited','server_retry_after') AND until_at>?").all(at)
+      .map(row => ({ host: String(row.host), until: String(row.until_at), reason: String(row.category) as DeferredEndpoint['reason'], http_status: row.category === 'rate_limited' ? 429 : null }));
+  }
+  scheduling(catalog: Catalog, at: string, force = false, explicit: string[] = []) {
+    const sources = catalog.sources.filter(source => source.enabled);
+    const active = [...new Set(sources.flatMap(source => source.endpoints.map(endpoint => endpoint.id)))].filter(id => !explicit.length || explicit.includes(id));
+    const countries = Object.fromEntries(catalog.countries.map(country => [country.code, [...new Set(sources.filter(source => source.countryCode === country.code).flatMap(source => source.endpoints.map(endpoint => endpoint.id)))].filter(id => active.includes(id))]).filter(([, ids]) => ids.length));
+    const bindingRows = this.db.prepare('SELECT endpoint_id,MAX(next_due) next_due,MAX(last_attempt_at) last_attempt_at FROM bindings GROUP BY endpoint_id').all();
+    const states = new Map<string, SchedulingState>(bindingRows.map(row => [String(row.endpoint_id), { endpoint_id: String(row.endpoint_id), next_due: row.next_due as string | null, last_attempt_at: row.last_attempt_at as string | null }]));
+    const latest = this.db.prepare('SELECT c.endpoint_id,c.checked_at,c.reason,c.details FROM (SELECT DISTINCT endpoint_id FROM bindings) b JOIN collections c ON c.id=(SELECT id FROM collections p WHERE p.endpoint_id=b.endpoint_id ORDER BY checked_at DESC,id DESC LIMIT 1)').all();
+    for (const row of latest) {
+      const details = JSON.parse(String(row.details)), state = states.get(String(row.endpoint_id)); if (!state) continue;
+      const recovery = details.recovery;
+      Object.assign(state, { reason: row.reason, http_status: details.http_status ?? recovery?.http_status ?? null,
+        retry_after_at: details.retry_after_at ?? (recovery?.category === 'rate_limited' || recovery?.cause === 'rate_limited' ? recovery.nextEligibleAt : null),
+        defer_reason: details.defer_reason ?? (recovery?.category === 'rate_limited' || recovery?.cause === 'rate_limited' ? 'rate_limited' : null) });
+    }
+    const cooldowns = new Map(this.hostCooldowns(at).map(row => [row.host, row]));
+    const eligible: string[] = [], checked: string[] = [], deferred: DeferredEndpoint[] = [];
+    for (const id of active) {
+      const state = states.get(id), due = endpointDue(state, at, force), host = new URL(catalog.endpoints.get(id)!.url).hostname;
+      if (due.checked_today) checked.push(id);
+      const hostUntil = cooldowns.get(host);
+      if (hostUntil && (!due.deferred || hostUntil.until > due.deferred.next_due)) deferred.push({ endpoint_id: id, next_due: hostUntil.until, reason: hostUntil.reason, http_status: hostUntil.reason === 'rate_limited' ? 429 : null });
+      else if (due.deferred) deferred.push(due.deferred);
+      else if (due.eligible) eligible.push(id);
+    }
+    eligible.sort((a, b) => String(states.get(a)?.last_attempt_at ?? '').localeCompare(String(states.get(b)?.last_attempt_at ?? '')) || a.localeCompare(b));
+    const scheduling: CollectionScheduling = { policy: 'daily_all_active', as_of: at, active_endpoint_ids: active, already_checked_today_endpoint_ids: checked, deferred_endpoints: deferred, country_active_endpoints: countries, ...(force ? { force_recheck: true } : {}) };
+    return { eligible, scheduling };
   }
   finishCycle(id: string, status: 'completed' | 'partial' | 'failed', at: string, reason: string | null = null) {
     const value = this.db.prepare('SELECT payload FROM collection_cycles WHERE id=?').get(id); if (!value) throw Error('UNKNOWN_COLLECTION_CYCLE');
     const prior = validateCollectionCycle(JSON.parse(String(value.payload))); if (prior.status !== 'running') throw Error('COLLECTION_CYCLE_ALREADY_FINISHED');
     const records = this.db.prepare("SELECT endpoint_id,status,format FROM collections WHERE json_extract(details,'$.cycle_id')=?").all(id);
     const row = validateCollectionCycle({ ...prior, status, finished_at: at, failure_reason: reason,
+      ...(prior.scheduling ? { scheduling: { ...prior.scheduling, as_of: at, deferred_endpoints: prior.scheduling.deferred_endpoints.filter(value => Date.parse(value.next_due) > Date.parse(at)) } } : {}),
       attempted_endpoint_ids: [...new Set(records.map(record => String(record.endpoint_id)))],
       successful_article_endpoint_ids: [...new Set(records.filter(record => ['working_nonempty', 'valid_empty'].includes(String(record.status)) && record.format !== 'sitemapindex').map(record => String(record.endpoint_id)))] });
     this.db.prepare('UPDATE collection_cycles SET payload=? WHERE id=?').run(JSON.stringify(row), id); return row;
@@ -138,16 +185,39 @@ export class ActivityLedger {
           if (!existed && initialized && article.kind === 'candidate') sourceNew[source.id]++;
         }
       }
+      const retryDeadline = collection.server_deferral?.until ?? collection.retry_after_at;
+      const serverDeadline = retryDeadline && Date.parse(retryDeadline) > Date.parse(collection.checked_at) ? retryDeadline : null;
+      const limitingStatus = collection.server_deferral?.http_status ?? collection.http_status ?? null;
+      const nextDue = collectionNextDue(collection.checked_at, limitingStatus, retryDeadline);
+      const deferReason = limitingStatus === 429 ? 'rate_limited' : serverDeadline ? 'server_retry_after' : null;
+      const requestHost = collection.request_host ?? new URL(collection.endpoint.url).hostname;
+      const responseHost = collection.response_host ?? requestHost;
+      const oldRecovery = this.db.prepare('SELECT failed_checks FROM endpoint_recovery WHERE endpoint_id=?').get(collection.endpoint.id);
+      const category = successful ? 'healthy' : limitingStatus === 429 ? 'rate_limited' : [401, 402, 403, 451].includes(collection.http_status ?? 0) ? 'access_restricted' : [404, 410].includes(collection.http_status ?? 0) ? 'missing_endpoint' : [500, 502, 503, 504].includes(collection.http_status ?? 0) ? 'server_error_retry_candidate' : collection.status === 'timeout' ? 'transient_transport' : collection.status === 'malformed' ? 'document_validation' : 'unresolved';
+      const recovery = { endpoint_id: collection.endpoint.id, checked_at: collection.checked_at, http_status: collection.http_status ?? null, reason: collection.reason, status: collection.status,
+        diagnostics: { requestHost, retryAfterAt: retryDeadline ?? null, ...(collection.server_deferral?.hostname ? { deferredHost: collection.server_deferral.hostname } : {}) }, attempts: collection.attempts ?? 1, category,
+        action: successful ? 'normal_cadence' : category === 'rate_limited' ? 'wait_retry_after' : category === 'missing_endpoint' ? 'review_relocation_or_removal' : category === 'access_restricted' ? 'review_official_alternative' : category === 'document_validation' ? 'review_document_or_parser_fixture' : ['transient_transport', 'server_error_retry_candidate'].includes(category) ? 'bounded_backoff' : 'retain_diagnostics_and_review',
+        review: !successful && !['rate_limited', 'transient_transport', 'server_error_retry_candidate'].includes(category), nextEligibleAt: nextDue,
+        failedChecks: successful ? 0 : Number(oldRecovery?.failed_checks ?? 0) + 1, policyVersion: 'daily-all-active-1' };
       const details = { source_ids: sources.map(s => s.id), countries: [...new Set(sources.map(s => s.countryCode))], source_new: sourceNew, country_new: countryNew,
         baseline_sources: baselineSources, observed_urls: urls.length, uncertain_urls: urls.filter(u => u.kind === 'uncertain').length, index_children_excluded: index,
+        http_status: collection.http_status ?? null, retry_after_at: retryDeadline ?? null, retry_after_source: collection.retry_after_source ?? null, defer_reason: deferReason,
+        requested_hops: collection.requested_hops ?? null, ...(collection.server_deferral ? { server_deferral: collection.server_deferral } : {}),
+        recovery,
         ...(collection.cycle_id ? { cycle_id: collection.cycle_id } : {}), ...(collection.newest_content_at !== undefined ? { newest_content_at: collection.newest_content_at, date_kind: collection.date_kind ?? null } : {}) };
       this.db.prepare('INSERT INTO collections VALUES(?,?,?,?,?,?,?)').run(collection.id, collection.endpoint.id, collection.checked_at, collection.status, collection.format, collection.reason, JSON.stringify(details));
       for (const { source } of bindingStates) {
         const row = this.db.prepare('SELECT failures FROM bindings WHERE source_id=? AND endpoint_id=?').get(source.id, collection.endpoint.id);
         const failures = successful ? 0 : Number(row?.failures ?? 0) + 1;
-        const next = new Date(successful ? Date.parse(collection.checked_at.slice(0,10)) + (index ? 7 : 1) * 86400000 : Date.parse(collection.checked_at) + Math.min(7 * 86400000, 3600000 * 2 ** Math.min(failures, 8))).toISOString();
-        this.db.prepare(`UPDATE bindings SET baseline_at=CASE WHEN ? THEN COALESCE(baseline_at,?) ELSE baseline_at END,last_success_at=CASE WHEN ? THEN ? ELSE last_success_at END,last_attempt_at=?,last_status=?,failures=?,next_due=? WHERE source_id=? AND endpoint_id=?`).run(+(successful && !index), collection.checked_at, +successful, collection.checked_at, collection.checked_at, collection.status, failures, next, source.id, collection.endpoint.id);
+        this.db.prepare(`UPDATE bindings SET baseline_at=CASE WHEN ? THEN COALESCE(baseline_at,?) ELSE baseline_at END,last_success_at=CASE WHEN ? THEN ? ELSE last_success_at END,last_attempt_at=?,last_status=?,failures=?,next_due=? WHERE source_id=? AND endpoint_id=?`).run(+(successful && !index), collection.checked_at, +successful, collection.checked_at, collection.checked_at, collection.status, failures, nextDue, source.id, collection.endpoint.id);
       }
+      this.db.prepare('INSERT INTO endpoint_recovery VALUES(?,?,?,?,?,?,?,?,?,?) ON CONFLICT(endpoint_id) DO UPDATE SET request_host=excluded.request_host,response_host=excluded.response_host,failed_checks=excluded.failed_checks,last_checked_at=excluded.last_checked_at,category=excluded.category,action=excluded.action,next_eligible_at=excluded.next_eligible_at,review_required=excluded.review_required,record=excluded.record').run(collection.endpoint.id, requestHost, responseHost, recovery.failedChecks, collection.checked_at, recovery.category, recovery.action, nextDue, +recovery.review, JSON.stringify(recovery));
+      this.db.prepare('INSERT INTO recovery_events VALUES(?,?,?,?) ON CONFLICT(event_key) DO NOTHING').run(collection.id, collection.endpoint.id, collection.checked_at, JSON.stringify(recovery));
+      for (const host of new Set([requestHost, responseHost, ...(collection.server_deferral?.hostname ? [collection.server_deferral.hostname] : [])])) {
+        if (deferReason) this.db.prepare("INSERT INTO host_cooldowns VALUES(?,?,?) ON CONFLICT(host) DO UPDATE SET until_at=CASE WHEN host_cooldowns.category IN ('rate_limited','server_retry_after') THEN MAX(host_cooldowns.until_at,excluded.until_at) ELSE excluded.until_at END,category=CASE WHEN host_cooldowns.category IN ('rate_limited','server_retry_after') AND host_cooldowns.until_at>excluded.until_at THEN host_cooldowns.category ELSE excluded.category END").run(host, serverDeadline ?? nextDue, deferReason);
+        else this.db.prepare("DELETE FROM host_cooldowns WHERE host=? AND (category NOT IN ('rate_limited','server_retry_after') OR until_at<=?)").run(host, collection.checked_at);
+      }
+      if (collection.cycle_id && deferReason && this.db.prepare("SELECT 1 FROM collection_cycles WHERE id=? AND json_extract(payload,'$.status')='running'").get(collection.cycle_id)) this.deferCycleEndpoint(collection.cycle_id, { endpoint_id: collection.endpoint.id, next_due: serverDeadline ?? nextDue, reason: deferReason, http_status: limitingStatus });
       this.db.prepare(`INSERT INTO metadata VALUES('tracking_start',?) ON CONFLICT DO NOTHING`).run(collection.checked_at);
       return { ...details, replayed: false };
     });
@@ -180,6 +250,7 @@ export class ActivityLedger {
     const bindings = this.db.prepare('SELECT * FROM bindings').all();
     const starts = (field: string) => Object.fromEntries(this.db.prepare(`SELECT j.value AS scope,MIN(c.checked_at) AS at FROM collections c,json_each(c.details,'$.${field}') j GROUP BY j.value`).all().map(row => [String(row.scope),String(row.at)]));
     const base = { version: 1, lane, generated_at: at, tracking_start: start, normalization_version: NORMALIZATION_VERSION,
+      scheduling: this.scheduling(catalog, at).scheduling,
       collection_cycles: this.db.prepare('SELECT payload FROM collection_cycles ORDER BY json_extract(payload,\'$.started_at\') DESC LIMIT 256').all().map(row => summarizeCollectionCycle(JSON.parse(String(row.payload)))),
       bindings, scope_starts: { source: starts('source_ids'), country: starts('countries') }, registry_at: this.db.prepare("SELECT value FROM metadata WHERE key='registry_at'").get()?.value ?? null,
       registry_digest: createHash('sha256').update(JSON.stringify(catalog.sources)).digest('hex'),

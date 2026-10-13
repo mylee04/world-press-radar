@@ -57,9 +57,9 @@
       </div>
       <p class="metric-hint">검사 범위: 활성 주소 중 검사한 비율 · 성공률: 검사 중 성공한 비율</p>
       <div class="table-shell country-table-shell">
-        <table class="country-table"><caption class="sr-only">국가별 검사 범위, 수집 성공률, 콘텐츠 신선도와 등록 현황. 국가를 선택하면 상세 정보가 열립니다.</caption><thead><tr><th scope="col">국가 <span id="country-count" class="table-count"></span></th><th scope="col">검사 범위</th><th scope="col">수집 성공률</th><th id="freshness-heading" scope="col">콘텐츠 신선도</th><th scope="col" class="numeric">활성 등록</th><th scope="col" class="numeric">RSS / 사이트맵</th><th id="observation-heading" scope="col">관측 상태</th><th scope="col"><span class="sr-only">상세</span></th></tr></thead><tbody id="country-rows"><tr><td colspan="8" class="empty-cell"><span class="loading-marker"></span> 실제 저장 기록을 불러오는 중입니다.</td></tr></tbody></table>
+        <table class="country-table"><caption class="sr-only">국가별 고유 언론사 수, 검사 범위, 수집 성공률, 콘텐츠 신선도와 등록 현황. 국가를 선택하면 상세 정보가 열립니다.</caption><thead><tr><th scope="col">국가 <span id="country-count" class="table-count"></span></th><th scope="col" class="numeric publisher-heading">고유 언론사</th><th scope="col">검사 범위</th><th scope="col">수집 성공률</th><th id="freshness-heading" scope="col">콘텐츠 신선도</th><th scope="col" class="numeric">활성 등록</th><th scope="col" class="numeric">RSS / 사이트맵</th><th id="observation-heading" scope="col">관측 상태</th><th scope="col"><span class="sr-only">상세</span></th></tr></thead><tbody id="country-rows"><tr><td colspan="9" class="empty-cell"><span class="loading-marker"></span> 실제 저장 기록을 불러오는 중입니다.</td></tr></tbody></table>
       </div>
-      <p class="table-footnote">—는 자료 부족이며 0과 다릅니다. 국가를 선택하면 소스별 기록을 볼 수 있습니다.</p>
+      <p class="table-footnote">≈는 언론사 추정치 · —는 자료 부족이며 0과 다릅니다. 국가를 선택하면 소스별 기록을 볼 수 있습니다.</p>
       <section id="country-detail" class="detail-panel" aria-labelledby="detail-title" hidden>
         <div class="section-heading"><div><h2 id="detail-title">국가 상세</h2></div><button type="button" id="investigate-selected" class="primary-button">이 국가 조사 <span aria-hidden="true">↗</span></button></div>
         <div id="country-detail-meta" class="detail-meta"></div>
@@ -73,8 +73,8 @@
     <section id="panel-inventory" role="tabpanel" aria-labelledby="tab-inventory" hidden>
       <div class="section-heading"><div><h2>국가별 현재 확보량</h2></div></div>
       <p id="inventory-note" class="table-footnote inventory-note">MCP의 등록 기준 시각과 현재 확보량을 조회합니다.</p>
-      <div class="table-shell"><table class="inventory-table"><caption class="sr-only">국가별 활성 등록, 비활성 등록 및 고유 RSS·사이트맵 주소 수. 보유량이 많은 국가 순.</caption><thead><tr><th scope="col">국가</th><th scope="col" class="numeric">활성 등록</th><th scope="col" class="numeric">비활성 등록</th><th scope="col" class="numeric">고유 RSS 주소</th><th scope="col" class="numeric">고유 사이트맵 주소</th></tr></thead><tbody id="inventory-rows"><tr><td colspan="5" class="empty-cell">기록을 확인하는 중입니다.</td></tr></tbody></table></div>
-      <p class="table-footnote">등록은 언론사 수와 다릅니다. 주소는 국가 안에서 중복 제거합니다. 비활성은 수집 실패를 뜻하지 않습니다.</p>
+      <div class="table-shell"><table class="inventory-table"><caption class="sr-only">국가별 고유 언론사, 활성 등록, 비활성 등록 및 고유 RSS·사이트맵 주소 수. 보유량이 많은 국가 순.</caption><thead><tr><th scope="col">국가</th><th scope="col" class="numeric publisher-heading">고유 언론사</th><th scope="col" class="numeric">활성 등록</th><th scope="col" class="numeric">비활성 등록</th><th scope="col" class="numeric">고유 RSS 주소</th><th scope="col" class="numeric">고유 사이트맵 주소</th></tr></thead><tbody id="inventory-rows"><tr><td colspan="6" class="empty-cell">기록을 확인하는 중입니다.</td></tr></tbody></table></div>
+      <p class="table-footnote">≈는 언론사 추정치입니다. 등록은 언론사 수와 다릅니다. 주소는 국가 안에서 중복 제거합니다. 비활성은 수집 실패를 뜻하지 않습니다.</p>
       <details id="inventory-history-details" class="method-details"><summary id="inventory-history-title">등록 변화와 신규 소스</summary>
       <div class="section-heading subsection-heading"><h3 id="inventory-change-heading">등록 변화</h3></div>
       <div id="inventory-history-note" class="notice"></div>

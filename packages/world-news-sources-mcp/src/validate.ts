@@ -41,9 +41,10 @@ async function bounded<T>(promise: Promise<T>, milliseconds: number): Promise<T>
   })]); } finally { clearTimeout(timer!); }
 }
 export type RequestGate = (hostname: string, deadline: number) => Promise<() => void>;
-export async function fetchXml(raw: string, timeoutMs = 8000, maxBytes = MAX_BYTES, gate?: RequestGate): Promise<{ status: number; body: Buffer; finalUrl: string }> {
+export async function fetchXml(raw: string, timeoutMs = 8000, maxBytes = MAX_BYTES, gate?: RequestGate): Promise<{ status: number; body: Buffer; finalUrl: string; retryAfter?: string; requestedHops: number }> {
   const deadline = Date.now() + timeoutMs;
-  let current = raw;
+  let current = raw, requestedHops = 0, lastStatus: number | null = null, lastUrl: string | undefined;
+  try {
   for (let redirects = 0; redirects <= 3; redirects++) {
     if (Date.now() >= deadline) throw new Error('TIMEOUT');
     const url = safeUrl(current);
@@ -57,15 +58,17 @@ export async function fetchXml(raw: string, timeoutMs = 8000, maxBytes = MAX_BYT
     const pinnedLookup: LookupFunction = (_host, options, callback) => {
       if (options.all) callback(null, [pinned]); else callback(null, pinned.address, pinned.family);
     };
-    const response = await new Promise<{ status: number; body: Buffer; location?: string; encoding?: string }>((resolve, reject) => {
+    const response = await new Promise<{ status: number; body: Buffer; location?: string; encoding?: string; retryAfter?: string }>((resolve, reject) => {
+      requestedHops++; lastUrl = url.href; lastStatus = null;
       const request = (url.protocol === 'https:' ? httpsRequest : httpRequest)(url, {
         lookup: pinnedLookup, agent: false,
         headers: { 'user-agent': 'WorldNewsSourcesMCP/0.1 (bounded metadata validation)', accept: 'application/xml, application/rss+xml, application/atom+xml, text/xml', 'accept-encoding': 'identity' },
       }, response => {
         const status = response.statusCode ?? 0;
+        lastStatus = status;
         if (status < 200 || status >= 300) {
           response.destroy();
-          resolve({ status, body: Buffer.alloc(0), location: response.headers.location });
+          resolve({ status, body: Buffer.alloc(0), location: response.headers.location, retryAfter: response.headers['retry-after'] });
           return;
         }
         const chunks: Buffer[] = []; let length = 0;
@@ -89,10 +92,14 @@ export async function fetchXml(raw: string, timeoutMs = 8000, maxBytes = MAX_BYT
     let body = response.body;
     if (response.encoding && !['identity', 'gzip'].includes(response.encoding)) throw new Error('UNSUPPORTED_ENCODING');
     if (response.encoding === 'gzip' || (body[0] === 0x1f && body[1] === 0x8b)) body = gunzipSync(body, { maxOutputLength: maxBytes });
-    return { status: response.status, body, finalUrl: url.href };
+    return { status: response.status, body, finalUrl: url.href, requestedHops, ...(response.retryAfter ? { retryAfter: response.retryAfter } : {}) };
     } finally { release(); }
   }
   throw new Error('TOO_MANY_REDIRECTS');
+  } catch (error) {
+    if (error instanceof Error) Object.assign(error, { requestedHops, lastHttpStatus: lastStatus, lastUrl });
+    throw error;
+  }
 }
 
 export async function checkEndpoint(endpoint: Endpoint): Promise<Observation> {

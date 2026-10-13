@@ -4,6 +4,8 @@ import { fileURLToPath } from 'node:url';
 import { normalizeRegistry } from '../dist/catalog.js';
 import {readHistory} from '../dist/activity-history.js';
 import { snapshotSchema } from '../dist/health.js';
+import { DatabaseSync } from 'node:sqlite';
+import { estimatePublisherInventory } from '../dist/publisher-inventory.js';
 
 const root = new URL('../', import.meta.url);
 const output = new URL('../.deploy-vercel/', import.meta.url);
@@ -37,6 +39,24 @@ if (existsSync(receiptFile)) {
   if (isAbsolute(within) || within === '..' || within.startsWith('../') || statSync(reportPath).size > 10*1024*1024) throw Error('Invalid saved dashboard report');
   const report = JSON.parse(readFileSync(reportPath, 'utf8'));
   if (report.data_source === 'remote' && report.status === 'completed' && report.overview?.date === report.date && Array.isArray(report.overview?.items)) {
+    // Publish only derived counts from the exact complete registry revision.
+    // The private observation database and full listing stay out of the bundle.
+    const historyFile = new URL('output/news-quality/history.sqlite', root);
+    if (existsSync(historyFile) && report.overview.registry_snapshot_at) {
+      const db = new DatabaseSync(fileURLToPath(historyFile), { readOnly: true });
+      try {
+        const row = db.prepare('SELECT sources FROM quality_registry WHERE registry_snapshot_at=? ORDER BY observed_at DESC,id DESC LIMIT 1').get(report.overview.registry_snapshot_at);
+        if (row) {
+          const sources = JSON.parse(String(row.sources));
+          report.overview.items = report.overview.items.map(country => {
+            const selected = sources.filter(source => source.country === country.country);
+            return selected.filter(source => source.enabled).length === country.inventory?.active_normalized_sources
+              ? { ...country, inventory: { ...country.inventory, ...estimatePublisherInventory(selected),
+                publisher_inventory_snapshot_at: report.overview.registry_snapshot_at } } : country;
+          });
+        }
+      } finally { db.close(); }
+    }
     savedOverview = { ...report.overview, history: undefined,
       source: 'daily_saved_remote_mcp', evaluated_at: report.observed_at,
       runtime: { data_source: 'daily_saved_remote_mcp', report_observed_at: report.observed_at,

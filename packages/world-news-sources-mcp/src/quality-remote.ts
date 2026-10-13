@@ -1,9 +1,34 @@
 import { Client, StreamableHTTPClientTransport } from '@modelcontextprotocol/client';
+import { estimatePublisherInventory } from './publisher-inventory.js';
+import { z } from 'zod';
 
 type Row = Record<string, any>;
 export type RemoteQualityCall = (name: string, args: Record<string, unknown>, signal?: AbortSignal) => Promise<Row>;
 export const REMOTE_NEWS_MCP_URL = 'https://news.bymyleslee.com/mcp';
 const DAY = 86400000;
+const scheduleCount = z.number().int().min(0).max(10000);
+const remoteScheduleSchema = z.object({ policy: z.literal('daily_all_active'), as_of: z.string().datetime({ offset: true }),
+  cycle_id: z.string().min(1).max(128), cycle_status: z.enum(['running', 'completed', 'partial', 'failed']),
+  cycle_started_at: z.string().datetime({ offset: true }), cycle_finished_at: z.string().datetime({ offset: true }).nullable(),
+  active_endpoints: scheduleCount, already_checked_today_endpoints: scheduleCount, eligible_endpoints: scheduleCount,
+  planned_endpoints: scheduleCount, attempted_endpoints: scheduleCount, deferred_endpoints: scheduleCount,
+  unattempted_deferred_endpoints: scheduleCount, unattempted_unrestricted_endpoints: scheduleCount,
+  next_recheck_at: z.string().datetime({ offset: true }).nullable() });
+function remoteSchedule(value: unknown, date: string, now: number, expected: number | null) {
+  const parsed = remoteScheduleSchema.safeParse(value);
+  if (!parsed.success) return null;
+  const row = parsed.data, from = Date.parse(date), to = from + DAY;
+  if (Date.parse(row.cycle_started_at) < from || Date.parse(row.cycle_started_at) >= to
+    || Date.parse(row.as_of) < Date.parse(row.cycle_started_at) || Date.parse(row.as_of) >= to || Date.parse(row.as_of) > now
+    || row.cycle_finished_at && (Date.parse(row.cycle_finished_at) >= to || Date.parse(row.cycle_finished_at) < Date.parse(row.as_of))
+    || row.active_endpoints !== expected
+    || row.attempted_endpoints > row.planned_endpoints || row.planned_endpoints > row.eligible_endpoints
+    || row.active_endpoints !== row.already_checked_today_endpoints + row.attempted_endpoints + row.unattempted_deferred_endpoints + row.unattempted_unrestricted_endpoints
+    || row.unattempted_deferred_endpoints > row.deferred_endpoints || row.deferred_endpoints > row.active_endpoints
+    || row.next_recheck_at && Date.parse(row.next_recheck_at) <= Date.parse(row.as_of)
+    || row.cycle_status === 'running' && row.cycle_finished_at !== null || row.cycle_status !== 'running' && row.cycle_finished_at === null) return null;
+  return row;
+}
 const originalTools = new Set(['search_sources', 'get_source', 'list_countries', 'get_endpoint_health',
   'get_source_article_activity', 'get_country_article_activity', 'get_country_source_inventory']);
 
@@ -86,6 +111,7 @@ function metrics(activity: Row, date: string, now: number) {
   const expected = finite(item?.expected_endpoints), attempted = window.data_available ? finite(item?.targeted_endpoints) : null;
   const successful = window.data_available ? finite(item?.successful_article_endpoints) : null;
   return { period: window, attempt_coverage: ratio(attempted, expected), success_rate: ratio(successful, attempted),
+    collection_schedule: remoteSchedule(item?.collection_schedule, date, now, expected),
     successful_registered_coverage: ratio(successful, expected),
     collection: { attempted_endpoints: attempted, successful_article_endpoints: successful,
       failed_checks: window.data_available ? finite(item?.failed_checks) : null,
@@ -102,7 +128,7 @@ function inventory(value: Row) {
 }
 function countryRow(info: Row, activity: Row, date: string, now: number) {
   const current = metrics(activity, date, now), expected = finite((activity.items ?? []).at(-1)?.expected_endpoints);
-  return { country: info.country, name: info.name, inventory: inventory(info), period: current.period,
+  return { country: info.country, name: info.name, inventory: inventory(info), period: current.period, collection_schedule: current.collection_schedule,
     metrics: { attempt_coverage: current.attempt_coverage, success_rate: current.success_rate,
       successful_registered_coverage: current.successful_registered_coverage,
       freshness: { ...ratio(null, 0), reason: 'Remote MCP does not export empirical update cadence or comparable content-date history.',
@@ -289,7 +315,15 @@ export class RemoteQualityStore {
       if (next !== null && next !== undefined && (typeof next !== 'number' || next <= offset)) throw Error('Invalid remote source pagination');
       offset = next ?? null;
     }
-    return { country: overview.items[0], date: overview.date, snapshot_at: overview.snapshot_at, latest_collection: overview.latest_collection,
+    const row = overview.items[0];
+    const publisherSources = offset === null && total === sources.length
+      && row.inventory.active_normalized_sources === sources.length ? sources.map(source => ({
+        name: typeof source.name === 'string' ? source.name : '', countryCode: code, enabled: source.enabled !== false,
+        endpoints: (Array.isArray(source.endpoints) ? source.endpoints : []).map((endpoint: Row) => ({
+          url: typeof endpoint.url === 'string' ? endpoint.url : null,
+        })),
+      })) : null;
+    return { country: { ...row, inventory: { ...row.inventory, ...estimatePublisherInventory(publisherSources) } }, date: overview.date, snapshot_at: overview.snapshot_at, latest_collection: overview.latest_collection,
       sources, source_list_state: offset !== null || total !== null && total > sources.length ? 'partial' : 'complete',
       source_list_limit: 500, source_count: sources.length, source_total: total,
       inventory_changes: overview.inventory_changes, source: 'remote_cached_mcp', runtime: overview.runtime };

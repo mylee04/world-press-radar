@@ -13,8 +13,18 @@ export const observationSchema = z.object({
   contentFreshness: z.enum(['recent', 'stale', 'missing', 'unreliable']).optional(),
   dateKind: z.enum(['feed_item_date', 'sitemap_lastmod']).optional(),
   finalUrl: z.string().max(2048).optional(), attempts: z.number().int().min(1).max(2).optional(),
+  retryAfterAt: z.string().datetime({ offset: true }).nullable().optional(), retryAfterSource: z.enum(['delta_seconds', 'http_date']).nullable().optional(),
+  requestedHops: z.number().int().min(0).max(8).optional(), stopReason: z.literal('DAILY_REQUEST_BUDGET_EXHAUSTED').optional(),
+  requestDeferred: z.object({ until: z.string().datetime({ offset: true }), httpStatus: z.number().int().min(100).max(599).nullable(), hostname: z.string().max(253).optional() }).strict().optional(),
+  serverDeferral: z.object({ until: z.string().datetime({ offset: true }), httpStatus: z.number().int().min(100).max(599).nullable(), hostname: z.string().max(253).optional() }).strict().optional(),
   durationMs: z.number().int().nonnegative().optional(),
   validatorVersion: z.string().max(32).optional(),
+  // Existing Oracle v3 snapshots retain these diagnostics. Accept their exact
+  // schema so an upgrade preserves the current health data without stripping it.
+  diagnostics: z.object({ phase: z.enum(['fetch', 'inspect', 'complete']),
+    contentType: z.string().max(128).nullable(), bodyKind: z.enum(['html', 'other_or_unknown', 'not_received']),
+    requestHost: z.string().max(253).optional(), retryAfterAt: z.string().datetime().nullable(),
+    cooldownUntil: z.string().datetime().optional() }).strict().optional(),
 }).strict();
 export type Observation = z.infer<typeof observationSchema>;
 export const auditMetaSchema = z.object({

@@ -4,7 +4,7 @@ import { mkdtempSync, rmSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { ActivityLedger, collectionId } from '../dist/activity-ledger.js';
-import { ActivityStore, countryInventory, dayBoundary, sourceActivitySchema } from '../dist/activity.js';
+import { ActivityStore, countryInventory, countryCollectionSchedule, dayBoundary, sourceActivitySchema } from '../dist/activity.js';
 import { normalizeArticleUrl } from '../dist/article-url.js';
 import { normalizeRegistry } from '../dist/catalog.js';
 import { inspectXml } from '../dist/inspect.js';
@@ -111,6 +111,40 @@ test('daily full-pass cadence uses calendar due dates; retries share a durable b
     ledger.reserveRequest(now,2);ledger.reserveRequest(now,2);assert.throws(()=>ledger.reserveRequest(now,2),/BUDGET_EXHAUSTED/);
     ledger.reserveRequest('2026-10-11T00:00:00.000Z',2);
     assert.equal(ledger.db.prepare('SELECT requests FROM request_budget WHERE day=?').get('2026-10-10').requests,2);
+  }finally{cleanup();}
+});
+test('daily scheduling exports measured exceptions without treating deferrals as attempts or projecting snapshot state into history',()=>{
+  sequence=0;const {ledger,cleanup}=setup();try{
+    visit(ledger,'A',0,[],'valid_empty');visit(ledger,'B',0,[],'valid_empty');
+    const a=source('A').endpoints[0].id, deferred=source('A').endpoints[1].id, already=source('B').endpoints[0].id, ca=source('C').endpoints[0].id;
+    const cycle={id:'daily-policy',lane:'production',started_at:'2026-10-01T14:00:00.000Z',finished_at:'2026-10-01T15:00:00.000Z',status:'completed',scope:'due_endpoints',
+      registry_digest:'a'.repeat(64),country_endpoints:{US:[a],CA:[ca]},eligible_endpoint_ids:[a,ca],planned_endpoint_ids:[a,ca],attempted_endpoint_ids:[a,ca],successful_article_endpoint_ids:[a,ca],failure_reason:null,
+      scheduling:{policy:'daily_all_active',as_of:'2026-10-01T15:00:00.000Z',active_endpoint_ids:[a,deferred,already,ca],already_checked_today_endpoint_ids:[already],
+        deferred_endpoints:[{endpoint_id:deferred,next_due:'2026-10-03T15:00:00.000Z',reason:'rate_limited',http_status:429}],country_active_endpoints:{US:[a,deferred,already],CA:[ca]}}};
+    const snapshot={...ledger.snapshot(catalog,now),collection_cycles:[cycle],scheduling:{policy:'daily_all_active',as_of:now,country_metrics:{US:{deferred_endpoints:0}}}};
+    const store=new ActivityStore(snapshot), query=(start_date='2026-10-01',timezone='UTC')=>store.query(catalog,'country',{country:'US',start_date,end_date:start_date,timezone},Date.parse(now)).items[0];
+    const measured=query();assert.equal(measured.targeted_endpoints,2);assert.equal(measured.expected_endpoints,3);
+    assert.equal(measured.collection_schedule.policy,'daily_all_active');assert.equal(measured.collection_schedule.as_of,cycle.scheduling.as_of);
+    assert.equal(measured.collection_schedule.active_endpoints,3);assert.equal(measured.collection_schedule.already_checked_today_endpoints,1);
+    assert.equal(measured.collection_schedule.deferred_endpoints,1);assert.equal(measured.collection_schedule.cycle_status,'completed');
+    assert.equal(measured.collection_schedule.unattempted_deferred_endpoints,1);assert.equal(measured.collection_schedule.unattempted_unrestricted_endpoints,0);
+    assert.equal(countryCollectionSchedule([cycle],'US',Date.parse('2026-10-01'),Date.parse('2026-10-02'),Date.parse(now),4),null);
+    const limited=new ActivityStore({...snapshot,collection_cycles:[{...cycle,status:'partial',eligible_endpoint_ids:[a,ca],planned_endpoint_ids:[ca],attempted_endpoint_ids:[ca],successful_article_endpoint_ids:[ca],failure_reason:'PLANNED_ENDPOINT_LIMIT'}]});
+    const left=limited.query(catalog,'country',{country:'US',start_date:'2026-10-01',end_date:'2026-10-01'},Date.parse(now)).items[0].collection_schedule;
+    assert.equal(left.unattempted_unrestricted_endpoints,1);assert.equal(left.unattempted_deferred_endpoints,1);assert.equal(left.cycle_status,'partial');
+    const observed429={...snapshot.collections[0],endpoint_id:deferred,checked_at:'2026-10-01T15:30:00.000Z',status:'http_error',format:null};
+    const dynamic=new ActivityStore({...snapshot,collections:[...snapshot.collections,observed429],collection_cycles:[{...cycle,country_endpoints:{US:[a,deferred],CA:[ca]},
+      eligible_endpoint_ids:[a,deferred,ca],planned_endpoint_ids:[a,deferred,ca],attempted_endpoint_ids:[a,deferred,ca],successful_article_endpoint_ids:[a,ca],
+      finished_at:'2026-10-01T16:00:00.000Z',scheduling:{...cycle.scheduling,as_of:'2026-10-01T16:00:00.000Z'}}]});
+    const newLimit=dynamic.query(catalog,'country',{country:'US',start_date:'2026-10-01',end_date:'2026-10-01'},Date.parse(now)).items[0];
+    assert.equal(newLimit.targeted_endpoints,3);assert.equal(newLimit.failed_checks,1);assert.equal(newLimit.collection_schedule.deferred_endpoints,1);
+    assert.equal(newLimit.collection_schedule.unattempted_deferred_endpoints,0);assert.equal(newLimit.collection_schedule.unattempted_unrestricted_endpoints,0);
+    assert.equal(query('2026-10-02').collection_schedule,null);assert.equal(query('2026-10-01','America/Chicago').collection_schedule,null);
+    assert.equal(store.query(catalog,'source',{source_id:source('A').id,start_date:'2026-10-01',end_date:'2026-10-01'},Date.parse(now)).items[0].collection_schedule,null);
+    assert.equal(store.query(catalog,'country',{country:'US',mode:'rolling_24h'},Date.parse(now)).items[0].collection_schedule,null);
+    const legacy=new ActivityStore({...snapshot,collection_cycles:undefined});assert.equal(legacy.query(catalog,'country',{country:'US',start_date:'2026-10-01',end_date:'2026-10-01'},Date.parse(now)).items[0].collection_schedule,null);
+    const crossing=new ActivityStore({...snapshot,collection_cycles:[{...cycle,finished_at:'2026-10-02T00:01:00.000Z',scheduling:{...cycle.scheduling,as_of:'2026-10-02T00:01:00.000Z'}}]});
+    assert.equal(crossing.query(catalog,'country',{country:'US',start_date:'2026-10-01',end_date:'2026-10-01'},Date.parse(now)).items[0].collection_schedule,null);
   }finally{cleanup();}
 });
 test('URL normalization retains identity queries, order, path case/escapes and separates uncertain paths',()=>{

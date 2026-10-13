@@ -30,7 +30,7 @@ The three views are collection quality, source holdings and investigations. Coun
 
 Successful zero discoveries are not a failure. Untracked, failed or unavailable periods stay null; partial weeks/months retain missing-day counts. Discoveries are not publication counts or the publisher's complete output. Country URLs are deduplicated within country; source totals cannot be summed without overlaps. Global endpoint counts use the global inventory.
 
-Registration rows, normalized sources, typed endpoints and corporate publishers are different. Current publisher identity and independent per-endpoint discovery totals remain unavailable where the export lacks evidence. Names/domains are not substituted for publishers. Current holdings are not historic inventory, and first observation is never treated as registration time.
+Registration rows, normalized sources, typed endpoints and corporate publishers are different. Both country tables show an explicitly estimated newsroom/brand count (`≈`) immediately after the country, using registered site domains, narrowly reviewed brand aliases, and shared-host namespaces/names. This is not a verified legal-entity or ownership-group census. A remote overview uses only a complete registry observation with the exact matching registry revision and active source count; partial, absent, or mismatched observations leave the count null. Country drilldowns use complete source listings. Unknown shared servers and unlinked domains can still introduce error. Independent per-endpoint discovery totals remain unavailable where the export lacks evidence. Current holdings are not historic inventory, and first observation is never treated as registration time.
 
 ## Investigations
 
@@ -53,6 +53,8 @@ OpenAI can search country sources, read source quality, read observed endpoint h
 `QualityHistoryStore` saves country metrics, complete registry observations and collector cycle evidence in SQLite. The first complete registry observation is a baseline. Later added/removed/reappeared/activated records describe observation intervals, leaving actual occurrence dates null. Partial lists and stale snapshots cannot establish registry changes.
 
 The collector records planned, attempted and successful endpoint cohorts, completion state, content dates and date kind. Comparable production due cycles require the same country's UTC weekday and unchanged cohort, at least two independent day samples, and adequate prior attempt coverage. A review signal needs a fall of at least 15 percentage points and a value below 80% of baseline. Several eligible countries falling together trigger common-collector investigation first.
+
+The new collection policy targets every active address daily. It defaults to six global workers (maximum sixteen), one request per host with a two-second gap, eight seconds per fetch attempt, at most three redirects and one transient retry. HTTP-hop reservations, redirects and retries share the 12,000-request daily cap. Already-checked and server-deferred targets remain visible; 429/`Retry-After` waiting, budget limits and unfinished work are partial coverage, not successful zero results. The existing production timer remains 03:00 UTC; this new policy has not been rolled out there.
 
 Older records and the current remote seven-tool aggregates lack these completed cohorts. Their baseline stays unavailable; a later observation date does not establish completion, and a missing baseline is not a healthy verdict. Freshness needs at least three reliable content-date advances with comparable inspections. HTTP success and old observations cannot certify current freshness. Feed item dates and sitemap `lastmod` remain different evidence kinds.
 
@@ -110,9 +112,11 @@ Exact labels by language were rules 3/3 English, 4/4 Korean, 3/3 Japanese; Jev 3
 
 ## Production state
 
-The existing repository and original working-tree changes are preserved. The current Vercel configuration has 10-second functions and no durable process. Prepared hosted views keep investigations/mutations disabled. A full cloud agent needs authenticated durable execution, persistent run/budget storage and a reviewed UI connection. The existing Cloudflare D1 holds tool counters; its saved credential returned 401 at preflight.
+The existing repository and original working-tree changes are preserved. The last inspected production Vercel ceiling was ten seconds; the prepared bundle uses sixty seconds and still has no durable agent process. Hosted investigations/mutations stay disabled. A full cloud agent needs authenticated durable execution, persistent run/budget storage and a reviewed UI connection. The existing Cloudflare D1 holds tool counters; its saved credential returned 401 at preflight.
 
 Daily activation, cloud execution hosting/authentication, production secret locations and rollout remain separate from local implementation. Authoritative completed-cycle and freshness history must accumulate; historic completion is not backfilled. Each official replacement still needs explicit approval and post-apply collection before claiming recovery.
+
+Production rollout must preserve the current registry, audits, private activity ledger, exported shards and existing timer rather than overwrite them with the old local snapshot. Activity refresh permits an explicit degraded warning for missing usage acknowledgments only; functional MCP and history mismatches still fail. Standalone smoke verification remains strict by default. See [the safe rollout checklist](activity/README.md#deployoracle-handoff).
 
 ## Verified integration run — 2026-10-13
 

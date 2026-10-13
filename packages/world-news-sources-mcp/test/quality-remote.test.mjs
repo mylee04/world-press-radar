@@ -14,6 +14,43 @@ const activity = items => ({items, snapshot_at:'2026-10-13T03:53:00.000Z', lates
 const source = () => ({id, name:'Test Outlet', countryCode:'US', countryName:'United States', enabled:true, activeRegistrationCount:1,
   endpoints:[{id:ep,type:'rss',url:'https://news.example/rss',health:{status:'unknown',checked_at:null,content_freshness:'missing'}}]});
 
+test('remote scheduling distinguishes server deferrals and omissions only with consistent same-day evidence', async () => {
+  let schedule = { policy: 'daily_all_active', as_of: '2026-10-12T04:00:00.000Z', cycle_id: 'daily-cycle', cycle_status: 'partial',
+    cycle_started_at: '2026-10-12T03:00:00.000Z', cycle_finished_at: '2026-10-12T04:00:00.000Z',
+    active_endpoints: 12, already_checked_today_endpoints: 0, eligible_endpoints: 10, planned_endpoints: 10,
+    attempted_endpoints: 8, deferred_endpoints: 2, unattempted_deferred_endpoints: 2,
+    unattempted_unrestricted_endpoints: 2, next_recheck_at: '2026-10-13T12:00:00.000Z' };
+  const store = new RemoteQualityStore(async name => name === 'get_country_source_inventory'
+    ? { items: [inventory()], total: 1, next_offset: null }
+    : activity([day(date, { collection_schedule: schedule })]));
+  const row = (await store.overview(date)).items[0];
+  assert.equal(row.collection_schedule.deferred_endpoints, 2);
+  assert.equal(row.collection_schedule.unattempted_unrestricted_endpoints, 2);
+  assert.equal(row.metrics.attempt_coverage.numerator, 8);
+  assert.equal(row.metrics.attempt_coverage.denominator, 12);
+  schedule = { ...schedule, as_of: '2026-10-13T00:00:00.000Z' };
+  assert.equal((await store.overview(date)).items[0].collection_schedule, null);
+  schedule = { ...schedule, as_of: '2026-10-12T04:00:00.000Z', deferred_endpoints: 1 };
+  assert.equal((await store.overview(date)).items[0].collection_schedule, null);
+});
+
+test('country detail estimates publishers only after the full source listing matches inventory', async () => {
+  let total = 2;
+  const s = source(), second = { ...source(), id: `src_${'c'.repeat(24)}`, name: 'Test Outlet - World',
+    endpoints: [{ id: `ep_${'d'.repeat(24)}`, type: 'rss', url: 'https://news.example/world' }] };
+  const store = new RemoteQualityStore(async name => name === 'get_country_source_inventory'
+    ? { items: [{ ...inventory(), active_normalized_sources: 2 }], total: 1, next_offset: null }
+    : name === 'get_country_article_activity' ? activity([day(date)])
+      : { items: [s, second], total, next_offset: null });
+  const complete = await store.country('US', date);
+  assert.equal(complete.country.inventory.unique_publishers, 1);
+  assert.equal(complete.country.inventory.publisher_count_state, 'estimated_from_registry_identity');
+  total = 3;
+  const partial = await store.country('US', date);
+  assert.equal(partial.country.inventory.unique_publishers, null);
+  assert.equal(partial.source_list_state, 'partial');
+});
+
 test('overview reads original public tools and computes saved ratios without fabricated baseline or freshness', async () => {
   const calls = [];
   const store = new RemoteQualityStore(async (name, args) => {

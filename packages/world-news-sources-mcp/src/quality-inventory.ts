@@ -1,5 +1,6 @@
 import { canonicalUrl, stableId, type Catalog, type Endpoint, type Source } from './catalog.js';
 import { type HealthStore } from './health.js';
+import { estimatePublisherInventory } from './publisher-inventory.js';
 
 type Raw = Record<string, unknown>;
 const object = (value: unknown): Raw | null => value !== null && typeof value === 'object' && !Array.isArray(value) ? value as Raw : null;
@@ -117,11 +118,11 @@ export function getInventoryChanges(catalog: Catalog, rawRegistry: unknown, date
         disabled_source_registrations: sources.reduce((count, source) => count + source.disabledRegistrationCount, 0),
         configured_source_registrations: sources.reduce((count, source) => count + source.registrationCount, 0),
         active_normalized_sources: active.length, configured_normalized_sources: sources.length,
-        unique_active_rss_endpoints: endpoints('rss'), unique_active_sitemap_endpoints: endpoints('sitemap'), unique_publishers: null } };
+        unique_active_rss_endpoints: endpoints('rss'), unique_active_sitemap_endpoints: endpoints('sitemap'), ...estimatePublisherInventory(active) } };
   });
   return { date, timezone: 'UTC' as const, as_of: new Date(now).toISOString(), history_complete: false as const,
     recorded_events_only: true as const, per_country: perCountry, additions, source_transitions: sourceTransitions,
     unknown_addition_timestamp_count: catalog.sources.length - knownIds.size,
     known_addition_timestamp_count: knownIds.size,
-    semantics: 'Changes count recorded normalized-source events on the selected UTC date among sources still present in the current registry. Zero recorded events does not establish zero actual changes. Current holdings are configuration counts at as_of, not historical holdings. Missing creation dates remain unknown; first observation and endpoint validation are not registration dates. Deactivation is not deletion. No deletion ledger exists, so deletions and net change are unknown. Publishers are not resolved identities; their count is unknown. Endpoint deduplication uses type plus canonical URL within each country; registration rows and normalized sources are distinct.' };
+    semantics: 'Changes count recorded normalized-source events on the selected UTC date among sources still present in the current registry. Zero recorded events does not establish zero actual changes. Current holdings are configuration counts at as_of, not historical holdings. Missing creation dates remain unknown; first observation and endpoint validation are not registration dates. Deactivation is not deletion. No deletion ledger exists, so deletions and net change are unknown. Publisher counts are brand estimates from domains and explicit aliases, not verified legal entities or ownership groups. Endpoint deduplication uses type plus canonical URL within each country; registration rows and normalized sources are distinct.' };
 }
