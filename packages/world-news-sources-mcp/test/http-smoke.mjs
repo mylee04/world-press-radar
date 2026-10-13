@@ -12,7 +12,7 @@ try{
   const status=await fetch(new URL('/health',address),{signal:AbortSignal.timeout(15000)});
   assert.equal(status.status,200);const summary=await status.json();assert.equal(summary.configured_rows,5393);
   await client.connect(new StreamableHTTPClientTransport(new URL(address),{fetch:async(input,init)=>{const headers=new Headers(init?.headers);headers.set('x-world-news-traffic','inspection');const response=await fetch(input,{...init,headers});const ack=response.headers.get('x-world-news-metrics');if(ack)metricsAcks.push(ack);return response;}}));
-  const tools=(await client.listTools()).tools;assert.equal(tools.length,7);
+  const tools=(await client.listTools()).tools;assert.equal(tools.length,9);
   const sources=(await client.callTool({name:'search_sources',arguments:{country:'US',endpoint_type:'sitemap',limit:1}})).structuredContent;
   assert.equal(sources.items.length,1);
   const source=sources.items[0];
@@ -63,7 +63,7 @@ try{
   };
   const initialized=await rpc({jsonrpc:'2.0',id:1,method:'initialize',params:{protocolVersion:'2025-06-18',capabilities:{},clientInfo:{name:'live-legacy-smoke',version:'1'}}});
   assert.equal(initialized.serverInfo.name,'world-news-sources-mcp');
-  assert.equal((await rpc({jsonrpc:'2.0',id:2,method:'tools/list'},initialized.protocolVersion)).tools.length,7);
+  assert.equal((await rpc({jsonrpc:'2.0',id:2,method:'tools/list'},initialized.protocolVersion)).tools.length,9);
   const called=await rpc({jsonrpc:'2.0',id:3,method:'tools/call',params:{name:'list_countries',arguments:{limit:1}}},initialized.protocolVersion);
   assert.equal(called.structuredContent.total,73);
   if(summary.usage_statistics?.configured){assert.equal(metricsAcks.length,10);assert.ok(metricsAcks.every(ack=>ack==='recorded'));}

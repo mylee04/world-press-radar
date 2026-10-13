@@ -29,6 +29,10 @@ The product is meant to feel like a live coverage monitor, not a raw feed dump.
 - Bun-based ingest and health tooling
 - Token-gated API access for customer reads
 
+## News Quality Agent
+
+The existing [news MCP package](packages/world-news-sources-mcp/README.md) also provides a minimal country quality dashboard and evidence-driven investigations. Rules compute collection metrics; an optional OpenAI agent selects MCP reads, and Jev classifies retrieved evidence. Persistent observations, a shared pilot budget and approval-controlled local repair proposals support the workflow. Discovery counts describe first-observed URLs, not total published articles. See [implementation and limits](packages/world-news-sources-mcp/QUALITY.md) and [daily operations](packages/world-news-sources-mcp/ops/QUALITY-OPERATIONS.md). Production agent hosting and timer activation remain separate from the existing portal and collector schedules.
+
 ## Local Runtime Notes
 
 Repo scripts read `.env.local` or `.env.macmini.local` when present.

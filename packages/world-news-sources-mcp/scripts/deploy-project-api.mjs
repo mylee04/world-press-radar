@@ -8,9 +8,10 @@ export const TEAM='team_L8qng538xRzhNBoq38X6p8sN';
 const NAME='world-news-sources-mcp';
 const DOMAINS=['news.bymyleslee.com','world-news-sources-mcp.vercel.app'];
 const ALLOWED=new Set(['package.json','package-lock.json','vercel.json',
-  'api/mcp.mjs','api/health.mjs',
-  ...['catalog','status','health','http','server','metrics','activity','activity-history'].map(x=>`dist/${x}.js`),'dist/hosted.mjs',
-  'metadata/registry.json','metadata/legacy-health.json','metadata/health.json','metadata/activity.json',
+  'api/mcp.mjs','api/health.mjs','api/quality.mjs',
+  ...['catalog','status','health','http','server','metrics','activity','activity-history','quality','quality-history','quality-inventory','quality-http','quality-remote','investigation','openai-runtime','openai-investigation','jev-runtime','jev-investigation','quality-decision','repair-workflow','host-gate','inspect','validate'].map(x=>`dist/${x}.js`),'dist/hosted.mjs',
+  ...['index.html','app.js','styles.css'].map(x=>`dashboard/${x}`),
+  'metadata/registry.json','metadata/legacy-health.json','metadata/health.json','metadata/activity.json','metadata/quality-overview.json',
   ...['index.html','support.html','privacy.html','terms.html','styles.css','icon.svg'].map(x=>`public/${x}`),
   'public/.well-known/openai-apps-challenge']);
 export const expectedBundlePaths=()=>[...ALLOWED];

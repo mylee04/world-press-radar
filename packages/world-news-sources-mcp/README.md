@@ -2,7 +2,9 @@
 
 Source activation/deactivation timestamps and operator workflow: [STATUS-HISTORY.md](STATUS-HISTORY.md). Existing unknown historical dates remain null. Health audits do not change the enabled flag.
 
-`world-news-sources-mcp` is a small, database-free MCP package for configured publisher RSS and sitemap metadata. It reads this repository's `data/rss-atlas.json` directly. No article ingestion, PostgreSQL, Next.js, customer token or LLM/API key is needed to run it.
+`world-news-sources-mcp` serves configured publisher RSS/sitemap metadata from this repository's `data/rss-atlas.json`. The core read tools need no database, PostgreSQL, Next.js, customer token, or model key. Optional collection and quality operations use private SQLite stores for their durable history.
+
+The **News Quality Agent dashboard** is available at `/quality` in the local HTTP runtime. It reads actual production MCP records, separates attempt coverage from success among attempts, and shows actual investigations. Run `npm run quality:dashboard`; see [QUALITY.md](QUALITY.md) for the minimal dashboard, rules/OpenAI/Jev modes, persistent history and shared $5 pilot budget. Both provider pilot calls have succeeded. Repair proposals require explicit approval and affect only the local registry. [Daily operations](ops/QUALITY-OPERATIONS.md) are prepared; cloud rollout and timer activation are separate.
 
 ## Run locally
 
@@ -44,7 +46,7 @@ Files are loaded once at startup, capped at 16 MiB. Restart after changing regis
 
 ## Tools and examples
 
-All four tools are read-only and use cached metadata. Tool calls never fetch a publisher or write files.
+The four core metadata tools below are read-only and use cached metadata. Additional activity/inventory/quality tools are documented below. MCP tool calls never fetch a publisher or write the registry.
 
 | Tool | Example arguments | Result |
 | --- | --- | --- |
@@ -149,7 +151,7 @@ Optional long-term aggregate counters are described in [`metrics/README.md`](met
 
 ## Article-URL activity and current inventory
 
-Seven read tools are now available, including `get_country_source_inventory`, `get_source_article_activity` and `get_country_article_activity`. [Activity operator documentation](activity/README.md) defines excluded initialization baselines, scope-specific discovery, deduplication, timezone/DST, partial coverage and the separate durable SQLite ledger. No tool crawls a publisher. Counts describe first-discovered candidate URLs, not publications or entry counts.
+Nine read tools are available in this checkout, including `get_country_source_inventory`, `get_source_article_activity`, `get_country_article_activity`, `get_country_collection_quality` and `get_source_collection_quality`. The last verified deployed MCP has seven tools; the dashboard's production reader uses those seven. [Activity operator documentation](activity/README.md) defines excluded initialization baselines, scope-specific discovery, deduplication, timezone/DST, partial coverage and the separate durable SQLite ledger. Future collector runs record completed cohorts and reliable content dates for comparable quality baselines. No MCP tool crawls a publisher. Counts describe first-discovered candidate URLs, not publications or entry counts.
 
 ```json
 {"name":"get_country_source_inventory","arguments":{"country":"US","include_disabled":true}}

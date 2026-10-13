@@ -1,0 +1,807 @@
+{
+  "version": 1,
+  "executed_at": "2026-10-13T18:03:04.421Z",
+  "case_set_id": "news-quality-fixed-cases-v1",
+  "case_set_sha256": "374f973f9d95fd9a140a2f4d333e724ed88da7d0e5b020f261486071d1329f81",
+  "model_rubric_sha256": "92d1fc17119a9de6c4ab7aa36897e414781ab355f6ca91cb237cfd32eccedcbc",
+  "synthetic_fixtures": true,
+  "total_fixed_cases": 10,
+  "rules": {
+    "status": "completed",
+    "metrics": {
+      "total_cases": 10,
+      "exact_classification_correct": 10,
+      "exact_classification_accuracy": 1,
+      "evidence_contract_failures": 0,
+      "true_positive_findings": 3,
+      "false_positive_findings": 0,
+      "true_negative_findings": 7,
+      "missed_relevant_findings": 0,
+      "false_positive_rate": 0,
+      "missed_relevant_finding_rate": 0,
+      "duration_ms": 748.866334,
+      "finding_definition": "An endpoint finding explicitly requiring live confirmation of failure, access failure, or stale content. This is not a confirmed outage; unknown tracking and missing content dates remain separate labels."
+    },
+    "by_language": {
+      "en": {
+        "total_cases": 3,
+        "exact_classification_correct": 3,
+        "exact_classification_accuracy": 1,
+        "evidence_contract_failures": 0,
+        "true_positive_findings": 0,
+        "false_positive_findings": 0,
+        "true_negative_findings": 3,
+        "missed_relevant_findings": 0,
+        "false_positive_rate": 0,
+        "missed_relevant_finding_rate": null,
+        "duration_ms": 206.32245900000004,
+        "finding_definition": "An endpoint finding explicitly requiring live confirmation of failure, access failure, or stale content. This is not a confirmed outage; unknown tracking and missing content dates remain separate labels."
+      },
+      "ko": {
+        "total_cases": 4,
+        "exact_classification_correct": 4,
+        "exact_classification_accuracy": 1,
+        "evidence_contract_failures": 0,
+        "true_positive_findings": 1,
+        "false_positive_findings": 0,
+        "true_negative_findings": 3,
+        "missed_relevant_findings": 0,
+        "false_positive_rate": 0,
+        "missed_relevant_finding_rate": 0,
+        "duration_ms": 308.510084,
+        "finding_definition": "An endpoint finding explicitly requiring live confirmation of failure, access failure, or stale content. This is not a confirmed outage; unknown tracking and missing content dates remain separate labels."
+      },
+      "ja": {
+        "total_cases": 3,
+        "exact_classification_correct": 3,
+        "exact_classification_accuracy": 1,
+        "evidence_contract_failures": 0,
+        "true_positive_findings": 2,
+        "false_positive_findings": 0,
+        "true_negative_findings": 1,
+        "missed_relevant_findings": 0,
+        "false_positive_rate": 0,
+        "missed_relevant_finding_rate": 0,
+        "duration_ms": 234.033791,
+        "finding_definition": "An endpoint finding explicitly requiring live confirmation of failure, access failure, or stale content. This is not a confirmed outage; unknown tracking and missing content dates remain separate labels."
+      }
+    },
+    "wall_duration_ms": 749.334709,
+    "model_calls": 0,
+    "api_cost": {
+      "currency": "USD",
+      "amount": 0,
+      "evidence": "Offline code execution; no model or API provider called."
+    },
+    "server_cost": {
+      "amount": null,
+      "status": "not_measured"
+    }
+  },
+  "providers": [
+    {
+      "method": "typesafe_jev",
+      "model": "jev-1.13.0",
+      "status": "completed",
+      "evidence_kind": "live_api",
+      "intended_cases": 10,
+      "evaluated_cases": 10,
+      "metrics": {
+        "total_cases": 10,
+        "exact_classification_correct": 9,
+        "exact_classification_accuracy": 0.9,
+        "evidence_contract_failures": 2,
+        "true_positive_findings": 3,
+        "false_positive_findings": 2,
+        "true_negative_findings": 5,
+        "missed_relevant_findings": 0,
+        "false_positive_rate": 0.2857142857142857,
+        "missed_relevant_finding_rate": 0,
+        "duration_ms": 1439.725000999997,
+        "finding_definition": "An endpoint finding explicitly requiring live confirmation of failure, access failure, or stale content. This is not a confirmed outage; unknown tracking and missing content dates remain separate labels."
+      },
+      "by_language": {
+        "en": {
+          "total_cases": 3,
+          "exact_classification_correct": 3,
+          "exact_classification_accuracy": 1,
+          "evidence_contract_failures": 1,
+          "true_positive_findings": 0,
+          "false_positive_findings": 1,
+          "true_negative_findings": 2,
+          "missed_relevant_findings": 0,
+          "false_positive_rate": 0.3333333333333333,
+          "missed_relevant_finding_rate": null,
+          "duration_ms": 396.76337500000045,
+          "finding_definition": "An endpoint finding explicitly requiring live confirmation of failure, access failure, or stale content. This is not a confirmed outage; unknown tracking and missing content dates remain separate labels.",
+          "intended_cases": 3,
+          "failed_cases": 0
+        },
+        "ko": {
+          "total_cases": 4,
+          "exact_classification_correct": 3,
+          "exact_classification_accuracy": 0.75,
+          "evidence_contract_failures": 1,
+          "true_positive_findings": 1,
+          "false_positive_findings": 1,
+          "true_negative_findings": 2,
+          "missed_relevant_findings": 0,
+          "false_positive_rate": 0.3333333333333333,
+          "missed_relevant_finding_rate": 0,
+          "duration_ms": 651.3112509999974,
+          "finding_definition": "An endpoint finding explicitly requiring live confirmation of failure, access failure, or stale content. This is not a confirmed outage; unknown tracking and missing content dates remain separate labels.",
+          "intended_cases": 4,
+          "failed_cases": 0
+        },
+        "ja": {
+          "total_cases": 3,
+          "exact_classification_correct": 3,
+          "exact_classification_accuracy": 1,
+          "evidence_contract_failures": 0,
+          "true_positive_findings": 2,
+          "false_positive_findings": 0,
+          "true_negative_findings": 1,
+          "missed_relevant_findings": 0,
+          "false_positive_rate": 0,
+          "missed_relevant_finding_rate": 0,
+          "duration_ms": 391.65037499999926,
+          "finding_definition": "An endpoint finding explicitly requiring live confirmation of failure, access failure, or stale content. This is not a confirmed outage; unknown tracking and missing content dates remain separate labels.",
+          "intended_cases": 3,
+          "failed_cases": 0
+        }
+      },
+      "wall_duration_ms": 1439.8858749999981,
+      "usage_tokens": {
+        "input_tokens": 14556,
+        "output_tokens": 1636
+      },
+      "api_cost": {
+        "currency": "USD",
+        "amount": null,
+        "estimated_amount": 0.0006113520000000001,
+        "known_estimated_amount": 0.0006113520000000001,
+        "billing_status": "not_available",
+        "evidence": "Provider-reported token usage times configured rates; not a billing receipt."
+      },
+      "cases": [
+        {
+          "id": "donga-national-regression",
+          "language": "ko",
+          "country": "KR",
+          "status": "completed",
+          "expected": {
+            "classification": "failure_after_prior_success",
+            "requires_live_confirmation": true
+          },
+          "observed": {
+            "classification": "failure_after_prior_success",
+            "requires_live_confirmation": true
+          },
+          "classification_correct": true,
+          "evidence_mismatches": [],
+          "model": "jev-1.13.0",
+          "confidence": 0.99,
+          "usage_tokens": {
+            "input_tokens": 1570,
+            "output_tokens": 163,
+            "cached_input_tokens": null
+          },
+          "estimated_api_cost_usd": 0.00006594,
+          "billing_cost_usd": null,
+          "duration_ms": 251.10520799999904
+        },
+        {
+          "id": "donga-science-recovery",
+          "language": "ko",
+          "country": "KR",
+          "status": "completed",
+          "expected": {
+            "classification": "recovered_after_failure",
+            "requires_live_confirmation": false
+          },
+          "observed": {
+            "classification": "successful_collection",
+            "requires_live_confirmation": true
+          },
+          "classification_correct": false,
+          "evidence_mismatches": [
+            {
+              "field": "requires_live_confirmation",
+              "expected": false,
+              "observed": true
+            }
+          ],
+          "model": "jev-1.13.0",
+          "confidence": 0.67,
+          "usage_tokens": {
+            "input_tokens": 1498,
+            "output_tokens": 161,
+            "cached_input_tokens": null
+          },
+          "estimated_api_cost_usd": 0.000062916,
+          "billing_cost_usd": null,
+          "duration_ms": 125.85633400000006
+        },
+        {
+          "id": "nhk-obsolete-feed-evidence",
+          "language": "ja",
+          "country": "JP",
+          "status": "completed",
+          "expected": {
+            "classification": "stale_content_evidence",
+            "requires_live_confirmation": true
+          },
+          "observed": {
+            "classification": "stale_content_evidence",
+            "requires_live_confirmation": true
+          },
+          "classification_correct": true,
+          "evidence_mismatches": [],
+          "model": "jev-1.13.0",
+          "confidence": 0.98,
+          "usage_tokens": {
+            "input_tokens": 1531,
+            "output_tokens": 165,
+            "cached_input_tokens": null
+          },
+          "estimated_api_cost_usd": 0.00006430200000000001,
+          "billing_cost_usd": null,
+          "duration_ms": 125.72670800000014
+        },
+        {
+          "id": "nyt-technology-untracked",
+          "language": "en",
+          "country": "US",
+          "status": "completed",
+          "expected": {
+            "classification": "untracked_or_no_available_checks",
+            "requires_live_confirmation": false
+          },
+          "observed": {
+            "classification": "untracked_or_no_available_checks",
+            "requires_live_confirmation": true
+          },
+          "classification_correct": true,
+          "evidence_mismatches": [
+            {
+              "field": "requires_live_confirmation",
+              "expected": false,
+              "observed": true
+            }
+          ],
+          "model": "jev-1.13.0",
+          "confidence": 0.88,
+          "usage_tokens": {
+            "input_tokens": 1264,
+            "output_tokens": 167,
+            "cached_input_tokens": null
+          },
+          "estimated_api_cost_usd": 0.000053088000000000004,
+          "billing_cost_usd": null,
+          "duration_ms": 126.08137499999975
+        },
+        {
+          "id": "texas-tribune-successful-zero",
+          "language": "en",
+          "country": "US",
+          "status": "completed",
+          "expected": {
+            "classification": "successful_no_new_discoveries",
+            "requires_live_confirmation": false
+          },
+          "observed": {
+            "classification": "successful_no_new_discoveries",
+            "requires_live_confirmation": false
+          },
+          "classification_correct": true,
+          "evidence_mismatches": [],
+          "model": "jev-1.13.0",
+          "confidence": 0.99,
+          "usage_tokens": {
+            "input_tokens": 1530,
+            "output_tokens": 166,
+            "cached_input_tokens": null
+          },
+          "estimated_api_cost_usd": 0.00006426000000000001,
+          "billing_cost_usd": null,
+          "duration_ms": 136.70175000000017
+        },
+        {
+          "id": "yomiuri-access-gap",
+          "language": "ja",
+          "country": "JP",
+          "status": "completed",
+          "expected": {
+            "classification": "access_failure_without_normal_baseline",
+            "requires_live_confirmation": true
+          },
+          "observed": {
+            "classification": "access_failure_without_normal_baseline",
+            "requires_live_confirmation": true
+          },
+          "classification_correct": true,
+          "evidence_mismatches": [],
+          "model": "jev-1.13.0",
+          "confidence": 0.99,
+          "usage_tokens": {
+            "input_tokens": 1415,
+            "output_tokens": 166,
+            "cached_input_tokens": null
+          },
+          "estimated_api_cost_usd": 0.000059430000000000005,
+          "billing_cost_usd": null,
+          "duration_ms": 125.14279199999874
+        },
+        {
+          "id": "sitemap-index-only",
+          "language": "en",
+          "country": "US",
+          "status": "completed",
+          "expected": {
+            "classification": "index_only",
+            "requires_live_confirmation": false
+          },
+          "observed": {
+            "classification": "index_only",
+            "requires_live_confirmation": false
+          },
+          "classification_correct": true,
+          "evidence_mismatches": [],
+          "model": "jev-1.13.0",
+          "confidence": 0.96,
+          "usage_tokens": {
+            "input_tokens": 1335,
+            "output_tokens": 161,
+            "cached_input_tokens": null
+          },
+          "estimated_api_cost_usd": 0.000056070000000000004,
+          "billing_cost_usd": null,
+          "duration_ms": 133.98025000000052
+        },
+        {
+          "id": "missing-content-dates",
+          "language": "ko",
+          "country": "KR",
+          "status": "completed",
+          "expected": {
+            "classification": "successful_collection",
+            "requires_live_confirmation": false
+          },
+          "observed": {
+            "classification": "successful_collection",
+            "requires_live_confirmation": false
+          },
+          "classification_correct": true,
+          "evidence_mismatches": [],
+          "model": "jev-1.13.0",
+          "confidence": 1,
+          "usage_tokens": {
+            "input_tokens": 1423,
+            "output_tokens": 161,
+            "cached_input_tokens": null
+          },
+          "estimated_api_cost_usd": 0.000059766000000000003,
+          "billing_cost_usd": null,
+          "duration_ms": 129.44504199999938
+        },
+        {
+          "id": "japan-times-normal-collection",
+          "language": "ja",
+          "country": "JP",
+          "status": "completed",
+          "expected": {
+            "classification": "successful_collection",
+            "requires_live_confirmation": false
+          },
+          "observed": {
+            "classification": "successful_collection",
+            "requires_live_confirmation": false
+          },
+          "classification_correct": true,
+          "evidence_mismatches": [],
+          "model": "jev-1.13.0",
+          "confidence": 1,
+          "usage_tokens": {
+            "input_tokens": 1531,
+            "output_tokens": 161,
+            "cached_input_tokens": null
+          },
+          "estimated_api_cost_usd": 0.00006430200000000001,
+          "billing_cost_usd": null,
+          "duration_ms": 140.78087500000038
+        },
+        {
+          "id": "korea-unattempted-period",
+          "language": "ko",
+          "country": "KR",
+          "status": "completed",
+          "expected": {
+            "classification": "not_attempted_in_period",
+            "requires_live_confirmation": false
+          },
+          "observed": {
+            "classification": "not_attempted_in_period",
+            "requires_live_confirmation": false
+          },
+          "classification_correct": true,
+          "evidence_mismatches": [],
+          "model": "jev-1.13.0",
+          "confidence": 0.91,
+          "usage_tokens": {
+            "input_tokens": 1459,
+            "output_tokens": 165,
+            "cached_input_tokens": null
+          },
+          "estimated_api_cost_usd": 0.000061278,
+          "billing_cost_usd": null,
+          "duration_ms": 144.90466699999888
+        }
+      ],
+      "limitations": [
+        "Ten synthetic cases; language counts are small and cannot establish production accuracy.",
+        "Grouped by source-language label; mostly structured evidence, not a multilingual semantic benchmark.",
+        "Metrics exclude failed/unexecuted cases; evaluate coverage alongside accuracy.",
+        "Label descriptions and rule-derived classifications were excluded from provider inputs."
+      ]
+    },
+    {
+      "method": "generic_low_cost_llm",
+      "model": "gpt-6-luna",
+      "status": "completed",
+      "evidence_kind": "live_api",
+      "intended_cases": 10,
+      "evaluated_cases": 10,
+      "metrics": {
+        "total_cases": 10,
+        "exact_classification_correct": 9,
+        "exact_classification_accuracy": 0.9,
+        "evidence_contract_failures": 0,
+        "true_positive_findings": 3,
+        "false_positive_findings": 0,
+        "true_negative_findings": 7,
+        "missed_relevant_findings": 0,
+        "false_positive_rate": 0,
+        "missed_relevant_finding_rate": 0,
+        "duration_ms": 14413.414457,
+        "finding_definition": "An endpoint finding explicitly requiring live confirmation of failure, access failure, or stale content. This is not a confirmed outage; unknown tracking and missing content dates remain separate labels."
+      },
+      "by_language": {
+        "en": {
+          "total_cases": 3,
+          "exact_classification_correct": 2,
+          "exact_classification_accuracy": 0.6666666666666666,
+          "evidence_contract_failures": 0,
+          "true_positive_findings": 0,
+          "false_positive_findings": 0,
+          "true_negative_findings": 3,
+          "missed_relevant_findings": 0,
+          "false_positive_rate": 0,
+          "missed_relevant_finding_rate": null,
+          "duration_ms": 3900.0590409999986,
+          "finding_definition": "An endpoint finding explicitly requiring live confirmation of failure, access failure, or stale content. This is not a confirmed outage; unknown tracking and missing content dates remain separate labels.",
+          "intended_cases": 3,
+          "failed_cases": 0
+        },
+        "ko": {
+          "total_cases": 4,
+          "exact_classification_correct": 4,
+          "exact_classification_accuracy": 1,
+          "evidence_contract_failures": 0,
+          "true_positive_findings": 1,
+          "false_positive_findings": 0,
+          "true_negative_findings": 3,
+          "missed_relevant_findings": 0,
+          "false_positive_rate": 0,
+          "missed_relevant_finding_rate": 0,
+          "duration_ms": 6033.121250000001,
+          "finding_definition": "An endpoint finding explicitly requiring live confirmation of failure, access failure, or stale content. This is not a confirmed outage; unknown tracking and missing content dates remain separate labels.",
+          "intended_cases": 4,
+          "failed_cases": 0
+        },
+        "ja": {
+          "total_cases": 3,
+          "exact_classification_correct": 3,
+          "exact_classification_accuracy": 1,
+          "evidence_contract_failures": 0,
+          "true_positive_findings": 2,
+          "false_positive_findings": 0,
+          "true_negative_findings": 1,
+          "missed_relevant_findings": 0,
+          "false_positive_rate": 0,
+          "missed_relevant_finding_rate": 0,
+          "duration_ms": 4480.234166,
+          "finding_definition": "An endpoint finding explicitly requiring live confirmation of failure, access failure, or stale content. This is not a confirmed outage; unknown tracking and missing content dates remain separate labels.",
+          "intended_cases": 3,
+          "failed_cases": 0
+        }
+      },
+      "wall_duration_ms": 14413.90325,
+      "usage_tokens": {
+        "input_tokens": 9134,
+        "output_tokens": 240
+      },
+      "api_cost": {
+        "currency": "USD",
+        "amount": null,
+        "estimated_amount": 0.0010334,
+        "known_estimated_amount": 0.0010334,
+        "billing_status": "not_available",
+        "evidence": "Provider-reported token usage times configured rates; not a billing receipt."
+      },
+      "cases": [
+        {
+          "id": "donga-national-regression",
+          "language": "ko",
+          "country": "KR",
+          "status": "completed",
+          "expected": {
+            "classification": "failure_after_prior_success",
+            "requires_live_confirmation": true
+          },
+          "observed": {
+            "classification": "failure_after_prior_success",
+            "requires_live_confirmation": true
+          },
+          "classification_correct": true,
+          "evidence_mismatches": [],
+          "model": "gpt-6-luna",
+          "confidence": null,
+          "usage_tokens": {
+            "input_tokens": 978,
+            "output_tokens": 21,
+            "cached_input_tokens": 0
+          },
+          "estimated_api_cost_usd": 0.00010830000000000002,
+          "billing_cost_usd": null,
+          "duration_ms": 2082.6595420000003
+        },
+        {
+          "id": "donga-science-recovery",
+          "language": "ko",
+          "country": "KR",
+          "status": "completed",
+          "expected": {
+            "classification": "recovered_after_failure",
+            "requires_live_confirmation": false
+          },
+          "observed": {
+            "classification": "recovered_after_failure",
+            "requires_live_confirmation": false
+          },
+          "classification_correct": true,
+          "evidence_mismatches": [],
+          "model": "gpt-6-luna",
+          "confidence": null,
+          "usage_tokens": {
+            "input_tokens": 937,
+            "output_tokens": 21,
+            "cached_input_tokens": 0
+          },
+          "estimated_api_cost_usd": 0.0001042,
+          "billing_cost_usd": null,
+          "duration_ms": 1821.257458
+        },
+        {
+          "id": "nhk-obsolete-feed-evidence",
+          "language": "ja",
+          "country": "JP",
+          "status": "completed",
+          "expected": {
+            "classification": "stale_content_evidence",
+            "requires_live_confirmation": true
+          },
+          "observed": {
+            "classification": "stale_content_evidence",
+            "requires_live_confirmation": true
+          },
+          "classification_correct": true,
+          "evidence_mismatches": [],
+          "model": "gpt-6-luna",
+          "confidence": null,
+          "usage_tokens": {
+            "input_tokens": 959,
+            "output_tokens": 22,
+            "cached_input_tokens": 0
+          },
+          "estimated_api_cost_usd": 0.00010690000000000001,
+          "billing_cost_usd": null,
+          "duration_ms": 1976.4319159999995
+        },
+        {
+          "id": "nyt-technology-untracked",
+          "language": "en",
+          "country": "US",
+          "status": "completed",
+          "expected": {
+            "classification": "untracked_or_no_available_checks",
+            "requires_live_confirmation": false
+          },
+          "observed": {
+            "classification": "not_attempted_in_period",
+            "requires_live_confirmation": false
+          },
+          "classification_correct": false,
+          "evidence_mismatches": [],
+          "model": "gpt-6-luna",
+          "confidence": null,
+          "usage_tokens": {
+            "input_tokens": 801,
+            "output_tokens": 22,
+            "cached_input_tokens": 0
+          },
+          "estimated_api_cost_usd": 0.0000911,
+          "billing_cost_usd": null,
+          "duration_ms": 1271.0758749999995
+        },
+        {
+          "id": "texas-tribune-successful-zero",
+          "language": "en",
+          "country": "US",
+          "status": "completed",
+          "expected": {
+            "classification": "successful_no_new_discoveries",
+            "requires_live_confirmation": false
+          },
+          "observed": {
+            "classification": "successful_no_new_discoveries",
+            "requires_live_confirmation": false
+          },
+          "classification_correct": true,
+          "evidence_mismatches": [],
+          "model": "gpt-6-luna",
+          "confidence": null,
+          "usage_tokens": {
+            "input_tokens": 958,
+            "output_tokens": 23,
+            "cached_input_tokens": 0
+          },
+          "estimated_api_cost_usd": 0.0001073,
+          "billing_cost_usd": null,
+          "duration_ms": 1208.0941250000005
+        },
+        {
+          "id": "yomiuri-access-gap",
+          "language": "ja",
+          "country": "JP",
+          "status": "completed",
+          "expected": {
+            "classification": "access_failure_without_normal_baseline",
+            "requires_live_confirmation": true
+          },
+          "observed": {
+            "classification": "access_failure_without_normal_baseline",
+            "requires_live_confirmation": true
+          },
+          "classification_correct": true,
+          "evidence_mismatches": [],
+          "model": "gpt-6-luna",
+          "confidence": null,
+          "usage_tokens": {
+            "input_tokens": 886,
+            "output_tokens": 52,
+            "cached_input_tokens": 0
+          },
+          "estimated_api_cost_usd": 0.00011460000000000001,
+          "billing_cost_usd": null,
+          "duration_ms": 1577.7453330000008
+        },
+        {
+          "id": "sitemap-index-only",
+          "language": "en",
+          "country": "US",
+          "status": "completed",
+          "expected": {
+            "classification": "index_only",
+            "requires_live_confirmation": false
+          },
+          "observed": {
+            "classification": "index_only",
+            "requires_live_confirmation": false
+          },
+          "classification_correct": true,
+          "evidence_mismatches": [],
+          "model": "gpt-6-luna",
+          "confidence": null,
+          "usage_tokens": {
+            "input_tokens": 845,
+            "output_tokens": 19,
+            "cached_input_tokens": 0
+          },
+          "estimated_api_cost_usd": 0.000094,
+          "billing_cost_usd": null,
+          "duration_ms": 1420.8890409999985
+        },
+        {
+          "id": "missing-content-dates",
+          "language": "ko",
+          "country": "KR",
+          "status": "completed",
+          "expected": {
+            "classification": "successful_collection",
+            "requires_live_confirmation": false
+          },
+          "observed": {
+            "classification": "successful_collection",
+            "requires_live_confirmation": false
+          },
+          "classification_correct": true,
+          "evidence_mismatches": [],
+          "model": "gpt-6-luna",
+          "confidence": null,
+          "usage_tokens": {
+            "input_tokens": 895,
+            "output_tokens": 19,
+            "cached_input_tokens": 0
+          },
+          "estimated_api_cost_usd": 0.000099,
+          "billing_cost_usd": null,
+          "duration_ms": 1210.691667000001
+        },
+        {
+          "id": "japan-times-normal-collection",
+          "language": "ja",
+          "country": "JP",
+          "status": "completed",
+          "expected": {
+            "classification": "successful_collection",
+            "requires_live_confirmation": false
+          },
+          "observed": {
+            "classification": "successful_collection",
+            "requires_live_confirmation": false
+          },
+          "classification_correct": true,
+          "evidence_mismatches": [],
+          "model": "gpt-6-luna",
+          "confidence": null,
+          "usage_tokens": {
+            "input_tokens": 958,
+            "output_tokens": 19,
+            "cached_input_tokens": 0
+          },
+          "estimated_api_cost_usd": 0.00010530000000000001,
+          "billing_cost_usd": null,
+          "duration_ms": 926.0569169999999
+        },
+        {
+          "id": "korea-unattempted-period",
+          "language": "ko",
+          "country": "KR",
+          "status": "completed",
+          "expected": {
+            "classification": "not_attempted_in_period",
+            "requires_live_confirmation": false
+          },
+          "observed": {
+            "classification": "not_attempted_in_period",
+            "requires_live_confirmation": false
+          },
+          "classification_correct": true,
+          "evidence_mismatches": [],
+          "model": "gpt-6-luna",
+          "confidence": null,
+          "usage_tokens": {
+            "input_tokens": 917,
+            "output_tokens": 22,
+            "cached_input_tokens": 0
+          },
+          "estimated_api_cost_usd": 0.0001027,
+          "billing_cost_usd": null,
+          "duration_ms": 918.5125829999997
+        }
+      ],
+      "limitations": [
+        "Ten synthetic cases; language counts are small and cannot establish production accuracy.",
+        "Grouped by source-language label; mostly structured evidence, not a multilingual semantic benchmark.",
+        "Metrics exclude failed/unexecuted cases; evaluate coverage alongside accuracy.",
+        "Label descriptions and rule-derived classifications were excluded from provider inputs."
+      ]
+    }
+  ],
+  "decision": "Retain deterministic classifications. Jev remains optional and review-gated; neither model is adopted as the default daily anomaly detector.",
+  "limitations": [
+    "Ten synthetic cases do not establish production accuracy.",
+    "Language groups indicate source-language labels on mostly structured evidence, not multilingual semantic understanding.",
+    "Reported token usage yields an estimate; billing receipts are unavailable."
+  ]
+}

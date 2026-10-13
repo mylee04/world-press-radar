@@ -24,16 +24,24 @@
     "plugin:validate": "node scripts/package-plugin.mjs",
     "plugin:package": "node scripts/package-plugin.mjs --package",
     "activity:collect": "node scripts/collect-activity.mjs",
-    "activity:export": "node scripts/collect-activity.mjs --export-only"
+    "activity:export": "node scripts/collect-activity.mjs --export-only",
+    "quality:dashboard": "npm run build && WNS_QUALITY_REMOTE=1 node dist/http-local.js",
+    "quality:evaluate": "npm run build && node scripts/evaluate-quality.mjs",
+    "quality:dashboard:local": "npm run build && node dist/http-local.js",
+    "quality:report": "npm run build && node scripts/quality-report.mjs",
+    "quality:daily": "npm run build && node scripts/quality-daily.mjs",
+    "quality:schedule": "npm run build && node scripts/install-quality-schedule.mjs"
   },
   "dependencies": {
+    "@modelcontextprotocol/client": "2.2.0",
     "@modelcontextprotocol/node": "2.1.0",
     "@modelcontextprotocol/server": "2.2.0",
+    "@openai/agents": "0.20.0",
+    "openai": "7.32.0",
     "saxes": "6.0.0",
     "zod": "^4.0.0"
   },
   "devDependencies": {
-    "@modelcontextprotocol/client": "2.2.0",
     "@types/node": "^22.0.0",
     "ajv": "^8.20.0",
     "typescript": "^5.7.3"

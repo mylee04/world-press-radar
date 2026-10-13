@@ -137,7 +137,7 @@ test('inventory is recomputed from actual registry, counts mixed duplicates hone
 test('all original tools plus activity and inventory work through actual MCP transport',async()=>{
   const {ledger,cleanup}=setup();visit(ledger,'A',0,[],'valid_empty');const handler=createHttpHandler(catalog,new HealthStore(),['example.com'],undefined,new ActivityStore(ledger.snapshot(catalog,now)));const client=new Client({name:'activity-test',version:'1'});
   try{
-    await client.connect(new StreamableHTTPClientTransport(new URL('https://example.com/mcp'),{fetch:(input,init)=>handler.fetch(new Request(input,init))}));assert.equal((await client.listTools()).tools.length,7);
+    await client.connect(new StreamableHTTPClientTransport(new URL('https://example.com/mcp'),{fetch:(input,init)=>handler.fetch(new Request(input,init))}));assert.equal((await client.listTools()).tools.length,9);
     const calls=[['search_sources',{limit:1}],['get_source',{source_id:source('A').id}],['list_countries',{limit:1}],['get_endpoint_health',{endpoint_ids:[source('A').endpoints[0].id]}],['get_country_source_inventory',{country:'US'}],['get_source_article_activity',{source_id:source('A').id,start_date:'2026-10-01',end_date:'2026-10-01'}],['get_country_article_activity',{country:'US',start_date:'2026-10-01',end_date:'2026-10-01'}]];
     for(const [name,args] of calls){const result=await client.callTool({name,arguments:args});assert.notEqual(result.isError,true,name);assert.ok(result.structuredContent,name);}
     assert.equal((await client.callTool({name:'get_source_article_activity',arguments:{source_id:source('A').id,timezone:'invalid'}})).isError,true);

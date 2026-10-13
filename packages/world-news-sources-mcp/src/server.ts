@@ -2,6 +2,7 @@ import { McpServer } from '@modelcontextprotocol/server';
 import { countrySchema, detailsSchema, healthSchema, page, search, searchSchema, type Catalog } from './catalog.js';
 import { HealthStore } from './health.js';
 import { ActivityStore, countryActivitySchema, sourceActivitySchema, inventorySchema, countryInventory } from './activity.js';
+import { countryQualitySchema, sourceQualitySchema, getCountryQualityOverview, getSourceQualityDetail } from './quality.js';
 
 export function createServer(catalog: Catalog, health: HealthStore, activity = new ActivityStore()) {
   const server = new McpServer({ name: 'world-news-sources-mcp', title: 'World News Sources', version: '0.1.0' });
@@ -46,5 +47,19 @@ export function createServer(catalog: Catalog, health: HealthStore, activity = n
       inputSchema: kind === 'source' ? sourceActivitySchema : countryActivitySchema, annotations,
     }, async (input: unknown) => { try { return result(activity.query(catalog, kind, input)); } catch (error) { return { isError: true, content: [{ type: 'text' as const, text: error instanceof Error ? error.message : 'Invalid activity input' }] }; } });
   }
+  server.registerTool('get_country_collection_quality', {
+    description: 'Read cached country attempt coverage, success among attempted article endpoints, inventory, partial UTC windows and own-country weekday baseline review signals. Unknown cadence freshness stays null. Does not confirm current outages or modify sources.',
+    inputSchema: countryQualitySchema, annotations,
+  }, async input => {
+    try { return result(getCountryQualityOverview(catalog, activity, health, input)); }
+    catch (error) { return { isError: true, content: [{ type: 'text' as const, text: error instanceof Error ? error.message : 'Quality lookup failed' }] }; }
+  });
+  server.registerTool('get_source_collection_quality', {
+    description: 'Read cached source endpoint failure/regression/recovery evidence and daily, trailing 7-day and trailing 30-day first-discovered URL counts with explicit deduplication and unavailable endpoint counts. Successful zero discoveries alone is not failure.',
+    inputSchema: sourceQualitySchema, annotations,
+  }, async input => {
+    try { return result(getSourceQualityDetail(catalog, activity, health, input)); }
+    catch (error) { return { isError: true, content: [{ type: 'text' as const, text: error instanceof Error ? error.message : 'Quality lookup failed' }] }; }
+  });
   return server;
 }

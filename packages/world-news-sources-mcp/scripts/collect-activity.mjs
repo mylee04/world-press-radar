@@ -24,6 +24,7 @@ const {catalog} = loadData(); const gate = createHostGate(2000);
 const bindings = new Map(); for(const source of catalog.sources.filter(s=>s.enabled)) for(const endpoint of source.endpoints){const list=bindings.get(endpoint.id)??[];list.push(source);bindings.set(endpoint.id,list);}
 const atomicJson = (path,value) => { const tmp=`${path}.${process.pid}.tmp`;writeFileSync(tmp,JSON.stringify(value)+'\n',{mode:0o600});renameSync(tmp,path); };
 let completed=0, failed=0, replayed=0;
+let activeCycle = null;
 try {
   ledger.acquire(owner,new Date().toISOString(),120);
   const existingLane=ledger.db.prepare("SELECT value FROM metadata WHERE key='lane'").get()?.value;
@@ -44,8 +45,10 @@ try {
     const now=new Date().toISOString();
     const state=ledger.db.prepare('SELECT endpoint_id,MIN(baseline_at) baseline_at,MAX(next_due) next_due,MIN(last_attempt_at) last_attempt_at FROM bindings GROUP BY endpoint_id').all();
     const states=new Map(state.map(row=>[row.endpoint_id,row]));
-    const endpoints=[...bindings.keys()].filter(id=>!explicit.length||explicit.includes(id)).filter(id=>args.includes('--force')||!states.get(id)?.next_due||states.get(id).next_due<=now)
-      .sort((a,b)=>String(states.get(a)?.last_attempt_at??'').localeCompare(String(states.get(b)?.last_attempt_at??''))||a.localeCompare(b)).slice(0,limit);
+    const eligible=[...bindings.keys()].filter(id=>!explicit.length||explicit.includes(id)).filter(id=>args.includes('--force')||!states.get(id)?.next_due||states.get(id).next_due<=now)
+      .sort((a,b)=>String(states.get(a)?.last_attempt_at??'').localeCompare(String(states.get(b)?.last_attempt_at??''))||a.localeCompare(b));
+    const endpoints=eligible.slice(0,limit);
+    activeCycle=randomUUID();ledger.beginCycle(catalog,{id:activeCycle,lane,at:now,scope:explicit.length?'explicit_endpoints':'due_endpoints',eligible_endpoint_ids:eligible,planned_endpoint_ids:endpoints});
     let cursor=0, exhausted=false, aborted=false;
     const workers=await Promise.allSettled(Array.from({length:2},async()=>{
       try { while(cursor<endpoints.length && !exhausted && !aborted){
@@ -54,7 +57,8 @@ try {
         ledger.acquire(owner,new Date().toISOString(),120);try{ledger.reserveRequest(new Date().toISOString(),dailyBudget);}catch(error){if(error.message==='DAILY_REQUEST_BUDGET_EXHAUSTED'){exhausted=true;console.log(JSON.stringify({stopped:error.message}));break;}throw error;}
         let observation=await auditEndpoint(endpoint,gate,true);
         if(isTransient(observation)){try{ledger.reserveRequest(new Date().toISOString(),dailyBudget);observation=await auditEndpoint(endpoint,gate,true);}catch(error){if(error.message!=='DAILY_REQUEST_BUDGET_EXHAUSTED')throw error;}}
-        const collection={id:collectionId(id,observation.checkedAt,observation.observedUrls??[]),endpoint,checked_at:observation.checkedAt,status:observation.auditStatus??'network_error',format:observation.format??null,reason:observation.reason??null,urls:observation.observedUrls??[],traffic:lane,source_bindings:bindings.get(id).map(({id,countryCode})=>({id,countryCode}))};
+        const collection={id:collectionId(id,observation.checkedAt,observation.observedUrls??[]),endpoint,checked_at:observation.checkedAt,status:observation.auditStatus??'network_error',format:observation.format??null,reason:observation.reason??null,urls:observation.observedUrls??[],traffic:lane,cycle_id:activeCycle,
+          newest_content_at:observation.newestContentAt??null,date_kind:observation.dateKind,source_bindings:bindings.get(id).map(({id,countryCode})=>({id,countryCode}))};
         const path=join(spool,`${collection.id}.json`);atomicJson(path,collection);
         if(aborted)return; // Retain later in-flight payloads, so recovery can commit in chronological order.
         ledger.acquire(owner,new Date().toISOString(),120);ledger.commit(collection,bindings.get(id),owner);unlinkSync(path);completed++;if(!['working_nonempty','valid_empty'].includes(collection.status))failed++;
@@ -62,7 +66,9 @@ try {
       }}catch(error){aborted=true;throw error;}
     }));
     const rejected=workers.find(result=>result.status==='rejected');if(rejected)throw rejected.reason;
+    ledger.finishCycle(activeCycle,exhausted||completed<eligible.length?'partial':'completed',new Date().toISOString(),exhausted?'DAILY_REQUEST_BUDGET_EXHAUSTED':completed<eligible.length?'PLANNED_ENDPOINT_LIMIT':null);activeCycle=null;
   }
   const snapshot=ledger.archive(catalog,join(dirname(snapshotPath),'history'));atomicJson(snapshotPath,snapshot);
   console.log(JSON.stringify({lane,db:dbPath,snapshot:snapshotPath,tracking_start:snapshot.tracking_start,completed,failed,replayed,cadence:'operator only; no timer created',daily_request_budget:dailyBudget}));
-}finally{ledger.release(owner);ledger.close();}
+}catch(error){if(activeCycle){ledger.finishCycle(activeCycle,'failed',new Date().toISOString(),'COLLECTOR_RUN_FAILED');activeCycle=null;}throw error;}
+finally{ledger.release(owner);ledger.close();}

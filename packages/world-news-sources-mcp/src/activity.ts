@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { page, pagination, type Catalog } from './catalog.js';
 import {readHistory,historyMonths,validateHistory,type HistoryManifest} from './activity-history.js';
+import {summarizeCollectionCycle,type CollectionCycleEvidence} from './quality-history.js';
 
 const day = z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine(value => { const at = Date.parse(value); return Number.isFinite(at) && new Date(at).toISOString().slice(0, 10) === value; }, 'Invalid date');
 const timezone = z.string().max(100).default('UTC').refine(value => { try { new Intl.DateTimeFormat('en', { timeZone: value }); return true; } catch { return false; } }, 'Invalid IANA timezone');
@@ -8,7 +9,7 @@ const activityFields = { mode: z.enum(['calendar_days', 'rolling_24h']).default(
 export const sourceActivitySchema = z.object({ source_id: z.string().regex(/^src_[a-f0-9]{24}$/), ...activityFields }).strict();
 export const countryActivitySchema = z.object({ country: z.string().min(2).max(8), ...activityFields }).strict();
 export const inventorySchema = z.object({ country: z.string().min(2).max(8).optional(), include_disabled: z.boolean().default(false), ...pagination }).strict();
-export type ActivitySnapshot = { version: number; lane: string; generated_at: string; tracking_start: string | null; available_since: string; registry_at: string | null; semantics: string; bindings: Array<Record<string, unknown>>; collections: Array<Record<string, any>>; history?: HistoryManifest; scope_latest?: {source:Record<string,string>;country:Record<string,string>}; scope_starts?: { source: Record<string,string>; country: Record<string,string> }; snapshot_coverage?: Record<string,unknown> };
+export type ActivitySnapshot = { version: number; lane: string; generated_at: string; tracking_start: string | null; available_since: string; registry_at: string | null; semantics: string; bindings: Array<Record<string, unknown>>; collections: Array<Record<string, any>>; collection_cycles?: CollectionCycleEvidence[]; history?: HistoryManifest; scope_latest?: {source:Record<string,string>;country:Record<string,string>}; scope_starts?: { source: Record<string,string>; country: Record<string,string> }; snapshot_coverage?: Record<string,unknown> };
 export function localDate(at: number, zone: string) {
   const parts = new Intl.DateTimeFormat('en', { timeZone: zone, year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(at);
   const get = (key: string) => parts.find(p => p.type === key)!.value;
@@ -25,6 +26,7 @@ export class ActivityStore {
   constructor(readonly snapshot?: ActivitySnapshot, readonly historyDirectory?:string) {
     if (snapshot && (snapshot.version !== 1 || snapshot.lane !== 'production' || !Array.isArray(snapshot.bindings) || !Array.isArray(snapshot.collections))) throw new Error('Invalid production activity snapshot');
     if(snapshot?.history)validateHistory(snapshot.history);
+    if(snapshot?.collection_cycles)for(const cycle of snapshot.collection_cycles)summarizeCollectionCycle(cycle);
   }
   query(catalog: Catalog, kind: 'source' | 'country', raw: unknown, now = Date.now()) {
     const input = kind === 'source' ? sourceActivitySchema.parse(raw) : countryActivitySchema.parse(raw);

@@ -5,9 +5,11 @@ import {join} from 'node:path';
 import {encodeHistory,type HistoryShard} from './activity-history.js';
 import type { Catalog, Endpoint, Source } from './catalog.js';
 import { normalizeArticleUrl, NORMALIZATION_VERSION } from './article-url.js';
+import { validateCollectionCycle, summarizeCollectionCycle, type CollectionCycle } from './quality-history.js';
 
 export type CollectionBinding = Pick<Source, 'id' | 'countryCode'>;
-export type Collection = { id: string; endpoint: Endpoint; checked_at: string; status: string; format: string | null; urls: string[]; reason: string | null; traffic: 'production' | 'inspection'; source_bindings?: CollectionBinding[] };
+export type Collection = { id: string; endpoint: Endpoint; checked_at: string; status: string; format: string | null; urls: string[]; reason: string | null; traffic: 'production' | 'inspection'; source_bindings?: CollectionBinding[];
+  cycle_id?: string; newest_content_at?: string | null; date_kind?: 'feed_item_date' | 'sitemap_lastmod' };
 export const ACTIVITY_SCHEMA = `
 PRAGMA journal_mode=WAL;
 PRAGMA foreign_keys=ON;
@@ -23,6 +25,7 @@ CREATE TABLE IF NOT EXISTS collections(id TEXT PRIMARY KEY,endpoint_id TEXT NOT 
 CREATE INDEX IF NOT EXISTS collection_time ON collections(checked_at);
 CREATE TABLE IF NOT EXISTS writer_lock(id INTEGER PRIMARY KEY CHECK(id=1),owner TEXT NOT NULL,expires_at TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS request_budget(day TEXT PRIMARY KEY,requests INTEGER NOT NULL);
+CREATE TABLE IF NOT EXISTS collection_cycles(id TEXT PRIMARY KEY,payload TEXT NOT NULL);
 `;
 export function collectionId(endpointId: string, checkedAt: string, urls: string[]) {
   return createHash('sha256').update(JSON.stringify([endpointId, checkedAt, urls])).digest('hex');
@@ -58,6 +61,24 @@ export class ActivityLedger {
       this.db.prepare(`INSERT INTO metadata VALUES('registry_at',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value`).run(at);
     });
   }
+  beginCycle(catalog: Catalog, input: { id: string; lane: 'production' | 'inspection'; at: string; eligible_endpoint_ids: string[]; planned_endpoint_ids: string[]; scope: 'due_endpoints' | 'explicit_endpoints' }) {
+    const eligible = new Set(input.eligible_endpoint_ids), active = catalog.sources.filter(source => source.enabled);
+    if ([...eligible].some(id => !active.some(source => source.endpoints.some(endpoint => endpoint.id === id)))) throw Error('UNREGISTERED_CYCLE_ENDPOINT');
+    const countries = Object.fromEntries(catalog.countries.map(country => [country.code, [...new Set(active.filter(source => source.countryCode === country.code).flatMap(source => source.endpoints.map(endpoint => endpoint.id)))].filter(id => eligible.has(id))]).filter(([, ids]) => ids.length));
+    const row = validateCollectionCycle({ id: input.id, lane: input.lane, started_at: input.at, finished_at: null, status: 'running', scope: input.scope,
+      registry_digest: createHash('sha256').update(JSON.stringify(catalog.sources)).digest('hex'), country_endpoints: countries,
+      eligible_endpoint_ids: input.eligible_endpoint_ids, planned_endpoint_ids: input.planned_endpoint_ids, attempted_endpoint_ids: [], successful_article_endpoint_ids: [], failure_reason: null });
+    this.db.prepare('INSERT INTO collection_cycles VALUES(?,?)').run(row.id, JSON.stringify(row)); return row;
+  }
+  finishCycle(id: string, status: 'completed' | 'partial' | 'failed', at: string, reason: string | null = null) {
+    const value = this.db.prepare('SELECT payload FROM collection_cycles WHERE id=?').get(id); if (!value) throw Error('UNKNOWN_COLLECTION_CYCLE');
+    const prior = validateCollectionCycle(JSON.parse(String(value.payload))); if (prior.status !== 'running') throw Error('COLLECTION_CYCLE_ALREADY_FINISHED');
+    const records = this.db.prepare("SELECT endpoint_id,status,format FROM collections WHERE json_extract(details,'$.cycle_id')=?").all(id);
+    const row = validateCollectionCycle({ ...prior, status, finished_at: at, failure_reason: reason,
+      attempted_endpoint_ids: [...new Set(records.map(record => String(record.endpoint_id)))],
+      successful_article_endpoint_ids: [...new Set(records.filter(record => ['working_nonempty', 'valid_empty'].includes(String(record.status)) && record.format !== 'sitemapindex').map(record => String(record.endpoint_id)))] });
+    this.db.prepare('UPDATE collection_cycles SET payload=? WHERE id=?').run(JSON.stringify(row), id); return row;
+  }
   // Every URL relationship, scope discovery, initialization and collection checkpoint commits together.
   // Inspection uses a separate ledger file; it is never copied into a production snapshot.
   commit(collection: Collection, sources: CollectionBinding[], owner: string, now = new Date().toISOString()) {
@@ -68,6 +89,13 @@ export class ActivityLedger {
       if (!lock || lock.owner !== owner || String(lock.expires_at) <= now) throw new Error('COLLECTOR_LEASE_LOST');
       const previous = this.db.prepare('SELECT details FROM collections WHERE id=?').get(collection.id);
       if (previous) return { ...JSON.parse(String(previous.details)), replayed: true };
+      if (collection.cycle_id) {
+        const value = this.db.prepare('SELECT payload FROM collection_cycles WHERE id=?').get(collection.cycle_id);
+        const cycle: CollectionCycle | null = value ? validateCollectionCycle(JSON.parse(String(value.payload))) : null;
+        if (!cycle || cycle.status === 'completed' || cycle.lane !== collection.traffic || !cycle.planned_endpoint_ids.includes(collection.endpoint.id)
+          || Date.parse(collection.checked_at) < Date.parse(cycle.started_at) || cycle.finished_at && Date.parse(collection.checked_at) > Date.parse(cycle.finished_at)) throw Error('COLLECTION_CYCLE_MISMATCH');
+      }
+      if (collection.newest_content_at != null && !Number.isFinite(Date.parse(collection.newest_content_at)) || collection.date_kind && !['feed_item_date', 'sitemap_lastmod'].includes(collection.date_kind)) throw Error('INVALID_COLLECTION_CONTENT_DATE');
       if (!sources.length || new Set(sources.map(source => source.id)).size !== sources.length) throw new Error('UNREGISTERED_COLLECTION_BINDING');
       for (const source of sources) {
         const binding = this.db.prepare('SELECT country FROM bindings WHERE source_id=? AND endpoint_id=?').get(source.id, collection.endpoint.id);
@@ -111,7 +139,8 @@ export class ActivityLedger {
         }
       }
       const details = { source_ids: sources.map(s => s.id), countries: [...new Set(sources.map(s => s.countryCode))], source_new: sourceNew, country_new: countryNew,
-        baseline_sources: baselineSources, observed_urls: urls.length, uncertain_urls: urls.filter(u => u.kind === 'uncertain').length, index_children_excluded: index };
+        baseline_sources: baselineSources, observed_urls: urls.length, uncertain_urls: urls.filter(u => u.kind === 'uncertain').length, index_children_excluded: index,
+        ...(collection.cycle_id ? { cycle_id: collection.cycle_id } : {}), ...(collection.newest_content_at !== undefined ? { newest_content_at: collection.newest_content_at, date_kind: collection.date_kind ?? null } : {}) };
       this.db.prepare('INSERT INTO collections VALUES(?,?,?,?,?,?,?)').run(collection.id, collection.endpoint.id, collection.checked_at, collection.status, collection.format, collection.reason, JSON.stringify(details));
       for (const { source } of bindingStates) {
         const row = this.db.prepare('SELECT failures FROM bindings WHERE source_id=? AND endpoint_id=?').get(source.id, collection.endpoint.id);
@@ -151,6 +180,7 @@ export class ActivityLedger {
     const bindings = this.db.prepare('SELECT * FROM bindings').all();
     const starts = (field: string) => Object.fromEntries(this.db.prepare(`SELECT j.value AS scope,MIN(c.checked_at) AS at FROM collections c,json_each(c.details,'$.${field}') j GROUP BY j.value`).all().map(row => [String(row.scope),String(row.at)]));
     const base = { version: 1, lane, generated_at: at, tracking_start: start, normalization_version: NORMALIZATION_VERSION,
+      collection_cycles: this.db.prepare('SELECT payload FROM collection_cycles ORDER BY json_extract(payload,\'$.started_at\') DESC LIMIT 256').all().map(row => summarizeCollectionCycle(JSON.parse(String(row.payload)))),
       bindings, scope_starts: { source: starts('source_ids'), country: starts('countries') }, registry_at: this.db.prepare("SELECT value FROM metadata WHERE key='registry_at'").get()?.value ?? null,
       registry_digest: createHash('sha256').update(JSON.stringify(catalog.sources)).digest('hex'),
       semantics: 'First discovered unique candidate URL in each scope after that endpoint/source binding baseline. Not published articles; no semantic content dedup. Index children excluded; homepage/section/forum heuristics reported separately. Full durable URL history remains in the operator SQLite ledger.' };

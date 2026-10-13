@@ -17,7 +17,7 @@ if(untracked)calls.push(['get_country_article_activity',{country:untracked.code,
 const client=new Client({name:'world-news-sources-local-archive-inspection',version:'1'}),results=[];
 try{
   await client.connect(new StreamableHTTPClientTransport(new URL('https://news.bymyleslee.com/mcp'),{fetch:(input,init)=>handler.fetch(new Request(input,init))}));
-  const tools=(await client.listTools()).tools.map(t=>t.name);assert.equal(tools.length,7);
+  const tools=(await client.listTools()).tools.map(t=>t.name);assert.equal(tools.length,9);
   for(const [name,args]of calls){const result=await client.callTool({name,arguments:args});assert.notEqual(result.isError,true,JSON.stringify(result.content));results.push({tool:name,input:args,result:result.structuredContent});
     if(name.endsWith('_article_activity')){const expected=new ActivityStore(snapshot,fileURLToPath(new URL('../activity/history/',import.meta.url))).query(catalog,name==='get_source_article_activity'?'source':'country',args);assert.deepEqual(result.structuredContent.items,expected.items);}}
   const evidence={kind:'local_generated_hosted_bundle_real_ledger_archive_inspection',live_deployment:false,external_metrics_sent:false,tools,results};

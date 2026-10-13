@@ -16,8 +16,9 @@ export function loadData() {
   const snapshotPath = process.env.WNS_HEALTH_PATH ?? (existsSync(localPath) ? localPath : fileURLToPath(new URL('../audits/health-latest.json', import.meta.url)));
   const activityPath = process.env.WNS_ACTIVITY_PATH ?? fileURLToPath(new URL('../activity/activity-snapshot.json', import.meta.url));
   if (process.env.WNS_HEALTH_PATH && !existsSync(snapshotPath)) throw new Error('WNS_HEALTH_PATH does not exist');
+  const rawRegistry = readJson(atlasPath);
   return {
-    catalog: normalizeRegistry(readJson(atlasPath)), snapshotPath,
+    catalog: normalizeRegistry(rawRegistry), rawRegistry, snapshotPath,
     activity: new ActivityStore(existsSync(activityPath) ? readJson(activityPath) as ActivitySnapshot : undefined,join(dirname(activityPath),'history')),
     health: new HealthStore(existsSync(snapshotPath) ? readJson(snapshotPath) : undefined,
       existsSync(legacyPath) ? readJson(legacyPath) : undefined),

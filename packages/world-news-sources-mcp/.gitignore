@@ -5,3 +5,5 @@ audits/*/observations.jsonl
 audits/*/snapshot.json
 activity/*.sqlite*
 activity/*.spool/
+output/playwright/
+output/news-quality/

@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "fixture_set": true,
+  "id": "news-quality-fixed-cases-v1",
+  "provenance": "Synthetic, manually labeled examples inspired by the approved News Quality Agent scenarios. These are not saved MCP observations, live publisher checks, or language-model benchmark results.",
+  "selected_date": "2026-10-12",
+  "now": "2026-10-13T12:00:00.000Z",
+  "snapshot_at": "2026-10-12T03:52:00.000Z",
+  "available_since": "2026-10-06T00:00:00.000Z",
+  "limitations": [
+    "One synthetic endpoint per case; this does not measure country-wide coverage.",
+    "The final observed day is partial. Observations do not establish current live state.",
+    "The small fixed set tests decision behavior. It does not establish production accuracy or multilingual model performance.",
+    "New URL counts are first-discovered candidate URLs after a binding baseline, not publication counts."
+  ],
+  "cases": [
+    {
+      "id": "donga-national-regression",
+      "language": "ko",
+      "country": "KR",
+      "name": "Fixture 동아일보 National",
+      "description": "이전에 정상 수집하던 피드가 연속 타임아웃으로 바뀌었다. 현재 장애와 원인은 추가 확인한다.",
+      "endpoint": { "type": "rss", "url": "https://donga.fixture.example/national.xml" },
+      "baseline_at": "2026-10-06T01:00:00.000Z",
+      "collections": [
+        { "at": "2026-10-06T01:00:00.000Z", "status": "working_nonempty", "format": "rss", "new_urls": 0, "baseline": true },
+        { "at": "2026-10-10T01:00:00.000Z", "status": "working_nonempty", "format": "rss", "new_urls": 18 },
+        { "at": "2026-10-11T01:00:00.000Z", "status": "timeout", "format": null, "reason": "Synthetic request timeout" },
+        { "at": "2026-10-12T01:00:00.000Z", "status": "timeout", "format": null, "reason": "Synthetic request timeout" }
+      ],
+      "health": { "checkedAt": "2026-10-12T01:00:00.000Z", "outcome": "unhealthy", "httpStatus": null, "reason": "Synthetic request timeout", "format": null, "auditStatus": "timeout", "contentFreshness": "missing", "newestContentAt": null },
+      "expected": { "classification": "failure_after_prior_success", "requires_live_confirmation": true, "daily_discoveries": null },
+      "label_reason": "Dated successful article collection precedes a later failed check; the failure merits investigation, but live interruption is not yet verified."
+    },
+    {
+      "id": "donga-science-recovery",
+      "language": "ko",
+      "country": "KR",
+      "name": "Fixture 동아일보 Science",
+      "description": "오래된 타임아웃 상태 뒤에 더 최근 성공과 신규 URL 발견이 있어 회복 근거를 보존한다.",
+      "endpoint": { "type": "rss", "url": "https://donga.fixture.example/science.xml" },
+      "baseline_at": "2026-10-06T01:00:00.000Z",
+      "collections": [
+        { "at": "2026-10-06T01:00:00.000Z", "status": "working_nonempty", "format": "rss", "new_urls": 0, "baseline": true },
+        { "at": "2026-10-11T01:00:00.000Z", "status": "timeout", "format": null, "reason": "Synthetic old timeout" },
+        { "at": "2026-10-12T01:00:00.000Z", "status": "working_nonempty", "format": "rss", "new_urls": 21 }
+      ],
+      "health": { "checkedAt": "2026-10-11T01:00:00.000Z", "outcome": "unhealthy", "httpStatus": null, "reason": "Synthetic old timeout", "format": null, "auditStatus": "timeout", "contentFreshness": "missing", "newestContentAt": null },
+      "expected": { "classification": "recovered_after_failure", "requires_live_confirmation": false, "daily_discoveries": 21 },
+      "label_reason": "A successful collection after the failed observation provides dated recovery evidence; an older health label must not conceal it."
+    },
+    {
+      "id": "nhk-obsolete-feed-evidence",
+      "language": "ja",
+      "country": "JP",
+      "name": "Fixture NHK 旧フィード",
+      "description": "接続は成功したがコンテンツ日付が古い。旧アドレスや更新周期を追加調査する。",
+      "endpoint": { "type": "rss", "url": "https://nhk-old.fixture.example/rss/cat1.xml" },
+      "baseline_at": "2026-10-06T01:00:00.000Z",
+      "collections": [
+        { "at": "2026-10-06T01:00:00.000Z", "status": "working_nonempty", "format": "rss", "new_urls": 0, "baseline": true },
+        { "at": "2026-10-11T01:00:00.000Z", "status": "working_nonempty", "format": "rss", "new_urls": 0 },
+        { "at": "2026-10-12T01:00:00.000Z", "status": "working_nonempty", "format": "rss", "new_urls": 0 }
+      ],
+      "health": { "checkedAt": "2026-10-12T01:00:00.000Z", "outcome": "healthy", "httpStatus": 200, "reason": null, "format": "rss", "auditStatus": "working_nonempty", "contentFreshness": "stale", "newestContentAt": "2026-08-08T02:00:00.000Z", "dateKind": "feed_item_date" },
+      "expected": { "classification": "stale_content_evidence", "requires_live_confirmation": true, "daily_discoveries": 0 },
+      "label_reason": "Successful transport alone does not establish fresh content. The explicit dated stale-content evidence merits verification."
+    },
+    {
+      "id": "nyt-technology-untracked",
+      "language": "en",
+      "country": "US",
+      "name": "Fixture NYT Technology",
+      "description": "No available activity checks or initialized binding; an old malformed health observation cannot establish a present collection interruption.",
+      "endpoint": { "type": "rss", "url": "https://nyt.fixture.example/technology.xml" },
+      "baseline_at": null,
+      "collections": [],
+      "health": { "checkedAt": "2026-09-20T01:00:00.000Z", "outcome": "unhealthy", "httpStatus": 200, "reason": "Synthetic historical malformed XML", "format": null, "auditStatus": "malformed", "contentFreshness": "missing", "newestContentAt": null },
+      "expected": { "classification": "untracked_or_no_available_checks", "requires_live_confirmation": false, "daily_discoveries": null, "initialization": "not_initialized" },
+      "label_reason": "Absence of available collection evidence is unknown, not zero or a demonstrated stop after prior normal collection."
+    },
+    {
+      "id": "texas-tribune-successful-zero",
+      "language": "en",
+      "country": "US",
+      "name": "Fixture Texas Tribune",
+      "description": "Two successful checks found no new candidate URLs. Zero new discoveries alone is not evidence of a failure.",
+      "endpoint": { "type": "rss", "url": "https://texas-tribune.fixture.example/feed.xml" },
+      "baseline_at": "2026-10-06T01:00:00.000Z",
+      "collections": [
+        { "at": "2026-10-06T01:00:00.000Z", "status": "working_nonempty", "format": "rss", "new_urls": 0, "baseline": true },
+        { "at": "2026-10-11T01:00:00.000Z", "status": "working_nonempty", "format": "rss", "new_urls": 0 },
+        { "at": "2026-10-12T01:00:00.000Z", "status": "working_nonempty", "format": "rss", "new_urls": 0 }
+      ],
+      "health": { "checkedAt": "2026-10-12T01:00:00.000Z", "outcome": "healthy", "httpStatus": 200, "reason": null, "format": "rss", "auditStatus": "working_nonempty", "contentFreshness": "recent", "newestContentAt": "2026-10-11T20:00:00.000Z", "dateKind": "feed_item_date" },
+      "expected": { "classification": "successful_no_new_discoveries", "requires_live_confirmation": false, "daily_discoveries": 0 },
+      "label_reason": "The checks succeeded and dated content is available; discovery count zero is a measured value, not missing data or an outage."
+    },
+    {
+      "id": "yomiuri-access-gap",
+      "language": "ja",
+      "country": "JP",
+      "name": "Fixture 読売新聞 sitemap",
+      "description": "HTTP 429 と収集失敗があるが、過去の正常収集は確認できない。停止ではなくアクセス失敗・収集空白。",
+      "endpoint": { "type": "sitemap", "url": "https://yomiuri.fixture.example/news-sitemap.xml" },
+      "baseline_at": null,
+      "collections": [
+        { "at": "2026-10-10T01:00:00.000Z", "status": "blocked", "format": null, "reason": "Synthetic HTTP 429" },
+        { "at": "2026-10-12T01:00:00.000Z", "status": "blocked", "format": null, "reason": "Synthetic HTTP 429" }
+      ],
+      "health": { "checkedAt": "2026-10-12T01:00:00.000Z", "outcome": "unhealthy", "httpStatus": 429, "reason": "Synthetic HTTP 429", "format": null, "auditStatus": "blocked", "contentFreshness": "missing", "newestContentAt": null },
+      "expected": { "classification": "access_failure_without_normal_baseline", "requires_live_confirmation": true, "daily_discoveries": null, "initialization": "not_initialized" },
+      "label_reason": "Failed access is real in the fixture, but no prior successful collection establishes a transition from normal to stopped."
+    },
+    {
+      "id": "sitemap-index-only",
+      "language": "en",
+      "country": "US",
+      "name": "Fixture Sitemap Index",
+      "description": "The sitemap index is readable, but child sitemap listings are not collected article URLs.",
+      "endpoint": { "type": "sitemap", "url": "https://index-only.fixture.example/sitemap.xml" },
+      "baseline_at": null,
+      "collections": [
+        { "at": "2026-10-12T01:00:00.000Z", "status": "working_nonempty", "format": "sitemapindex", "new_urls": 0 }
+      ],
+      "health": { "checkedAt": "2026-10-12T01:00:00.000Z", "outcome": "healthy", "httpStatus": 200, "reason": null, "format": "sitemapindex", "auditStatus": "working_nonempty", "contentFreshness": "missing", "newestContentAt": null },
+      "expected": { "classification": "index_only", "requires_live_confirmation": false, "daily_discoveries": null },
+      "label_reason": "Transport/XML success is distinct from successful article collection; index-only evidence cannot become an article count of zero."
+    },
+    {
+      "id": "missing-content-dates",
+      "language": "ko",
+      "country": "KR",
+      "name": "Fixture 날짜 없는 피드",
+      "description": "기사 URL 수집은 성공했지만 콘텐츠 날짜가 없어 신선도는 미확인으로 남긴다.",
+      "endpoint": { "type": "rss", "url": "https://missing-date.fixture.example/feed.xml" },
+      "baseline_at": "2026-10-06T01:00:00.000Z",
+      "collections": [
+        { "at": "2026-10-06T01:00:00.000Z", "status": "working_nonempty", "format": "rss", "new_urls": 0, "baseline": true },
+        { "at": "2026-10-12T01:00:00.000Z", "status": "working_nonempty", "format": "rss", "new_urls": 4 }
+      ],
+      "health": { "checkedAt": "2026-10-12T01:00:00.000Z", "outcome": "healthy", "httpStatus": 200, "reason": null, "format": "rss", "auditStatus": "working_nonempty", "contentFreshness": "missing", "newestContentAt": null },
+      "expected": { "classification": "successful_collection", "requires_live_confirmation": false, "daily_discoveries": 4, "content_freshness": "missing", "newest_content_at": null },
+      "label_reason": "URL collection success and content freshness are separate. A missing date must remain unknown rather than being called recent or stale."
+    },
+    {
+      "id": "japan-times-normal-collection",
+      "language": "ja",
+      "country": "JP",
+      "name": "Fixture Japan Times",
+      "description": "成功記録と新規 URL があり、保存済みの日付も新しい。正常コントロール。",
+      "endpoint": { "type": "rss", "url": "https://japan-times.fixture.example/feed.xml" },
+      "baseline_at": "2026-10-06T01:00:00.000Z",
+      "collections": [
+        { "at": "2026-10-06T01:00:00.000Z", "status": "working_nonempty", "format": "rss", "new_urls": 0, "baseline": true },
+        { "at": "2026-10-11T01:00:00.000Z", "status": "working_nonempty", "format": "rss", "new_urls": 11 },
+        { "at": "2026-10-12T01:00:00.000Z", "status": "working_nonempty", "format": "rss", "new_urls": 9 }
+      ],
+      "health": { "checkedAt": "2026-10-12T01:00:00.000Z", "outcome": "healthy", "httpStatus": 200, "reason": null, "format": "rss", "auditStatus": "working_nonempty", "contentFreshness": "recent", "newestContentAt": "2026-10-12T00:30:00.000Z", "dateKind": "feed_item_date" },
+      "expected": { "classification": "successful_collection", "requires_live_confirmation": false, "daily_discoveries": 9 },
+      "label_reason": "Dated successful collections and current saved content evidence provide a normal control."
+    },
+    {
+      "id": "korea-unattempted-period",
+      "language": "ko",
+      "country": "KR",
+      "name": "Fixture 오늘 검사 누락",
+      "description": "과거 성공은 있지만 선택한 날짜에는 검사하지 않았다. 누락을 실패나 신규 발견 0건으로 바꾸지 않는다.",
+      "endpoint": { "type": "rss", "url": "https://unattempted.fixture.example/feed.xml" },
+      "baseline_at": "2026-10-06T01:00:00.000Z",
+      "collections": [
+        { "at": "2026-10-06T01:00:00.000Z", "status": "working_nonempty", "format": "rss", "new_urls": 0, "baseline": true },
+        { "at": "2026-10-11T01:00:00.000Z", "status": "working_nonempty", "format": "rss", "new_urls": 3 }
+      ],
+      "health": { "checkedAt": "2026-10-11T01:00:00.000Z", "outcome": "healthy", "httpStatus": 200, "reason": null, "format": "rss", "auditStatus": "working_nonempty", "contentFreshness": "recent", "newestContentAt": "2026-10-11T00:30:00.000Z", "dateKind": "feed_item_date" },
+      "expected": { "classification": "not_attempted_in_period", "requires_live_confirmation": false, "daily_discoveries": null },
+      "label_reason": "No selected-day attempt means no selected-day measurement; historical success alone cannot fill in a daily value."
+    }
+  ]
+}

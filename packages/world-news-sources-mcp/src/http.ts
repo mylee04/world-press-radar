@@ -4,8 +4,10 @@ import type { HealthStore } from './health.js';
 import { createServer } from './server.js';
 import { callMetadata, callOutcome, readRpcResponse, type AggregateSink } from './metrics.js';
 import { ActivityStore } from './activity.js';
+import { createQualityHandler, type QualityRuntimeOptions } from './quality-http.js';
 
-export function createHttpHandler(catalog: Catalog, health: HealthStore, allowedHosts: string[], metrics?: AggregateSink, activity = new ActivityStore()) {
+export function createHttpHandler(catalog: Catalog, health: HealthStore, allowedHosts: string[], metrics?: AggregateSink, activity = new ActivityStore(), rawRegistry?: unknown, allowInvestigations = false, remoteQuality = false, qualityRuntime: QualityRuntimeOptions = {}) {
+  const quality = createQualityHandler(catalog, health, activity, rawRegistry, allowInvestigations, remoteQuality, qualityRuntime);
   const mcp = createMcpHandler(() => createServer(catalog, health, activity), {
     legacy: 'stateless', responseMode: 'json', maxRequestBodySize: 64 * 1024,
     maxSubscriptions: 0, keepAliveMs: 0,
@@ -23,6 +25,8 @@ export function createHttpHandler(catalog: Catalog, health: HealthStore, allowed
       const rejected = hostHeaderValidationResponse(guardedRequest, allowedHosts)
         ?? originValidationResponse(guardedRequest, [...allowedHosts, 'chatgpt.com']);
       if (rejected) return rejected;
+      const qualityResponse = await quality(guardedRequest);
+      if (qualityResponse) return qualityResponse;
       if (url.pathname === '/health' && request.method === 'GET') return Response.json({
         name: 'world-news-sources-mcp', status: 'ok', configured_rows: catalog.configuredRows,
         countries: catalog.countries.length, ...health.summary(),
