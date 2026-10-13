@@ -11,8 +11,9 @@ async function fixture(t) {
   t.after(() => rm(directory, { recursive: true, force: true }));
   const root = join(directory, 'package'), output = join(directory, 'bundle');
   const files = ['package.json', 'package-lock.json', 'tsconfig.json', 'dist/activity-ledger.js', 'dist/collection-schedule.js',
-    'scripts/collect-activity.mjs', 'scripts/prepare-vercel.mjs', 'scripts/quality-cloud-gateway.mjs', 'scripts/install-collector-release.py', 'test/inventory.test.mjs'];
+    'scripts/collect-activity.mjs', 'scripts/prepare-vercel.mjs', 'scripts/quality-cloud-gateway.mjs', 'scripts/install-collector-release.py', 'test/inventory.test.mjs', 'evaluation/cases.json'];
   for (const path of files) { await mkdir(dirname(join(root, path)), { recursive: true }); await writeFile(join(root, path), '// fixture\n'); }
+  await writeFile(join(root, 'evaluation/cases.json'), JSON.stringify({ version: 1, fixture_set: true, cases: [{ endpoint: { url: 'https://fixture.example/rss' } }] }));
   return { root, output, directory, options: { packageRoot: root, output, revision: 'daily-quality-test' } };
 }
 
@@ -25,8 +26,9 @@ test('collector release transfers exact code while excluding credentials, regist
   const result = await prepareCollectorRelease(f.options);
   assert.equal(result.status, 'prepared_code_only'); assert.equal(result.production_data_copied, false);
   const manifest = JSON.parse(await readFile(join(f.output, 'COLLECTOR-CODE-MANIFEST.json'), 'utf8'));
-  assert.equal(manifest.contains_credentials, false); assert.equal(manifest.files.length, 10);
+  assert.equal(manifest.contains_credentials, false); assert.equal(manifest.files.length, 11);
   assert.ok(manifest.files.some(file => file.path === 'test/inventory.test.mjs'));
+  assert.ok(manifest.files.some(file => file.path === 'evaluation/cases.json'));
   assert.ok(manifest.files.every(file => /^[a-f0-9]{64}$/.test(file.sha256)));
   assert.deepEqual((await readdir(f.output)).sort(), ['COLLECTOR-CODE-MANIFEST.json', 'packages']);
 });

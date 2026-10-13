@@ -20,7 +20,7 @@ import time
 
 PACKAGE = Path('packages/world-news-sources-mcp')
 KIND = 'world-press-radar-collector-code-only'
-CODE = re.compile(r'^(?:package(?:-lock)?\.json|tsconfig\.json|src/[A-Za-z0-9_-]+\.ts|dist/[A-Za-z0-9_-]+\.(?:js|d\.ts)|scripts/[A-Za-z0-9_-]+\.(?:mjs|py)|test/[A-Za-z0-9_-]+(?:\.test)?\.mjs|dashboard/(?:index\.html|app\.js|styles\.css)|site/(?:[A-Za-z0-9_-]+\.(?:html|css|svg)|\.well-known/openai-apps-challenge)|metrics/(?:worker\.mjs|schema\.sql|report\.sql)|plugin/(?:plugin\.json|mcp\.json|skills/find-news-sources/(?:SKILL\.md|agents/openai\.yaml))|expansion/(?:robots-policy\.mjs|(?:registry-additions|verified-health-additions|second-pass-live-before|first-pass-checkpoints)\.json|remaining13/(?:registry-additions|verified-health-additions|verified-existing-health|checkpoints|targeted)\.json))$')
+CODE = re.compile(r'^(?:package(?:-lock)?\.json|tsconfig\.json|src/[A-Za-z0-9_-]+\.ts|dist/[A-Za-z0-9_-]+\.(?:js|d\.ts)|scripts/[A-Za-z0-9_-]+\.(?:mjs|py)|test/[A-Za-z0-9_-]+(?:\.test)?\.mjs|dashboard/(?:index\.html|app\.js|styles\.css)|site/(?:[A-Za-z0-9_-]+\.(?:html|css|svg)|\.well-known/openai-apps-challenge)|metrics/(?:worker\.mjs|schema\.sql|report\.sql)|plugin/(?:plugin\.json|mcp\.json|skills/find-news-sources/(?:SKILL\.md|agents/openai\.yaml))|expansion/(?:robots-policy\.mjs|(?:registry-additions|verified-health-additions|second-pass-live-before|first-pass-checkpoints)\.json|remaining13/(?:registry-additions|verified-health-additions|verified-existing-health|checkpoints|targeted)\.json)|evaluation/cases\.json)$')
 
 
 def fail(code):
@@ -130,7 +130,7 @@ def verify_bundle(bundle):
         seen.add(path)
         size += file['bytes']
     required = {'package-lock.json', 'dist/activity-ledger.js', 'dist/collection-schedule.js', 'scripts/collect-activity.mjs',
-                'scripts/prepare-vercel.mjs', 'scripts/quality-cloud-gateway.mjs', 'scripts/install-collector-release.py'}
+                'scripts/prepare-vercel.mjs', 'scripts/quality-cloud-gateway.mjs', 'scripts/install-collector-release.py', 'evaluation/cases.json'}
     if not required <= seen or size > 32 * 1024**2 or len(seen) > 400:
         fail('INCOMPLETE_BUNDLE')
     listed = {str(PACKAGE / path) for path in seen} | {'COLLECTOR-CODE-MANIFEST.json'}

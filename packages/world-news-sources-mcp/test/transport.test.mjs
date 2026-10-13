@@ -5,7 +5,9 @@ import { StdioClientTransport } from '@modelcontextprotocol/client/stdio';
 import { fileURLToPath } from 'node:url';
 import { existsSync, readFileSync } from 'node:fs';
 
-test('SDK client initializes real stdio server and exercises all four tools', {timeout:15000}, async()=>{
+test('SDK client initializes real stdio server and exercises current registry tools without a dated row count', {timeout:15000}, async()=>{
+  const registry=JSON.parse(readFileSync(new URL('../../../data/rss-atlas.json',import.meta.url),'utf8'));
+  const expectedRows=registry.countries.reduce((count,country)=>count+country.feeds.length,0);
   const transport=new StdioClientTransport({command:process.execPath,args:[fileURLToPath(new URL('../dist/stdio.js',import.meta.url))],cwd:'/tmp',env:{},stderr:'pipe'});
   const client=new Client({name:'world-news-sources-test',version:'0.1.0'});
   try {
@@ -13,7 +15,8 @@ test('SDK client initializes real stdio server and exercises all four tools', {t
     const {tools}=await client.listTools();assert.equal(tools.length,9);
     assert.ok(tools.every(t=>t.annotations.readOnlyHint));
     const countries=await client.callTool({name:'list_countries',arguments:{limit:2}});
-    assert.equal(countries.structuredContent.configured_rows,5393);
+    assert.equal(countries.structuredContent.configured_rows,expectedRows);
+    assert.equal(countries.structuredContent.total,new Set(registry.countries.map(country=>country.code.toUpperCase())).size);
     assert.equal(countries.structuredContent.items.length,2);
     const found=await client.callTool({name:'search_sources',arguments:{country:'GB',endpoint_type:'rss',limit:1}});
     const source=found.structuredContent.items[0];assert.ok(source);

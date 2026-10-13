@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createQualityCloudGateway } from '../scripts/quality-cloud-gateway.mjs';
+import { createQualityCloudGateway, normalizeQualityRequest } from '../scripts/quality-cloud-gateway.mjs';
 import { CloudQualityAccess } from '../dist/quality-cloud-auth.js';
 import { mkdtempSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -12,6 +12,26 @@ const session = 's'.repeat(43);
 const settings = { backendUrl: 'https://bymyleslee.com/_news-quality', gatewayToken: secret, publicOrigins: [origin] };
 const request = (path, options = {}) => new Request(`${origin}/quality/api/${path}`, options);
 const post = (body = '{}', extra = {}) => ({ method: 'POST', body, headers: { origin, 'content-type': 'application/json', ...extra } });
+
+test('Vercel original and rewritten URLs preserve root, assets and API routes without returning HTML for scripts', async () => {
+  for (const [input, expected] of [
+    ['/quality', '/quality'], ['/quality/', '/quality/'], ['/api/quality', '/quality/'],
+    ['/quality/app.js', '/quality/app.js'], ['/quality/styles.css', '/quality/styles.css'],
+    ['/api/quality?path=app.js', '/quality/app.js'], ['/api/quality?path=styles.css', '/quality/styles.css'],
+    ['/quality/api/overview?date=2026-10-12', '/quality/api/overview?date=2026-10-12'],
+    ['/api/quality?path=api/overview&date=2026-10-12', '/quality/api/overview?date=2026-10-12'],
+    ['/api/quality?path=api/country&date=2026-10-12&country=US', '/quality/api/country?date=2026-10-12&country=US'],
+    ['/quality/app.js?path=', '/quality/app.js'],
+  ]) {
+    const forwarded = normalizeQualityRequest(new Request(origin + input));
+    assert.equal(new URL(forwarded.url).pathname + new URL(forwarded.url).search, expected);
+  }
+  const original = new Request(origin + '/quality/api/investigations', post('{"country":"US"}'));
+  const forwarded = normalizeQualityRequest(original); assert.equal(forwarded.method, 'POST');
+  assert.equal(forwarded.headers.get('origin'), origin); assert.equal(await forwarded.text(), '{"country":"US"}');
+  assert.equal(normalizeQualityRequest(new Request(origin + '/unrelated')), null);
+  assert.equal(normalizeQualityRequest(new Request(origin + '/api/quality?path=' + 'x'.repeat(2049))), null);
+});
 
 test('public reads use the fixed HTTPS backend prefix and server-only credential', async () => {
   let captured;

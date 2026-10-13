@@ -109,7 +109,10 @@ writeJson('package-lock.json', lock);
 writeJson('vercel.json', {
   framework: null, installCommand: 'npm ci --omit=dev --ignore-scripts', buildCommand: '', outputDirectory: 'public', cleanUrls: true,
   functions: { 'api/*.mjs': { maxDuration: 60,includeFiles:'{metadata/activity-history/**,dashboard/**}' } },
-  rewrites: [{ source: '/mcp', destination: '/api/mcp' }, { source: '/health', destination: '/api/health' }, { source: '/quality/:path*', destination: '/api/quality?path=:path*' }],
+  rewrites: [{ source: '/mcp', destination: '/api/mcp' }, { source: '/health', destination: '/api/health' },
+    { source: '/quality', destination: '/api/quality' }, { source: '/quality/', destination: '/api/quality' },
+    { source: '/quality/app.js', destination: '/api/quality?path=app.js' }, { source: '/quality/styles.css', destination: '/api/quality?path=styles.css' },
+    { source: '/quality/:path*', destination: '/api/quality?path=:path*' }],
   headers: [{ source: '/(.*)', headers: [{ key: 'X-Content-Type-Options', value: 'nosniff' }] },
     { source: '/.well-known/openai-apps-challenge', headers: [{ key: 'Content-Type', value: 'text/plain; charset=utf-8' }] }],
 });
@@ -132,7 +135,7 @@ export const handler = createHttpHandler(normalizeRegistry(registry), new Health
 for (const route of ['mcp', 'health']) writeFileSync(new URL(`api/${route}.mjs`, output),
   `import {handler} from '../dist/hosted.mjs';\nexport default {fetch(request){const url=new URL(request.url);url.pathname='/${route}';return handler.fetch(new Request(url,request));}};\n`);
 writeFileSync(new URL('api/quality.mjs', output),
-  `import {handler} from '../dist/hosted.mjs';\nimport {createQualityCloudGateway} from '../dist/quality-cloud-gateway.mjs';\nconst gateway=createQualityCloudGateway({backendUrl:process.env.WNS_QUALITY_BACKEND_URL,gatewayToken:process.env.WNS_QUALITY_GATEWAY_TOKEN,publicOrigins:[process.env.WNS_QUALITY_PUBLIC_ORIGIN]});\nexport default {async fetch(request){const url=new URL(request.url);const path=url.searchParams.get('path')??'';url.pathname='/quality/'+path;url.searchParams.delete('path');const forwarded=new Request(url,request);if(url.pathname.startsWith('/quality/api/')&&process.env.WNS_QUALITY_BACKEND_URL)return gateway(forwarded);return handler.fetch(forwarded);}};\n`);
+  `import {handler} from '../dist/hosted.mjs';\nimport {createQualityCloudGateway,normalizeQualityRequest} from '../dist/quality-cloud-gateway.mjs';\nconst gateway=createQualityCloudGateway({backendUrl:process.env.WNS_QUALITY_BACKEND_URL,gatewayToken:process.env.WNS_QUALITY_GATEWAY_TOKEN,publicOrigins:[process.env.WNS_QUALITY_PUBLIC_ORIGIN]});\nexport default {async fetch(request){const forwarded=normalizeQualityRequest(request);if(!forwarded)return new Response('Not found',{status:404});const url=new URL(forwarded.url);if(url.pathname.startsWith('/quality/api/')&&process.env.WNS_QUALITY_BACKEND_URL)return gateway(forwarded);return handler.fetch(forwarded);}};\n`);
 for (const file of ['index.html', 'support.html', 'privacy.html', 'terms.html', 'styles.css', 'icon.svg']) {
   copyFileSync(new URL(`site/${file}`, root), new URL(`public/${file}`, output));
 }

@@ -8,7 +8,7 @@ const fixed = ['package.json', 'package-lock.json', 'tsconfig.json'];
 const fixtureFiles = new Set(['expansion/registry-additions.json', 'expansion/verified-health-additions.json',
   'expansion/robots-policy.mjs', 'expansion/second-pass-live-before.json', 'expansion/first-pass-checkpoints.json',
   'expansion/remaining13/checkpoints.json', 'expansion/remaining13/targeted.json', 'expansion/remaining13/registry-additions.json',
-  'expansion/remaining13/verified-health-additions.json', 'expansion/remaining13/verified-existing-health.json']);
+  'expansion/remaining13/verified-health-additions.json', 'expansion/remaining13/verified-existing-health.json', 'evaluation/cases.json']);
 export const collectorCodePath = path => fixed.includes(path) || fixtureFiles.has(path)
   || /^(?:src\/[A-Za-z0-9_-]+\.ts|dist\/[A-Za-z0-9_-]+\.(?:js|d\.ts)|scripts\/[A-Za-z0-9_-]+\.(?:mjs|py)|test\/[A-Za-z0-9_-]+(?:\.test)?\.mjs|dashboard\/(?:index\.html|app\.js|styles\.css)|site\/(?:[A-Za-z0-9_-]+\.(?:html|css|svg)|\.well-known\/openai-apps-challenge)|metrics\/(?:worker\.mjs|schema\.sql|report\.sql)|plugin\/(?:plugin\.json|mcp\.json|skills\/find-news-sources\/(?:SKILL\.md|agents\/openai\.yaml)))$/.test(path);
 
@@ -22,7 +22,7 @@ export async function prepareCollectorRelease({ packageRoot = root, output, revi
     for (const name of await readdir(directory)) {
       if (name === 'node_modules' || name === 'output' || name === '.deploy-vercel' || name === '.vercel') continue;
       const path = prefix + name, info = await lstat(join(directory, name));
-      if (info.isDirectory() && /^(?:src|dist|scripts|test|dashboard|site|metrics|plugin|expansion)(?:\/|$)/.test(path)) await walk(join(directory, name), path + '/');
+      if (info.isDirectory() && /^(?:src|dist|scripts|test|dashboard|site|metrics|plugin|expansion|evaluation)(?:\/|$)/.test(path)) await walk(join(directory, name), path + '/');
       else if (collectorCodePath(path)) {
         if (!info.isFile() || info.isSymbolicLink() || info.size > 4 * 1024 * 1024) throw Error('COLLECTOR_RELEASE_UNSAFE_FILE');
         listed.push(path);
@@ -31,8 +31,11 @@ export async function prepareCollectorRelease({ packageRoot = root, output, revi
   };
   await walk(packageRoot);
   for (const required of [...fixed, 'dist/activity-ledger.js', 'dist/collection-schedule.js', 'scripts/collect-activity.mjs',
-    'scripts/prepare-vercel.mjs', 'scripts/quality-cloud-gateway.mjs', 'scripts/install-collector-release.py'])
+    'scripts/prepare-vercel.mjs', 'scripts/quality-cloud-gateway.mjs', 'scripts/install-collector-release.py', 'evaluation/cases.json'])
     if (!listed.includes(required)) throw Error('COLLECTOR_RELEASE_BUILD_REQUIRED');
+  const cases = JSON.parse(await readFile(join(packageRoot, 'evaluation/cases.json'), 'utf8'));
+  if (cases.version !== 1 || cases.fixture_set !== true || !Array.isArray(cases.cases) || !cases.cases.length
+    || cases.cases.some(fixture => !new URL(fixture.endpoint.url).hostname.endsWith('.example'))) throw Error('COLLECTOR_RELEASE_SYNTHETIC_FIXTURES_REQUIRED');
   const manifest = { version: 1, kind: 'world-press-radar-collector-code-only', revision,
     prepared_at: new Date().toISOString(), files: [], contains_registry: false, contains_activity_ledger: false,
     contains_credentials: false, authoritative_data_source: 'existing-oracle-release-only' };

@@ -1,6 +1,6 @@
 import {createHash} from 'node:crypto';
 import {readFileSync, statSync} from 'node:fs';
-import {join} from 'node:path';
+import {join,resolve} from 'node:path';
 import {gzipSync, gunzipSync} from 'node:zlib';
 
 export type HistoryShard = {month:string; file:string; sha256:string; bytes:number; records:number};
@@ -46,11 +46,52 @@ export function decodeHistory(bytes:Buffer, descriptor:HistoryShard,filter?:Hist
   });
 }
 export function readHistory(directory:string, descriptor:HistoryShard,filter?:HistoryFilter) {
-  validateHistory({version:1,complete:true,shards:[descriptor]});
-  let bytes:Buffer;
-  try {const path=join(directory,descriptor.file);if(statSync(path).size>MAX_COMPRESSED)throw Error();bytes=readFileSync(path);}catch{throw Error('ACTIVITY_HISTORY_READ_FAILURE');}
-  return decodeHistory(bytes,descriptor,filter);
+  return historyCache.read(directory,descriptor,filter);
 }
+
+type HistoryRow=Record<string,any>;
+type CachedHistory={signature:string;rows:ReadonlyArray<HistoryRow>;byCountry:Map<string,HistoryRow[]>;bySource:Map<string,HistoryRow[]>;bytes:number};
+/** Cache only checksum-verified immutable archive records. Every hit still stats
+ * the file: deletion, same-size corruption and atomic replacement invalidate it.
+ * Both retained serialized bytes and record/entry counts have explicit bounds.
+ * This is process-local derived data; no durable observations or URL ledger. */
+export class HistoryArchiveCache {
+  private readonly entries=new Map<string,CachedHistory>();
+  private bytes=0;private records=0;
+  constructor(private readonly limits={maxBytes:64*1024*1024,maxRecords:200000,maxEntries:4}) {}
+  stats(){return{entries:this.entries.size,serialized_bytes:this.bytes,records:this.records};}
+  private remove(key:string){const entry=this.entries.get(key);if(entry){this.bytes-=entry.bytes;this.records-=entry.rows.length;this.entries.delete(key);}}
+  read(directory:string,descriptor:HistoryShard,filter?:HistoryFilter):HistoryRow[]{
+    validateHistory({version:1,complete:true,shards:[descriptor]});
+    const path=resolve(directory,descriptor.file),key=JSON.stringify([path,descriptor.month,descriptor.sha256,descriptor.bytes,descriptor.records]);
+    const fingerprint=()=>{
+      try{const info=statSync(path,{bigint:true});if(!info.isFile()||info.size>BigInt(MAX_COMPRESSED))throw Error();return[info.dev,info.ino,info.size,info.mtimeNs,info.ctimeNs].join(':');}
+      catch{this.remove(key);throw Error('ACTIVITY_HISTORY_READ_FAILURE');}
+    };
+    const signature=fingerprint();let entry=this.entries.get(key);
+    if(entry?.signature!==signature){this.remove(key);entry=undefined;}
+    if(!entry){
+      let bytes:Buffer;try{bytes=readFileSync(path);}catch{throw Error('ACTIVITY_HISTORY_READ_FAILURE');}
+      // An archive replaced during the read is never installed as a valid hit.
+      if(fingerprint()!==signature)throw Error('ACTIVITY_HISTORY_READ_FAILURE');
+      const rows=decodeHistory(bytes,descriptor),byCountry=new Map<string,HistoryRow[]>(),bySource=new Map<string,HistoryRow[]>();
+      const add=(index:Map<string,HistoryRow[]>,scopes:string[],row:HistoryRow)=>{for(const scope of scopes){const values=index.get(scope)??[];values.push(row);index.set(scope,values);}};
+      for(const row of rows){
+        Object.freeze(row.baseline_sources);Object.freeze(row.source_ids);Object.freeze(row.countries);Object.freeze(row.source_new);Object.freeze(row.country_new);Object.freeze(row);
+        add(byCountry,row.countries,row);add(bySource,row.source_ids,row);
+      }
+      const serializedBytes=Buffer.byteLength(JSON.stringify(rows));
+      entry={signature,rows:Object.freeze(rows),byCountry,bySource,bytes:serializedBytes};
+      if(serializedBytes<=this.limits.maxBytes&&rows.length<=this.limits.maxRecords&&this.limits.maxEntries>0){
+        while(this.entries.size&&(this.entries.size>=this.limits.maxEntries||this.bytes+serializedBytes>this.limits.maxBytes||this.records+rows.length>this.limits.maxRecords))this.remove(this.entries.keys().next().value!);
+        this.entries.set(key,entry);this.bytes+=serializedBytes;this.records+=rows.length;
+      }
+    }else{this.entries.delete(key);this.entries.set(key,entry);}
+    const rows=filter?(filter.kind==='country'?entry.byCountry:entry.bySource).get(filter.scope)??[]:entry.rows;
+    return filter?rows.filter(row=>{const at=Date.parse(row.checked_at);return at>=filter.from&&at<filter.to;}):[...rows];
+  }
+}
+const historyCache=new HistoryArchiveCache();
 export function historyMonths(from:number,to:number) {
   const result:string[]=[];let month=new Date(from).toISOString().slice(0,7),last=new Date(to-1).toISOString().slice(0,7);
   while(month<=last){result.push(month);const date=new Date(`${month}-01T00:00:00Z`);date.setUTCMonth(date.getUTCMonth()+1);month=date.toISOString().slice(0,7);if(result.length>3)throw Error('ACTIVITY_HISTORY_RANGE_BUDGET');}return result;

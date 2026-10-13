@@ -69,7 +69,7 @@ function endpointProvenance(feed: Raw, endpoint: Endpoint, now: number) {
   });
 }
 
-function sourceAddition(source: Source, feeds: Raw[], health: HealthStore, catalog: Catalog, now: number) {
+function sourceAddition(source: Source, feeds: Raw[], health: HealthStore, sourcesByEndpoint: ReadonlyMap<string, Source[]>, now: number) {
   if (feeds.length !== source.registrationCount || !source.status_history_consistent) return null;
   const initial = feeds.map(feed => initialRegistration(feed, now));
   const first = initial[0];
@@ -79,7 +79,7 @@ function sourceAddition(source: Source, feeds: Raw[], health: HealthStore, catal
     recorded_at_basis: 'operator_initial_registration' as const,
     registration_count: source.registrationCount, source_homepage: publicUrl(feeds[0].source_homepage),
     endpoints: source.endpoints.map(endpoint => ({ endpoint_id: endpoint.id, type: endpoint.type, url: endpoint.url,
-      provenance: endpointProvenance(feeds[0], endpoint, now), latest_validation: health.get(endpoint, catalog.sources, now) })) };
+      provenance: endpointProvenance(feeds[0], endpoint, now), latest_validation: health.get(endpoint, sourcesByEndpoint.get(endpoint.id) ?? [source], now) })) };
 }
 
 /** Recorded changes on one UTC day; holdings always describe the current catalog. */
@@ -90,8 +90,15 @@ export function getInventoryChanges(catalog: Catalog, rawRegistry: unknown, date
     || date > new Date(now).toISOString().slice(0, 10)) throw new Error('Inventory date must be a valid past/present UTC date');
   const onDate = (value: string) => Date.parse(value) >= from && Date.parse(value) < from + 86400000 && Date.parse(value) <= now;
   const raw = rawRegistrations(rawRegistry);
+  // Legacy health keys include a source label and country. Keep every alias actually
+  // bound to the typed endpoint, including disabled rows, without scanning unrelated outlets.
+  const sourcesByEndpoint = new Map<string, Source[]>();
+  for (const source of catalog.sources) for (const endpoint of source.endpoints) {
+    const bindings = sourcesByEndpoint.get(endpoint.id) ?? [];
+    bindings.push(source); sourcesByEndpoint.set(endpoint.id, bindings);
+  }
   const knownAdditions = catalog.sources.flatMap(source => {
-    const addition = sourceAddition(source, raw.get(source.id) ?? [], health, catalog, now);
+    const addition = sourceAddition(source, raw.get(source.id) ?? [], health, sourcesByEndpoint, now);
     return addition ? [addition] : [];
   });
   const knownIds = new Set(knownAdditions.map(addition => addition.source_id));

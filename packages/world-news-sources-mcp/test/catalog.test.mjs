@@ -63,8 +63,13 @@ test('health keeps true checked time, stale/unknown and RSS fallback separate', 
   assert.equal(future.get(rss,[source],now).checked_at,null);
   assert.throws(()=>new HealthStore({version:1,observations:[{...observation(rss,'healthy'),type:'sitemap'}]}));
 });
-test('real registry loads independently with expected configuration counts', () => {
-  const {catalog}=loadData();assert.equal(catalog.configuredRows,5393);assert.equal(catalog.countries.length,73);
+test('real registry preserves every current configured row and country independently of a dated fixture count', () => {
+  const {catalog,rawRegistry}=loadData();
+  const rows=rawRegistry.countries.reduce((count,country)=>count+country.feeds.length,0);
+  assert.equal(catalog.configuredRows,rows);
+  assert.deepEqual(new Set(catalog.countries.map(country=>country.code)),new Set(rawRegistry.countries.map(country=>country.code.toUpperCase())));
+  assert.equal(catalog.sources.reduce((count,source)=>count+source.registrationCount,0),rows);
+  assert.equal(catalog.countries.reduce((count,country)=>count+country.configuredRows,0),rows);
   assert.ok(catalog.sources.length<=catalog.configuredRows);
   assert.ok([...catalog.endpoints.values()].some(e=>e.type==='sitemap'));
 });

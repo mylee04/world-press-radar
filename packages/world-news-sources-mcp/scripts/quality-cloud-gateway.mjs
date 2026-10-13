@@ -67,6 +67,21 @@ async function bytes(stream, maximum, signal) {
   } finally { signal?.removeEventListener('abort', cancel); await cancel(); }
 }
 
+export function normalizeQualityRequest(request) {
+  const url = new URL(request.url);
+  if (url.pathname.length > 4096 || (url.searchParams.get('path')?.length ?? 0) > 2048) return null;
+  // Vercel can preserve the original public pathname after a rewrite. In that
+  // case it is authoritative; replacing it with an absent query capture would
+  // accidentally return dashboard HTML for a script or API request.
+  if (url.pathname === '/api/quality' || url.pathname === '/api/quality/') {
+    url.pathname = `/quality/${url.searchParams.get('path') ?? ''}`;
+  } else if (url.pathname !== '/quality' && !url.pathname.startsWith('/quality/')) {
+    return null;
+  }
+  url.searchParams.delete('path');
+  return new Request(url, request);
+}
+
 export function createQualityCloudGateway({ backendUrl, gatewayToken, publicOrigins = [], fetchImpl = fetch, timeoutMs = 45000 } = {}) {
   const target = backendOrigin(backendUrl);
   const origins = new Set(publicOrigins.map(value => origin(value)).filter(Boolean));

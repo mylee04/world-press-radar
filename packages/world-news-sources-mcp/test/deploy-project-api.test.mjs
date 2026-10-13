@@ -28,6 +28,13 @@ test('source configuration cannot inject private environment, arbitrary routing,
     assert.throws(()=>createBody([],config),/Unexpected deployment/);
   }
 });
+test('literal quality roots and assets are routed before the parameterized wildcard',()=>{
+  const {rewrites}=JSON.parse(createBody([])),wildcard=rewrites.findIndex(route=>route.source==='/quality/:path*');
+  for(const source of ['/quality','/quality/','/quality/app.js','/quality/styles.css']){
+    const index=rewrites.findIndex(route=>route.source===source);assert.ok(index>=0&&index<wildcard);
+    assert.ok(rewrites[index].destination.startsWith('/api/quality'));assert.ok(!rewrites[index].destination.includes(':path*'));
+  }
+});
 test('ready deployment submits once, polls, checks identity and persists resume ID',async t=>{const f=await fixture(t),calls=[];f.fetchImpl=mock(calls,async path=>path==='/v13/deployments'?{id:'dpl_test'}:{id:'dpl_test',projectId:PROJECT,target:'production',readyState:'READY',aliasAssigned:true,alias:domains.domains.map(x=>x.name)});assert.equal((await deploy(f)).status,'READY');assert.equal(calls.filter(x=>x.method==='POST'&&x.path==='/v13/deployments').length,1);await deploy(f);assert.equal(calls.filter(x=>x.method==='POST'&&x.path==='/v13/deployments').length,1);assert.equal(JSON.parse(await readFile(f.stateFile,'utf8')).status,'ready');assert.ok(calls.every(x=>!x.path.includes('/user')));});
 test('uncertain POST is durably blocked from blind retries and errors cannot leak token',async t=>{const f=await fixture(t),calls=[];f.fetchImpl=mock(calls,async path=>{if(path==='/v13/deployments')throw Error(f.token);return {};});await assert.rejects(deploy(f),e=>!e.message.includes(f.token));await assert.rejects(deploy(f),/uncertain/);assert.equal(calls.filter(x=>x.method==='POST'&&x.path==='/v13/deployments').length,1);});
 test('403 never falls back to broader credentials or raw server message',async()=>{const api=client('test-private-value',async()=>new Response('test-private-value',{status:403}));await assert.rejects(api('/v13/deployments'),e=>e.message==='Vercel API HTTP 403');});

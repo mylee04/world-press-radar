@@ -13,7 +13,10 @@ const DOMAINS=['news.bymyleslee.com','world-news-sources-mcp.vercel.app'];
 const DEPLOYMENT_CONFIG={
   framework:null,installCommand:'npm ci --omit=dev --ignore-scripts',buildCommand:'',outputDirectory:'public',cleanUrls:true,
   functions:{'api/*.mjs':{maxDuration:60,includeFiles:'{metadata/activity-history/**,dashboard/**}'}},
-  rewrites:[{source:'/mcp',destination:'/api/mcp'},{source:'/health',destination:'/api/health'},{source:'/quality/:path*',destination:'/api/quality?path=:path*'}],
+  rewrites:[{source:'/mcp',destination:'/api/mcp'},{source:'/health',destination:'/api/health'},
+    {source:'/quality',destination:'/api/quality'},{source:'/quality/',destination:'/api/quality'},
+    {source:'/quality/app.js',destination:'/api/quality?path=app.js'},{source:'/quality/styles.css',destination:'/api/quality?path=styles.css'},
+    {source:'/quality/:path*',destination:'/api/quality?path=:path*'}],
   headers:[{source:'/(.*)',headers:[{key:'X-Content-Type-Options',value:'nosniff'}]},
     {source:'/.well-known/openai-apps-challenge',headers:[{key:'Content-Type',value:'text/plain; charset=utf-8'}]}],
 };

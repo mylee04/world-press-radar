@@ -42,6 +42,38 @@ test('records exact operator initial additions and keeps validation and registra
   assert.equal(us.history_complete, false);
 });
 
+test('shared endpoint legacy validation retains cross-country and disabled aliases without unrelated sources', () => {
+  const raw = fixture();
+  raw.countries[0].feeds.push({ name: 'Disabled alias', url: 'https://news.example/rss', enabled: false });
+  raw.countries[1].feeds.push({ name: 'Japan alias', url: 'https://news.example/rss' });
+  raw.countries[0].feeds.push(...Array.from({ length: 100 }, (_, index) => ({ name: `Unrelated ${index}`, url: `https://unrelated.example/feed/${index}` })));
+  const catalog = normalizeRegistry(raw), endpoint = catalog.sources.find(source => source.name === 'Verified Outlet').endpoints[0];
+  class TrackedHealth extends HealthStore {
+    calls = [];
+    get(endpoint, sources, at) { this.calls.push({ endpoint, sources }); return super.get(endpoint, sources, at); }
+  }
+  for (const [countryCode, outlet, valid, httpCode] of [['JP', 'Japan alias', true, 200], ['US', 'Disabled alias', false, 429]]) {
+    const health = new TrackedHealth(undefined, { results: [{ countryCode, outlet, url: endpoint.url, checkedAt, valid, httpCode }] });
+    const got = getInventoryChanges(catalog, raw, date, health, now);
+    const validation = got.additions[0].endpoints.find(record => record.type === 'rss').latest_validation;
+    assert.equal(validation.validation, 'legacy_xml_markers');
+    assert.equal(validation.checked_at, checkedAt);
+    assert.equal(validation.last_outcome, valid ? 'reported_valid' : 'reported_invalid');
+    assert.equal(validation.http_status, httpCode);
+    const call = health.calls.find(call => call.endpoint.id === endpoint.id);
+    assert.deepEqual(call.sources.map(source => source.name).sort(), ['Disabled alias', 'Japan alias', 'Verified Outlet']);
+    assert.ok(call.sources.some(source => !source.enabled));
+    assert.ok(call.sources.every(source => source.endpoints.some(bound => bound.id === endpoint.id)));
+  }
+  const modern = new HealthStore({ version: 1, observations: [{ endpointId: endpoint.id, type: endpoint.type, url: endpoint.url,
+    checkedAt: initialAt, outcome: 'healthy', httpStatus: 200, reason: null, format: 'rss', auditStatus: 'working_nonempty' }] },
+  { results: [{ countryCode: 'US', outlet: 'Disabled alias', url: endpoint.url, checkedAt, valid: false, httpCode: 429 }] });
+  const latest = getInventoryChanges(catalog, raw, date, modern, now).additions[0].endpoints.find(record => record.type === 'rss').latest_validation;
+  assert.equal(latest.validation, 'xml_structure');
+  assert.equal(latest.http_status, 200);
+  assert.equal(latest.checked_at, initialAt);
+});
+
 test('enabled transition timestamp is not a creation date; deactivation is not deletion', () => {
   const raw = fixture(), catalog = normalizeRegistry(raw), source = catalog.sources.find(source => source.name === 'Verified Outlet');
   const disabled = updateRegistryStatus(raw, source.id, false, 'Endpoint needs review', new Date('2026-10-12T05:00:00.000Z'));

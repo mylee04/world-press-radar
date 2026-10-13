@@ -14,6 +14,9 @@ const dateFields = { date: validDate.optional(), baseline_days: z.number().int()
 export const countryQualitySchema = z.object({ country: z.string().min(2).max(8).optional(), ...dateFields, ...pagination }).strict();
 export const sourceQualitySchema = z.object({ source_id: z.string().regex(/^src_[a-f0-9]{24}$/), ...dateFields }).strict();
 type RecordRow = Record<string, any>;
+const recordTimes=new WeakMap<RecordRow,{raw:unknown;at:number}>();
+function checkedAt(record:RecordRow){const raw=record.checked_at,previous=recordTimes.get(record);if(previous&&previous.raw===raw)return previous.at;const at=Date.parse(raw);recordTimes.set(record,{raw,at});return at;}
+function groupBy<T>(values:T[],key:(value:T)=>string){const result=new Map<string,T[]>();for(const value of values){const scope=key(value),rows=result.get(scope)??[];rows.push(value);result.set(scope,rows);}return result;}
 type Ratio = { value: number | null; numerator: number | null; denominator: number; unit: 'percent' };
 const success = (event: RecordRow) => ['working_nonempty', 'valid_empty'].includes(event.status);
 export const successfulArticleCollection = (event: RecordRow) => success(event) && event.format !== 'sitemapindex';
@@ -38,8 +41,8 @@ function recordsInWindow(activity: ActivityStore, from: number, to: number) {
     const months = new Set(historyMonths(from, to));
     records = snapshot.history.shards.filter(shard => months.has(shard.month)).flatMap(shard => readHistory(activity.historyDirectory!, shard));
   }
-  return records.filter(event => Date.parse(event.checked_at) >= from && Date.parse(event.checked_at) < to)
-    .sort((a, b) => Date.parse(a.checked_at) - Date.parse(b.checked_at));
+  return records.filter(event => checkedAt(event) >= from && checkedAt(event) < to)
+    .sort((a, b) => checkedAt(a) - checkedAt(b));
 }
 function latestCollection(activity: ActivityStore) {
   const snapshot = activity.snapshot;
@@ -72,7 +75,7 @@ function firstScopeAt(activity: ActivityStore, kind: 'country' | 'source', scope
 function dayMetrics(activity: ActivityStore, date: string, scopeStart: string | null, latest: string | null,
   expected: Set<string>, records: RecordRow[], now: number) {
   const period = temporalState(activity, date, scopeStart, latest, now), from = Date.parse(date);
-  const rows = records.filter(e => expected.has(e.endpoint_id) && Date.parse(e.checked_at) >= from && Date.parse(e.checked_at) < from + DAY);
+  const rows = records.filter(e => expected.has(e.endpoint_id) && checkedAt(e) >= from && checkedAt(e) < from + DAY);
   const attempted = new Set(rows.map(e => e.endpoint_id)), successful = new Set(rows.filter(successfulArticleCollection).map(e => e.endpoint_id));
   const latestByEndpoint = new Map(rows.map(e => [e.endpoint_id, e]));
   return { period: { ...period, last_collection_at: rows.at(-1)?.checked_at ?? null },
@@ -104,13 +107,13 @@ function contentEvidence(endpoint: Endpoint, sources: Source[], health: HealthSt
 }
 function classifyEndpoint(endpoint: Endpoint, records: RecordRow[], sources: Source[], health: HealthStore, date: string, now: number,
   bindings: Array<Record<string, unknown>> = []) {
-  const end = Date.parse(date) + DAY, relevant = records.filter(e => e.endpoint_id === endpoint.id && Date.parse(e.checked_at) < end);
-  const rows = relevant.filter(e => Date.parse(e.checked_at) >= Date.parse(date));
+  const end = Date.parse(date) + DAY, relevant = records.filter(e => e.endpoint_id === endpoint.id && checkedAt(e) < end);
+  const rows = relevant.filter(e => checkedAt(e) >= Date.parse(date));
   const last = rows.at(-1), previous = last ? relevant.filter(e => e !== last) : relevant;
   const sourceIds = new Set(sources.map(source => source.id));
   // The real binding baseline also proves an earlier non-index success, even when it is outside this bounded history window.
   const oldBaseline = bindings.filter(binding => binding.endpoint_id === endpoint.id && sourceIds.has(String(binding.source_id)) &&
-    typeof binding.baseline_at === 'string' && Date.parse(binding.baseline_at) < (last ? Date.parse(last.checked_at) : end))
+    typeof binding.baseline_at === 'string' && Date.parse(binding.baseline_at) < (last ? checkedAt(last) : end))
     .map(binding => String(binding.baseline_at)).sort((a, b) => Date.parse(a) - Date.parse(b)).at(-1);
   const priorSuccess = previous.filter(successfulArticleCollection).at(-1)?.checked_at ?? oldBaseline ?? null;
   const saved = contentEvidence(endpoint, sources, health, now, relevant, Math.min(end - 1, now));
@@ -145,7 +148,8 @@ function baseline(activity: ActivityStore, current: ReturnType<typeof dayMetrics
   const date = current.period.date, weekday = new Date(date).getUTCDay();
   const candidates = Array.from({ length: days }, (_, i) => shift(date, -i - 1)).filter(d => new Date(d).getUTCDay() === weekday);
   const cohortStart = Date.parse(candidates.at(-1) ?? date);
-  const cohort = new Set([...expected].filter(id => records.some(e => e.endpoint_id === id && Date.parse(e.checked_at) < cohortStart)));
+  const historicalEndpoints=new Set(records.filter(e=>checkedAt(e)<cohortStart).map(e=>e.endpoint_id));
+  const cohort = new Set([...expected].filter(id => historicalEndpoints.has(id)));
   const samples = candidates.map(d => ({ date: d, metrics: dayMetrics(activity, d, scopeStart, latest, cohort, records, now) }))
     .filter(s => s.metrics.period.observation_window_closed && s.metrics.attempt_coverage.value !== null && s.metrics.attempt_coverage.value >= 80);
   const available = samples.length >= 2 && cohort.size >= Math.min(5, expected.size) && expected.size > 0;
@@ -166,11 +170,17 @@ export function getCountryQualityOverview(catalog: Catalog, activity: ActivitySt
   if (countryCode && !catalog.countries.some(c => c.code === countryCode)) throw Error('Unknown country');
   const from = Date.parse(shift(selected.date, -input.baseline_days - 7));
   const records = recordsInWindow(activity, from, Date.parse(selected.date) + DAY);
+  const countryRecords=new Map<string,RecordRow[]>();
+  for(const record of records)for(const country of new Set<string>(record.countries??[])){const rows=countryRecords.get(country)??[];rows.push(record);countryRecords.set(country,rows);}
+  const countrySources=groupBy(catalog.sources.filter(source=>source.enabled),source=>source.countryCode);
+  const endpointBindings=groupBy(activity.snapshot?.bindings??[],binding=>String(binding.endpoint_id));
   const cycles = (activity.snapshot?.collection_cycles ?? []).map(summarizeCollectionCycle);
   const rows = catalog.countries.map(country => {
-    const sources = catalog.sources.filter(s => s.enabled && s.countryCode === country.code);
+    const sources = countrySources.get(country.code)??[];
     const endpoints = new Map(sources.flatMap(s => s.endpoints.map(e => [e.id, e] as const))), expected = new Set(endpoints.keys());
-    const relevant = records.filter(e => e.countries?.includes(country.code) && expected.has(e.endpoint_id));
+    const relevant = (countryRecords.get(country.code)??[]).filter(e => expected.has(e.endpoint_id));
+    const endpointRecords=groupBy(relevant,record=>String(record.endpoint_id)),endpointSources=new Map<string,Source[]>();
+    for(const source of sources)for(const endpoint of source.endpoints){const bound=endpointSources.get(endpoint.id)??[];bound.push(source);endpointSources.set(endpoint.id,bound);}
     const scopeStart = firstScopeAt(activity, 'country', country.code, relevant);
     const current = dayMetrics(activity, selected.date, scopeStart, selected.latest, expected, relevant, now);
     const history = baseline(activity, current, expected, relevant, scopeStart, selected.latest, input.baseline_days, now);
@@ -185,18 +195,18 @@ export function getCountryQualityOverview(catalog: Catalog, activity: ActivitySt
           reasons.push({ metric: key, current: value, baseline: normal, delta_percentage_points: value - normal });
       }
     }
-    const findings = [...endpoints.values()].map(e => classifyEndpoint(e, relevant, sources.filter(s => s.endpoints.some(ep => ep.id === e.id)), health, selected.date, now, activity.snapshot?.bindings));
+    const findings = [...endpoints.values()].map(e => classifyEndpoint(e, endpointRecords.get(e.id)??[], endpointSources.get(e.id)??[], health, selected.date, now, endpointBindings.get(e.id)??[]));
     const evidenceCounts = { recent: 0, stale: 0, missing: 0, unreliable: 0 };
     for (const finding of findings) evidenceCounts[finding.health.content_freshness]++;
     const freshnessEligible = findings.filter(finding => finding.health.comparable_update_cadence.value !== null);
     const investigationCandidates = findings.flatMap(finding => {
-      const boundSources = sources.filter(source => source.endpoints.some(endpoint => endpoint.id === finding.endpoint_id));
+      const boundSources = endpointSources.get(finding.endpoint_id)??[];
       const candidate = (source: Source, reason: string, priority: number) => ({ source_id: source.id, endpoint_id: finding.endpoint_id, reason, priority });
       if (finding.classification === 'failure_after_prior_success') return boundSources.map(source => candidate(source, finding.classification, 1));
       if (finding.health.content_freshness === 'stale' && finding.health.checked_at) return boundSources.map(source => candidate(source, 'saved_stale_content_evidence_requires_confirmation', 2));
       if (finding.classification === 'access_failure_without_normal_baseline') return boundSources.map(source => candidate(source, finding.classification, 3));
       if (finding.classification === 'recovered_after_failure') return boundSources.map(source => candidate(source, finding.classification, 4));
-      return boundSources.filter(source => !activity.snapshot?.bindings.some(binding => binding.source_id === source.id && binding.endpoint_id === finding.endpoint_id && binding.baseline_at))
+      return boundSources.filter(source => !(endpointBindings.get(finding.endpoint_id)??[]).some(binding => binding.source_id === source.id && binding.baseline_at))
         .map(source => candidate(source, 'uninitialized_binding', 5));
     }).sort((a, b) => a.priority - b.priority || a.source_id.localeCompare(b.source_id));
     return { country: country.code, name: country.name, inventory: inventory(catalog, country.code), period: current.period,
