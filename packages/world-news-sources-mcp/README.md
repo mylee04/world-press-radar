@@ -4,7 +4,7 @@ Source activation/deactivation timestamps and operator workflow: [STATUS-HISTORY
 
 `world-news-sources-mcp` serves configured publisher RSS/sitemap metadata from this repository's `data/rss-atlas.json`. The core read tools need no database, PostgreSQL, Next.js, customer token, or model key. Optional collection and quality operations use private SQLite stores for their durable history.
 
-The **News Quality Agent dashboard** is available at `/quality` in the local HTTP runtime. It reads actual production MCP records, separates attempt coverage from success among attempts, and shows actual investigations. Run `npm run quality:dashboard`; see [QUALITY.md](QUALITY.md) for the minimal dashboard, rules/OpenAI/Jev modes, persistent history and shared $5 pilot budget. Both provider pilot calls have succeeded. Repair proposals require explicit approval and affect only the local registry. [Daily operations](ops/QUALITY-OPERATIONS.md) are prepared; cloud rollout and timer activation are separate.
+The **News Quality Agent dashboard** separates attempt coverage, success among attempts and freshness, with actual rules/OpenAI/Jev investigation records. Run `npm run quality:dashboard` locally. The cloud runtime uses the existing Oracle server for durable history and execution, a Vercel gateway on the existing public domain, administrator-only investigation starts and approvals, and the migrated shared **$5** pilot cap. The public [dashboard](https://news.bymyleslee.com/quality/) and actual cloud rules/OpenAI/Jev investigations have passed acceptance; its web service and daily rules timer are active. Its first actual daily report completed with no errors or model calls; repeat-start and web-restart persistence checks passed. See [QUALITY.md](QUALITY.md) and [operations](ops/QUALITY-OPERATIONS.md).
 
 ## Run locally
 
@@ -42,7 +42,7 @@ Optional paths, all local JSON files:
 | `WNS_LEGACY_HEALTH_PATH` | repository `audits/readme_rss_health_latest.json` | Historical marker-check audit; a missing file is allowed |
 | `WNS_HEALTH_PATH` | local override if present, otherwise package `audits/health-latest.json` | Typed health snapshot; an explicitly supplied path must exist |
 
-Files are loaded once at startup, capped at 16 MiB. Restart after changing registry or health files. The package can also run outside this repository when given `WNS_REGISTRY_PATH`; the registry schema is enforced. It imports no web application or ingestion module. The root app's TypeScript configuration excludes this separately built package.
+Ordinary metadata runtimes load files once at startup, capped at 16 MiB; restart after changes. The durable cloud quality runtime checks changed registry, health and activity exports every 30 seconds while no investigation is active. The package can also run outside this repository when given `WNS_REGISTRY_PATH`; the registry schema is enforced. It imports no web application or ingestion module. The root app's TypeScript configuration excludes this separately built package.
 
 ## Tools and examples
 
@@ -139,7 +139,7 @@ Completed **2026-09-30T20:05:37.106Z**: all 5,775 distinct typed URLs were attem
 
 ## Vercel bundle
 
-`npm run prepare:vercel` writes ignored `.deploy-vercel/` with only runtime metadata modules, whitelisted registry fields and cached health. It excludes the portal, database, customer tokens, validator and audit runner. The hosted tools have no operator check tool. Production is project `world-news-sources-mcp` under `mylee04s-projects`; deployment commands and evidence are in `DEPLOYMENT.md`. Hosting requires an HTTPS public hostname, Node 22 runtime and an access policy appropriate to public metadata. Do not deploy the old application root for this service.
+`npm run prepare:vercel` writes ignored `.deploy-vercel/` with runtime metadata modules, whitelisted registry fields, saved health/activity, dashboard assets and the quality gateway. It excludes private databases, model credentials, the old portal, validator and audit runner. Hosted MCP tools remain read-only; the gateway sends authenticated quality operations to the separate durable Oracle process. Production is project `world-news-sources-mcp` under `mylee04s-projects`; deployment commands and evidence are in `DEPLOYMENT.md`. Hosting requires an HTTPS public hostname, Node 22 runtime and an access policy appropriate to public metadata. Do not deploy the old application root for this service.
 
 Transport and SDK choices follow the [official MCP transport specification](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports) and [TypeScript SDK v2](https://github.com/modelcontextprotocol/typescript-sdk) (`@modelcontextprotocol/server` 2.2.0, pinned in the lockfile).
 
@@ -151,7 +151,7 @@ Optional long-term aggregate counters are described in [`metrics/README.md`](met
 
 ## Article-URL activity and current inventory
 
-Nine read tools are available in this checkout, including `get_country_source_inventory`, `get_source_article_activity`, `get_country_article_activity`, `get_country_collection_quality` and `get_source_collection_quality`. The last verified deployed MCP has seven tools; the dashboard's production reader uses those seven. [Activity operator documentation](activity/README.md) defines excluded initialization baselines, scope-specific discovery, deduplication, timezone/DST, partial coverage and the separate durable SQLite ledger. Future collector runs record completed cohorts and reliable content dates for comparable quality baselines. No MCP tool crawls a publisher. Counts describe first-discovered candidate URLs, not publications or entry counts.
+Nine read tools are available in this checkout, including `get_country_source_inventory`, `get_source_article_activity`, `get_country_article_activity`, `get_country_collection_quality` and `get_source_collection_quality`. The older deployed MCP had seven tools; the remote dashboard reader remains compatible with those seven. The cloud quality runtime reads the authoritative Oracle metadata with the nine-tool implementation. [Activity operator documentation](activity/README.md) defines excluded initialization baselines, scope-specific discovery, deduplication, timezone/DST, partial coverage and the separate durable SQLite ledger. Future collector runs record completed cohorts and reliable content dates for comparable quality baselines. No MCP tool crawls a publisher. Counts describe first-discovered candidate URLs, not publications or entry counts.
 
 ```json
 {"name":"get_country_source_inventory","arguments":{"country":"US","include_disabled":true}}

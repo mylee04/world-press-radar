@@ -2,7 +2,7 @@
 
 This extends World Press Radar's existing news MCP. Harvard CS2680 inspired the tool design, result-dependent investigation loop, visible execution and reproducible quality/cost comparison. It does not claim completion of the course or its assignments.
 
-The application has a minimal country dashboard, actual MCP investigations, an adaptive OpenAI agent, a Jev evidence classifier, durable observation/run/budget stores, and an approval-controlled local repair workflow. Rules are the default. Models inspect evidence; code owns counts, dates, deduplication and supported failure classifications.
+The application has a minimal country dashboard, actual MCP investigations, an adaptive OpenAI agent, a Jev evidence classifier, durable observation/run/budget stores, and an approval-controlled registry repair workflow. Rules are the default. Models inspect evidence; code owns counts, dates, deduplication and supported failure classifications.
 
 The implementation stays in TypeScript/Node.js. The user excluded Rust migration from the project plan on October 13, 2026.
 
@@ -15,7 +15,7 @@ npm run quality:dashboard
 # http://127.0.0.1:3000/quality/
 ```
 
-The dashboard reads `https://news.bymyleslee.com/mcp` through its original seven read tools, defaults to the preceding UTC day, and displays the actual saved-data timestamp. It does not fetch publishers. The local MCP also exposes two quality tools. `quality:dashboard:local` uses local metadata; its checked-in October 1 snapshot must not be represented as newer production data. `WNS_PORT=3400` chooses another loopback port. Restart to reload local files.
+The local default reads `https://news.bymyleslee.com/mcp` through its original seven read tools. The cloud worker reads the authoritative Oracle registry, health and activity exports, including completed-cycle evidence when present. Both default to the preceding UTC day and display the actual saved-data timestamp; dashboard reads do not fetch publishers. `quality:dashboard:local` uses local metadata; its checked-in October 1 snapshot must not be represented as newer production data. `WNS_PORT=3400` chooses another loopback port. The cloud metadata cache checks for changed exports every 30 seconds while no investigation is active.
 
 The three views are collection quality, source holdings and investigations. Country names are Korean. US and China appear first, followed by the recorded nominal-GDP ordering. Scope, missing data and raw execution evidence sit behind expandable controls.
 
@@ -56,19 +56,19 @@ OpenAI can search country sources, read source quality, read observed endpoint h
 
 The collector records planned, attempted and successful endpoint cohorts, completion state, content dates and date kind. Comparable production due cycles require the same country's UTC weekday and unchanged cohort, at least two independent day samples, and adequate prior attempt coverage. A review signal needs a fall of at least 15 percentage points and a value below 80% of baseline. Several eligible countries falling together trigger common-collector investigation first.
 
-The new collection policy targets every active address daily. It defaults to six global workers (maximum sixteen), one request per host with a two-second gap, eight seconds per fetch attempt, at most three redirects and one transient retry. HTTP-hop reservations, redirects and retries share the 12,000-request daily cap. Already-checked and server-deferred targets remain visible; 429/`Retry-After` waiting, budget limits and unfinished work are partial coverage, not successful zero results. The existing production timer remains 03:00 UTC; this new policy has not been rolled out there.
+The new collection policy targets every active address daily. It defaults to six global workers (maximum sixteen), one request per host with a two-second gap, eight seconds per fetch attempt, at most three redirects and one transient retry. HTTP-hop reservations, redirects and retries share the 12,000-request daily cap. Already-checked and server-deferred targets remain visible; 429/`Retry-After` waiting, budget limits and unfinished work are partial coverage, not successful zero results. The policy is installed on the authoritative Oracle collector. Its 03:00 UTC timer remains unchanged; the next scheduled run is October 14, 2026. The verified runtime plan contains 5,416 active typed targets, a 10,000-target limit, six workers and the 12,000-request cap.
 
-Production rollout remains paused while whole-run phase measurement is incomplete. The October 13 baseline inspected the existing two-worker production release, eight bounded live endpoint probes and read-only SQLite diagnostics. Follow-up isolated Oracle measurements identified repeated per-URL SQL preparation and validated a small storage change: reuse that statement, precompute country baselines and omit unused UPSERT return values. Counts, timestamps, relationships, transactions and replay semantics remain unchanged. No production code or policy was changed, and these measurements do not justify Rust or establish whole-run speedup. See [the original findings](ops/COLLECTOR-PERFORMANCE-2026-10-13.md) and [the storage comparison](ops/COLLECTOR-STORAGE-2026-10-13.md).
+The October 13 baseline inspected the existing two-worker production release, eight bounded live endpoint probes and read-only SQLite diagnostics. Isolated Oracle measurements identified repeated per-URL SQL preparation and validated statement reuse, precomputed country baselines and removal of unused UPSERT return values. Counts, timestamps, relationships, transactions and replay semantics remain unchanged. The code and safe rollout tooling are installed on Oracle; rollout retained the authoritative registry, article ledger, tracking baseline and URL identities. These isolated measurements do not establish whole-run speedup. See [the original findings](ops/COLLECTOR-PERFORMANCE-2026-10-13.md), [the storage comparison](ops/COLLECTOR-STORAGE-2026-10-13.md) and [collector rollout](ops/COLLECTOR-ROLLOUT.md).
 
 Older records and the current remote seven-tool aggregates lack these completed cohorts. Their baseline stays unavailable; a later observation date does not establish completion, and a missing baseline is not a healthy verdict. Freshness needs at least three reliable content-date advances with comparable inspections. HTTP success and old observations cannot certify current freshness. Feed item dates and sitemap `lastmod` remain different evidence kinds.
 
-`QualityRunStore` retains actual events in SQLite. Request IDs recover accepted starts after a lost response and across restarts when persistence is configured. Interrupted runs become explicit failures and are never silently replayed. Two concurrent runs are allowed. In-memory-only embeddings retain at most 20 runs for one hour.
+`QualityRunStore` retains actual events in private SQLite. Request IDs recover accepted starts after a lost response and across restarts. Restart reconciliation marks dead-owner or legacy interrupted runs as failures without replaying them; a live independent daily process keeps its run. The daily worker shares the run store without taking the web process lease. Two concurrent interactive runs are allowed. In-memory-only embeddings retain at most 20 runs for one hour.
 
 ## Credentials and cost
 
 The user approved a **$5 combined pilot cap for OpenAI and Jev**, not a renewed daily allowance. `PersistentModelBudget` shares conservative reservations across providers, processes and restarts. Uncertain failures retain reservations; a fixed authorization ID prevents budget renewal at restart.
 
-The existing OpenAI key is read from its configured file in memory. The user prepared the TypeSafe account and locally stored key. Values never appear in browser responses, reports or deployment bundles. Credential files are parsed as literal assignments, never sourced as shell code. Both live provider pilot calls have succeeded. Readiness reflects configuration; it does not promise future API availability.
+The user approved reusing the existing OpenAI and TypeSafe keys on Oracle in `/home/ubuntu/.config/world-press-radar-quality/model-secrets.env`, with mode 0600. The worker reads literal assignments in memory, never sources them as shell code, and never returns values to the browser, reports or deployment bundles. The shared pilot budget was migrated with prior reservations retained and the old local allowance sealed. Both earlier local provider pilots and subsequent actual cloud investigations succeeded. Readiness reflects configuration, not future API availability.
 
 | Control | Purpose |
 | --- | --- |
@@ -79,13 +79,13 @@ The existing OpenAI key is read from its configured file in memory. The user pre
 | Provider `*_MODEL`, `*_TOTAL_BUDGET_USD`, `*_RUN_BUDGET_USD` | Model and provider/run limits |
 | Provider `*_INPUT_USD_PER_MILLION`, OpenAI `*_OUTPUT_USD_PER_MILLION` | Rates for usage estimates |
 
-Provider controls default off. Production secret setup is separate. Usage-derived costs are estimates, not billing receipts. Missing usage never becomes zero cost. Automatic model retries, remote tracing, sensitive SDK logging and OpenAI response storage are disabled. Paid execution and repair mutations require the loopback owner session and same-origin requests; that session is not cloud authentication.
+Provider controls default off. Usage-derived costs are estimates, not billing receipts. Missing usage never becomes zero cost. Automatic model retries, remote tracing, sensitive SDK logging and OpenAI response storage are disabled. In cloud mode, every investigation start, including rules, and all repair mutations require the separate administrator credential and a same-origin request. The gateway credential permits forwarding only. Browser login creates an eight-hour signed Secure/HttpOnly/SameSite=Strict cookie; anonymous visitors can read statistics and sanitized completed investigations.
 
 ## Approval-controlled repair
 
 The operator selects a source, endpoint and publisher website. Bounded official-page feed declarations or `robots.txt` sitemap declarations produce validated XML candidates and an exact proposal. The operator must confirm website ownership; a declaration alone does not prove it.
 
-Approval binds the proposal digest, registry hash, actor and session. Apply changes only the local registry and retains rollback evidence. Changed registries, expired validation, conflicting proposals and unauthenticated mutations are rejected. Model suggestions cannot apply changes. Local application is not production deployment.
+Approval binds the proposal digest, registry hash, actor and session. Apply changes only the explicitly configured registry and retains rollback evidence. Local mode affects its local registry; cloud mode is bound to the approved Oracle collector release root. Changed registries, expired validation, conflicting proposals and unauthenticated mutations are rejected. Model suggestions cannot apply changes. Restart the cloud worker after a collector release switch so its repair binding follows the new release.
 
 Recovery requires a successful non-baseline collector observation after application plus newer reliable content dates. A valid candidate, HTTP success or first initialization collection is insufficient. Without collector evidence, verification explicitly waits. No actual publisher registration has been automatically replaced by the demos.
 
@@ -100,7 +100,7 @@ npm run quality:evaluate -- --provider all --output /absolute/path/new-result.js
 npm test
 ```
 
-The daily worker saves country/registry observations and investigates at most five supported declines using **rules only**. Receipts prevent duplicate successful reports; partial runs are retryable. Scheduler definitions for launchd, systemd and cron are prepared, not activated. See [operations](ops/QUALITY-OPERATIONS.md).
+The daily worker saves country/registry observations and investigates at most five supported declines using **rules only**. Receipts prevent duplicate successful reports; partial runs are retryable. Oracle runs an activated dedicated hourly systemd dispatcher, gated after 09:00 UTC for the preceding closed UTC day; user lingering keeps it independent of login. The collector retains its separate 03:00 UTC timer. Local launchd/cron generators remain optional. See [operations](ops/QUALITY-OPERATIONS.md).
 
 Ten fixed synthetic English/Korean/Japanese cases compare exact-label agreement, false positives, missed failures, language results, actual time, reported usage and estimated costs. Providers use the same cases. Synthetic agreement is not general multilingual news accuracy. Rules have zero model cost; server cost is unmeasured. Live evidence is retained privately in `output/news-quality/`.
 
@@ -116,18 +116,26 @@ Exact labels by language were rules 3/3 English, 4/4 Korean, 3/3 Japanese; Jev 3
 
 ## Production state
 
-The existing repository and original working-tree changes are preserved. The last inspected production Vercel ceiling was ten seconds; the prepared bundle uses sixty seconds and still has no durable agent process. Hosted investigations/mutations stay disabled. A full cloud agent needs authenticated durable execution, persistent run/budget storage and a reviewed UI connection. The existing Cloudflare D1 holds tool counters; its saved credential returned 401 at preflight.
+The public dashboard is [https://news.bymyleslee.com/quality/](https://news.bymyleslee.com/quality/), verified in the actual browser on October 13, 2026. It uses the existing Vercel domain and Oracle server. The cloud web service listens only on `127.0.0.1:3401`; a narrow nginx HTTPS route and Vercel gateway connect it to the public UI. History, investigations and the shared model budget remain in private Oracle SQLite outside immutable code releases. The web service and daily timer are active with `Linger=yes`. The first actual daily report for October 12 UTC completed at `2026-10-13T22:54:06.610Z` with no errors, model calls or model cost. It recorded the initial registry observation baseline and found no supported decline eligible for investigation; historic completed cycles were not fabricated. A repeat daily start retained the same receipt. The final web restart preserved the exact three completed investigations, their saved payloads and the shared budget/reservations; web health and the daily timer remained active.
 
-Daily activation, cloud execution hosting/authentication, production secret locations and rollout remain separate from local implementation. Authoritative completed-cycle and freshness history must accumulate; historic completion is not backfilled. Each official replacement still needs explicit approval and post-apply collection before claiming recovery.
+The gateway uses an encrypted server-only credential; the separate administrator credential is required for execution and registry changes. Actual anonymous investigation starts and proposal requests returned 403. The public bundle contains saved metadata and dashboard assets, with no private databases or model credentials. Browser verification showed 73 country sections, 72 active countries, approximately 2,792 distinct newsroom/brands, 5,034 active registrations, 3,667 RSS addresses and 1,749 sitemap addresses. The last collection was October 13 at 03:53 UTC; the later 22:31 UTC snapshot generation is shown separately. The existing Cloudflare D1 remains an independent MCP counter service.
 
-Production rollout must preserve the current registry, audits, private activity ledger, exported shards and existing timer rather than overwrite them with the old local snapshot. Activity refresh permits an explicit degraded warning for missing usage acknowledgments only; functional MCP and history mismatches still fail. Standalone smoke verification remains strict by default. See [the safe rollout checklist](activity/README.md#deployoracle-handoff).
+The collector release is activated after 315 tests on Oracle. It preserves the current registry, audits, private activity ledger, exported shards, pending spools, tracking baseline and existing timers. The old local snapshot did not replace newer production data. The first normally scheduled collection under the new policy is October 14 at 03:00 UTC. Authoritative completed-cycle and freshness history must accumulate from real runs; historic completion is not backfilled. Official replacements still need individual approval and post-apply collection before claiming recovery. Activity refresh may report an explicit degraded usage-acknowledgment warning; functional MCP and history mismatches still fail. See [cloud deployment](ops/QUALITY-CLOUD-DEPLOYMENT.md) and [collector rollout](ops/COLLECTOR-ROLLOUT.md).
 
 ## Verified integration run — 2026-10-13
 
-The actual OpenAI investigation completed with 13 MCP calls, three model calls and three inspected Korean sources. Jev completed with 34 MCP calls, twelve model calls and twelve inspected sources. These are partial country investigations, not whole-country health certifications. Invalid model proposals are recorded and excluded from accepted proposals; model summaries remain unverified.
+In the earlier local integration, OpenAI completed with 13 MCP calls, three model calls and three inspected Korean sources. Jev completed with 34 MCP calls, twelve model calls and twelve inspected sources. These are partial country investigations, not whole-country health certifications. Invalid model proposals are recorded and excluded from accepted proposals; model summaries remain unverified.
 
-Total provider-reported usage estimates for the pilots, comparison and integration debugging were $0.009963582 against the shared $5 cap. Provider billing receipts were not available. The final suite passed 212 tests. Original checkout fingerprints remained unchanged for all 15 pre-existing dirty/untracked files.
+The earlier local pilots, comparison and integration debugging accounted for an estimated $0.009963582 before migration. They are separate from the subsequent cloud runs below. Provider billing receipts were not available. The local integration suite passed 212 tests; the final cloud implementation suite passed 316 tests. The subsequent daily CLI entry-point regression suite passed 11 tests. Original checkout fingerprints remained unchanged for all 15 pre-existing dirty/untracked files.
 
-Read-only cloud preview: https://world-news-sources-mmbxxj7gx-mylee04s-projects.vercel.app/quality/. Vercel reports Ready. Local bundle validation returned 73 countries from the actual saved MCP report in 7ms. Production was not promoted. Cloud investigation hosting/authentication, durable remote storage, credential destination approval and daily scheduler activation remain operational requirements.
+Actual cloud acceptance completed these Korean investigations:
+
+| Mode | Tool calls | Inspected sources | Model calls | Estimated API cost |
+| --- | --- | --- | --- | --- |
+| Rules | 27 | 12 of 48 | 0 | $0 |
+| OpenAI | 6 | 3 of 48 | 3 | $0.0017533 |
+| Jev | 27 | 12 of 48 | 12 | $0.00178101 |
+
+These bounded runs are not whole-country health certifications. The shared total after cloud acceptance is **$0.013497892 of $5**, including the earlier local usage estimate. Vercel deployment `dpl_FbuoKYZM6qa236t3YqpfwJj19mvw` is Ready with the existing production aliases; actual browser acceptance confirmed the public route and data.
 
 TypeSafe integration follows the official [agent skill](https://github.com/typesafe-ai/skills/blob/main/skills/typesafe-ai/SKILL.md), HTTP API and Choice documentation. The skill was read directly; no global skill installation was required.
