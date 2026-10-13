@@ -122,7 +122,7 @@ export function createQualityHandler(catalog: Catalog, health: HealthStore, acti
         return await options.cloudAccess.sessionResponse(request, url);
       const principal = session(request, url);
       const publicCloud = Boolean(options.cloudAccess && !principal);
-      const date = url.searchParams.get('date') ?? undefined;
+      const date = url.searchParams.get('date') ?? (options.cloudAccess ? new Date(Date.now() - 86400000).toISOString().slice(0, 10) : undefined);
       if (url.pathname === '/quality/api/overview' && request.method === 'GET') {
         if (remoteQuality) {
           const overview = options.savedRemoteOverview?.(date) ?? await remoteQuality.overview(date);

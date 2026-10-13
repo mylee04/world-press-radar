@@ -109,6 +109,21 @@ test('public reads work with no model credentials but every run or proposal acce
   assert.equal((await (await handler(request('/admin/session'))).json()).authenticated, false);
 });
 
+test('cloud reads default to the preceding UTC date while explicit dates and local latest-snapshot defaults remain intact', async t => {
+  t.mock.method(Date, 'now', () => Date.parse('2026-10-13T00:30:00.000Z'));
+  const { access } = fixture(t);
+  const activity = new ActivityStore({ version: 1, lane: 'production', generated_at: '2026-10-13T00:20:00.000Z',
+    tracking_start: null, available_since: '2026-10-01T00:00:00.000Z', registry_at: null, semantics: 'Fixture counts', bindings: [], collections: [] });
+  const cloud = createQualityHandler(catalog, new HealthStore(), activity, raw, true, false, { cloudAccess: access });
+  const local = createQualityHandler(catalog, new HealthStore(), activity, raw, true);
+  for (const route of ['/overview', '/country?country=US', `/source?source_id=${catalog.sources[0].id}`]) {
+    assert.equal((await (await cloud(request(route))).json()).date, '2026-10-12');
+    const separator = route.includes('?') ? '&' : '?';
+    assert.equal((await (await cloud(request(`${route}${separator}date=2026-10-11`))).json()).date, '2026-10-11');
+    assert.equal((await (await local(new Request(`http://127.0.0.1:3400/quality/api${route}`))).json()).date, '2026-10-13');
+  }
+});
+
 test('cloud durable state requires an absolute private directory and remains usable without paid providers', async t => {
   const { env } = fixture(t, false);
   assert.throws(() => createCloudQualityRuntime({ ...env, WNS_QUALITY_STATE_DIR: 'relative' }), /QUALITY_CLOUD_STATE_DIRECTORY_REQUIRED/);
