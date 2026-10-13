@@ -109,7 +109,7 @@ export function investigationCountries(overview, maximum) {
 }
 
 async function defaultRuntime(options) {
-  const [{ loadData }, { getCountryQualityOverview }, { RemoteQualityStore, REMOTE_NEWS_MCP_URL }, { InvestigationStore }, { QualityHistoryStore }, { QualityRunStore }] = await Promise.all([
+  const [{ loadData }, { getAllCountryQualityOverview }, { RemoteQualityStore, REMOTE_NEWS_MCP_URL }, { InvestigationStore }, { QualityHistoryStore }, { QualityRunStore }] = await Promise.all([
     import('../dist/config.js'), import('../dist/quality.js'), import('../dist/quality-remote.js'), import('../dist/investigation.js'), import('../dist/quality-history.js'),
     import('../dist/quality-runtime-storage.js'),
   ]);
@@ -150,10 +150,7 @@ async function defaultRuntime(options) {
       if (options.remote) return new RemoteQualityStore(call).overview(date);
       // The overview contains only actual snapshot cycle evidence; observeOverview
       // persists terminal cycles and ignores running cycles without inventing earlier runs.
-      const first = getCountryQualityOverview(data.catalog, data.activity, data.health, { date, limit: 50 }), items = [...first.items];
-      let offset = first.next_offset;
-      while (offset !== null) { const next = getCountryQualityOverview(data.catalog, data.activity, data.health, { date, offset, limit: 50 }); items.push(...next.items); offset = next.next_offset; }
-      return { ...first, items, next_offset: null };
+      return getAllCountryQualityOverview(data.catalog,data.activity,data.health,{date});
     },
     registry: observedAt => options.remote ? captureRemoteRegistry(call, observedAt)
       : { observed_at: observedAt, registry_snapshot_at: data.activity.snapshot?.registry_at ?? null, complete: true,

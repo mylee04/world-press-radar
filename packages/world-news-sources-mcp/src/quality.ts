@@ -165,6 +165,14 @@ function baseline(activity: ActivityStore, current: ReturnType<typeof dayMetrics
 
 /** Saved-data quality overview. No live network checks, registry changes, or model calls. */
 export function getCountryQualityOverview(catalog: Catalog, activity: ActivityStore, health: HealthStore, raw: unknown = {}, now = Date.now()) {
+  return buildCountryQualityOverview(catalog,activity,health,raw,now,false);
+}
+/** Internal HTTP overview: compute all countries once, outside MCP byte paging.
+ * Public tool input limits and the byte-bounded paged helper stay unchanged. */
+export function getAllCountryQualityOverview(catalog: Catalog,activity:ActivityStore,health:HealthStore,raw:unknown={},now=Date.now()){
+  return buildCountryQualityOverview(catalog,activity,health,raw,now,true);
+}
+function buildCountryQualityOverview(catalog:Catalog,activity:ActivityStore,health:HealthStore,raw:unknown,now:number,all:boolean){
   const input = countryQualitySchema.parse(raw), selected = selection(activity, input.date, now);
   const countryCode = input.country?.toUpperCase();
   if (countryCode && !catalog.countries.some(c => c.code === countryCode)) throw Error('Unknown country');
@@ -252,7 +260,7 @@ export function getCountryQualityOverview(catalog: Catalog, activity: ActivitySt
       eligible_baseline_countries: eligible, total_catalog_countries: rows.length, assessment_scope: 'all_catalog_countries',
       reason: 'Shared country success declines are a triage signal. Collector/network cause requires separate evidence; no cause is inferred from a zero count.' },
     metric_semantics: 'Attempt coverage = attempted/current active typed endpoints. Success = successful non-index article endpoints/attempted endpoints. At least one successful check qualifies; latest failed outcomes are separately retained. Current registry denominators are not historical inventory.',
-    ...page(rows.filter(row => !countryCode || row.country === countryCode), input.offset, input.limit) };
+    ...(all?{items:rows.filter(row=>!countryCode||row.country===countryCode),total:rows.filter(row=>!countryCode||row.country===countryCode).length,offset:0,next_offset:null}:page(rows.filter(row => !countryCode || row.country === countryCode), input.offset, input.limit)) };
 }
 
 function aggregateActivity(result: ReturnType<ActivityStore['query']>, label: string, latest: string | null, now: number) {

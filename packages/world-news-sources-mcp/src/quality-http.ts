@@ -4,7 +4,7 @@ import { z } from 'zod';
 import type { Catalog } from './catalog.js';
 import type { ActivityStore } from './activity.js';
 import type { HealthStore } from './health.js';
-import { getCountryQualityOverview, getSourceQualityDetail, countryQualitySchema } from './quality.js';
+import { getCountryQualityOverview, getAllCountryQualityOverview, getSourceQualityDetail, countryQualitySchema } from './quality.js';
 import { getInventoryChanges } from './quality-inventory.js';
 import { InvestigationStore, investigationSchema } from './investigation.js';
 import { RemoteQualityStore } from './quality-remote.js';
@@ -128,15 +128,10 @@ export function createQualityHandler(catalog: Catalog, health: HealthStore, acti
           const overview = options.savedRemoteOverview?.(date) ?? await remoteQuality.overview(date);
           return json({ ...decorate(overview), runtime: { ...overview.runtime, ...runtime(principal) } });
         }
-        const first = getCountryQualityOverview(catalog, activity, health, { date, limit: 50 });
-        const items = [...first.items]; let offset = first.next_offset;
-        while (offset !== null) {
-          const next = getCountryQualityOverview(catalog, activity, health, { date, offset, limit: 50 });
-          items.push(...next.items); offset = next.next_offset;
-        }
+        const first = getAllCountryQualityOverview(catalog, activity, health, { date });
         const active = catalog.sources.filter(s => s.enabled);
         const distinct = (type: 'rss' | 'sitemap') => new Set(active.flatMap(s => s.endpoints.filter(e => e.type === type).map(e => e.id))).size;
-        return json(decorate({ ...first, items, next_offset: null,
+        return json(decorate({ ...first, next_offset: null,
           global_inventory: { active_countries: new Set(active.map(s => s.countryCode)).size,
             active_source_registrations: active.reduce((sum, s) => sum + s.activeRegistrationCount, 0),
             unique_active_rss_endpoints: distinct('rss'), unique_active_sitemap_endpoints: distinct('sitemap'), ...estimateGlobalPublisherInventory(active) },
