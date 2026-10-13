@@ -5,7 +5,7 @@ import { normalizeRegistry } from '../dist/catalog.js';
 import {readHistory} from '../dist/activity-history.js';
 import { snapshotSchema } from '../dist/health.js';
 import { DatabaseSync } from 'node:sqlite';
-import { estimatePublisherInventory } from '../dist/publisher-inventory.js';
+import { estimatePublisherInventory, estimateGlobalPublisherInventory } from '../dist/publisher-inventory.js';
 
 const root = new URL('../', import.meta.url);
 const output = new URL('../.deploy-vercel/', import.meta.url);
@@ -54,6 +54,11 @@ if (existsSync(receiptFile)) {
               ? { ...country, inventory: { ...country.inventory, ...estimatePublisherInventory(selected),
                 publisher_inventory_snapshot_at: report.overview.registry_snapshot_at } } : country;
           });
+          const active = sources.filter(source => source.enabled);
+          const endpoints = type => new Set(active.flatMap(source => source.endpoints.filter(endpoint => endpoint.type === type).map(endpoint => endpoint.endpoint_id))).size;
+          const global = report.overview.global_inventory;
+          if (global && endpoints('rss') === global.unique_active_rss_endpoints && endpoints('sitemap') === global.unique_active_sitemap_endpoints)
+            report.overview.global_inventory = { ...global, ...estimateGlobalPublisherInventory(sources), publisher_inventory_snapshot_at: report.overview.registry_snapshot_at };
         }
       } finally { db.close(); }
     }

@@ -1,10 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { estimatePublisherInventory, estimatePublisherInventoryByCountry } from '../dist/publisher-inventory.js';
+import { estimatePublisherInventory, estimatePublisherInventoryByCountry, estimateGlobalPublisherInventory } from '../dist/publisher-inventory.js';
 
 const source = (name, urls, enabled = true, countryCode = 'US') => ({ name, enabled, countryCode,
   endpoints: urls.map((url, index) => ({ url, type: index === 0 ? 'rss' : 'sitemap' })) });
+
+test('global brands are deduplicated across countries, not summed from country counts', () => {
+  const sources = [source('BBC News', ['https://feeds.bbci.co.uk/news/rss.xml'], true, 'GB'),
+    source('BBC World', ['https://www.bbc.com/news/feed'], true, 'US'),
+    source('Independent Newsroom', ['https://independent.example/feed'], true, 'US')];
+  const countries = estimatePublisherInventoryByCountry(sources);
+  assert.equal(Object.values(countries).reduce((total, country) => total + country.unique_publishers, 0), 3);
+  assert.equal(estimateGlobalPublisherInventory(sources).unique_publishers, 2);
+  assert.equal(estimateGlobalPublisherInventory(null).unique_publishers, null);
+  assert.equal(estimateGlobalPublisherInventory([]).unique_publishers, 0);
+});
 
 test('real NYT, Donga and NHK section/legacy endpoint registrations each count one brand', () => {
   const registry = JSON.parse(readFileSync(new URL('../../../data/rss-atlas.json', import.meta.url), 'utf8'));

@@ -270,6 +270,9 @@ function renderSummary(data) {
   const global = data.global_inventory ?? data.global_totals ?? data.inventory?.global_totals;
   const sum = (key) => state.countries.reduce((total, country) => total + (inventory(country)[key] ?? 0), 0);
   $('stat-countries').textContent = valueText(global?.active_countries ?? state.countries.filter((country) => (inventory(country).active_source_registrations ?? 0) > 0).length);
+  // The same publisher can appear in multiple countries; use the server's global deduplicated count.
+  $('stat-publishers').textContent = publisherCountText(global ?? {});
+  $('stat-publishers').parentElement.title = publisherCountNote(global ?? {});
   $('stat-sources').textContent = valueText(global?.active_source_registrations ?? sum('active_source_registrations'));
   // Endpoint IDs can cross country boundaries. A global unique total needs server deduplication.
   $('stat-rss').textContent = valueText(global?.unique_active_rss_endpoints);

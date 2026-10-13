@@ -52,6 +52,19 @@ test('remote publisher estimates use only a complete matching registry revision,
   assert.equal(store.decorateOverview(payload(at('2026-10-13'))).items[0].inventory.unique_publishers, null);
 });
 
+test('global publisher card needs a complete matching registry with matching global endpoint counts', t => {
+  const { path } = setup(t), store = new QualityHistoryStore(path); t.after(() => store.close());
+  const revision = at('2026-10-11');
+  store.observeCatalog(catalog, at('2026-10-12'), revision);
+  const payload = { date: '2026-10-12', registry_snapshot_at: revision, items: [],
+    global_inventory: { unique_publishers: null, unique_active_rss_endpoints: 4, unique_active_sitemap_endpoints: 0 } };
+  const global = store.decorateOverview(payload).global_inventory;
+  assert.equal(global.unique_publishers, 1);
+  assert.equal(global.publisher_count_state, 'estimated_from_registry_identity');
+  assert.equal(store.decorateOverview({ ...payload, registry_snapshot_at: at('2026-10-10') }).global_inventory.unique_publishers, null);
+  assert.equal(store.decorateOverview({ ...payload, global_inventory: { ...payload.global_inventory, unique_active_rss_endpoints: 5 } }).global_inventory.unique_publishers, null);
+});
+
 test('complete registry first observation is a durable baseline, never an inferred creation batch', t => {
   const { path } = setup(t); let store = new QualityHistoryStore(path);
   assert.equal(store.observeCatalog(catalog, at('2026-10-12'), at('2026-10-11')).state, 'initial_observation_baseline');

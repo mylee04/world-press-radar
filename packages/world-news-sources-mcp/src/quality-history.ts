@@ -4,7 +4,7 @@ import { mkdirSync, lstatSync, existsSync, chmodSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { z } from 'zod';
 import { canonicalUrl, stableId, type Catalog } from './catalog.js';
-import { estimatePublisherInventory } from './publisher-inventory.js';
+import { estimatePublisherInventory, estimateGlobalPublisherInventory } from './publisher-inventory.js';
 
 const DAY = 86400000;
 const iso = z.string().datetime({ offset: true });
@@ -275,7 +275,13 @@ export class QualityHistoryStore {
     });
     const all = [...new Set(cycles.flatMap(cycle => Object.keys(cycle.country_metrics)))].map(country => ({ country, baseline: completedCycleBaseline(cycles, country, date) }));
     const eligible = all.filter(row => row.baseline.state === 'comparable_completed_cycles'), failed = eligible.filter(row => row.baseline.reasons.some(reason => reason.metric === 'success_rate'));
-    return { ...payload, items: rows, history: this.summary(date), completed_cycle_common_signal: {
+    const active = sources?.filter(source => source.enabled);
+    const endpoints = (type: string) => new Set(active?.flatMap(source => source.endpoints.filter(endpoint => endpoint.type === type).map(endpoint => endpoint.endpoint_id)) ?? []).size;
+    const globalMatches = active && payload.global_inventory && endpoints('rss') === payload.global_inventory.unique_active_rss_endpoints
+      && endpoints('sitemap') === payload.global_inventory.unique_active_sitemap_endpoints;
+    return { ...payload, items: rows, global_inventory: globalMatches
+      ? { ...payload.global_inventory, ...estimateGlobalPublisherInventory(sources), publisher_inventory_snapshot_at: registryAt } : payload.global_inventory,
+      history: this.summary(date), completed_cycle_common_signal: {
       state: eligible.length >= 3 && failed.length >= 3 && failed.length / eligible.length >= .3 ? 'investigate_common_collector_first' : 'not_established',
       eligible_countries: eligible.length, affected_countries: failed.map(row => row.country), assessment_scope: 'all_recorded_cycle_countries', cause_confirmed: false } };
   }

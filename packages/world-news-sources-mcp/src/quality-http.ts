@@ -8,6 +8,7 @@ import { getCountryQualityOverview, getSourceQualityDetail, countryQualitySchema
 import { getInventoryChanges } from './quality-inventory.js';
 import { InvestigationStore, investigationSchema } from './investigation.js';
 import { RemoteQualityStore } from './quality-remote.js';
+import { estimateGlobalPublisherInventory } from './publisher-inventory.js';
 import type { QualityHistoryStore } from './quality-history.js';
 import { repairApprovalSchema, repairApplySchema, type RepairPrincipal, type RepairWorkflowStore } from './repair-workflow.js';
 
@@ -126,7 +127,7 @@ export function createQualityHandler(catalog: Catalog, health: HealthStore, acti
         return json(decorate({ ...first, items, next_offset: null,
           global_inventory: { active_countries: new Set(active.map(s => s.countryCode)).size,
             active_source_registrations: active.reduce((sum, s) => sum + s.activeRegistrationCount, 0),
-            unique_active_rss_endpoints: distinct('rss'), unique_active_sitemap_endpoints: distinct('sitemap'), unique_publishers: null },
+            unique_active_rss_endpoints: distinct('rss'), unique_active_sitemap_endpoints: distinct('sitemap'), ...estimateGlobalPublisherInventory(active) },
           inventory_changes: getInventoryChanges(catalog, rawRegistry, first.date, health),
           runtime: runtime() }));
       }

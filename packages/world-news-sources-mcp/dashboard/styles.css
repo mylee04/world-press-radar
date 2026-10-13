@@ -26,7 +26,7 @@ h1{font:600 27px/1.4 var(--sans);letter-spacing:-.8px;margin-bottom:6px}
 .snapshot-card{background:none;border-left:0;padding:0;text-align:right;min-width:0}
 .snapshot-label{font-size:10px;margin-bottom:4px}
 .snapshot-caption{display:none}
-.summary-grid{margin-bottom:20px;border-radius:7px}
+.summary-grid{grid-template-columns:repeat(5,minmax(0,1fr));margin-bottom:20px;border-radius:7px}
 .summary-card{padding:16px 20px}
 .summary-card>strong{font:500 29px/1.4 var(--sans);letter-spacing:-.7px}
 .summary-meta{font-size:10px}
@@ -153,3 +153,4 @@ td.country-name{display:table-cell}
 
 .publisher-heading,.publisher-count{min-width:94px}.publisher-count{white-space:nowrap}
 .collection-schedule{display:flex;flex-wrap:wrap;gap:2px 7px;margin-top:5px;font-size:9px;color:var(--muted)}.schedule-deferred{color:var(--warn)}
+@media(max-width:700px){.summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.summary-card{border-bottom:1px solid var(--border)}.summary-card:nth-child(2n){border-right:0}.summary-card:last-child{grid-column:1/-1;border-right:0;border-bottom:0}}

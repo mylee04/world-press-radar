@@ -149,3 +149,8 @@ export function estimatePublisherInventoryByCountry(sources: readonly PublisherS
   return Object.fromEntries([...grouped].sort(([a], [b]) => a.localeCompare(b))
     .map(([country, values]) => [country, estimatePublisherInventory(values)]));
 }
+
+/** Global brand estimate: remove country namespaces before deduplicating. */
+export function estimateGlobalPublisherInventory(sources: readonly PublisherSource[] | null | undefined): PublisherInventory {
+  return estimatePublisherInventory(Array.isArray(sources) ? sources.map(source => ({ ...source, country: undefined, countryCode: undefined })) : sources);
+}
