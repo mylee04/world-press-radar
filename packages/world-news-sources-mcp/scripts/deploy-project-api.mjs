@@ -3,10 +3,21 @@ import {readdir,readFile,lstat,writeFile,rename,mkdir} from 'node:fs/promises';
 import {resolve,join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
+import {isDeepStrictEqual} from 'node:util';
 export const PROJECT='prj_BJ4NiHnL2RbmtjojGUogPS2faQJs';
 export const TEAM='team_L8qng538xRzhNBoq38X6p8sN';
 const NAME='world-news-sources-mcp';
 const DOMAINS=['news.bymyleslee.com','world-news-sources-mcp.vercel.app'];
+// The CLI sends this configuration in the deployment request as well as the
+// source file. Merely uploading vercel.json does not transmit its route options.
+const DEPLOYMENT_CONFIG={
+  framework:null,installCommand:'npm ci --omit=dev --ignore-scripts',buildCommand:'',outputDirectory:'public',cleanUrls:true,
+  functions:{'api/*.mjs':{maxDuration:60,includeFiles:'{metadata/activity-history/**,dashboard/**}'}},
+  rewrites:[{source:'/mcp',destination:'/api/mcp'},{source:'/health',destination:'/api/health'},{source:'/quality/:path*',destination:'/api/quality?path=:path*'}],
+  headers:[{source:'/(.*)',headers:[{key:'X-Content-Type-Options',value:'nosniff'}]},
+    {source:'/.well-known/openai-apps-challenge',headers:[{key:'Content-Type',value:'text/plain; charset=utf-8'}]}],
+};
+export const expectedDeploymentConfig=()=>structuredClone(DEPLOYMENT_CONFIG);
 const ALLOWED=new Set(['package.json','package-lock.json','vercel.json',
   'api/mcp.mjs','api/health.mjs','api/quality.mjs',
   ...['catalog','status','health','http','server','metrics','activity','activity-history','quality','quality-history','quality-inventory','quality-http','quality-remote','quality-cloud-auth','publisher-inventory','investigation','openai-runtime','openai-investigation','jev-runtime','jev-investigation','quality-decision','repair-workflow','host-gate','inspect','validate'].map(x=>`dist/${x}.js`),'dist/hosted.mjs','dist/quality-cloud-gateway.mjs',
@@ -49,15 +60,22 @@ export async function collectBundle(directory,allowed=ALLOWED){
   for(const required of [...ALLOWED,...archiveAllowed.keys()])if(!files.some(x=>x.file===required))throw Error('Bundle is incomplete');
   return files;
 }
-export function createBody(files){
-  // Omit env, build.env, projectSettings, alias, domains, git and account fields.
-  // Existing project environment and domain configuration remain authoritative.
-  const body={name:NAME,project:PROJECT,target:'production',files};
+export function createBody(files,config=DEPLOYMENT_CONFIG){
+  if(!isDeepStrictEqual(config,DEPLOYMENT_CONFIG))throw Error('Unexpected deployment routing or build configuration');
+  // Copy only the exact reviewed public routes/build settings. Environment,
+  // account, Git and domain changes remain forbidden. These four overrides
+  // match the prepared source configuration and the CLI deployment behavior.
+  const projectSettings=Object.fromEntries(['framework','installCommand','buildCommand','outputDirectory'].map(key=>[key,config[key]]));
+  const body={...structuredClone(config),version:2,name:NAME,project:PROJECT,target:'production',files,projectSettings};
   const serialized=JSON.stringify(body);
   if(Buffer.byteLength(serialized)>24*1024*1024)throw Error('Deployment request exceeds local safety limit');
   return serialized;
 }
 export function deploymentPlan(files){
+  let config;
+  try{const source=files.find(file=>file.file==='vercel.json');if(!source||source.encoding!=='base64'||Buffer.byteLength(source.data)>128*1024)throw Error();config=JSON.parse(Buffer.from(source.data,'base64').toString('utf8'));}
+  catch{throw Error('Invalid deployment configuration source');}
+  if(!isDeepStrictEqual(config,DEPLOYMENT_CONFIG))throw Error('Unexpected deployment routing or build configuration');
   let sourceBytes=0;const uploads=[];
   const references=files.map(f=>{
     const bytes=Buffer.from(f.data,'base64');
@@ -67,7 +85,7 @@ export function deploymentPlan(files){
     const sha=createHash('sha1').update(bytes).digest('hex');uploads.push({file:f.file,bytes,sha});
     return {file:f.file,sha,size:bytes.length};
   });
-  return {body:createBody(references),uploads,sourceBytes};
+  return {body:createBody(references,config),uploads,sourceBytes};
 }
 export async function uploadArchive({bytes,sha},token,fetchImpl=fetch){
   let response;

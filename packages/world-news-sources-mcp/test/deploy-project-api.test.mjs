@@ -3,14 +3,14 @@ import assert from 'node:assert/strict';
 import {mkdtemp,mkdir,writeFile,readFile,symlink,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join,dirname} from 'node:path';
-import {PROJECT,TEAM,collectBundle,createBody,deploymentPlan,deploy,client,preflight,expectedBundlePaths} from '../scripts/deploy-project-api.mjs';
+import {PROJECT,TEAM,collectBundle,createBody,deploymentPlan,deploy,client,preflight,expectedBundlePaths,expectedDeploymentConfig} from '../scripts/deploy-project-api.mjs';
 const project={id:PROJECT,name:'world-news-sources-mcp',accountId:TEAM,
   env:['METRICS_WRITE_SECRET','METRICS_COLLECTOR_URL'].map(key=>({key,target:['production']}))};
 const domains={domains:['news.bymyleslee.com','world-news-sources-mcp.vercel.app'].map(name=>({name}))};
-async function fixture(t){const root=await mkdtemp(join(tmpdir(),'wns-api-'));t.after(()=>rm(root,{recursive:true,force:true}));const bundle=join(root,'bundle');for(const p of expectedBundlePaths()){await mkdir(dirname(join(bundle,p)),{recursive:true});await writeFile(join(bundle,p),p==='metadata/activity.json'?'null':'example');}return {directory:bundle,stateFile:join(root,'state/run.json'),token:'test-credential-not-real',sleep:async()=>{}};}
+async function fixture(t){const root=await mkdtemp(join(tmpdir(),'wns-api-'));t.after(()=>rm(root,{recursive:true,force:true}));const bundle=join(root,'bundle');for(const p of expectedBundlePaths()){await mkdir(dirname(join(bundle,p)),{recursive:true});await writeFile(join(bundle,p),p==='metadata/activity.json'?'null':p==='vercel.json'?JSON.stringify(expectedDeploymentConfig()):'example');}return {directory:bundle,stateFile:join(root,'state/run.json'),token:'test-credential-not-real',sleep:async()=>{}};}
 function mock(calls,mutation){return async(url,opts)=>{const path=new URL(url).pathname;calls.push({path,method:opts.method,body:opts.body});let data;if(path===`/v9/projects/${PROJECT}`)data=project;else if(path.endsWith('/domains'))data=domains;else data=await mutation(path,opts);return new Response(JSON.stringify(data),{status:200});};}
 test('exact generated whitelist excludes local link and rejects unexpected secret files and symlinks',async t=>{const f=await fixture(t);await mkdir(join(f.directory,'.vercel'));await writeFile(join(f.directory,'.vercel/project.json'),'local-only');assert.equal((await collectBundle(f.directory)).length,expectedBundlePaths().length);await writeFile(join(f.directory,'.env'),'do-not-upload');await assert.rejects(collectBundle(f.directory),/unapproved/);await rm(join(f.directory,'.env'));await symlink('/etc/passwd',join(f.directory,'metadata/leak.json'));await assert.rejects(collectBundle(f.directory),/symlink/);});
-test('payload omits environment/settings/domain changes and uses exact project production target',()=>{const d=JSON.parse(createBody([{file:'example',data:'AA==',encoding:'base64'}]));assert.deepEqual(Object.keys(d).sort(),['files','name','project','target']);assert.equal(d.project,PROJECT);assert.equal(d.target,'production');});
+test('payload includes the reviewed routes and build configuration while omitting environment, domain, Git and account changes',()=>{const d=JSON.parse(createBody([{file:'example',sha:'a'.repeat(40),size:1}]));assert.equal(d.project,PROJECT);assert.equal(d.target,'production');assert.equal(d.version,2);assert.deepEqual(d.rewrites,expectedDeploymentConfig().rewrites);assert.deepEqual(d.functions,expectedDeploymentConfig().functions);assert.deepEqual(d.projectSettings,{framework:null,installCommand:'npm ci --omit=dev --ignore-scripts',buildCommand:'',outputDirectory:'public'});for(const key of ['env','build','alias','domains','gitSource','gitMetadata','accountId','teamId'])assert.ok(!(key in d));});
 test('public cloud import graph is explicit and private runtime data remains forbidden',async t=>{
   const f=await fixture(t),paths=expectedBundlePaths();
   for(const file of ['dist/quality-cloud-auth.js','dist/publisher-inventory.js','dist/quality-cloud-gateway.mjs'])assert.ok(paths.includes(file));
@@ -18,6 +18,14 @@ test('public cloud import graph is explicit and private runtime data remains for
   assert.equal((await collectBundle(f.directory)).length,paths.length+2);
   for(const file of ['metadata/history.sqlite','metadata/typesafe.env','metadata/admin-token','dist/quality-runtime.sqlite']){
     await writeFile(join(f.directory,file),'private fixture');await assert.rejects(collectBundle(f.directory),/unapproved/);await rm(join(f.directory,file));
+  }
+});
+test('source configuration cannot inject private environment, arbitrary routing, or account changes into a deployment',async t=>{
+  const f=await fixture(t);
+  for(const addition of [{env:{PRIVATE_VALUE:'must-not-upload'}},{build:{env:{SECRET:'must-not-upload'}}},{accountId:'other'},{alias:['attacker.example']},{rewrites:[{source:'/(.*)',destination:'https://attacker.example'}]}]){
+    const config={...expectedDeploymentConfig(),...addition};await writeFile(join(f.directory,'vercel.json'),JSON.stringify(config));
+    const files=await collectBundle(f.directory);assert.throws(()=>deploymentPlan(files),/Unexpected deployment/);
+    assert.throws(()=>createBody([],config),/Unexpected deployment/);
   }
 });
 test('ready deployment submits once, polls, checks identity and persists resume ID',async t=>{const f=await fixture(t),calls=[];f.fetchImpl=mock(calls,async path=>path==='/v13/deployments'?{id:'dpl_test'}:{id:'dpl_test',projectId:PROJECT,target:'production',readyState:'READY',aliasAssigned:true,alias:domains.domains.map(x=>x.name)});assert.equal((await deploy(f)).status,'READY');assert.equal(calls.filter(x=>x.method==='POST'&&x.path==='/v13/deployments').length,1);await deploy(f);assert.equal(calls.filter(x=>x.method==='POST'&&x.path==='/v13/deployments').length,1);assert.equal(JSON.parse(await readFile(f.stateFile,'utf8')).status,'ready');assert.ok(calls.every(x=>!x.path.includes('/user')));});
@@ -50,6 +58,8 @@ test('all source code, metadata and archives upload by exact SHA before a compac
   }return mock([],async p=>p==='/v13/deployments'?{id:'dpl_archive'}:{projectId:PROJECT,target:'production',readyState:'READY',aliasAssigned:true,alias:domains.domains.map(x=>x.name)})(url,opts);};
   assert.equal((await deploy(f)).status,'READY');const submission=calls.find(c=>c.path==='/v13/deployments'),d=JSON.parse(submission.opts.body);
   assert.equal(new URL(submission.url).searchParams.get('teamId'),TEAM);
+  assert.deepEqual(d.rewrites,expectedDeploymentConfig().rewrites);assert.deepEqual(d.functions,expectedDeploymentConfig().functions);
+  assert.deepEqual(d.headers,expectedDeploymentConfig().headers);assert.equal(d.projectSettings.buildCommand,'');assert.equal(d.projectSettings.outputDirectory,'public');
   for(const ref of d.files){
     assert.deepEqual(Object.keys(ref).sort(),['file','sha','size']);assert.match(ref.sha,/^[a-f0-9]{40}$/);
     const expected=plan.uploads.find(upload=>upload.file===ref.file);assert.equal(ref.sha,expected.sha);assert.equal(ref.size,expected.bytes.length);
@@ -61,11 +71,11 @@ test('all source code, metadata and archives upload by exact SHA before a compac
 });
 
 test('large valid metadata remains out of the deployment JSON and source capacity guards remain enforced',()=>{
-  const large=Buffer.alloc(10*1024*1024,32),files=[{file:'metadata/health.json',data:large.toString('base64'),encoding:'base64'}],plan=deploymentPlan(files);
-  assert.equal(plan.sourceBytes,large.length);assert.ok(Buffer.byteLength(plan.body)<1024);
+  const large=Buffer.alloc(10*1024*1024,32),config={file:'vercel.json',data:Buffer.from(JSON.stringify(expectedDeploymentConfig())).toString('base64'),encoding:'base64'},files=[{file:'metadata/health.json',data:large.toString('base64'),encoding:'base64'},config],plan=deploymentPlan(files);
+  assert.equal(plan.sourceBytes,large.length+Buffer.from(config.data,'base64').length);assert.ok(Buffer.byteLength(plan.body)<4096);
   assert.deepEqual(Object.keys(JSON.parse(plan.body).files[0]).sort(),['file','sha','size']);
-  const tooLarge=Buffer.alloc(12*1024*1024+1).toString('base64');assert.throws(()=>deploymentPlan([{file:'metadata/health.json',data:tooLarge,encoding:'base64'}]),/file exceeds/);
-  assert.throws(()=>deploymentPlan(Array.from({length:9},(_,i)=>({file:`fixture${i}`,data:files[0].data,encoding:'base64'}))),/capacity budget/);
+  const tooLarge=Buffer.alloc(12*1024*1024+1).toString('base64');assert.throws(()=>deploymentPlan([{file:'metadata/health.json',data:tooLarge,encoding:'base64'},config]),/file exceeds/);
+  assert.throws(()=>deploymentPlan([...Array.from({length:9},(_,i)=>({file:`fixture${i}`,data:files[0].data,encoding:'base64'})),config]),/capacity budget/);
 });
 test('file-upload denial/uncertainty never submits a deployment or falls back to broader credentials',async t=>{
   const f=await archivedFixture(t),calls=[];
