@@ -104,7 +104,7 @@ test('shared runtime path rejects symlink files and directories before starting 
   assert.equal(await readFile(existing, 'utf8'), 'unchanged');
 }));
 
-test('a separate daily process persists actual rules runs alongside active server jobs and recorded cycle cohorts', async () => temporary(async directory => {
+test('a separate daily process invoked through a release symlink persists rules runs alongside active server jobs and recorded cycle cohorts', async () => temporary(async directory => {
   const registry = { countries: [{ code: 'US', name: 'United States', feeds: [{ name: 'Synthetic Daily Fixture', url: 'https://daily.fixture.example/rss.xml' }] }] };
   const catalog = normalizeRegistry(registry), source = catalog.sources[0], endpoint = source.endpoints[0];
   const terminalDates = ['2026-09-21', '2026-09-28', '2026-10-05', '2026-10-12'];
@@ -134,7 +134,9 @@ test('a separate daily process persists actual rules runs alongside active serve
   serverStore.save(unrelatedRun);
   const env = { ...process.env, WNS_REGISTRY_PATH: registryPath, WNS_ACTIVITY_PATH: activityPath, WNS_HEALTH_PATH: healthPath,
     WNS_LEGACY_HEALTH_PATH: join(directory, 'absent-legacy.json') };
-  const invoke = () => promisify(execFile)(process.execPath, [fileURLToPath(new URL('../scripts/quality-daily.mjs', import.meta.url)),
+  const cliPath = join(directory, 'quality-daily-current.mjs');
+  await symlink(fileURLToPath(new URL('../scripts/quality-daily.mjs', import.meta.url)), cliPath);
+  const invoke = () => promisify(execFile)(process.execPath, [cliPath,
     '--local', `--output=${options.output}`, `--history=${options.history}`, `--runtime=${options.runtime}`, '--date=2026-10-12'], { env, timeout: 15000 });
   try {
     const first = JSON.parse((await invoke()).stdout);

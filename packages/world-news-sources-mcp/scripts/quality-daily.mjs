@@ -1,4 +1,4 @@
-import { mkdir, open, readFile, rename, unlink, lstat } from 'node:fs/promises';
+import { mkdir, open, readFile, rename, unlink, lstat, realpath } from 'node:fs/promises';
 import { resolve, join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { randomUUID, createHash } from 'node:crypto';
@@ -230,7 +230,10 @@ export async function runDaily(options, services = {}) {
   } finally { try { await runtime?.close(); } finally { await lock.close(); await unlink(lockPath).catch(() => {}); } }
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+// Production starts through the managed `current` symlink. Node resolves the
+// module URL to its release directory, so compare canonical filesystem paths.
+const invokedPath = process.argv[1] ? await realpath(resolve(process.argv[1])).catch(() => null) : null;
+if (invokedPath && import.meta.url === pathToFileURL(invokedPath).href) {
   try {
     const result = await runDaily(dailyOptions(process.argv.slice(2)));
     console.log(JSON.stringify(result)); if (result.status === 'partial') process.exitCode = 2;
