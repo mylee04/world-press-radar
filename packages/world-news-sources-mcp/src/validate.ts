@@ -30,8 +30,8 @@ export function safeUrl(raw: string): URL {
   return url;
 }
 
-export function validateXml(buffer: Buffer, type: EndpointType): NonNullable<Observation['format']> {
-  return inspectXml(buffer, type).format;
+export function validateXml(buffer: Buffer, type: EndpointType, contentType?: string): NonNullable<Observation['format']> {
+  return inspectXml(buffer, type, undefined, undefined, undefined, contentType).format;
 }
 
 async function bounded<T>(promise: Promise<T>, milliseconds: number): Promise<T> {
@@ -41,7 +41,7 @@ async function bounded<T>(promise: Promise<T>, milliseconds: number): Promise<T>
   })]); } finally { clearTimeout(timer!); }
 }
 export type RequestGate = (hostname: string, deadline: number) => Promise<() => void>;
-export async function fetchXml(raw: string, timeoutMs = 8000, maxBytes = MAX_BYTES, gate?: RequestGate): Promise<{ status: number; body: Buffer; finalUrl: string; retryAfter?: string; requestedHops: number }> {
+export async function fetchXml(raw: string, timeoutMs = 8000, maxBytes = MAX_BYTES, gate?: RequestGate): Promise<{ status: number; body: Buffer; finalUrl: string; retryAfter?: string; contentType?: string; requestedHops: number }> {
   const deadline = Date.now() + timeoutMs;
   let current = raw, requestedHops = 0, lastStatus: number | null = null, lastUrl: string | undefined;
   try {
@@ -58,7 +58,7 @@ export async function fetchXml(raw: string, timeoutMs = 8000, maxBytes = MAX_BYT
     const pinnedLookup: LookupFunction = (_host, options, callback) => {
       if (options.all) callback(null, [pinned]); else callback(null, pinned.address, pinned.family);
     };
-    const response = await new Promise<{ status: number; body: Buffer; location?: string; encoding?: string; retryAfter?: string }>((resolve, reject) => {
+    const response = await new Promise<{ status: number; body: Buffer; location?: string; encoding?: string; retryAfter?: string; contentType?: string }>((resolve, reject) => {
       requestedHops++; lastUrl = url.href; lastStatus = null;
       const request = (url.protocol === 'https:' ? httpsRequest : httpRequest)(url, {
         lookup: pinnedLookup, agent: false,
@@ -71,13 +71,18 @@ export async function fetchXml(raw: string, timeoutMs = 8000, maxBytes = MAX_BYT
           resolve({ status, body: Buffer.alloc(0), location: response.headers.location, retryAfter: response.headers['retry-after'] });
           return;
         }
+        const contentType = response.headers['content-type'];
+        const contentTypeCount = response.rawHeaders?.filter((name, index) => index % 2 === 0 && name.toLowerCase() === 'content-type').length ?? 0;
+        if (contentTypeCount > 1 || contentType !== undefined && typeof contentType !== 'string') {
+          response.destroy(); reject(new Error('INVALID_XML')); return;
+        }
         const chunks: Buffer[] = []; let length = 0;
         response.on('data', (chunk: Buffer) => {
           length += chunk.length;
           if (length > maxBytes) request.destroy(new Error('BODY_TOO_LARGE')); else chunks.push(chunk);
         });
         response.on('error', reject);
-        response.on('end', () => resolve({ status, body: Buffer.concat(chunks), encoding: response.headers['content-encoding'] }));
+        response.on('end', () => resolve({ status, body: Buffer.concat(chunks), encoding: response.headers['content-encoding'], contentType }));
       });
       const timer = setTimeout(() => request.destroy(new Error('TIMEOUT')), Math.max(1, deadline - Date.now()));
       request.on('close', () => clearTimeout(timer));
@@ -92,7 +97,7 @@ export async function fetchXml(raw: string, timeoutMs = 8000, maxBytes = MAX_BYT
     let body = response.body;
     if (response.encoding && !['identity', 'gzip'].includes(response.encoding)) throw new Error('UNSUPPORTED_ENCODING');
     if (response.encoding === 'gzip' || (body[0] === 0x1f && body[1] === 0x8b)) body = gunzipSync(body, { maxOutputLength: maxBytes });
-    return { status: response.status, body, finalUrl: url.href, requestedHops, ...(response.retryAfter ? { retryAfter: response.retryAfter } : {}) };
+    return { status: response.status, body, finalUrl: url.href, requestedHops, ...(response.retryAfter ? { retryAfter: response.retryAfter } : {}), ...(response.contentType !== undefined ? { contentType: response.contentType } : {}) };
     } finally { release(); }
   }
   throw new Error('TOO_MANY_REDIRECTS');
@@ -110,7 +115,7 @@ export async function checkEndpoint(endpoint: Endpoint): Promise<Observation> {
     const response = await fetchXml(endpoint.url);
     httpStatus = response.status;
     if (httpStatus < 200 || httpStatus >= 300) throw new Error(`HTTP_${httpStatus}`);
-    format = validateXml(response.body, endpoint.type);
+    format = validateXml(response.body, endpoint.type, response.contentType);
   } catch (error) {
     // Store only a finite reason code, never arbitrary server body, URL credentials or network error text.
     const message = error instanceof Error ? error.message : '';

@@ -32,7 +32,39 @@ function requireEncoding(declared: string | undefined, expected: 'utf-8' | 'utf-
   throw new Error('UNSUPPORTED_ENCODING');
 }
 
-function decodeXml(buffer: Buffer): string {
+function xmlMimeEncoding(contentType: string | undefined): string | undefined {
+  if (contentType === undefined) return;
+  if (typeof contentType !== 'string' || /[^\t\x20-\x7e]/.test(contentType)) throw new Error('INVALID_XML');
+  const media = /^[ \t]*([!#$%&'*+.^_`|~0-9A-Za-z-]+)\/([!#$%&'*+.^_`|~0-9A-Za-z-]+)/.exec(contentType);
+  if (!media) throw new Error('INVALID_XML');
+  const type = `${media[1]}/${media[2]}`.toLowerCase();
+  const isXml = type === 'application/xml' || type === 'text/xml' || media[2].toLowerCase().endsWith('+xml');
+  // RFC 9110 permits empty semicolon parameters, but no whitespace around '='.
+  const parameter = /[ \t]*;[ \t]*(?:([!#$%&'*+.^_`|~0-9A-Za-z-]+)=([!#$%&'*+.^_`|~0-9A-Za-z-]+|"(?:[^"\\\r\n]|\\[\t\x20-\x7e])*"))?/y;
+  const names = new Set<string>(); let index = media[0].length; let charset: string | undefined;
+  while (contentType.slice(index).trim()) {
+    parameter.lastIndex = index;
+    const part = parameter.exec(contentType);
+    if (!part) throw new Error('INVALID_XML');
+    index = parameter.lastIndex;
+    const name = part[1]?.toLowerCase();
+    if (!name) continue;
+    if (names.has(name) || name === 'charset*') throw new Error('INVALID_XML');
+    names.add(name);
+    const value = part[2].startsWith('"') ? part[2].slice(1, -1).replace(/\\([\t\x20-\x7e])/g, '$1') : part[2];
+    if (name === 'charset') {
+      if (!/^[A-Za-z][A-Za-z0-9._-]*$/.test(value)) throw new Error('INVALID_XML');
+      charset = value.toLowerCase();
+    }
+  }
+  // Only XML media types can provide an external XML character encoding.
+  if (!isXml) return;
+  if (charset && !['utf-8', 'utf-16', 'iso-8859-1'].includes(charset)) throw new Error('UNSUPPORTED_ENCODING');
+  return charset;
+}
+
+function decodeXml(buffer: Buffer, contentType?: string): string {
+  const external = xmlMimeEncoding(contentType);
   const starts = (...bytes: number[]) => bytes.every((byte, index) => buffer[index] === byte);
   // Recognize unsupported UCS-4 signatures before their UTF-16 prefixes.
   if (starts(0, 0, 0xfe, 0xff) || starts(0xff, 0xfe, 0, 0) ||
@@ -41,6 +73,7 @@ function decodeXml(buffer: Buffer): string {
     const xml = decodeStrict(buffer.subarray(2), buffer[0] === 0xff ? 'utf-16le' : 'utf-16be');
     if (xml.startsWith('\uFEFF')) throw new Error('INVALID_XML');
     requireEncoding(declaredEncoding(xml), 'utf-16');
+    requireEncoding(external, 'utf-16');
     return xml;
   }
   const utf8Bom = starts(0xef, 0xbb, 0xbf);
@@ -49,22 +82,26 @@ function decodeXml(buffer: Buffer): string {
   // only that prolog before choosing the strict decoder for the entire body.
   const end = body.indexOf('?>');
   const declared = end < 0 ? undefined : declaredEncoding(body.subarray(0, end + 2).toString('latin1'));
-  if (utf8Bom) requireEncoding(declared, 'utf-8');
-  else if (declared === 'iso-8859-1') {
+  if (declared && !['utf-8', 'utf-16', 'iso-8859-1'].includes(declared)) throw new Error('UNSUPPORTED_ENCODING');
+  // RFC 7303 defines MIME charset as authoritative without a BOM. This
+  // collector deliberately holds conflicting signals instead of overriding one.
+  if (external && declared && external !== declared) throw new Error('INVALID_XML');
+  const encoding = external ?? declared ?? 'utf-8';
+  if (utf8Bom) { requireEncoding(declared, 'utf-8'); requireEncoding(external, 'utf-8'); }
+  else if (encoding === 'iso-8859-1') {
     // WHATWG TextDecoder maps this label to Windows-1252. Buffer's latin1
     // conversion instead preserves the exact ISO-8859-1 byte-to-codepoint map.
     return body.toString('latin1');
-  } else if (declared === 'utf-16') throw new Error('INVALID_XML'); // UTF-16 needs a BOM.
-  else if (declared && declared !== 'utf-8') throw new Error('UNSUPPORTED_ENCODING');
+  } else if (encoding === 'utf-16') throw new Error('INVALID_XML'); // UTF-16 needs a BOM.
   const xml = decodeStrict(body, 'utf-8');
   if (xml.startsWith('\uFEFF')) throw new Error('INVALID_XML');
   return xml;
 }
 
 // Extract counts, a few URLs and dates only. No article text is retained.
-export function inspectXml(buffer: Buffer, type: EndpointType, now = Date.now(), maxBytes = 2 * 1024 * 1024, fullUrls = false): XmlSummary {
+export function inspectXml(buffer: Buffer, type: EndpointType, now = Date.now(), maxBytes = 2 * 1024 * 1024, fullUrls = false, contentType?: string): XmlSummary {
   if (buffer.length > maxBytes) throw new Error('BODY_TOO_LARGE');
-  const xml = decodeXml(buffer);
+  const xml = decodeXml(buffer, contentType);
   const parser = new SaxesParser({ xmlns: true });
   const stack: string[] = []; const fields = new Map<string, string>();
   let root = ''; let namespace = ''; let channel = false;

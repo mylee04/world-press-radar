@@ -20,7 +20,7 @@ export async function auditEndpoint(endpoint: Endpoint, gate?: RequestGate, full
     requestedHops = response.requestedHops;
     if (status >= 400) retryAfter = parseRetryAfter(response.retryAfter);
     if (status < 200 || status >= 300) throw new Error(`HTTP_${status}`);
-    summary = inspectXml(response.body, endpoint.type, Date.now(), maxBytes, fullUrls);
+    summary = inspectXml(response.body, endpoint.type, Date.now(), maxBytes, fullUrls, response.contentType);
     auditStatus = summary.entryCount ? 'working_nonempty' : 'valid_empty';
   } catch (error) {
     const message = error instanceof Error ? error.message : '';

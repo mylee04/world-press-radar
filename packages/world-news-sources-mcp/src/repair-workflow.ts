@@ -14,7 +14,7 @@ export type CollectorRecoveryEvidence = {
   run_id: string; completed_at: string; successful: boolean; baseline: boolean;
   first_discovered_urls: number | null; newest_content_at: string | null;
 };
-export type RepairFetch = (url: string, timeoutMs: number, maxBytes: number) => Promise<{ status: number; body: Buffer; finalUrl: string }>;
+export type RepairFetch = (url: string, timeoutMs: number, maxBytes: number) => Promise<{ status: number; body: Buffer; finalUrl: string; contentType?: string }>;
 export type RepairWorkflowOptions = {
   directory: string; registryPath: string; allowedRegistryRoot: string;
   authorizeMutation?: (principal: RepairPrincipal) => boolean;
@@ -277,7 +277,7 @@ export class RepairWorkflowStore {
       // remain candidates for human investigation, never an approved replacement.
       if (new URL(final).hostname !== new URL(candidate.url).hostname) throw Error('CANDIDATE_REDIRECT_NOT_DECLARED');
       if (status < 200 || status >= 300) throw Error(`HTTP_${status}`);
-      const summary = inspectXml(response.body, candidate.type, this.now().getTime());
+      const summary = inspectXml(response.body, candidate.type, this.now().getTime(), undefined, undefined, response.contentType);
       return { ...candidate, endpoint_id: stableId('ep', [candidate.type, candidate.url]), validation: {
         checked_at: this.now().toISOString(), status: 'valid', http_status: status, final_url: final, reason: null,
         format: summary.format, entries_with_url: summary.entriesWithUrl, newest_content_at: summary.newestContentAt,

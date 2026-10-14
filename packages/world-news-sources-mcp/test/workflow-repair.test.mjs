@@ -94,6 +94,28 @@ test('discovery records provenance and actual XML/date evidence without modifyin
   assert.equal(reloaded.list().total, 1);
 });
 
+test('repair candidate validation honors explicit XML MIME charset without weakening metadata or changing registry', async t => {
+  const f = fixture(t), original = readFileSync(f.registryPath);
+  const xml = feed().toString('utf8').replace('<title>News</title>', '<title>Caf\u00e9</title>').replace('/articles/one', '/articles/caf\u00e9');
+  const response = { status: 200, body: Buffer.from(xml, 'latin1'), finalUrl: 'https://publisher.example/new.xml', contentType: 'text/xml; charset=ISO-8859-1' };
+  f.state.responses.set('https://publisher.example/new.xml', response);
+  const valid = await f.store.discover(f.request);
+  assert.equal(valid.state, 'proposal_ready');
+  assert.equal(valid.proposal.content.candidate.validation.entries_with_url, 1);
+  assert.deepEqual(readFileSync(f.registryPath), original);
+  for (const invalid of [
+    { ...response, contentType: undefined },
+    { ...response, body: Buffer.from('<?xml version="1.0" encoding="UTF-8"?>' + xml, 'latin1') },
+    { ...response, body: Buffer.from(xml.replace('<title>Caf\u00e9</title>', '<title/>'), 'latin1') },
+  ]) {
+    f.state.responses.set('https://publisher.example/new.xml', invalid);
+    const held = await f.store.discover(f.request);
+    assert.equal(held.proposal, null);
+    assert.equal(held.candidates[0].validation.status, 'invalid');
+    assert.deepEqual(readFileSync(f.registryPath), original);
+  }
+});
+
 test('official and candidate cross-host redirects do not become approved replacements', async t => {
   const f = fixture(t);
   f.state.responses.set('https://publisher.example/', { status: 200, body: Buffer.from('<link rel="alternate" type="application/rss+xml" href="/new.xml">'), finalUrl: 'https://unrelated.example/' });
