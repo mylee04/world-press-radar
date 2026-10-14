@@ -11,6 +11,7 @@ const registrySchema = z.object({
     code: z.string().trim().min(2).max(8), name: text,
     feeds: z.array(z.object({
       name: text, url, sitemapUrl: url, row: z.number().int().optional(),
+      persistent_source_id: z.string().regex(/^src_[a-f0-9]{24}$/).optional(),
       enabled: z.boolean().optional(), category: z.string().max(256).optional(),
       language: z.string().max(128).optional(), tier: z.union([z.string(), z.number()]).optional(),
       ...statusFields,
@@ -46,6 +47,8 @@ export type Catalog = {
 export function normalizeRegistry(input: unknown): Catalog {
   const registry = registrySchema.parse(input);
   const sources = new Map<string, Source>();
+  const identities = new Map<string, string>();
+  const identityOwners = new Map<string, string>();
   const endpoints = new Map<string, Endpoint>();
   const countries = new Map<string, Catalog['countries'][number]>();
   let configuredRows = 0;
@@ -63,7 +66,14 @@ export function normalizeRegistry(input: unknown): Catalog {
         endpoints.set(endpoint.id, endpoint);
         list.push(endpoint);
       }
-      const id = stableId('src', [code, feed.name.normalize('NFKC').toLowerCase(), ...list.map(e => e.id).sort()]);
+      const identityParts = [code, feed.name.normalize('NFKC').toLowerCase(), ...list.map(e => e.id).sort()];
+      const identity = JSON.stringify(identityParts);
+      // Legacy rows keep their existing IDs. An approved endpoint repair can retain
+      // that ID so healthy sibling bindings and recorded source history stay linked.
+      const id = feed.persistent_source_id ?? stableId('src', identityParts);
+      if (identities.has(id) && identities.get(id) !== identity) throw Error('REGISTRY_SOURCE_IDENTITY_CONFLICT');
+      if (identityOwners.has(identity) && identityOwners.get(identity) !== id) throw Error('REGISTRY_DUPLICATE_SOURCE_IDENTITY');
+      identities.set(id, identity); identityOwners.set(identity, id);
       const previous = sources.get(id);
       const status = statusMetadata(feed);
       if (previous) {

@@ -18,6 +18,39 @@ test('both typed endpoints survive; duplicate registrations merge and IDs surviv
   const sameUrl = normalizeRegistry({ countries: [{ code: 'US', name: 'US', feeds: [{name:'Same',url:'https://example.com/xml',sitemapUrl:'https://example.com/xml'}] }] });
   assert.notEqual(sameUrl.sources[0].endpoints[0].id, sameUrl.sources[0].endpoints[1].id);
 });
+test('persistent source identity preserves the legacy ID across an endpoint repair', () => {
+  const raw = { countries: [{ code: 'US', name: 'US', feeds: [
+    { name: 'Publisher', url: 'https://publisher.example/rss.xml', sitemapUrl: 'https://publisher.example/old-map.xml' },
+  ] }] };
+  const oldSource = normalizeRegistry(raw).sources[0];
+  assert.equal(oldSource.id, 'src_5a079d4a7f67fbf34862a761');
+  const repaired = structuredClone(raw);
+  repaired.countries[0].feeds[0].persistent_source_id = oldSource.id;
+  repaired.countries[0].feeds[0].sitemapUrl = 'https://publisher.example/new-map.xml';
+  repaired.countries[0].feeds.push({ ...repaired.countries[0].feeds[0] });
+  const source = normalizeRegistry(repaired).sources[0];
+  assert.equal(source.id, oldSource.id);
+  assert.equal(source.registrationCount, 2);
+  assert.equal(source.endpoints[0].id, oldSource.endpoints[0].id);
+  assert.notEqual(source.endpoints[1].id, oldSource.endpoints[1].id);
+});
+test('persistent source IDs reject malformed values and unlike registrations claiming one identity', () => {
+  const feed = { name: 'Publisher', url: 'https://publisher.example/rss.xml', persistent_source_id: 'src_' + 'a'.repeat(24) };
+  const registryOf = feeds => ({ countries: [{ code: 'US', name: 'US', feeds }] });
+  for (const id of ['src_short', 'src_' + 'A'.repeat(24), ' src_' + 'a'.repeat(24), null])
+    assert.throws(() => normalizeRegistry(registryOf([{ ...feed, persistent_source_id: id }])));
+  for (const patch of [{ name: 'Other Publisher' }, { url: 'https://publisher.example/other.xml' }, { sitemapUrl: 'https://publisher.example/map.xml' }])
+    assert.throws(() => normalizeRegistry(registryOf([feed, { ...feed, ...patch }])), /REGISTRY_SOURCE_IDENTITY_CONFLICT/);
+  assert.throws(() => normalizeRegistry({ countries: [
+    { code: 'US', name: 'US', feeds: [feed] }, { code: 'CA', name: 'Canada', feeds: [feed] },
+  ] }), /REGISTRY_SOURCE_IDENTITY_CONFLICT/);
+});
+test('equivalent registrations cannot be split between different persistent and legacy IDs', () => {
+  const legacy = { name: 'Publisher', url: 'https://publisher.example/rss.xml' };
+  const explicit = { ...legacy, persistent_source_id: 'src_' + 'a'.repeat(24) };
+  for (const feeds of [[legacy, explicit], [explicit, legacy]])
+    assert.throws(() => normalizeRegistry({ countries: [{ code: 'US', name: 'US', feeds }] }), /REGISTRY_DUPLICATE_SOURCE_IDENTITY/);
+});
 test('filtering, pagination, disabled rows and empty sources', () => {
   const catalog = normalizeRegistry(registry);
   const first = search(catalog, {limit:2});

@@ -6,6 +6,9 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { RepairWorkflowStore, officialDeclarations } from '../dist/repair-workflow.js';
 import { normalizeRegistry } from '../dist/catalog.js';
+import { ActivityLedger, collectionId } from '../dist/activity-ledger.js';
+import { ActivityStore } from '../dist/activity.js';
+import { QualityHistoryStore } from '../dist/quality-history.js';
 
 const principal = { actor_id: 'operator', session_id: 'verified-session' };
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -80,6 +83,7 @@ test('discovery records provenance and actual XML/date evidence without modifyin
   assert.equal(result.proposal.content.affected_registration_rows, 2);
   assert.equal(result.proposal.content.old_url, 'https://publisher.example/old.xml');
   assert.equal(result.proposal.content.new_url, 'https://publisher.example/new.xml');
+  assert.equal(result.proposal.content.new_source_id, f.source.id);
   assert.equal(result.proposal.content.candidate.validation.entries_with_url, 1);
   assert.equal(result.proposal.content.candidate.validation.content_freshness, 'recent');
   assert.deepEqual(readFileSync(f.registryPath), original);
@@ -150,6 +154,7 @@ test('approved transaction replaces all duplicate rows and separate rollback con
   const registry = JSON.parse(readFileSync(f.registryPath, 'utf8'));
   assert.ok(registry.countries[0].feeds.every(row => row.url === proposal.content.new_url));
   assert.ok(registry.countries[0].feeds.every(row => row.registry_added_at === '2026-01-01T00:00:00Z'));
+  assert.ok(registry.countries[0].feeds.every(row => row.persistent_source_id === f.source.id));
   assert.equal(result.deployed, false);
   assert.equal(result.registry_reload_required, true);
   assert.equal(result.proposal.applied_registry_hash, digest(readFileSync(f.registryPath)));
@@ -260,7 +265,7 @@ test('replacement identity preserves other endpoint bindings when publisher name
   const raw = JSON.parse(readFileSync(f.registryPath, 'utf8'));
   raw.countries[0].feeds = [
     { name: 'Publisher', url: 'https://publisher.example/old.xml', sitemapUrl: 'https://publisher.example/original-map.xml' },
-    { name: 'Publisher', url: 'https://publisher.example/new.xml', sitemapUrl: 'https://publisher.example/other-map.xml' },
+    { name: 'Publisher', url: 'https://publisher.example/other-feed.xml', sitemapUrl: 'https://publisher.example/other-map.xml' },
   ];
   writeFileSync(f.registryPath, JSON.stringify(raw) + '\n');
   const source = normalizeRegistry(raw).sources.find(item => item.endpoints.some(ep => ep.url.endsWith('/old.xml')));
@@ -272,4 +277,111 @@ test('replacement identity preserves other endpoint bindings when publisher name
   const changedSource = next.sources.find(item => item.id === proposal.content.new_source_id);
   assert.equal(changedSource.endpoints.find(ep => ep.type === 'sitemap').url, 'https://publisher.example/original-map.xml');
   assert.equal(next.sources.length, 2);
+});
+
+test('already configured candidate is held without an XML request or duplicate repair proposal', async t => {
+  const f = fixture(t), raw = JSON.parse(readFileSync(f.registryPath, 'utf8'));
+  raw.countries[0].feeds.push({ name: 'Publisher', url: 'https://publisher.example/new.xml', enabled: false });
+  writeFileSync(f.registryPath, JSON.stringify(raw) + '\n');
+  const result = await f.store.discover(f.request);
+  assert.equal(result.proposal, null);
+  assert.deepEqual(result.candidates, []);
+  assert.equal(result.held_candidates[0].reason, 'ALREADY_CONFIGURED_ENDPOINT');
+  assert.ok(!f.state.calls.some(call => call.url === 'https://publisher.example/new.xml'));
+  await assert.rejects(f.store.discover({ ...f.request, candidate_url: 'https://publisher.example/new.xml' }), /WORKFLOW_CANDIDATE_ALREADY_CONFIGURED/);
+});
+
+test('older identity-changing proposals require rediscovery before any registry mutation', async t => {
+  const f = fixture(t), { proposal } = await f.store.discover(f.request);
+  const path = join(f.settings.directory, `${proposal.content.proposal_id}.json`);
+  const legacy = JSON.parse(readFileSync(path, 'utf8'));
+  legacy.content.new_source_id = 'src_' + 'b'.repeat(24);
+  legacy.proposal_digest = digest(JSON.stringify(legacy.content));
+  writeFileSync(path, JSON.stringify(legacy));
+  const { approval } = f.store.approve(approvalRequest(legacy), principal);
+  const original = readFileSync(f.registryPath);
+  assert.throws(() => f.store.apply(applyRequest(legacy, approval), principal), /WORKFLOW_PROPOSAL_REQUIRES_REDISCOVERY/);
+  assert.deepEqual(readFileSync(f.registryPath), original);
+});
+
+test('sequential endpoint repairs keep the same source identity and use the latest registry hash', async t => {
+  const f = fixture(t), raw = JSON.parse(readFileSync(f.registryPath, 'utf8'));
+  raw.countries[0].feeds = raw.countries[0].feeds.map(row => ({ ...row, sitemapUrl: 'https://publisher.example/old-map.xml' }));
+  writeFileSync(f.registryPath, JSON.stringify(raw) + '\n');
+  const source = normalizeRegistry(raw).sources[0];
+  const first = await f.store.discover({ ...f.request, source_id: source.id, endpoint_id: source.endpoints.find(endpoint => endpoint.type === 'rss').id });
+  const firstApproval = f.store.approve(approvalRequest(first.proposal), principal);
+  const firstApplied = f.store.apply(applyRequest(first.proposal, firstApproval.approval), principal);
+  f.state.responses.set('https://publisher.example/sitemap.xml', { status: 200, finalUrl: 'https://publisher.example/sitemap.xml',
+    body: Buffer.from('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://publisher.example/articles/new-map</loc><lastmod>2026-10-13T11:30:00Z</lastmod></url></urlset>') });
+  const second = await f.store.discover({ ...f.request, source_id: source.id, endpoint_id: source.endpoints.find(endpoint => endpoint.type === 'sitemap').id });
+  assert.equal(second.proposal.content.source_id, source.id);
+  assert.equal(second.proposal.content.new_source_id, source.id);
+  assert.equal(second.proposal.content.registry_hash, firstApplied.proposal.applied_registry_hash);
+  assert.notEqual(second.proposal.content.registry_hash, first.proposal.content.registry_hash);
+  const secondApproval = f.store.approve(approvalRequest(second.proposal), principal);
+  f.store.apply(applyRequest(second.proposal, secondApproval.approval), principal);
+  const finalRaw = JSON.parse(readFileSync(f.registryPath, 'utf8')), finalSource = normalizeRegistry(finalRaw).sources[0];
+  assert.equal(finalSource.id, source.id); assert.equal(finalSource.registrationCount, 2);
+  assert.ok(finalRaw.countries[0].feeds.every(row => row.persistent_source_id === source.id && row.url === first.proposal.content.new_url
+    && row.sitemapUrl === second.proposal.content.new_url && row.registry_added_at === '2026-01-01T00:00:00Z'));
+});
+
+test('approved sitemap repair preserves healthy sibling bindings, source history and activation metadata', async t => {
+  const f = fixture(t), raw = JSON.parse(readFileSync(f.registryPath, 'utf8'));
+  const activation = { enabled: true, enabled_changed_at: '2026-01-02T00:00:00.000Z', status_reason: 'Operator reactivated',
+    status_history: [{ old_enabled: false, new_enabled: true, changed_at: '2026-01-02T00:00:00.000Z', reason: 'Operator reactivated' }],
+    status_transition_count: 1 };
+  raw.countries[0].feeds = raw.countries[0].feeds.map(row => ({ ...row, url: 'https://publisher.example/healthy.xml',
+    sitemapUrl: 'https://publisher.example/old-map.xml', ...activation }));
+  writeFileSync(f.registryPath, JSON.stringify(raw) + '\n');
+  const before = normalizeRegistry(raw), source = before.sources[0];
+  const rss = source.endpoints.find(endpoint => endpoint.type === 'rss');
+  const oldMap = source.endpoints.find(endpoint => endpoint.type === 'sitemap');
+  const ledger = new ActivityLedger(':memory:'), history = new QualityHistoryStore(':memory:');
+  t.after(() => { history.close(); ledger.close(); });
+  const start = '2026-10-13T10:00:00.000Z';
+  ledger.acquire('writer', start, 10800); ledger.syncRegistry(before, start);
+  const visit = (endpoint, boundSource, at, urls, status = 'working_nonempty') => ledger.commit({
+    id: collectionId(endpoint.id, at, urls), endpoint, checked_at: at, status, format: endpoint.type === 'rss' ? 'rss' : 'urlset',
+    reason: status === 'http_error' ? 'HTTP_404' : null, http_status: status === 'http_error' ? 404 : 200, urls, traffic: 'production',
+  }, [boundSource], 'writer', at);
+  visit(rss, source, start, ['https://publisher.example/articles/archive']);
+  visit(rss, source, '2026-10-13T10:01:00.000Z', ['https://publisher.example/articles/before-repair']);
+  visit(oldMap, source, '2026-10-13T10:02:00.000Z', [], 'http_error');
+  history.observeCatalog(before, start, start);
+  const siblingBefore = ledger.db.prepare('SELECT * FROM bindings WHERE source_id=? AND endpoint_id=?').get(source.id, rss.id);
+  const oldBindingBefore = ledger.db.prepare('SELECT * FROM bindings WHERE source_id=? AND endpoint_id=?').get(source.id, oldMap.id);
+  const historyBefore = ledger.db.prepare('SELECT * FROM collections ORDER BY checked_at,id').all();
+  f.state.responses.set('https://publisher.example/sitemap.xml', { status: 200, finalUrl: 'https://publisher.example/sitemap.xml',
+    body: Buffer.from('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://publisher.example/articles/new-map</loc><lastmod>2026-10-13T11:30:00Z</lastmod></url></urlset>') });
+  const { proposal } = await f.store.discover({ ...f.request, source_id: source.id, endpoint_id: oldMap.id });
+  assert.equal(proposal.content.new_source_id, source.id);
+  const { approval } = f.store.approve(approvalRequest(proposal), principal);
+  f.store.apply(applyRequest(proposal, approval), principal);
+  const updatedRaw = JSON.parse(readFileSync(f.registryPath, 'utf8'));
+  for (const [i, row] of updatedRaw.countries[0].feeds.entries()) {
+    assert.deepEqual(row, { ...raw.countries[0].feeds[i], persistent_source_id: source.id, sitemapUrl: proposal.content.new_url });
+  }
+  const after = normalizeRegistry(updatedRaw), repairedSource = after.sources[0];
+  assert.equal(repairedSource.id, source.id);
+  const change = history.observeCatalog(after, '2026-10-13T12:00:01.000Z', '2026-10-13T12:00:01.000Z');
+  assert.deepEqual({ added: change.added, removed: change.removed, reactivated: change.reactivated, deactivated: change.deactivated },
+    { added: 0, removed: 0, reactivated: 0, deactivated: 0 });
+  ledger.syncRegistry(after, '2026-10-13T12:00:01.000Z');
+  assert.deepEqual(ledger.db.prepare('SELECT * FROM bindings WHERE source_id=? AND endpoint_id=?').get(source.id, rss.id), siblingBefore);
+  assert.deepEqual(ledger.db.prepare('SELECT * FROM bindings WHERE source_id=? AND endpoint_id=?').get(source.id, oldMap.id), oldBindingBefore);
+  assert.deepEqual(ledger.db.prepare('SELECT * FROM collections ORDER BY checked_at,id').all(), historyBefore);
+  const newMap = repairedSource.endpoints.find(endpoint => endpoint.type === 'sitemap');
+  assert.equal(ledger.db.prepare('SELECT baseline_at FROM bindings WHERE source_id=? AND endpoint_id=?').get(source.id, newMap.id).baseline_at, null);
+  const baseline = visit(newMap, repairedSource, '2026-10-13T12:01:00.000Z', ['https://publisher.example/articles/map-archive']);
+  assert.deepEqual(baseline.baseline_sources, [source.id]);
+  assert.equal(baseline.source_new[source.id], 0); assert.equal(baseline.country_new.KR, 0);
+  const next = visit(rss, repairedSource, '2026-10-13T12:02:00.000Z', ['https://publisher.example/articles/after-repair']);
+  assert.deepEqual(next.baseline_sources, []);
+  assert.equal(next.source_new[source.id], 1);
+  const snapshot = ledger.snapshot(after, '2026-10-13T12:03:00.000Z');
+  const activity = new ActivityStore(snapshot).query(after, 'source', { source_id: source.id, start_date: '2026-10-13', end_date: '2026-10-13' }, Date.parse('2026-10-13T12:03:00.000Z'));
+  assert.equal(activity.scope_tracking_start, start);
+  assert.equal(activity.items[0].new_unique_candidate_urls, 2);
 });

@@ -25,7 +25,7 @@ for (const dir of ['api', 'dist', 'metadata', 'public']) mkdirSync(new URL(`${di
 const writeJson = (path, value) => writeFileSync(new URL(path, output), JSON.stringify(value) + '\n');
 const raw = readMetadata(registryPath);
 normalizeRegistry(raw); // Validate before preparing any upload.
-const fields = ['name', 'url', 'sitemapUrl', 'row', 'enabled', 'category', 'language', 'tier', 'enabled_changed_at', 'status_reason', 'status_history', 'status_transition_count', 'registry_addition_batch', 'source_homepage', 'endpoint_provenance'];
+const fields = ['name', 'url', 'sitemapUrl', 'persistent_source_id', 'row', 'enabled', 'category', 'language', 'tier', 'enabled_changed_at', 'status_reason', 'status_history', 'status_transition_count', 'registry_addition_batch', 'source_homepage', 'endpoint_provenance'];
 const registry = { countries: raw.countries.map(country => ({ code: country.code, name: country.name,
   feeds: country.feeds.map(feed => Object.fromEntries(fields.filter(key => feed[key] !== undefined).map(key => [key, feed[key]]))),
 })) };

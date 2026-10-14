@@ -69,7 +69,9 @@ export function inspectXml(buffer: Buffer, type: EndpointType, now = Date.now(),
   parser.on('text', text); parser.on('cdata', text);
   parser.on('closetag', () => {
     if (active?.depth === stack.length) {
-      if (active.kind === 'field') fields.set(active.name, active.value);
+      // A blank duplicate (for example an unnamespaced self-link) must not
+      // erase usable channel metadata that appeared earlier in the feed.
+      if (active.kind === 'field' && (!fields.has(active.name) || active.value.trim())) fields.set(active.name, active.value);
       if (active.kind === 'url') recordUrl(active.value, ['urlset', 'sitemapindex'].includes(root));
       if (active.kind === 'date') recordDate(active.value);
       active = null;
@@ -84,9 +86,11 @@ export function inspectXml(buffer: Buffer, type: EndpointType, now = Date.now(),
   const has = (keys: string[]) => keys.every(k => fields.get(k)?.trim());
   let format: XmlSummary['format'] | null = null;
   if (type === 'rss') {
-    if (root === 'rss' && namespace === '' && channel && has(['title', 'link', 'description'])) format = 'rss';
+    // RSS requires the description element. Its text may be empty; this is
+    // format recognition, while title/link still need usable text.
+    if (root === 'rss' && namespace === '' && channel && has(['title', 'link']) && fields.has('description')) format = 'rss';
     if (root === 'feed' && namespace === atomNs && has(['title', 'id', 'updated']) && Number.isFinite(Date.parse(fields.get('updated')!))) format = 'atom';
-    if (root === 'RDF' && namespace === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' && has(['title', 'link', 'description'])) format = 'rdf';
+    if (root === 'RDF' && namespace === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' && has(['title', 'link']) && fields.has('description')) format = 'rdf';
   } else if (['urlset', 'sitemapindex'].includes(root) && namespace === sitemapNs) format = root as XmlSummary['format'];
   if (!format) throw new Error('WRONG_ENDPOINT_FORMAT');
   return { format, entryCount, entriesWithUrl, sampleUrls, newestContentAt: newest ? new Date(newest).toISOString() : null,

@@ -7,9 +7,10 @@ import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { encodeHistory } from '../dist/activity-history.js';
+import { normalizeRegistry } from '../dist/catalog.js';
 import { collectBundle } from '../scripts/deploy-project-api.mjs';
 
-test('Vercel preparation uses the explicit production metadata and its sibling verified history', async t => {
+test('Vercel preparation retains repaired source identity with explicit metadata and verified history', async t => {
   const packageRoot = fileURLToPath(new URL('../', import.meta.url));
   const directory = mkdtempSync(join(tmpdir(), 'wns-vercel-fresh-'));
   t.after(() => rmSync(directory, { recursive: true, force: true }));
@@ -17,13 +18,23 @@ test('Vercel preparation uses the explicit production metadata and its sibling v
   for (const file of ['package.json', 'package-lock.json']) cpSync(join(packageRoot, file), join(directory, file));
   symlinkSync(join(packageRoot, 'node_modules'), join(directory, 'node_modules'), 'dir');
   const staged = join(directory, 'fresh'); mkdirSync(join(staged, 'history'), { recursive: true });
+  const originalRegistry = { countries: [{ code: 'US', name: 'United States', feeds: [
+    { name: 'Fresh production fixture', url: 'https://publisher.example/before-repair', enabled: true },
+    { name: 'Unchanged legacy fixture', url: 'https://legacy.example/rss', enabled: true },
+  ] }] };
+  const originalCatalog = normalizeRegistry(originalRegistry), originalSource = originalCatalog.sources.find(source => source.name === 'Fresh production fixture');
+  const repairedRegistry = structuredClone(originalRegistry);
+  Object.assign(repairedRegistry.countries[0].feeds[0], {
+    url: 'https://publisher.example/fresh', persistent_source_id: originalSource.id,
+    private_operator_note: 'Must not enter the public registry metadata',
+  });
   const record = { checked_at: '2026-10-13T03:53:00.000Z', endpoint_id: 'fresh-endpoint', status: 'working_nonempty', format: 'rss', uncertain_urls: 0,
-    baseline_sources: [], source_new: { fresh: 4 }, country_new: { US: 4 }, newest_content_at: '2026-10-13T03:30:00.000Z', date_kind: 'feed_item_date' };
+    baseline_sources: [], source_new: { [originalSource.id]: 4 }, country_new: { US: 4 }, newest_content_at: '2026-10-13T03:30:00.000Z', date_kind: 'feed_item_date' };
   const bytes = encodeHistory([record]), sha256 = createHash('sha256').update(bytes).digest('hex');
   const shard = { month: '2026-10', file: `2026-10-${sha256}.json.gz`, sha256, bytes: bytes.length, records: 1 };
   writeFileSync(join(staged, 'history', shard.file), bytes);
   const metadata = {
-    registry: { countries: [{ code: 'US', name: 'United States', feeds: [{ name: 'Fresh production fixture', url: 'https://publisher.example/fresh', enabled: true }] }] },
+    registry: repairedRegistry,
     legacy: { results: [{ countryCode: 'US', outlet: 'Fresh production fixture', url: 'https://publisher.example/fresh', checkedAt: record.checked_at, valid: true, httpCode: 200 }] },
     health: { version: 1, observations: [] },
     activity: { version: 1, lane: 'production', snapshot_at: record.checked_at, collections: [], history: { version: 1, complete: true, shards: [shard] } },
@@ -35,6 +46,15 @@ test('Vercel preparation uses the explicit production metadata and its sibling v
   const bundle = join(directory, '.deploy-vercel');
   const registry = JSON.parse(readFileSync(join(bundle, 'metadata/registry.json'), 'utf8'));
   assert.equal(registry.countries[0].feeds[0].name, 'Fresh production fixture');
+  assert.equal(registry.countries[0].feeds[0].persistent_source_id, originalSource.id);
+  assert.ok(!Object.hasOwn(registry.countries[0].feeds[0], 'private_operator_note'));
+  const publicCatalog = normalizeRegistry(registry);
+  const publicSource = publicCatalog.sources.find(source => source.name === 'Fresh production fixture');
+  assert.equal(publicSource.id, originalSource.id, 'old saved source activity must remain linked after public export');
+  assert.equal(publicSource.endpoints[0].url, 'https://publisher.example/fresh');
+  assert.equal(publicCatalog.sources.find(source => source.name === 'Unchanged legacy fixture').id,
+    originalCatalog.sources.find(source => source.name === 'Unchanged legacy fixture').id);
+  assert.ok(!Object.hasOwn(registry.countries[0].feeds[1], 'persistent_source_id'));
   assert.equal(JSON.parse(readFileSync(join(bundle, 'metadata/activity.json'), 'utf8')).snapshot_at, record.checked_at);
   assert.deepEqual(readFileSync(join(bundle, 'metadata/activity-history', shard.file)), bytes);
   assert.ok(existsSync(join(bundle, 'dist/health.js')), 'template-only runtime imports must also be copied');
@@ -43,6 +63,7 @@ test('Vercel preparation uses the explicit production metadata and its sibling v
   assert.ok(files.some(file => file.file === `metadata/activity-history/${shard.file}`));
   assert.ok(!files.some(file => /(?:sqlite|\.env|fresh\/)/.test(file.file)));
   assert.equal(JSON.parse(readFileSync(join(staged, 'registry.json'), 'utf8')).countries[0].feeds[0].name, 'Fresh production fixture');
+  assert.deepEqual(JSON.parse(readFileSync(join(staged, 'registry.json'), 'utf8')), repairedRegistry);
 });
 
 test('an explicitly missing metadata path stops preparation before any upload', t => {

@@ -42,6 +42,37 @@ test('records exact operator initial additions and keeps validation and registra
   assert.equal(us.history_complete, false);
 });
 
+test('endpoint repair retains the original recorded registration date through persistent source identity', () => {
+  const raw = fixture(), source = normalizeRegistry(raw).sources.find(source => source.name === 'Verified Outlet');
+  raw.countries[0].feeds[0].persistent_source_id = source.id;
+  raw.countries[0].feeds[0].url = 'https://news.example/current-rss';
+  raw.countries[0].feeds.push(structuredClone(raw.countries[0].feeds[0]));
+  const got = project(raw), addition = got.additions[0];
+  assert.equal(got.known_addition_timestamp_count, 1);
+  assert.equal(addition.source_id, source.id); assert.equal(addition.recorded_at, initialAt);
+  assert.equal(addition.recorded_at_basis, 'operator_initial_registration');
+  assert.equal(addition.registration_count, 2);
+  assert.equal(got.source_transitions.length, 0);
+  const repaired = addition.endpoints.find(endpoint => endpoint.type === 'rss');
+  assert.equal(repaired.url, 'https://news.example/current-rss');
+  assert.deepEqual(repaired.provenance, []);
+  assert.equal(repaired.latest_validation.status, 'unknown');
+  assert.equal(project(raw, '2026-10-13').additions.length, 0);
+});
+
+test('raw persistent IDs cannot misattribute registration metadata to a different catalog identity', () => {
+  const catalog = normalizeRegistry(fixture()), source = catalog.sources.find(source => source.name === 'Verified Outlet');
+  for (const patch of [
+    { persistent_source_id: 'invalid' }, { persistent_source_id: source.id, name: 'Different Publisher' },
+    { persistent_source_id: source.id, url: 'https://other.example/new-feed' },
+  ]) {
+    const raw = fixture(); Object.assign(raw.countries[0].feeds[0], patch);
+    const got = getInventoryChanges(catalog, raw, date, new HealthStore(), now);
+    assert.equal(got.known_addition_timestamp_count, 0);
+    assert.equal(got.additions.length, 0);
+  }
+});
+
 test('shared endpoint legacy validation retains cross-country and disabled aliases without unrelated sources', () => {
   const raw = fixture();
   raw.countries[0].feeds.push({ name: 'Disabled alias', url: 'https://news.example/rss', enabled: false });

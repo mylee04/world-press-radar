@@ -7,6 +7,12 @@ import { rss, atom, sitemap, sitemapIndex } from './fixtures.mjs';
 test('parse well-formed RSS, Atom, RDF, sitemap and sitemap index',()=>{
   for(const [body,type,format] of [[rss,'rss','rss'],[atom,'rss','atom'],[sitemap,'sitemap','urlset'],[sitemapIndex,'sitemap','sitemapindex'],['<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://purl.org/rss/1.0/"><channel><title>News</title><link>https://example.com</link><description>News</description></channel></rdf:RDF>','rss','rdf']]) assert.equal(validateXml(Buffer.from(body),type),format);
 });
+test('endpoint validation accepts empty RSS descriptions and blank duplicate links while keeping required fields',()=>{
+  const empty=rss.replace('<description>News feed</description>','<description/>');
+  assert.equal(validateXml(Buffer.from(empty),'rss'),'rss');
+  assert.equal(validateXml(Buffer.from(empty.replace('<link>https://example.com</link>','<link>https://example.com</link><link href="https://example.com/feed"/>')),'rss'),'rss');
+  for(const body of [empty.replace('<description/>',''),empty.replace('<description/>','<description xmlns="urn:wrong"/>'),empty.replace('<title>News</title>','<title/>')]) assert.throws(()=>validateXml(Buffer.from(body),'rss'),/WRONG_ENDPOINT_FORMAT/);
+});
 test('XML markers and HTTP-like content cannot establish endpoint validity',()=>{
   for(const body of ['<?xml version="1.0"?><html>login</html>','<rss><channel></rss>','<rss/>','<!DOCTYPE rss [<!ENTITY x "evil">]><rss>&x;</rss>']) assert.throws(()=>validateXml(Buffer.from(body),'rss'));
   assert.throws(()=>validateXml(Buffer.from(sitemap),'rss'));

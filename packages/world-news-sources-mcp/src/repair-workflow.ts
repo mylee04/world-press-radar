@@ -318,22 +318,30 @@ export class RepairWorkflowStore {
         .map(item => [`${item.type}:${item.url}`, item])).values()];
       const requestedCandidate = input.candidate_url ? canonicalUrl(input.candidate_url) : null;
       if (requestedCandidate && !deduplicated.some(item => item.url === requestedCandidate)) throw Error('WORKFLOW_CANDIDATE_NOT_OFFICIALLY_DECLARED');
+      if (requestedCandidate && initial.catalog.endpoints.has(stableId('ep', [endpoint.type, requestedCandidate])))
+        throw Error('WORKFLOW_CANDIDATE_ALREADY_CONFIGURED');
       // A requested candidate is checked first. The bounded list remains transparent.
       deduplicated.sort((a, b) => Number(b.url === requestedCandidate) - Number(a.url === requestedCandidate));
       const candidates: RepairCandidate[] = [];
-      for (const declaration of deduplicated.slice(0, 5)) candidates.push(await this.validateCandidate(declaration));
+      const heldCandidates: { url: string; endpoint_id: string; reason: 'ALREADY_CONFIGURED_ENDPOINT' }[] = [];
+      for (const declaration of deduplicated.slice(0, 5)) {
+        const endpointId = stableId('ep', [declaration.type, declaration.url]);
+        if (initial.catalog.endpoints.has(endpointId)) {
+          heldCandidates.push({ url: declaration.url, endpoint_id: endpointId, reason: 'ALREADY_CONFIGURED_ENDPOINT' });
+          continue;
+        }
+        candidates.push(await this.validateCandidate(declaration));
+      }
       const eligible = candidates.filter(item => (!requestedCandidate || item.url === requestedCandidate) && item.validation.status === 'valid' && (item.validation.entries_with_url ?? 0) > 0 &&
         item.validation.format !== 'sitemapindex' && item.validation.content_freshness !== 'stale' && item.validation.content_freshness !== 'unreliable');
       eligible.sort((a, b) => Number(b.url === requestedCandidate) - Number(a.url === requestedCandidate) ||
         Number(b.validation.content_freshness === 'recent') - Number(a.validation.content_freshness === 'recent'));
       const selected = eligible[0];
-      if (!selected) return { proposal: null, candidates, documents, state: 'no_verified_alternative' as const,
+      if (!selected) return { proposal: null, candidates, held_candidates: heldCandidates, documents, state: 'no_verified_alternative' as const,
         checked_at: this.now().toISOString(), official_website_confirmed: false,
         semantics: 'The selected website must be confirmed by the operator as the publisher official website. Declarations are not proof of ownership. HTTP/XML validation does not establish collector recovery.' };
       const nextRegistry = this.replace(initial.registry, source.id, endpoint, selected.url);
-      const expectedNewSourceId = stableId('src', [source.countryCode, source.name.normalize('NFKC').toLowerCase(),
-        ...source.endpoints.map(item => item.id === endpoint.id ? selected.endpoint_id : item.id).sort()]);
-      const newSource = normalizeRegistry(nextRegistry).sources.find(item => item.id === expectedNewSourceId);
+      const newSource = normalizeRegistry(nextRegistry).sources.find(item => item.id === source.id);
       if (!newSource) throw Error('WORKFLOW_REPLACEMENT_IDENTITY_FAILED');
       const content = contentSchema.parse({ proposal_id: randomUUID(), created_at: this.now().toISOString(), source_id: source.id,
         source_name: source.name, country: source.countryCode, endpoint_id: endpoint.id, endpoint_type: endpoint.type,
@@ -343,12 +351,13 @@ export class RepairWorkflowStore {
       const proposal: RepairProposal = { version: 1, content, proposal_digest: objectHash(content), state: 'proposed',
         approvals: [], applied_at: null, applied_registry_hash: null, recovery: null, audit: [] };
       this.audit(proposal, 'proposal_created', null, { official_website_confirmation_required: true,
-        request_count: documents.length + candidates.length, omitted_candidate_count: Math.max(0, deduplicated.length - candidates.length) });
+        request_count: documents.length + candidates.length, omitted_candidate_count: Math.max(0, deduplicated.length - candidates.length),
+        held_candidates: heldCandidates });
       this.lock(() => {
         if (this.readRegistry().registryHash !== initial.registryHash) throw Error('WORKFLOW_REGISTRY_CHANGED');
         this.save(proposal);
       });
-      return { proposal, candidates, documents, state: 'proposal_ready' as const, official_website_confirmed: false,
+      return { proposal, candidates, held_candidates: heldCandidates, documents, state: 'proposal_ready' as const, official_website_confirmed: false,
         semantics: 'Approval confirms the selected publisher website and the exact replacement. The proposal applies only to this local registry; it does not deploy or prove recovery.' };
     } finally { this.busyDiscovery = false; }
   }
@@ -360,6 +369,7 @@ export class RepairWorkflowStore {
       if (singleton.id !== sourceId) continue;
       const key = oldEndpoint.type === 'rss' ? 'url' : 'sitemapUrl';
       if (typeof feed[key] !== 'string' || canonicalUrl(feed[key] as string) !== oldEndpoint.url) throw Error('WORKFLOW_REGISTRY_CHANGED');
+      feed.persistent_source_id = sourceId;
       feed[key] = newUrl; changed++;
     }
     if (!changed) throw Error('WORKFLOW_SOURCE_ENDPOINT_NOT_FOUND');
@@ -400,6 +410,9 @@ export class RepairWorkflowStore {
       if (input.expected_registry_hash !== proposal.content.registry_hash || initial.registryHash !== input.expected_registry_hash || approval.registry_hash !== input.expected_registry_hash)
         throw Error('WORKFLOW_REGISTRY_CHANGED');
       if (this.now().getTime() - Date.parse(proposal.content.candidate.validation.checked_at) > 24 * 60 * 60 * 1000) throw Error('WORKFLOW_VALIDATION_EXPIRED');
+      // Proposals created by the older workflow changed source identity. They must
+      // be rediscovered and reviewed with the history-preserving replacement.
+      if (proposal.content.new_source_id !== proposal.content.source_id) throw Error('WORKFLOW_PROPOSAL_REQUIRES_REDISCOVERY');
       const endpoint = initial.catalog.endpoints.get(proposal.content.endpoint_id);
       if (!endpoint || endpoint.url !== proposal.content.old_url) throw Error('WORKFLOW_REGISTRY_CHANGED');
       const next = this.replace(initial.registry, proposal.content.source_id, endpoint, proposal.content.new_url);

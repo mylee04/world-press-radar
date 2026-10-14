@@ -17,8 +17,9 @@ const publicUrl = (value: unknown) => {
 
 // Registry metadata is retained only in memory. Project approved public fields;
 // never spread arbitrary raw registry fields into an HTTP response.
-function rawRegistrations(rawRegistry: unknown): Map<string, Raw[]> {
+function rawRegistrations(rawRegistry: unknown, catalog: Catalog): Map<string, Raw[]> {
   const registrations = new Map<string, Raw[]>(), registry = object(rawRegistry);
+  const sources = new Map(catalog.sources.map(source => [source.id, source]));
   for (const rawCountry of Array.isArray(registry?.countries) ? registry.countries : []) {
     const country = object(rawCountry);
     if (!country || typeof country.code !== 'string' || !Array.isArray(country.feeds)) continue;
@@ -34,7 +35,15 @@ function rawRegistrations(rawRegistry: unknown): Map<string, Raw[]> {
         endpointIds.push(stableId('ep', [type, url]));
       }
       if (malformed) continue;
-      const sourceId = stableId('src', [country.code.trim().toUpperCase(), feed.name.trim().normalize('NFKC').toLowerCase(), ...endpointIds.sort()]);
+      const countryCode = country.code.trim().toUpperCase(), name = feed.name.trim().normalize('NFKC').toLowerCase();
+      const persistentId = feed.persistent_source_id;
+      if (persistentId !== undefined && (typeof persistentId !== 'string' || !/^src_[a-f0-9]{24}$/.test(persistentId))) continue;
+      const sourceId = typeof persistentId === 'string' ? persistentId : stableId('src', [countryCode, name, ...endpointIds.sort()]);
+      const source = sources.get(sourceId);
+      // A raw persistent ID is not enough to attribute registration evidence:
+      // its publisher and typed endpoints must match the validated catalog.
+      if (!source || source.countryCode !== countryCode || source.name.normalize('NFKC').toLowerCase() !== name
+        || source.endpoints.length !== endpointIds.length || !source.endpoints.every(endpoint => endpointIds.includes(endpoint.id))) continue;
       const matches = registrations.get(sourceId) ?? [];
       matches.push(feed); registrations.set(sourceId, matches);
     }
@@ -89,7 +98,7 @@ export function getInventoryChanges(catalog: Catalog, rawRegistry: unknown, date
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !Number.isFinite(from) || new Date(from).toISOString().slice(0, 10) !== date
     || date > new Date(now).toISOString().slice(0, 10)) throw new Error('Inventory date must be a valid past/present UTC date');
   const onDate = (value: string) => Date.parse(value) >= from && Date.parse(value) < from + 86400000 && Date.parse(value) <= now;
-  const raw = rawRegistrations(rawRegistry);
+  const raw = rawRegistrations(rawRegistry, catalog);
   // Legacy health keys include a source label and country. Keep every alias actually
   // bound to the typed endpoint, including disabled rows, without scanning unrelated outlets.
   const sourcesByEndpoint = new Map<string, Source[]>();

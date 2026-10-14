@@ -1,0 +1,287 @@
+{
+  "version": 1,
+  "status": "safety_fix_deployed_registry_unchanged_waiting_for_next_regular_collection",
+  "evidence_observed_at": "2026-10-14T15:35:11.385Z",
+  "registry_sha256": "5ca99418a88d0283553bf97bbdcd683673b385b768e722f93aa81d43952544aa",
+  "operational_and_inspection_states": {
+    "enabled": "Included in regular collection; a failed observation does not disable the source.",
+    "disabled": "Collection excluded by a reviewed operator state change; retained history is not deleted.",
+    "inspection_outcome": "Independent of enabled; valid_empty and sitemapindex are distinguished from article-containing output.",
+    "auto_disable_threshold": null,
+    "endpoint_level_disable": "Not implemented. Source-level disabling can stop healthy sibling endpoints."
+  },
+  "saved_failures": {
+    "total": 1178,
+    "groups": {
+      "wrong_format": 461,
+      "other_limits_or_http": 71,
+      "access_restriction": 317,
+      "transient_candidate": 67,
+      "missing_or_gone": 123,
+      "xml_or_parser": 124,
+      "rate_limit_or_server_wait": 15
+    }
+  },
+  "recovery_queue": {
+    "failed584": 584,
+    "distinct_hosts": 400,
+    "selected_major_anchors": 69,
+    "prior_success": 9,
+    "rows_with_other_typed_endpoint": 86
+  },
+  "first_discovery_batch": {
+    "publisher_authorities": 36,
+    "queued_failed_endpoint_ids_covered_by_seeds": 92,
+    "actual_http_hops": 157,
+    "policy": {
+      "concurrency": 6,
+      "host_gap_ms": 2000,
+      "timeout_ms": 8000,
+      "retries": 0,
+      "registry_changes": 0,
+      "ledger_writes": 0,
+      "model_calls": 0
+    },
+    "fresh_draft_http_hops": 4,
+    "total_actual_http_hops": 161
+  },
+  "inspection_fix_evidence": {
+    "summary": {
+      "cached_bodies": 67,
+      "now_recognized": 12,
+      "now_nonempty": 11,
+      "now_valid_empty": 1
+    },
+    "evidence_semantics": "Cached official discovery response reparse only. These candidate URLs are not the full active registry and this does not establish production recovery.",
+    "publisher_requests": 0,
+    "ledger_writes": 0,
+    "changed_candidates": [
+      {
+        "publisher": "China News Service",
+        "url": "https://www.chinanews.com.cn/rss/importnews.xml",
+        "type": "rss",
+        "original_checked_at": "2026-10-14T16:06:15.805Z",
+        "body_sha256": "6b32d8af4b14f3030b3d4dccb78ab9870281f277b1cea997600d2abe649abfe5",
+        "old_reason": "WRONG_ENDPOINT_FORMAT",
+        "new_status": "working_nonempty",
+        "format": "rss",
+        "entries_with_url": 30,
+        "newest_content_at": "2026-10-14T13:06:01.000Z"
+      },
+      {
+        "publisher": "China News Service",
+        "url": "https://www.chinanews.com.cn/rss/dxw.xml",
+        "type": "rss",
+        "original_checked_at": "2026-10-14T16:06:18.429Z",
+        "body_sha256": "46eb3d645367d7c39ed97f6b8247816809fcf411200a187d643c67dfcef4f394",
+        "old_reason": "WRONG_ENDPOINT_FORMAT",
+        "new_status": "working_nonempty",
+        "format": "rss",
+        "entries_with_url": 13,
+        "newest_content_at": "2026-10-14T09:07:16.000Z"
+      },
+      {
+        "publisher": "Mainichi Flash",
+        "url": "https://mainichi.jp/rss/etc/mainichi-sports.rss",
+        "type": "rss",
+        "original_checked_at": "2026-10-14T16:06:18.033Z",
+        "body_sha256": "216a07aa2074304b9ff8a03459eb1a8b2aa7323042fd6ef6b27a99750df4c7b6",
+        "old_reason": "WRONG_ENDPOINT_FORMAT",
+        "new_status": "working_nonempty",
+        "format": "rdf",
+        "entries_with_url": 20,
+        "newest_content_at": "2026-10-14T14:09:44.000Z"
+      },
+      {
+        "publisher": "Mainichi Flash",
+        "url": "https://mainichi.jp/rss/etc/mainichi-enta.rss",
+        "type": "rss",
+        "original_checked_at": "2026-10-14T16:06:20.293Z",
+        "body_sha256": "524d2c65a0745e77181d81b4c9883118af111621b5ae784f1a5f0f7f54765ccd",
+        "old_reason": "WRONG_ENDPOINT_FORMAT",
+        "new_status": "working_nonempty",
+        "format": "rdf",
+        "entries_with_url": 20,
+        "newest_content_at": "2026-10-14T04:06:22.000Z"
+      },
+      {
+        "publisher": "The Independent",
+        "url": "https://www.independent.co.uk/news/uk/rss",
+        "type": "rss",
+        "original_checked_at": "2026-10-14T16:06:14.737Z",
+        "body_sha256": "898ddc9eb3606ebcc71857c5e413602aa0703a42b015fd32e6675e845d2f7318",
+        "old_reason": "WRONG_ENDPOINT_FORMAT",
+        "new_status": "working_nonempty",
+        "format": "rss",
+        "entries_with_url": 73,
+        "newest_content_at": "2026-10-14T15:45:55.000Z"
+      },
+      {
+        "publisher": "The Independent",
+        "url": "https://www.independent.co.uk/news/rss",
+        "type": "rss",
+        "original_checked_at": "2026-10-14T16:06:17.031Z",
+        "body_sha256": "1462529f1f4ac56bfd774aa1f703bdf61c6a1c6accaae7b761498df1dec5b4d0",
+        "old_reason": "WRONG_ENDPOINT_FORMAT",
+        "new_status": "working_nonempty",
+        "format": "rss",
+        "entries_with_url": 100,
+        "newest_content_at": "2026-10-14T16:01:22.000Z"
+      },
+      {
+        "publisher": "The Independent",
+        "url": "https://www.independent.co.uk/news/world/rss",
+        "type": "rss",
+        "original_checked_at": "2026-10-14T16:06:19.347Z",
+        "body_sha256": "a5c59802a11399379387d1b35af21bf5157b905bcf9ea87d71e70d283f39c684",
+        "old_reason": "WRONG_ENDPOINT_FORMAT",
+        "new_status": "working_nonempty",
+        "format": "rss",
+        "entries_with_url": 74,
+        "newest_content_at": "2026-10-14T16:01:22.000Z"
+      },
+      {
+        "publisher": "The Independent",
+        "url": "https://www.independent.co.uk/news/business/rss",
+        "type": "rss",
+        "original_checked_at": "2026-10-14T16:06:21.854Z",
+        "body_sha256": "56b97b2771ce754a1848791fe632d8535a660a808ff5cdb5fe7ad2aae87b8422",
+        "old_reason": "WRONG_ENDPOINT_FORMAT",
+        "new_status": "working_nonempty",
+        "format": "rss",
+        "entries_with_url": 17,
+        "newest_content_at": "2026-10-14T15:45:55.000Z"
+      },
+      {
+        "publisher": "The Independent",
+        "url": "https://www.independent.co.uk/news/people/rss",
+        "type": "rss",
+        "original_checked_at": "2026-10-14T16:06:24.330Z",
+        "body_sha256": "46cb70e3ea0c33415541c897a38cc6c82d28d3067618d8936a9d40fffc395873",
+        "old_reason": "WRONG_ENDPOINT_FORMAT",
+        "new_status": "valid_empty",
+        "format": "rss",
+        "entries_with_url": 0,
+        "newest_content_at": null
+      },
+      {
+        "publisher": "The Independent",
+        "url": "https://www.independent.co.uk/news/science/rss",
+        "type": "rss",
+        "original_checked_at": "2026-10-14T16:06:26.825Z",
+        "body_sha256": "2ac9977b35698b39af1a5aa3fb6b1b6890e36600be6a22a187a48773605a802c",
+        "old_reason": "WRONG_ENDPOINT_FORMAT",
+        "new_status": "working_nonempty",
+        "format": "rss",
+        "entries_with_url": 10,
+        "newest_content_at": "2026-10-14T11:49:11.000Z"
+      },
+      {
+        "publisher": "BILD",
+        "url": "http://www.bild.de/rss-feeds/rss-16725492,feed=home.bild.html",
+        "type": "rss",
+        "original_checked_at": "2026-10-14T16:06:22.321Z",
+        "body_sha256": "b96f66afdf289b79a875d2175f1e0185c0fe60a4ff4d0ceba396e3f9bb2b27c4",
+        "old_reason": "WRONG_ENDPOINT_FORMAT",
+        "new_status": "working_nonempty",
+        "format": "rss",
+        "entries_with_url": 100,
+        "newest_content_at": null
+      },
+      {
+        "publisher": "The Evening Standard",
+        "url": "https://www.standard.co.uk/news/rss",
+        "type": "rss",
+        "original_checked_at": "2026-10-14T16:06:59.763Z",
+        "body_sha256": "9923f797399aa23123e7692935d7178a17073353989047684c5e83920ad066fd",
+        "old_reason": "WRONG_ENDPOINT_FORMAT",
+        "new_status": "working_nonempty",
+        "format": "rss",
+        "entries_with_url": 92,
+        "newest_content_at": "2026-10-14T15:56:19.000Z"
+      }
+    ]
+  },
+  "reviewed_replacement_candidate": {
+    "publisher": "Fakt",
+    "country": "PL",
+    "source_id": "src_1eabdbbe6dc7ddb0d79f7b96",
+    "old_url": "https://www.fakt.pl/rss/",
+    "old_endpoint_id": "ep_1fec248c1c56d4801c601564",
+    "old_reason": "HTTP_404",
+    "new_url": "https://www.fakt.pl/.feed",
+    "provenance": {
+      "kind": "official_html_feed_link",
+      "source_url": "https://www.fakt.pl/",
+      "found_at": "2026-10-14T16:06:38.814Z",
+      "page_sha256": "3135d96d833c7275591a80dec5c069f576e7f22606cae13a7549456a415cb9dc",
+      "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" href=\"https://www.fakt.pl/.feed\">"
+    },
+    "observation": {
+      "checkedAt": "2026-10-14T16:06:43.556Z",
+      "outcome": "healthy",
+      "httpStatus": 200,
+      "format": "rss",
+      "entryCount": 20,
+      "entriesWithUrl": 20,
+      "newestContentAt": "2026-10-14T15:06:05.000Z",
+      "contentFreshness": "recent",
+      "finalUrl": "https://www.fakt.pl/rss"
+    },
+    "status": "held_after_fresh_pre_proposal_HTTP_404",
+    "scope": "Same publisher general RSS. Official .feed declaration redirects to /rss; old registered /rss/ had saved 404. Fresh draft check returned 404, so no proposal/approval/application was created.",
+    "approval_required": false,
+    "collector_recovery_confirmed": false,
+    "latest_validation": {
+      "checked_at": "2026-10-14T17:00:04.833Z",
+      "status": "invalid",
+      "http_status": 404,
+      "final_url": "https://www.fakt.pl/rss",
+      "reason": "HTTP_404",
+      "format": null,
+      "entries_with_url": null,
+      "newest_content_at": null,
+      "content_freshness": null,
+      "duration_ms": 4666
+    },
+    "approval_semantics": "No approval requested for an unstable candidate. A future verified exact replacement still requires manager approval."
+  },
+  "safety_fix": {
+    "local_full_tests": 373,
+    "pinned_server_full_tests": 358,
+    "existing_registry_normalization_unchanged": true,
+    "history_semantics": "Keep publisher source identity and healthy sibling bindings on an approved endpoint repair. New typed endpoint receives a fresh baseline; first baseline NEW is zero. Old failure records remain retained.",
+    "remaining_discovery": "584 queued saved format/404 failures were not all individually researched. First bounded36-authority/92-endpoint pass found parser false failures; reassess the remaining target set after the next regular collection under the fixed inspector.",
+    "long_term_accuracy_proven": false
+  },
+  "changes": {
+    "registry": 0,
+    "deactivated_sources": 0,
+    "deleted_sources": 0,
+    "models_called": 0,
+    "article_body_requests": 0
+  },
+  "official_spec_references": [
+    "https://www.rssboard.org/rss-specification",
+    "https://web.resource.org/rss/1.0/spec"
+  ],
+  "deployment": {
+    "collector_release": "news-quality-recovery-ready-20261014",
+    "quality_release": "quality-recovery-safety-20261014",
+    "deployment_id": "dpl_22XF9P5xRvejpD16JExcLeXSX7eX",
+    "ready_state": "READY",
+    "public_url": "https://news.bymyleslee.com/quality/",
+    "verified_at": "2026-10-14T17:01:20.659Z",
+    "bundle_body_sha256": "99d0c10dd7088789ad3548993ef04a3d93bf26a2bb0a938269756853f1173593",
+    "ledger_counts": {
+      "collections": 58842,
+      "urls": 2275159,
+      "bindings": 5900
+    },
+    "tracking_start_preserved": "2026-10-01T01:36:12.370Z",
+    "baselines_sha256": "edd9209f6a59e8a5de9f7f081f86655db27c9afe8eb8d2742010767319a464ba",
+    "model_records_preserved": true,
+    "units_active": 4,
+    "next_collector_utc": "2026-10-15T03:00:00Z"
+  }
+}
