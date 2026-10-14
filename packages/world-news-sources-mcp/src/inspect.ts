@@ -10,10 +10,61 @@ export type XmlSummary = {
   observedUrls?: string[];
 };
 
+function declaredEncoding(xml: string): string | undefined {
+  // Only the initial XML declaration determines the encoding. Saxes still
+  // validates its grammar; comments, other PIs and body attributes cannot opt in.
+  if (!/^<\?xml[ \t\r\n]/.test(xml)) return;
+  const end = xml.indexOf('?>');
+  if (end < 0) return;
+  return /[ \t\r\n]encoding[ \t\r\n]*=[ \t\r\n]*(["'])([A-Za-z][A-Za-z0-9._-]*)\1/.exec(xml.slice(0, end))?.[2].toLowerCase();
+}
+
+function decodeStrict(buffer: Buffer, encoding: 'utf-8' | 'utf-16le' | 'utf-16be'): string {
+  try {
+    // Remove the one detected signature explicitly, preserving all other U+FEFFs.
+    return new TextDecoder(encoding, { fatal: true, ignoreBOM: true }).decode(buffer);
+  } catch { throw new Error('INVALID_XML'); }
+}
+
+function requireEncoding(declared: string | undefined, expected: 'utf-8' | 'utf-16'): void {
+  if (!declared || declared === expected) return;
+  if (['utf-8', 'utf-16', 'iso-8859-1'].includes(declared)) throw new Error('INVALID_XML');
+  throw new Error('UNSUPPORTED_ENCODING');
+}
+
+function decodeXml(buffer: Buffer): string {
+  const starts = (...bytes: number[]) => bytes.every((byte, index) => buffer[index] === byte);
+  // Recognize unsupported UCS-4 signatures before their UTF-16 prefixes.
+  if (starts(0, 0, 0xfe, 0xff) || starts(0xff, 0xfe, 0, 0) ||
+      starts(0, 0, 0xff, 0xfe) || starts(0xfe, 0xff, 0, 0)) throw new Error('UNSUPPORTED_ENCODING');
+  if (starts(0xff, 0xfe) || starts(0xfe, 0xff)) {
+    const xml = decodeStrict(buffer.subarray(2), buffer[0] === 0xff ? 'utf-16le' : 'utf-16be');
+    if (xml.startsWith('\uFEFF')) throw new Error('INVALID_XML');
+    requireEncoding(declaredEncoding(xml), 'utf-16');
+    return xml;
+  }
+  const utf8Bom = starts(0xef, 0xbb, 0xbf);
+  const body = utf8Bom ? buffer.subarray(3) : buffer;
+  // The declaration of an ASCII-compatible encoding is itself ASCII. Read
+  // only that prolog before choosing the strict decoder for the entire body.
+  const end = body.indexOf('?>');
+  const declared = end < 0 ? undefined : declaredEncoding(body.subarray(0, end + 2).toString('latin1'));
+  if (utf8Bom) requireEncoding(declared, 'utf-8');
+  else if (declared === 'iso-8859-1') {
+    // WHATWG TextDecoder maps this label to Windows-1252. Buffer's latin1
+    // conversion instead preserves the exact ISO-8859-1 byte-to-codepoint map.
+    return body.toString('latin1');
+  } else if (declared === 'utf-16') throw new Error('INVALID_XML'); // UTF-16 needs a BOM.
+  else if (declared && declared !== 'utf-8') throw new Error('UNSUPPORTED_ENCODING');
+  const xml = decodeStrict(body, 'utf-8');
+  if (xml.startsWith('\uFEFF')) throw new Error('INVALID_XML');
+  return xml;
+}
+
 // Extract counts, a few URLs and dates only. No article text is retained.
 export function inspectXml(buffer: Buffer, type: EndpointType, now = Date.now(), maxBytes = 2 * 1024 * 1024, fullUrls = false): XmlSummary {
   if (buffer.length > maxBytes) throw new Error('BODY_TOO_LARGE');
-  const xml = new TextDecoder('utf-8', { fatal: true }).decode(buffer);
+  const xml = decodeXml(buffer);
   const parser = new SaxesParser({ xmlns: true });
   const stack: string[] = []; const fields = new Map<string, string>();
   let root = ''; let namespace = ''; let channel = false;
