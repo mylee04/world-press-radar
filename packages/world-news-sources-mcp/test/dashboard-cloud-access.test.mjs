@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
+import { koreanUiContext } from './dashboard-test-runtime.mjs';
 
 const app = readFileSync(new URL('../dashboard/app.js', import.meta.url), 'utf8');
 const code = app.slice(app.indexOf('function canRunInvestigation()'), app.indexOf('function renderEngineStatus()'));
@@ -11,7 +12,7 @@ function access(runtime, { authenticated = false, status } = {}) {
     if (!elements.has(id)) elements.set(id, { hidden: false, disabled: false, open: false, textContent: '', querySelector: () => ({ textContent: '' }) });
     return elements.get(id);
   };
-  const context = vm.createContext({ state: { overview: { runtime }, adminSession: { authenticated }, run: status ? { status } : null }, $: element });
+  const context = koreanUiContext({ state: { overview: { runtime }, adminSession: { authenticated }, run: status ? { status } : null }, $: element });
   vm.runInContext(`${code}\nrenderExecutionAccess(); this.allowed=canRunInvestigation();`, context);
   return { elements, allowed: context.allowed };
 }

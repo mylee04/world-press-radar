@@ -2,13 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
+import { koreanUiContext } from './dashboard-test-runtime.mjs';
 
 // Exercise the shipped browser request helper, with controlled transport failures.
 const app=readFileSync(new URL('../dashboard/app.js',import.meta.url),'utf8');
 const code=app.slice(app.indexOf('class DashboardConnectionError'),app.indexOf('function dateQuery('));
 function client(fetchImpl){
   const status={textContent:''};
-  const context=vm.createContext({fetch:fetchImpl,TypeError,AbortController,window:{setTimeout,clearTimeout},$:()=>status});
+  const context=koreanUiContext({fetch:fetchImpl,TypeError,AbortController,window:{setTimeout,clearTimeout},$:()=>status});
   vm.runInContext(code+'\nthis.request=api;',context);
   return {request:context.request,status};
 }

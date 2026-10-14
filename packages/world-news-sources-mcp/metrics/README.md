@@ -17,10 +17,12 @@ Free quotas are shared with other account usage. As documented September 30, 202
 Use the existing authenticated Cloudflare D1 Console and run `report.sql`; or use the approved local Wrangler OAuth login:
 
 ```sh
-npx wrangler@4.145.0 d1 execute world-news-sources-metrics --remote --file metrics/report.sql --config metrics/wrangler.jsonc
+npx wrangler@4.145.0 d1 execute world-news-sources-metrics --remote --command "$(cat metrics/report.sql)" --config metrics/wrangler.jsonc --json
 ```
 
 The collector exposes **no read/dashboard API**. A separate owner web dashboard/authentication would require another access design and approval. Daily rows can be exported to plot long-term totals. Retained aggregates do not identify individuals.
+
+Pass the SELECT through `--command` to obtain its result rows. In the verified Wrangler 4.145.0 remote invocation, `--file` returned SQL-file execution metadata without SELECT rows; that receipt cannot establish a zero counter total. Owner OAuth was refreshed with the existing five effective scopes on October 14, 2026, and the read-only query returned 135 retained aggregate rows with zero rows written. An owner-read authentication error is separate from the MCP collector's write acknowledgment.
 
 ## Traffic separation
 

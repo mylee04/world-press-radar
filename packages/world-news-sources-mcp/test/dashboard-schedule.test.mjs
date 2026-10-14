@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
+import { koreanUiContext } from './dashboard-test-runtime.mjs';
 
 // Run the shipped display helper against recorded schedules, without transport or a browser.
 const app=readFileSync(new URL('../dashboard/app.js',import.meta.url),'utf8');
@@ -11,12 +12,12 @@ assert.ok(start>=0&&end>start,'the shipped schedule display helper must be prese
 const code=app.slice(start,end);
 
 function element(tag='td',className='',textContent=''){
-  return {tag,className,textContent,children:[],append(...children){this.children.push(...children);},get childElementCount(){return this.children.length;}};
+  return {tag,className,textContent:String(typeof textContent === 'function' ? textContent() : textContent),children:[],append(...children){this.children.push(...children);},get childElementCount(){return this.children.length;}};
 }
 function display(country,{date='2026-10-14',inputDate=date}={}){
   const cell=element(),metric=element('div','metric','64.2%');
   cell.append(metric);
-  const context=vm.createContext({
+  const context=koreanUiContext({
     state:{overview:{date}},$:()=>({value:inputDate}),node:element,
     valueText:value=>new Intl.NumberFormat('ko-KR').format(value),
     timeText:value=>`formatted:${value}`
@@ -68,8 +69,8 @@ test('a running cycle labels remaining work as pending inspection',()=>{
 
 const noteCode=app.slice(app.indexOf('function observationNote('),app.indexOf('function renderCountries('));
 function observationNote(items,date='2026-10-14'){
-  const context=vm.createContext({});vm.runInContext(noteCode+'\nthis.describe=observationNote;',context);
-  return context.describe({date,items});
+  const context=koreanUiContext({});vm.runInContext(noteCode+'\nthis.describe=observationNote;',context);
+  return String(context.describe({date,items}));
 }
 test('completed explicit-address probes never appear as completed country collection cycles',()=>{
   const items=Array.from({length:73},(_,i)=>({country:`country-${i}`,period:{run_completion:i<16?'completed':'not_recorded',observation_window_closed:false},

@@ -10,16 +10,20 @@ const TOOL_NAMES = ['search_sources', 'get_source', 'list_countries', 'get_endpo
   'get_country_source_inventory', 'get_source_article_activity', 'get_country_article_activity',
   'get_country_collection_quality', 'get_source_collection_quality'];
 
-function fixture({ ack = 'recorded', functionalFault } = {}) {
-  const registry = { countries: [{ code: 'US', name: 'United States', feeds: [
-    { name: 'Example News', url: 'https://publisher.example.test/feed', sitemapUrl: 'https://publisher.example.test/sitemap.xml' },
-  ] }] };
-  const source = normalizeRegistry(registry).sources[0];
+function fixture({ ack = 'recorded', functionalFault, registrationCount = 1, countryCount = 1,
+  localRegistry = true, healthCounts = {} } = {}) {
+  const feed = { name: 'Example News', url: 'https://publisher.example.test/feed', sitemapUrl: 'https://publisher.example.test/sitemap.xml' };
+  const registry = { countries: Array.from({ length: countryCount }, (_, index) => ({
+    code: index === 0 ? 'US' : `C${index}`, name: index === 0 ? 'United States' : `Country ${index}`,
+    feeds: index === 0 ? Array.from({ length: registrationCount }, () => ({ ...feed })) : [],
+  })) };
+  const catalog = normalizeRegistry(registry);
+  const source = catalog.sources[0];
   const observations = source.endpoints.map(endpoint => ({ endpointId: endpoint.id, type: endpoint.type,
     auditStatus: 'working_nonempty', format: endpoint.type === 'rss' ? 'rss' : 'sitemap', checkedAt: CHECKED,
     entryCount: 1, reason: null, httpStatus: 200, sampleUrls: ['https://publisher.example.test/news/one'] }));
   const healthSnapshot = { audit: { checked: 2, lastCompletedFullAuditAt: CHECKED }, observations };
-  const toolResult = (name, args) => {
+  const toolResult = (name, args, legacy = false) => {
     if (name === 'search_sources') return { items: [source], total: 1 };
     if (name === 'get_source') return { ...source, id: functionalFault === 'source' ? 'incorrect_source_id' : source.id };
     if (name === 'get_endpoint_health') return { endpoints: args.endpoint_ids.map(id => {
@@ -28,21 +32,24 @@ function fixture({ ack = 'recorded', functionalFault } = {}) {
         entry_count: observation.entryCount, reason: observation.reason, http_status: observation.httpStatus,
         audit_status: observation.auditStatus, sample_urls: observation.sampleUrls, format: observation.format };
     }) };
-    if (name === 'list_countries') return { total: functionalFault === 'countries' ? 1 : 73, items: [] };
+    if (name === 'list_countries') return {
+      total: catalog.countries.length + Number(functionalFault === 'countries' || legacy && functionalFault === 'legacy_countries'),
+      configured_rows: catalog.configuredRows + Number(functionalFault === 'rows' || legacy && functionalFault === 'legacy_rows'), items: [],
+    };
     if (name === 'get_country_source_inventory') return { items: [{ country: 'US', active_source_registrations: 1 }] };
     if (name === 'get_source_article_activity' || name === 'get_country_article_activity') return { items: [] };
     throw Error('Unexpected fixture tool');
   };
-  let toolCalls = 0, closed = false;
+  let toolCalls = 0, closed = false, legacy = false;
   const fetchFixture = async (input, init) => {
     const url = new URL(input instanceof Request ? input.url : input);
-    if (url.pathname === '/health') return Response.json({ configured_rows: 5393, endpoints_checked: 2,
+    if (url.pathname === '/health') return Response.json({ configured_rows: catalog.configuredRows, countries: catalog.countries.length, ...healthCounts, endpoints_checked: 2,
       last_completed_full_audit_at: CHECKED, usage_statistics: { configured: true } }, { status: functionalFault === 'http' ? 503 : 200 });
     const request = JSON.parse(init.body);
     let result;
-    if (request.method === 'initialize') result = { serverInfo: { name: 'world-news-sources-mcp' }, protocolVersion: '2025-06-18' };
+    if (request.method === 'initialize') { legacy = true; result = { serverInfo: { name: 'world-news-sources-mcp' }, protocolVersion: '2025-06-18' }; }
     else if (request.method === 'tools/list') result = { tools: TOOL_NAMES.map(name => ({ name })) };
-    else if (request.method === 'tools/call') result = { structuredContent: toolResult(request.params.name, request.params.arguments) };
+    else if (request.method === 'tools/call') result = { structuredContent: toolResult(request.params.name, request.params.arguments, legacy) };
     else throw Error('Unexpected fixture RPC');
     const headers = {};
     if (request.method === 'tools/call') {
@@ -66,7 +73,7 @@ function fixture({ ack = 'recorded', functionalFault } = {}) {
     async close() { closed = true; },
   };
   return { dependencies: { fetch: fetchFixture, client, createTransport: (_address, fetcher) => ({ fetch: fetcher }),
-    readJson: url => String(url).endsWith('/rss-atlas.json') ? registry : String(url).endsWith('/health-latest.json') ? healthSnapshot : null },
+    readJson: url => String(url).endsWith('/rss-atlas.json') ? localRegistry ? registry : null : String(url).endsWith('/health-latest.json') ? healthSnapshot : null },
     counts: () => ({ toolCalls, closed }) };
 }
 
@@ -97,6 +104,50 @@ test('complete mocked SDK and legacy functional smoke remains passed with ten re
   assert.equal(result.status, 'passed'); assert.equal(result.functional_status, 'passed');
   assert.equal(result.metrics.status, 'recorded'); assert.equal(result.metrics.warning, null);
   assert.deepEqual(mocked.counts(), { toolCalls: 10, closed: true });
+});
+
+test('HTTP smoke follows registry growth instead of fixed registration or country totals', async () => {
+  for (const [registrationCount, countryCount] of [[5393, 73], [5437, 74]]) {
+    const mocked = fixture({ registrationCount, countryCount });
+    const result = await runHttpSmoke(parseSmokeOptions([ADDRESS]), mocked.dependencies);
+    assert.equal(result.status, 'passed');
+    assert.equal(result.service.configured_rows, registrationCount);
+    assert.equal(result.service.countries, countryCount);
+    assert.deepEqual(mocked.counts(), { toolCalls: 10, closed: true });
+  }
+});
+
+test('HTTP smoke rejects a genuine remote/local registry mismatch even with degraded metrics allowed', async () => {
+  for (const healthCounts of [{ configured_rows: 2 }, { countries: 2 }]) {
+    const mocked = fixture({ healthCounts, ack: 'unavailable' });
+    await assert.rejects(runHttpSmoke(parseSmokeOptions([ADDRESS, '--allow-metrics-degraded']), mocked.dependencies),
+      /Health (registration|country) count must match the local registry/);
+    assert.deepEqual(mocked.counts(), { toolCalls: 0, closed: true });
+  }
+});
+
+test('HTTP smoke uses consistent remote counts when the local registry is unavailable', async () => {
+  const mocked = fixture({ localRegistry: false, registrationCount: 7, countryCount: 2 });
+  const result = await runHttpSmoke(parseSmokeOptions([ADDRESS]), mocked.dependencies);
+  assert.equal(result.status, 'passed');
+  assert.deepEqual(mocked.counts(), { toolCalls: 10, closed: true });
+  for (const functionalFault of ['rows', 'countries', 'legacy_rows', 'legacy_countries']) {
+    const inconsistent = fixture({ localRegistry: false, functionalFault, ack: 'unavailable' });
+    await assert.rejects(runHttpSmoke(parseSmokeOptions([ADDRESS, '--allow-metrics-degraded']), inconsistent.dependencies),
+      /(SDK|Legacy) (registration|country) count must match health/);
+    assert.equal(inconsistent.counts().closed, true);
+  }
+});
+
+test('remote count fallback rejects absent, nonpositive, fractional, string and unsafe totals', async () => {
+  for (const key of ['configured_rows', 'countries']) {
+    for (const value of [undefined, null, 0, -1, 1.5, '1', Number.MAX_SAFE_INTEGER + 1]) {
+      const mocked = fixture({ localRegistry: false, healthCounts: { [key]: value } });
+      await assert.rejects(runHttpSmoke(parseSmokeOptions([ADDRESS, '--allow-metrics-degraded']), mocked.dependencies),
+        new RegExp(`Health ${key} must be a positive safe integer`));
+      assert.deepEqual(mocked.counts(), { toolCalls: 0, closed: true });
+    }
+  }
 });
 
 test('post-deploy opt-in retains successful MCP results while clearly reporting unavailable or missing usage ACKs', async () => {

@@ -50,8 +50,15 @@ const callStructured=async input=>{
 const verifiedExamples=[];
 const metricsAcks=[];
 try{
+  const registry=readJson(new URL('../../../data/rss-atlas.json',import.meta.url));
+  const catalog=registry?normalizeRegistry(registry):null;
   const status=await fetchImpl(new URL('/health',address),{signal:AbortSignal.timeout(15000)});
-  assert.equal(status.status,200);const summary=await status.json();assert.equal(summary.configured_rows,5393);
+  assert.equal(status.status,200);const summary=await status.json();
+  for(const key of ['configured_rows','countries'])assert.ok(Number.isSafeInteger(summary[key])&&summary[key]>0,`Health ${key} must be a positive safe integer`);
+  if(catalog){
+    assert.equal(summary.configured_rows,catalog.configuredRows,'Health registration count must match the local registry');
+    assert.equal(summary.countries,catalog.countries.length,'Health country count must match the local registry');
+  }
   const inspectionFetch=async(input,init)=>{const headers=new Headers(init?.headers);headers.set('x-world-news-traffic','inspection');const response=await fetchImpl(input,{...init,headers});const ack=response.headers.get('x-world-news-metrics');if(ack)metricsAcks.push(ack);return response;};
   await client.connect(dependencies.createTransport?dependencies.createTransport(address,inspectionFetch):new StreamableHTTPClientTransport(new URL(address),{fetch:inspectionFetch}));
   const tools=(await client.listTools()).tools;assert.equal(tools.length,9);
@@ -60,9 +67,7 @@ try{
   const source=sources.items[0];
   const details=await callStructured({name:'get_source',arguments:{source_id:source.id}});
   assert.equal(details.id,source.id);
-  const registryPath=new URL('../../../data/rss-atlas.json',import.meta.url);
-  const registry=readJson(registryPath);
-  if(registry){const expectedSource=normalizeRegistry(registry).sources.find(s=>s.id===details.id);assert.ok(expectedSource);for(const key of ['enabled','enabled_changed_at','status_reason','status_history','status_transition_count','status_history_consistent'])assert.deepEqual(details[key],expectedSource[key]);}
+  if(catalog){const expectedSource=catalog.sources.find(s=>s.id===details.id);assert.ok(expectedSource);for(const key of ['enabled','enabled_changed_at','status_reason','status_history','status_transition_count','status_history_consistent'])assert.deepEqual(details[key],expectedSource[key]);}
   const health=await callStructured({name:'get_endpoint_health',arguments:{endpoint_ids:[source.endpoints[0].id]}});
   assert.ok(['unknown','stale','healthy','unhealthy'].includes(health.endpoints[0].status));
   const snapshotPath=new URL('../audits/health-latest.json',import.meta.url);
@@ -84,7 +89,8 @@ try{
     }
   }
   const countries=await callStructured({name:'list_countries',arguments:{limit:1}});
-  assert.equal(countries.total,73);
+  assert.equal(countries.total,summary.countries,'SDK country count must match health');
+  assert.equal(countries.configured_rows,summary.configured_rows,'SDK registration count must match health');
   const inventory=await callStructured({name:'get_country_source_inventory',arguments:{country:'US',limit:1}});
   assert.ok(inventory.items[0].active_source_registrations>0);
   const activityPath=new URL('../activity/activity-snapshot.json',import.meta.url);
@@ -94,7 +100,8 @@ try{
   const activity=await callStructured({name:'get_source_article_activity',arguments:{source_id:activitySource,start_date:activityDay,end_date:activityDay}});
   const countryActivity=await callStructured({name:'get_country_article_activity',arguments:{country:'US',start_date:activityDay,end_date:activityDay}});
   if(activitySnapshot?.history){
-    const catalog=normalizeRegistry(registry),expected=new ActivityStore(activitySnapshot,fileURLToPath(new URL('../activity/history/',import.meta.url))).query(catalog,'source',{source_id:activitySource,start_date:activityDay,end_date:activityDay});
+    assert.ok(catalog,'Local registry is required to verify exported activity history');
+    const expected=new ActivityStore(activitySnapshot,fileURLToPath(new URL('../activity/history/',import.meta.url))).query(catalog,'source',{source_id:activitySource,start_date:activityDay,end_date:activityDay});
     assert.deepEqual(activity.items,expected.items);assert.deepEqual(activity.snapshot_coverage,activitySnapshot.snapshot_coverage);assert.notEqual(activity.items[0].state,'history_not_in_snapshot');
   }
   if(activitySnapshot){assert.equal(activity.tracking_start,activitySnapshot.tracking_start);assert.equal(activity.snapshot_at,activitySnapshot.generated_at);assert.equal(summary.article_activity.tracking_start,activitySnapshot.tracking_start);assert.ok(activity.initialized_bindings>0);}
@@ -109,7 +116,8 @@ try{
   assert.equal((await rpc({jsonrpc:'2.0',id:2,method:'tools/list'},initialized.protocolVersion)).tools.length,9);
   const called=await rpc({jsonrpc:'2.0',id:3,method:'tools/call',params:{name:'list_countries',arguments:{limit:1}}},initialized.protocolVersion);
   assert.notEqual(called.isError,true,'Legacy MCP tool reported a functional error');
-  assert.equal(called.structuredContent.total,73);
+  assert.equal(called.structuredContent.total,summary.countries,'Legacy country count must match health');
+  assert.equal(called.structuredContent.configured_rows,summary.configured_rows,'Legacy registration count must match health');
   const metrics=metricsResult(Boolean(summary.usage_statistics?.configured),metricsAcks,allowMetricsDegraded);
   return {status:metrics.status==='degraded'?'degraded':'passed',functional_status:'passed',endpoint:address,service:summary,
     metrics,metrics_acknowledgments:metricsAcks,tools:tools.map(t=>t.name),sample:{source_id:source.id,name:source.name,endpoint_type:source.endpoints[0].type,health:health.endpoints[0].status,checked_at:health.endpoints[0].checked_at,entry_count:health.endpoints[0].entry_count},output_examples:verifiedExamples,inventory,source_activity:activity,country_activity:countryActivity,protocol:initialized.protocolVersion,verified:'HTTPS SDK calls plus legacy initialize, tools/list, tools/call and matching cached audit'};
