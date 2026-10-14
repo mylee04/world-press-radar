@@ -1,0 +1,2390 @@
+{
+  "version": 1,
+  "run_id": "major20-quality-expansion-2026-10-14",
+  "prepared_at": "2026-10-14T01:51:08.792Z",
+  "registry_sha256": "314594b28b66cf725add832f7fdccb3ce73e6f74ad20f9bae0a46dea69d613e9",
+  "selected_countries": [
+    "US",
+    "CN",
+    "DE",
+    "JP",
+    "IN",
+    "GB",
+    "FR",
+    "IT",
+    "CA",
+    "BR",
+    "RU",
+    "KR",
+    "AU",
+    "ES",
+    "MX",
+    "ID",
+    "TR",
+    "SA",
+    "ZA",
+    "AR"
+  ],
+  "additions": [
+    {
+      "country": "US",
+      "name": "Inside Climate News",
+      "language": "en",
+      "homepage": "https://insideclimatenews.org/",
+      "publisher_reference": "https://insideclimatenews.org/",
+      "scope_note": "Climate, environmental justice and energy reporting.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://insideclimatenews.org/feed/",
+          "endpoint_id": "ep_37940cbf2eae588957b9066e",
+          "observation": {
+            "endpointId": "ep_37940cbf2eae588957b9066e",
+            "type": "rss",
+            "url": "https://insideclimatenews.org/feed/",
+            "checkedAt": "2026-10-14T01:38:47.999Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 10,
+            "entriesWithUrl": 10,
+            "sampleUrls": [
+              "https://insideclimatenews.org/news/13102026/wyoming-colorado-river-measuring/",
+              "https://insideclimatenews.org/news/13102026/ohio-data-center-moratoriums/",
+              "https://insideclimatenews.org/news/13102026/pennsylvania-hydrogen-hubs-in-limbo/"
+            ],
+            "newestContentAt": "2026-10-13T22:50:17.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://insideclimatenews.org/feed/",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2138,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://insideclimatenews.org/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:38:45.858Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://insideclimatenews.org/",
+            "found_at": "2026-10-14T01:38:43.736Z",
+            "page_sha256": "79520311cdd43c231a52150d9b2339517c2579f9b57ad73e4b383f3385a8dda3",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Inside Climate News &raquo; Feed\" href=\"https://insideclimatenews.org/feed/\" />"
+          }
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "name": "404 Media",
+      "language": "en",
+      "homepage": "https://www.404media.co/",
+      "publisher_reference": "https://www.404media.co/",
+      "scope_note": "Independent technology and digital rights reporting.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.404media.co/rss/",
+          "endpoint_id": "ep_7b853380ab4a9498fe8137ff",
+          "observation": {
+            "endpointId": "ep_7b853380ab4a9498fe8137ff",
+            "type": "rss",
+            "url": "https://www.404media.co/rss/",
+            "checkedAt": "2026-10-14T01:44:29.166Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 15,
+            "entriesWithUrl": 15,
+            "sampleUrls": [
+              "https://www.404media.co/character-ais-bankruptcy-documents-show-the-economics-of-ai-dont-work/",
+              "https://www.404media.co/dubstep-and-booktok-a-perfect-match/",
+              "https://www.404media.co/smutstep-dubstep-booktok-growl-darq-dagr/"
+            ],
+            "newestContentAt": "2026-10-13T20:06:53.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.404media.co/rss/",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2122,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.404media.co/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:44:27.042Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.404media.co/",
+            "found_at": "2026-10-14T01:44:24.938Z",
+            "page_sha256": "5351ff9c116ca3150f2ebc3e41e378c73d46dfbdf96fc36a86a3a770b3ce3aa2",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"404 Media\" href=\"https://www.404media.co/rss/\">"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.404media.co/sitemap-posts.xml",
+          "endpoint_id": "ep_854126f00c5183278ef46ccd",
+          "observation": {
+            "endpointId": "ep_854126f00c5183278ef46ccd",
+            "type": "sitemap",
+            "url": "https://www.404media.co/sitemap-posts.xml",
+            "checkedAt": "2026-10-14T01:44:42.362Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 2385,
+            "entriesWithUrl": 2385,
+            "sampleUrls": [
+              "https://www.404media.co/character-ais-bankruptcy-documents-show-the-economics-of-ai-dont-work/",
+              "https://www.404media.co/dubstep-and-booktok-a-perfect-match/",
+              "https://www.404media.co/smutstep-dubstep-booktok-growl-darq-dagr/"
+            ],
+            "newestContentAt": "2026-10-13T20:06:53.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.404media.co/sitemap-posts.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2458,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.404media.co/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:44:27.042Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://www.404media.co/sitemap.xml",
+            "found_at": "2026-10-14T01:44:39.904Z",
+            "page_sha256": "a37f45ad5d3797c0a0626836ccf73dc7a3e3f3b843a43b131051dcb5b211dfba",
+            "declaration": "<loc>https://www.404media.co/sitemap-posts.xml</loc>",
+            "declared_lastmod": "2026-10-13T20:06:53.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "name": "Alaska Public Media",
+      "language": "en",
+      "homepage": "https://alaskapublic.org/",
+      "publisher_reference": "https://alaskapublic.org/",
+      "scope_note": "Alaska local and public interest reporting.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://alaskapublic.org/news-sitemap-content.xml",
+          "endpoint_id": "ep_9d3acf0cef649af2033fc9da",
+          "observation": {
+            "endpointId": "ep_9d3acf0cef649af2033fc9da",
+            "type": "sitemap",
+            "url": "https://alaskapublic.org/news-sitemap-content.xml",
+            "checkedAt": "2026-10-14T01:39:28.791Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 14,
+            "entriesWithUrl": 14,
+            "sampleUrls": [
+              "https://alaskapublic.org/news/economy/2026-10-12/passenger-numbers-on-track-for-record-at-major-alaska-airports",
+              "https://alaskapublic.org/news/politics/2026-10-12/second-big-beautiful-lease-sale-in-alaskas-cook-inlet-planned-after-first-sale-flops",
+              "https://alaskapublic.org/news/economy/energy/2026-10-12/trump-administration-cuts-environmental-reviews-to-fast-track-alaska-oil-exploration"
+            ],
+            "newestContentAt": "2026-10-14T00:35:40.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://alaskapublic.org/news-sitemap-content.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2230,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://alaskapublic.org/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:15.198Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://alaskapublic.org/robots.txt",
+            "found_at": "2026-10-14T01:39:15.198Z",
+            "page_sha256": "2cf7a57e036e449f6961e6aae4372783cd5a95575cd43bb98ef0a3630649c4ae",
+            "declaration": "Sitemap: https://alaskapublic.org/news-sitemap-content.xml"
+          }
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "name": "Hawaii Public Radio",
+      "language": "en",
+      "homepage": "https://www.hawaiipublicradio.org/",
+      "publisher_reference": "https://www.hawaiipublicradio.org/",
+      "scope_note": "Hawaii regional public interest reporting.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://www.hawaiipublicradio.org/news-sitemap-content.xml",
+          "endpoint_id": "ep_0c5c1dc41866885b534b5a2c",
+          "observation": {
+            "endpointId": "ep_0c5c1dc41866885b534b5a2c",
+            "type": "sitemap",
+            "url": "https://www.hawaiipublicradio.org/news-sitemap-content.xml",
+            "checkedAt": "2026-10-14T01:39:39.493Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 114,
+            "entriesWithUrl": 114,
+            "sampleUrls": [
+              "https://www.hawaiipublicradio.org/local-news/2026-10-12/climate-insights-september-heats-up-amid-storms",
+              "https://www.hawaiipublicradio.org/national-international/2026-10-11/russia-hits-ukraine-gas-facilities-after-trump-claims-energy-ceasefire",
+              "https://www.hawaiipublicradio.org/2026-10-11/texas-15th-congressional-district-provides-clues-to-states-latino-vote"
+            ],
+            "newestContentAt": "2026-10-14T00:11:04.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.hawaiipublicradio.org/news-sitemap-content.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2255,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.hawaiipublicradio.org/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:25.509Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://www.hawaiipublicradio.org/robots.txt",
+            "found_at": "2026-10-14T01:39:25.509Z",
+            "page_sha256": "b52e79b2822075bc8d25917a2281b120dbc6aaad86ad66935fec25fdafadefbc",
+            "declaration": "Sitemap: https://www.hawaiipublicradio.org/news-sitemap-content.xml"
+          }
+        }
+      ]
+    },
+    {
+      "country": "CA",
+      "name": "The Narwhal",
+      "language": "en",
+      "homepage": "https://thenarwhal.ca/",
+      "publisher_reference": "https://thenarwhal.ca/",
+      "scope_note": "Canadian climate, environment and Indigenous issues reporting; exact official RSS guide.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://thenarwhal.ca/feed/",
+          "endpoint_id": "ep_37abeb4b73051cda968155b8",
+          "observation": {
+            "endpointId": "ep_37abeb4b73051cda968155b8",
+            "type": "rss",
+            "url": "https://thenarwhal.ca/feed/",
+            "checkedAt": "2026-10-14T01:43:09.948Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 11,
+            "entriesWithUrl": 11,
+            "sampleUrls": [
+              "https://thenarwhal.ca/bc-alberta-rocky-mountain-backcountry-trails/?utm_source=rss",
+              "https://thenarwhal.ca/lake-ontario-environmental-science-cutbacks/?utm_source=rss",
+              "https://thenarwhal.ca/winnipeg-zoo-churchill-polar-bear/?utm_source=rss"
+            ],
+            "newestContentAt": "2026-10-13T12:00:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://thenarwhal.ca/feed/",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2435,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://thenarwhal.ca/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:43:07.511Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_anchor",
+            "source_url": "https://thenarwhal.ca/rss-feeds/",
+            "found_at": "2026-10-14T01:43:05.343Z",
+            "page_sha256": "f3cb988fc6e79d5fd1c23c08441cd45f164423ce5aaa74549170e0a9bded9644",
+            "tag": "<a href=\"https://thenarwhal.ca/feed/\">"
+          }
+        }
+      ]
+    },
+    {
+      "country": "CA",
+      "name": "The Breach",
+      "language": "en",
+      "homepage": "https://breachmedia.ca/",
+      "publisher_reference": "https://breachmedia.ca/",
+      "scope_note": "Canadian public interest and investigative journalism.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://breachmedia.ca/feed/",
+          "endpoint_id": "ep_e5db833c0dadb28eb9d8f678",
+          "observation": {
+            "endpointId": "ep_e5db833c0dadb28eb9d8f678",
+            "type": "rss",
+            "url": "https://breachmedia.ca/feed/",
+            "checkedAt": "2026-10-14T01:44:29.820Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 20,
+            "entriesWithUrl": 20,
+            "sampleUrls": [
+              "https://breachmedia.ca/alberta-referendum-is-a-sign-of-a-growing-far-right/",
+              "https://breachmedia.ca/bc-activists-risked-jail-time-to-provide-safe-drugs-and-won-a-historic-court-ruling/",
+              "https://breachmedia.ca/im-familiar-with-death-threats-they-show-avi-lewis-is-having-an-impact/"
+            ],
+            "newestContentAt": "2026-10-13T18:59:28.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://breachmedia.ca/feed/",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2295,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://breachmedia.ca/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:44:27.524Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://breachmedia.ca/",
+            "found_at": "2026-10-14T01:44:25.293Z",
+            "page_sha256": "08ebc447ac15739ffdbc51e7a59b2da3f16b28b209ae8085d91b787a5e7abd28",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"The Breach &raquo; Feed\" href=\"https://breachmedia.ca/feed/\" />"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://breachmedia.ca/post-sitemap.xml",
+          "endpoint_id": "ep_d6bbf425d416db5f41ed4b90",
+          "observation": {
+            "endpointId": "ep_d6bbf425d416db5f41ed4b90",
+            "type": "sitemap",
+            "url": "https://breachmedia.ca/post-sitemap.xml",
+            "checkedAt": "2026-10-14T01:44:36.834Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 609,
+            "entriesWithUrl": 609,
+            "sampleUrls": [
+              "https://breachmedia.ca/home/",
+              "https://breachmedia.ca/doug-fords-wreckage-ep-7/",
+              "https://breachmedia.ca/police-manipulate-public-opinion-tbs-3/"
+            ],
+            "newestContentAt": "2026-10-13T18:59:31.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://breachmedia.ca/post-sitemap.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2490,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://breachmedia.ca/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:44:27.524Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://breachmedia.ca/sitemap_index.xml",
+            "found_at": "2026-10-14T01:44:34.342Z",
+            "page_sha256": "f7328e8525d3bb5aec9115914f1562c31a62eab9af24de6f27e15fc64a03abaa",
+            "declaration": "<loc>https://breachmedia.ca/post-sitemap.xml</loc>",
+            "declared_lastmod": "2026-10-13T18:59:31+00:00"
+          }
+        }
+      ]
+    },
+    {
+      "country": "BR",
+      "name": "Brasil 247",
+      "language": "pt",
+      "homepage": "https://www.brasil247.com/",
+      "publisher_reference": "https://www.brasil247.com/",
+      "scope_note": "Brazilian national politics and economy reporting.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.brasil247.com/feed/",
+          "endpoint_id": "ep_9e3d9cd8596ed3119b26962c",
+          "observation": {
+            "endpointId": "ep_9e3d9cd8596ed3119b26962c",
+            "type": "rss",
+            "url": "https://www.brasil247.com/feed/",
+            "checkedAt": "2026-10-14T01:43:13.274Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 10,
+            "entriesWithUrl": 10,
+            "sampleUrls": [
+              "https://www.brasil247.com/brasilia/atos-pro-lula-mobilizam-apoiadores-em-11-capitais-para-o-segundo-turno/",
+              "https://www.brasil247.com/economia/ibovespa-cai-104-e-fecha-aos-2068-mil-pontos/",
+              "https://www.brasil247.com/economia/dolar-sobe-074-e-fecha-acima-de-r-5-apos-feriado-no-brasil/"
+            ],
+            "newestContentAt": "2026-10-14T01:40:23.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.brasil247.com/feed/",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2219,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.brasil247.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:43:11.053Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.brasil247.com/",
+            "found_at": "2026-10-14T01:43:08.770Z",
+            "page_sha256": "8702a74dd09fc4a05a80418eb9c90e65ca7f1d90fe3cb39b07ee83733dad99ea",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Feed para Brasil 247 &raquo;\" href=\"https://www.brasil247.com/feed/\" />"
+          }
+        }
+      ]
+    },
+    {
+      "country": "BR",
+      "name": "Jornal Opção",
+      "language": "pt",
+      "homepage": "https://www.jornalopcao.com.br/",
+      "publisher_reference": "https://www.jornalopcao.com.br/",
+      "scope_note": "Regional reporting in Goiás and national public affairs.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.jornalopcao.com.br/feed/",
+          "endpoint_id": "ep_44dbe9946ca1543c4b9e9eba",
+          "observation": {
+            "endpointId": "ep_44dbe9946ca1543c4b9e9eba",
+            "type": "rss",
+            "url": "https://www.jornalopcao.com.br/feed/",
+            "checkedAt": "2026-10-14T01:43:25.303Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 25,
+            "entriesWithUrl": 25,
+            "sampleUrls": [
+              "https://www.jornalopcao.com.br/ultimas-noticias/mpf-propoe-liberacao-das-obras-do-brt-norte-sul-em-goiania-para-evitar-paralisia-e-proteger-recursos-publicos-878615/",
+              "https://www.jornalopcao.com.br/saude/como-o-caso-do-papa-leao-xiv-ajuda-a-entender-quando-um-nodulo-no-pulmao-exige-cirurgia-especialista-explica-878581/",
+              "https://www.jornalopcao.com.br/bastidores/republicanos-em-goias-deve-ter-mudanca-no-comando-apos-2o-turno-marussa-e-mabel-podem-assumir-878599/"
+            ],
+            "newestContentAt": "2026-10-13T22:42:04.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.jornalopcao.com.br/feed/",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2178,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.jornalopcao.com.br/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:43:23.122Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.jornalopcao.com.br/",
+            "found_at": "2026-10-14T01:43:20.906Z",
+            "page_sha256": "9ea6d911adb8aba34d1a520efdc37787d02a029fe069a6bff20ef42c95f610ee",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Feed para Jornal Opção &raquo;\" href=\"https://www.jornalopcao.com.br/feed/\" />"
+          }
+        }
+      ]
+    },
+    {
+      "country": "AR",
+      "name": "Cenital",
+      "language": "es",
+      "homepage": "https://cenital.com/",
+      "publisher_reference": "https://cenital.com/",
+      "scope_note": "Argentinian politics, economy and public policy reporting.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://cenital.com/feed/",
+          "endpoint_id": "ep_00d71a81f41ff13acac1eab0",
+          "observation": {
+            "endpointId": "ep_00d71a81f41ff13acac1eab0",
+            "type": "rss",
+            "url": "https://cenital.com/feed/",
+            "checkedAt": "2026-10-14T01:40:22.012Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 10,
+            "entriesWithUrl": 10,
+            "sampleUrls": [
+              "https://cenital.com/el-papa-leon-xiv-fue-operado-con-exito/",
+              "https://cenital.com/milei-otra-vez-viaja-a-estados-unidos/",
+              "https://cenital.com/formas-de-la-divulgacion/"
+            ],
+            "newestContentAt": "2026-10-13T21:30:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://cenital.com/feed/",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 3021,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://cenital.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:40:18.988Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://cenital.com/",
+            "found_at": "2026-10-14T01:40:16.737Z",
+            "page_sha256": "5dd90ec3bbea332296b5b410808e16fef2a0ecba3f95285877d2b3f5797fef9c",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Cenital &raquo; Feed\" href=\"https://cenital.com/feed/\" />"
+          }
+        }
+      ]
+    },
+    {
+      "country": "AR",
+      "name": "La Nueva",
+      "language": "es",
+      "homepage": "https://www.lanueva.com/",
+      "publisher_reference": "https://www.lanueva.com/",
+      "scope_note": "Bahía Blanca regional and national reporting.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://www.lanueva.com/sitemap_last.xml",
+          "endpoint_id": "ep_e414e8314120a928fd6f8b2d",
+          "observation": {
+            "endpointId": "ep_e414e8314120a928fd6f8b2d",
+            "type": "sitemap",
+            "url": "https://www.lanueva.com/sitemap_last.xml",
+            "checkedAt": "2026-10-14T01:40:34.413Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 50,
+            "entriesWithUrl": 50,
+            "sampleUrls": [
+              "https://www.lanueva.com/nota/2026-10-13-5-0-5-sin-paredes-boca-recibe-a-vasco-da-gama-por-la-ida-de-las-semifinales-de-la-copa-sudamericana",
+              "https://www.lanueva.com/nota/2026-10-13-21-31-0-polemica-por-el-oro-el-gobierno-cuestiono-a-la-agn-por-estar-politizada",
+              "https://www.lanueva.com/nota/2026-10-13-20-27-0-cuales-son-los-sectores-afectados-por-los-cortes-de-calle-vigentes-en-bahia"
+            ],
+            "newestContentAt": "2026-10-14T01:35:56.093Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.lanueva.com/sitemap_last.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2507,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.lanueva.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:40:27.026Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://www.lanueva.com/robots.txt",
+            "found_at": "2026-10-14T01:40:27.026Z",
+            "page_sha256": "a0540160abdf6423c5b69df4553266e95b2bffd5a701822067a70f0aa9fd2de1",
+            "declaration": "Sitemap: https://www.lanueva.com/sitemap_last.xml"
+          }
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "name": "The 19th",
+      "language": "en",
+      "homepage": "https://19thnews.org/",
+      "publisher_reference": "https://19thnews.org/",
+      "scope_note": "Gender, politics and public policy nonprofit reporting.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://19thnews.org/feed",
+          "endpoint_id": "ep_309512f262d750c2ec5c7ca0",
+          "observation": {
+            "endpointId": "ep_309512f262d750c2ec5c7ca0",
+            "type": "rss",
+            "url": "https://19thnews.org/feed",
+            "checkedAt": "2026-10-14T01:39:00.351Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 20,
+            "entriesWithUrl": 20,
+            "sampleUrls": [
+              "https://19thnews.org/2026/10/ilhan-omar-house-search/",
+              "https://19thnews.org/2026/10/idaho-abortion-fight-moms-neighbors-activists/",
+              "https://19thnews.org/2026/10/voting-rights-act-protections-naacp/"
+            ],
+            "newestContentAt": "2026-10-13T21:56:20.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://19thnews.org/feed/",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 2,
+            "durationMs": 4490,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://19thnews.org/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:38:55.860Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://19thnews.org/",
+            "found_at": "2026-10-14T01:38:53.680Z",
+            "page_sha256": "cd9c677ab6bd2e243c538e0c175dfac25360963dc4a700948b6ca5c23f938aab",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"The 19th: Articles\" href=\"/feed\" />"
+          }
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "name": "The Marshall Project",
+      "language": "en",
+      "homepage": "https://www.themarshallproject.org/",
+      "publisher_reference": "https://www.themarshallproject.org/",
+      "scope_note": "Criminal justice and public accountability reporting.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.themarshallproject.org/rss/recent",
+          "endpoint_id": "ep_c78a32d86cd4173389cd834a",
+          "observation": {
+            "endpointId": "ep_c78a32d86cd4173389cd834a",
+            "type": "rss",
+            "url": "https://www.themarshallproject.org/rss/recent",
+            "checkedAt": "2026-10-14T01:39:10.420Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 50,
+            "entriesWithUrl": 50,
+            "sampleUrls": [
+              "https://www.themarshallproject.org/2026/10/10/id-arizona-voting-homeless-unhoused",
+              "https://www.themarshallproject.org/2026/10/09/new-york-ice-shooting-oscar-belgal",
+              "https://www.themarshallproject.org/2026/10/09/quilt-prison-vermont-restorative-justice"
+            ],
+            "newestContentAt": "2026-10-10T16:00:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.themarshallproject.org/rss/recent",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2346,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.themarshallproject.org/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:08.074Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.themarshallproject.org/",
+            "found_at": "2026-10-14T01:39:05.818Z",
+            "page_sha256": "d5c971dd1c513e48f402512ef421a4d039eb2e158954cda598d65b81c540111a",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"https://www.themarshallproject.org/rss/recent\" />"
+          }
+        }
+      ]
+    },
+    {
+      "country": "DE",
+      "name": "netzpolitik.org",
+      "language": "de",
+      "homepage": "https://netzpolitik.org/",
+      "publisher_reference": "https://netzpolitik.org/impressum/",
+      "scope_note": "Digital rights and technology policy reporting; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://netzpolitik.org/sitemap-news.xml",
+          "endpoint_id": "ep_b7bee556fae938a4d56385d8",
+          "observation": {
+            "endpointId": "ep_b7bee556fae938a4d56385d8",
+            "type": "sitemap",
+            "url": "https://netzpolitik.org/sitemap-news.xml",
+            "checkedAt": "2026-10-14T01:38:48.617Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 4,
+            "entriesWithUrl": 4,
+            "sampleUrls": [
+              "https://netzpolitik.org/2026/werbeindustrie-liest-mit-ki-chatbots-schicken-inhalte-aus-gespraechen-an-tracking-firmen/",
+              "https://netzpolitik.org/2026/angriffe-auf-yandex-aus-brennenden-rechenzentren-in-russland-wird-kein-bot-ausfall-bei-der-afd/",
+              "https://netzpolitik.org/2026/sensible-grindr-daten-microsoft-tochter-muss-rekordstrafe-zahlen/"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://netzpolitik.org/sitemap-news.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2619,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://netzpolitik.org/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:38:36.839Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://netzpolitik.org/sitemap.xml",
+            "found_at": "2026-10-14T01:38:45.997Z",
+            "page_sha256": "08554d36db785d49e5d76409b1b0b1da196751f80fb645ff8a99bd740e5d3ff7",
+            "declaration": "<loc>https://netzpolitik.org/sitemap-news.xml</loc>"
+          }
+        }
+      ]
+    },
+    {
+      "country": "DE",
+      "name": "Golem.de",
+      "language": "de",
+      "homepage": "https://www.golem.de/",
+      "publisher_reference": "https://www.golem.de/sonstiges/impressum.html",
+      "scope_note": "German technology and business reporting; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://www.golem.de/gnewsmap.xml",
+          "endpoint_id": "ep_e45c15a8cdd873ec6a171028",
+          "observation": {
+            "endpointId": "ep_e45c15a8cdd873ec6a171028",
+            "type": "sitemap",
+            "url": "https://www.golem.de/gnewsmap.xml",
+            "checkedAt": "2026-10-14T01:38:51.772Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 210,
+            "entriesWithUrl": 210,
+            "sampleUrls": [
+              "https://www.golem.de/news/satellitenmobilfunk-hoettges-warnt-netzbetreiber-vor-mvno-deals-mit-starlink-2610-214072.html",
+              "https://www.golem.de/news/google-cloud-und-thales-trotz-deutscher-server-kein-geheimschutz-fuer-regierungsdaten-2610-214071.html",
+              "https://www.golem.de/news/leere-regale-supermarktlogistik-durch-cyberangriff-lahmgelegt-2610-214069.html"
+            ],
+            "newestContentAt": "2026-10-14T00:40:02.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.golem.de/gnewsmap.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 3681,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.golem.de/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:38:36.728Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://www.golem.de/gsiteindex.xml",
+            "found_at": "2026-10-14T01:38:48.088Z",
+            "page_sha256": "8a5af3be08cb210a4cd358d101df8318511e700c082fdf3b9747b5247f8b6332",
+            "declaration": "<loc>https://www.golem.de/gnewsmap.xml</loc>"
+          }
+        }
+      ]
+    },
+    {
+      "country": "GB",
+      "name": "The Ferret",
+      "language": "en",
+      "homepage": "https://www.theferret.scot/",
+      "publisher_reference": "https://www.theferret.scot/about/",
+      "scope_note": "Scottish investigative and fact-checking reporting; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.theferret.scot/latest/rss/",
+          "endpoint_id": "ep_a4c73fb7ad3ac61fb72150b3",
+          "observation": {
+            "endpointId": "ep_a4c73fb7ad3ac61fb72150b3",
+            "type": "rss",
+            "url": "https://www.theferret.scot/latest/rss/",
+            "checkedAt": "2026-10-14T01:38:53.568Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 15,
+            "entriesWithUrl": 15,
+            "sampleUrls": [
+              "https://www.theferret.scot/salmon-farmers-scheme-greenwashing/",
+              "https://www.theferret.scot/scotland-data-centre-graham-edwards/",
+              "https://www.theferret.scot/dundee-university-refused-taxpayer-bailout-after-80m-cash-balance-investigation/"
+            ],
+            "newestContentAt": "2026-10-13T05:00:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.theferret.scot/latest/rss/",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2520,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.theferret.scot/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:38:48.927Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.theferret.scot/",
+            "found_at": "2026-10-14T01:38:51.044Z",
+            "page_sha256": "4a0e319b0d29c9bac23b1b954df26a2fa5c50818ec6d00430ea93e026e3e800a",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"The Ferret\" href=\"https://www.theferret.scot/latest/rss/\">"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.theferret.scot/sitemap-posts.xml",
+          "endpoint_id": "ep_bf92f59f7a6024560be2a6bc",
+          "observation": {
+            "endpointId": "ep_bf92f59f7a6024560be2a6bc",
+            "type": "sitemap",
+            "url": "https://www.theferret.scot/sitemap-posts.xml",
+            "checkedAt": "2026-10-14T01:39:04.617Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 2822,
+            "entriesWithUrl": 2822,
+            "sampleUrls": [
+              "https://www.theferret.scot/salmon-farmers-scheme-greenwashing/",
+              "https://www.theferret.scot/scotland-data-centre-graham-edwards/",
+              "https://www.theferret.scot/dundee-university-refused-taxpayer-bailout-after-80m-cash-balance-investigation/"
+            ],
+            "newestContentAt": "2026-10-13T04:59:59.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.theferret.scot/sitemap-posts.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2312,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.theferret.scot/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:38:48.927Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://www.theferret.scot/sitemap.xml",
+            "found_at": "2026-10-14T01:39:02.305Z",
+            "page_sha256": "0845f252014341ec5da639f49b225b42aa0a7706ab78187edbd4d4d40fa8b8ff",
+            "declaration": "<loc>https://www.theferret.scot/sitemap-posts.xml</loc>"
+          }
+        }
+      ]
+    },
+    {
+      "country": "FR",
+      "name": "Les Jours",
+      "language": "fr",
+      "homepage": "https://lesjours.fr/",
+      "publisher_reference": "https://lesjours.fr/mentions-legales.html",
+      "scope_note": "French independent investigative reporting; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://lesjours.fr/rss.xml",
+          "endpoint_id": "ep_94137d774bf674fe6e0632d8",
+          "observation": {
+            "endpointId": "ep_94137d774bf674fe6e0632d8",
+            "type": "rss",
+            "url": "https://lesjours.fr/rss.xml",
+            "checkedAt": "2026-10-14T01:39:13.504Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 10,
+            "entriesWithUrl": 10,
+            "sampleUrls": [
+              "https://lesjours.fr/obsessions/rn-derniere-marche-3/ep9-bardella-militant/?utm_source=rss-feed&utm_medium=RSS&utm_campaign=rss-feed",
+              "https://lesjours.fr/obsessions/ecoles-hors-contrat-catholiques/ep4-excellence-ruralites/?utm_source=rss-feed&utm_medium=RSS&utm_campaign=rss-feed",
+              "https://lesjours.fr/obsessions/rn-derniere-marche-3/ep8-enquete-facebook-riposte-frontieres/?utm_source=rss-feed&utm_medium=RSS&utm_campaign=rss-feed"
+            ],
+            "newestContentAt": "2026-10-13T10:59:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://lesjours.fr/rss.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2600,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://lesjours.fr/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:07.826Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://lesjours.fr/",
+            "found_at": "2026-10-14T01:39:10.892Z",
+            "page_sha256": "275fcda412e5b250195d272a2e582b3e78e2c30222c4b1e3a3d3d389ef5ecd7a",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" href=\"https://lesjours.fr/rss.xml\"/>"
+          }
+        }
+      ]
+    },
+    {
+      "country": "IT",
+      "name": "Internazionale",
+      "language": "it",
+      "homepage": "https://www.internazionale.it/",
+      "publisher_reference": "https://www.internazionale.it/about",
+      "scope_note": "Italian international affairs and magazine reporting; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.internazionale.it/sitemaps/rss.xml",
+          "endpoint_id": "ep_f11772c7f6da9e05a0d3db48",
+          "observation": {
+            "endpointId": "ep_f11772c7f6da9e05a0d3db48",
+            "type": "rss",
+            "url": "https://www.internazionale.it/sitemaps/rss.xml",
+            "checkedAt": "2026-10-14T01:39:17.015Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 13,
+            "entriesWithUrl": 13,
+            "sampleUrls": [
+              "https://www.internazionale.it/notizie/ajaz-ashraf-giornalista/2026/10/13/proteste-india-repressione",
+              "https://www.internazionale.it/foto/2026/10/13/sguardo-rovescio-marialba-russo",
+              "https://www.internazionale.it/opinione/pierre-haski/2026/10/13/arabia-saudita-huthi"
+            ],
+            "newestContentAt": "2026-10-13T08:51:48.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.internazionale.it/sitemaps/rss.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2179,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.internazionale.it/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:12.047Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.internazionale.it/",
+            "found_at": "2026-10-14T01:39:14.830Z",
+            "page_sha256": "b2961fe6c7908678521fd8ca416b57b6fd067b9fbf12844396637ce844554a30",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Internazionale - RSS\" href=\"https://www.internazionale.it/sitemaps/rss.xml\" />"
+          }
+        }
+      ]
+    },
+    {
+      "country": "IT",
+      "name": "Linkiesta",
+      "language": "it",
+      "homepage": "https://www.linkiesta.it/",
+      "publisher_reference": "https://www.linkiesta.it/chi-siamo/",
+      "scope_note": "Italian politics, economy and culture reporting; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.linkiesta.it/feed/",
+          "endpoint_id": "ep_0ad9d011bde31b3d3185a9e7",
+          "observation": {
+            "endpointId": "ep_0ad9d011bde31b3d3185a9e7",
+            "type": "rss",
+            "url": "https://www.linkiesta.it/feed/",
+            "checkedAt": "2026-10-14T01:39:21.318Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 12,
+            "entriesWithUrl": 12,
+            "sampleUrls": [
+              "https://www.linkiesta.it/2026/10/debito-spread-inflazione-tassi/",
+              "https://www.linkiesta.it/2026/10/conte-ha-un-piano-schlein-una-comitiva-da-tenere-insieme/",
+              "https://www.linkiesta.it/2026/10/america-democrazia-trasformata-in-societa-per-azioni/"
+            ],
+            "newestContentAt": "2026-10-13T15:30:35.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.linkiesta.it/feed/",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2276,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.linkiesta.it/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:16.404Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.linkiesta.it/",
+            "found_at": "2026-10-14T01:39:19.038Z",
+            "page_sha256": "2624db4e34693585315e4934ca7deb83ccc004079000be19db1aec9d5c329e7a",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Linkiesta.it &raquo; Feed\" href=\"https://www.linkiesta.it/feed/\" />"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.linkiesta.it/news-sitemap.xml",
+          "endpoint_id": "ep_48ee9a8ffe68ed0399e8eb5f",
+          "observation": {
+            "endpointId": "ep_48ee9a8ffe68ed0399e8eb5f",
+            "type": "sitemap",
+            "url": "https://www.linkiesta.it/news-sitemap.xml",
+            "checkedAt": "2026-10-14T01:39:31.802Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 28,
+            "entriesWithUrl": 28,
+            "sampleUrls": [
+              "https://www.linkiesta.it/2026/10/debito-spread-inflazione-tassi/",
+              "https://www.linkiesta.it/2026/10/america-democrazia-trasformata-in-societa-per-azioni/",
+              "https://www.linkiesta.it/2026/10/salvini-dimissioni-lega-tajani-primarie-forza-italia/"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.linkiesta.it/news-sitemap.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2482,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.linkiesta.it/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:16.404Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://www.linkiesta.it/robots.txt",
+            "found_at": "2026-10-14T01:39:16.404Z",
+            "page_sha256": "830ea0d94c5f900e28be27eb320168c8a57d596bb83852cd4594b582d6bf220d",
+            "declaration": "Sitemap: https://www.linkiesta.it/news-sitemap.xml"
+          }
+        }
+      ]
+    },
+    {
+      "country": "IT",
+      "name": "Valigia Blu",
+      "language": "it",
+      "homepage": "https://www.valigiablu.it/",
+      "publisher_reference": "https://www.valigiablu.it/about/",
+      "scope_note": "Italian fact-checking and public-interest reporting; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.valigiablu.it/feed/",
+          "endpoint_id": "ep_ca7c33441500f39373864616",
+          "observation": {
+            "endpointId": "ep_ca7c33441500f39373864616",
+            "type": "rss",
+            "url": "https://www.valigiablu.it/feed/",
+            "checkedAt": "2026-10-14T01:39:40.033Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 10,
+            "entriesWithUrl": 10,
+            "sampleUrls": [
+              "https://www.valigiablu.it/dipartimento-stato-usa-propaganda-maga-europa/",
+              "https://www.valigiablu.it/memoria-israele-trauma-7-ottobre-elezioni/",
+              "https://www.valigiablu.it/caso-cornell-jane-doe-cultura-stupro/"
+            ],
+            "newestContentAt": "2026-10-12T06:44:59.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.valigiablu.it/feed/",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 3454,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.valigiablu.it/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:33.055Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.valigiablu.it/",
+            "found_at": "2026-10-14T01:39:36.577Z",
+            "page_sha256": "82c4db17d689179765e9945c2f1580a47c2e1f281b7bef859d8ad27eb0723dae",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Valigia Blu &raquo; Feed\" href=\"https://www.valigiablu.it/feed/\" />"
+          }
+        }
+      ]
+    },
+    {
+      "country": "ES",
+      "name": "infoLibre",
+      "language": "es",
+      "homepage": "https://www.infolibre.es/",
+      "publisher_reference": "https://www.infolibre.es/aviso-legal/",
+      "scope_note": "Spanish investigative, politics and economy reporting; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.infolibre.es/rss/",
+          "endpoint_id": "ep_1acbeff414437896d942fe40",
+          "observation": {
+            "endpointId": "ep_1acbeff414437896d942fe40",
+            "type": "rss",
+            "url": "https://www.infolibre.es/rss/",
+            "checkedAt": "2026-10-14T01:39:42.624Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 50,
+            "entriesWithUrl": 50,
+            "sampleUrls": [
+              "https://www.infolibre.es/politica/izquierda-alternativa-juega-29n-puzle-pactos-candidaturas-debe-resolver-tres-dias_1_2237934.html",
+              "https://www.infolibre.es/investigacion/comunidad-madrid-dispara-publicidad-articulo-14-abc-web-radio-javier-negre_130_2237809.html",
+              "https://www.infolibre.es/politica/pp-bloquea-asamblea-madrid-preguntas-contratos-gastos-orcam-mexico_1_2237580.html"
+            ],
+            "newestContentAt": "2026-10-13T18:08:12.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.infolibre.es/rss/",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2579,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.infolibre.es/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:37.571Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.infolibre.es/",
+            "found_at": "2026-10-14T01:39:40.042Z",
+            "page_sha256": "43a69c7946d4da7405133c11f31206535a5e7285dabc7d108fa4e66acb498d5e",
+            "tag": "<link rel=\"alternate\" title=\"Últimas Noticias de infolibre.es | infoLibre\" href=\"/rss/\" type=\"application/rss+xml\">"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.infolibre.es/sitemap_google_news_382e2.xml",
+          "endpoint_id": "ep_c9a24ac83fea4bf863a928b9",
+          "observation": {
+            "endpointId": "ep_c9a24ac83fea4bf863a928b9",
+            "type": "sitemap",
+            "url": "https://www.infolibre.es/sitemap_google_news_382e2.xml",
+            "checkedAt": "2026-10-14T01:39:49.712Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 45,
+            "entriesWithUrl": 45,
+            "sampleUrls": [
+              "https://www.infolibre.es/politica/izquierda-alternativa-juega-29n-puzle-pactos-candidaturas-debe-resolver-tres-dias_1_2237934.html",
+              "https://www.infolibre.es/opinion/columnas/la-guillotina/ultimo-vals-democracia-ravel_129_2237862.html",
+              "https://www.infolibre.es/opinion/vinetas/javirroyo/partido-patron_131_2237846.html"
+            ],
+            "newestContentAt": "2026-10-13T19:11:34.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.infolibre.es/sitemap_google_news_382e2.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2298,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.infolibre.es/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:37.571Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://www.infolibre.es/sitemap_index_382e2.xml",
+            "found_at": "2026-10-14T01:39:47.414Z",
+            "page_sha256": "dcc95cfd3d6372077a868036adca8073c7be164ead1f0ae126e13a85179338ff",
+            "declaration": "<loc>https://www.infolibre.es/sitemap_google_news_382e2.xml</loc>"
+          }
+        }
+      ]
+    },
+    {
+      "country": "ES",
+      "name": "Newtral",
+      "language": "es",
+      "homepage": "https://www.newtral.es/",
+      "publisher_reference": "https://www.newtral.es/aviso-legal-y-politica-de-privacidad/",
+      "scope_note": "Spanish verification and public-interest journalism; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.newtral.es/feed/",
+          "endpoint_id": "ep_0b5cd3042b6ab3a4f7436fab",
+          "observation": {
+            "endpointId": "ep_0b5cd3042b6ab3a4f7436fab",
+            "type": "rss",
+            "url": "https://www.newtral.es/feed/",
+            "checkedAt": "2026-10-14T01:39:52.116Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 10,
+            "entriesWithUrl": 10,
+            "sampleUrls": [
+              "https://www.newtral.es/fundador-latinos-trump-deportado-guevara/20261013/",
+              "https://www.newtral.es/feijoo-pago-mili/20261013/",
+              "https://www.newtral.es/voto-whatsapp-ine/20261013/"
+            ],
+            "newestContentAt": "2026-10-13T16:09:21.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.newtral.es/feed/",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2596,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.newtral.es/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:46.687Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.newtral.es/",
+            "found_at": "2026-10-14T01:39:49.516Z",
+            "page_sha256": "b1449a288796f50e36089ce79d430b75b8b59d55943b1e136380d5d876b6db57",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Newtral - Últimas noticias\" href=\"https://www.newtral.es/feed/\">"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.newtral.es/news-sitemap.xml",
+          "endpoint_id": "ep_99834e61be4562ebbfc09c67",
+          "observation": {
+            "endpointId": "ep_99834e61be4562ebbfc09c67",
+            "type": "sitemap",
+            "url": "https://www.newtral.es/news-sitemap.xml",
+            "checkedAt": "2026-10-14T01:40:00.447Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 13,
+            "entriesWithUrl": 13,
+            "sampleUrls": [
+              "https://www.newtral.es/fundador-latinos-trump-deportado-guevara/20261013/",
+              "https://www.newtral.es/feijoo-pago-mili/20261013/",
+              "https://www.newtral.es/voto-whatsapp-ine/20261013/"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.newtral.es/news-sitemap.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2311,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.newtral.es/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:46.687Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://newtral.es/sitemap.xml",
+            "found_at": "2026-10-14T01:39:58.134Z",
+            "page_sha256": "4ba1909ed2c2d13266c9eed71f3a8533ceba30077531beeea77608ebc45123c2",
+            "declaration": "<loc>https://www.newtral.es/news-sitemap.xml</loc>"
+          }
+        }
+      ]
+    },
+    {
+      "country": "KR",
+      "name": "미디어오늘",
+      "language": "ko",
+      "homepage": "https://www.mediatoday.co.kr/",
+      "publisher_reference": "https://www.mediatoday.co.kr/",
+      "scope_note": "Korean media-policy and public-affairs publisher. Rolling Google News URL set; independent publication_date review is recent. Validator lastmod freshness remains missing.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://www.mediatoday.co.kr/sitemap.xml",
+          "endpoint_id": "ep_c74d8e724a36eec8b5bcf962",
+          "observation": {
+            "endpointId": "ep_c74d8e724a36eec8b5bcf962",
+            "type": "sitemap",
+            "url": "https://www.mediatoday.co.kr/sitemap.xml",
+            "checkedAt": "2026-10-14T01:38:44.954Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 100,
+            "entriesWithUrl": 100,
+            "sampleUrls": [
+              "https://www.mediatoday.co.kr/news/articleView.html?idxno=337712",
+              "https://www.mediatoday.co.kr/news/articleView.html?idxno=337701",
+              "https://www.mediatoday.co.kr/news/articleView.html?idxno=337710"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.mediatoday.co.kr/sitemap.xml",
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 4161,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.mediatoday.co.kr/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:38:36.554Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://www.mediatoday.co.kr/robots.txt",
+            "found_at": "2026-10-14T01:38:36.554Z",
+            "page_sha256": "5492a32c6a46a96ab03773ea4ad51940c907e3ccd587ad63c703b7a27defee41",
+            "declaration": "\n\r\nSitemap:https://www.mediatoday.co.kr/sitemap.xml"
+          }
+        }
+      ]
+    },
+    {
+      "country": "KR",
+      "name": "경남도민일보",
+      "language": "ko",
+      "homepage": "https://www.idomin.com/",
+      "publisher_reference": "https://www.idomin.com/com/com-1.html",
+      "scope_note": "Korean regional daily covering Gyeongsangnam-do. Official RSS and rolling article sitemap; their overlap is deduplicated by the shared source binding.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://cdn.idomin.com/rss/gn_rss_allArticle.xml",
+          "endpoint_id": "ep_e3d11ef41be26ff2570dabee",
+          "observation": {
+            "endpointId": "ep_e3d11ef41be26ff2570dabee",
+            "type": "rss",
+            "url": "https://cdn.idomin.com/rss/gn_rss_allArticle.xml",
+            "checkedAt": "2026-10-14T01:41:54.277Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 50,
+            "entriesWithUrl": 50,
+            "sampleUrls": [
+              "https://www.idomin.com/news/articleView.html?idxno=2016881",
+              "https://www.idomin.com/news/articleView.html?idxno=2016880",
+              "https://www.idomin.com/news/articleView.html?idxno=2016879"
+            ],
+            "newestContentAt": "2026-10-14T00:59:25.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://cdn.idomin.com/rss/gn_rss_allArticle.xml",
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 4769,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://cdn.idomin.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:41:49.508Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.idomin.com/",
+            "found_at": "2026-10-14T01:41:47.932Z",
+            "page_sha256": "9c3157f20c170434e4cca8a8ca569e1009d2ecccca7255091b2ffac179f03eda",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" href=\"https://cdn.idomin.com/rss/gn_rss_allArticle.xml\"/>"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.idomin.com/sitemap.xml",
+          "endpoint_id": "ep_c9d3b21136edb193104110f9",
+          "observation": {
+            "endpointId": "ep_c9d3b21136edb193104110f9",
+            "type": "sitemap",
+            "url": "https://www.idomin.com/sitemap.xml",
+            "checkedAt": "2026-10-14T01:41:56.157Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 100,
+            "entriesWithUrl": 100,
+            "sampleUrls": [
+              "https://www.idomin.com/news/articleView.html?idxno=2016883",
+              "https://www.idomin.com/news/articleView.html?idxno=2016882",
+              "https://www.idomin.com/news/articleView.html?idxno=2016881"
+            ],
+            "newestContentAt": "2026-10-14T01:02:38.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.idomin.com/sitemap.xml",
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 1879,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.idomin.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:41:43.789Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://www.idomin.com/robots.txt",
+            "found_at": "2026-10-14T01:41:43.789Z",
+            "page_sha256": "ee63cfbf89a02645b4b5ed46d78d928c23fc1eb4e1d0dd089f7b80a8151cce24",
+            "declaration": "\n\r\n\r\n\r\nSitemap: https://www.idomin.com/sitemap.xml"
+          }
+        }
+      ]
+    },
+    {
+      "country": "KR",
+      "name": "시사IN",
+      "language": "ko",
+      "homepage": "https://www.sisain.co.kr/",
+      "publisher_reference": "https://www.sisain.co.kr/",
+      "scope_note": "Korean current-affairs weekly. Official current all-article RSS and rolling Google News URL set. Sitemap lastmod is unavailable; independent news publication dates are retained separately.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://cdn.sisain.co.kr/rss/gns_allArticle.xml",
+          "endpoint_id": "ep_290078111abd085dee01886e",
+          "observation": {
+            "endpointId": "ep_290078111abd085dee01886e",
+            "type": "rss",
+            "url": "https://cdn.sisain.co.kr/rss/gns_allArticle.xml",
+            "checkedAt": "2026-10-14T01:41:54.615Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 50,
+            "entriesWithUrl": 50,
+            "sampleUrls": [
+              "https://www.sisain.co.kr/news/articleView.html?idxno=58605",
+              "https://www.sisain.co.kr/news/articleView.html?idxno=58602",
+              "https://www.sisain.co.kr/news/articleView.html?idxno=58587"
+            ],
+            "newestContentAt": "2026-10-13T21:36:31.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://cdn.sisain.co.kr/rss/gns_allArticle.xml",
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 5929,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://cdn.sisain.co.kr/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:41:48.685Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.sisain.co.kr/",
+            "found_at": "2026-10-14T01:41:47.173Z",
+            "page_sha256": "d8b5900a054ff83479be6502d428d192e20355415c6db42624a14003d4b50dd6",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" href=\"https://cdn.sisain.co.kr/rss/gns_allArticle.xml\"/>"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "http://www.sisain.co.kr/sitemap.xml",
+          "endpoint_id": "ep_6ef5008eb063180652c75db9",
+          "observation": {
+            "endpointId": "ep_6ef5008eb063180652c75db9",
+            "type": "sitemap",
+            "url": "http://www.sisain.co.kr/sitemap.xml",
+            "checkedAt": "2026-10-14T01:42:02.615Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 100,
+            "entriesWithUrl": 100,
+            "sampleUrls": [
+              "https://www.sisain.co.kr/news/articleView.html?idxno=58605",
+              "https://www.sisain.co.kr/news/articleView.html?idxno=58602",
+              "https://www.sisain.co.kr/news/articleView.html?idxno=58587"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "http://www.sisain.co.kr/sitemap.xml",
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 3151,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "http://www.sisain.co.kr/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:41:59.463Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://www.sisain.co.kr/robots.txt",
+            "found_at": "2026-10-14T01:41:43.268Z",
+            "page_sha256": "f8460f9347e207401c1af14a3c6c72817ca6a8e528ae31a71f6f1cd8c2012e2b",
+            "declaration": "\n\r\nsitemap: http://www.sisain.co.kr/sitemap.xml"
+          }
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "name": "京都新聞",
+      "language": "ja",
+      "homepage": "https://www.kyoto-np.co.jp/",
+      "publisher_reference": "https://www.kyoto-np.co.jp/list/corporate/about",
+      "scope_note": "Japanese regional daily covering Kyoto and Shiga. Official current RSS with article URLs and parsed publication dates.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.kyoto-np.co.jp/list/feed/rss",
+          "endpoint_id": "ep_cfb72ea9b4a085b2f7151e3e",
+          "observation": {
+            "endpointId": "ep_cfb72ea9b4a085b2f7151e3e",
+            "type": "rss",
+            "url": "https://www.kyoto-np.co.jp/list/feed/rss",
+            "checkedAt": "2026-10-14T01:39:16.692Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 20,
+            "entriesWithUrl": 20,
+            "sampleUrls": [
+              "https://www.kyoto-np.co.jp/articles/-/1807282",
+              "https://www.kyoto-np.co.jp/articles/-/1807066",
+              "https://www.kyoto-np.co.jp/articles/-/1805807"
+            ],
+            "newestContentAt": "2026-10-14T01:30:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.kyoto-np.co.jp/list/feed/rss",
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2717,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.kyoto-np.co.jp/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:06.733Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.kyoto-np.co.jp/",
+            "found_at": "2026-10-14T01:39:13.973Z",
+            "page_sha256": "0735752ecb32419be36a6e8ecaed7b25d931bbab83a8e3eec1f5029720d5ac58",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"京都新聞デジタル 総合RSS\" href=\"https://www.kyoto-np.co.jp/list/feed/rss\" />"
+          }
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "name": "沖縄タイムス",
+      "language": "ja",
+      "homepage": "https://www.okinawatimes.co.jp/",
+      "publisher_reference": "https://okinawatimes.jp/company-overview/",
+      "scope_note": "Japanese Okinawa regional daily. Official current RSS with article URLs and parsed publication dates.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.okinawatimes.co.jp/list/feed/rss",
+          "endpoint_id": "ep_0b71a7441b8b288ae104bfd4",
+          "observation": {
+            "endpointId": "ep_0b71a7441b8b288ae104bfd4",
+            "type": "rss",
+            "url": "https://www.okinawatimes.co.jp/list/feed/rss",
+            "checkedAt": "2026-10-14T01:39:14.589Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 20,
+            "entriesWithUrl": 20,
+            "sampleUrls": [
+              "http://www.okinawatimes.co.jp/articles/-/1943904",
+              "http://www.okinawatimes.co.jp/articles/-/1943800",
+              "http://www.okinawatimes.co.jp/articles/-/1944106"
+            ],
+            "newestContentAt": "2026-10-14T01:14:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.okinawatimes.co.jp/list/feed/rss",
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2841,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.okinawatimes.co.jp/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:03.171Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.okinawatimes.co.jp/",
+            "found_at": "2026-10-14T01:39:11.746Z",
+            "page_sha256": "f48bf7ae9a5358c56b9a7578102f269be55233bf5ea094f0109afe31f9f9ac79",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"沖縄タイムス＋プラス 総合RSS\" href=\"https://www.okinawatimes.co.jp/list/feed/rss\">"
+          }
+        }
+      ]
+    },
+    {
+      "country": "JP",
+      "name": "琉球新報",
+      "language": "ja",
+      "homepage": "https://ryukyushimpo.jp/",
+      "publisher_reference": "https://ryukyushimpo.jp/",
+      "scope_note": "Japanese Okinawa regional daily. Rolling Google News URL set, 88 of 88 sampled full-set URLs match article paths. Independent publication dates are recent; validator lastmod freshness remains missing.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://ryukyushimpo.jp/news-sitemap.xml",
+          "endpoint_id": "ep_b9e6d9b9c865254b10b8c464",
+          "observation": {
+            "endpointId": "ep_b9e6d9b9c865254b10b8c464",
+            "type": "sitemap",
+            "url": "https://ryukyushimpo.jp/news-sitemap.xml",
+            "checkedAt": "2026-10-14T01:39:02.854Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 88,
+            "entriesWithUrl": 88,
+            "sampleUrls": [
+              "https://ryukyushimpo.jp/national/entry-5554181.html",
+              "https://ryukyushimpo.jp/national/entry-5554179.html",
+              "https://ryukyushimpo.jp/national/entry-5554178.html"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://ryukyushimpo.jp/news-sitemap.xml",
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 3402,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://ryukyushimpo.jp/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:38:52.064Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://ryukyushimpo.jp/sitemap_index.xml",
+            "found_at": "2026-10-14T01:38:59.451Z",
+            "page_sha256": "0aa78289069e4f78deec05632623d23358b2e73f1d92cdf2cf1ac0fa3dc21c4f",
+            "declaration": "<loc>https://ryukyushimpo.jp/news-sitemap.xml</loc>"
+          }
+        }
+      ]
+    },
+    {
+      "country": "CN",
+      "name": "光明网 - News Sitemap",
+      "language": "zh",
+      "homepage": "https://www.gmw.cn/",
+      "publisher_reference": "https://www.gmw.cn/",
+      "scope_note": "Mainland Chinese publisher with Beijing address in its official footer. Official rolling news URL set; all 298 reviewed URLs have dated content article paths and current lastmod.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "http://news.gmw.cn/google_news.xml",
+          "endpoint_id": "ep_51153d49336114f6429ec205",
+          "observation": {
+            "endpointId": "ep_51153d49336114f6429ec205",
+            "type": "sitemap",
+            "url": "http://news.gmw.cn/google_news.xml",
+            "checkedAt": "2026-10-14T01:42:41.937Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 298,
+            "entriesWithUrl": 298,
+            "sampleUrls": [
+              "https://news.gmw.cn/2026-10/14/content_39044643.htm",
+              "https://news.gmw.cn/2026-10/14/content_39044645.htm",
+              "https://news.gmw.cn/2026-10/14/content_39044644.htm"
+            ],
+            "newestContentAt": "2026-10-13T18:25:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://news.gmw.cn/google_news.xml",
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 2,
+            "durationMs": 5452,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "http://news.gmw.cn/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:42:36.467Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://www.gmw.cn/google.xml",
+            "found_at": "2026-10-14T01:42:34.070Z",
+            "page_sha256": "8e1ffeba2bc3906c545604e0547c02d5fe1cfef1f33087c19d39b2d5283b50cd",
+            "declaration": "<loc>http://news.gmw.cn/google_news.xml</loc>"
+          }
+        }
+      ]
+    },
+    {
+      "country": "IN",
+      "name": "Mongabay India",
+      "language": "en",
+      "homepage": "https://india.mongabay.com/",
+      "publisher_reference": "https://india.mongabay.com/about",
+      "scope_note": "Indian English-language environment and conservation news edition. Official current RSS; archived sitemap partitions are excluded.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://india.mongabay.com/feed",
+          "endpoint_id": "ep_3b7757444dcb4d04fcea8ad1",
+          "observation": {
+            "endpointId": "ep_3b7757444dcb4d04fcea8ad1",
+            "type": "rss",
+            "url": "https://india.mongabay.com/feed",
+            "checkedAt": "2026-10-14T01:42:48.629Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 20,
+            "entriesWithUrl": 20,
+            "sampleUrls": [
+              "https://india.mongabay.com/2026/10/lessons-from-translocating-a-tiger-for-population-recovery-commentary/",
+              "https://india.mongabay.com/2026/10/as-kashmir-turns-from-paddy-to-apples-dependence-on-outside-rice-grows/",
+              "https://india.mongabay.com/2026/10/reclaiming-natures-many-delights-through-living-fences-book-review/"
+            ],
+            "newestContentAt": "2026-10-13T14:15:32.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://india.mongabay.com/feed/",
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 2,
+            "durationMs": 4282,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://india.mongabay.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:42:42.115Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_anchor",
+            "source_url": "https://india.mongabay.com/",
+            "found_at": "2026-10-14T01:42:44.344Z",
+            "page_sha256": "a7f2271a47168c8948242cd0a9876ab4a3f8abbbf1c0d549a5ed07a04de31596",
+            "tag": "<a href=\"https://india.mongabay.com/feed\" data-wpel-link=\"internal\">"
+          }
+        }
+      ]
+    },
+    {
+      "country": "IN",
+      "name": "Scroll.in - Recent Article Sitemap",
+      "language": "en",
+      "homepage": "https://scroll.in/",
+      "publisher_reference": "https://scroll.in/",
+      "scope_note": "Additional rolling article URL set for existing Indian publisher Scroll.in. Existing RSS and Google News endpoints remain unchanged; this is a new typed endpoint, not a new publisher.",
+      "kind": "existing_publisher_alternative",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://scroll.in/sitemap/sitemap.xml",
+          "endpoint_id": "ep_a6fd762936db448a5e685a77",
+          "observation": {
+            "endpointId": "ep_a6fd762936db448a5e685a77",
+            "type": "sitemap",
+            "url": "https://scroll.in/sitemap/sitemap.xml",
+            "checkedAt": "2026-10-14T01:39:55.224Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 222,
+            "entriesWithUrl": 222,
+            "sampleUrls": [
+              "https://scroll.in/article/1096068/how-adani-profited-from-government-coal-import-order-that-raised-electricity-prices-across-india",
+              "https://scroll.in/article/1096238/why-relocating-wild-animals-is-rife-with-complications",
+              "https://scroll.in/article/1096329/why-anne-carson-has-won-the-nobel-prize-for-literature-for-her-bold-inventive-breathtaking-work"
+            ],
+            "newestContentAt": "2026-10-14T01:00:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://scroll.in/sitemap/sitemap.xml",
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2553,
+            "attempts": 1,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://scroll.in/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:50.152Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://scroll.in/robots.txt",
+            "found_at": "2026-10-14T01:39:50.152Z",
+            "page_sha256": "e4ecb76149e94733da5757fd902d22ff2d60c3bc91c46f874facc4d31b2cc04f",
+            "declaration": "Sitemap: https://scroll.in/sitemap/sitemap.xml"
+          }
+        }
+      ]
+    },
+    {
+      "country": "AU",
+      "name": "Independent Australia",
+      "language": "en",
+      "homepage": "https://independentaustralia.net/",
+      "publisher_reference": "https://independentaustralia.net/",
+      "scope_note": "Australian public affairs reporting. Official feed provider declared by the publisher.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://feeds.feedburner.com/IndependentAustralia",
+          "endpoint_id": "ep_204db26ef366a7f85c80dc46",
+          "observation": {
+            "endpointId": "ep_204db26ef366a7f85c80dc46",
+            "type": "rss",
+            "url": "https://feeds.feedburner.com/IndependentAustralia",
+            "checkedAt": "2026-10-14T01:39:34.105Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 100,
+            "entriesWithUrl": 100,
+            "sampleUrls": [
+              "https://independentaustralia.net/business/business-display/no-easy-solution-to-australias-rural-and-remote-connectivity-problem,21671?utm_source=rss&utm_medium=rss&utm_campaign=IA_Feed",
+              "https://independentaustralia.net/politics/politics-display/public-executions-aukus-and-the-right-of-australian-communities-to-say-no,21670?utm_source=rss&utm_medium=rss&utm_campaign=IA_Feed",
+              "https://independentaustralia.net/business/business-display/openai-under-scrutiny-over-security-failures-and-research-ethics,21669?utm_source=rss&utm_medium=rss&utm_campaign=IA_Feed"
+            ],
+            "newestContentAt": "2026-10-13T21:00:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://feeds.feedburner.com/IndependentAustralia",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2303,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://feeds.feedburner.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:31.801Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://independentaustralia.net/",
+            "found_at": "2026-10-14T01:39:31.513Z",
+            "page_sha256": "b3acd7a50b0565ad51bf34ec4a04022805b2645dbf2af221d367eef32f6b3381",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Independent Australia\" href=\"https://feeds.feedburner.com/IndependentAustralia\" />"
+          }
+        }
+      ]
+    },
+    {
+      "country": "TR",
+      "name": "Bianet",
+      "language": "tr",
+      "homepage": "https://bianet.org/",
+      "publisher_reference": "https://bianet.org/",
+      "scope_note": "Turkish independent rights reporting; general RSS and current news URL sitemap. Sitemap content dates remain missing in the validator.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://bianet.org/rss/bianet",
+          "endpoint_id": "ep_ce0090b3d6140442dd379db1",
+          "observation": {
+            "endpointId": "ep_ce0090b3d6140442dd379db1",
+            "type": "rss",
+            "url": "https://bianet.org/rss/bianet",
+            "checkedAt": "2026-10-14T01:39:56.479Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 50,
+            "entriesWithUrl": 50,
+            "sampleUrls": [
+              "https://bianet.org/yazi/saglik-bakanligi-esitsizlikleri-devam-ettirmekte-kararliyiz-324373",
+              "https://bianet.org/haber/trump-yemen-savasi-nda-erdogan-dan-destek-istersem-verir-dedi-turkiye-zaten-destek-veriyor-324389",
+              "https://bianet.org/haber/fransa-yuzbinler-liseli-direnisini-surduruyor-sonraki-randevu-17-ekim-de-324388"
+            ],
+            "newestContentAt": "2026-10-13T21:05:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://bianet.org/rss/bianet",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2309,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://bianet.org/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:51.962Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_html_feed_anchor",
+            "source_url": "https://bianet.org/",
+            "found_at": "2026-10-14T01:39:54.169Z",
+            "page_sha256": "46859498eb9187d300c74f3821509254ae7115979892985264121ea809b5b639",
+            "tag": "<a href=/rss/bianet class='btn btn--social btn--circle btn--social--rss' target=_blank>"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://bianet.org/sitemap/haberler",
+          "endpoint_id": "ep_ab936723e13d3195142179c0",
+          "observation": {
+            "endpointId": "ep_ab936723e13d3195142179c0",
+            "type": "sitemap",
+            "url": "https://bianet.org/sitemap/haberler",
+            "checkedAt": "2026-10-14T01:39:58.638Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 123,
+            "entriesWithUrl": 123,
+            "sampleUrls": [
+              "https://bianet.org/haber/trump-yemen-savasi-nda-erdogan-dan-destek-istersem-verir-dedi-turkiye-zaten-destek-veriyor-324389",
+              "https://bianet.org/haber/fransa-yuzbinler-liseli-direnisini-surduruyor-sonraki-randevu-17-ekim-de-324388",
+              "https://bianet.org/haber/thirteen-unaccompanied-migrant-children-missing-in-edirne-324387"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://bianet.org/sitemap/haberler",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2158,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://bianet.org/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:51.962Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://bianet.org/robots.txt",
+            "found_at": "2026-10-14T01:39:51.962Z",
+            "page_sha256": "60c951ab65b6fac3b7badb92be57aa08fcdf871e3c63d09eac361cb1c4e8c38d",
+            "declaration": "\nSitemap: https://bianet.org/sitemap/haberler"
+          }
+        }
+      ]
+    },
+    {
+      "country": "RU",
+      "name": "7x7",
+      "language": "ru",
+      "homepage": "https://semnasem.org/",
+      "publisher_reference": "https://semnasem.org/",
+      "scope_note": "Russian-language regional reporting. Initial observations are excluded article-discovery baselines.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://semnasem.org/rss/default.xml",
+          "endpoint_id": "ep_d5c9daec29669408d65c4828",
+          "observation": {
+            "endpointId": "ep_d5c9daec29669408d65c4828",
+            "type": "rss",
+            "url": "https://semnasem.org/rss/default.xml",
+            "checkedAt": "2026-10-14T01:39:59.678Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 40,
+            "entriesWithUrl": 40,
+            "sampleUrls": [
+              "https://semnasem.org/news/2026/10/13/karelskaya-obshestvennica-zayavila-chto-u-nee-ukrali-pobedu-na-vyborah-rezultat-izmenilsya-blagodarya-uchastku-v-voinskoj-chasti-o-kotorom-ne-bylo-izvest",
+              "https://semnasem.org/news/2026/10/13/tomskoe-otdelenie-ldpr-udalilo-post-s-predlozheniem-pereimenovat-mera-v-posadnika",
+              "https://semnasem.org/news/2026/10/13/proektirovshik-zapreshennogo-musornogo-poligona-pod-ekaterinburgom-potreboval-s-aktivistov-6-mln-rublej"
+            ],
+            "newestContentAt": "2026-10-13T14:44:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://semnasem.org/rss/default.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2830,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://semnasem.org/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:54.156Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://semnasem.org/",
+            "found_at": "2026-10-14T01:39:56.845Z",
+            "page_sha256": "daad25b3a91e83880b917c501e96734072207ab6e9a918fee910e16803948f8f",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"&laquo;7x7&raquo; Горизонтальная Россия\" href=\"https://semnasem.org/rss/default.xml\">"
+          }
+        }
+      ]
+    }
+  ]
+}

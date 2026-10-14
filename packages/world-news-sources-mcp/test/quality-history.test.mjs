@@ -118,13 +118,65 @@ test('same-country weekday completed cohorts produce drops; incomplete/new cohor
   const observations = [cycle('2026-09-21'), cycle('2026-09-28'), cycle('2026-10-05'), cycle('2026-10-12', false)];
   const got = completedCycleBaseline(observations, 'US', '2026-10-12');
   assert.equal(got.state, 'comparable_completed_cycles'); assert.equal(got.samples, 3); assert.equal(got.reasons[0].metric, 'success_rate'); assert.equal(got.reasons[0].current, 0);
-  assert.equal(completedCycleBaseline([...observations.slice(0, 3), cycle('2026-10-12', false, { status: 'partial' })], 'US', '2026-10-12').state, 'incomplete_or_explicit_cycle');
+  const incomplete = cycle('2026-10-12', false, { status: 'partial', attempted_endpoint_ids: [...catalog.endpoints.keys()].filter(id => id !== ep.id) });
+  assert.equal(completedCycleBaseline([...observations.slice(0, 3), incomplete], 'US', '2026-10-12').state, 'incomplete_or_explicit_cycle');
   const changed = cycle('2026-10-12', false), excluded = changed.country_endpoints.US.find(id => id !== ep.id); changed.country_endpoints.US = [ep.id];
   changed.eligible_endpoint_ids = changed.eligible_endpoint_ids.filter(id => id !== excluded); changed.planned_endpoint_ids = changed.planned_endpoint_ids.filter(id => id !== excluded); changed.attempted_endpoint_ids = changed.attempted_endpoint_ids.filter(id => id !== excluded);
   assert.equal(completedCycleBaseline([...observations.slice(0, 3), changed], 'US', '2026-10-12').state, 'insufficient_completed_cycle_history');
   const oneDay = [cycle('2026-10-05'), cycle('2026-10-05', true, { id: 'retry', started_at: '2026-10-05T05:00:00.000Z', finished_at: '2026-10-05T06:00:00.000Z' }), cycle('2026-10-12', false)];
   assert.equal(completedCycleBaseline(oneDay, 'US', '2026-10-12').samples, 1);
   assert.throws(() => validateCollectionCycle(cycle('2026-10-12', true, { attempted_endpoint_ids: [ep.id] })), /INVALID_COLLECTION_CYCLE/);
+});
+
+test('a country completed within partial global due cycles keeps its baseline when another country is deferred', () => {
+  const other = cycle('2026-10-12').country_endpoints.KR[0];
+  const partial = (date, good = true) => {
+    const attempted = [...catalog.endpoints.keys()].filter(id => id !== other);
+    const row = cycle(date, good, { status: 'partial', attempted_endpoint_ids: attempted,
+      successful_article_endpoint_ids: good ? attempted : [], failure_reason: 'SERVER_RETRY_AFTER_DEFERRED' });
+    row.scheduling = { policy: 'daily_all_active', as_of: row.finished_at, active_endpoint_ids: row.eligible_endpoint_ids,
+      already_checked_today_endpoint_ids: [], country_active_endpoints: row.country_endpoints,
+      deferred_endpoints: [{ endpoint_id: other, next_due: new Date(Date.parse(row.finished_at) + 86400000).toISOString(), reason: 'rate_limited', http_status: 429 }] };
+    return row;
+  };
+  const rows = [partial('2026-09-28'), partial('2026-10-05'), partial('2026-10-12', false)];
+  for (const evidence of [rows, rows.map(summarizeCollectionCycle)]) {
+    const unaffected = completedCycleBaseline(evidence, 'US', '2026-10-12');
+    assert.equal(unaffected.state, 'comparable_completed_cycles');
+    assert.equal(unaffected.samples, 2);
+    assert.equal(unaffected.metrics.success_rate, 100);
+    assert.equal(unaffected.current.success_rate, 0);
+    assert.equal(unaffected.reasons[0].metric, 'success_rate');
+    assert.equal(completedCycleBaseline(evidence, 'KR', '2026-10-12').state, 'incomplete_or_explicit_cycle');
+  }
+});
+
+test('a deferred address outside the eligible cohort does not make its country a completed baseline sample', () => {
+  const row = cycle('2026-10-12'), active = [...row.eligible_endpoint_ids], countries = structuredClone(row.country_endpoints);
+  const deferred = countries.US.find(id => id !== ep.id);
+  row.country_endpoints.US = [ep.id];
+  for (const field of ['eligible_endpoint_ids', 'planned_endpoint_ids', 'attempted_endpoint_ids', 'successful_article_endpoint_ids']) row[field] = row[field].filter(id => id !== deferred);
+  row.scheduling = { policy: 'daily_all_active', as_of: row.finished_at, active_endpoint_ids: active,
+    already_checked_today_endpoint_ids: [], country_active_endpoints: countries,
+    deferred_endpoints: [{ endpoint_id: deferred, next_due: '2026-10-13T04:00:00.000Z', reason: 'rate_limited', http_status: 429 }] };
+  const summary = summarizeCollectionCycle(row);
+  assert.equal(summary.country_metrics.US.eligible_endpoints, summary.country_metrics.US.attempted_endpoints);
+  assert.equal(summary.scheduling.country_metrics.US.unattempted_deferred_endpoints, 1);
+  assert.equal(completedCycleBaseline([summary], 'US', '2026-10-12').state, 'incomplete_or_explicit_cycle');
+});
+
+test('failed, running and explicit cycles cannot supply current or past country-complete baseline samples', () => {
+  const excluded = [
+    cycle('2026-09-21', true, { status: 'failed' }),
+    cycle('2026-09-28', true, { status: 'running', finished_at: null }),
+    cycle('2026-10-05', true, { scope: 'explicit_endpoints' }),
+  ];
+  const got = completedCycleBaseline([...excluded, cycle('2026-10-12')], 'US', '2026-10-12');
+  assert.equal(got.state, 'insufficient_completed_cycle_history');
+  assert.equal(got.samples, 0);
+  for (const patch of [{ status: 'failed' }, { status: 'running', finished_at: null }, { scope: 'explicit_endpoints' }]) {
+    assert.equal(completedCycleBaseline([cycle('2026-09-28'), cycle('2026-10-05'), cycle('2026-10-12', false, patch)], 'US', '2026-10-12').state, 'incomplete_or_explicit_cycle');
+  }
 });
 
 test('filtered view still checks actual completed drops across all stored countries', t => {

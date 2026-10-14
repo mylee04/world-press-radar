@@ -1398,6 +1398,181 @@
         {
           "name": "Aviation Week",
           "url": "https://www.aviationweek.com/rss"
+        },
+        {
+          "name": "Inside Climate News",
+          "language": "en",
+          "url": "https://insideclimatenews.org/feed/",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://insideclimatenews.org/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://insideclimatenews.org/feed/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://insideclimatenews.org/",
+              "found_at": "2026-10-14T01:38:43.736Z",
+              "page_sha256": "79520311cdd43c231a52150d9b2339517c2579f9b57ad73e4b383f3385a8dda3",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Inside Climate News &raquo; Feed\" href=\"https://insideclimatenews.org/feed/\" />",
+              "checked_at": "2026-10-14T01:38:47.999Z",
+              "format": "rss",
+              "scope_note": "Climate, environmental justice and energy reporting."
+            }
+          ]
+        },
+        {
+          "name": "404 Media",
+          "language": "en",
+          "url": "https://www.404media.co/rss/",
+          "sitemapUrl": "https://www.404media.co/sitemap-posts.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://www.404media.co/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.404media.co/rss/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.404media.co/",
+              "found_at": "2026-10-14T01:44:24.938Z",
+              "page_sha256": "5351ff9c116ca3150f2ebc3e41e378c73d46dfbdf96fc36a86a3a770b3ce3aa2",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"404 Media\" href=\"https://www.404media.co/rss/\">",
+              "checked_at": "2026-10-14T01:44:29.166Z",
+              "format": "rss",
+              "scope_note": "Independent technology and digital rights reporting."
+            },
+            {
+              "type": "sitemap",
+              "url": "https://www.404media.co/sitemap-posts.xml",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://www.404media.co/sitemap.xml",
+              "found_at": "2026-10-14T01:44:39.904Z",
+              "page_sha256": "a37f45ad5d3797c0a0626836ccf73dc7a3e3f3b843a43b131051dcb5b211dfba",
+              "declaration": "<loc>https://www.404media.co/sitemap-posts.xml</loc>",
+              "declared_lastmod": "2026-10-13T20:06:53.000Z",
+              "checked_at": "2026-10-14T01:44:42.362Z",
+              "format": "urlset",
+              "scope_note": "Independent technology and digital rights reporting."
+            }
+          ]
+        },
+        {
+          "name": "Alaska Public Media",
+          "language": "en",
+          "url": null,
+          "sitemapUrl": "https://alaskapublic.org/news-sitemap-content.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://alaskapublic.org/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://alaskapublic.org/news-sitemap-content.xml",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://alaskapublic.org/robots.txt",
+              "found_at": "2026-10-14T01:39:15.198Z",
+              "page_sha256": "2cf7a57e036e449f6961e6aae4372783cd5a95575cd43bb98ef0a3630649c4ae",
+              "declaration": "Sitemap: https://alaskapublic.org/news-sitemap-content.xml",
+              "checked_at": "2026-10-14T01:39:28.791Z",
+              "format": "urlset",
+              "scope_note": "Alaska local and public interest reporting."
+            }
+          ]
+        },
+        {
+          "name": "Hawaii Public Radio",
+          "language": "en",
+          "url": null,
+          "sitemapUrl": "https://www.hawaiipublicradio.org/news-sitemap-content.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://www.hawaiipublicradio.org/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://www.hawaiipublicradio.org/news-sitemap-content.xml",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://www.hawaiipublicradio.org/robots.txt",
+              "found_at": "2026-10-14T01:39:25.509Z",
+              "page_sha256": "b52e79b2822075bc8d25917a2281b120dbc6aaad86ad66935fec25fdafadefbc",
+              "declaration": "Sitemap: https://www.hawaiipublicradio.org/news-sitemap-content.xml",
+              "checked_at": "2026-10-14T01:39:39.493Z",
+              "format": "urlset",
+              "scope_note": "Hawaii regional public interest reporting."
+            }
+          ]
+        },
+        {
+          "name": "The 19th",
+          "language": "en",
+          "url": "https://19thnews.org/feed",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://19thnews.org/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://19thnews.org/feed",
+              "kind": "official_html_feed_link",
+              "source_url": "https://19thnews.org/",
+              "found_at": "2026-10-14T01:38:53.680Z",
+              "page_sha256": "cd9c677ab6bd2e243c538e0c175dfac25360963dc4a700948b6ca5c23f938aab",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"The 19th: Articles\" href=\"/feed\" />",
+              "checked_at": "2026-10-14T01:39:00.351Z",
+              "format": "rss",
+              "scope_note": "Gender, politics and public policy nonprofit reporting."
+            }
+          ]
+        },
+        {
+          "name": "The Marshall Project",
+          "language": "en",
+          "url": "https://www.themarshallproject.org/rss/recent",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://www.themarshallproject.org/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.themarshallproject.org/rss/recent",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.themarshallproject.org/",
+              "found_at": "2026-10-14T01:39:05.818Z",
+              "page_sha256": "d5c971dd1c513e48f402512ef421a4d039eb2e158954cda598d65b81c540111a",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"https://www.themarshallproject.org/rss/recent\" />",
+              "checked_at": "2026-10-14T01:39:10.420Z",
+              "format": "rss",
+              "scope_note": "Criminal justice and public accountability reporting."
+            }
+          ]
         }
       ]
     },
@@ -2186,6 +2361,33 @@
           "valid": "valid",
           "row": 59,
           "enabled": false
+        },
+        {
+          "name": "光明网 - News Sitemap",
+          "language": "zh",
+          "url": null,
+          "sitemapUrl": "http://news.gmw.cn/google_news.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://www.gmw.cn/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "http://news.gmw.cn/google_news.xml",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://www.gmw.cn/google.xml",
+              "found_at": "2026-10-14T01:42:34.070Z",
+              "page_sha256": "8e1ffeba2bc3906c545604e0547c02d5fe1cfef1f33087c19d39b2d5283b50cd",
+              "declaration": "<loc>http://news.gmw.cn/google_news.xml</loc>",
+              "checked_at": "2026-10-14T01:42:41.937Z",
+              "format": "urlset",
+              "scope_note": "Mainland Chinese publisher with Beijing address in its official footer. Official rolling news URL set; all 298 reviewed URLs have dated content article paths and current lastmod."
+            }
+          ]
         }
       ]
     },
@@ -3270,6 +3472,114 @@
           "status": "⏩ OFFICIAL",
           "checkedDate": "04/13/2026",
           "valid": "needs verification"
+        },
+        {
+          "name": "Nippon.com (Japanese News Sitemap)",
+          "language": "ja",
+          "url": null,
+          "sitemapUrl": "https://www.nippon.com/ja/googleNews.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:11:07.987Z",
+          "status_reason": "Initial registration from verified official declarations (g7-official-first-pass-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "g7-official-first-pass-2026-10-01",
+          "source_homepage": "https://www.nippon.com/ja/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://www.nippon.com/ja/googleNews.xml",
+              "kind": "official_sitemap_index_child_ranked",
+              "source_url": "https://www.nippon.com/ja/sitemap.xml",
+              "found_at": "2026-10-01T19:36:55.472Z",
+              "page_sha256": "e6c6169fd4d884708b1a2c1118677421e79be0d325d4c26a1dfeb40268b37cdb",
+              "declared_lastmod": "2026-10-01T21:03:02+09:00",
+              "checked_at": "2026-10-01T19:36:58.323Z",
+              "format": "urlset",
+              "scope_note": "Explicitly enumerated Japanese news sitemap. Dates are unreliable; no current-publication count is inferred. Oversized Japanese article sitemap excluded."
+            }
+          ]
+        },
+        {
+          "name": "京都新聞",
+          "language": "ja",
+          "url": "https://www.kyoto-np.co.jp/list/feed/rss",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://www.kyoto-np.co.jp/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.kyoto-np.co.jp/list/feed/rss",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.kyoto-np.co.jp/",
+              "found_at": "2026-10-14T01:39:13.973Z",
+              "page_sha256": "0735752ecb32419be36a6e8ecaed7b25d931bbab83a8e3eec1f5029720d5ac58",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"京都新聞デジタル 総合RSS\" href=\"https://www.kyoto-np.co.jp/list/feed/rss\" />",
+              "checked_at": "2026-10-14T01:39:16.692Z",
+              "format": "rss",
+              "scope_note": "Japanese regional daily covering Kyoto and Shiga. Official current RSS with article URLs and parsed publication dates."
+            }
+          ]
+        },
+        {
+          "name": "沖縄タイムス",
+          "language": "ja",
+          "url": "https://www.okinawatimes.co.jp/list/feed/rss",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://www.okinawatimes.co.jp/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.okinawatimes.co.jp/list/feed/rss",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.okinawatimes.co.jp/",
+              "found_at": "2026-10-14T01:39:11.746Z",
+              "page_sha256": "f48bf7ae9a5358c56b9a7578102f269be55233bf5ea094f0109afe31f9f9ac79",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"沖縄タイムス＋プラス 総合RSS\" href=\"https://www.okinawatimes.co.jp/list/feed/rss\">",
+              "checked_at": "2026-10-14T01:39:14.589Z",
+              "format": "rss",
+              "scope_note": "Japanese Okinawa regional daily. Official current RSS with article URLs and parsed publication dates."
+            }
+          ]
+        },
+        {
+          "name": "琉球新報",
+          "language": "ja",
+          "url": null,
+          "sitemapUrl": "https://ryukyushimpo.jp/news-sitemap.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://ryukyushimpo.jp/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://ryukyushimpo.jp/news-sitemap.xml",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://ryukyushimpo.jp/sitemap_index.xml",
+              "found_at": "2026-10-14T01:38:59.451Z",
+              "page_sha256": "0aa78289069e4f78deec05632623d23358b2e73f1d92cdf2cf1ac0fa3dc21c4f",
+              "declaration": "<loc>https://ryukyushimpo.jp/news-sitemap.xml</loc>",
+              "checked_at": "2026-10-14T01:39:02.854Z",
+              "format": "urlset",
+              "scope_note": "Japanese Okinawa regional daily. Rolling Google News URL set, 88 of 88 sampled full-set URLs match article paths. Independent publication dates are recent; validator lastmod freshness remains missing."
+            }
+          ]
         }
       ]
     },
@@ -4207,6 +4517,87 @@
         {
           "name": "Augsburger Allgemeine - News Sitemap",
           "sitemapUrl": "https://www.augsburger-allgemeine.de/news.xml"
+        },
+        {
+          "name": "Kölner Stadt-Anzeiger (News Sitemap)",
+          "language": "de",
+          "url": null,
+          "sitemapUrl": "https://www.ksta.de/xml/newssitemap.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:11:07.987Z",
+          "status_reason": "Initial registration from verified official declarations (g7-official-first-pass-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "g7-official-first-pass-2026-10-01",
+          "source_homepage": "https://www.ksta.de/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://www.ksta.de/xml/newssitemap.xml",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://www.ksta.de/robots.txt",
+              "found_at": "2026-10-01T19:31:22.324Z",
+              "page_sha256": "5a5a1e9c57698e03c67871a6a0cc6f23f6fda5f000629c39f51677fa6e39403c",
+              "declaration": "Sitemap: https://www.ksta.de/xml/newssitemap.xml",
+              "checked_at": "2026-10-01T19:31:25.209Z",
+              "format": "urlset",
+              "scope_note": "Official robots-declared news sitemap. Mixed 50,000-entry archive excluded; failed RSS unchanged."
+            }
+          ]
+        },
+        {
+          "name": "netzpolitik.org",
+          "language": "de",
+          "url": null,
+          "sitemapUrl": "https://netzpolitik.org/sitemap-news.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://netzpolitik.org/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://netzpolitik.org/sitemap-news.xml",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://netzpolitik.org/sitemap.xml",
+              "found_at": "2026-10-14T01:38:45.997Z",
+              "page_sha256": "08554d36db785d49e5d76409b1b0b1da196751f80fb645ff8a99bd740e5d3ff7",
+              "declaration": "<loc>https://netzpolitik.org/sitemap-news.xml</loc>",
+              "checked_at": "2026-10-14T01:38:48.617Z",
+              "format": "urlset",
+              "scope_note": "Digital rights and technology policy reporting; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline."
+            }
+          ]
+        },
+        {
+          "name": "Golem.de",
+          "language": "de",
+          "url": null,
+          "sitemapUrl": "https://www.golem.de/gnewsmap.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://www.golem.de/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://www.golem.de/gnewsmap.xml",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://www.golem.de/gsiteindex.xml",
+              "found_at": "2026-10-14T01:38:48.088Z",
+              "page_sha256": "8a5af3be08cb210a4cd358d101df8318511e700c082fdf3b9747b5247f8b6332",
+              "declaration": "<loc>https://www.golem.de/gnewsmap.xml</loc>",
+              "checked_at": "2026-10-14T01:38:51.772Z",
+              "format": "urlset",
+              "scope_note": "German technology and business reporting; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline."
+            }
+          ]
         }
       ]
     },
@@ -4564,6 +4955,60 @@
           "sitemapUrl": "https://www.business-standard.com/sitemap/news-sitemap.xml",
           "language": "en",
           "tier": "primary"
+        },
+        {
+          "name": "Mongabay India",
+          "language": "en",
+          "url": "https://india.mongabay.com/feed",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://india.mongabay.com/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://india.mongabay.com/feed",
+              "kind": "official_html_feed_anchor",
+              "source_url": "https://india.mongabay.com/",
+              "found_at": "2026-10-14T01:42:44.344Z",
+              "page_sha256": "a7f2271a47168c8948242cd0a9876ab4a3f8abbbf1c0d549a5ed07a04de31596",
+              "tag": "<a href=\"https://india.mongabay.com/feed\" data-wpel-link=\"internal\">",
+              "checked_at": "2026-10-14T01:42:48.629Z",
+              "format": "rss",
+              "scope_note": "Indian English-language environment and conservation news edition. Official current RSS; archived sitemap partitions are excluded."
+            }
+          ]
+        },
+        {
+          "name": "Scroll.in - Recent Article Sitemap",
+          "language": "en",
+          "url": null,
+          "sitemapUrl": "https://scroll.in/sitemap/sitemap.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://scroll.in/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://scroll.in/sitemap/sitemap.xml",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://scroll.in/robots.txt",
+              "found_at": "2026-10-14T01:39:50.152Z",
+              "page_sha256": "e4ecb76149e94733da5757fd902d22ff2d60c3bc91c46f874facc4d31b2cc04f",
+              "declaration": "Sitemap: https://scroll.in/sitemap/sitemap.xml",
+              "checked_at": "2026-10-14T01:39:55.224Z",
+              "format": "urlset",
+              "scope_note": "Additional rolling article URL set for existing Indian publisher Scroll.in. Existing RSS and Google News endpoints remain unchanged; this is a new typed endpoint, not a new publisher."
+            }
+          ]
         }
       ]
     },
@@ -5656,6 +6101,99 @@
           "status": "NEW",
           "checkedDate": "04/12/2026",
           "valid": "valid"
+        },
+        {
+          "name": "Novara Media",
+          "language": "en",
+          "url": "https://novaramedia.com/feed/",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:11:07.987Z",
+          "status_reason": "Initial registration from verified official declarations (g7-official-first-pass-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "g7-official-first-pass-2026-10-01",
+          "source_homepage": "https://novaramedia.com/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://novaramedia.com/feed/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://novaramedia.com/",
+              "found_at": "2026-10-01T19:41:13.429Z",
+              "page_sha256": "bb9e232d2f101347817ecfdb8364574838b817b3bd4e6aca4e8b1b673df74c7d",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Novara Media RSS Feed\" href=\"https://novaramedia.com/feed/\" />",
+              "checked_at": "2026-10-01T19:41:18.077Z",
+              "format": "rss",
+              "scope_note": "Official RSS. The valid-empty sitemap is not included."
+            }
+          ]
+        },
+        {
+          "name": "Halifax Courier (News Sitemap)",
+          "language": "en",
+          "url": null,
+          "sitemapUrl": "https://www.halifaxcourier.co.uk/sitemaps/googlenews",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:11:07.987Z",
+          "status_reason": "Initial registration from verified official declarations (g7-official-first-pass-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "g7-official-first-pass-2026-10-01",
+          "source_homepage": "https://www.halifaxcourier.co.uk/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://www.halifaxcourier.co.uk/sitemaps/googlenews",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://www.halifaxcourier.co.uk/robots.txt",
+              "found_at": "2026-10-01T19:31:10.383Z",
+              "page_sha256": "bad687b68ea12068a5d57cee6e3fb08ed427eef227d8bb385964bae8b829fce0",
+              "declaration": "Sitemap: https://www.halifaxcourier.co.uk/sitemaps/googlenews",
+              "checked_at": "2026-10-01T19:31:14.967Z",
+              "format": "urlset",
+              "scope_note": "Official robots-declared news sitemap is a separate endpoint type; failed RSS remains failed."
+            }
+          ]
+        },
+        {
+          "name": "The Ferret",
+          "language": "en",
+          "url": "https://www.theferret.scot/latest/rss/",
+          "sitemapUrl": "https://www.theferret.scot/sitemap-posts.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://www.theferret.scot/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.theferret.scot/latest/rss/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.theferret.scot/",
+              "found_at": "2026-10-14T01:38:51.044Z",
+              "page_sha256": "4a0e319b0d29c9bac23b1b954df26a2fa5c50818ec6d00430ea93e026e3e800a",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"The Ferret\" href=\"https://www.theferret.scot/latest/rss/\">",
+              "checked_at": "2026-10-14T01:38:53.568Z",
+              "format": "rss",
+              "scope_note": "Scottish investigative and fact-checking reporting; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline."
+            },
+            {
+              "type": "sitemap",
+              "url": "https://www.theferret.scot/sitemap-posts.xml",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://www.theferret.scot/sitemap.xml",
+              "found_at": "2026-10-14T01:39:02.305Z",
+              "page_sha256": "0845f252014341ec5da639f49b225b42aa0a7706ab78187edbd4d4d40fa8b8ff",
+              "declaration": "<loc>https://www.theferret.scot/sitemap-posts.xml</loc>",
+              "checked_at": "2026-10-14T01:39:04.617Z",
+              "format": "urlset",
+              "scope_note": "Scottish investigative and fact-checking reporting; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline."
+            }
+          ]
         }
       ]
     },
@@ -6233,6 +6771,60 @@
           "sitemapUrl": "https://www.lesnumeriques.com/sitemap-google-news.xml",
           "language": "fr",
           "tier": "primary"
+        },
+        {
+          "name": "Capital (Official RSS)",
+          "language": "fr",
+          "url": "https://feed.prismamediadigital.com/v1/cap/rss?limit=20",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:11:07.987Z",
+          "status_reason": "Initial registration from verified official declarations (g7-official-first-pass-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "g7-official-first-pass-2026-10-01",
+          "source_homepage": "https://www.capital.fr/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://feed.prismamediadigital.com/v1/cap/rss?limit=20",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.capital.fr/",
+              "found_at": "2026-10-01T19:31:18.985Z",
+              "page_sha256": "891364346a0df04a6874a37642d9200c7e23a9c2eb8200d8e171585e1dea6450",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Flux RSS pour capital.fr\" href=\"https://feed.prismamediadigital.com/v1/cap/rss?limit=20\">",
+              "checked_at": "2026-10-01T19:31:22.165Z",
+              "format": "rss",
+              "scope_note": "Official homepage declares this provider-hosted RSS. Existing failed RSS and existing news sitemap are unchanged."
+            }
+          ]
+        },
+        {
+          "name": "Les Jours",
+          "language": "fr",
+          "url": "https://lesjours.fr/rss.xml",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://lesjours.fr/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://lesjours.fr/rss.xml",
+              "kind": "official_html_feed_link",
+              "source_url": "https://lesjours.fr/",
+              "found_at": "2026-10-14T01:39:10.892Z",
+              "page_sha256": "275fcda412e5b250195d272a2e582b3e78e2c30222c4b1e3a3d3d389ef5ecd7a",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" href=\"https://lesjours.fr/rss.xml\"/>",
+              "checked_at": "2026-10-14T01:39:13.504Z",
+              "format": "rss",
+              "scope_note": "French independent investigative reporting; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline."
+            }
+          ]
         }
       ]
     },
@@ -6947,6 +7539,126 @@
         {
           "name": "Corriere dello Sport",
           "url": "https://www.corrieredellosport.it/rss/home.xml"
+        },
+        {
+          "name": "Il Giornale (News Sitemap)",
+          "language": "it",
+          "url": null,
+          "sitemapUrl": "https://www.ilgiornale.it/arc/outboundfeeds/sitemap-news/latest/",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:11:07.987Z",
+          "status_reason": "Initial registration from verified official declarations (g7-official-first-pass-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "g7-official-first-pass-2026-10-01",
+          "source_homepage": "https://www.ilgiornale.it/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://www.ilgiornale.it/arc/outboundfeeds/sitemap-news/latest/",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://www.ilgiornale.it/robots.txt",
+              "found_at": "2026-10-01T19:31:34.274Z",
+              "page_sha256": "e13704507c9eb4779ea0fa1259c883599a80980d961f5bb236f7803ddad86ab3",
+              "declaration": "Sitemap: https://www.ilgiornale.it/arc/outboundfeeds/sitemap-news/latest/",
+              "checked_at": "2026-10-01T19:31:42.315Z",
+              "format": "urlset",
+              "scope_note": "Official robots-declared rolling news sitemap. Duplicate latest XML alternative omitted; old RSS unchanged."
+            }
+          ]
+        },
+        {
+          "name": "Internazionale",
+          "language": "it",
+          "url": "https://www.internazionale.it/sitemaps/rss.xml",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://www.internazionale.it/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.internazionale.it/sitemaps/rss.xml",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.internazionale.it/",
+              "found_at": "2026-10-14T01:39:14.830Z",
+              "page_sha256": "b2961fe6c7908678521fd8ca416b57b6fd067b9fbf12844396637ce844554a30",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Internazionale - RSS\" href=\"https://www.internazionale.it/sitemaps/rss.xml\" />",
+              "checked_at": "2026-10-14T01:39:17.015Z",
+              "format": "rss",
+              "scope_note": "Italian international affairs and magazine reporting; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline."
+            }
+          ]
+        },
+        {
+          "name": "Linkiesta",
+          "language": "it",
+          "url": "https://www.linkiesta.it/feed/",
+          "sitemapUrl": "https://www.linkiesta.it/news-sitemap.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://www.linkiesta.it/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.linkiesta.it/feed/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.linkiesta.it/",
+              "found_at": "2026-10-14T01:39:19.038Z",
+              "page_sha256": "2624db4e34693585315e4934ca7deb83ccc004079000be19db1aec9d5c329e7a",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Linkiesta.it &raquo; Feed\" href=\"https://www.linkiesta.it/feed/\" />",
+              "checked_at": "2026-10-14T01:39:21.318Z",
+              "format": "rss",
+              "scope_note": "Italian politics, economy and culture reporting; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline."
+            },
+            {
+              "type": "sitemap",
+              "url": "https://www.linkiesta.it/news-sitemap.xml",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://www.linkiesta.it/robots.txt",
+              "found_at": "2026-10-14T01:39:16.404Z",
+              "page_sha256": "830ea0d94c5f900e28be27eb320168c8a57d596bb83852cd4594b582d6bf220d",
+              "declaration": "Sitemap: https://www.linkiesta.it/news-sitemap.xml",
+              "checked_at": "2026-10-14T01:39:31.802Z",
+              "format": "urlset",
+              "scope_note": "Italian politics, economy and culture reporting; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline."
+            }
+          ]
+        },
+        {
+          "name": "Valigia Blu",
+          "language": "it",
+          "url": "https://www.valigiablu.it/feed/",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://www.valigiablu.it/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.valigiablu.it/feed/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.valigiablu.it/",
+              "found_at": "2026-10-14T01:39:36.577Z",
+              "page_sha256": "82c4db17d689179765e9945c2f1580a47c2e1f281b7bef859d8ad27eb0723dae",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Valigia Blu &raquo; Feed\" href=\"https://www.valigiablu.it/feed/\" />",
+              "checked_at": "2026-10-14T01:39:40.033Z",
+              "format": "rss",
+              "scope_note": "Italian fact-checking and public-interest reporting; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline."
+            }
+          ]
         }
       ]
     },
@@ -8589,6 +9301,112 @@
         {
           "name": "The Recorder",
           "url": "https://www.recorder.ca/feed"
+        },
+        {
+          "name": "The Maple",
+          "language": "en",
+          "url": "https://www.readthemaple.com/rss/",
+          "sitemapUrl": "https://www.readthemaple.com/sitemap-posts.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:11:07.987Z",
+          "status_reason": "Initial registration from verified official declarations (g7-official-first-pass-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "g7-official-first-pass-2026-10-01",
+          "source_homepage": "https://www.readthemaple.com/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.readthemaple.com/rss/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.readthemaple.com/",
+              "found_at": "2026-10-01T19:41:01.531Z",
+              "page_sha256": "850ed3689720e73bbb317da2d8d1eb87b1dd25639187728af2f23307b195a915",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"The Maple\" href=\"https://www.readthemaple.com/rss/\">",
+              "checked_at": "2026-10-01T19:41:06.182Z",
+              "format": "rss",
+              "scope_note": "Publisher RSS plus explicitly declared posts-only sitemap. Both endpoints share one new source; overlapping URLs are deduplicated by the collector."
+            },
+            {
+              "type": "sitemap",
+              "url": "https://www.readthemaple.com/sitemap-posts.xml",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://www.readthemaple.com/sitemap.xml",
+              "found_at": "2026-10-01T19:41:10.691Z",
+              "page_sha256": "c6393d02b158991179af7f2735ff26fa64c1fcbaf0f2f08b4d464870ca8d1151",
+              "declared_lastmod": "2026-09-29T17:59:56.000Z",
+              "checked_at": "2026-10-01T19:41:13.144Z",
+              "format": "urlset",
+              "scope_note": "Publisher RSS plus explicitly declared posts-only sitemap. Both endpoints share one new source; overlapping URLs are deduplicated by the collector."
+            }
+          ]
+        },
+        {
+          "name": "The Narwhal",
+          "language": "en",
+          "url": "https://thenarwhal.ca/feed/",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://thenarwhal.ca/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://thenarwhal.ca/feed/",
+              "kind": "official_html_feed_anchor",
+              "source_url": "https://thenarwhal.ca/rss-feeds/",
+              "found_at": "2026-10-14T01:43:05.343Z",
+              "page_sha256": "f3cb988fc6e79d5fd1c23c08441cd45f164423ce5aaa74549170e0a9bded9644",
+              "tag": "<a href=\"https://thenarwhal.ca/feed/\">",
+              "checked_at": "2026-10-14T01:43:09.948Z",
+              "format": "rss",
+              "scope_note": "Canadian climate, environment and Indigenous issues reporting; exact official RSS guide."
+            }
+          ]
+        },
+        {
+          "name": "The Breach",
+          "language": "en",
+          "url": "https://breachmedia.ca/feed/",
+          "sitemapUrl": "https://breachmedia.ca/post-sitemap.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://breachmedia.ca/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://breachmedia.ca/feed/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://breachmedia.ca/",
+              "found_at": "2026-10-14T01:44:25.293Z",
+              "page_sha256": "08ebc447ac15739ffdbc51e7a59b2da3f16b28b209ae8085d91b787a5e7abd28",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"The Breach &raquo; Feed\" href=\"https://breachmedia.ca/feed/\" />",
+              "checked_at": "2026-10-14T01:44:29.820Z",
+              "format": "rss",
+              "scope_note": "Canadian public interest and investigative journalism."
+            },
+            {
+              "type": "sitemap",
+              "url": "https://breachmedia.ca/post-sitemap.xml",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://breachmedia.ca/sitemap_index.xml",
+              "found_at": "2026-10-14T01:44:34.342Z",
+              "page_sha256": "f7328e8525d3bb5aec9115914f1562c31a62eab9af24de6f27e15fc64a03abaa",
+              "declaration": "<loc>https://breachmedia.ca/post-sitemap.xml</loc>",
+              "declared_lastmod": "2026-10-13T18:59:31+00:00",
+              "checked_at": "2026-10-14T01:44:36.834Z",
+              "format": "urlset",
+              "scope_note": "Canadian public interest and investigative journalism."
+            }
+          ]
         }
       ]
     },
@@ -9005,6 +9823,59 @@
           "name": "Rambler News (Portal News)",
           "url": "https://news.rambler.ru/rss/",
           "enabled": false
+        },
+        {
+          "name": "Mediazona",
+          "language": "ru",
+          "url": null,
+          "sitemapUrl": "https://zona.media/news-sitemap.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:52:57.439Z",
+          "status_reason": "Initial registration from verified official declarations (major20-remaining13-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-remaining13-2026-10-01",
+          "source_homepage": "https://zona.media/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://zona.media/news-sitemap.xml",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://zona.media/sitemap.xml",
+              "found_at": "2026-10-01T20:22:41.391Z",
+              "page_sha256": "b3baa4b7df4966f23bc64409b8d0a24928ebfe41a2c8f422fe7559bff9666ac7",
+              "checked_at": "2026-10-01T20:28:19.105Z",
+              "format": "urlset",
+              "scope_note": "Official rolling news sitemap. RU indicates Russian-language/Russian-affairs editorial scope, not current legal headquarters. Recent sitemap lastmod is not article publication time; no publication metric is inferred."
+            }
+          ]
+        },
+        {
+          "name": "7x7",
+          "language": "ru",
+          "url": "https://semnasem.org/rss/default.xml",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://semnasem.org/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://semnasem.org/rss/default.xml",
+              "kind": "official_html_feed_link",
+              "source_url": "https://semnasem.org/",
+              "found_at": "2026-10-14T01:39:56.845Z",
+              "page_sha256": "daad25b3a91e83880b917c501e96734072207ab6e9a918fee910e16803948f8f",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"&laquo;7x7&raquo; Горизонтальная Россия\" href=\"https://semnasem.org/rss/default.xml\">",
+              "checked_at": "2026-10-14T01:39:59.678Z",
+              "format": "rss",
+              "scope_note": "Russian-language regional reporting. Initial observations are excluded article-discovery baselines."
+            }
+          ]
         }
       ]
     },
@@ -9406,6 +10277,111 @@
           "checkedDate": null,
           "valid": "needs verification",
           "row": 48
+        },
+        {
+          "name": "미디어오늘",
+          "language": "ko",
+          "url": null,
+          "sitemapUrl": "https://www.mediatoday.co.kr/sitemap.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://www.mediatoday.co.kr/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://www.mediatoday.co.kr/sitemap.xml",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://www.mediatoday.co.kr/robots.txt",
+              "found_at": "2026-10-14T01:38:36.554Z",
+              "page_sha256": "5492a32c6a46a96ab03773ea4ad51940c907e3ccd587ad63c703b7a27defee41",
+              "declaration": "Sitemap:https://www.mediatoday.co.kr/sitemap.xml",
+              "checked_at": "2026-10-14T01:38:44.954Z",
+              "format": "urlset",
+              "scope_note": "Korean media-policy and public-affairs publisher. Rolling Google News URL set; independent publication_date review is recent. Validator lastmod freshness remains missing."
+            }
+          ]
+        },
+        {
+          "name": "경남도민일보",
+          "language": "ko",
+          "url": "https://cdn.idomin.com/rss/gn_rss_allArticle.xml",
+          "sitemapUrl": "https://www.idomin.com/sitemap.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://www.idomin.com/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://cdn.idomin.com/rss/gn_rss_allArticle.xml",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.idomin.com/",
+              "found_at": "2026-10-14T01:41:47.932Z",
+              "page_sha256": "9c3157f20c170434e4cca8a8ca569e1009d2ecccca7255091b2ffac179f03eda",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" href=\"https://cdn.idomin.com/rss/gn_rss_allArticle.xml\"/>",
+              "checked_at": "2026-10-14T01:41:54.277Z",
+              "format": "rss",
+              "scope_note": "Korean regional daily covering Gyeongsangnam-do. Official RSS and rolling article sitemap; their overlap is deduplicated by the shared source binding."
+            },
+            {
+              "type": "sitemap",
+              "url": "https://www.idomin.com/sitemap.xml",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://www.idomin.com/robots.txt",
+              "found_at": "2026-10-14T01:41:43.789Z",
+              "page_sha256": "ee63cfbf89a02645b4b5ed46d78d928c23fc1eb4e1d0dd089f7b80a8151cce24",
+              "declaration": "Sitemap: https://www.idomin.com/sitemap.xml",
+              "checked_at": "2026-10-14T01:41:56.157Z",
+              "format": "urlset",
+              "scope_note": "Korean regional daily covering Gyeongsangnam-do. Official RSS and rolling article sitemap; their overlap is deduplicated by the shared source binding."
+            }
+          ]
+        },
+        {
+          "name": "시사IN",
+          "language": "ko",
+          "url": "https://cdn.sisain.co.kr/rss/gns_allArticle.xml",
+          "sitemapUrl": "http://www.sisain.co.kr/sitemap.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://www.sisain.co.kr/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://cdn.sisain.co.kr/rss/gns_allArticle.xml",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.sisain.co.kr/",
+              "found_at": "2026-10-14T01:41:47.173Z",
+              "page_sha256": "d8b5900a054ff83479be6502d428d192e20355415c6db42624a14003d4b50dd6",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" href=\"https://cdn.sisain.co.kr/rss/gns_allArticle.xml\"/>",
+              "checked_at": "2026-10-14T01:41:54.615Z",
+              "format": "rss",
+              "scope_note": "Korean current-affairs weekly. Official current all-article RSS and rolling Google News URL set. Sitemap lastmod is unavailable; independent news publication dates are retained separately."
+            },
+            {
+              "type": "sitemap",
+              "url": "http://www.sisain.co.kr/sitemap.xml",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://www.sisain.co.kr/robots.txt",
+              "found_at": "2026-10-14T01:41:43.268Z",
+              "page_sha256": "f8460f9347e207401c1af14a3c6c72817ca6a8e528ae31a71f6f1cd8c2012e2b",
+              "declaration": "sitemap: http://www.sisain.co.kr/sitemap.xml",
+              "checked_at": "2026-10-14T01:42:02.615Z",
+              "format": "urlset",
+              "scope_note": "Korean current-affairs weekly. Official current all-article RSS and rolling Google News URL set. Sitemap lastmod is unavailable; independent news publication dates are retained separately."
+            }
+          ]
         }
       ]
     },
@@ -9790,6 +10766,60 @@
         {
           "name": "R7",
           "sitemapUrl": "https://noticias.r7.com/arc/outboundfeeds/sitemap-news-index/"
+        },
+        {
+          "name": "Brasil 247",
+          "language": "pt",
+          "url": "https://www.brasil247.com/feed/",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://www.brasil247.com/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.brasil247.com/feed/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.brasil247.com/",
+              "found_at": "2026-10-14T01:43:08.770Z",
+              "page_sha256": "8702a74dd09fc4a05a80418eb9c90e65ca7f1d90fe3cb39b07ee83733dad99ea",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Feed para Brasil 247 &raquo;\" href=\"https://www.brasil247.com/feed/\" />",
+              "checked_at": "2026-10-14T01:43:13.274Z",
+              "format": "rss",
+              "scope_note": "Brazilian national politics and economy reporting."
+            }
+          ]
+        },
+        {
+          "name": "Jornal Opção",
+          "language": "pt",
+          "url": "https://www.jornalopcao.com.br/feed/",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://www.jornalopcao.com.br/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.jornalopcao.com.br/feed/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.jornalopcao.com.br/",
+              "found_at": "2026-10-14T01:43:20.906Z",
+              "page_sha256": "9ea6d911adb8aba34d1a520efdc37787d02a029fe069a6bff20ef42c95f610ee",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Feed para Jornal Opção &raquo;\" href=\"https://www.jornalopcao.com.br/feed/\" />",
+              "checked_at": "2026-10-14T01:43:25.303Z",
+              "format": "rss",
+              "scope_note": "Regional reporting in Goiás and national public affairs."
+            }
+          ]
         }
       ]
     },
@@ -11135,6 +12165,33 @@
           "status": "NEW",
           "checkedDate": "04/02/2026",
           "valid": "valid"
+        },
+        {
+          "name": "Independent Australia",
+          "language": "en",
+          "url": "https://feeds.feedburner.com/IndependentAustralia",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://independentaustralia.net/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://feeds.feedburner.com/IndependentAustralia",
+              "kind": "official_html_feed_link",
+              "source_url": "https://independentaustralia.net/",
+              "found_at": "2026-10-14T01:39:31.513Z",
+              "page_sha256": "b3acd7a50b0565ad51bf34ec4a04022805b2645dbf2af221d367eef32f6b3381",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Independent Australia\" href=\"https://feeds.feedburner.com/IndependentAustralia\" />",
+              "checked_at": "2026-10-14T01:39:34.105Z",
+              "format": "rss",
+              "scope_note": "Australian public affairs reporting. Official feed provider declared by the publisher."
+            }
+          ]
         }
       ]
     },
@@ -11587,6 +12644,84 @@
         {
           "name": "El Confidencial Digital",
           "url": "https://www.elconfidencialdigital.com/rss/"
+        },
+        {
+          "name": "infoLibre",
+          "language": "es",
+          "url": "https://www.infolibre.es/rss/",
+          "sitemapUrl": "https://www.infolibre.es/sitemap_google_news_382e2.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://www.infolibre.es/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.infolibre.es/rss/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.infolibre.es/",
+              "found_at": "2026-10-14T01:39:40.042Z",
+              "page_sha256": "43a69c7946d4da7405133c11f31206535a5e7285dabc7d108fa4e66acb498d5e",
+              "tag": "<link rel=\"alternate\" title=\"Últimas Noticias de infolibre.es | infoLibre\" href=\"/rss/\" type=\"application/rss+xml\">",
+              "checked_at": "2026-10-14T01:39:42.624Z",
+              "format": "rss",
+              "scope_note": "Spanish investigative, politics and economy reporting; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline."
+            },
+            {
+              "type": "sitemap",
+              "url": "https://www.infolibre.es/sitemap_google_news_382e2.xml",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://www.infolibre.es/sitemap_index_382e2.xml",
+              "found_at": "2026-10-14T01:39:47.414Z",
+              "page_sha256": "dcc95cfd3d6372077a868036adca8073c7be164ead1f0ae126e13a85179338ff",
+              "declaration": "<loc>https://www.infolibre.es/sitemap_google_news_382e2.xml</loc>",
+              "checked_at": "2026-10-14T01:39:49.712Z",
+              "format": "urlset",
+              "scope_note": "Spanish investigative, politics and economy reporting; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline."
+            }
+          ]
+        },
+        {
+          "name": "Newtral",
+          "language": "es",
+          "url": "https://www.newtral.es/feed/",
+          "sitemapUrl": "https://www.newtral.es/news-sitemap.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://www.newtral.es/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.newtral.es/feed/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.newtral.es/",
+              "found_at": "2026-10-14T01:39:49.516Z",
+              "page_sha256": "b1449a288796f50e36089ce79d430b75b8b59d55943b1e136380d5d876b6db57",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Newtral - Últimas noticias\" href=\"https://www.newtral.es/feed/\">",
+              "checked_at": "2026-10-14T01:39:52.116Z",
+              "format": "rss",
+              "scope_note": "Spanish verification and public-interest journalism; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline."
+            },
+            {
+              "type": "sitemap",
+              "url": "https://www.newtral.es/news-sitemap.xml",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://newtral.es/sitemap.xml",
+              "found_at": "2026-10-14T01:39:58.134Z",
+              "page_sha256": "4ba1909ed2c2d13266c9eed71f3a8533ceba30077531beeea77608ebc45123c2",
+              "declaration": "<loc>https://www.newtral.es/news-sitemap.xml</loc>",
+              "checked_at": "2026-10-14T01:40:00.447Z",
+              "format": "urlset",
+              "scope_note": "Spanish verification and public-interest journalism; configured URLs are available article candidates, not publication totals. New bindings require an excluded first-collection baseline."
+            }
+          ]
         }
       ]
     },
@@ -16665,6 +17800,72 @@
           "status": "NEW",
           "checkedDate": "03/18/2026",
           "valid": "valid"
+        },
+        {
+          "name": "Medyascope",
+          "language": "tr",
+          "url": "https://medyascope.tv/feed/",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:52:57.439Z",
+          "status_reason": "Initial registration from verified official declarations (major20-remaining13-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-remaining13-2026-10-01",
+          "source_homepage": "https://medyascope.tv/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://medyascope.tv/feed/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://medyascope.tv/",
+              "found_at": "2026-10-01T20:22:30.322Z",
+              "page_sha256": "d03d20517fbddfabb188d7293a531d537c8e43b976f42c3fa22871910d2a9815",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Medyascope &raquo; akışı\" href=\"https://medyascope.tv/feed/\" />",
+              "checked_at": "2026-10-01T20:22:32.450Z",
+              "format": "rss",
+              "scope_note": "Official Turkish news RSS. Numbered archive sitemap excluded to avoid freezing a current partition as a permanent stream."
+            }
+          ]
+        },
+        {
+          "name": "Bianet",
+          "language": "tr",
+          "url": "https://bianet.org/rss/bianet",
+          "sitemapUrl": "https://bianet.org/sitemap/haberler",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://bianet.org/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://bianet.org/rss/bianet",
+              "kind": "official_html_feed_anchor",
+              "source_url": "https://bianet.org/",
+              "found_at": "2026-10-14T01:39:54.169Z",
+              "page_sha256": "46859498eb9187d300c74f3821509254ae7115979892985264121ea809b5b639",
+              "tag": "<a href=/rss/bianet class='btn btn--social btn--circle btn--social--rss' target=_blank>",
+              "checked_at": "2026-10-14T01:39:56.479Z",
+              "format": "rss",
+              "scope_note": "Turkish independent rights reporting; general RSS and current news URL sitemap. Sitemap content dates remain missing in the validator."
+            },
+            {
+              "type": "sitemap",
+              "url": "https://bianet.org/sitemap/haberler",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://bianet.org/robots.txt",
+              "found_at": "2026-10-14T01:39:51.962Z",
+              "page_sha256": "60c951ab65b6fac3b7badb92be57aa08fcdf871e3c63d09eac361cb1c4e8c38d",
+              "declaration": "Sitemap: https://bianet.org/sitemap/haberler",
+              "checked_at": "2026-10-14T01:39:58.638Z",
+              "format": "urlset",
+              "scope_note": "Turkish independent rights reporting; general RSS and current news URL sitemap. Sitemap content dates remain missing in the validator."
+            }
+          ]
         }
       ]
     },
@@ -21907,6 +23108,99 @@
           "valid": "valid",
           "row": 108,
           "sitemapUrl": "https://www.mendozapost.com/files/sitemap/sitemap.xml.gz"
+        },
+        {
+          "name": "elDiarioAR",
+          "language": "es",
+          "url": "https://www.eldiarioar.com/rss/",
+          "sitemapUrl": "https://www.eldiarioar.com/sitemap_google_news_a59a1.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:52:57.439Z",
+          "status_reason": "Initial registration from verified official declarations (major20-remaining13-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-remaining13-2026-10-01",
+          "source_homepage": "https://www.eldiarioar.com/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.eldiarioar.com/rss/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.eldiarioar.com/",
+              "found_at": "2026-10-01T20:22:55.713Z",
+              "page_sha256": "edc990c2155c264c4499438c2b3c5af29f399ec9270ca1b171e574d296828f78",
+              "tag": "<link rel=\"alternate\" title=\"Últimas Noticias de eldiario.es | elDiarioAR.com\" href=\"/rss/\" type=\"application/rss+xml\">",
+              "checked_at": "2026-10-01T20:22:58.565Z",
+              "format": "rss",
+              "scope_note": "Official Argentine publisher RSS plus explicitly declared rolling news sitemap, sharing one source for overlap deduplication."
+            },
+            {
+              "type": "sitemap",
+              "url": "https://www.eldiarioar.com/sitemap_google_news_a59a1.xml",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://www.eldiarioar.com/sitemap_index_a59a1.xml",
+              "found_at": "2026-10-01T20:23:05.685Z",
+              "page_sha256": "9b058c4ee8cdd2205e57b17fd0987b22a7a52e61a2ae5d098ca9cd5bcb8d937e",
+              "declared_lastmod": "2026-10-01T22:04:31+02:00",
+              "checked_at": "2026-10-01T20:23:07.976Z",
+              "format": "urlset",
+              "scope_note": "Official Argentine publisher RSS plus explicitly declared rolling news sitemap, sharing one source for overlap deduplication."
+            }
+          ]
+        },
+        {
+          "name": "Cenital",
+          "language": "es",
+          "url": "https://cenital.com/feed/",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://cenital.com/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://cenital.com/feed/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://cenital.com/",
+              "found_at": "2026-10-14T01:40:16.737Z",
+              "page_sha256": "5dd90ec3bbea332296b5b410808e16fef2a0ecba3f95285877d2b3f5797fef9c",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Cenital &raquo; Feed\" href=\"https://cenital.com/feed/\" />",
+              "checked_at": "2026-10-14T01:40:22.012Z",
+              "format": "rss",
+              "scope_note": "Argentinian politics, economy and public policy reporting."
+            }
+          ]
+        },
+        {
+          "name": "La Nueva",
+          "language": "es",
+          "url": null,
+          "sitemapUrl": "https://www.lanueva.com/sitemap_last.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T01:53:20.176Z",
+          "status_reason": "Initial registration from verified official declarations (major20-quality-expansion-2026-10-14).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-quality-expansion-2026-10-14",
+          "source_homepage": "https://www.lanueva.com/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://www.lanueva.com/sitemap_last.xml",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://www.lanueva.com/robots.txt",
+              "found_at": "2026-10-14T01:40:27.026Z",
+              "page_sha256": "a0540160abdf6423c5b69df4553266e95b2bffd5a701822067a70f0aa9fd2de1",
+              "declaration": "Sitemap: https://www.lanueva.com/sitemap_last.xml",
+              "checked_at": "2026-10-14T01:40:34.413Z",
+              "format": "urlset",
+              "scope_note": "Bahía Blanca regional and national reporting."
+            }
+          ]
         }
       ]
     },
@@ -34883,6 +36177,33 @@
           "status": "NEW",
           "checkedDate": "03/31/2026",
           "valid": "valid"
+        },
+        {
+          "name": "GroundUp",
+          "language": "en",
+          "url": "https://www.groundup.org.za/sitenews/rss/",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-01T20:52:57.439Z",
+          "status_reason": "Initial registration from verified official declarations (major20-remaining13-2026-10-01).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major20-remaining13-2026-10-01",
+          "source_homepage": "https://groundup.org.za/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.groundup.org.za/sitenews/rss/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://groundup.org.za/",
+              "found_at": "2026-10-01T20:22:47.839Z",
+              "page_sha256": "24e2198355eff92446fc68d67db6b54b684964ca1fdc9b63671be1f955d4f886",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" href=\"https://www.groundup.org.za/sitenews/rss/\" />",
+              "checked_at": "2026-10-01T20:22:53.311Z",
+              "format": "rss",
+              "scope_note": "Official South African news RSS. Large mixed archive sitemap deferred; no 20,021-entry archive baseline is added here."
+            }
+          ]
         }
       ]
     },

@@ -138,17 +138,24 @@ export function empiricalFreshness(input: DatedContent[], at: number) {
     typical_update_seconds: cadence / 1000, freshness_threshold_seconds: threshold / 1000, content_age_seconds: age / 1000 };
 }
 
-/** Compare the same country's fully recorded due cycles, UTC weekday and unchanged planned cohort. */
+/** Compare fully recorded country cohorts, even when another country left a terminal due cycle partial. */
 export function completedCycleBaseline(input: CollectionCycleEvidence[], country: string, date: string, days = 56) {
   // Stores validate summaries on ingestion; do not revalidate every country field once per country during comparisons.
   const cycles = input.map(row => 'summary_version' in row ? row : summarizeCollectionCycle(row));
+  const countryComplete = (row: CollectionCycleSummary) => {
+    const cohort = row.country_metrics[country], scheduling = row.scheduling?.country_metrics[country];
+    return row.lane === 'production' && (row.status === 'completed' || row.status === 'partial')
+      && row.finished_at !== null && row.scope === 'due_endpoints' && !!cohort && cohort.eligible_endpoints > 0
+      && cohort.eligible_endpoints === cohort.planned_endpoints && cohort.planned_endpoints === cohort.attempted_endpoints
+      && (!scheduling || scheduling.unattempted_deferred_endpoints === 0 && scheduling.unattempted_unrestricted_endpoints === 0);
+  };
   const selected = cycles.filter(row => row.lane === 'production' && row.started_at.slice(0, 10) === date && row.country_metrics[country]?.eligible_endpoints)
     .sort((a, b) => a.started_at.localeCompare(b.started_at)).at(-1);
   const empty = { state: 'completion_not_recorded', cycle_id: selected?.id ?? null, samples: 0, sample_dates: [] as string[], comparable_endpoints: 0,
     metrics: { attempt_coverage: null as number | null, success_rate: null as number | null }, current: null as null | { attempt_coverage: number; success_rate: number | null }, reasons: [] as Array<{ metric: string; current: number; baseline: number; delta_percentage_points: number }> };
-  if (!selected || selected.status !== 'completed' || selected.scope !== 'due_endpoints') return { ...empty, state: selected ? 'incomplete_or_explicit_cycle' : empty.state };
+  if (!selected || !countryComplete(selected)) return { ...empty, state: selected ? 'incomplete_or_explicit_cycle' : empty.state };
   const cohort = selected.country_metrics[country], signature = cohort.cohort_sha256, start = Date.parse(date) - days * DAY, weekday = new Date(date).getUTCDay();
-  const previous = cycles.filter(row => row.lane === 'production' && row.status === 'completed' && row.scope === 'due_endpoints'
+  const previous = cycles.filter(row => countryComplete(row)
     && (row.scheduling?.policy ?? 'legacy_due_policy') === (selected.scheduling?.policy ?? 'legacy_due_policy')
     && Date.parse(row.started_at) >= start && row.started_at < selected.started_at && row.started_at.slice(0, 10) < date
     && new Date(row.started_at).getUTCDay() === weekday && row.country_metrics[country]?.cohort_sha256 === signature);

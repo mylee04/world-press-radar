@@ -1,0 +1,134 @@
+{
+  "prepared_at": "2026-10-14T01:43:16.058Z",
+  "registrations": 9,
+  "rss_endpoints": 7,
+  "sitemap_endpoints": 6,
+  "by_country": {
+    "DE": {
+      "registrations": 2,
+      "rss": 0,
+      "sitemap": 2
+    },
+    "GB": {
+      "registrations": 1,
+      "rss": 1,
+      "sitemap": 1
+    },
+    "FR": {
+      "registrations": 1,
+      "rss": 1,
+      "sitemap": 0
+    },
+    "IT": {
+      "registrations": 3,
+      "rss": 3,
+      "sitemap": 1
+    },
+    "ES": {
+      "registrations": 2,
+      "rss": 2,
+      "sitemap": 2
+    }
+  },
+  "checks": 75,
+  "additional_xml_content_checks": 4,
+  "additional_golem_guide_attempts": 1,
+  "no_production_mutations": true,
+  "exclusions": [
+    {
+      "name": "netzpolitik.org RSS",
+      "reason": "Explicit robots disallow /feed/; no endpoint fetch or bypass. Allowed rolling news sitemap validated independently."
+    },
+    {
+      "name": "Golem.de RSS",
+      "reason": "Official website exposes RSS guide, but actual current bounded guide fetch returned consent page without declarations; no bypass or guessed provider URL."
+    },
+    {
+      "name": "The Bristol Cable",
+      "reason": "Homepage/robots currently provided no declared RSS or sitemap; no guessed path accepted."
+    },
+    {
+      "name": "Carbon Brief",
+      "reason": "Only partitioned post maps and newsletter/category navigation maps found. Deferred to avoid treating archive or navigation pages as rolling article streams."
+    },
+    {
+      "name": "Vert RSS",
+      "reason": "Official declared /feed/ returned wrong endpoint format, not accepted."
+    },
+    {
+      "name": "Internazionale sitemaps",
+      "reason": "Official article map structurally nonempty, but output samples are from May 2017 with missing validator dates; excluded as obsolete. Current RSS is independently recent."
+    },
+    {
+      "name": "Linkiesta sitemap index",
+      "reason": "Index timed out at bounded 8 seconds. Separately declared current news sitemap succeeded; index itself not installed."
+    },
+    {
+      "name": "Valigia Blu homepage RSS and sitemap",
+      "reason": "Homepage category feed is valid-empty; declared sitemap XML malformed. Current main RSS remains independently validated."
+    },
+    {
+      "name": "El Salto",
+      "reason": "robots request inconclusive/network; no bypass or source addition."
+    }
+  ],
+  "content_dates": [
+    {
+      "url": "https://netzpolitik.org/sitemap-news.xml",
+      "checked_at": "2026-10-14T01:41:29.215Z",
+      "http_status": 200,
+      "xml_sha256": "82501a15f330f2f3b1808a5879c2692da4b6f389e668e0e3d3fda167cbbd3628",
+      "publication_or_lastmod_count": 4,
+      "newest_declared_date": "2026-10-13T11:48:26+02:00",
+      "date_examples": [
+        "2026-10-13T11:48:26+02:00",
+        "2026-10-12T17:34:58+02:00",
+        "2026-10-12T14:14:39+02:00"
+      ],
+      "note": "Additional direct XML news publication dates are evidence only; validator newestContentAt is preserved, not fabricated."
+    },
+    {
+      "url": "https://www.linkiesta.it/news-sitemap.xml",
+      "checked_at": "2026-10-14T01:41:29.588Z",
+      "http_status": 200,
+      "xml_sha256": "eed2e7a740b4065671fe69ede0e2da4c8b61c4db0d4c5dee3065b5f0484fae93",
+      "publication_or_lastmod_count": 28,
+      "newest_declared_date": "2026-10-13T15:30:35+00:00",
+      "date_examples": [
+        "2026-10-13T15:30:35+00:00",
+        "2026-10-13T05:10:10+00:00",
+        "2026-10-13T05:07:43+00:00"
+      ],
+      "note": "Additional direct XML news publication dates are evidence only; validator newestContentAt is preserved, not fabricated."
+    },
+    {
+      "url": "https://www.infolibre.es/sitemap_google_news_382e2.xml",
+      "checked_at": "2026-10-14T01:41:29.901Z",
+      "http_status": 200,
+      "xml_sha256": "944990668e9dcfe6870aea878f0e6f861273e73bced97470ac5a3e0237709d28",
+      "publication_or_lastmod_count": 90,
+      "newest_declared_date": "2026-10-13T19:11:34+00:00",
+      "date_examples": [
+        "2026-10-13T19:11:34+00:00",
+        "2026-10-13T18:09:37+00:00",
+        "2026-10-13T18:09:37+00:00"
+      ],
+      "note": "Additional direct XML news publication dates are evidence only; validator newestContentAt is preserved, not fabricated."
+    },
+    {
+      "url": "https://www.newtral.es/news-sitemap.xml",
+      "checked_at": "2026-10-14T01:41:30.402Z",
+      "http_status": 200,
+      "xml_sha256": "071b5e190b2a37c90e5d43d6da115ff99e4b7b42a04877aab3d088a208901998",
+      "publication_or_lastmod_count": 13,
+      "newest_declared_date": "2026-10-13T16:09:21+00:00",
+      "date_examples": [
+        "2026-10-13T16:09:21+00:00",
+        "2026-10-13T15:57:27+00:00",
+        "2026-10-13T15:56:43+00:00"
+      ],
+      "note": "Additional direct XML news publication dates are evidence only; validator newestContentAt is preserved, not fabricated."
+    }
+  ],
+  "limits": "One request per hostname, 2 second host gap, 2 independent workers, DNS-pinned public targets, 8 second XML checks, bounded XML bodies. No model APIs or article bodies fetched."
+}

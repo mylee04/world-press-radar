@@ -1,0 +1,217 @@
+{
+  "prepared_at": "2026-10-14T01:47:50.914Z",
+  "registry_sha256": "314594b28b66cf725add832f7fdccb3ce73e6f74ad20f9bae0a46dea69d613e9",
+  "core_registrations": 10,
+  "core_endpoints": 12,
+  "optional_registrations": 3,
+  "dry_run_validated_registrations": 13,
+  "registry_modified": false,
+  "by_country": {
+    "US": {
+      "core": 4,
+      "optional": 3
+    },
+    "CA": {
+      "core": 2,
+      "optional": 0
+    },
+    "BR": {
+      "core": 2,
+      "optional": 0
+    },
+    "MX": {
+      "core": 0,
+      "optional": 0
+    },
+    "AR": {
+      "core": 2,
+      "optional": 0
+    }
+  },
+  "selected": [
+    {
+      "country": "US",
+      "name": "Inside Climate News",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://insideclimatenews.org/feed/",
+          "checked_at": "2026-10-14T01:38:47.999Z",
+          "newest_content_at": "2026-10-13T22:50:17.000Z",
+          "entries_with_url": 10
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "name": "404 Media",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.404media.co/rss/",
+          "checked_at": "2026-10-14T01:44:29.166Z",
+          "newest_content_at": "2026-10-13T20:06:53.000Z",
+          "entries_with_url": 15
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.404media.co/sitemap-posts.xml",
+          "checked_at": "2026-10-14T01:44:42.362Z",
+          "newest_content_at": "2026-10-13T20:06:53.000Z",
+          "entries_with_url": 2385
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "name": "Alaska Public Media",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://alaskapublic.org/news-sitemap-content.xml",
+          "checked_at": "2026-10-14T01:39:28.791Z",
+          "newest_content_at": "2026-10-14T00:35:40.000Z",
+          "entries_with_url": 14
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "name": "Hawaii Public Radio",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://www.hawaiipublicradio.org/news-sitemap-content.xml",
+          "checked_at": "2026-10-14T01:39:39.493Z",
+          "newest_content_at": "2026-10-14T00:11:04.000Z",
+          "entries_with_url": 114
+        }
+      ]
+    },
+    {
+      "country": "CA",
+      "name": "The Narwhal",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://thenarwhal.ca/feed/",
+          "checked_at": "2026-10-14T01:43:09.948Z",
+          "newest_content_at": "2026-10-13T12:00:00.000Z",
+          "entries_with_url": 11
+        }
+      ]
+    },
+    {
+      "country": "CA",
+      "name": "The Breach",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://breachmedia.ca/feed/",
+          "checked_at": "2026-10-14T01:44:29.820Z",
+          "newest_content_at": "2026-10-13T18:59:28.000Z",
+          "entries_with_url": 20
+        },
+        {
+          "type": "sitemap",
+          "url": "https://breachmedia.ca/post-sitemap.xml",
+          "checked_at": "2026-10-14T01:44:36.834Z",
+          "newest_content_at": "2026-10-13T18:59:31.000Z",
+          "entries_with_url": 609
+        }
+      ]
+    },
+    {
+      "country": "BR",
+      "name": "Brasil 247",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.brasil247.com/feed/",
+          "checked_at": "2026-10-14T01:43:13.274Z",
+          "newest_content_at": "2026-10-14T01:40:23.000Z",
+          "entries_with_url": 10
+        }
+      ]
+    },
+    {
+      "country": "BR",
+      "name": "Jornal Opção",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.jornalopcao.com.br/feed/",
+          "checked_at": "2026-10-14T01:43:25.303Z",
+          "newest_content_at": "2026-10-13T22:42:04.000Z",
+          "entries_with_url": 25
+        }
+      ]
+    },
+    {
+      "country": "AR",
+      "name": "Cenital",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://cenital.com/feed/",
+          "checked_at": "2026-10-14T01:40:22.012Z",
+          "newest_content_at": "2026-10-13T21:30:00.000Z",
+          "entries_with_url": 10
+        }
+      ]
+    },
+    {
+      "country": "AR",
+      "name": "La Nueva",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://www.lanueva.com/sitemap_last.xml",
+          "checked_at": "2026-10-14T01:40:34.413Z",
+          "newest_content_at": "2026-10-14T01:35:56.093Z",
+          "entries_with_url": 50
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "name": "The 19th",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://19thnews.org/feed",
+          "checked_at": "2026-10-14T01:39:00.351Z",
+          "newest_content_at": "2026-10-13T21:56:20.000Z",
+          "entries_with_url": 20
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "name": "The Marshall Project",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.themarshallproject.org/rss/recent",
+          "checked_at": "2026-10-14T01:39:10.420Z",
+          "newest_content_at": "2026-10-10T16:00:00.000Z",
+          "entries_with_url": 50
+        }
+      ]
+    },
+    {
+      "country": "US",
+      "name": "Undark",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://undark.org/feed/",
+          "checked_at": "2026-10-14T01:38:48.392Z",
+          "newest_content_at": "2026-10-09T07:05:00.000Z",
+          "entries_with_url": 10
+        }
+      ]
+    }
+  ],
+  "deferred_count": 74
+}

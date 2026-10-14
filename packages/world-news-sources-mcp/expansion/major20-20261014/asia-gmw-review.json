@@ -1,0 +1,51 @@
+{
+  "url": "http://news.gmw.cn/google_news.xml",
+  "status": 200,
+  "checked_at": "2026-10-14T01:44:09.869Z",
+  "sha256": "1fe9662cc0fc952a40551c9ede6cd6d224fe8c368bd482f1044bba2102b75989",
+  "date_count": 298,
+  "date_samples": [
+    {
+      "tag": "lastmod",
+      "value": "2026-10-14T02:25:00+08:00"
+    },
+    {
+      "tag": "lastmod",
+      "value": "2026-10-14T02:25:00+08:00"
+    },
+    {
+      "tag": "lastmod",
+      "value": "2026-10-14T02:25:00+08:00"
+    },
+    {
+      "tag": "lastmod",
+      "value": "2026-10-14T02:20:00+08:00"
+    },
+    {
+      "tag": "lastmod",
+      "value": "2026-10-14T02:20:00+08:00"
+    },
+    {
+      "tag": "lastmod",
+      "value": "2026-10-14T02:20:00+08:00"
+    },
+    {
+      "tag": "lastmod",
+      "value": "2026-10-14T02:20:00+08:00"
+    },
+    {
+      "tag": "lastmod",
+      "value": "2026-10-14T02:20:00+08:00"
+    }
+  ],
+  "url_count": 298,
+  "article_url_heuristic_count": 298,
+  "sample_urls": [
+    "https://news.gmw.cn/2026-10/14/content_39044643.htm",
+    "https://news.gmw.cn/2026-10/14/content_39044645.htm",
+    "https://news.gmw.cn/2026-10/14/content_39044644.htm",
+    "https://news.gmw.cn/2026-10/14/content_39044631.htm",
+    "https://news.gmw.cn/2026-10/14/content_39044632.htm"
+  ],
+  "xml_excerpt": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\r\n  <url>\r\n    <loc>https://news.gmw.cn/2026-10/14/content_39044643.htm</loc>\r\n    <lastmod>2026-10-14T02:25:00+08:00</lastmod>\r\n  </url>\r\n  <url>\r\n    <loc>https://news.gmw.cn/2026-10/14/content_39044645.htm</loc>\r\n    <lastmod>2026-10-14T02:25:00+08:00</lastmod>\r\n  </url>\r\n  <url>\r\n    <loc>https://news.gmw.cn/2026-10/14/content_39044644.htm</loc>\r\n    <lastmod>2026-10-14T02:25:00+08:00</lastmod>\r\n  </url>\r\n  <url>\r\n    <loc>https://news.gmw.cn/2026-10/14/content_39044631.htm</loc>\r\n    <lastmod>2026-10-14T02:20:00+08:00</lastmod>\r\n  </url>\r\n  <url>\r\n    <loc>https://news.gmw.cn/2026-10/14/content_39044632.htm</loc>\r\n    <lastmod>2026-10-14T02:20:00+08:00</lastmod>\r\n  </url>\r\n  <url>\r\n    <loc>https://news.gmw.cn/2026-10/14/content_39044633.htm</loc>\r\n    <lastmod>2026-10-14T02:20:00+08:00</lastmod>\r\n  </url>\r\n  <url>\r\n    <loc>https://news.gmw.cn/2026-10/14/content_39044599.htm</loc>\r\n    <lastmod>2026-10-14T02:20:00+08:00</lastmod>\r\n  </url>\r\n  <url>\r\n    <loc>https://news.gmw.cn/2026-10/14/content_39044600.htm</loc>\r\n    <lastmod>2026-10-14T02:20:00+08:00</lastmod>\r\n  </url>\r\n  <url>\r\n    <loc>https://news.gmw.cn/2026-10/14/content_39044602.htm</loc>\r\n    <lastmod>2026-10-14T02:20:00+08:00</lastmod>\r\n  </url>\r\n  <url>\r\n    <loc>https://news.gmw.cn/2026-10/14/content_39044634.htm</loc>\r\n    <lastmod>2026-10-14T02:20:00+08:00</lastmod>\r\n  </url>\r\n  <url>\r\n    <loc>https://ne"
+}

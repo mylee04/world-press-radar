@@ -1,0 +1,79 @@
+{
+  "applied_at_utc": "2026-10-14T01:53:20.176Z",
+  "baseline_finished_at_utc": "2026-10-14T01:53:40.165Z",
+  "registrations_added": 33,
+  "typed_rss_added": 24,
+  "typed_sitemaps_added": 18,
+  "actual_oracle_target_checks": 42,
+  "successful_new_bindings": 41,
+  "uninitialized_new_bindings": 1,
+  "failed_endpoint": {
+    "source": "Linkiesta",
+    "type": "sitemap",
+    "url": "https://www.linkiesta.it/news-sitemap.xml",
+    "status": "blocked",
+    "http_status": 403
+  },
+  "old_health_and_full_audit_preserved": true,
+  "retention": {
+    "verified_at_utc": "2026-10-14T02:06:50.780928+00:00",
+    "old_collections_exact_content_preserved": {
+      "rows": 53346,
+      "sha256": "8f87d0a1e922278a8e7495c67bf28a49e8784417e3585a758c103145a6a42bcd"
+    },
+    "old_canonical_urls_preserved": 2119207,
+    "old_binding_baselines_preserved": 5819,
+    "new_source_nonbaseline_candidate_urls": 0,
+    "new_initialized_bindings": 41,
+    "new_uninitialized_bindings": 1,
+    "model_calls": 0
+  },
+  "global_inventory": {
+    "active_countries": 72,
+    "active_source_registrations": 5067,
+    "unique_active_rss_endpoints": 3691,
+    "unique_active_sitemap_endpoints": 1767,
+    "unique_publishers": 2824,
+    "publisher_count_state": "estimated_from_registry_identity",
+    "publisher_count_semantics": "활성 등록의 매체 브랜드 기준 추정. 등록된 사이트 도메인·별칭으로 중복을 제거함. 55개는 사이트 도메인 없이 등록명·공유 피드 경로로 추정. 모회사별로 합치지 않으며, 공유 서버·연결되지 않은 다른 도메인에는 오차가 있을 수 있음.",
+    "publisher_identity_basis": {
+      "domain_groups": 2769,
+      "name_fallback_groups": 55,
+      "unresolved_active_registrations": 0
+    },
+    "publisher_inventory_snapshot_at": "2026-10-14T01:53:36.342Z"
+  },
+  "model_calls": 0,
+  "existing_source_rows_changed": 0,
+  "collector_timer_changed": false,
+  "tests": {
+    "full_suite_pass": 326,
+    "focused_cloud_pass": 37,
+    "focused_dashboard_pass": 19
+  },
+  "quality_release": "quality-country-baseline-ready-20261014",
+  "quality_activation": "activated",
+  "public_deployment": "dpl_BzqxtTbWvd9eF5cyAKUiC7j2RM6E",
+  "public_url": "https://news.bymyleslee.com/quality/",
+  "actual_rules_investigation": {
+    "run_id": "e1f79829-2d75-44a9-847b-f3db161dd86d",
+    "country": "IT",
+    "date": "2026-10-14",
+    "status": "completed",
+    "tool_calls": 29,
+    "inspected_sources": 12,
+    "available_sources": 110,
+    "model_calls": 0,
+    "model_cost_usd": 0,
+    "new_linkiesta_results": [
+      {
+        "classification": "successful_no_new_discoveries",
+        "endpoint_id": "ep_0ad9d011bde31b3d3185a9e7"
+      },
+      {
+        "classification": "access_failure_without_normal_baseline",
+        "endpoint_id": "ep_48ee9a8ffe68ed0399e8eb5f"
+      }
+    ]
+  }
+}

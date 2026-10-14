@@ -1,0 +1,273 @@
+{
+  "version": 1,
+  "additions": [
+    {
+      "country": "AU",
+      "name": "Independent Australia",
+      "language": "en",
+      "homepage": "https://independentaustralia.net/",
+      "publisher_reference": "https://independentaustralia.net/",
+      "scope_note": "Australian public affairs reporting. Official feed provider declared by the publisher.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://feeds.feedburner.com/IndependentAustralia",
+          "endpoint_id": "ep_204db26ef366a7f85c80dc46",
+          "observation": {
+            "endpointId": "ep_204db26ef366a7f85c80dc46",
+            "type": "rss",
+            "url": "https://feeds.feedburner.com/IndependentAustralia",
+            "checkedAt": "2026-10-14T01:39:34.105Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 100,
+            "entriesWithUrl": 100,
+            "sampleUrls": [
+              "https://independentaustralia.net/business/business-display/no-easy-solution-to-australias-rural-and-remote-connectivity-problem,21671?utm_source=rss&utm_medium=rss&utm_campaign=IA_Feed",
+              "https://independentaustralia.net/politics/politics-display/public-executions-aukus-and-the-right-of-australian-communities-to-say-no,21670?utm_source=rss&utm_medium=rss&utm_campaign=IA_Feed",
+              "https://independentaustralia.net/business/business-display/openai-under-scrutiny-over-security-failures-and-research-ethics,21669?utm_source=rss&utm_medium=rss&utm_campaign=IA_Feed"
+            ],
+            "newestContentAt": "2026-10-13T21:00:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://feeds.feedburner.com/IndependentAustralia",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2303,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://feeds.feedburner.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:31.801Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://independentaustralia.net/",
+            "found_at": "2026-10-14T01:39:31.513Z",
+            "page_sha256": "b3acd7a50b0565ad51bf34ec4a04022805b2645dbf2af221d367eef32f6b3381",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"Independent Australia\" href=\"https://feeds.feedburner.com/IndependentAustralia\" />"
+          }
+        }
+      ]
+    },
+    {
+      "country": "TR",
+      "name": "Bianet",
+      "language": "tr",
+      "homepage": "https://bianet.org/",
+      "publisher_reference": "https://bianet.org/",
+      "scope_note": "Turkish independent rights reporting; general RSS and current news URL sitemap. Sitemap content dates remain missing in the validator.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://bianet.org/rss/bianet",
+          "endpoint_id": "ep_ce0090b3d6140442dd379db1",
+          "observation": {
+            "endpointId": "ep_ce0090b3d6140442dd379db1",
+            "type": "rss",
+            "url": "https://bianet.org/rss/bianet",
+            "checkedAt": "2026-10-14T01:39:56.479Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 50,
+            "entriesWithUrl": 50,
+            "sampleUrls": [
+              "https://bianet.org/yazi/saglik-bakanligi-esitsizlikleri-devam-ettirmekte-kararliyiz-324373",
+              "https://bianet.org/haber/trump-yemen-savasi-nda-erdogan-dan-destek-istersem-verir-dedi-turkiye-zaten-destek-veriyor-324389",
+              "https://bianet.org/haber/fransa-yuzbinler-liseli-direnisini-surduruyor-sonraki-randevu-17-ekim-de-324388"
+            ],
+            "newestContentAt": "2026-10-13T21:05:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://bianet.org/rss/bianet",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2309,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://bianet.org/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:51.962Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_html_feed_anchor",
+            "source_url": "https://bianet.org/",
+            "found_at": "2026-10-14T01:39:54.169Z",
+            "page_sha256": "46859498eb9187d300c74f3821509254ae7115979892985264121ea809b5b639",
+            "tag": "<a href=/rss/bianet class='btn btn--social btn--circle btn--social--rss' target=_blank>"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://bianet.org/sitemap/haberler",
+          "endpoint_id": "ep_ab936723e13d3195142179c0",
+          "observation": {
+            "endpointId": "ep_ab936723e13d3195142179c0",
+            "type": "sitemap",
+            "url": "https://bianet.org/sitemap/haberler",
+            "checkedAt": "2026-10-14T01:39:58.638Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 123,
+            "entriesWithUrl": 123,
+            "sampleUrls": [
+              "https://bianet.org/haber/trump-yemen-savasi-nda-erdogan-dan-destek-istersem-verir-dedi-turkiye-zaten-destek-veriyor-324389",
+              "https://bianet.org/haber/fransa-yuzbinler-liseli-direnisini-surduruyor-sonraki-randevu-17-ekim-de-324388",
+              "https://bianet.org/haber/thirteen-unaccompanied-migrant-children-missing-in-edirne-324387"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://bianet.org/sitemap/haberler",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2158,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://bianet.org/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:51.962Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://bianet.org/robots.txt",
+            "found_at": "2026-10-14T01:39:51.962Z",
+            "page_sha256": "60c951ab65b6fac3b7badb92be57aa08fcdf871e3c63d09eac361cb1c4e8c38d",
+            "declaration": "\nSitemap: https://bianet.org/sitemap/haberler"
+          }
+        }
+      ]
+    },
+    {
+      "country": "RU",
+      "name": "7x7",
+      "language": "ru",
+      "homepage": "https://semnasem.org/",
+      "publisher_reference": "https://semnasem.org/",
+      "scope_note": "Russian-language regional reporting. Initial observations are excluded article-discovery baselines.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://semnasem.org/rss/default.xml",
+          "endpoint_id": "ep_d5c9daec29669408d65c4828",
+          "observation": {
+            "endpointId": "ep_d5c9daec29669408d65c4828",
+            "type": "rss",
+            "url": "https://semnasem.org/rss/default.xml",
+            "checkedAt": "2026-10-14T01:39:59.678Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 40,
+            "entriesWithUrl": 40,
+            "sampleUrls": [
+              "https://semnasem.org/news/2026/10/13/karelskaya-obshestvennica-zayavila-chto-u-nee-ukrali-pobedu-na-vyborah-rezultat-izmenilsya-blagodarya-uchastku-v-voinskoj-chasti-o-kotorom-ne-bylo-izvest",
+              "https://semnasem.org/news/2026/10/13/tomskoe-otdelenie-ldpr-udalilo-post-s-predlozheniem-pereimenovat-mera-v-posadnika",
+              "https://semnasem.org/news/2026/10/13/proektirovshik-zapreshennogo-musornogo-poligona-pod-ekaterinburgom-potreboval-s-aktivistov-6-mln-rublej"
+            ],
+            "newestContentAt": "2026-10-13T14:44:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://semnasem.org/rss/default.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2830,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://semnasem.org/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T01:39:54.156Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://semnasem.org/",
+            "found_at": "2026-10-14T01:39:56.845Z",
+            "page_sha256": "daad25b3a91e83880b917c501e96734072207ab6e9a918fee910e16803948f8f",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"&laquo;7x7&raquo; Горизонтальная Россия\" href=\"https://semnasem.org/rss/default.xml\">"
+          }
+        }
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "country": "AU",
+      "name": "Cosmos",
+      "reason": "homepage_robots_not_allowed"
+    },
+    {
+      "country": "AU",
+      "name": "Pearls and Irritations",
+      "reason": "No current declared article endpoint accepted; old archives excluded"
+    },
+    {
+      "country": "AU",
+      "name": "New Matilda",
+      "reason": "No current declared article endpoint accepted; old archives excluded"
+    },
+    {
+      "country": "ZA",
+      "name": "Daily Investor",
+      "reason": "homepage_robots_not_allowed"
+    },
+    {
+      "country": "ZA",
+      "name": "MyBroadband",
+      "reason": "homepage_robots_not_allowed"
+    },
+    {
+      "country": "ZA",
+      "name": "Daily Maverick",
+      "reason": "No current declared article endpoint accepted; old archives excluded"
+    },
+    {
+      "country": "TR",
+      "name": "Diken",
+      "reason": "homepage_robots_not_allowed"
+    }
+  ],
+  "requests": 42
+}

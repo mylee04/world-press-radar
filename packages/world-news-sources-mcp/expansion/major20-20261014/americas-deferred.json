@@ -1,0 +1,662 @@
+[
+  {
+    "country": "US",
+    "name": "Inside Climate News",
+    "url": "https://insideclimatenews.org/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-13T22:50:23.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Undark",
+    "url": "https://undark.org/sitemap.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-08T15:51:31.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Undark",
+    "url": "https://undark.org/news-sitemap.xml",
+    "reason": "No reliable content date / current article proof",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Undark",
+    "url": "https://undark.org/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-08T15:51:31.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "The 19th",
+    "url": "https://19thnews.org/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-13T12:32:06.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "The 19th",
+    "url": "https://19thnews.org/newsletters-sitemap.xml",
+    "reason": "Navigation, financial instrument or comment/newsletter listing",
+    "http_status": 200,
+    "newest_content_at": "2026-10-06T13:42:27.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "The 19th",
+    "url": "https://19thnews.org/news-sitemap.xml",
+    "reason": "HTTP_429",
+    "http_status": 429,
+    "newest_content_at": null,
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "The Marshall Project",
+    "url": "https://www.themarshallproject.org/sitemap.xml",
+    "reason": "HTTP_403",
+    "http_status": 403,
+    "newest_content_at": null,
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "404 Media",
+    "url": "https://www.404media.co/rss",
+    "reason": "Not selected; prefer article-only current endpoint",
+    "http_status": 200,
+    "newest_content_at": "2026-10-13T20:06:53.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "404 Media",
+    "url": "https://www.404media.co/sitemap.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-13T20:06:53.529Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Alaska Public Media",
+    "url": "https://alaskapublic.org/index.rss",
+    "reason": "valid_empty",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Alaska Public Media",
+    "url": "https://alaskapublic.org/sitemap.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-13T09:09:41.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Alaska Public Media",
+    "url": "https://alaskapublic.org/sitemap-latest.xml",
+    "reason": "Not selected; prefer article-only current endpoint",
+    "http_status": 200,
+    "newest_content_at": "2026-10-14T00:35:40.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Alaska Public Media",
+    "url": "https://alaskapublic.org/sitemap-latest.xml",
+    "reason": "Not selected; prefer article-only current endpoint",
+    "http_status": 200,
+    "newest_content_at": "2026-10-14T00:35:40.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Hawaii Public Radio",
+    "url": "https://www.hawaiipublicradio.org/index.rss",
+    "reason": "valid_empty",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Hawaii Public Radio",
+    "url": "https://www.hawaiipublicradio.org/sitemap.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-13T04:06:44.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Hawaii Public Radio",
+    "url": "https://www.hawaiipublicradio.org/sitemap-latest.xml",
+    "reason": "Not selected; prefer article-only current endpoint",
+    "http_status": 200,
+    "newest_content_at": "2026-10-14T01:36:06.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Hawaii Public Radio",
+    "url": "https://www.hawaiipublicradio.org/sitemap-latest.xml",
+    "reason": "Not selected; prefer article-only current endpoint",
+    "http_status": 200,
+    "newest_content_at": "2026-10-14T01:36:06.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "CA",
+    "name": "The Narwhal",
+    "url": "https://thenarwhal.ca/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-09-01T12:20:31.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "CA",
+    "name": "The Narwhal",
+    "url": "https://thenarwhal.ca/news-sitemap.xml",
+    "reason": "No reliable content date / current article proof",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Grist",
+    "url": "https://grist.org/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-13T18:17:59.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Grist",
+    "url": "https://grist.org/newsletter-sitemap.xml",
+    "reason": "Old content; do not register as current collection",
+    "http_status": 200,
+    "newest_content_at": "2023-03-17T00:26:49.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Grist",
+    "url": "https://grist.org/grist-50/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2022-01-28T22:15:47.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Grist",
+    "url": "https://grist.org/fix/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-08T21:25:32.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Grist",
+    "url": "https://uprootproject.org/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-01T14:21:24.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "CA",
+    "name": "The Breach",
+    "url": "https://breachmedia.ca/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-13T18:59:31.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "BR",
+    "name": "Agência Brasil",
+    "url": "https://rss.ebc.com.br/",
+    "reason": "TIMEOUT",
+    "http_status": null,
+    "newest_content_at": null,
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "BR",
+    "name": "Repórter Brasil",
+    "url": "https://reporterbrasil.org.br/feed/",
+    "reason": "WRONG_ENDPOINT_FORMAT",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "BR",
+    "name": "Repórter Brasil",
+    "url": "https://reporterbrasil.org.br/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-13T19:25:12.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "BR",
+    "name": "Repórter Brasil",
+    "url": "https://reporterbrasil.org.br/sitemap-news.php",
+    "reason": "No reliable content date / current article proof",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "MX",
+    "name": "Pie de Página",
+    "url": "https://piedepagina.mx/feed/",
+    "reason": "WRONG_ENDPOINT_FORMAT",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "MX",
+    "name": "Noroeste",
+    "url": "https://www.noroeste.com.mx/sitemap.xml",
+    "reason": "Not selected; prefer article-only current endpoint",
+    "http_status": 200,
+    "newest_content_at": "2026-10-14T01:15:30.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "MX",
+    "name": "Noroeste",
+    "url": "https://www.noroeste.com.mx/sitemapforgoogle.xml",
+    "reason": "No reliable content date / current article proof",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "MX",
+    "name": "Noroeste",
+    "url": "https://www.noroeste.com.mx/megasitemap.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2021-03-02T00:00:00.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "AR",
+    "name": "Cenital",
+    "url": "https://cenital.com/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-13T21:09:57.000Z",
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "AR",
+    "name": "La Nueva",
+    "url": "https://www.lanueva.com/news/rss",
+    "reason": "DTD_NOT_ALLOWED",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "AR",
+    "name": "La Nueva",
+    "url": "https://www.lanueva.com/sitemap.xml",
+    "reason": "No reliable content date / current article proof",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "AR",
+    "name": "La Nueva",
+    "url": "https://www.lanueva.com/sitemap_news.xml",
+    "reason": "No reliable content date / current article proof",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "AR",
+    "name": "La Nueva",
+    "url": "https://www.lanueva.com/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "CA",
+    "name": "The Narwhal",
+    "url": "https://thenarwhal.ca/rss-feeds/",
+    "reason": "DTD_NOT_ALLOWED",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-targeted-checkpoints.json"
+  },
+  {
+    "country": "CA",
+    "name": "The Narwhal",
+    "url": "https://thenarwhal.ca/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-09-01T12:20:31.000Z",
+    "evidence_file": "americas-targeted-checkpoints.json"
+  },
+  {
+    "country": "CA",
+    "name": "The Narwhal",
+    "url": "https://thenarwhal.ca/news-sitemap.xml",
+    "reason": "No reliable content date / current article proof",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-targeted-checkpoints.json"
+  },
+  {
+    "country": "BR",
+    "name": "InfoAmazonia",
+    "url": "https://infoamazonia.org/feed/",
+    "reason": "ROBOTS_DISALLOWED",
+    "http_status": null,
+    "newest_content_at": null,
+    "evidence_file": "americas-targeted-checkpoints.json"
+  },
+  {
+    "country": "BR",
+    "name": "InfoAmazonia",
+    "url": "https://infoamazonia.org/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-13T20:17:55.000Z",
+    "evidence_file": "americas-targeted-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Grist",
+    "url": "https://grist.org/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-13T18:17:59.000Z",
+    "evidence_file": "americas-targeted-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Grist",
+    "url": "https://grist.org/newsletter-sitemap.xml",
+    "reason": "Old content; do not register as current collection",
+    "http_status": 200,
+    "newest_content_at": "2023-03-17T00:26:49.000Z",
+    "evidence_file": "americas-targeted-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Grist",
+    "url": "https://grist.org/grist-50/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2022-01-28T22:15:47.000Z",
+    "evidence_file": "americas-targeted-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Grist",
+    "url": "https://grist.org/fix/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-08T21:25:32.000Z",
+    "evidence_file": "americas-targeted-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "Grist",
+    "url": "https://uprootproject.org/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-01T14:21:24.000Z",
+    "evidence_file": "americas-targeted-checkpoints.json"
+  },
+  {
+    "country": "BR",
+    "name": "Marco Zero Conteúdo",
+    "url": "https://marcozero.org/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-13T20:52:33.000Z",
+    "evidence_file": "americas-targeted-checkpoints.json"
+  },
+  {
+    "country": "CA",
+    "name": "The Narwhal",
+    "url": "https://feedly.com/news-reader",
+    "reason": "DTD_NOT_ALLOWED",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-final-checkpoints.json"
+  },
+  {
+    "country": "CA",
+    "name": "The Narwhal",
+    "url": "https://thenarwhal.ca/rss-feeds/",
+    "reason": "DTD_NOT_ALLOWED",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-final-checkpoints.json"
+  },
+  {
+    "country": "CA",
+    "name": "The Narwhal",
+    "url": "https://thenarwhal.ca/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-09-01T12:20:31.000Z",
+    "evidence_file": "americas-final-checkpoints.json"
+  },
+  {
+    "country": "CA",
+    "name": "The Narwhal",
+    "url": "https://thenarwhal.ca/news-sitemap.xml",
+    "reason": "No reliable content date / current article proof",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-final-checkpoints.json"
+  },
+  {
+    "country": "BR",
+    "name": "Brasil 247",
+    "url": "https://www.brasil247.com/sitemap-acoes.xml",
+    "reason": "Navigation, financial instrument or comment/newsletter listing",
+    "http_status": 200,
+    "newest_content_at": "2026-10-13T00:00:00.000Z",
+    "evidence_file": "americas-final-checkpoints.json"
+  },
+  {
+    "country": "BR",
+    "name": "Brasil 247",
+    "url": "https://www.brasil247.com/sitemap-fiis.xml",
+    "reason": "Navigation, financial instrument or comment/newsletter listing",
+    "http_status": 200,
+    "newest_content_at": "2026-10-13T00:00:00.000Z",
+    "evidence_file": "americas-final-checkpoints.json"
+  },
+  {
+    "country": "BR",
+    "name": "Brasil 247",
+    "url": "https://www.brasil247.com/sitemap-news.xml",
+    "reason": "No reliable content date / current article proof",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-final-checkpoints.json"
+  },
+  {
+    "country": "BR",
+    "name": "Brasil 247",
+    "url": "https://www.brasil247.com/sitemap-category.xml",
+    "reason": "No reliable content date / current article proof",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-final-checkpoints.json"
+  },
+  {
+    "country": "BR",
+    "name": "Jornal Opção",
+    "url": "https://www.jornalopcao.com.br/sitemaps/sitemap.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-12T21:19:03.000Z",
+    "evidence_file": "americas-final-checkpoints.json"
+  },
+  {
+    "country": "CA",
+    "name": "The Breach",
+    "url": "https://breachmedia.ca/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-13T18:59:31.000Z",
+    "evidence_file": "americas-paired-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "404 Media",
+    "url": "https://www.404media.co/404-media-now-has-a-full-text-rss-feed/",
+    "reason": "DTD_NOT_ALLOWED",
+    "http_status": 200,
+    "newest_content_at": null,
+    "evidence_file": "americas-paired-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "404 Media",
+    "url": "https://www.404media.co/rss",
+    "reason": "Not selected; prefer article-only current endpoint",
+    "http_status": 200,
+    "newest_content_at": "2026-10-13T20:06:53.000Z",
+    "evidence_file": "americas-paired-checkpoints.json"
+  },
+  {
+    "country": "US",
+    "name": "404 Media",
+    "url": "https://www.404media.co/sitemap.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-13T20:06:53.529Z",
+    "evidence_file": "americas-paired-checkpoints.json"
+  },
+  {
+    "country": "MX",
+    "name": "Ríodoce",
+    "url": "https://riodoce.mx/feed/",
+    "reason": "HTTP_500",
+    "http_status": 500,
+    "newest_content_at": null,
+    "evidence_file": "americas-paired-checkpoints.json"
+  },
+  {
+    "country": "MX",
+    "name": "Ríodoce",
+    "url": "https://riodoce.mx/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2025-12-03T21:38:18.000Z",
+    "evidence_file": "americas-paired-checkpoints.json"
+  },
+  {
+    "country": "MX",
+    "name": "LADO B",
+    "url": "https://www.ladobe.com.mx/inicio/feed/",
+    "reason": "Old content; do not register as current collection",
+    "http_status": 200,
+    "newest_content_at": "2018-11-28T02:01:36.000Z",
+    "evidence_file": "americas-paired-checkpoints.json"
+  },
+  {
+    "country": "MX",
+    "name": "LADO B",
+    "url": "https://www.ladobe.com.mx/sitemap_index.xml",
+    "reason": "Index only; no article URL set",
+    "http_status": 200,
+    "newest_content_at": "2026-10-12T16:35:48.000Z",
+    "evidence_file": "americas-paired-checkpoints.json"
+  },
+  {
+    "country": "MX",
+    "name": "LADO B",
+    "url": "https://www.ladobe.com.mx/post-sitemap.xml",
+    "reason": "Old content; do not register as current collection",
+    "http_status": 200,
+    "newest_content_at": "2011-09-12T03:42:11.000Z",
+    "evidence_file": "americas-paired-checkpoints.json"
+  },
+  {
+    "country": "BR",
+    "name": "Agência Mural",
+    "url": "https://www.agenciamural.org.br/",
+    "reason": "Homepage/robots unavailable; no bypass attempted",
+    "http_status": 403,
+    "evidence_file": "americas-checkpoints.json"
+  },
+  {
+    "country": "BR",
+    "name": "Congresso em Foco",
+    "url": "https://congressoemfoco.uol.com.br/",
+    "reason": "getaddrinfo ENOTFOUND congressoemfoco.uol.com.br",
+    "http_status": null,
+    "evidence_file": "americas-targeted-checkpoints.json"
+  },
+  {
+    "country": "BR",
+    "name": "Sul21",
+    "url": "https://sul21.com.br/",
+    "reason": "No explicit official feed or current article urlset declaration",
+    "http_status": 200,
+    "evidence_file": "americas-final-checkpoints.json"
+  },
+  {
+    "country": "MX",
+    "name": "SinEmbargo",
+    "url": "https://www.sinembargo.mx/",
+    "reason": "Homepage/robots unavailable; no bypass attempted",
+    "http_status": 403,
+    "evidence_file": "americas-final-checkpoints.json"
+  },
+  {
+    "country": "MX",
+    "name": "El Siglo de Torreón",
+    "url": "https://www.elsiglodetorreon.com.mx/",
+    "reason": "Homepage/robots unavailable; no bypass attempted",
+    "http_status": 403,
+    "evidence_file": "americas-mexico-checkpoints.json"
+  },
+  {
+    "country": "MX",
+    "name": "La Voz de Michoacán",
+    "url": "https://www.lavozdemichoacan.com.mx/",
+    "reason": "TIMEOUT",
+    "http_status": null,
+    "evidence_file": "americas-mexico-checkpoints.json"
+  }
+]

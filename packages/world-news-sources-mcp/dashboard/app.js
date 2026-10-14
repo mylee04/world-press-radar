@@ -210,7 +210,17 @@ function countryAssessment(country) {
 function observationNote(data) {
   const countries = data.items ?? data.countries ?? [];
   const partial = countries.some((country) => country.period?.observation_window_closed === false || country.period?.run_completion === 'partial' || country.period?.run_completion === 'failed');
-  const completed = countries.filter((country) => country.completed_cycle_baseline?.current || country.period?.run_completion === 'completed').length;
+  const completed = countries.filter((country) => {
+    const baseline = country.completed_cycle_baseline;
+    if (baseline) return ['comparable_completed_cycles', 'insufficient_completed_cycle_history'].includes(baseline.state)
+      && baseline.current?.attempt_coverage === 100;
+    // A legacy status alone can describe a completed explicit-address probe.
+    // Count it only if full production cohort metadata independently proves it.
+    const period = country.period ?? {};
+    return period.run_completion === 'completed' && period.lane === 'production' && period.scope === 'due_endpoints'
+      && Number.isSafeInteger(period.eligible_endpoints) && period.eligible_endpoints > 0
+      && period.eligible_endpoints === period.planned_endpoints && period.planned_endpoints === period.attempted_endpoints;
+  }).length;
   const clauses = [`${data.date || '날짜 없음'} UTC 기록`, partial ? '부분 구간 포함' : '저장된 검사 범위'];
   clauses.push(completed ? `완료 회차 기록 ${completed}/${countries.length}개국` : '완료 회차 기록 없음');
   const common = data.completed_cycle_common_signal ?? data.common_collector_signal;
@@ -335,16 +345,33 @@ function renderEngineStatus() {
 
 function registryHistoryView(data) {
   const history = data.history ?? {}, changes = data.inventory_changes ?? data.registry_changes ?? {};
-  if (history.baseline_observed_at && Array.isArray(history.observed_registry_changes)) return {
+  const date = data.date ?? history.date ?? changes.date;
+  const observed = history.baseline_observed_at && Array.isArray(history.observed_registry_changes) && (!history.date || history.date === date);
+  const rows = Array.isArray(changes) ? changes : changes.per_country ?? changes.countries ?? changes.items ?? [];
+  const keys = ['added', 'additions', 'deactivations', 'reactivations', 'reactivated', 'deletions', 'net_change', 'net'];
+  const actual = (!changes.date || changes.date === date) && (changes.recorded_events_only === true || changes.history_complete === true)
+    && rows.some((row) => keys.some((key) => typeof row[key] === 'number'));
+  const additions = [changes.additions, changes.new_sources, data.new_sources,
+    Array.isArray(changes.events) ? changes.events.filter(event => ['added', 'source_added'].includes(event.type)) : null].find(Array.isArray) ?? [];
+  const events = additions
+    .filter(source => {
+      const at = source.recorded_at ?? source.added_at ?? source.at;
+      return typeof at === 'string' && Number.isFinite(Date.parse(at)) && new Date(at).toISOString().slice(0, 10) === date;
+    });
+  const recordedChanges = events.length > 0 || rows.some(row => keys.some(key => typeof row[key] === 'number' && row[key] !== 0));
+  if (actual && (recordedChanges || !observed)) {
+    const known = new Set([...events, ...(changes.source_transitions ?? [])].map(source => source.source_id).filter(Boolean));
+    // A source with a real dated event is listed once. Other observation-only
+    // changes keep their unknown occurrence date and observation interval.
+    const observations = observed ? history.observed_registry_changes.filter(source => !known.has(source.source_id)) : [];
+    return { mode: 'actual', date, rows, events, observations, registryAt: changes.as_of };
+  }
+  if (observed) return {
     mode: 'observed', date: history.date ?? data.date, rows: history.per_country ?? [], events: history.observed_registry_changes,
     baseline: history.baseline_observed_at, latest: history.latest_registry_observed_at,
     registryAt: history.registry_snapshot_at, comparison: !!history.latest_registry_observed_at && Date.parse(history.latest_registry_observed_at) > Date.parse(history.baseline_observed_at)
   };
-  const rows = Array.isArray(changes) ? changes : changes.per_country ?? changes.countries ?? changes.items ?? [];
-  const keys = ['added', 'additions', 'deactivations', 'reactivations', 'reactivated', 'deletions', 'net_change', 'net'];
-  const actual = (changes.recorded_events_only === true || changes.history_complete === true) && rows.some((row) => keys.some((key) => typeof row[key] === 'number'));
-  return { mode: actual ? 'actual' : 'unavailable', date: changes.date ?? data.date, rows,
-    events: data.new_sources ?? changes.additions ?? changes.new_sources ?? changes.events?.filter((event) => ['added', 'source_added'].includes(event.type)) ?? [], registryAt: changes.as_of };
+  return { mode: 'unavailable', date, rows, events: [], registryAt: changes.as_of };
 }
 const registryEventLabels = { registration_observed: '첫 관측', registry_removal_observed: '목록에서 사라짐', registration_reappearance_observed: '다시 관측', reactivation_observed: '재활성화 관측', deactivation_observed: '비활성화 관측' };
 function renderInventory() {
@@ -374,7 +401,8 @@ function renderInventory() {
   headings.forEach((name, index) => { const cell = node('th', index ? 'numeric' : '', name); cell.scope = 'col'; head.append(cell); });
   $('inventory-history-caption').textContent = view.mode === 'observed' ? '조회일 UTC에 관측된 정규화 소스 변화. 실제 추가·삭제 시각과 다릅니다.' : '조회일 UTC에 기록된 등록 변화';
   const observedRows = [...view.rows].sort((a, b) => (b.observed_additions ?? 0) - (a.observed_additions ?? 0) || compareEconomy(a, b));
-  const actualRows = countries.map((country) => country.inventory_changes ?? view.rows.find((change) => countryCode(change) === countryCode(country)) ?? { country: countryCode(country) });
+  const actualRows = countries.map((country) => view.rows.find((change) => countryCode(change) === countryCode(country)) ?? country.inventory_changes ?? { country: countryCode(country) })
+    .sort((a, b) => (b.added ?? b.additions ?? 0) - (a.added ?? a.additions ?? 0) || compareEconomy(a, b));
   const rows = view.mode === 'observed' ? observedRows : actualRows;
   $('inventory-history-table').hidden = view.mode === 'unavailable' || view.mode === 'observed' && !view.rows.length;
   if (!$('inventory-history-table').hidden) rows.forEach((change) => {
@@ -389,17 +417,19 @@ function renderInventory() {
         : `${view.date} UTC에 발견한 관측 사이 변화 · 정규화 소스 기준 · 실제 추가·삭제일 미상`
     : view.mode === 'actual' ? `${view.date} UTC 기록 · —는 이력 없음. 0은 기록된 이벤트 없음. 과거 추가일은 추정하지 않습니다.` : '이력이 없어 과거 증가량을 집계하지 않습니다. 신규 0건을 뜻하지 않습니다.';
   $('source-events-title').textContent = view.mode === 'observed' ? '관측된 소스 변화' : '신규 소스 목록';
-  const events = view.mode === 'observed' ? [...view.events].reverse() : view.events, list = $('new-source-list'); list.replaceChildren();
-  $('new-source-count').textContent = view.mode === 'observed' ? beforeBaseline ? '관측 이전' : !view.comparison ? '최초 기준선' : `관측 ${events.length}건` : view.mode === 'actual' ? `기록된 추가 ${events.length}개` : '추가 이력 미제공';
+  const events = view.mode === 'observed' ? [...view.events].reverse() : [...view.events, ...(view.observations ?? [])], list = $('new-source-list'); list.replaceChildren();
+  $('new-source-count').textContent = view.mode === 'observed' ? beforeBaseline ? '관측 이전' : !view.comparison ? '최초 기준선' : `관측 ${events.length}건` : view.mode === 'actual' ? `기록된 추가 ${view.events.length}개${view.observations?.length ? ` · 별도 관측 ${view.observations.length}건` : ''}` : '추가 이력 미제공';
+  if (view.mode === 'actual' && view.events.length) $('inventory-history-details').open = true;
   if (!events.length) {
     list.append(node('div', 'inventory-empty', beforeBaseline ? '이 날짜는 관측 시작 이전입니다.' : view.mode === 'observed' ? view.comparison ? '조회일에 기록된 관측 변화가 없습니다. 실제 변화 없음과 다릅니다.' : '첫 목록을 기준선으로 저장했습니다. 과거 소스를 신규 추가로 세지 않습니다.' : view.mode === 'actual' ? '조회일에 기록된 추가가 없습니다.' : '등록 추가 이력이 제공되지 않습니다.'));
     return;
   }
   events.forEach((source) => {
+    const observation = Boolean(registryEventLabels[source.kind]);
     const card = node('article', 'new-source-card'); card.append(node('h3', '', source.name ?? source.source_name ?? source.source?.name ?? '이름 없음'));
     const types = [...new Set((source.endpoints ?? []).map((endpoint) => endpoint.type))].map((type) => type === 'sitemap' ? '사이트맵' : type === 'rss' ? 'RSS' : type);
-    card.append(node('p', '', `${countryName(source)} · ${types.join(' / ') || (source.endpoint_types ?? []).join(' / ') || source.type || source.endpoint_type || '유형 없음'}${view.mode === 'observed' ? ` · ${registryEventLabels[source.kind] ?? '변화 관측'}` : ''}`));
-    card.append(node('p', '', view.mode === 'observed' ? `관측 구간 ${timeText(source.previous_observed_at).replace(' UTC', '')} → ${timeText(source.observed_at)}` : `기록된 추가 ${timeText(source.recorded_at ?? source.added_at ?? source.at)}`));
+    card.append(node('p', '', `${countryName(source)} · ${types.join(' / ') || (source.endpoint_types ?? []).join(' / ') || source.type || source.endpoint_type || '유형 없음'}${observation ? ` · ${registryEventLabels[source.kind]}` : ''}`));
+    card.append(node('p', '', observation ? `관측 구간 ${timeText(source.previous_observed_at).replace(' UTC', '')} → ${timeText(source.observed_at)}` : `기록된 추가 ${timeText(source.recorded_at ?? source.added_at ?? source.at)}`));
     for (const endpoint of source.endpoints ?? []) {
       const check = endpoint.latest_validation;
       if (check) { const line = node('p', '', `검증 ${timeText(check.checked_at)} · HTTP ${valueText(check.http_status)}`); line.append(badge(check.status)); card.append(line); }

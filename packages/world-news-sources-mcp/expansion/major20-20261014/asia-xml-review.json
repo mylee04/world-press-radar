@@ -1,0 +1,239 @@
+[
+  {
+    "url": "https://mongabay.co.id/feed",
+    "status": 200,
+    "checked_at": "2026-10-14T01:41:01.408Z",
+    "sha256": "1edebf5948af46ff5ab371a5c404ff1e2462e81cceb23b6d790f2e610f7402fc",
+    "date_count": 20,
+    "date_samples": [
+      {
+        "tag": "pubDate",
+        "value": "13 Okt 2026 22:22:26 +0000"
+      },
+      {
+        "tag": "pubDate",
+        "value": "13 Okt 2026 14:04:05 +0000"
+      },
+      {
+        "tag": "pubDate",
+        "value": "13 Okt 2026 10:00:13 +0000"
+      },
+      {
+        "tag": "pubDate",
+        "value": "13 Okt 2026 07:34:42 +0000"
+      },
+      {
+        "tag": "pubDate",
+        "value": "13 Okt 2026 05:00:59 +0000"
+      },
+      {
+        "tag": "pubDate",
+        "value": "13 Okt 2026 05:00:43 +0000"
+      },
+      {
+        "tag": "pubDate",
+        "value": "13 Okt 2026 03:34:12 +0000"
+      },
+      {
+        "tag": "pubDate",
+        "value": "13 Okt 2026 01:10:24 +0000"
+      }
+    ],
+    "url_count": 0,
+    "article_url_heuristic_count": 0,
+    "nonarticle_sample": [],
+    "xml_excerpt": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><rss version=\"2.0\" xmlns:content=\"http://purl.org/rss/1.0/modules/content/\" xmlns:wfw=\"http://wellformedweb.org/CommentAPI/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:atom=\"http://www.w3.org/2005/Atom\" xmlns:sy=\"http://purl.org/rss/1.0/modules/syndication/\" xmlns:slash=\"http://purl.org/rss/1.0/modules/slash/\" >\r\n\r\n\t<channel>\r\n\t\t<title>Mongabay.co.id</title>\r\n\t\t<atom:link href=\"https://mongabay.co.id/feed/\" rel=\"self\" type=\"application/rss+xml\" />\r\n\t\t<link>https://mongabay.co.id/</link>\r\n\t\t<description>Situs berita lingkungan</description>\r\n\t\t<lastBuildDate>Tue, 13 Oct 2026 22:22:26 +0000</lastBuildDate>\r\n\t\t<language>id</language>\r\n\t\t<sy:updatePeriod>hourly</sy:updatePeriod>\r\n\t\t<sy:updateFrequency>1</sy:updateFrequency>\r\n\t\t<generator>https://wordpress.org/?v=7.1.3</generator>\n\t\t\t\t<item>\r\n\t\t\t\t\t<title>Anak Krakatau Erupsi Lagi, Bagaimana Kesiapsiagaan Hadapi Bencana?</title>\r\n\t\t\t\t\t<link>https://mongabay.co.id/2026/10/13/anak-krakatau-erupsi-lagi-bagaimana-kesiapsiagaan-hadapi-bencana/</link>\r\n\t\t\t\t\t<comments>https://mongabay.co.id/2026/10/13/anak-krakatau-erupsi-lagi-bagaimana-kesiapsiagaan-hadapi-bencana/#respond</comments>\r\n\t\t\t\t\t<pubDate>13 Okt 2026 22:22:26 +0000</pubDate>\r\n\t\t\t\t\t\t\t\t\t\t\t<dc:creator>\r\n\t\t\t\t\t\t\t<![CDATA[Anggita Raissa]]>\r\n\t\t\t\t\t\t</dc:creator>\r\n\t\t\t\t\t\t\t\t\t\t<author>\r\n\t\t\t\t\t\t<![CDATA[Sapariah Saturi]]>\r\n\t\t\t\t\t</author>\r\n\t\t\t\t\t\t\t<category><![CDATA[Sosial]]></category>\n\t\t\t\t\t\t\t\t\t\t<enclosure url=\"https://indomgb.s3.amazonaws.com/wp-content/uploads/2019/01/22065832/krakatau-erupsi-1992-768x512.jpg\" type=\"image/jpeg\" />\r\n\t\t\t\t\t<guid isPermaLink=\"false\">https://mongabay.co.id/?p=134976</guid>\r\n\r\n\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t<locations>\r\n\t\t\t\t\t\t\t<![CDATA[banten dan jawa]]>\r\n\t\t\t\t\t\t</locations>\r\n\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t<topic-tags>\r\n\t\t\t\t\t\t\t<![CDATA[bencana, Kelautan perikanan, komunitas lokal, pencemaran, dan politik dan hukum]]>\r\n\t\t\t\t\t\t</topic-tags>\r\n\t\t\t\t\t\r\n\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t<description>\r\n\t\t\t\t\t\t\t<![CDATA[<p>&#160; Gunung Anak Krakatau (GAK) di Se"
+  },
+  {
+    "url": "https://www.mediatoday.co.kr/sitemap.xml",
+    "status": 200,
+    "checked_at": "2026-10-14T01:41:04.252Z",
+    "sha256": "db1881b6a66eccb04fbff61a04f215f923387fb81a18b3c8813d20b2faa34399",
+    "date_count": 100,
+    "date_samples": [
+      {
+        "tag": "news:publication_date",
+        "value": "2026-10-14T07:37:22+09:00"
+      },
+      {
+        "tag": "news:publication_date",
+        "value": "2026-10-13T22:05:00+09:00"
+      },
+      {
+        "tag": "news:publication_date",
+        "value": "2026-10-13T21:50:43+09:00"
+      },
+      {
+        "tag": "news:publication_date",
+        "value": "2026-10-13T20:50:00+09:00"
+      },
+      {
+        "tag": "news:publication_date",
+        "value": "2026-10-13T20:48:00+09:00"
+      },
+      {
+        "tag": "news:publication_date",
+        "value": "2026-10-13T20:20:00+09:00"
+      },
+      {
+        "tag": "news:publication_date",
+        "value": "2026-10-13T19:35:00+09:00"
+      },
+      {
+        "tag": "news:publication_date",
+        "value": "2026-10-13T17:46:39+09:00"
+      }
+    ],
+    "url_count": 100,
+    "article_url_heuristic_count": 100,
+    "nonarticle_sample": [],
+    "xml_excerpt": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:news=\"http://www.google.com/schemas/sitemap-news/0.9\">\r\n    <url>\r\n        <loc>https://www.mediatoday.co.kr/news/articleView.html?idxno=337712</loc>\r\n        <news:news>\r\n          <news:publication>\r\n            <news:name>미디어오늘</news:name>\r\n            <news:language>ko</news:language>\r\n          </news:publication>\r\n          <news:genres>PressRelease</news:genres>\r\n          <news:publication_date>2026-10-14T07:37:22+09:00</news:publication_date>\r\n          <news:title>‘막말’ 주진우 제명 언급한 김민석에 조선일보 “야당 입틀막”</news:title>\r\n          <news:keywords>미디어오늘, ‘막말’ 주진우 제명 언급한 김민석에 조선일보 “야당 입틀막”, 아침신문솎아보기,세종,이전,세종 이전,중앙행정기관,행정안전부,조선일보,김민석,주진우,이진숙,국민의힘,더불어민주당,흉기난동</news:keywords>\r\n        </news:news>\r\n    </url>\r\n    <url>\r\n        <loc>https://www.mediatoday.co.kr/news/articleView.html?idxno=337701</loc>\r\n        <news:news>\r\n          <news:publication>\r\n            <news:name>미디어오늘</news:name>\r\n            <news:language>ko</news:language>\r\n          </news:publication>\r\n          <news:genres>PressRelease</news:genres>\r\n          <news:publication_date>2026-10-13T22:05:00+09:00</news:publication_date>\r\n          <news:title>이언주 신임 MBC 국장 &amp;quot;불신도 1위? 외부 탓만 할 순 없다&amp;quot;</news:title>\r\n          <news:keywords>미디어오늘, 이언주 신임 MBC 국장 &amp;quot;불신도 1위? 외부 탓만 할 순 없다&amp;quot;, 이언주,MBC,문화방송,이언주 보도국장,이언주 뉴스룸국장,MBC 보도국장,저널리즘,방송문화진흥회,이성주,이성주 사장</news:keywords>\r\n        </news:news>\r\n    </url>\r\n    <url>\r\n        <loc>https://www.mediatoday.co.kr/news/articleView.html?idxno=337710</loc>\r\n        <news:news>\r\n          <news:publication>\r\n            <news:name>미디어오늘</news:name>\r\n            <news:language>ko</news:language>\r\n          </news:publication>\r\n          <news:genres>PressRelease</news:genres>\r\n          <news:publication_date>2026-10-13T21:50:43+09:00</news:publication_date>\r\n          <news:title>尹방통위 사무처장, YTN 매각 ‘부당개입’ 감사결과에 “모르는 것 많았다”</news:title>\r\n   "
+  },
+  {
+    "url": "https://ryukyushimpo.jp/news-sitemap.xml",
+    "status": 200,
+    "checked_at": "2026-10-14T01:41:04.468Z",
+    "sha256": "069d5b2c825314242b6b18fdbf9b037964f09fcdd522c834c07bb3e7bb59f67f",
+    "date_count": 88,
+    "date_samples": [
+      {
+        "tag": "news:publication_date",
+        "value": "2026-10-13T20:00:00+00:00"
+      },
+      {
+        "tag": "news:publication_date",
+        "value": "2026-10-13T20:00:00+00:00"
+      },
+      {
+        "tag": "news:publication_date",
+        "value": "2026-10-13T20:00:00+00:00"
+      },
+      {
+        "tag": "news:publication_date",
+        "value": "2026-10-13T20:00:00+00:00"
+      },
+      {
+        "tag": "news:publication_date",
+        "value": "2026-10-13T20:00:00+00:00"
+      },
+      {
+        "tag": "news:publication_date",
+        "value": "2026-10-13T20:00:00+00:00"
+      },
+      {
+        "tag": "news:publication_date",
+        "value": "2026-10-13T20:00:00+00:00"
+      },
+      {
+        "tag": "news:publication_date",
+        "value": "2026-10-13T20:00:00+00:00"
+      }
+    ],
+    "url_count": 88,
+    "article_url_heuristic_count": 88,
+    "nonarticle_sample": [],
+    "xml_excerpt": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<?xml-stylesheet type=\"text/xsl\" href=\"https://ryukyushimpo.jp/content/plugins/yoast-news-seo/assets/xml-news-sitemap.xsl\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:news=\"http://www.google.com/schemas/sitemap-news/0.9\">\n<url>\n\t<loc>https://ryukyushimpo.jp/national/entry-5554181.html</loc>\n\t<news:news>\n\t\t<news:publication>\n\t\t\t<news:name>琉球新報デジタル</news:name>\n\t\t\t<news:language>ja</news:language>\n\t\t</news:publication>\n\t\t<news:publication_date>2026-10-13T20:00:00+00:00</news:publication_date>\n\t\t<news:title><![CDATA[米軍基地で山火事発生　キャンプ・シュワブ]]></news:title>\n\t</news:news>\n</url>\n<url>\n\t<loc>https://ryukyushimpo.jp/national/entry-5554179.html</loc>\n\t<news:news>\n\t\t<news:publication>\n\t\t\t<news:name>琉球新報デジタル</news:name>\n\t\t\t<news:language>ja</news:language>\n\t\t</news:publication>\n\t\t<news:publication_date>2026-10-13T20:00:00+00:00</news:publication_date>\n\t\t<news:title><![CDATA[真相究明求め　緊急声明を発表　県労連]]></news:title>\n\t</news:news>\n</url>\n<url>\n\t<loc>https://ryukyushimpo.jp/national/entry-5554178.html</loc>\n\t<news:news>\n\t\t<news:publication>\n\t\t\t<news:name>琉球新報デジタル</news:name>\n\t\t\t<news:language>ja</news:language>\n\t\t</news:publication>\n\t\t<news:publication_date>2026-10-13T20:00:00+00:00</news:publication_date>\n\t\t<news:title><![CDATA[仏海軍哨戒機　嘉手納に飛来]]></news:title>\n\t</news:news>\n</url>\n<url>\n\t<loc>https://ryukyushimpo.jp/national/entry-5554176.html</loc>\n\t<news:news>\n\t\t<news:publication>\n\t\t\t<news:name>琉球新報デジタル</news:name>\n\t\t\t<news:language>ja</news:language>\n\t\t</news:publication>\n\t\t<news:publication_date>2026-10-13T20:00:00+00:00</news:publication_date>\n\t\t<news:title><![CDATA[将棋・女流王将戦、西山勝ち１勝１敗]]></news:title>\n\t</news:news>\n</url>\n<url>\n\t<loc>https://ryukyushimpo.jp/national/entry-5554171.html</loc>\n\t<news:news>\n\t\t<news:publication>\n\t\t\t<news:name>琉球新報デジタル</news:name>\n\t\t\t<news:language>ja</news:language>\n\t\t</news:publication>\n\t\t<news:publication_date>2026-10-13T20:00:00+00:00</news:publication_date>\n\t\t<news:title><![CDATA[令和８年度学校保健および学校安"
+  },
+  {
+    "url": "https://ryukyushimpo.jp/post-sitemap.xml",
+    "status": 200,
+    "checked_at": "2026-10-14T01:41:06.664Z",
+    "sha256": "e4e558d15aa5ea95201f73c01698255a192773b74086a9227dc73fb2b53d6ef1",
+    "date_count": 1001,
+    "date_samples": [
+      {
+        "tag": "lastmod",
+        "value": "2026-10-14T01:09:53+00:00"
+      },
+      {
+        "tag": "lastmod",
+        "value": "2003-03-01T00:00:01+00:00"
+      },
+      {
+        "tag": "lastmod",
+        "value": "2003-03-01T00:00:01+00:00"
+      },
+      {
+        "tag": "lastmod",
+        "value": "2003-03-01T00:00:01+00:00"
+      },
+      {
+        "tag": "lastmod",
+        "value": "2003-03-01T00:00:01+00:00"
+      },
+      {
+        "tag": "lastmod",
+        "value": "2003-03-01T00:00:01+00:00"
+      },
+      {
+        "tag": "lastmod",
+        "value": "2003-03-01T00:00:01+00:00"
+      },
+      {
+        "tag": "lastmod",
+        "value": "2003-03-01T00:00:01+00:00"
+      }
+    ],
+    "url_count": 1001,
+    "article_url_heuristic_count": 0,
+    "nonarticle_sample": [
+      "https://ryukyushimpo.jp/todays-news.html",
+      "https://ryukyushimpo.jp/okinawa-dic/prentry-41674.html",
+      "https://ryukyushimpo.jp/okinawa-dic/prentry-42261.html",
+      "https://ryukyushimpo.jp/okinawa-dic/prentry-43057.html",
+      "https://ryukyushimpo.jp/okinawa-dic/prentry-40082.html"
+    ],
+    "xml_excerpt": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><?xml-stylesheet type=\"text/xsl\" href=\"//ryukyushimpo.jp/content/plugins/wordpress-seo/css/main-sitemap.xsl\"?>\n<urlset xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:image=\"http://www.google.com/schemas/sitemap-image/1.1\" xsi:schemaLocation=\"http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd\" xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n\t<url>\n\t\t<loc>https://ryukyushimpo.jp/todays-news.html</loc>\n\t\t<lastmod>2026-10-14T01:09:53+00:00</lastmod>\n\t</url>\n\t<url>\n\t\t<loc>https://ryukyushimpo.jp/okinawa-dic/prentry-41674.html</loc>\n\t\t<lastmod>2003-03-01T00:00:01+00:00</lastmod>\n\t</url>\n\t<url>\n\t\t<loc>https://ryukyushimpo.jp/okinawa-dic/prentry-42261.html</loc>\n\t\t<lastmod>2003-03-01T00:00:01+00:00</lastmod>\n\t</url>\n\t<url>\n\t\t<loc>https://ryukyushimpo.jp/okinawa-dic/prentry-43057.html</loc>\n\t\t<lastmod>2003-03-01T00:00:01+00:00</lastmod>\n\t</url>\n\t<url>\n\t\t<loc>https://ryukyushimpo.jp/okinawa-dic/prentry-40082.html</loc>\n\t\t<lastmod>2003-03-01T00:00:01+00:00</lastmod>\n\t</url>\n\t<url>\n\t\t<loc>https://ryukyushimpo.jp/okinawa-dic/prentry-40740.html</loc>\n\t\t<lastmod>2003-03-01T00:00:01+00:00</lastmod>\n\t</url>\n\t<url>\n\t\t<loc>https://ryukyushimpo.jp/okinawa-dic/prentry-40498.html</loc>\n\t\t<lastmod>2003-03-01T00:00:01+00:00</lastmod>\n\t</url>\n\t<url>\n\t\t<loc>https://ryukyushimpo.jp/okinawa-dic/prentry-40766.html</loc>\n\t\t<lastmod>2003-03-01T00:00:01+00:00</lastmod>\n\t</url>\n\t<url>\n\t\t<loc>https://ryukyushimpo.jp/okinawa-dic/prentry-40029.html</loc>\n\t\t<lastmod>2003-03-01T00:00:01+00:00</lastmod>\n\t</url>\n\t<url>\n\t\t<loc>https://ryukyushimpo.jp/okinawa-dic/prentry-40637.html</loc>\n\t\t<lastmod>2003-03-01T00:00:01+00:00</lastmod>\n\t</url>\n\t<url>\n\t\t<loc>https://ryukyushimpo.jp/okinawa-dic/prentry-40381.html</loc>\n\t\t<lastmod>2003-03-01T00:00:01+00:00</lastmod>\n\t</url>\n\t<url>\n\t\t<loc>https://r"
+  },
+  {
+    "url": "http://www.eeo.com.cn/xml/sitemap.xml",
+    "status": 200,
+    "checked_at": "2026-10-14T01:41:08.840Z",
+    "sha256": "d4942c89fb337d636c349c0486ef1ac09c7277ea2822b0034c0e139c261bee3c",
+    "date_count": 509,
+    "date_samples": [
+      {
+        "tag": "lastmod",
+        "value": "2026-10-14"
+      },
+      {
+        "tag": "lastmod",
+        "value": "2026-10-14"
+      },
+      {
+        "tag": "lastmod",
+        "value": "2026-10-14"
+      },
+      {
+        "tag": "lastmod",
+        "value": "2026-10-14"
+      },
+      {
+        "tag": "lastmod",
+        "value": "2026-10-14"
+      },
+      {
+        "tag": "lastmod",
+        "value": "2026-10-14"
+      },
+      {
+        "tag": "lastmod",
+        "value": "2026-10-14"
+      },
+      {
+        "tag": "lastmod",
+        "value": "2026-10-14"
+      }
+    ],
+    "url_count": 509,
+    "article_url_heuristic_count": 300,
+    "nonarticle_sample": [
+      "http://www.eeo.com.cn/index.shtml",
+      "http://www.eeo.com.cn/caijing/",
+      "http://www.eeo.com.cn/tmt/",
+      "http://www.eeo.com.cn/pinglun/",
+      "http://www.eeo.com.cn/shipin/"
+    ],
+    "xml_excerpt": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n\t<url>\n\t\t<loc>http://www.eeo.com.cn/index.shtml</loc>\n\t\t<lastmod>2026-10-14</lastmod>\n\t\t<changefreq>always</changefreq>\n\t\t<priority>1.0</priority>\n\t</url>\n\t<url>\n\t\t<loc>http://www.eeo.com.cn/caijing/</loc>\n\t\t<lastmod>2026-10-14</lastmod>\n\t\t<changefreq>hourly</changefreq>\n\t\t<priority>0.8</priority>\n\t</url>\n\t<url>\n\t\t<loc>http://www.eeo.com.cn/tmt/</loc>\n\t\t<lastmod>2026-10-14</lastmod>\n\t\t<changefreq>hourly</changefreq>\n\t\t<priority>0.8</priority>\n\t</url>\n\t<url>\n\t\t<loc>http://www.eeo.com.cn/pinglun/</loc>\n\t\t<lastmod>2026-10-14</lastmod>\n\t\t<changefreq>hourly</changefreq>\n\t\t<priority>0.8</priority>\n\t</url>\n\t<url>\n\t\t<loc>http://www.eeo.com.cn/shipin/</loc>\n\t\t<lastmod>2026-10-14</lastmod>\n\t\t<changefreq>hourly</changefreq>\n\t\t<priority>0.8</priority>\n\t</url>\n\t<url>\n\t\t<loc>http://www.eeo.com.cn/eeo/caijing/zhengquan/</loc>\n\t\t<lastmod>2026-10-14</lastmod>\n\t\t<changefreq>hourly</changefreq>\n\t\t<priority>0.8</priority>\n\t</url>\n\t<url>\n\t\t<loc>http://www.eeo.com.cn/eeo/caijing/yinxing/</loc>\n\t\t<lastmod>2026-10-14</lastmod>\n\t\t<changefreq>hourly</changefreq>\n\t\t<priority>0.8</priority>\n\t</url>\n\t<url>\n\t\t<loc>http://www.eeo.com.cn/eeo/caijing/baoxian/</loc>\n\t\t<lastmod>2026-10-14</lastmod>\n\t\t<changefreq>hourly</changefreq>\n\t\t<priority>0.8</priority>\n\t</url>\n\t<url>\n\t\t<loc>http://www.eeo.com.cn/eeo/caijing/PEchuangtou/</loc>\n\t\t<lastmod>2026-10-14</lastmod>\n\t\t<changefreq>hourly</changefreq>\n\t\t<priority>0.8</priority>\n\t</url>\n\t<url>\n\t\t<loc>http://www.eeo.com.cn/eeo/tmt/xinnengyuan/</loc>\n\t\t<lastmod>2026-10-14</lastmod>\n\t\t<changefreq>hourly</changefreq>\n\t\t<priority>0.8</priority>\n\t</url>\n\t<url>\n\t\t<loc>http://www.eeo.com.cn/eeo/tmt/dianshang/</loc>\n\t\t<lastmod>2026-10-14</lastmod>\n\t\t<changefreq>hourly</changefreq>\n\t\t<priority>0.8</priority>\n\t</url>\n\t<url>\n\t\t<loc>http://www.eeo.com.cn/eeo/shangyechanye/jkyl/</loc>\n\t\t<lastmod>2026-10-14</lastmod>\n\t\t<changefreq>hourly</changefreq>\n\t\t<priority>0.8</prior"
+  }
+]

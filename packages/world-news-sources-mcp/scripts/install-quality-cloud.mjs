@@ -211,7 +211,9 @@ async function verifySystemdDefinitions(options, release, run) {
 async function loopbackHealth(port) {
   for (let attempt = 0; attempt < 10; attempt++) {
     try {
-      const response = await fetch(`http://127.0.0.1:${port}/health`, { signal: AbortSignal.timeout(1000), redirect: 'error' });
+      // A cold catalog/archive read on the shared VM can exceed one second.
+      // Keep readiness bounded without rejecting an otherwise healthy startup.
+      const response = await fetch(`http://127.0.0.1:${port}/health`, { signal: AbortSignal.timeout(5000), redirect: 'error' });
       if (response.ok) {
         const payload = await response.json();
         if (payload.status === 'ok' && payload.service === 'news-quality' && payload.persistence === 'sqlite' && payload.metadata_reload_failed === false) return;
