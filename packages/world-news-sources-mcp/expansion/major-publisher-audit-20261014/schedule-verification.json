@@ -1,0 +1,24 @@
+{
+  "verified_at_utc": "2026-10-14T05:24:49.866873+00:00",
+  "verification": "Read-only systemd user-unit metadata from existing Oracle host; no job start, reset or reload.",
+  "timer": {
+    "NextElapseUSecRealtime": "Thu 2026-10-15 03:00:00 UTC",
+    "LastTriggerUSec": "Wed 2026-10-14 03:00:28 UTC",
+    "ActiveState": "active",
+    "UnitFileState": "enabled"
+  },
+  "timer_unit": "# /home/ubuntu/.config/systemd/user/world-news-activity.timer\n[Unit]\nDescription=Daily article observation at 12:00 Asia/Seoul\n\n[Timer]\nOnCalendar=*-*-* 03:00:00 UTC\nPersistent=true\nAccuracySec=1min\nUnit=world-news-activity.service\n\n[Install]\nWantedBy=timers.target",
+  "last_service": {
+    "Result": "exit-code",
+    "ExecMainStartTimestamp": "Wed 2026-10-14 03:00:28 UTC",
+    "ExecMainExitTimestamp": "Wed 2026-10-14 03:54:08 UTC",
+    "ExecMainStatus": "1",
+    "ActiveState": "failed"
+  },
+  "notes": [
+    "The last service exit status includes the historical post-collection smoke assertion failure. It is not evidence that no addresses were checked.",
+    "The daily collector selection is daily_all_active; rate-limited host waits can defer addresses.",
+    "The dynamic-count smoke correction is installed; success of the next scheduled run is still pending."
+  ],
+  "jobs_started_by_audit": 0
+}

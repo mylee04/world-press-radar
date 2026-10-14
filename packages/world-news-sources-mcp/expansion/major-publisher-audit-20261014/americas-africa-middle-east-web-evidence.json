@@ -1,0 +1,1181 @@
+{
+  "method": "Official publisher/about sites and primary Reuters Institute country profiles; no XML endpoint requests.",
+  "evidence": [
+    {
+      "url": "https://www.mapnews.ma/en/sites/default/files/privacy-policy-eng.pdf",
+      "title": "Identification",
+      "web_status": "observed",
+      "query_batch": "audit_official_batch1"
+    },
+    {
+      "url": "https://www.kuna.net.kw/?lang=fa",
+      "title": "كونا :: وكالة الأنباء الكويتية - انباء عناوين أخبار - الكويت",
+      "web_status": "observed",
+      "query_batch": "audit_official_batch1"
+    },
+    {
+      "url": "https://www.kuna.net.kw/?Language=ar&id=2424428",
+      "title": "كونا :: وكالة الأنباء الكويتية - انباء عناوين أخبار - الكويت",
+      "web_status": "observed",
+      "query_batch": "audit_official_batch1"
+    },
+    {
+      "url": "https://beta.bna.bh/article/XVvz1ECl5ogMvbd2",
+      "title": "مطالعات الصحف في مملكة البحرين - الأخبار المحلية | وكالة أنباء البحرين",
+      "web_status": "observed",
+      "query_batch": "audit_official_batch1"
+    },
+    {
+      "url": "https://www.kuna.net.kw/ArticleDetails.aspx?id=3236259",
+      "title": "KUNA | Kuwait News Agency",
+      "web_status": "observed",
+      "query_batch": "audit_official_batch1"
+    },
+    {
+      "url": "https://www.kuna.net.kw/ArticleDetails.aspx?id=3236916&language=en",
+      "title": "KUNA | Kuwait News Agency",
+      "web_status": "observed",
+      "query_batch": "audit_official_batch1"
+    },
+    {
+      "url": "https://www.kuna.net.kw/ErrorPage.aspx?aspxerrorpath=%2Fhome%2FPhoto.aspx",
+      "title": "KUNA | Kuwait News Agency",
+      "web_status": "observed",
+      "query_batch": "audit_official_batch1"
+    },
+    {
+      "url": "https://beta.bna.bh/en/article/HbexJ1txgfOfj9EK",
+      "title": "Bahrain press review - Local News | Bahrain News Agency",
+      "web_status": "observed",
+      "query_batch": "audit_official_batch1"
+    },
+    {
+      "url": "https://www.kuna.net.kw/ArticleDetails.aspx?Language=ar&id=3237569",
+      "title": "KUNA | Kuwait News Agency",
+      "web_status": "observed",
+      "query_batch": "audit_official_batch1"
+    },
+    {
+      "url": "https://www.kuna.net.kw/ArticleDetails.aspx?Language=en&id=3106812",
+      "title": "KUNA : Info Min. visits KUNA - Media - 22/08/2023",
+      "web_status": "observed",
+      "query_batch": "audit_official_batch1"
+    },
+    {
+      "url": "https://www.kuna.net.kw/ArticleDetails.aspx?id=1573822&language=en",
+      "title": "KUNA : This is Kuwait News Agency (KUNA) Kuwait News Agency starts its transmission for Saturday July 30, 2005. - General - 30/07/2005",
+      "web_status": "observed",
+      "query_batch": "audit_official_batch1"
+    },
+    {
+      "url": "https://beta.bna.bh/en/article/Rh3notbh8SnwUAGi",
+      "title": "HRH the Crown Prince and Prime Minister issues Edict (4) of 2025 - Local News | Bahrain News Agency",
+      "web_status": "observed",
+      "query_batch": "audit_official_batch1"
+    },
+    {
+      "url": "https://www.alqabas.com/",
+      "title": "جريدة القبس",
+      "web_status": "observed",
+      "query_batch": "audit_kw_dailies"
+    },
+    {
+      "url": "https://www.alqabas.com/about-us/",
+      "title": "جريدة القبس",
+      "web_status": "observed",
+      "query_batch": "audit_kw_dailies"
+    },
+    {
+      "url": "https://www.alraimedia.com/",
+      "title": "الراي - الرئيسية",
+      "web_status": "observed",
+      "query_batch": "audit_latam_ma"
+    },
+    {
+      "url": "https://www.alqabas.com/?embed=true",
+      "title": "جريدة القبس",
+      "web_status": "observed",
+      "query_batch": "audit_kw_dailies"
+    },
+    {
+      "url": "https://alqabas.com/",
+      "title": "جريدة القبس",
+      "web_status": "observed",
+      "query_batch": "audit_kw_dailies"
+    },
+    {
+      "url": "https://www.aljarida.com/",
+      "title": "جريدة الجريدة الكويتية - الرئيسية",
+      "web_status": "observed",
+      "query_batch": "audit_kw_dailies"
+    },
+    {
+      "url": "https://www.alqabas.com/?lang=ar",
+      "title": "جريدة القبس",
+      "web_status": "observed",
+      "query_batch": "audit_kw_dailies"
+    },
+    {
+      "url": "https://www.alqabas.com/?ragrh=503",
+      "title": "جريدة القبس",
+      "web_status": "observed",
+      "query_batch": "audit_kw_dailies"
+    },
+    {
+      "url": "https://www.alqabas.com/author/245-%D9%81%D8%AE%D8%B1%D9%8A%20%D9%87%D8%A7%D8%B4%D9%85%20%D8%A7%D9%84%D8%B3%D9%8A%D8%AF%20%D8%B1%D8%AC%D8%A8/",
+      "title": "جريدة القبس",
+      "web_status": "observed",
+      "query_batch": "audit_kw_dailies"
+    },
+    {
+      "url": "https://www.alraimedia.com/print-article?articleId=385210",
+      "title": "الراي - الصحيفة",
+      "web_status": "observed",
+      "query_batch": "audit_kw_dailies"
+    },
+    {
+      "url": "https://www.alqabas.com/author/1892-%D8%AD%D9%85%D8%AF%20%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%D8%A9/",
+      "title": "جريدة القبس",
+      "web_status": "observed",
+      "query_batch": "audit_kw_dailies"
+    },
+    {
+      "url": "https://www.alraimedia.com/news/",
+      "title": "News - الراي",
+      "web_status": "observed",
+      "query_batch": "audit_kw_dailies"
+    },
+    {
+      "url": "https://d.alqabas.com/archive/1700684091500_gPReP.pdf",
+      "title": "القبس الخميس",
+      "web_status": "observed",
+      "query_batch": "audit_kw_dailies"
+    },
+    {
+      "url": "https://d.alqabas.com/archive/1717876093083_lEMcA.pdf",
+      "title": "القبس | الأحد",
+      "web_status": "observed",
+      "query_batch": "audit_kw_dailies"
+    },
+    {
+      "url": "https://www.alanba.com.kw/",
+      "title": "جريدة الأنباء الكويتية",
+      "web_status": "observed",
+      "query_batch": "audit_kw_jo"
+    },
+    {
+      "url": "https://kuwaittimes.com/",
+      "title": "Kuwait Times Newspaper - The Leading Independent Daily Kuwait News",
+      "web_status": "observed",
+      "query_batch": "audit_kw_jo"
+    },
+    {
+      "url": "https://jordantimes.com/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_kw_jo"
+    },
+    {
+      "url": "https://alrai.com/",
+      "title": "الرئيسية | صحيفة الرأي",
+      "web_status": "observed",
+      "query_batch": "audit_kw_jo"
+    },
+    {
+      "url": "https://www.addustour.com/",
+      "title": "جريدة الدستور الاردنية",
+      "web_status": "observed",
+      "query_batch": "audit_kw_jo"
+    },
+    {
+      "url": "https://royanews.tv/",
+      "title": "رؤيا الإخباري | أخبار الأردن المحلية والعالم العربي والدولي",
+      "web_status": "observed",
+      "query_batch": "audit_kw_jo"
+    },
+    {
+      "url": "https://www.alayam.com/",
+      "title": "آخر الأخبار - الصفحة الرئيسية - صحيفة الأيام البحرينية",
+      "web_status": "observed",
+      "query_batch": "audit_bh_eg"
+    },
+    {
+      "url": "https://www.akhbar-alkhaleej.com/",
+      "title": "أخبار الخليج | الجريدة اليومية الأولى في البحرين",
+      "web_status": "observed",
+      "query_batch": "audit_bh_eg"
+    },
+    {
+      "url": "https://www.gdnonline.com/",
+      "title": "Gulf Digital News – Bahrain, Saudi Arabia, United Arab Emirates, Kuwait, Qatar, Oman",
+      "web_status": "observed",
+      "query_batch": "audit_bh_eg"
+    },
+    {
+      "url": "https://www.newsofbahrain.com/",
+      "title": "News of Bahrain - Latest Bahrain, GCC, Business & Sports",
+      "web_status": "observed",
+      "query_batch": "audit_bh_eg"
+    },
+    {
+      "url": "https://english.ahram.org.eg/",
+      "title": "Ahram Online - News, Business, Culture, Sports & Multimedia from Egypt - Ahram Online",
+      "web_status": "observed",
+      "query_batch": "audit_bh_eg"
+    },
+    {
+      "url": "https://www.youm7.com/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_extra_missing"
+    },
+    {
+      "url": "https://jordantimes.com/static/about-us",
+      "title": "about-us | Jordan Times",
+      "web_status": "observed",
+      "query_batch": "audit_extra_missing"
+    },
+    {
+      "url": "https://www.alwatan.com.sa/",
+      "title": "الرئيسية - جريدة الوطن السعودية",
+      "web_status": "observed",
+      "query_batch": "audit_extra_missing"
+    },
+    {
+      "url": "https://jordantimes.com/jordantimes/uploads/global_files/50_years_Anniversary.pdf",
+      "title": "Sunday, October 26, 2025",
+      "web_status": "observed",
+      "query_batch": "audit_extra_missing"
+    },
+    {
+      "url": "https://jordantimes.com/news/local/the-jordan-times-digital-transformation-reaching-audiences-across-the-globe",
+      "title": "The Jordan Times’ digital transformation: reaching audiences across the Globe | Jordan Times",
+      "web_status": "observed",
+      "query_batch": "audit_extra_missing"
+    },
+    {
+      "url": "https://jordantimes.com/jordantimes/uploads/pdf/2025/05/26/-20250526-2.pdf?ts=070033",
+      "title": "6 OPINION & ANALYSIS",
+      "web_status": "observed",
+      "query_batch": "audit_extra_missing"
+    },
+    {
+      "url": "https://www.alwatan.com.sa/?trk=public_profile__posts-text",
+      "title": "الرئيسية - جريدة الوطن السعودية",
+      "web_status": "observed",
+      "query_batch": "audit_extra_missing"
+    },
+    {
+      "url": "https://www.alwatan.com.sa/1",
+      "title": "الرئيسية - جريدة الوطن السعودية",
+      "web_status": "observed",
+      "query_batch": "audit_extra_missing"
+    },
+    {
+      "url": "https://www.alwatan.com.sa/%D9%86%D9%82%D8%A7%D8%B4%D8%A7%D8%AA/19",
+      "title": "نقاشات - جريدة الوطن السعودية",
+      "web_status": "observed",
+      "query_batch": "audit_extra_missing"
+    },
+    {
+      "url": "https://www.alwatan.com.sa/article/1112764",
+      "title": "الصفحة الأولى - جريدة الوطن السعودية",
+      "web_status": "observed",
+      "query_batch": "audit_extra_missing"
+    },
+    {
+      "url": "https://www.alwatan.com.sa/author/356/22",
+      "title": "الرياض: الوطن - جريدة الوطن السعودية",
+      "web_status": "observed",
+      "query_batch": "audit_extra_missing"
+    },
+    {
+      "url": "https://www.alwatan.com.sa/%D8%B1%D8%A3%D9%8A/23",
+      "title": "رأي - جريدة الوطن السعودية",
+      "web_status": "observed",
+      "query_batch": "audit_extra_missing"
+    },
+    {
+      "url": "https://www.alwatan.com.sa/author/356/169",
+      "title": "الرياض: الوطن - جريدة الوطن السعودية",
+      "web_status": "observed",
+      "query_batch": "audit_extra_missing"
+    },
+    {
+      "url": "https://www.alwatan.com.sa/author/356/143",
+      "title": "الرياض: الوطن - جريدة الوطن السعودية",
+      "web_status": "observed",
+      "query_batch": "audit_extra_missing"
+    },
+    {
+      "url": "https://www.alwatan.com.sa/author/356/12",
+      "title": "الرياض: الوطن - جريدة الوطن السعودية",
+      "web_status": "observed",
+      "query_batch": "audit_extra_missing"
+    },
+    {
+      "url": "https://www.mena.org.eg/",
+      "title": "وكالة أنباء الشرق الأوسط - mena",
+      "web_status": "observed",
+      "query_batch": "audit_extra_missing"
+    },
+    {
+      "url": "https://omannews.gov.om/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_extra_missing"
+    },
+    {
+      "url": "https://www.thecanadianpressnews.ca/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_extra_missing"
+    },
+    {
+      "url": "https://omannews.gov.om/topics/en/79/show/126470/",
+      "title": "Oman News Agency",
+      "web_status": "observed",
+      "query_batch": "audit_americas_agencies"
+    },
+    {
+      "url": "https://omannews.gov.om/topics/en/83/show/122582/ona",
+      "title": "Oman News Agency",
+      "web_status": "observed",
+      "query_batch": "audit_americas_agencies"
+    },
+    {
+      "url": "https://omannews.gov.om/topics/en/79/show/127325/index.ona?GetLang=ar",
+      "title": "Oman News Agency",
+      "web_status": "observed",
+      "query_batch": "audit_americas_agencies"
+    },
+    {
+      "url": "https://omannews.gov.om/topics/en/79/show/126418/dark",
+      "title": "Oman News Agency",
+      "web_status": "observed",
+      "query_batch": "audit_americas_agencies"
+    },
+    {
+      "url": "https://omannews.gov.om/topics/en/79/show/126612/light",
+      "title": "Oman News Agency",
+      "web_status": "observed",
+      "query_batch": "audit_americas_agencies"
+    },
+    {
+      "url": "https://www.omannews.gov.om/topics/en/102/show/search%26keyword%3DRoyal%20Airport",
+      "title": "Oman News Agency",
+      "web_status": "observed",
+      "query_batch": "audit_americas_agencies"
+    },
+    {
+      "url": "https://www.omannews.gov.om/topics/en/79/show/124662/ona",
+      "title": "Oman News Agency",
+      "web_status": "observed",
+      "query_batch": "audit_americas_agencies"
+    },
+    {
+      "url": "https://omannews.gov.om/topics/en/80/show/127122/ona",
+      "title": "Oman News Agency",
+      "web_status": "observed",
+      "query_batch": "audit_americas_agencies"
+    },
+    {
+      "url": "https://omannews.gov.om/topics/en/129/show/125608/oman_press",
+      "title": "Oman News Agency",
+      "web_status": "observed",
+      "query_batch": "audit_americas_agencies"
+    },
+    {
+      "url": "https://omannews.gov.om/topics/en/83/page/26",
+      "title": "Oman News Agency",
+      "web_status": "observed",
+      "query_batch": "audit_americas_agencies"
+    },
+    {
+      "url": "https://omannews.gov.om/topics/en/79/show/106959/ona",
+      "title": "Oman News Agency",
+      "web_status": "observed",
+      "query_batch": "audit_americas_agencies"
+    },
+    {
+      "url": "https://omannews.gov.om/topics/en/80/show/124850",
+      "title": "Oman News Agency",
+      "web_status": "observed",
+      "query_batch": "audit_americas_agencies"
+    },
+    {
+      "url": "https://agenciabrasil.ebc.com.br/sites/default/files/atoms/file/cartilhaitamaraty.pdf",
+      "title": "Cartilha Sobre Disputa de Guarda e",
+      "web_status": "observed",
+      "query_batch": "audit_americas_agencies"
+    },
+    {
+      "url": "https://www.alriyadh.com/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_primary_gaps_more"
+    },
+    {
+      "url": "https://www.laprensagrafica.com/",
+      "title": "La Prensa Gráfica - última hora, noticias de El Salvador, noticias del mundo y vídeos",
+      "web_status": "observed",
+      "query_batch": "audit_americas_agencies"
+    },
+    {
+      "url": "https://elfaro.net/",
+      "title": "elfaro.net",
+      "web_status": "title_only",
+      "query_batch": "audit_americas_agencies"
+    },
+    {
+      "url": "https://noticiasargentinas.com/",
+      "title": "Agencia Noticias Argentinas - Periodismo. Fotoperiodismo. Agencia NA. Actualidad. Medios. Dólar. Gobierno.",
+      "web_status": "observed",
+      "query_batch": "audit_americas_agencies"
+    },
+    {
+      "url": "https://agenciabrasil.ebc.com.br/",
+      "title": "Agência Brasil | Últimas notícias do Brasil e do mundo",
+      "web_status": "observed",
+      "query_batch": "audit_latam_ma"
+    },
+    {
+      "url": "https://www.noticiascaracol.com/",
+      "title": "Noticias Caracol: últimas noticias de Colombia y el mundo hoy",
+      "web_status": "observed",
+      "query_batch": "audit_latam_ma"
+    },
+    {
+      "url": "https://www.noticiasrcn.com/",
+      "title": "Noticias RCN | Últimas Noticias de Colombia y el Mundo",
+      "web_status": "observed",
+      "query_batch": "audit_latam_ma"
+    },
+    {
+      "url": "https://www.2m.ma/",
+      "title": "2M - الرئيسية",
+      "web_status": "title_only",
+      "query_batch": "audit_latam_ma"
+    },
+    {
+      "url": "https://www.le360.ma/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_primary_gaps_more"
+    },
+    {
+      "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/united-states",
+      "title": "United States | Reuters Institute for the Study of Journalism",
+      "web_status": "observed",
+      "query_batch": "audit_dnr_markets"
+    },
+    {
+      "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/canada",
+      "title": "Canada | Reuters Institute for the Study of Journalism",
+      "web_status": "observed",
+      "query_batch": "audit_dnr_markets"
+    },
+    {
+      "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/brazil",
+      "title": "Brazil | Reuters Institute for the Study of Journalism",
+      "web_status": "observed",
+      "query_batch": "audit_dnr_markets"
+    },
+    {
+      "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/mexico",
+      "title": "Mexico | Reuters Institute for the Study of Journalism",
+      "web_status": "observed",
+      "query_batch": "audit_dnr_markets"
+    },
+    {
+      "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/argentina",
+      "title": "Argentina | Reuters Institute for the Study of Journalism",
+      "web_status": "observed",
+      "query_batch": "audit_dnr_markets"
+    },
+    {
+      "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/chile",
+      "title": "Chile | Reuters Institute for the Study of Journalism",
+      "web_status": "observed",
+      "query_batch": "audit_dnr_markets"
+    },
+    {
+      "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/colombia",
+      "title": "Colombia | Reuters Institute for the Study of Journalism",
+      "web_status": "observed",
+      "query_batch": "audit_dnr_markets"
+    },
+    {
+      "url": "https://reutersinstitute.politics.ox.ac.uk/digital-news-report/2026/south-africa",
+      "title": "South Africa | Reuters Institute for the Study of Journalism",
+      "web_status": "observed",
+      "query_batch": "audit_dnr_markets"
+    },
+    {
+      "url": "https://www.alriyadh.com/345653",
+      "title": "جريدة الرياض | تأسيس مؤسسة تكافل الخيرية لمنسوبي ومنسوبات وزارة التربية",
+      "web_status": "observed",
+      "query_batch": "audit_primary_gaps_more"
+    },
+    {
+      "url": "https://www.alriyadh.com/315365",
+      "title": "جريدة الرياض | توفير الدعم للموهوبين وأسرهم لتذليل الصعوبات التي تحد من نمو قدراتهم",
+      "web_status": "observed",
+      "query_batch": "audit_primary_gaps_more"
+    },
+    {
+      "url": "https://www.alriyadh.com/315969",
+      "title": "جريدة الرياض | مؤسسة سلطان بن عبدالعزيز الخيرية عطاء بلا حدود",
+      "web_status": "observed",
+      "query_batch": "audit_primary_gaps_more"
+    },
+    {
+      "url": "https://www.alriyadh.com/1897880",
+      "title": "جريدة الرياض | 1400 جمعية ومؤسسة أهلية في منطقة الرياض",
+      "web_status": "observed",
+      "query_batch": "audit_primary_gaps_more"
+    },
+    {
+      "url": "https://www.alriyadh.com/2098799",
+      "title": "جريدة الرياض | \"مؤسسة الرياض\".. دعم العمل الاجتماعي",
+      "web_status": "observed",
+      "query_batch": "audit_primary_gaps_more"
+    },
+    {
+      "url": "https://a6.alriyadh.com/page/info",
+      "title": "جريدة الرياض",
+      "web_status": "observed",
+      "query_batch": "audit_primary_gaps_more"
+    },
+    {
+      "url": "https://www.alriyadh.com/2124761",
+      "title": "جريدة الرياض | مؤسسة الرياض غير الربحية رؤية تواكب طموح الوطن",
+      "web_status": "observed",
+      "query_batch": "audit_primary_gaps_more"
+    },
+    {
+      "url": "https://www.alriyadh.com/459089",
+      "title": "جريدة الرياض | صدور النظام الأساس لمؤسسة التكافل لمنسوبي ومنسوبات «التربية»",
+      "web_status": "observed",
+      "query_batch": "audit_primary_gaps_more"
+    },
+    {
+      "url": "https://a6.alriyadh.com/2153949",
+      "title": "جريدة الرياض | معهد العاصمة النموذجي.. شواهد على التعليم",
+      "web_status": "observed",
+      "query_batch": "audit_primary_gaps_more"
+    },
+    {
+      "url": "https://www.alriyadh.com/504218",
+      "title": "جريدة الرياض | نحن مؤسسة حكومية ولسنا متجراً أو مؤسسة فردية ليقتنع البعض بوجودها أو لا يقتنع",
+      "web_status": "observed",
+      "query_batch": "audit_primary_gaps_more"
+    },
+    {
+      "url": "https://www.alriyadh.com/1996081",
+      "title": "جريدة الرياض | «مؤسسة الملك فيصل» تُعزّز التعليم الإلكتروني",
+      "web_status": "observed",
+      "query_batch": "audit_primary_gaps_more"
+    },
+    {
+      "url": "https://www.kan.org.il/",
+      "title": "כאן 11: חדשות, רדיו, טלוויזיה, שידור חי - תאגיד השידור הישראלי",
+      "web_status": "title_only",
+      "query_batch": "audit_primary_gaps_more"
+    },
+    {
+      "url": "https://www.map.ma/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_primary_gaps_more"
+    },
+    {
+      "url": "https://www.listindiario.com/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_do_uy"
+    },
+    {
+      "url": "https://www.diariolibre.com/",
+      "title": "Diario Libre: Ultimas Noticias de República Dominicana",
+      "web_status": "observed",
+      "query_batch": "audit_do_uy"
+    },
+    {
+      "url": "https://hoy.com.do/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_do_uy"
+    },
+    {
+      "url": "https://www.elcaribe.com.do/",
+      "title": "PORTADA - Periódico elCaribe",
+      "web_status": "observed",
+      "query_batch": "audit_do_uy"
+    },
+    {
+      "url": "https://elnacional.com.do/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_do_uy"
+    },
+    {
+      "url": "https://noticiassin.com/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_do_uy"
+    },
+    {
+      "url": "https://www.elpais.com.uy/",
+      "title": "Noticias de Uruguay y el mundo actualizadas - EL PAÍS Uruguay",
+      "web_status": "observed",
+      "query_batch": "audit_do_uy"
+    },
+    {
+      "url": "https://www.elobservador.com.uy/",
+      "title": "Últimas noticias de Estados Unidos y el mundo - El Observador",
+      "web_status": "observed",
+      "query_batch": "audit_do_uy"
+    },
+    {
+      "url": "https://ladiaria.com.uy/",
+      "title": "la diaria | Noticias e información de Uruguay y el mundo",
+      "web_status": "observed",
+      "query_batch": "audit_do_uy"
+    },
+    {
+      "url": "https://www.subrayado.com.uy/",
+      "title": "subrayado.com.uy",
+      "web_status": "observed",
+      "query_batch": "audit_do_uy"
+    },
+    {
+      "url": "https://www.montevideo.com.uy/",
+      "title": "Montevideo Portal",
+      "web_status": "observed",
+      "query_batch": "audit_do_uy"
+    },
+    {
+      "url": "https://www.reuters.com/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_us_ca"
+    },
+    {
+      "url": "https://www.ap.org/about/",
+      "title": "About Us | The Associated Press",
+      "web_status": "observed",
+      "query_batch": "audit_us_ca"
+    },
+    {
+      "url": "https://www.cbc.ca/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_us_ca"
+    },
+    {
+      "url": "https://www.ctvnews.ca/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_us_ca"
+    },
+    {
+      "url": "https://www.theglobeandmail.com/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_us_ca"
+    },
+    {
+      "url": "https://www.thestar.com/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_us_ca"
+    },
+    {
+      "url": "https://nationalpost.com/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_us_ca"
+    },
+    {
+      "url": "https://www.npr.org/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_us_ca"
+    },
+    {
+      "url": "https://www.washingtonpost.com/",
+      "title": "The Washington Post - Breaking news and latest headlines, U.S. news, world news, and video",
+      "web_status": "observed",
+      "query_batch": "audit_us_ca"
+    },
+    {
+      "url": "https://www.nytimes.com/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_us_ca"
+    },
+    {
+      "url": "https://www.wsj.com/",
+      "title": "The Wall Street Journal - Breaking News, Business, Financial & Economic News, World News and Video",
+      "web_status": "observed",
+      "query_batch": "audit_us_ca"
+    },
+    {
+      "url": "https://g1.globo.com/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_br_mx"
+    },
+    {
+      "url": "https://www.folha.uol.com.br/",
+      "title": "Notícias de hoje do Brasil e do Mundo | Folha de S.Paulo",
+      "web_status": "observed",
+      "query_batch": "audit_br_mx"
+    },
+    {
+      "url": "https://noticias.uol.com.br/",
+      "title": "UOL Notícias | Notícias do Dia no Brasil e no Mundo",
+      "web_status": "observed",
+      "query_batch": "audit_br_mx"
+    },
+    {
+      "url": "https://www.estadao.com.br/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_br_mx"
+    },
+    {
+      "url": "https://valor.globo.com/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_br_mx"
+    },
+    {
+      "url": "https://www.eluniversal.com.mx/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_br_mx"
+    },
+    {
+      "url": "https://www.reforma.com/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_br_mx"
+    },
+    {
+      "url": "https://www.jornada.com.mx/",
+      "title": "La Jornada",
+      "web_status": "observed",
+      "query_batch": "audit_br_mx"
+    },
+    {
+      "url": "https://www.eleconomista.com.mx/",
+      "title": "El Economista | Periódico especializado en economía, finanzas y negocios",
+      "web_status": "observed",
+      "query_batch": "audit_br_mx"
+    },
+    {
+      "url": "https://www.elfinanciero.com.mx/",
+      "title": "El Financiero | Las noticias de finanzas, economía y política más importantes del país.",
+      "web_status": "observed",
+      "query_batch": "audit_br_mx"
+    },
+    {
+      "url": "https://www.milenio.com/",
+      "title": "MILENIO | Noticias de hoy en México y el mundo al momento- Grupo Milenio",
+      "web_status": "observed",
+      "query_batch": "audit_br_mx"
+    },
+    {
+      "url": "https://www.clarin.com/",
+      "title": "Noticias. Últimas noticias de Argentina y el Mundo | Clarín",
+      "web_status": "observed",
+      "query_batch": "audit_ar_cl"
+    },
+    {
+      "url": "https://www.lanacion.com.ar/",
+      "title": "Últimas noticias de Argentina y el mundo - LA NACION",
+      "web_status": "observed",
+      "query_batch": "audit_ar_cl"
+    },
+    {
+      "url": "https://www.infobae.com/",
+      "title": "Infobae EE.UU. | Últimas Noticias de Estados Unidos en Español - Infobae",
+      "web_status": "observed",
+      "query_batch": "audit_ar_cl"
+    },
+    {
+      "url": "https://www.pagina12.com.ar/",
+      "title": "Página | 12: La otra mirada sobre Argentina y el mundo",
+      "web_status": "observed",
+      "query_batch": "audit_ar_cl"
+    },
+    {
+      "url": "https://www.cronista.com/",
+      "title": "El Cronista",
+      "web_status": "observed",
+      "query_batch": "audit_ar_cl"
+    },
+    {
+      "url": "https://www.emol.com/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_ar_cl"
+    },
+    {
+      "url": "https://www.latercera.com/",
+      "title": "La Tercera - Noticias de Chile y el Mundo",
+      "web_status": "observed",
+      "query_batch": "audit_ar_cl"
+    },
+    {
+      "url": "https://www.24horas.cl/",
+      "title": "24horas.cl te informa de las noticias de Chile y el mundo | 24horas",
+      "web_status": "observed",
+      "query_batch": "audit_ar_cl"
+    },
+    {
+      "url": "https://www.biobiochile.cl/",
+      "title": "BioBioChile - La Red de Prensa Más Grande de Chile",
+      "web_status": "observed",
+      "query_batch": "audit_ar_cl"
+    },
+    {
+      "url": "https://www.cooperativa.cl/",
+      "title": "Noticias de Chile, actualidad, deportes y streaming | Cooperativa",
+      "web_status": "observed",
+      "query_batch": "audit_ar_cl"
+    },
+    {
+      "url": "https://www.df.cl/",
+      "title": "Diario Financiero Noticias de negocios, financieras y económicas de Chile y el mundo | Diario Financiero",
+      "web_status": "observed",
+      "query_batch": "audit_ar_cl"
+    },
+    {
+      "url": "https://www.eluniverso.com/",
+      "title": "El Universo | Noticias de Ecuador y del mundo",
+      "web_status": "observed",
+      "query_batch": "audit_ec_co_sv"
+    },
+    {
+      "url": "https://www.elcomercio.com/",
+      "title": "El COMERCIO - Noticias de Ecuador y del mundo",
+      "web_status": "observed",
+      "query_batch": "audit_ec_co_sv"
+    },
+    {
+      "url": "https://www.expreso.ec/",
+      "title": "EXPRESO: Últimas noticias de Ecuador hoy, política, economía y seguridad",
+      "web_status": "observed",
+      "query_batch": "audit_ec_co_sv"
+    },
+    {
+      "url": "https://www.primicias.ec/",
+      "title": "Primicias - Noticias de Ecuador - Periodismo comprometido",
+      "web_status": "observed",
+      "query_batch": "audit_ec_co_sv"
+    },
+    {
+      "url": "https://www.teleamazonas.com/",
+      "title": "Teleamazonas - Portal de Noticias de Ecuador al instante",
+      "web_status": "observed",
+      "query_batch": "audit_ec_co_sv"
+    },
+    {
+      "url": "https://www.eltiempo.com/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_ec_co_sv"
+    },
+    {
+      "url": "https://www.elespectador.com/",
+      "title": "Noticias de hoy en Colombia y el mundo. Última hora | Noticias | EL ESPECTADOR",
+      "web_status": "observed",
+      "query_batch": "audit_ec_co_sv"
+    },
+    {
+      "url": "https://www.semana.com/",
+      "title": "Semana - Últimas Noticias de Colombia y el Mundo",
+      "web_status": "observed",
+      "query_batch": "audit_ec_co_sv"
+    },
+    {
+      "url": "https://www.larepublica.co/",
+      "title": "Noticias de Economía, Finanzas, Empresas y Negocios de Colombia y el Mundo | LaRepublica.co",
+      "web_status": "observed",
+      "query_batch": "audit_ec_co_sv"
+    },
+    {
+      "url": "https://www.elsalvador.com/",
+      "title": "Noticias de El Salvador - Noticias de El Salvador, noticias internacionales, salvadoreños por el mundo, economia, negocios, politica, deportes, entretenimiento, tecnologia, turismo, tendencias, fotos, videos, redes sociales",
+      "web_status": "observed",
+      "query_batch": "audit_ec_co_sv"
+    },
+    {
+      "url": "https://diarioelsalvador.com/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_ec_co_sv"
+    },
+    {
+      "url": "https://www.tcsahora.com/",
+      "title": "TCS Ahora - Noticias El Salvador",
+      "web_status": "observed",
+      "query_batch": "audit_ec_co_sv"
+    },
+    {
+      "url": "https://punchng.com/",
+      "title": "Punch newspapers - Breaking News, Nigerian News & Top Stories",
+      "web_status": "observed",
+      "query_batch": "audit_ng_za"
+    },
+    {
+      "url": "https://www.vanguardngr.com/",
+      "title": "Vanguard News: Nigerian News,Politics, Sports and Business from vanguard Newspapers -",
+      "web_status": "observed",
+      "query_batch": "audit_ng_za"
+    },
+    {
+      "url": "https://www.premiumtimesng.com/",
+      "title": "Premium Times - Nigeria leading newspaper for news, investigations",
+      "web_status": "observed",
+      "query_batch": "audit_ng_za"
+    },
+    {
+      "url": "https://www.channelstv.com/",
+      "title": "Channels Television • The Latest News from Nigeria and Around the World",
+      "web_status": "observed",
+      "query_batch": "audit_ng_za"
+    },
+    {
+      "url": "https://businessday.ng/",
+      "title": "Businessday NG",
+      "web_status": "observed",
+      "query_batch": "audit_ng_za"
+    },
+    {
+      "url": "https://nannews.ng/",
+      "title": "News Agency Of Nigeria - Africa's Media Giant",
+      "web_status": "observed",
+      "query_batch": "audit_ng_za"
+    },
+    {
+      "url": "https://www.sabcnews.com/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_ng_za"
+    },
+    {
+      "url": "https://www.news24.com/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_ng_za"
+    },
+    {
+      "url": "https://www.dailymaverick.co.za/",
+      "title": "Daily Maverick — Defend Truth",
+      "web_status": "observed",
+      "query_batch": "audit_ng_za"
+    },
+    {
+      "url": "https://mg.co.za/",
+      "title": "The Mail & Guardian | Africa's Better Future",
+      "web_status": "observed",
+      "query_batch": "audit_ng_za"
+    },
+    {
+      "url": "https://www.businesslive.co.za/bd/",
+      "title": "Business Day - Latest news and analysis from SA’s business sector",
+      "web_status": "observed",
+      "query_batch": "audit_ng_za"
+    },
+    {
+      "url": "https://www.enca.com/",
+      "title": "Top Stories | Latest News in South Africa | eNCA",
+      "web_status": "observed",
+      "query_batch": "audit_ng_za"
+    },
+    {
+      "url": "https://www.hespress.com/",
+      "title": "Hespress - هسبريس جريدة إلكترونية مغربية",
+      "web_status": "observed",
+      "query_batch": "audit_ma_sa_il"
+    },
+    {
+      "url": "https://lematin.ma/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_ma_sa_il"
+    },
+    {
+      "url": "https://medias24.com/",
+      "title": "Médias24 - Numéro un de l'information économique marocaine",
+      "web_status": "observed",
+      "query_batch": "audit_ma_sa_il"
+    },
+    {
+      "url": "https://www.spa.gov.sa/",
+      "title": "وكالة الأنباء السعودية",
+      "web_status": "title_only",
+      "query_batch": "audit_ma_sa_il"
+    },
+    {
+      "url": "https://www.arabnews.com/",
+      "title": "Arab News | Worldwide News, Latest Breaking News & Updates",
+      "web_status": "observed",
+      "query_batch": "audit_ma_sa_il"
+    },
+    {
+      "url": "https://www.okaz.com.sa/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_ma_sa_il"
+    },
+    {
+      "url": "https://www.aleqt.com/",
+      "title": "الاقتصادية - الموقع الرسمي لأخبار الاقتصاد والأسواق",
+      "web_status": "observed",
+      "query_batch": "audit_ma_sa_il"
+    },
+    {
+      "url": "https://www.al-jazirah.com/",
+      "title": "Al-Jazirah Daily Newspaper صحيفة الجزيرة",
+      "web_status": "title_only",
+      "query_batch": "audit_ma_sa_il"
+    },
+    {
+      "url": "https://www.haaretz.com/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_ma_sa_il"
+    },
+    {
+      "url": "https://www.ynet.co.il/",
+      "title": "ynet - חדשות, כלכלה, ספורט ובריאות - דיווחים שוטפים מהארץ ומהעולם",
+      "web_status": "observed",
+      "query_batch": "audit_ma_sa_il"
+    },
+    {
+      "url": "https://www.jpost.com/",
+      "title": "The Jerusalem Post - All News from the Middle East, Israel, and the Jewish World",
+      "web_status": "observed",
+      "query_batch": "audit_ma_sa_il"
+    },
+    {
+      "url": "https://www.timesofisrael.com/",
+      "title": "The Times of Israel | News from Israel, the Middle East and the Jewish World",
+      "web_status": "observed",
+      "query_batch": "audit_ma_sa_il"
+    },
+    {
+      "url": "https://www.globes.co.il/",
+      "title": "גלובס - עיתון העסקים של ישראל",
+      "web_status": "observed",
+      "query_batch": "audit_ma_sa_il"
+    },
+    {
+      "url": "https://www.aljazeera.com/",
+      "title": "Breaking News, World News and Video from Al Jazeera",
+      "web_status": "observed",
+      "query_batch": "audit_qa_ae_om_eg"
+    },
+    {
+      "url": "https://thepeninsulaqatar.com/",
+      "title": "Home | The Peninsula Qatar",
+      "web_status": "observed",
+      "query_batch": "audit_qa_ae_om_eg"
+    },
+    {
+      "url": "https://www.gulf-times.com/",
+      "title": "Gulf Times | Qatar's leading English daily newspaper",
+      "web_status": "observed",
+      "query_batch": "audit_qa_ae_om_eg"
+    },
+    {
+      "url": "https://www.qatar-tribune.com/",
+      "title": "Qatar Tribune - Read Qatar Tribune on the go for unrivalled news coverage",
+      "web_status": "observed",
+      "query_batch": "audit_qa_ae_om_eg"
+    },
+    {
+      "url": "https://www.qna.org.qa/",
+      "title": "الصفحة الرئيسية | Qatar news agency",
+      "web_status": "observed",
+      "query_batch": "audit_qa_ae_om_eg"
+    },
+    {
+      "url": "https://www.thenationalnews.com/",
+      "title": "The National - Latest world news, sport & opinion",
+      "web_status": "observed",
+      "query_batch": "audit_qa_ae_om_eg"
+    },
+    {
+      "url": "https://gulfnews.com/",
+      "title": "Gulf News: Latest UAE news, Dubai news, Business, travel news, Dubai Gold rate, prayer time, cinema",
+      "web_status": "observed",
+      "query_batch": "audit_qa_ae_om_eg"
+    },
+    {
+      "url": "https://www.khaleejtimes.com/",
+      "title": "Khaleej Times - Dubai News, UAE News, Gulf, News, Latest news, Arab news, Gulf News, Dubai Labour News",
+      "web_status": "observed",
+      "query_batch": "audit_qa_ae_om_eg"
+    },
+    {
+      "url": "https://www.aletihad.ae/",
+      "title": "الصفحة الرئيسية - الاتحاد للأخبار",
+      "web_status": "observed",
+      "query_batch": "audit_qa_ae_om_eg"
+    },
+    {
+      "url": "https://www.wam.ae/",
+      "title": "www.wam.ae",
+      "web_status": "title_only",
+      "query_batch": "audit_qa_ae_om_eg"
+    },
+    {
+      "url": "https://www.omanobserver.om/",
+      "title": "Official URL access attempt",
+      "web_status": "fetch_failed",
+      "query_batch": "audit_qa_ae_om_eg"
+    },
+    {
+      "url": "https://timesofoman.com/",
+      "title": "Times of Oman",
+      "web_status": "observed",
+      "query_batch": "audit_qa_ae_om_eg"
+    },
+    {
+      "url": "https://www.muscatdaily.com/",
+      "title": "Muscat Daily| Oman News |Business | Sports |Lifestyle",
+      "web_status": "observed",
+      "query_batch": "audit_qa_ae_om_eg"
+    },
+    {
+      "url": "https://alwatan.om/",
+      "title": "الوطن- الصفحة الرئيسية - جريدة الوطن - صوت عُمان في العالم",
+      "web_status": "observed",
+      "query_batch": "audit_qa_ae_om_eg"
+    },
+    {
+      "url": "https://www.almasryalyoum.com/",
+      "title": "المصري اليوم",
+      "web_status": "observed",
+      "query_batch": "audit_qa_ae_om_eg"
+    },
+    {
+      "url": "https://www.shorouknews.com/",
+      "title": "www.shorouknews.com",
+      "web_status": "observed",
+      "query_batch": "audit_qa_ae_om_eg"
+    },
+    {
+      "url": "https://almalnews.com/",
+      "title": "جريدة المال",
+      "web_status": "observed",
+      "query_batch": "audit_qa_ae_om_eg"
+    }
+  ]
+}
