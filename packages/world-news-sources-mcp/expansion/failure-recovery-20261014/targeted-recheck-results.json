@@ -1,0 +1,1395 @@
+{
+  "version": 1,
+  "operation_id": "failure-recovery-20261014",
+  "evidence_status": "verified_production_rechecks_and_read_only_postflight",
+  "registry_sha256": "5ca99418a88d0283553bf97bbdcd683673b385b768e722f93aa81d43952544aa",
+  "collection_day_utc": "2026-10-14",
+  "summary": {
+    "selected_registered_typed_endpoints": 113,
+    "actual_production_rechecks": 71,
+    "policy_holds": 33,
+    "server_waits_kept": 9,
+    "valid_xml_endpoints": 30,
+    "article_url_list_formats": 29,
+    "sitemap_indexes_only": 1,
+    "inspector_recent_article_lists": 20,
+    "strict_nonfuture_recent_article_lists": 19,
+    "future_normalized_timestamp": 1,
+    "still_failed_actual_rechecks": 41,
+    "valid_xml_endpoints_with_prior_article_xml_success": 11,
+    "xml_recognition_by_selection_lane": {
+      "fixed_inspector_current_url": 18,
+      "saved_redirect_politeness_wait": 5,
+      "transient_or_expired_server_wait": 7
+    },
+    "article_list_freshness_labels": {
+      "missing": 2,
+      "recent": 20,
+      "stale": 1,
+      "unreliable": 6
+    },
+    "remaining_actual_failure_reasons": {
+      "HTTP_429": 2,
+      "HTTP_500": 2,
+      "HTTP_502": 1,
+      "HTTP_503": 3,
+      "HTTP_530": 1,
+      "INVALID_XML": 1,
+      "POLITENESS_WAIT_LIMIT": 2,
+      "TIMEOUT": 28,
+      "WRONG_ENDPOINT_FORMAT": 1
+    },
+    "policy_hold_reasons": {
+      "CRAWL_DELAY_REVIEW": 7,
+      "HTTPS_DOWNGRADE_REVIEW": 2,
+      "ROBOTS_DISALLOWED": 1,
+      "ROBOTS_UNAVAILABLE": 23
+    },
+    "additional_reserved_http_requests": 215,
+    "registry_changes": 0,
+    "source_status_changes": 0,
+    "source_deletions": 0,
+    "model_calls": 0
+  },
+  "policy": {
+    "collection_scope": "explicit_endpoints",
+    "operator_same_utc_day_recheck": true,
+    "whole_registry_force_recheck": false,
+    "concurrency": 2,
+    "same_host_gap_ms": 2000,
+    "max_additional_http_requests_per_run": 400,
+    "durable_daily_request_limit": 12000,
+    "max_transient_retries": 1,
+    "endpoint_timeout_ms": 8000,
+    "fresh_robots_and_path_policy": true,
+    "server_waits_preserved": true,
+    "policy_holds_are_not_synthetic_failed_collections": true,
+    "registered_addresses_unchanged": true
+  },
+  "runs": [
+    {
+      "run_id": "targeted-recovery",
+      "started_at": "2026-10-14T17:36:42.294Z",
+      "finished_at": "2026-10-14T17:42:13.387Z",
+      "snapshot_generated_at": "2026-10-14T17:42:09.828Z",
+      "selected_endpoints": 100,
+      "actual_production_rechecks": 63,
+      "policy_holds": 28,
+      "server_waits_kept": 9,
+      "valid_xml_endpoints": 25,
+      "article_url_list_formats": 24,
+      "sitemap_indexes_only": 1,
+      "inspector_recent_article_lists": 15,
+      "strict_nonfuture_recent_article_lists": 14,
+      "still_failed_actual_rechecks": 38,
+      "additional_reserved_http_requests": 175,
+      "ledger_before": {
+        "collections": 58842,
+        "urls": 2275159,
+        "bindings": 5900
+      },
+      "ledger_after": {
+        "collections": 58905,
+        "urls": 2277304,
+        "bindings": 5900
+      },
+      "input_sha256": "c1fe5e77323de6601bf526596acaf2410691e051552abb3c89312d3853d97d60",
+      "result_sha256": "c20976e1ad8c4bedf227fe18ff06934eacccc7f4c494cdb74ade7851dd3f4e99"
+    },
+    {
+      "run_id": "targeted-redirect-recovery",
+      "started_at": "2026-10-14T17:42:52.253Z",
+      "finished_at": "2026-10-14T17:43:48.191Z",
+      "snapshot_generated_at": "2026-10-14T17:43:44.526Z",
+      "selected_endpoints": 13,
+      "actual_production_rechecks": 8,
+      "policy_holds": 5,
+      "server_waits_kept": 0,
+      "valid_xml_endpoints": 5,
+      "article_url_list_formats": 5,
+      "sitemap_indexes_only": 0,
+      "inspector_recent_article_lists": 5,
+      "strict_nonfuture_recent_article_lists": 5,
+      "still_failed_actual_rechecks": 3,
+      "additional_reserved_http_requests": 40,
+      "ledger_before": {
+        "collections": 58905,
+        "urls": 2277304,
+        "bindings": 5900
+      },
+      "ledger_after": {
+        "collections": 58913,
+        "urls": 2277419,
+        "bindings": 5900
+      },
+      "input_sha256": "cc6a32926a954e253555600b57c8a130968c93a9e54f743b09d4abba40c8c4b6",
+      "result_sha256": "5b8cc32475c10421f3cca2e40628b88017eae0722d03f55f7c562ae2e13c958f"
+    }
+  ],
+  "final_read_only_verification": {
+    "verified_at": "2026-10-14T17:45:52.421Z",
+    "scope": "latest current active production collection results on 2026-10-14 UTC",
+    "active_endpoints": 5497,
+    "failed_endpoints_before": 1178,
+    "failed_endpoints_after": 1148,
+    "failure_count_change_status": "verified",
+    "not_checked_today": 1,
+    "latest_saved_status_counts": {
+      "malformed": 588,
+      "working_nonempty": 4326,
+      "blocked": 319,
+      "http_error": 186,
+      "timeout": 48,
+      "incomplete": 4,
+      "valid_empty": 22,
+      "network_error": 3
+    },
+    "latest_saved_shape_counts": {
+      "failed": 1148,
+      "rss": 2802,
+      "urlset": 985,
+      "sitemapindex": 480,
+      "atom": 51,
+      "rdf": 30
+    },
+    "ledger": {
+      "collections": 58913,
+      "urls": 2277419,
+      "bindings": 5900
+    },
+    "collections_added": 71,
+    "binding_count_unchanged": true,
+    "tracking_start": "2026-10-01T01:36:12.370Z",
+    "production_spool_count": 0,
+    "stored_unique_url_rows_added": 2260,
+    "initial_triage_sha256": "d7b09f631f346c3ee6405a0f00a7a7537a7091147f2b9d2fe2b910691ad6d774",
+    "postflight_sha256": "16222696834f90ee393849309d31e85f6100ce6669053c03c04edb92488419fb"
+  },
+  "public_metadata_publication": {
+    "verified_at": "2026-10-14T17:47:18.247Z",
+    "deployment_id": "dpl_DenEMr4MHJmw17m3BVrrwsrFb9VQ",
+    "status": "READY",
+    "dashboard_url": "https://news.bymyleslee.com/quality/",
+    "activity_snapshot_generated_at": "2026-10-14T17:43:44.526Z",
+    "public_code_changed": false,
+    "gateway_settings_changed": false,
+    "deployed_url_fetch_performed": false,
+    "receipt_sha256": "c80ac84b24b3757c6f96f140128d567d47700e0d55d2cc0d2a7bd10365e7c797"
+  },
+  "semantics": {
+    "xml_recognition": "A bounded production request recognized feed or sitemap XML at the existing registered address. This is not a guarantee of future availability.",
+    "grouping": "The 18 parser-fix, 7 transient/server-wait and 5 redirect successes are selection-lane counts. A retry alone does not establish the cause of an earlier failure.",
+    "article_url_list_format": "Feed and URL-set formats contain observed URLs; format recognition does not independently verify that every URL is an article. Sitemap indexes are excluded from article-list counts.",
+    "content_date": "feed_item_date and sitemap_lastmod are publisher-supplied item dates and sitemap modification dates respectively. A recent modification date is not proof of publication time.",
+    "freshness": "Inspector recent labels total 20 article-list endpoints; 19 also have a normalized content date no later than their check. One future normalized sitemap timestamp is retained as a limitation; its original precision is unavailable here.",
+    "coverage": "These 113 selected old failures were reviewed. This is not a new full-registry pass, exhaustive article coverage, or proof of long-term recovery.",
+    "latest_counts": "Final counts use the latest saved result for each current active endpoint on the selected UTC day. The results were collected at different times; one address remains unattempted that day.",
+    "urls": "Observed XML URL counts and growth in stored unique URL rows are not publication totals or source/country NEW counts. Existing ledger deduplication and binding baselines remain in use.",
+    "holds": "Policy holds and preserved server waits create no invented endpoint check or source status transition. Their previous failure remains visible until an actual eligible collection succeeds.",
+    "history": "Prior success counts describe retained saved observations, not a complete lifetime history."
+  },
+  "recognized_xml_endpoints": [
+    {
+      "endpoint_id": "ep_48046963c867cfcb391fd2dd",
+      "type": "rss",
+      "registered_url": "https://www.lalibre.be/rss",
+      "sources": [
+        {
+          "source_id": "src_ecab156f7d18a2bcbb932449",
+          "name": "La Libre",
+          "country": "BE"
+        }
+      ],
+      "selection_lane": "saved_redirect_politeness_wait",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:35:01.407Z",
+        "status": "http_error",
+        "reason": "POLITENESS_WAIT_LIMIT",
+        "http_status": 301
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:43:35.331Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 100,
+        "attempts": 1,
+        "requested_http_hops": 3,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "feed_item_date",
+        "newest_content_at": "2026-10-14T17:37:01.000Z",
+        "strict_nonfuture_recent_content_date": true,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 13,
+        "last_prior_article_xml_success_at": "2026-10-13T03:24:54.977Z"
+      }
+    },
+    {
+      "endpoint_id": "ep_ae7cb7dd32cf13f2b066a09b",
+      "type": "sitemap",
+      "registered_url": "https://www.emol.com/sitemap/xml/sitemap7_2026.xml",
+      "sources": [
+        {
+          "source_id": "src_21c3b03825f030b0ce43364f",
+          "name": "Emol - Tecnología Sitemap 2026",
+          "country": "CL"
+        }
+      ],
+      "selection_lane": "transient_or_expired_server_wait",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:44:49.191Z",
+        "status": "timeout",
+        "reason": "TIMEOUT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:41:48.440Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "urlset",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 976,
+        "attempts": 2,
+        "requested_http_hops": 2,
+        "inspector_content_freshness_label": "missing",
+        "date_kind": "sitemap_lastmod",
+        "newest_content_at": null,
+        "strict_nonfuture_recent_content_date": false,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 11,
+        "last_prior_article_xml_success_at": "2026-10-12T03:40:15.310Z"
+      }
+    },
+    {
+      "endpoint_id": "ep_fcbeeb65f86e9b21880bba69",
+      "type": "rss",
+      "registered_url": "https://www.chinanews.com.cn/rss/china.xml",
+      "sources": [
+        {
+          "source_id": "src_5f8a12db76a5942f59973111",
+          "name": "China News Service - China",
+          "country": "CN"
+        }
+      ],
+      "selection_lane": "fixed_inspector_current_url",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:24:49.719Z",
+        "status": "malformed",
+        "reason": "WRONG_ENDPOINT_FORMAT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:37:31.981Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 30,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "feed_item_date",
+        "newest_content_at": "2026-10-14T15:25:13.000Z",
+        "strict_nonfuture_recent_content_date": true,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 0,
+        "last_prior_article_xml_success_at": null
+      }
+    },
+    {
+      "endpoint_id": "ep_ad383c12a89387fa93a44e10",
+      "type": "rss",
+      "registered_url": "https://www.chinanews.com.cn/rss/culture.xml",
+      "sources": [
+        {
+          "source_id": "src_7f2766b9c3989c54ba945016",
+          "name": "China News Service - Culture",
+          "country": "CN"
+        }
+      ],
+      "selection_lane": "fixed_inspector_current_url",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:23:09.930Z",
+        "status": "malformed",
+        "reason": "WRONG_ENDPOINT_FORMAT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:37:24.870Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 30,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "feed_item_date",
+        "newest_content_at": "2026-10-14T13:37:53.000Z",
+        "strict_nonfuture_recent_content_date": true,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 0,
+        "last_prior_article_xml_success_at": null
+      }
+    },
+    {
+      "endpoint_id": "ep_5e7266b8f4cb1737a2f021a0",
+      "type": "rss",
+      "registered_url": "https://www.chinanews.com.cn/rss/finance.xml",
+      "sources": [
+        {
+          "source_id": "src_6fdda67a84f1c2e9e5bff215",
+          "name": "China News Service - Finance",
+          "country": "CN"
+        }
+      ],
+      "selection_lane": "fixed_inspector_current_url",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:21:31.059Z",
+        "status": "malformed",
+        "reason": "WRONG_ENDPOINT_FORMAT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:37:20.230Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 30,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "feed_item_date",
+        "newest_content_at": "2026-10-14T15:30:51.000Z",
+        "strict_nonfuture_recent_content_date": true,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 0,
+        "last_prior_article_xml_success_at": null
+      }
+    },
+    {
+      "endpoint_id": "ep_e4a3e2646e0ffd95185edeae",
+      "type": "rss",
+      "registered_url": "https://www.chinanews.com.cn/rss/jk.xml",
+      "sources": [
+        {
+          "source_id": "src_4e7618acd002d138ff66575a",
+          "name": "China News Service - Health",
+          "country": "CN"
+        }
+      ],
+      "selection_lane": "fixed_inspector_current_url",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:24:19.078Z",
+        "status": "malformed",
+        "reason": "WRONG_ENDPOINT_FORMAT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:37:29.614Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 22,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "stale",
+        "date_kind": "feed_item_date",
+        "newest_content_at": "2026-03-05T23:50:05.000Z",
+        "strict_nonfuture_recent_content_date": false,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 0,
+        "last_prior_article_xml_success_at": null
+      }
+    },
+    {
+      "endpoint_id": "ep_47fbfc8485434b8a2bdf5309",
+      "type": "rss",
+      "registered_url": "https://www.chinanews.com.cn/rss/life.xml",
+      "sources": [
+        {
+          "source_id": "src_36b739e92ae9a3b8555f08dd",
+          "name": "China News Service - Life",
+          "country": "CN"
+        }
+      ],
+      "selection_lane": "fixed_inspector_current_url",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:20:56.529Z",
+        "status": "malformed",
+        "reason": "WRONG_ENDPOINT_FORMAT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:37:01.828Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 17,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "feed_item_date",
+        "newest_content_at": "2026-10-14T07:54:54.000Z",
+        "strict_nonfuture_recent_content_date": true,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 0,
+        "last_prior_article_xml_success_at": null
+      }
+    },
+    {
+      "endpoint_id": "ep_4b4476704fcfadcb1d5f5859",
+      "type": "rss",
+      "registered_url": "https://www.chinanews.com.cn/rss/scroll-news.xml",
+      "sources": [
+        {
+          "source_id": "src_311df845fdc5ba341d2d4bea",
+          "name": "China News Service - Scroll News",
+          "country": "CN"
+        }
+      ],
+      "selection_lane": "fixed_inspector_current_url",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:20:59.649Z",
+        "status": "malformed",
+        "reason": "WRONG_ENDPOINT_FORMAT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:37:03.917Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 30,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "feed_item_date",
+        "newest_content_at": "2026-10-14T15:58:04.000Z",
+        "strict_nonfuture_recent_content_date": true,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 0,
+        "last_prior_article_xml_success_at": null
+      }
+    },
+    {
+      "endpoint_id": "ep_df8d3b092c01d2a5656b3695",
+      "type": "rss",
+      "registered_url": "https://www.chinanews.com.cn/rss/society.xml",
+      "sources": [
+        {
+          "source_id": "src_8c799a05a8d70f1f445901a7",
+          "name": "China News Service - Society",
+          "country": "CN"
+        }
+      ],
+      "selection_lane": "fixed_inspector_current_url",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:24:11.360Z",
+        "status": "malformed",
+        "reason": "WRONG_ENDPOINT_FORMAT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:37:27.265Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 30,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "feed_item_date",
+        "newest_content_at": "2026-10-14T15:21:58.000Z",
+        "strict_nonfuture_recent_content_date": true,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 0,
+        "last_prior_article_xml_success_at": null
+      }
+    },
+    {
+      "endpoint_id": "ep_87282398b69fb7beea815b43",
+      "type": "rss",
+      "registered_url": "https://www.chinanews.com.cn/rss/sports.xml",
+      "sources": [
+        {
+          "source_id": "src_037f5eb5bb48bc27d30e16b9",
+          "name": "China News Service - Sports",
+          "country": "CN"
+        }
+      ],
+      "selection_lane": "fixed_inspector_current_url",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:22:27.490Z",
+        "status": "malformed",
+        "reason": "WRONG_ENDPOINT_FORMAT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:37:22.557Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 30,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "feed_item_date",
+        "newest_content_at": "2026-10-14T13:46:13.000Z",
+        "strict_nonfuture_recent_content_date": true,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 0,
+        "last_prior_article_xml_success_at": null
+      }
+    },
+    {
+      "endpoint_id": "ep_1e89c866989efc1a723a4fae",
+      "type": "rss",
+      "registered_url": "https://www.chinanews.com.cn/rss/world.xml",
+      "sources": [
+        {
+          "source_id": "src_77250b8d8b1ab27eccf6216e",
+          "name": "China News Service - World",
+          "country": "CN"
+        }
+      ],
+      "selection_lane": "fixed_inspector_current_url",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:16:51.343Z",
+        "status": "malformed",
+        "reason": "WRONG_ENDPOINT_FORMAT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:36:53.393Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 30,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "feed_item_date",
+        "newest_content_at": "2026-10-14T15:58:04.000Z",
+        "strict_nonfuture_recent_content_date": true,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 0,
+        "last_prior_article_xml_success_at": null
+      }
+    },
+    {
+      "endpoint_id": "ep_f4ab29ec114fc2379461d894",
+      "type": "rss",
+      "registered_url": "https://www.bild.de/feed/alles.xml",
+      "sources": [
+        {
+          "source_id": "src_1f68fe35a11e545362bb98a9",
+          "name": "BILD - Alles",
+          "country": "DE"
+        }
+      ],
+      "selection_lane": "fixed_inspector_current_url",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:24:37.952Z",
+        "status": "malformed",
+        "reason": "WRONG_ENDPOINT_FORMAT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:37:32.434Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 50,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "unreliable",
+        "date_kind": "feed_item_date",
+        "newest_content_at": null,
+        "strict_nonfuture_recent_content_date": false,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 0,
+        "last_prior_article_xml_success_at": null
+      }
+    },
+    {
+      "endpoint_id": "ep_5a269653bda967043c56e7d3",
+      "type": "rss",
+      "registered_url": "https://www.bild.de/feed/digital.xml",
+      "sources": [
+        {
+          "source_id": "src_069bde295f27920903dbbfeb",
+          "name": "BILD - Digital",
+          "country": "DE"
+        }
+      ],
+      "selection_lane": "fixed_inspector_current_url",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:21:23.117Z",
+        "status": "malformed",
+        "reason": "WRONG_ENDPOINT_FORMAT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:37:17.622Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 100,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "unreliable",
+        "date_kind": "feed_item_date",
+        "newest_content_at": null,
+        "strict_nonfuture_recent_content_date": false,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 0,
+        "last_prior_article_xml_success_at": null
+      }
+    },
+    {
+      "endpoint_id": "ep_67e5a47cf659a3e335cf2c24",
+      "type": "rss",
+      "registered_url": "https://www.bild.de/feed/politik.xml",
+      "sources": [
+        {
+          "source_id": "src_5f80571dc3ecde9d1146f635",
+          "name": "BILD - Politik",
+          "country": "DE"
+        }
+      ],
+      "selection_lane": "fixed_inspector_current_url",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:21:44.716Z",
+        "status": "malformed",
+        "reason": "WRONG_ENDPOINT_FORMAT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:37:20.737Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 100,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "unreliable",
+        "date_kind": "feed_item_date",
+        "newest_content_at": null,
+        "strict_nonfuture_recent_content_date": false,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 0,
+        "last_prior_article_xml_success_at": null
+      }
+    },
+    {
+      "endpoint_id": "ep_dc569fddffe3a5d637938c93",
+      "type": "rss",
+      "registered_url": "https://www.bild.de/feed/regional-chemnitz.xml",
+      "sources": [
+        {
+          "source_id": "src_5a007777108631cf6b3d74d0",
+          "name": "BILD - Regional Chemnitz",
+          "country": "DE"
+        }
+      ],
+      "selection_lane": "fixed_inspector_current_url",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:24:06.795Z",
+        "status": "malformed",
+        "reason": "WRONG_ENDPOINT_FORMAT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:37:26.960Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 50,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "unreliable",
+        "date_kind": "feed_item_date",
+        "newest_content_at": null,
+        "strict_nonfuture_recent_content_date": false,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 0,
+        "last_prior_article_xml_success_at": null
+      }
+    },
+    {
+      "endpoint_id": "ep_ef0d6050bdaf237ac823bf2b",
+      "type": "rss",
+      "registered_url": "https://www.bild.de/feed/sport.xml",
+      "sources": [
+        {
+          "source_id": "src_00397934e8f637fb38b18785",
+          "name": "BILD - Sport",
+          "country": "DE"
+        }
+      ],
+      "selection_lane": "fixed_inspector_current_url",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:24:31.725Z",
+        "status": "malformed",
+        "reason": "WRONG_ENDPOINT_FORMAT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:37:29.984Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 100,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "unreliable",
+        "date_kind": "feed_item_date",
+        "newest_content_at": null,
+        "strict_nonfuture_recent_content_date": false,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 0,
+        "last_prior_article_xml_success_at": null
+      }
+    },
+    {
+      "endpoint_id": "ep_d3595bc547c9543df9fd2e32",
+      "type": "rss",
+      "registered_url": "https://www.bild.de/feed/unterhaltung.xml",
+      "sources": [
+        {
+          "source_id": "src_fd929037c7751a8a36908961",
+          "name": "BILD - Unterhaltung",
+          "country": "DE"
+        }
+      ],
+      "selection_lane": "fixed_inspector_current_url",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:23:54.564Z",
+        "status": "malformed",
+        "reason": "WRONG_ENDPOINT_FORMAT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:37:24.524Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 100,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "unreliable",
+        "date_kind": "feed_item_date",
+        "newest_content_at": null,
+        "strict_nonfuture_recent_content_date": false,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 0,
+        "last_prior_article_xml_success_at": null
+      }
+    },
+    {
+      "endpoint_id": "ep_09ca68b7b97ee2ea6601363b",
+      "type": "rss",
+      "registered_url": "https://www.tagesschau.de/xml/rss2/",
+      "sources": [
+        {
+          "source_id": "src_1feb743d899b46f46ae4c019",
+          "name": "Tagesschau",
+          "country": "DE"
+        }
+      ],
+      "selection_lane": "saved_redirect_politeness_wait",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:29:02.555Z",
+        "status": "http_error",
+        "reason": "POLITENESS_WAIT_LIMIT",
+        "http_status": 301
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:43:35.786Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 40,
+        "attempts": 2,
+        "requested_http_hops": 6,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "feed_item_date",
+        "newest_content_at": "2026-10-14T16:24:05.000Z",
+        "strict_nonfuture_recent_content_date": true,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 13,
+        "last_prior_article_xml_success_at": "2026-10-13T03:15:30.918Z"
+      }
+    },
+    {
+      "endpoint_id": "ep_2192a56318fb5cac9b24ddc9",
+      "type": "rss",
+      "registered_url": "https://www.standard.co.uk/rss",
+      "sources": [
+        {
+          "source_id": "src_ca93f2d8420873e30cea2aaa",
+          "name": "The Evening Standard",
+          "country": "GB"
+        }
+      ],
+      "selection_lane": "fixed_inspector_current_url",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:16:53.095Z",
+        "status": "malformed",
+        "reason": "WRONG_ENDPOINT_FORMAT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:36:55.895Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 100,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "feed_item_date",
+        "newest_content_at": "2026-10-14T16:52:52.000Z",
+        "strict_nonfuture_recent_content_date": true,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 0,
+        "last_prior_article_xml_success_at": null
+      }
+    },
+    {
+      "endpoint_id": "ep_1e7e38017f60b84226424d45",
+      "type": "rss",
+      "registered_url": "https://www.independent.co.uk/rss",
+      "sources": [
+        {
+          "source_id": "src_d71607a92f306b1dbb4a458c",
+          "name": "The Independent",
+          "country": "GB"
+        }
+      ],
+      "selection_lane": "fixed_inspector_current_url",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:16:49.172Z",
+        "status": "malformed",
+        "reason": "WRONG_ENDPOINT_FORMAT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:36:50.069Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 100,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "feed_item_date",
+        "newest_content_at": "2026-10-14T17:30:42.000Z",
+        "strict_nonfuture_recent_content_date": true,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 0,
+        "last_prior_article_xml_success_at": null
+      }
+    },
+    {
+      "endpoint_id": "ep_6247ccb05a1f1e52b21ca088",
+      "type": "sitemap",
+      "registered_url": "https://www.metrotvnews.com/sitemap/sitemap-news.xml",
+      "sources": [
+        {
+          "source_id": "src_74563bedd5ee80bad18c4000",
+          "name": "MetroTV News - News Sitemap",
+          "country": "ID"
+        }
+      ],
+      "selection_lane": "transient_or_expired_server_wait",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:37:20.293Z",
+        "status": "timeout",
+        "reason": "TIMEOUT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:41:36.617Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "urlset",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 1000,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "missing",
+        "date_kind": "sitemap_lastmod",
+        "newest_content_at": null,
+        "strict_nonfuture_recent_content_date": false,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 10,
+        "last_prior_article_xml_success_at": "2026-10-11T03:24:34.053Z"
+      }
+    },
+    {
+      "endpoint_id": "ep_455ab7513330e0865a1ea8ad",
+      "type": "rss",
+      "registered_url": "https://mainichi.jp/rss/etc/mainichi-flash.rss",
+      "sources": [
+        {
+          "source_id": "src_1bb7c8fddf0fd853a0799ec3",
+          "name": "Mainichi Flash",
+          "country": "JP"
+        }
+      ],
+      "selection_lane": "fixed_inspector_current_url",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:20:50.526Z",
+        "status": "malformed",
+        "reason": "WRONG_ENDPOINT_FORMAT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:37:01.516Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rdf",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 20,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "feed_item_date",
+        "newest_content_at": "2026-10-14T14:59:28.000Z",
+        "strict_nonfuture_recent_content_date": true,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 0,
+        "last_prior_article_xml_success_at": null
+      }
+    },
+    {
+      "endpoint_id": "ep_2f3ffe5bfe60261ff442b7e2",
+      "type": "rss",
+      "registered_url": "https://www.elfinanciero.com.mx/rss/mundo",
+      "sources": [
+        {
+          "source_id": "src_b43b4323e6d8f4d27e09205d",
+          "name": "El Financiero",
+          "country": "MX"
+        }
+      ],
+      "selection_lane": "saved_redirect_politeness_wait",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:32:39.173Z",
+        "status": "http_error",
+        "reason": "POLITENESS_WAIT_LIMIT",
+        "http_status": 301
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:43:26.310Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 100,
+        "attempts": 1,
+        "requested_http_hops": 3,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "feed_item_date",
+        "newest_content_at": "2026-10-14T17:41:39.000Z",
+        "strict_nonfuture_recent_content_date": true,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 13,
+        "last_prior_article_xml_success_at": "2026-10-13T03:21:20.028Z"
+      }
+    },
+    {
+      "endpoint_id": "ep_58133bbb631a773cfd2193c1",
+      "type": "rss",
+      "registered_url": "https://www.elfinanciero.com.mx/rss",
+      "sources": [
+        {
+          "source_id": "src_03b00d0ab782679b5d2418a7",
+          "name": "El Financiero",
+          "country": "MX"
+        }
+      ],
+      "selection_lane": "transient_or_expired_server_wait",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:36:19.554Z",
+        "status": "timeout",
+        "reason": "TIMEOUT",
+        "http_status": null
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:41:29.380Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 100,
+        "attempts": 1,
+        "requested_http_hops": 3,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "feed_item_date",
+        "newest_content_at": "2026-10-14T17:34:59.000Z",
+        "strict_nonfuture_recent_content_date": true,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 13,
+        "last_prior_article_xml_success_at": "2026-10-13T03:27:00.408Z"
+      }
+    },
+    {
+      "endpoint_id": "ep_04aaf24287e9d6e510eb31f4",
+      "type": "rss",
+      "registered_url": "https://www.elfinanciero.com.mx/rss/economia",
+      "sources": [
+        {
+          "source_id": "src_bb134082730601970ef49d5b",
+          "name": "El Financiero (Economía)",
+          "country": "MX"
+        }
+      ],
+      "selection_lane": "saved_redirect_politeness_wait",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:28:33.520Z",
+        "status": "http_error",
+        "reason": "POLITENESS_WAIT_LIMIT",
+        "http_status": 301
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:43:18.809Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 100,
+        "attempts": 1,
+        "requested_http_hops": 3,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "feed_item_date",
+        "newest_content_at": "2026-10-14T17:41:39.000Z",
+        "strict_nonfuture_recent_content_date": true,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 13,
+        "last_prior_article_xml_success_at": "2026-10-13T03:14:43.930Z"
+      }
+    },
+    {
+      "endpoint_id": "ep_56e5f9b9581245b21324bad9",
+      "type": "sitemap",
+      "registered_url": "https://www.bernama.com/sitemap.xml",
+      "sources": [
+        {
+          "source_id": "src_a870662e783612ddee177030",
+          "name": "Bernama - Sitemap",
+          "country": "MY"
+        }
+      ],
+      "selection_lane": "transient_or_expired_server_wait",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:36:15.445Z",
+        "status": "timeout",
+        "reason": "TIMEOUT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:41:21.521Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "urlset",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 3143,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "sitemap_lastmod",
+        "newest_content_at": "2026-10-15T00:00:00.000Z",
+        "strict_nonfuture_recent_content_date": false,
+        "normalized_content_timestamp_after_check": true,
+        "source_timestamp_precision": "not_retained_in_run_summary",
+        "date_only_normalization_explanation": "possible_inference_not_verified"
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 10,
+        "last_prior_article_xml_success_at": "2026-10-13T03:26:52.574Z"
+      }
+    },
+    {
+      "endpoint_id": "ep_02f71b1d810534e7cac61f39",
+      "type": "sitemap",
+      "registered_url": "https://www.kosmo.com.my/sitemap_index.xml",
+      "sources": [
+        {
+          "source_id": "src_e82b6e4ef8755306663220f9",
+          "name": "Kosmo - Sitemap Index",
+          "country": "MY"
+        }
+      ],
+      "selection_lane": "transient_or_expired_server_wait",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:25:11.023Z",
+        "status": "timeout",
+        "reason": "TIMEOUT",
+        "http_status": null
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:37:36.475Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "sitemapindex",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": false,
+        "sitemap_index_only": true,
+        "observed_xml_url_count": 0,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "sitemap_lastmod",
+        "newest_content_at": "2026-10-14T16:32:29.000Z",
+        "strict_nonfuture_recent_content_date": false,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 0,
+        "last_prior_article_xml_success_at": null
+      }
+    },
+    {
+      "endpoint_id": "ep_cb06044c507ab95361912770",
+      "type": "rss",
+      "registered_url": "https://www.npo3fm.nl/rss/",
+      "sources": [
+        {
+          "source_id": "src_fc113347de541c486f04f5f5",
+          "name": "NPO Radio 1",
+          "country": "NL"
+        }
+      ],
+      "selection_lane": "saved_redirect_politeness_wait",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:47:46.149Z",
+        "status": "http_error",
+        "reason": "POLITENESS_WAIT_LIMIT",
+        "http_status": 308
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:43:44.376Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 50,
+        "attempts": 1,
+        "requested_http_hops": 3,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "feed_item_date",
+        "newest_content_at": "2026-10-13T16:55:00.000Z",
+        "strict_nonfuture_recent_content_date": true,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 12,
+        "last_prior_article_xml_success_at": "2026-10-13T03:45:02.249Z"
+      }
+    },
+    {
+      "endpoint_id": "ep_1ba10d433b62c11844bc9a99",
+      "type": "rss",
+      "registered_url": "https://vc.ru/rss/all",
+      "sources": [
+        {
+          "source_id": "src_928119978296fd78c2279756",
+          "name": "VC.ru",
+          "country": "RU"
+        }
+      ],
+      "selection_lane": "transient_or_expired_server_wait",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:30:28.085Z",
+        "status": "timeout",
+        "reason": "TIMEOUT",
+        "http_status": null
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:41:12.854Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "rss",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 12,
+        "attempts": 1,
+        "requested_http_hops": 1,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "feed_item_date",
+        "newest_content_at": "2026-10-14T16:08:33.000Z",
+        "strict_nonfuture_recent_content_date": true,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 13,
+        "last_prior_article_xml_success_at": "2026-10-13T03:17:49.090Z"
+      }
+    },
+    {
+      "endpoint_id": "ep_ed18a9a4c9ee4bd4e82100e0",
+      "type": "sitemap",
+      "registered_url": "https://spravy.stvr.sk/ekonomika_articles_sitemap.xml",
+      "sources": [
+        {
+          "source_id": "src_810cc9d8b207dcf1c2825bfd",
+          "name": "STVR Spravy - Ekonomika Sitemap",
+          "country": "SK"
+        }
+      ],
+      "selection_lane": "transient_or_expired_server_wait",
+      "previous_saved_failure": {
+        "checked_at": "2026-10-14T03:51:12.863Z",
+        "status": "timeout",
+        "reason": "TIMEOUT",
+        "http_status": 200
+      },
+      "recheck": {
+        "checked_at": "2026-10-14T17:42:07.019Z",
+        "status": "working_nonempty",
+        "http_status": 200,
+        "format": "urlset",
+        "xml_recognition": "confirmed_at_registered_address",
+        "article_url_list_format": true,
+        "sitemap_index_only": false,
+        "observed_xml_url_count": 5969,
+        "attempts": 2,
+        "requested_http_hops": 4,
+        "inspector_content_freshness_label": "recent",
+        "date_kind": "sitemap_lastmod",
+        "newest_content_at": "2026-10-14T17:30:16.000Z",
+        "strict_nonfuture_recent_content_date": true,
+        "normalized_content_timestamp_after_check": false
+      },
+      "saved_history": {
+        "prior_article_xml_successes": 12,
+        "last_prior_article_xml_success_at": "2026-10-13T03:50:41.395Z"
+      }
+    }
+  ]
+}
