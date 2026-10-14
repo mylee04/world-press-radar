@@ -1,0 +1,234 @@
+{
+  "version": 1,
+  "batch_id": "major-publisher-fill-20261014",
+  "started_at": "2026-10-14T14:12:17.508Z",
+  "finished_at": "2026-10-14T14:17:28.955Z",
+  "status": "applied_and_actual_selected_baseline_verified",
+  "inventory": {
+    "before": {
+      "configured_rows": 5437,
+      "normalized_sources": 5437,
+      "active_registrations": 5067,
+      "active_countries": 72,
+      "unique_active_rss": 3691,
+      "unique_active_sitemap": 1767,
+      "estimated_publishers": 2824
+    },
+    "after": {
+      "configured_rows": 5454,
+      "normalized_sources": 5454,
+      "active_registrations": 5084,
+      "active_countries": 73,
+      "unique_active_rss": 3701,
+      "unique_active_sitemap": 1779,
+      "estimated_publishers": 2840
+    }
+  },
+  "ledger_before": {
+    "collections": 58803,
+    "urls": 2265156,
+    "bindings": 5861
+  },
+  "ledger_after": {
+    "collections": 58825,
+    "urls": 2270471,
+    "bindings": 5883
+  },
+  "registry_before_sha256": "2eb21a9856ec8e5cbc6a38417aeac1b93addcf0684f7bf3ef6e57af45ef2bdc3",
+  "registry_after_sha256": "6bc0c46d1c482b4aa9d0931a9b98959ac7840aa2b7812cfed9f245eec1adfb75",
+  "retained_evidence": {
+    "old_binding_baselines_preserved": true,
+    "original_collections_unchanged": true,
+    "old_canonical_url_count_preserved": true,
+    "tracking_start_preserved": true,
+    "successful_new_checks_are_excluded_baselines": true,
+    "all_new_bindings_initialized": true,
+    "all_new_source_candidates_remain_baseline_excluded": true,
+    "relationship_counts_not_reduced": true,
+    "all_old_evidence_preserved": true,
+    "after_verification_passed": true
+  },
+  "old_collection_digest": {
+    "rows": 58803,
+    "sha256": "2199a1b812a66aaf40240ee9541e9ba4371a6082ec6c5eed3e297742a7ab58e4"
+  },
+  "old_binding_baselines_digest": {
+    "rows": 5861,
+    "sha256": "28513afed028027fe2abaa4d2a791988629a5887b5b693606f61a4557c8f2407"
+  },
+  "old_nine_binding_fields_sha256": "8d7ca0a4594cf1192d7b675656a988755a882ada403dbed71dc0cc8105f41232",
+  "original_url_identity": {
+    "rows": 2265156,
+    "sha256": "70a23c73f0c0b302beac5887bff0072f6321d7e80cc627a447d46bd3c0b98519"
+  },
+  "retained_url_identity": {
+    "rows": 2265156,
+    "sha256": "70a23c73f0c0b302beac5887bff0072f6321d7e80cc627a447d46bd3c0b98519"
+  },
+  "tracking_start": "2026-10-01T01:36:12.370Z",
+  "actual_first_check": "2026-10-14T14:16:04.586Z",
+  "actual_last_check": "2026-10-14T14:16:19.922Z",
+  "selected_baseline": {
+    "attempts": 22,
+    "article_xml_successes": 22,
+    "failed": 0,
+    "deferred": 0,
+    "http_hops": 25,
+    "gross_observed_urls": 5545,
+    "uncertain_observed_urls": 1,
+    "canonical_store_increase": 5315,
+    "source_new": 0,
+    "country_new": 0,
+    "baseline_excluded": true,
+    "parser_missing_content_dates": 4,
+    "semantics": "Observed article-address metadata, including one uncertain classification, not publication counts. Original URL first_seen values retained. First source/country observations are excluded baselines; five parser content dates remain missing."
+  },
+  "bounded_discovery_validation": [
+    {
+      "group": "priority-validation",
+      "publishers": 24,
+      "observed_at": "2026-10-14T13:44:06.116Z",
+      "policy": {
+        "concurrency": 6,
+        "host_gap_ms": 2000,
+        "request_budget": 400,
+        "reserved_http_slots": 73,
+        "actual_http_hops": 73,
+        "timeout_ms": 12000,
+        "retries": 0,
+        "candidate_xml_cache": true,
+        "registry_changes": 0,
+        "ledger_writes": 0,
+        "model_calls": 0
+      }
+    },
+    {
+      "group": "remaining-validation",
+      "publishers": 57,
+      "observed_at": "2026-10-14T13:57:24.978Z",
+      "policy": {
+        "concurrency": 6,
+        "host_gap_ms": 2000,
+        "request_budget": 400,
+        "reserved_http_slots": 127,
+        "actual_http_hops": 127,
+        "timeout_ms": 8000,
+        "retries": 0,
+        "candidate_xml_cache": "private_files_not_retained_body_buffers",
+        "per_publisher_total_checks": 6,
+        "redirect_policy_checked_before_each_hop": true,
+        "installed_transport_sha256": "d08c32ad360476bf31523b6e631f642bbb1e9404921c0d60cb14b4f5e12df0b9",
+        "registry_changes": 0,
+        "ledger_writes": 0,
+        "model_calls": 0
+      }
+    }
+  ],
+  "central_validation_http_hops": 200,
+  "research_metadata_reads_included_in_http_total": false,
+  "verified_consistent_backup_matches_pre_addition_ledger": true,
+  "existing_sources_edited": 0,
+  "disabled_sources_reactivated": 0,
+  "timer_starts": 0,
+  "timer_definitions_changed": false,
+  "model_calls": 0,
+  "budget_usd": {
+    "fixed_combined_limit": 5,
+    "estimated_cumulative_usage_unchanged": 0.076268448,
+    "settled_reservations": 323,
+    "pending_reservations": 0
+  },
+  "collector_release": "news-quality-source-pagination-20261014",
+  "quality_release": "quality-major20-ui-20261014",
+  "protected_application_rows_unchanged": {
+    "quality_runs": {
+      "rows": 4,
+      "sha256": "f27754532797a874d835d72f8cfeac13d0b30deb52aa6079edb62553eba0e04e"
+    },
+    "model_reservations": {
+      "rows": 323,
+      "sha256": "9ecd957fa06d8e06864bfe4efe8ab3dd0ef70b8b10a141e62fd346c9f590b4bf"
+    },
+    "model_budgets": {
+      "rows": 1,
+      "sha256": "e5438e31744abbfcafef8cbfda0595f9f813c783cfb8cb84b0cbc475ea4f2258"
+    }
+  },
+  "backend_health": {
+    "status": "ok",
+    "service": "news-quality",
+    "persistence": "sqlite",
+    "source_snapshot_at": "2026-10-14T14:16:20.045Z",
+    "metadata_reload_failed": false
+  },
+  "active_units": {
+    "world-press-radar-quality-web.service": "active",
+    "world-press-radar-quality-daily.timer": "active",
+    "world-news-activity.timer": "active",
+    "world-news-health.timer": "active"
+  },
+  "activity_generated_at": "2026-10-14T14:16:20.045Z",
+  "public_bundle_body_sha256": "111a34b2d1254e760fd39d0f7d769e737585ed1fa746a11453c7de559dfb3afd",
+  "public_deployment": {
+    "kind": "major-publisher-fill-production-ready",
+    "verified_at": "2026-10-14T14:21:41.946Z",
+    "deployment_id": "dpl_HD2bHEpVwD6Cr4nU1Q42uKpHzPjU",
+    "deployment_url": "https://world-news-sources-hffvblqpl-mylee04s-projects.vercel.app",
+    "target": "production",
+    "readyState": "READY",
+    "project": "prj_BJ4NiHnL2RbmtjojGUogPS2faQJs",
+    "aliasAssigned": true,
+    "aliases": [
+      "news.bymyleslee.com",
+      "world-news-sources-mcp.vercel.app",
+      "world-news-sources-mcp-mylee04s-projects.vercel.app"
+    ],
+    "public_url": "https://news.bymyleslee.com/quality/",
+    "submitted_body_sha256": "111a34b2d1254e760fd39d0f7d769e737585ed1fa746a11453c7de559dfb3afd",
+    "public_url_fetch_performed": false,
+    "gateway_settings_changed": false,
+    "credential_reused_on_owner_machine": true,
+    "credential_copied": false
+  },
+  "next_regular_check_utc": "2026-10-15T03:00:00Z",
+  "next_regular_check_chicago": "2026-10-14T22:00:00-05:00",
+  "scheduled_result_pending": true,
+  "local_validation": {
+    "tests": 360,
+    "passed": 360,
+    "failed": 0,
+    "registry_schema_validated": true,
+    "already_applied_batch_idempotence_dry_run_passed": true,
+    "all_existing_raw_feed_rows_unchanged": true
+  },
+  "live_backend_read_acceptance": {
+    "kind": "live_backend_read_only_inventory_acceptance",
+    "observed_at": "2026-10-14T14:23:57.939012+00:00",
+    "global_inventory": {
+      "active_countries": 73,
+      "active_source_registrations": 5084,
+      "unique_active_rss_endpoints": 3701,
+      "unique_active_sitemap_endpoints": 1779,
+      "unique_publishers": 2840,
+      "publisher_count_state": "estimated_from_registry_identity",
+      "publisher_count_semantics": "활성 등록의 매체 브랜드 기준 추정. 등록된 사이트 도메인·별칭으로 중복을 제거함. 55개는 사이트 도메인 없이 등록명·공유 피드 경로로 추정. 모회사별로 합치지 않으며, 공유 서버·연결되지 않은 다른 도메인에는 오차가 있을 수 있음.",
+      "publisher_identity_basis": {
+        "domain_groups": 2785,
+        "name_fallback_groups": 55,
+        "unresolved_active_registrations": 0
+      }
+    },
+    "snapshot_at": "2026-10-14T14:16:20.045Z",
+    "date": "2026-10-14",
+    "kuwait_source_id": "src_d3c8639761d78e4949f05993",
+    "kuwait_source_count": 1,
+    "requests": 2,
+    "methods": [
+      "GET"
+    ],
+    "admin_credentials_used": false,
+    "publisher_fetches": 0,
+    "model_calls": 0,
+    "credential_copied": false
+  }
+}

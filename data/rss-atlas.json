@@ -5009,6 +5009,34 @@
               "scope_note": "Additional rolling article URL set for existing Indian publisher Scroll.in. Existing RSS and Google News endpoints remain unchanged; this is a new typed endpoint, not a new publisher."
             }
           ]
+        },
+        {
+          "name": "Dainik Bhaskar",
+          "language": "hi",
+          "url": null,
+          "sitemapUrl": "https://www.bhaskar.com/sitemaps-v1--sitemap-google-news-1.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T14:16:00.924Z",
+          "status_reason": "Initial registration from verified official declarations (major-publisher-fill-20261014).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major-publisher-fill-20261014",
+          "source_homepage": "https://www.bhaskar.com/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://www.bhaskar.com/sitemaps-v1--sitemap-google-news-1.xml",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://www.bhaskar.com/sitemaps-v1--sitemap-google-news-index.xml",
+              "found_at": "2026-10-14T13:56:51.422Z",
+              "page_sha256": "e6e9ac6d09b663fa7301b2156b53fdd8b93c09b829c97a588adf13adc5dc1c15",
+              "declaration": "<loc>https://www.bhaskar.com/sitemaps-v1--sitemap-google-news-1.xml</loc>",
+              "declared_lastmod": null,
+              "checked_at": "2026-10-14T13:56:54.872Z",
+              "format": "urlset",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            }
+          ]
         }
       ]
     },
@@ -15549,6 +15577,33 @@
           "checkedDate": "04/02/2026",
           "valid": "valid",
           "row": 50
+        },
+        {
+          "name": "Le360",
+          "language": "fr",
+          "url": null,
+          "sitemapUrl": "https://fr.le360.ma/arc/outboundfeeds/sitemap-news/",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T14:16:00.924Z",
+          "status_reason": "Initial registration from verified official declarations (major-publisher-fill-20261014).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major-publisher-fill-20261014",
+          "source_homepage": "https://fr.le360.ma/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://fr.le360.ma/arc/outboundfeeds/sitemap-news/",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://fr.le360.ma/robots.txt",
+              "found_at": "2026-10-14T13:36:54.000Z",
+              "page_sha256": "98ccf527f09da24b301eaa25e38032006151c5f8920a28586d2fd8f87360870c",
+              "declaration": "Sitemap: https://fr.le360.ma/arc/outboundfeeds/sitemap-news/",
+              "checked_at": "2026-10-14T13:57:10.358Z",
+              "format": "urlset",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            }
+          ]
         }
       ]
     },
@@ -17866,6 +17921,62 @@
               "scope_note": "Turkish independent rights reporting; general RSS and current news URL sitemap. Sitemap content dates remain missing in the validator."
             }
           ]
+        },
+        {
+          "name": "Anadolu Agency",
+          "language": "tr",
+          "url": null,
+          "sitemapUrl": "https://www.aa.com.tr/tr/SiteMap/News",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T14:16:00.924Z",
+          "status_reason": "Initial registration from verified official declarations (major-publisher-fill-20261014).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major-publisher-fill-20261014",
+          "source_homepage": "https://www.aa.com.tr/en",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://www.aa.com.tr/tr/SiteMap/News",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://www.aa.com.tr/tr/Sitemap/index",
+              "found_at": "2026-10-14T13:57:03.905Z",
+              "page_sha256": "dce6e31136ab5f634f6543acb2a02682af12c0b53b5f3cef358ad97aa110151b",
+              "declaration": "<loc>https://www.aa.com.tr/tr/SiteMap/News</loc>",
+              "declared_lastmod": null,
+              "checked_at": "2026-10-14T13:57:08.201Z",
+              "format": "urlset",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            }
+          ]
+        },
+        {
+          "name": "Anadolu Agency — English",
+          "language": "en",
+          "url": null,
+          "sitemapUrl": "https://www.aa.com.tr/en/SiteMap/News",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T14:16:00.924Z",
+          "status_reason": "Initial registration from verified official declarations (major-publisher-fill-20261014).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major-publisher-fill-20261014",
+          "source_homepage": "https://www.aa.com.tr/en",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://www.aa.com.tr/en/SiteMap/News",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://www.aa.com.tr/en/Sitemap/index",
+              "found_at": "2026-10-14T13:57:11.634Z",
+              "page_sha256": "423fd819f43856c8c411aa7e71bdbb6fab553293d985d0164611cda208726e9f",
+              "declaration": "<loc>https://www.aa.com.tr/en/SiteMap/News</loc>",
+              "declared_lastmod": null,
+              "checked_at": "2026-10-14T13:57:16.742Z",
+              "format": "urlset",
+              "scope_note": "English edition of Anadolu Agency public news sitemap; same publisher brand as the Turkish edition, not a separate company or complete wire feed."
+            }
+          ]
         }
       ]
     },
@@ -18931,7 +19042,35 @@
     {
       "name": "Kuwait",
       "code": "KW",
-      "feeds": []
+      "feeds": [
+        {
+          "name": "Kuwait Times",
+          "language": "en",
+          "url": "https://kuwaittimes.com/rssFeed/0",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T14:16:00.924Z",
+          "status_reason": "Initial registration from verified official declarations (major-publisher-fill-20261014).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major-publisher-fill-20261014",
+          "source_homepage": "https://www.kuwaittimes.com/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://kuwaittimes.com/rssFeed/0",
+              "kind": "official_html_feed_anchor",
+              "source_url": "https://kuwaittimes.com/rss/",
+              "found_at": "2026-10-14T13:43:41.345Z",
+              "page_sha256": "8fead0712d5e552f61c867af86209695039c1ef6449a5f7e9b73525100a4070a",
+              "tag": "{\"declared_url\": \"https://kuwaittimes.com/rssFeed/0\"}",
+              "checked_at": "2026-10-14T13:43:45.594Z",
+              "format": "rss",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Taiwan",
@@ -22194,6 +22333,45 @@
         {
           "name": "IFP News",
           "url": "https://ifpnews.com/feed/"
+        },
+        {
+          "name": "IRIB News",
+          "language": "fa",
+          "url": "https://www.irib-news.ir/fa/rss/allnews",
+          "sitemapUrl": "https://www.irib-news.ir/fa-sitemap-news",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T14:16:00.924Z",
+          "status_reason": "Initial registration from verified official declarations (major-publisher-fill-20261014).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major-publisher-fill-20261014",
+          "source_homepage": "https://www.irib-news.ir/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.irib-news.ir/fa/rss/allnews",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.irib-news.ir/",
+              "found_at": "2026-10-14T13:36:50.000Z",
+              "page_sha256": "805d1f0accd909eb5d4679976dc6ddd4f1bd88097188ff1a2db3d40a7ba31222",
+              "tag": "{\"tag\": \"link\", \"rel\": \"alternate\", \"type\": \"application/rss+xml\", \"title\": \"RSS FEED\", \"href\": \"/fa/rss/allnews\"}",
+              "checked_at": "2026-10-14T13:57:00.174Z",
+              "format": "rss",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            },
+            {
+              "type": "sitemap",
+              "url": "https://www.irib-news.ir/fa-sitemap-news",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://www.irib-news.ir/robots.txt",
+              "found_at": "2026-10-14T13:36:47.000Z",
+              "page_sha256": "b5bc79fd01b366bb0d582c386f0c7189897c5f771ccc1fdad265b3f317f15319",
+              "declaration": "Sitemap: https://www.irib-news.ir/fa-sitemap-news",
+              "checked_at": "2026-10-14T13:57:21.507Z",
+              "format": "urlset",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            }
+          ]
         }
       ]
     },
@@ -23199,6 +23377,45 @@
               "checked_at": "2026-10-14T01:40:34.413Z",
               "format": "urlset",
               "scope_note": "Bahía Blanca regional and national reporting."
+            }
+          ]
+        },
+        {
+          "name": "Noticias Argentinas",
+          "language": "es",
+          "url": "https://noticiasargentinas.com/rss.xml",
+          "sitemapUrl": "https://noticiasargentinas.com/sitemap-news.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T14:16:00.924Z",
+          "status_reason": "Initial registration from verified official declarations (major-publisher-fill-20261014).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major-publisher-fill-20261014",
+          "source_homepage": "https://noticiasargentinas.com/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://noticiasargentinas.com/rss.xml",
+              "kind": "official_html_feed_link",
+              "source_url": "https://noticiasargentinas.com/",
+              "found_at": "2026-10-14T13:36:54.000Z",
+              "page_sha256": "64d6d85986e1f1e9740f5ce22ba508ba843ed2ad3d808b33eb9b395b6b41c83c",
+              "tag": "{\"tag\": \"link\", \"title\": \"Agencia Noticias Argentinas\", \"href\": \"https://noticiasargentinas.com/rss.xml\", \"rel\": \"alternate\", \"type\": \"application/rss+xml\"}",
+              "checked_at": "2026-10-14T13:57:03.134Z",
+              "format": "rss",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            },
+            {
+              "type": "sitemap",
+              "url": "https://noticiasargentinas.com/sitemap-news.xml",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://noticiasargentinas.com/robots.txt",
+              "found_at": "2026-10-14T13:36:51.000Z",
+              "page_sha256": "dbfbd57aa52428912bf7de4f4213df3c4a12e12ffde3d98007b4489ce8386f22",
+              "declaration": "Sitemap: https://noticiasargentinas.com/sitemap-news.xml",
+              "checked_at": "2026-10-14T13:57:05.382Z",
+              "format": "urlset",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
             }
           ]
         }
@@ -32065,6 +32282,33 @@
           "sitemapUrl": "https://www.tovima.com/sitemap_index.xml",
           "language": "en",
           "tier": "primary"
+        },
+        {
+          "name": "ERT News",
+          "language": "el",
+          "url": "https://www.ertnews.gr/feed/",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T14:16:00.924Z",
+          "status_reason": "Initial registration from verified official declarations (major-publisher-fill-20261014).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major-publisher-fill-20261014",
+          "source_homepage": "https://www.ertnews.gr/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.ertnews.gr/feed/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.ertnews.gr/",
+              "found_at": "2026-10-14T13:36:56.259Z",
+              "page_sha256": "dfd21caf244deba390c135fb6fdea906d6943bc240ba223296156c61cf21cb6c",
+              "tag": "{\"declared_url\": \"https://www.ertnews.gr/feed/\"}",
+              "checked_at": "2026-10-14T13:56:43.783Z",
+              "format": "rss",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            }
+          ]
         }
       ]
     },
@@ -34972,6 +35216,33 @@
           "status": "NEW",
           "checkedDate": "04/12/2026",
           "valid": "valid"
+        },
+        {
+          "name": "Dienas Bizness",
+          "language": "lv",
+          "url": "https://db.lv/rss",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T14:16:00.924Z",
+          "status_reason": "Initial registration from verified official declarations (major-publisher-fill-20261014).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major-publisher-fill-20261014",
+          "source_homepage": "https://db.lv/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://db.lv/rss",
+              "kind": "official_html_feed_link",
+              "source_url": "https://db.lv/",
+              "found_at": "2026-10-14T13:37:01.275Z",
+              "page_sha256": "0897609726f8179dde8c5d4ba32c576f4a9b24013fb1c86022039f72c1204037",
+              "tag": "{\"declared_url\": \"https://db.lv/rss\"}",
+              "checked_at": "2026-10-14T13:56:47.350Z",
+              "format": "rss",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            }
+          ]
         }
       ]
     },
@@ -36214,6 +36485,46 @@
         {
           "name": "Gulf Insider Bahrain",
           "url": "https://www.gulf-insider.com/feed/"
+        },
+        {
+          "name": "The Daily Tribune / News of Bahrain",
+          "language": "en",
+          "url": "https://www.newsofbahrain.com/rss/en.xml",
+          "sitemapUrl": "https://www.newsofbahrain.com/sitemaps/news.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T14:16:00.924Z",
+          "status_reason": "Initial registration from verified official declarations (major-publisher-fill-20261014).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major-publisher-fill-20261014",
+          "source_homepage": "https://www.newsofbahrain.com/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.newsofbahrain.com/rss/en.xml",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.newsofbahrain.com/en",
+              "found_at": "2026-10-14T13:32:40.000Z",
+              "page_sha256": "268c5765a98a8bd914cb77d42bf1186f304695ffd646af5490bbe1b9d6f2e748",
+              "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"News of Bahrain\" href=\"/rss/en.xml\"/>",
+              "checked_at": "2026-10-14T13:43:46.828Z",
+              "format": "rss",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            },
+            {
+              "type": "sitemap",
+              "url": "https://www.newsofbahrain.com/sitemaps/news.xml",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://www.newsofbahrain.com/sitemap.xml",
+              "found_at": "2026-10-14T13:43:40.972Z",
+              "page_sha256": "8d795dfc896c3145ebbe74823d87e7e562d307f92a8f354e56b3d4717d0605ca",
+              "declaration": "<loc>https://www.newsofbahrain.com/sitemaps/news.xml</loc>",
+              "declared_lastmod": null,
+              "checked_at": "2026-10-14T13:43:43.787Z",
+              "format": "urlset",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            }
+          ]
         }
       ]
     },
@@ -36998,6 +37309,62 @@
           "status": "NEW",
           "checkedDate": "04/14/2026",
           "valid": "valid"
+        },
+        {
+          "name": "Noticias RCN",
+          "language": "es",
+          "url": null,
+          "sitemapUrl": "https://www.noticiasrcn.com/sitemaps/recent_articles.xml.gz",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T14:16:00.924Z",
+          "status_reason": "Initial registration from verified official declarations (major-publisher-fill-20261014).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major-publisher-fill-20261014",
+          "source_homepage": "https://www.noticiasrcn.com/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://www.noticiasrcn.com/sitemaps/recent_articles.xml.gz",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://www.noticiasrcn.com/sitemapindex",
+              "found_at": "2026-10-14T13:57:09.637Z",
+              "page_sha256": "adffb7b897c81d5831dff3aeb8291aecfc1c613f7cc34f3f5bed59dd12bcc0e1",
+              "declaration": "<loc>https://www.noticiasrcn.com/sitemaps/recent_articles.xml.gz</loc>",
+              "declared_lastmod": "2026-10-14T13:50+00:00",
+              "checked_at": "2026-10-14T13:57:11.850Z",
+              "format": "urlset",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            }
+          ]
+        },
+        {
+          "name": "Noticias Caracol",
+          "language": "es",
+          "url": null,
+          "sitemapUrl": "https://www.noticiascaracol.com/content-sitemap-latest.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T14:16:00.924Z",
+          "status_reason": "Initial registration from verified official declarations (major-publisher-fill-20261014).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major-publisher-fill-20261014",
+          "source_homepage": "https://www.noticiascaracol.com/",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://www.noticiascaracol.com/content-sitemap-latest.xml",
+              "kind": "official_sitemap_index_enumerated_child",
+              "source_url": "https://www.noticiascaracol.com/content-sitemap.xml",
+              "found_at": "2026-10-14T13:57:16.784Z",
+              "page_sha256": "38eb7c6c5de11ad37df934fc48e17bb981735c799ac3b972a6ee29f3c22737da",
+              "declaration": "<loc>https://www.noticiascaracol.com/content-sitemap-latest.xml</loc>",
+              "declared_lastmod": null,
+              "checked_at": "2026-10-14T13:57:19.372Z",
+              "format": "urlset",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            }
+          ]
         }
       ]
     },
@@ -37608,6 +37975,33 @@
         {
           "name": "Politiko - News Sitemap",
           "sitemapUrl": "https://politiko.com.ph/news-sitemap.xml"
+        },
+        {
+          "name": "ABS-CBN News",
+          "language": "en",
+          "url": null,
+          "sitemapUrl": "https://abs-cbn.com/sitemap.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T14:16:00.924Z",
+          "status_reason": "Initial registration from verified official declarations (major-publisher-fill-20261014).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major-publisher-fill-20261014",
+          "source_homepage": "https://www.abs-cbn.com/news",
+          "endpoint_provenance": [
+            {
+              "type": "sitemap",
+              "url": "https://abs-cbn.com/sitemap.xml",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://www.abs-cbn.com/robots.txt",
+              "found_at": "2026-10-14T13:56:52.587Z",
+              "page_sha256": "5305acf22f85137cf80055d2b7f81854dd75a5ca6ab4c0ac17610d9e679f35b3",
+              "declaration": "Sitemap: https://abs-cbn.com/sitemap.xml",
+              "checked_at": "2026-10-14T13:56:59.743Z",
+              "format": "urlset",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            }
+          ]
         }
       ]
     },
@@ -37904,6 +38298,45 @@
         {
           "name": "Bloomberg TV Mongolia",
           "sitemapUrl": "https://www.bloombergtv.mn/"
+        },
+        {
+          "name": "Mongolian National Broadcaster / MNB",
+          "language": "mn",
+          "url": "https://www.mnb.mn/rss.xml",
+          "sitemapUrl": "https://www.mnb.mn/news-sitemap.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T14:16:00.924Z",
+          "status_reason": "Initial registration from verified official declarations (major-publisher-fill-20261014).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major-publisher-fill-20261014",
+          "source_homepage": "https://www.mnb.mn/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.mnb.mn/rss.xml",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.mnb.mn/",
+              "found_at": "2026-10-14T13:31:32.000Z",
+              "page_sha256": "f353c5befd213f7af92f193153febbe4d3fb46cd9af9c3a69eb47ac98dd2ebb4",
+              "tag": "{\"tag\": \"link\", \"rel\": \"alternate\", \"type\": \"application/rss+xml\", \"title\": \"МҮОНРТ — RSS\", \"href\": \"https://www.mnb.mn/rss.xml\"}",
+              "checked_at": "2026-10-14T13:43:50.101Z",
+              "format": "rss",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            },
+            {
+              "type": "sitemap",
+              "url": "https://www.mnb.mn/news-sitemap.xml",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://www.mnb.mn/robots.txt",
+              "found_at": "2026-10-14T13:31:29.000Z",
+              "page_sha256": "cd2d931a9cda904a05eaa35bb4f94bc41db0855436dc26d00851198e8e62beff",
+              "declaration": "Sitemap: https://www.mnb.mn/news-sitemap.xml",
+              "checked_at": "2026-10-14T13:43:46.583Z",
+              "format": "urlset",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            }
+          ]
         }
       ]
     },
@@ -37918,6 +38351,60 @@
         {
           "name": "Geo.tv",
           "url": "https://www.geo.tv/rss/1/1"
+        },
+        {
+          "name": "Associated Press of Pakistan",
+          "language": "en",
+          "url": "https://www.app.com.pk/feed/",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T14:16:00.924Z",
+          "status_reason": "Initial registration from verified official declarations (major-publisher-fill-20261014).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major-publisher-fill-20261014",
+          "source_homepage": "https://www.app.com.pk/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.app.com.pk/feed/",
+              "kind": "official_html_feed_link",
+              "source_url": "https://www.app.com.pk/",
+              "found_at": "2026-10-14T13:31:31.000Z",
+              "page_sha256": "fbb8dd9ca1dd7ed017471637f9c29ca3dd274035b1663a333009fb0c8aefad42",
+              "tag": "{\"tag\": \"link\", \"rel\": \"alternate\", \"type\": \"application/rss+xml\", \"title\": \"Associated Press Of Pakistan » Feed\", \"href\": \"https://www.app.com.pk/feed/\"}",
+              "checked_at": "2026-10-14T13:43:47.724Z",
+              "format": "rss",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            }
+          ]
+        },
+        {
+          "name": "Business Recorder",
+          "language": "en",
+          "url": "https://www.brecorder.com/feeds/latest-news",
+          "sitemapUrl": null,
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T14:16:00.924Z",
+          "status_reason": "Initial registration from verified official declarations (major-publisher-fill-20261014).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major-publisher-fill-20261014",
+          "source_homepage": "https://www.brecorder.com/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://www.brecorder.com/feeds/latest-news",
+              "kind": "official_html_feed_anchor",
+              "source_url": "https://www.brecorder.com/",
+              "found_at": "2026-10-14T13:31:34.000Z",
+              "page_sha256": "0ac66d895cbcce73eefabbb37d7bdd547d4a0ea8da9cde725d80ce164e397201",
+              "tag": "{\"tag\": \"a\", \"class\": \"rss\", \"href\": \"/feeds/latest-news\", \"title\": \"RSS\", \"target\": \"_blank\"}",
+              "checked_at": "2026-10-14T13:43:52.539Z",
+              "format": "rss",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            }
+          ]
         }
       ]
     },
@@ -38010,6 +38497,45 @@
         {
           "name": "Sputnik Kazakhstan - Article Sitemap Index",
           "sitemapUrl": "https://sputnik.kz/sitemap_article_index.xml"
+        },
+        {
+          "name": "Egemen Qazaqstan",
+          "language": "kk",
+          "url": "https://egemen.kz/rss",
+          "sitemapUrl": "https://egemen.kz/news-sitemap.xml",
+          "enabled": true,
+          "enabled_changed_at": "2026-10-14T14:16:00.924Z",
+          "status_reason": "Initial registration from verified official declarations (major-publisher-fill-20261014).",
+          "status_history": [],
+          "status_transition_count": 0,
+          "registry_addition_batch": "major-publisher-fill-20261014",
+          "source_homepage": "https://egemen.kz/",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://egemen.kz/rss",
+              "kind": "official_html_feed_link",
+              "source_url": "https://egemen.kz/",
+              "found_at": "2026-10-14T13:36:49.000Z",
+              "page_sha256": "30871e3f4e137c4587edaa6f7b790f69ca833bc7d113af66b2d9f8f95e04b974",
+              "tag": "{\"tag\": \"link\", \"rel\": \"alternate\", \"type\": \"application/rss+xml\", \"title\": \"Egemen Qazaqstan - Соңғы жаңалықтар, саясат, экономика, қоғам RSS\", \"href\": \"/rss\"}",
+              "checked_at": "2026-10-14T13:56:58.716Z",
+              "format": "rss",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            },
+            {
+              "type": "sitemap",
+              "url": "https://egemen.kz/news-sitemap.xml",
+              "kind": "official_robots_sitemap",
+              "source_url": "https://egemen.kz/robots.txt",
+              "found_at": "2026-10-14T13:36:45.000Z",
+              "page_sha256": "d1ce793a00bbf593ea82f11c35c020e8615f27a4e7ce8946907e34f1f3ac6b6a",
+              "declaration": "Sitemap: https://egemen.kz/news-sitemap.xml",
+              "checked_at": "2026-10-14T13:57:02.073Z",
+              "format": "urlset",
+              "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output."
+            }
+          ]
         }
       ]
     }

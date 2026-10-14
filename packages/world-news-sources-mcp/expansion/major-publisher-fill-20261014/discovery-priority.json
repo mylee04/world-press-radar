@@ -1,0 +1,1270 @@
+{
+  "version": 1,
+  "researched_at_utc": "2026-10-14T13:35:13Z",
+  "scope": "Bounded official homepage and robots declaration discovery for thirteen missing anchors in JO, OM, MN, PK. Root owns governed endpoint XML validation, registration decisions, and server rollout.",
+  "audit_sha256": "097ec39330cfc5861eb8e798f1f12c5cebf59c09ab43c2ea446f200ca4427a23",
+  "countries": [
+    "JO",
+    "OM",
+    "MN",
+    "PK"
+  ],
+  "selected_anchors": 13,
+  "publishers_with_declared_candidates": 7,
+  "declared_candidate_urls": 22,
+  "xml_requests": 0,
+  "registry_changes": 0,
+  "public_evidence_policy": "Only request metadata, hashes, declaration snippets, and primary URLs included. Full homepage/robots bodies retained under ignored private output/news-quality/major-publisher-fill-20261014/.",
+  "items": [
+    {
+      "country": "MN",
+      "name": "MONTSAME",
+      "audit_presence_status": "missing",
+      "audit_website": "https://montsame.mn/en/",
+      "publisher_domain": "montsame.mn",
+      "official_home": "https://montsame.mn/en/",
+      "publisher_identity_evidence": [
+        {
+          "url": "https://montsame.mn/en/",
+          "what_supports": "Official-site lookup attempted; unavailable to this web tool, not endpoint-health evidence.",
+          "verified_on": "2026-10-14",
+          "verification_method": "web_primary_page_lookup"
+        },
+        {
+          "url": "https://montsame.mn/mn/read/269963",
+          "what_supports": "Agency describes its national and provincial news coverage.",
+          "verified_on": "2026-10-14",
+          "verification_method": "primary_search_index"
+        },
+        {
+          "url": "https://montsame.mn/robots.txt",
+          "what_supports": "Bounded robots lookup; declaration unavailable via this tool.",
+          "verified_on": "2026-10-14",
+          "verification_method": "web_primary_page_lookup"
+        }
+      ],
+      "identity_verification_status": "official_homepage_retrieved",
+      "ownership": {
+        "endpoint_domain_control_basis": "Candidates use the same publisher domain as the official homepage; beneficial/corporate ownership was not independently audited.",
+        "editorial_role": "National news agency; selected for national/editorial role, not a measured audience rank.",
+        "corporate_owner": null
+      },
+      "official_page_observations": [
+        {
+          "requested_url": "https://montsame.mn/robots.txt",
+          "kind": "robots",
+          "observed_at_utc": "2026-10-14T13:31:29Z",
+          "status": 200,
+          "final_url": "https://montsame.mn/robots.txt",
+          "content_type": "text/plain",
+          "retry_after": null,
+          "truncated": false,
+          "body_sha256": "be5d744fa5597b502aeaf240cd98fec1b546b3f0103503cf0ce996cd4a7c4206",
+          "elapsed_ms": 211
+        },
+        {
+          "requested_url": "https://montsame.mn/en/",
+          "kind": "homepage",
+          "observed_at_utc": "2026-10-14T13:31:31Z",
+          "status": 200,
+          "final_url": "https://montsame.mn/en/",
+          "content_type": "text/html; charset=UTF-8",
+          "retry_after": null,
+          "truncated": false,
+          "body_sha256": "f8aa9bbcd151d26f0c7785b5a90cf060652e9ff180431662467b95d9a3b96b7d",
+          "elapsed_ms": 2251
+        }
+      ],
+      "candidates": [],
+      "other_official_discovery_links": [],
+      "excluded_non_article_feeds": [],
+      "crawler_policy_observations": [
+        {
+          "url": "https://montsame.mn/robots.txt",
+          "finding": "Wildcard robots group explicitly disallows /sitemap.xml. This disallow is not a Sitemap declaration.",
+          "recommended_action": "Do not treat the prohibited guessed sitemap path as a discovered candidate."
+        }
+      ],
+      "status": "no_exact_declaration_found",
+      "notes": [
+        "Exact URLs above are publisher declarations. A declaration does not establish XML validity, article coverage, or live collector accessibility.",
+        "No candidate XML, source mutation, paid model request, or deployment was performed by this researcher.",
+        "No exact RSS/sitemap declaration was established in this bounded review. Empty candidates means unknown, not proof that no feed exists."
+      ]
+    },
+    {
+      "country": "MN",
+      "name": "Mongolian National Broadcaster / MNB",
+      "audit_presence_status": "missing",
+      "audit_website": "https://www.mnb.mn/",
+      "publisher_domain": "mnb.mn",
+      "official_home": "https://www.mnb.mn/",
+      "publisher_identity_evidence": [
+        {
+          "url": "https://www.mnb.mn/",
+          "what_supports": "Official publisher homepage identity and editorial sections.",
+          "verified_on": "2026-10-14",
+          "verification_method": "web_primary_page_lookup"
+        },
+        {
+          "url": "https://aburobocon2025.mnb.mn/mn/about/show/3",
+          "what_supports": "Broadcaster identifies its public television and Mongolian News channel.",
+          "verified_on": "2026-10-14",
+          "verification_method": "primary_search_index"
+        },
+        {
+          "url": "https://www.mnb.mn/robots.txt",
+          "what_supports": "Bounded robots lookup; declaration unavailable via this tool.",
+          "verified_on": "2026-10-14",
+          "verification_method": "web_primary_page_lookup"
+        }
+      ],
+      "identity_verification_status": "official_homepage_retrieved",
+      "ownership": {
+        "endpoint_domain_control_basis": "Candidates use the same publisher domain as the official homepage; beneficial/corporate ownership was not independently audited.",
+        "editorial_role": "National public broadcaster; selected for national/editorial role, not a measured audience rank.",
+        "corporate_owner": null
+      },
+      "official_page_observations": [
+        {
+          "requested_url": "https://www.mnb.mn/robots.txt",
+          "kind": "robots",
+          "observed_at_utc": "2026-10-14T13:31:29Z",
+          "status": 200,
+          "final_url": "https://www.mnb.mn/robots.txt",
+          "content_type": "text/plain",
+          "retry_after": null,
+          "truncated": false,
+          "body_sha256": "cd2d931a9cda904a05eaa35bb4f94bc41db0855436dc26d00851198e8e62beff",
+          "elapsed_ms": 882
+        },
+        {
+          "requested_url": "https://www.mnb.mn/",
+          "kind": "homepage",
+          "observed_at_utc": "2026-10-14T13:31:32Z",
+          "status": 200,
+          "final_url": "https://www.mnb.mn/",
+          "content_type": "text/html; charset=utf-8",
+          "retry_after": null,
+          "truncated": false,
+          "body_sha256": "f353c5befd213f7af92f193153febbe4d3fb46cd9af9c3a69eb47ac98dd2ebb4",
+          "elapsed_ms": 1679
+        }
+      ],
+      "candidates": [
+        {
+          "url": "https://www.mnb.mn/sitemap/0.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.mnb.mn/robots.txt",
+          "declaration_method": "official_robots_sitemap_directive",
+          "declaration_text": "Sitemap: https://www.mnb.mn/sitemap/0.xml",
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:31:29Z",
+          "declaration_body_sha256": "cd2d931a9cda904a05eaa35bb4f94bc41db0855436dc26d00851198e8e62beff",
+          "content_scope": "general_sitemap",
+          "recommended_validation_priority": "secondary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        },
+        {
+          "url": "https://www.mnb.mn/sitemap/1.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.mnb.mn/robots.txt",
+          "declaration_method": "official_robots_sitemap_directive",
+          "declaration_text": "Sitemap: https://www.mnb.mn/sitemap/1.xml",
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:31:29Z",
+          "declaration_body_sha256": "cd2d931a9cda904a05eaa35bb4f94bc41db0855436dc26d00851198e8e62beff",
+          "content_scope": "general_sitemap",
+          "recommended_validation_priority": "secondary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        },
+        {
+          "url": "https://www.mnb.mn/podcast/sitemap/0.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.mnb.mn/robots.txt",
+          "declaration_method": "official_robots_sitemap_directive",
+          "declaration_text": "Sitemap: https://www.mnb.mn/podcast/sitemap/0.xml",
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:31:29Z",
+          "declaration_body_sha256": "cd2d931a9cda904a05eaa35bb4f94bc41db0855436dc26d00851198e8e62beff",
+          "content_scope": "podcast",
+          "recommended_validation_priority": "exclude_from_article_first_batch",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        },
+        {
+          "url": "https://www.mnb.mn/news-sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.mnb.mn/robots.txt",
+          "declaration_method": "official_robots_sitemap_directive",
+          "declaration_text": "Sitemap: https://www.mnb.mn/news-sitemap.xml",
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:31:29Z",
+          "declaration_body_sha256": "cd2d931a9cda904a05eaa35bb4f94bc41db0855436dc26d00851198e8e62beff",
+          "content_scope": "news",
+          "recommended_validation_priority": "primary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        },
+        {
+          "url": "https://www.mnb.mn/rss.xml",
+          "type": "rss",
+          "declaration_url": "https://www.mnb.mn/",
+          "declaration_method": "official_homepage_alternate_link",
+          "declaration_attributes": {
+            "tag": "link",
+            "rel": "alternate",
+            "type": "application/rss+xml",
+            "title": "МҮОНРТ — RSS",
+            "href": "https://www.mnb.mn/rss.xml"
+          },
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:31:32Z",
+          "declaration_body_sha256": "f353c5befd213f7af92f193153febbe4d3fb46cd9af9c3a69eb47ac98dd2ebb4",
+          "content_scope": "article_feed",
+          "recommended_validation_priority": "primary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        }
+      ],
+      "other_official_discovery_links": [],
+      "excluded_non_article_feeds": [],
+      "crawler_policy_observations": [],
+      "status": "official_candidates_found",
+      "notes": [
+        "Exact URLs above are publisher declarations. A declaration does not establish XML validity, article coverage, or live collector accessibility.",
+        "No candidate XML, source mutation, paid model request, or deployment was performed by this researcher."
+      ]
+    },
+    {
+      "country": "MN",
+      "name": "Unuudur",
+      "audit_presence_status": "missing",
+      "audit_website": "https://www.unuudur.mn/",
+      "publisher_domain": "unuudur.mn",
+      "official_home": "https://www.unuudur.mn/",
+      "publisher_identity_evidence": [
+        {
+          "url": "https://www.unuudur.mn/",
+          "what_supports": "Official publisher homepage identity and editorial sections.",
+          "verified_on": "2026-10-14",
+          "verification_method": "web_primary_page_lookup"
+        },
+        {
+          "url": "https://www.unuudur.mn/robots.txt",
+          "what_supports": "Bounded robots lookup; declaration unavailable via this tool.",
+          "verified_on": "2026-10-14",
+          "verification_method": "web_primary_page_lookup"
+        }
+      ],
+      "identity_verification_status": "official_homepage_retrieved",
+      "ownership": {
+        "endpoint_domain_control_basis": "Candidates use the same publisher domain as the official homepage; beneficial/corporate ownership was not independently audited.",
+        "editorial_role": "National general-news daily; selected for national/editorial role, not a measured audience rank.",
+        "corporate_owner": null
+      },
+      "official_page_observations": [
+        {
+          "requested_url": "https://www.unuudur.mn/robots.txt",
+          "kind": "robots",
+          "observed_at_utc": "2026-10-14T13:31:29Z",
+          "status": 200,
+          "final_url": "https://www.unuudur.mn/robots.txt",
+          "content_type": "text/plain;charset=UTF-8",
+          "retry_after": null,
+          "truncated": false,
+          "body_sha256": "d9c608ff1d53bba3acea8c9a1498c8fdbd064630cac2c2059e9604b100b02e83",
+          "elapsed_ms": 918
+        },
+        {
+          "requested_url": "https://www.unuudur.mn/",
+          "kind": "homepage",
+          "observed_at_utc": "2026-10-14T13:31:32Z",
+          "status": 200,
+          "final_url": "https://www.unuudur.mn/",
+          "content_type": "text/html;charset=UTF-8",
+          "retry_after": null,
+          "truncated": false,
+          "body_sha256": "0ba4727473142433b1a6a90d4bd7fd365e7a6b865e8128937488786fb2d4498f",
+          "elapsed_ms": 1408
+        }
+      ],
+      "candidates": [],
+      "other_official_discovery_links": [],
+      "excluded_non_article_feeds": [],
+      "crawler_policy_observations": [],
+      "status": "no_exact_declaration_found",
+      "notes": [
+        "Exact URLs above are publisher declarations. A declaration does not establish XML validity, article coverage, or live collector accessibility.",
+        "No candidate XML, source mutation, paid model request, or deployment was performed by this researcher.",
+        "No exact RSS/sitemap declaration was established in this bounded review. Empty candidates means unknown, not proof that no feed exists."
+      ]
+    },
+    {
+      "country": "PK",
+      "name": "Associated Press of Pakistan",
+      "audit_presence_status": "missing",
+      "audit_website": "https://www.app.com.pk/",
+      "publisher_domain": "app.com.pk",
+      "official_home": "https://www.app.com.pk/",
+      "publisher_identity_evidence": [
+        {
+          "url": "https://www.app.com.pk/",
+          "what_supports": "Official publisher homepage identity and editorial sections.",
+          "verified_on": "2026-10-14",
+          "verification_method": "web_primary_page_lookup"
+        },
+        {
+          "url": "https://www.app.com.pk/robots.txt",
+          "what_supports": "Bounded robots lookup; declaration unavailable via this tool.",
+          "verified_on": "2026-10-14",
+          "verification_method": "web_primary_page_lookup"
+        }
+      ],
+      "identity_verification_status": "official_homepage_retrieved",
+      "ownership": {
+        "endpoint_domain_control_basis": "Candidates use the same publisher domain as the official homepage; beneficial/corporate ownership was not independently audited.",
+        "editorial_role": "National news agency; selected for national/editorial role, not a measured audience rank.",
+        "corporate_owner": null
+      },
+      "official_page_observations": [
+        {
+          "requested_url": "https://www.app.com.pk/robots.txt",
+          "kind": "robots",
+          "observed_at_utc": "2026-10-14T13:31:29Z",
+          "status": 200,
+          "final_url": "https://www.app.com.pk/robots.txt",
+          "content_type": "text/plain",
+          "retry_after": null,
+          "truncated": false,
+          "body_sha256": "57a6367a45f622c00f9be9a721f1ef19e6bfcb99fd347c38d238c7b29ac99f95",
+          "elapsed_ms": 424
+        },
+        {
+          "requested_url": "https://www.app.com.pk/",
+          "kind": "homepage",
+          "observed_at_utc": "2026-10-14T13:31:31Z",
+          "status": 200,
+          "final_url": "https://www.app.com.pk/",
+          "content_type": "text/html; charset=UTF-8",
+          "retry_after": null,
+          "truncated": false,
+          "body_sha256": "fbb8dd9ca1dd7ed017471637f9c29ca3dd274035b1663a333009fb0c8aefad42",
+          "elapsed_ms": 197
+        }
+      ],
+      "candidates": [
+        {
+          "url": "https://www.app.com.pk/feed/",
+          "type": "rss",
+          "declaration_url": "https://www.app.com.pk/",
+          "declaration_method": "official_homepage_alternate_link",
+          "declaration_attributes": {
+            "tag": "link",
+            "rel": "alternate",
+            "type": "application/rss+xml",
+            "title": "Associated Press Of Pakistan » Feed",
+            "href": "https://www.app.com.pk/feed/"
+          },
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:31:31Z",
+          "declaration_body_sha256": "fbb8dd9ca1dd7ed017471637f9c29ca3dd274035b1663a333009fb0c8aefad42",
+          "content_scope": "article_feed",
+          "recommended_validation_priority": "primary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        }
+      ],
+      "other_official_discovery_links": [],
+      "excluded_non_article_feeds": [
+        {
+          "url": "https://www.app.com.pk/comments/feed/",
+          "reason": "Publisher explicitly labels this as comments feed; not article feed."
+        }
+      ],
+      "crawler_policy_observations": [],
+      "status": "official_candidates_found",
+      "notes": [
+        "Exact URLs above are publisher declarations. A declaration does not establish XML validity, article coverage, or live collector accessibility.",
+        "No candidate XML, source mutation, paid model request, or deployment was performed by this researcher."
+      ]
+    },
+    {
+      "country": "PK",
+      "name": "Business Recorder",
+      "audit_presence_status": "missing",
+      "audit_website": "https://www.brecorder.com/",
+      "publisher_domain": "brecorder.com",
+      "official_home": "https://www.brecorder.com/",
+      "publisher_identity_evidence": [
+        {
+          "url": "https://www.brecorder.com/",
+          "what_supports": "Official publisher homepage identity and editorial sections.",
+          "verified_on": "2026-10-14",
+          "verification_method": "web_primary_page_lookup"
+        },
+        {
+          "url": "https://www.brecorder.com/robots.txt",
+          "what_supports": "Bounded robots lookup; declaration unavailable via this tool.",
+          "verified_on": "2026-10-14",
+          "verification_method": "web_primary_page_lookup"
+        }
+      ],
+      "identity_verification_status": "official_homepage_retrieved",
+      "ownership": {
+        "endpoint_domain_control_basis": "Candidates use the same publisher domain as the official homepage; beneficial/corporate ownership was not independently audited.",
+        "editorial_role": "National business newspaper; selected for national/editorial role, not a measured audience rank.",
+        "corporate_owner": null
+      },
+      "official_page_observations": [
+        {
+          "requested_url": "https://www.brecorder.com/robots.txt",
+          "kind": "robots",
+          "observed_at_utc": "2026-10-14T13:31:31Z",
+          "status": 200,
+          "final_url": "https://www.brecorder.com/robots.txt",
+          "content_type": "text/plain; charset=utf-8",
+          "retry_after": null,
+          "truncated": false,
+          "body_sha256": "77dcac50a89bfc358438434092c0aef815c3c40a3753a49213c22912a827fca5",
+          "elapsed_ms": 346
+        },
+        {
+          "requested_url": "https://www.brecorder.com/",
+          "kind": "homepage",
+          "observed_at_utc": "2026-10-14T13:31:34Z",
+          "status": 200,
+          "final_url": "https://www.brecorder.com/",
+          "content_type": "text/html; charset=UTF-8",
+          "retry_after": null,
+          "truncated": false,
+          "body_sha256": "0ac66d895cbcce73eefabbb37d7bdd547d4a0ea8da9cde725d80ce164e397201",
+          "elapsed_ms": 186
+        }
+      ],
+      "candidates": [
+        {
+          "url": "https://www.brecorder.com/feeds/sitemap",
+          "type": "sitemap",
+          "declaration_url": "https://www.brecorder.com/robots.txt",
+          "declaration_method": "official_robots_sitemap_directive",
+          "declaration_text": "Sitemap: https://www.brecorder.com/feeds/sitemap",
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:31:31Z",
+          "declaration_body_sha256": "77dcac50a89bfc358438434092c0aef815c3c40a3753a49213c22912a827fca5",
+          "content_scope": "general_sitemap",
+          "recommended_validation_priority": "secondary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        },
+        {
+          "url": "https://www.brecorder.com/feeds/home/",
+          "type": "rss",
+          "declaration_url": "https://www.brecorder.com/",
+          "declaration_method": "official_homepage_alternate_link",
+          "declaration_attributes": {
+            "tag": "link",
+            "rel": "alternate",
+            "type": "application/rss+xml",
+            "title": "Business Recorder",
+            "href": "https://www.brecorder.com/feeds/home/"
+          },
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:31:34Z",
+          "declaration_body_sha256": "0ac66d895cbcce73eefabbb37d7bdd547d4a0ea8da9cde725d80ce164e397201",
+          "content_scope": "article_feed",
+          "recommended_validation_priority": "primary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        },
+        {
+          "url": "https://www.brecorder.com/feeds/latest-news",
+          "type": "rss",
+          "declaration_url": "https://www.brecorder.com/",
+          "declaration_method": "official_homepage_rss_anchor",
+          "declaration_attributes": {
+            "tag": "a",
+            "class": "rss",
+            "href": "/feeds/latest-news",
+            "title": "RSS",
+            "target": "_blank"
+          },
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:31:34Z",
+          "declaration_body_sha256": "0ac66d895cbcce73eefabbb37d7bdd547d4a0ea8da9cde725d80ce164e397201",
+          "content_scope": "article_feed",
+          "recommended_validation_priority": "secondary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        }
+      ],
+      "other_official_discovery_links": [],
+      "excluded_non_article_feeds": [],
+      "crawler_policy_observations": [],
+      "status": "official_candidates_found",
+      "notes": [
+        "Exact URLs above are publisher declarations. A declaration does not establish XML validity, article coverage, or live collector accessibility.",
+        "No candidate XML, source mutation, paid model request, or deployment was performed by this researcher."
+      ]
+    },
+    {
+      "country": "PK",
+      "name": "PTV News",
+      "audit_presence_status": "missing",
+      "audit_website": "https://ptv.com.pk/",
+      "publisher_domain": "ptv.com.pk",
+      "official_home": "https://ptv.com.pk/",
+      "publisher_identity_evidence": [
+        {
+          "url": "https://ptv.com.pk/",
+          "what_supports": "Official-site lookup attempted; unavailable to this web tool, not endpoint-health evidence.",
+          "verified_on": "2026-10-14",
+          "verification_method": "web_primary_page_lookup"
+        },
+        {
+          "url": "https://ptv.com.pk/ptvnews/tstvptvnews",
+          "what_supports": "Official PTV site indexes its PTV News transmission.",
+          "verified_on": "2026-10-14",
+          "verification_method": "primary_search_index"
+        },
+        {
+          "url": "https://ptv.com.pk/robots.txt",
+          "what_supports": "Bounded robots lookup; declaration unavailable via this tool.",
+          "verified_on": "2026-10-14",
+          "verification_method": "web_primary_page_lookup"
+        }
+      ],
+      "identity_verification_status": "official_primary_page_identity_from_prior_audit_current_access_restricted",
+      "ownership": {
+        "endpoint_domain_control_basis": "Candidates use the same publisher domain as the official homepage; beneficial/corporate ownership was not independently audited.",
+        "editorial_role": "National public television news service; selected for national/editorial role, not a measured audience rank.",
+        "corporate_owner": null
+      },
+      "official_page_observations": [
+        {
+          "requested_url": "https://ptv.com.pk/robots.txt",
+          "kind": "robots",
+          "observed_at_utc": "2026-10-14T13:31:33Z",
+          "status": 403,
+          "final_url": "https://ptv.com.pk/robots.txt",
+          "content_type": "text/html; charset=UTF-8",
+          "retry_after": null,
+          "error": "HTTP Error 403: Forbidden",
+          "elapsed_ms": 98
+        },
+        {
+          "requested_url": "https://ptv.com.pk/",
+          "kind": "homepage",
+          "observed_at_utc": "2026-10-14T13:31:35Z",
+          "status": 403,
+          "final_url": "https://ptv.com.pk/",
+          "content_type": "text/html; charset=UTF-8",
+          "retry_after": null,
+          "error": "HTTP Error 403: Forbidden",
+          "elapsed_ms": 68
+        }
+      ],
+      "candidates": [],
+      "other_official_discovery_links": [],
+      "excluded_non_article_feeds": [],
+      "crawler_policy_observations": [],
+      "status": "no_exact_declaration_found",
+      "notes": [
+        "Exact URLs above are publisher declarations. A declaration does not establish XML validity, article coverage, or live collector accessibility.",
+        "No candidate XML, source mutation, paid model request, or deployment was performed by this researcher.",
+        "No exact RSS/sitemap declaration was established in this bounded review. Empty candidates means unknown, not proof that no feed exists."
+      ]
+    },
+    {
+      "country": "JO",
+      "name": "Jordan News Agency / Petra",
+      "audit_presence_status": "missing",
+      "audit_website": "https://www.petra.gov.jo/",
+      "publisher_domain": "petra.gov.jo",
+      "official_home": "https://petra.gov.jo/ar",
+      "publisher_identity_evidence": [
+        {
+          "url": "https://petra.gov.jo/ar",
+          "what_supports": "Official agency homepage identifies Jordan News Agency and national reporting sections."
+        }
+      ],
+      "identity_verification_status": "official_homepage_retrieved",
+      "ownership": {
+        "endpoint_domain_control_basis": "Candidates use the same publisher domain as the official homepage; beneficial/corporate ownership was not independently audited.",
+        "editorial_role": "national news agency anchor selected for broad national coverage or institutional role; bounded editorial selection, not an audience-rank claim.",
+        "corporate_owner": null
+      },
+      "official_page_observations": [
+        {
+          "requested_url": "https://www.petra.gov.jo/robots.txt",
+          "kind": "robots",
+          "observed_at_utc": "2026-10-14T13:31:33Z",
+          "error": "TimeoutError: The read operation timed out",
+          "elapsed_ms": 18069
+        },
+        {
+          "requested_url": "https://www.petra.gov.jo/",
+          "kind": "homepage",
+          "observed_at_utc": "2026-10-14T13:31:53Z",
+          "error": "TimeoutError: The read operation timed out",
+          "elapsed_ms": 18047
+        },
+        {
+          "requested_url": "https://petra.gov.jo/robots.txt",
+          "kind": "robots",
+          "observed_at_utc": "2026-10-14T13:33:09Z",
+          "method": "curl_standard_tls_no_insecure",
+          "status": 200,
+          "final_url": "https://petra.gov.jo/robots.txt",
+          "content_type": "text/plain",
+          "body_sha256": "c2343abe56b691b8dff2688f278d73da39941ce95727517106220e1f7a760358",
+          "error": null,
+          "exit_code": 0,
+          "elapsed_ms": 228
+        },
+        {
+          "requested_url": "https://petra.gov.jo/ar",
+          "kind": "homepage",
+          "observed_at_utc": "2026-10-14T13:33:12Z",
+          "method": "curl_standard_tls_no_insecure",
+          "status": 200,
+          "final_url": "https://petra.gov.jo/ar",
+          "content_type": "text/html; charset=UTF-8",
+          "body_sha256": "952528db243c66fbb7162dad42aae5f96f91844a3563b832b65874889501e553",
+          "error": null,
+          "exit_code": 0,
+          "elapsed_ms": 816
+        }
+      ],
+      "candidates": [
+        {
+          "url": "https://petra.gov.jo/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://petra.gov.jo/robots.txt",
+          "declaration_method": "official_robots_sitemap_directive",
+          "declaration_text": "Sitemap: https://petra.gov.jo/sitemap.xml",
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:33:09Z",
+          "declaration_body_sha256": "c2343abe56b691b8dff2688f278d73da39941ce95727517106220e1f7a760358",
+          "content_scope": "general_sitemap",
+          "recommended_validation_priority": "secondary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        }
+      ],
+      "other_official_discovery_links": [],
+      "excluded_non_article_feeds": [],
+      "crawler_policy_observations": [
+        {
+          "url": "https://petra.gov.jo/robots.txt",
+          "finding": "A sitemap is declared, but wildcard User-agent:* has Disallow:/ while named search/AI crawler groups allow most paths.",
+          "recommended_action": "Hold generic collector XML fetch pending policy review; do not impersonate an allowed user agent."
+        }
+      ],
+      "status": "official_candidates_found",
+      "notes": [
+        "Exact URLs above are publisher declarations. A declaration does not establish XML validity, article coverage, or live collector accessibility.",
+        "No candidate XML, source mutation, paid model request, or deployment was performed by this researcher."
+      ]
+    },
+    {
+      "country": "JO",
+      "name": "Al Rai Jordan",
+      "audit_presence_status": "missing",
+      "audit_website": "https://www.alrai.com/",
+      "publisher_domain": "alrai.com",
+      "official_home": "https://alrai.com/",
+      "publisher_identity_evidence": [
+        {
+          "url": "https://alrai.com/",
+          "what_supports": "Official publisher homepage identifies this newsroom and its editorial scope."
+        }
+      ],
+      "identity_verification_status": "official_homepage_retrieved",
+      "ownership": {
+        "endpoint_domain_control_basis": "Candidates use the same publisher domain as the official homepage; beneficial/corporate ownership was not independently audited.",
+        "editorial_role": "general newspaper anchor selected for broad national coverage or institutional role; bounded editorial selection, not an audience-rank claim.",
+        "corporate_owner": null
+      },
+      "official_page_observations": [
+        {
+          "requested_url": "https://www.alrai.com/robots.txt",
+          "kind": "robots",
+          "observed_at_utc": "2026-10-14T13:31:33Z",
+          "status": 200,
+          "final_url": "https://alrai.com/robots.txt",
+          "content_type": "text/plain; charset=utf-8",
+          "retry_after": null,
+          "truncated": false,
+          "body_sha256": "499f60c6782c92648551fcad793ad7f742fa1d76b09e54c2ecbff1a559e13948",
+          "elapsed_ms": 581
+        },
+        {
+          "requested_url": "https://www.alrai.com/",
+          "kind": "homepage",
+          "observed_at_utc": "2026-10-14T13:31:36Z",
+          "status": 200,
+          "final_url": "https://alrai.com/",
+          "content_type": "text/html; charset=UTF-8",
+          "retry_after": null,
+          "truncated": false,
+          "body_sha256": "c76b62f95a7ab23a866d17e93c20b1e959e2abd447aa3c0858a601cfd598f2ad",
+          "elapsed_ms": 959
+        }
+      ],
+      "candidates": [
+        {
+          "url": "http://alrai.com/sitemaps/sitemap_0.xml",
+          "type": "sitemap",
+          "declaration_url": "https://alrai.com/robots.txt",
+          "declaration_method": "official_robots_sitemap_directive",
+          "declaration_text": "Sitemap: http://alrai.com/sitemaps/sitemap_0.xml",
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:31:33Z",
+          "declaration_body_sha256": "499f60c6782c92648551fcad793ad7f742fa1d76b09e54c2ecbff1a559e13948",
+          "content_scope": "general_sitemap",
+          "recommended_validation_priority": "secondary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        }
+      ],
+      "other_official_discovery_links": [],
+      "excluded_non_article_feeds": [],
+      "crawler_policy_observations": [
+        {
+          "url": "https://alrai.com/robots.txt",
+          "finding": "RSS paths /rss and /rssFeed/* are disallowed; the exact declared /sitemaps/sitemap_0.xml path is outside those rules.",
+          "recommended_action": "Prefer declared sitemap; do not invent or fetch disallowed RSS routes."
+        }
+      ],
+      "status": "official_candidates_found",
+      "notes": [
+        "Exact URLs above are publisher declarations. A declaration does not establish XML validity, article coverage, or live collector accessibility.",
+        "No candidate XML, source mutation, paid model request, or deployment was performed by this researcher."
+      ]
+    },
+    {
+      "country": "JO",
+      "name": "Ad-Dustour",
+      "audit_presence_status": "missing",
+      "audit_website": "https://www.addustour.com/",
+      "publisher_domain": "addustour.com",
+      "official_home": "https://www.addustour.com/",
+      "publisher_identity_evidence": [
+        {
+          "url": "https://www.addustour.com/",
+          "what_supports": "Official publisher homepage identifies this newsroom and its editorial scope."
+        }
+      ],
+      "identity_verification_status": "official_homepage_retrieved",
+      "ownership": {
+        "endpoint_domain_control_basis": "Candidates use the same publisher domain as the official homepage; beneficial/corporate ownership was not independently audited.",
+        "editorial_role": "general newspaper anchor selected for broad national coverage or institutional role; bounded editorial selection, not an audience-rank claim.",
+        "corporate_owner": null
+      },
+      "official_page_observations": [
+        {
+          "requested_url": "https://www.addustour.com/robots.txt",
+          "kind": "robots",
+          "observed_at_utc": "2026-10-14T13:31:34Z",
+          "status": 200,
+          "final_url": "https://www.addustour.com/robots.txt",
+          "content_type": "text/plain; charset=utf-8",
+          "retry_after": null,
+          "truncated": false,
+          "body_sha256": "2ece6ad1b37d40669ed52ae3365349ab55498ee0969685f825c2a15b1685d830",
+          "elapsed_ms": 94
+        },
+        {
+          "requested_url": "https://www.addustour.com/",
+          "kind": "homepage",
+          "observed_at_utc": "2026-10-14T13:31:36Z",
+          "status": 200,
+          "final_url": "https://www.addustour.com/",
+          "content_type": "text/html; charset=UTF-8",
+          "retry_after": null,
+          "truncated": false,
+          "body_sha256": "75790ea6a748956e366fe364cac710946ea6a078308a243fddd3d61da3ce74b7",
+          "elapsed_ms": 308
+        }
+      ],
+      "candidates": [],
+      "other_official_discovery_links": [],
+      "excluded_non_article_feeds": [],
+      "crawler_policy_observations": [
+        {
+          "url": "https://www.addustour.com/robots.txt",
+          "finding": "Robots has a wildcard Disallow:/ group and named allowed crawler groups; this researcher did not fetch candidate XML.",
+          "recommended_action": "Do not impersonate allowed agents. Review policy before any crawler endpoint request."
+        }
+      ],
+      "status": "no_exact_declaration_found",
+      "notes": [
+        "Exact URLs above are publisher declarations. A declaration does not establish XML validity, article coverage, or live collector accessibility.",
+        "No candidate XML, source mutation, paid model request, or deployment was performed by this researcher.",
+        "No exact RSS/sitemap declaration was established in this bounded review. Empty candidates means unknown, not proof that no feed exists."
+      ]
+    },
+    {
+      "country": "JO",
+      "name": "The Jordan Times",
+      "audit_presence_status": "missing",
+      "audit_website": "https://www.jordantimes.com/",
+      "publisher_domain": "jordantimes.com",
+      "official_home": "https://www.jordantimes.com/",
+      "publisher_identity_evidence": [
+        {
+          "url": "https://jordantimes.com/static/about-us",
+          "what_supports": "Official about page identifies an English-language daily published by Jordan Press Foundation."
+        }
+      ],
+      "identity_verification_status": "official_primary_page_identity_from_prior_audit_current_access_restricted",
+      "ownership": {
+        "endpoint_domain_control_basis": "Candidates use the same publisher domain as the official homepage; beneficial/corporate ownership was not independently audited.",
+        "editorial_role": "general newspaper anchor selected for broad national coverage or institutional role; bounded editorial selection, not an audience-rank claim.",
+        "corporate_owner": null
+      },
+      "official_page_observations": [
+        {
+          "requested_url": "https://www.jordantimes.com/robots.txt",
+          "kind": "robots",
+          "observed_at_utc": "2026-10-14T13:31:35Z",
+          "status": 403,
+          "final_url": "https://jordantimes.com/robots.txt",
+          "content_type": "text/html; charset=UTF-8",
+          "retry_after": null,
+          "error": "HTTP Error 403: Forbidden",
+          "elapsed_ms": 298
+        },
+        {
+          "requested_url": "https://www.jordantimes.com/",
+          "kind": "homepage",
+          "observed_at_utc": "2026-10-14T13:31:37Z",
+          "status": 403,
+          "final_url": "https://jordantimes.com/",
+          "content_type": "text/html; charset=UTF-8",
+          "retry_after": null,
+          "error": "HTTP Error 403: Forbidden",
+          "elapsed_ms": 287
+        }
+      ],
+      "candidates": [],
+      "other_official_discovery_links": [],
+      "excluded_non_article_feeds": [],
+      "crawler_policy_observations": [],
+      "status": "no_exact_declaration_found",
+      "notes": [
+        "Exact URLs above are publisher declarations. A declaration does not establish XML validity, article coverage, or live collector accessibility.",
+        "No candidate XML, source mutation, paid model request, or deployment was performed by this researcher.",
+        "No exact RSS/sitemap declaration was established in this bounded review. Empty candidates means unknown, not proof that no feed exists."
+      ]
+    },
+    {
+      "country": "JO",
+      "name": "Roya News",
+      "audit_presence_status": "missing",
+      "audit_website": "https://www.royanews.tv/",
+      "publisher_domain": "royanews.tv",
+      "official_home": "https://royanews.tv:443/",
+      "publisher_identity_evidence": [
+        {
+          "url": "https://royanews.tv/",
+          "what_supports": "Official publisher homepage identifies this newsroom and its editorial scope."
+        }
+      ],
+      "identity_verification_status": "official_homepage_retrieved",
+      "ownership": {
+        "endpoint_domain_control_basis": "Candidates use the same publisher domain as the official homepage; beneficial/corporate ownership was not independently audited.",
+        "editorial_role": "national television newsroom anchor selected for broad national coverage or institutional role; bounded editorial selection, not an audience-rank claim.",
+        "corporate_owner": null
+      },
+      "official_page_observations": [
+        {
+          "requested_url": "https://www.royanews.tv/robots.txt",
+          "kind": "robots",
+          "observed_at_utc": "2026-10-14T13:31:36Z",
+          "status": 200,
+          "final_url": "https://royanews.tv:443/robots.txt",
+          "content_type": "text/plain; charset=UTF-8",
+          "retry_after": null,
+          "truncated": false,
+          "body_sha256": "3e69e0b7531ef32e702762eb536e7973fcacc6c577285c2787deedf8c44e0599",
+          "elapsed_ms": 1111
+        },
+        {
+          "requested_url": "https://www.royanews.tv/",
+          "kind": "homepage",
+          "observed_at_utc": "2026-10-14T13:31:39Z",
+          "status": 200,
+          "final_url": "https://royanews.tv:443/",
+          "content_type": "text/html; charset=utf-8",
+          "retry_after": null,
+          "truncated": false,
+          "body_sha256": "528b234c5e01dc176d8e6b2cbda2e016b780d61ce5ced8e0201f76dc68ecbe8b",
+          "elapsed_ms": 1527
+        }
+      ],
+      "candidates": [
+        {
+          "url": "https://royanews.tv/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://royanews.tv:443/robots.txt",
+          "declaration_method": "official_robots_sitemap_directive",
+          "declaration_text": "Sitemap: https://royanews.tv/sitemap.xml",
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:31:36Z",
+          "declaration_body_sha256": "3e69e0b7531ef32e702762eb536e7973fcacc6c577285c2787deedf8c44e0599",
+          "content_scope": "general_sitemap",
+          "recommended_validation_priority": "secondary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        }
+      ],
+      "other_official_discovery_links": [],
+      "excluded_non_article_feeds": [],
+      "crawler_policy_observations": [],
+      "status": "official_candidates_found",
+      "notes": [
+        "Exact URLs above are publisher declarations. A declaration does not establish XML validity, article coverage, or live collector accessibility.",
+        "No candidate XML, source mutation, paid model request, or deployment was performed by this researcher."
+      ]
+    },
+    {
+      "country": "OM",
+      "name": "Oman News Agency / ONA",
+      "audit_presence_status": "missing",
+      "audit_website": "https://www.omannews.gov.om/",
+      "publisher_domain": "omannews.gov.om",
+      "official_home": "https://omannews.gov.om/",
+      "publisher_identity_evidence": [
+        {
+          "url": "https://omannews.gov.om/topics/en/79/show/127325/index.ona?GetLang=ar",
+          "what_supports": "Official ONA news page confirms its Omani national reporting identity."
+        }
+      ],
+      "identity_verification_status": "official_homepage_retrieved",
+      "ownership": {
+        "endpoint_domain_control_basis": "Candidates use the same publisher domain as the official homepage; beneficial/corporate ownership was not independently audited.",
+        "editorial_role": "national news agency anchor selected for broad national coverage or institutional role; bounded editorial selection, not an audience-rank claim.",
+        "corporate_owner": null
+      },
+      "official_page_observations": [
+        {
+          "requested_url": "https://www.omannews.gov.om/robots.txt",
+          "kind": "robots",
+          "observed_at_utc": "2026-10-14T13:31:37Z",
+          "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>",
+          "elapsed_ms": 1048
+        },
+        {
+          "requested_url": "https://www.omannews.gov.om/",
+          "kind": "homepage",
+          "observed_at_utc": "2026-10-14T13:31:40Z",
+          "error": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>",
+          "elapsed_ms": 771
+        },
+        {
+          "requested_url": "https://omannews.gov.om/robots.txt",
+          "kind": "robots",
+          "observed_at_utc": "2026-10-14T13:33:11Z",
+          "method": "curl_standard_tls_no_insecure",
+          "status": 200,
+          "final_url": "https://omannews.gov.om/robots.txt",
+          "content_type": "text/plain; charset=UTF-8",
+          "body_sha256": "207d9b22fb6cb5f4b5ee76cc2cb45af58e5a4352a2ea08ff2835185757826e6a",
+          "error": null,
+          "exit_code": 0,
+          "elapsed_ms": 1656
+        },
+        {
+          "requested_url": "https://omannews.gov.om/",
+          "kind": "homepage",
+          "observed_at_utc": "2026-10-14T13:33:24Z",
+          "method": "curl_standard_tls_no_insecure",
+          "status": 200,
+          "final_url": "https://omannews.gov.om/",
+          "content_type": "text/html; charset=UTF-8",
+          "body_sha256": "f94d57acc0a295832bf692efc84521c796d56012bd89ea0cd3c83596bfd54658",
+          "error": null,
+          "exit_code": 0,
+          "elapsed_ms": 11510
+        }
+      ],
+      "candidates": [
+        {
+          "url": "https://www.omannews.gov.om/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://omannews.gov.om/robots.txt",
+          "declaration_method": "official_robots_sitemap_directive",
+          "declaration_text": "Sitemap: https://www.omannews.gov.om/sitemap.xml",
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:33:11Z",
+          "declaration_body_sha256": "207d9b22fb6cb5f4b5ee76cc2cb45af58e5a4352a2ea08ff2835185757826e6a",
+          "content_scope": "general_sitemap",
+          "recommended_validation_priority": "secondary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        },
+        {
+          "url": "https://omannews.gov.om/rss/lang/ar/cat/85",
+          "type": "rss",
+          "declaration_url": "https://omannews.gov.om/",
+          "declaration_method": "official_homepage_rss_anchor",
+          "declaration_attributes": {
+            "tag": "a",
+            "href": "rss/lang/ar/cat/85"
+          },
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:33:24Z",
+          "declaration_body_sha256": "f94d57acc0a295832bf692efc84521c796d56012bd89ea0cd3c83596bfd54658",
+          "content_scope": "article_feed",
+          "recommended_validation_priority": "secondary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        },
+        {
+          "url": "https://omannews.gov.om/rss/lang/ar/cat/3",
+          "type": "rss",
+          "declaration_url": "https://omannews.gov.om/",
+          "declaration_method": "official_homepage_rss_anchor",
+          "declaration_attributes": {
+            "tag": "a",
+            "href": "rss/lang/ar/cat/3"
+          },
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:33:24Z",
+          "declaration_body_sha256": "f94d57acc0a295832bf692efc84521c796d56012bd89ea0cd3c83596bfd54658",
+          "content_scope": "article_feed",
+          "recommended_validation_priority": "primary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        },
+        {
+          "url": "https://omannews.gov.om/rss/lang/ar/cat/6",
+          "type": "rss",
+          "declaration_url": "https://omannews.gov.om/",
+          "declaration_method": "official_homepage_rss_anchor",
+          "declaration_attributes": {
+            "tag": "a",
+            "href": "rss/lang/ar/cat/6"
+          },
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:33:24Z",
+          "declaration_body_sha256": "f94d57acc0a295832bf692efc84521c796d56012bd89ea0cd3c83596bfd54658",
+          "content_scope": "article_feed",
+          "recommended_validation_priority": "secondary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        },
+        {
+          "url": "https://omannews.gov.om/rss/lang/ar/cat/4",
+          "type": "rss",
+          "declaration_url": "https://omannews.gov.om/",
+          "declaration_method": "official_homepage_rss_anchor",
+          "declaration_attributes": {
+            "tag": "a",
+            "href": "rss/lang/ar/cat/4"
+          },
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:33:24Z",
+          "declaration_body_sha256": "f94d57acc0a295832bf692efc84521c796d56012bd89ea0cd3c83596bfd54658",
+          "content_scope": "article_feed",
+          "recommended_validation_priority": "secondary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        },
+        {
+          "url": "https://omannews.gov.om/rss/lang/ar/cat/5",
+          "type": "rss",
+          "declaration_url": "https://omannews.gov.om/",
+          "declaration_method": "official_homepage_rss_anchor",
+          "declaration_attributes": {
+            "tag": "a",
+            "href": "rss/lang/ar/cat/5"
+          },
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:33:24Z",
+          "declaration_body_sha256": "f94d57acc0a295832bf692efc84521c796d56012bd89ea0cd3c83596bfd54658",
+          "content_scope": "article_feed",
+          "recommended_validation_priority": "secondary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        },
+        {
+          "url": "https://omannews.gov.om/rss/lang/ar/cat/7",
+          "type": "rss",
+          "declaration_url": "https://omannews.gov.om/",
+          "declaration_method": "official_homepage_rss_anchor",
+          "declaration_attributes": {
+            "tag": "a",
+            "href": "rss/lang/ar/cat/7"
+          },
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:33:24Z",
+          "declaration_body_sha256": "f94d57acc0a295832bf692efc84521c796d56012bd89ea0cd3c83596bfd54658",
+          "content_scope": "article_feed",
+          "recommended_validation_priority": "secondary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        },
+        {
+          "url": "https://omannews.gov.om/rss/lang/ar/cat/8",
+          "type": "rss",
+          "declaration_url": "https://omannews.gov.om/",
+          "declaration_method": "official_homepage_rss_anchor",
+          "declaration_attributes": {
+            "tag": "a",
+            "href": "rss/lang/ar/cat/8"
+          },
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:33:24Z",
+          "declaration_body_sha256": "f94d57acc0a295832bf692efc84521c796d56012bd89ea0cd3c83596bfd54658",
+          "content_scope": "article_feed",
+          "recommended_validation_priority": "secondary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        },
+        {
+          "url": "https://omannews.gov.om/rss/lang/ar/cat/86",
+          "type": "rss",
+          "declaration_url": "https://omannews.gov.om/",
+          "declaration_method": "official_homepage_rss_anchor",
+          "declaration_attributes": {
+            "tag": "a",
+            "href": "rss/lang/ar/cat/86"
+          },
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:33:24Z",
+          "declaration_body_sha256": "f94d57acc0a295832bf692efc84521c796d56012bd89ea0cd3c83596bfd54658",
+          "content_scope": "article_feed",
+          "recommended_validation_priority": "secondary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        },
+        {
+          "url": "https://omannews.gov.om/rss/lang/ar/cat/88",
+          "type": "rss",
+          "declaration_url": "https://omannews.gov.om/",
+          "declaration_method": "official_homepage_rss_anchor",
+          "declaration_attributes": {
+            "tag": "a",
+            "href": "rss/lang/ar/cat/88"
+          },
+          "verified_on": "2026-10-14",
+          "observed_at_utc": "2026-10-14T13:33:24Z",
+          "declaration_body_sha256": "f94d57acc0a295832bf692efc84521c796d56012bd89ea0cd3c83596bfd54658",
+          "content_scope": "article_feed",
+          "recommended_validation_priority": "secondary",
+          "endpoint_xml_fetched": false,
+          "endpoint_validation_status": "not_checked",
+          "publisher_domain_matches": true
+        }
+      ],
+      "other_official_discovery_links": [
+        {
+          "url": "https://omannews.gov.om/rss.ona",
+          "type": "rss_discovery_page_or_feed_unknown",
+          "declaration_url": "https://omannews.gov.om/",
+          "method": "official_homepage_rss_anchor",
+          "observed_at_utc": "2026-10-14T13:33:24Z",
+          "note": "Linked by official site, but may be an HTML feed directory or help page; no XML format inferred."
+        },
+        {
+          "url": "https://omannews.gov.om/rssinfo/",
+          "type": "rss_discovery_page_or_feed_unknown",
+          "declaration_url": "https://omannews.gov.om/",
+          "method": "official_homepage_rss_anchor",
+          "observed_at_utc": "2026-10-14T13:33:24Z",
+          "note": "Linked by official site, but may be an HTML feed directory or help page; no XML format inferred."
+        }
+      ],
+      "excluded_non_article_feeds": [],
+      "crawler_policy_observations": [],
+      "status": "official_candidates_found",
+      "notes": [
+        "Exact URLs above are publisher declarations. A declaration does not establish XML validity, article coverage, or live collector accessibility.",
+        "No candidate XML, source mutation, paid model request, or deployment was performed by this researcher.",
+        "Python urllib verification on www host failed local issuer-chain verification; standard TLS curl on canonical non-www host retrieved homepage/robots without --insecure. Keep original error visible; no endpoint health inference."
+      ]
+    },
+    {
+      "country": "OM",
+      "name": "Al Watan Oman",
+      "audit_presence_status": "missing",
+      "audit_website": "https://www.alwatan.om/",
+      "publisher_domain": "alwatan.om",
+      "official_home": "https://alwatan.om/",
+      "publisher_identity_evidence": [
+        {
+          "url": "https://alwatan.om/",
+          "what_supports": "Official publisher homepage identifies this newsroom and its editorial scope."
+        }
+      ],
+      "identity_verification_status": "official_homepage_retrieved",
+      "ownership": {
+        "endpoint_domain_control_basis": "Candidates use the same publisher domain as the official homepage; beneficial/corporate ownership was not independently audited.",
+        "editorial_role": "general newspaper anchor selected for broad national coverage or institutional role; bounded editorial selection, not an audience-rank claim.",
+        "corporate_owner": null
+      },
+      "official_page_observations": [
+        {
+          "requested_url": "https://www.alwatan.om/robots.txt",
+          "kind": "robots",
+          "observed_at_utc": "2026-10-14T13:31:38Z",
+          "status": 200,
+          "final_url": "https://alwatan.om/robots.txt",
+          "content_type": "text/plain; charset=utf-8",
+          "retry_after": null,
+          "truncated": false,
+          "body_sha256": "0a6249f145ad5114ce6fc2dd16cb7f00e70229c1de679356f1cbf36b1c37aca7",
+          "elapsed_ms": 674
+        },
+        {
+          "requested_url": "https://www.alwatan.om/",
+          "kind": "homepage",
+          "observed_at_utc": "2026-10-14T13:31:40Z",
+          "status": 200,
+          "final_url": "https://alwatan.om/",
+          "content_type": "text/html; charset=UTF-8",
+          "retry_after": null,
+          "truncated": false,
+          "body_sha256": "02971ba27aeca9a174eac12e84662db9a88674aa1e9271074a1509d90fe2ff7f",
+          "elapsed_ms": 788
+        }
+      ],
+      "candidates": [],
+      "other_official_discovery_links": [],
+      "excluded_non_article_feeds": [],
+      "crawler_policy_observations": [],
+      "status": "no_exact_declaration_found",
+      "notes": [
+        "Exact URLs above are publisher declarations. A declaration does not establish XML validity, article coverage, or live collector accessibility.",
+        "No candidate XML, source mutation, paid model request, or deployment was performed by this researcher.",
+        "No exact RSS/sitemap declaration was established in this bounded review. Empty candidates means unknown, not proof that no feed exists."
+      ]
+    }
+  ]
+}

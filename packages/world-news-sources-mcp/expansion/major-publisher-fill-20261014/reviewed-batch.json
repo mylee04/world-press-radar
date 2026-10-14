@@ -1,0 +1,1287 @@
+{
+  "version": 1,
+  "run_id": "major-publisher-fill-20261014",
+  "prepared_at": "2026-10-14T14:04:35.589Z",
+  "registry_sha256": "2eb21a9856ec8e5cbc6a38417aeac1b93addcf0684f7bf3ef6e57af45ef2bdc3",
+  "selected_countries": [
+    "AR",
+    "BH",
+    "CO",
+    "GR",
+    "IN",
+    "IR",
+    "KW",
+    "KZ",
+    "LV",
+    "MA",
+    "MN",
+    "PH",
+    "PK",
+    "TR"
+  ],
+  "additions": [
+    {
+      "country": "KW",
+      "name": "Kuwait Times",
+      "language": "en",
+      "homepage": "https://www.kuwaittimes.com/",
+      "publisher_reference": "https://www.kuwaittimes.com/",
+      "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://kuwaittimes.com/rssFeed/0",
+          "endpoint_id": "ep_c8b745d4785ba2a423b6d7f9",
+          "observation": {
+            "endpointId": "ep_c8b745d4785ba2a423b6d7f9",
+            "type": "rss",
+            "url": "https://kuwaittimes.com/rssFeed/0",
+            "checkedAt": "2026-10-14T13:43:45.594Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 50,
+            "entriesWithUrl": 50,
+            "sampleUrls": [
+              "https://kuwaittimes.com/article/51610/kuwait/jaber-hospital-event-promotes-early-detection-of-breast-cancer/",
+              "https://kuwaittimes.com/article/51609/kuwait/kuwait-university-opens-petroleum-services-lab-with-slb/",
+              "https://kuwaittimes.com/article/51608/kuwait/sheikh-dr-salman-al-sabah-tops-kuwait-based-surgery-researchers-on-stanford-elsevier-top-2-list/"
+            ],
+            "newestContentAt": "2026-10-14T11:28:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://kuwaittimes.com/rssfeed/0/",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 2,
+            "durationMs": 4247,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://kuwaittimes.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:43:32.509Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_anchor",
+            "source_url": "https://kuwaittimes.com/rss/",
+            "found_at": "2026-10-14T13:43:41.345Z",
+            "tag": "{\"declared_url\": \"https://kuwaittimes.com/rssFeed/0\"}",
+            "page_sha256": "8fead0712d5e552f61c867af86209695039c1ef6449a5f7e9b73525100a4070a"
+          }
+        }
+      ]
+    },
+    {
+      "country": "BH",
+      "name": "The Daily Tribune / News of Bahrain",
+      "language": "en",
+      "homepage": "https://www.newsofbahrain.com/",
+      "publisher_reference": "https://www.newsofbahrain.com/",
+      "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.newsofbahrain.com/rss/en.xml",
+          "endpoint_id": "ep_5ea8f64b03b498de39a7902c",
+          "observation": {
+            "endpointId": "ep_5ea8f64b03b498de39a7902c",
+            "type": "rss",
+            "url": "https://www.newsofbahrain.com/rss/en.xml",
+            "checkedAt": "2026-10-14T13:43:46.828Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 30,
+            "entriesWithUrl": 30,
+            "sampleUrls": [
+              "https://www.newsofbahrain.com/en/article/pope-leo-xiv-diagnosed-with-lung-cancer-after-surgery",
+              "https://www.newsofbahrain.com/en/article/car-showroom-hubs-should-be-led-by-investors-says-government",
+              "https://www.newsofbahrain.com/en/article/knowledge-is-preventative-medicine-how-genetic-testing-is-rewriting-breast-cancer-outcomes"
+            ],
+            "newestContentAt": "2026-10-14T12:51:04.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.newsofbahrain.com/rss/en.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 3036,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.newsofbahrain.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:43:38.671Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.newsofbahrain.com/en",
+            "found_at": "2026-10-14T13:32:40.000Z",
+            "page_sha256": "268c5765a98a8bd914cb77d42bf1186f304695ffd646af5490bbe1b9d6f2e748",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"News of Bahrain\" href=\"/rss/en.xml\"/>"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.newsofbahrain.com/sitemaps/news.xml",
+          "endpoint_id": "ep_6f768751d323b73abd74cd81",
+          "observation": {
+            "endpointId": "ep_6f768751d323b73abd74cd81",
+            "type": "sitemap",
+            "url": "https://www.newsofbahrain.com/sitemaps/news.xml",
+            "checkedAt": "2026-10-14T13:43:43.787Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 116,
+            "entriesWithUrl": 116,
+            "sampleUrls": [
+              "https://www.newsofbahrain.com/en/article/pope-leo-xiv-diagnosed-with-lung-cancer-after-surgery",
+              "https://www.newsofbahrain.com/en/article/car-showroom-hubs-should-be-led-by-investors-says-government",
+              "https://www.newsofbahrain.com/en/article/knowledge-is-preventative-medicine-how-genetic-testing-is-rewriting-breast-cancer-outcomes"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.newsofbahrain.com/sitemaps/news.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2806,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.newsofbahrain.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:43:38.671Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://www.newsofbahrain.com/sitemap.xml",
+            "found_at": "2026-10-14T13:43:40.972Z",
+            "page_sha256": "8d795dfc896c3145ebbe74823d87e7e562d307f92a8f354e56b3d4717d0605ca",
+            "declaration": "<loc>https://www.newsofbahrain.com/sitemaps/news.xml</loc>",
+            "declared_lastmod": null
+          }
+        }
+      ]
+    },
+    {
+      "country": "PK",
+      "name": "Associated Press of Pakistan",
+      "language": "en",
+      "homepage": "https://www.app.com.pk/",
+      "publisher_reference": "https://www.app.com.pk/",
+      "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.app.com.pk/feed/",
+          "endpoint_id": "ep_1bd1d8ac44b80fa9bc40ff65",
+          "observation": {
+            "endpointId": "ep_1bd1d8ac44b80fa9bc40ff65",
+            "type": "rss",
+            "url": "https://www.app.com.pk/feed/",
+            "checkedAt": "2026-10-14T13:43:47.724Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 10,
+            "entriesWithUrl": 10,
+            "sampleUrls": [
+              "https://www.app.com.pk/national/cancelled-mutation-entries-cannot-by-themselves-establish-legal-ownership-rules-sc/",
+              "https://www.app.com.pk/punjab/cpwb-calls-for-stronger-child-protection-system-effective-reporting-mechanism/",
+              "https://www.app.com.pk/business/fiscal-deficit-falls-to-22-year-low-tax-revenues-rise-40pc-in-two-years-aurangzeb/"
+            ],
+            "newestContentAt": "2026-10-14T13:17:57.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.app.com.pk/feed/",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2381,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.app.com.pk/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:43:45.343Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.app.com.pk/",
+            "found_at": "2026-10-14T13:31:31.000Z",
+            "page_sha256": "fbb8dd9ca1dd7ed017471637f9c29ca3dd274035b1663a333009fb0c8aefad42",
+            "tag": "{\"tag\": \"link\", \"rel\": \"alternate\", \"type\": \"application/rss+xml\", \"title\": \"Associated Press Of Pakistan » Feed\", \"href\": \"https://www.app.com.pk/feed/\"}"
+          }
+        }
+      ]
+    },
+    {
+      "country": "PK",
+      "name": "Business Recorder",
+      "language": "en",
+      "homepage": "https://www.brecorder.com/",
+      "publisher_reference": "https://www.brecorder.com/",
+      "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.brecorder.com/feeds/latest-news",
+          "endpoint_id": "ep_68fed7e14f94a3ddccb5b4ae",
+          "observation": {
+            "endpointId": "ep_68fed7e14f94a3ddccb5b4ae",
+            "type": "rss",
+            "url": "https://www.brecorder.com/feeds/latest-news",
+            "checkedAt": "2026-10-14T13:43:52.539Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 30,
+            "entriesWithUrl": 30,
+            "sampleUrls": [
+              "https://www.brecorder.com/news/40444202/netflix-cuts-about-6-of-jobs-in-biggest-layoff-since-2022-wsj-reports",
+              "https://www.brecorder.com/news/40444201/netanyahu-says-he-is-not-seeking-to-attack-iran-again-before-israel-election",
+              "https://www.brecorder.com/news/40444200/container-ship-sinks-near-hormuz-after-being-hit-by-projectile-sources-say"
+            ],
+            "newestContentAt": "2026-10-14T13:40:24.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.brecorder.com/feeds/latest-news",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2110,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.brecorder.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:43:46.004Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_anchor",
+            "source_url": "https://www.brecorder.com/",
+            "found_at": "2026-10-14T13:31:34.000Z",
+            "page_sha256": "0ac66d895cbcce73eefabbb37d7bdd547d4a0ea8da9cde725d80ce164e397201",
+            "tag": "{\"tag\": \"a\", \"class\": \"rss\", \"href\": \"/feeds/latest-news\", \"title\": \"RSS\", \"target\": \"_blank\"}"
+          }
+        }
+      ]
+    },
+    {
+      "country": "MN",
+      "name": "Mongolian National Broadcaster / MNB",
+      "language": "mn",
+      "homepage": "https://www.mnb.mn/",
+      "publisher_reference": "https://www.mnb.mn/",
+      "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.mnb.mn/rss.xml",
+          "endpoint_id": "ep_7e66f5de0aecbb6a68561544",
+          "observation": {
+            "endpointId": "ep_7e66f5de0aecbb6a68561544",
+            "type": "rss",
+            "url": "https://www.mnb.mn/rss.xml",
+            "checkedAt": "2026-10-14T13:43:50.101Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 30,
+            "entriesWithUrl": 30,
+            "sampleUrls": [
+              "https://www.mnb.mn/article/usvuriin-avragch-2026-chingeltei-duurgiin-khangardi-bulgem-ulsyn-avarga-bolloo-3633",
+              "https://www.mnb.mn/article/aziin-zuny-sportyn-paralimpyn-v-naadamd-manai-ulsaas-44-tamirchin-oroltsono-5383",
+              "https://www.mnb.mn/article/niisleliin-khemjeend-tomuugiin-esreg-darkhlaajuulalt-85-43-khuvtai-urgeljilj-baina-5253"
+            ],
+            "newestContentAt": "2026-10-14T09:59:45.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.mnb.mn/rss.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 3513,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.mnb.mn/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:43:43.461Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.mnb.mn/",
+            "found_at": "2026-10-14T13:31:32.000Z",
+            "page_sha256": "f353c5befd213f7af92f193153febbe4d3fb46cd9af9c3a69eb47ac98dd2ebb4",
+            "tag": "{\"tag\": \"link\", \"rel\": \"alternate\", \"type\": \"application/rss+xml\", \"title\": \"МҮОНРТ — RSS\", \"href\": \"https://www.mnb.mn/rss.xml\"}"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.mnb.mn/news-sitemap.xml",
+          "endpoint_id": "ep_ac3f0ec87c2596c31afeb93d",
+          "observation": {
+            "endpointId": "ep_ac3f0ec87c2596c31afeb93d",
+            "type": "sitemap",
+            "url": "https://www.mnb.mn/news-sitemap.xml",
+            "checkedAt": "2026-10-14T13:43:46.583Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 93,
+            "entriesWithUrl": 93,
+            "sampleUrls": [
+              "https://www.mnb.mn/article/usvuriin-avragch-2026-chingeltei-duurgiin-khangardi-bulgem-ulsyn-avarga-bolloo-3633",
+              "https://www.mnb.mn/article/aziin-zuny-sportyn-paralimpyn-v-naadamd-manai-ulsaas-44-tamirchin-oroltsono-5383",
+              "https://www.mnb.mn/article/niisleliin-khemjeend-tomuugiin-esreg-darkhlaajuulalt-85-43-khuvtai-urgeljilj-baina-5253"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.mnb.mn/news-sitemap.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 3122,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.mnb.mn/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:43:43.461Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://www.mnb.mn/robots.txt",
+            "found_at": "2026-10-14T13:31:29.000Z",
+            "page_sha256": "cd2d931a9cda904a05eaa35bb4f94bc41db0855436dc26d00851198e8e62beff",
+            "declaration": "Sitemap: https://www.mnb.mn/news-sitemap.xml"
+          }
+        }
+      ]
+    },
+    {
+      "country": "GR",
+      "name": "ERT News",
+      "language": "el",
+      "homepage": "https://www.ertnews.gr/",
+      "publisher_reference": "https://www.ertnews.gr/",
+      "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.ertnews.gr/feed/",
+          "endpoint_id": "ep_9cc3a59d7ffe5ddd035ceb54",
+          "observation": {
+            "endpointId": "ep_9cc3a59d7ffe5ddd035ceb54",
+            "type": "rss",
+            "url": "https://www.ertnews.gr/feed/",
+            "checkedAt": "2026-10-14T13:56:43.783Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 35,
+            "entriesWithUrl": 35,
+            "sampleUrls": [
+              "https://www.ertnews.gr/ert3/to-kratiko-theatro-voreiou-ellados-parousiase-ton-kallitexniko-programmatismo-2026-2027-me-nees-paragoges-kai-draseis/",
+              "https://www.ertnews.gr/eidiseis/ellada/kakokairia-nekros-62xronos-sti-rodo-kopike-sta-dyo-dromos-stin-eyvoia-plimmyres-se-sporades-kai-oropo-pote-ypoxoroun-ta-fainomena/",
+              "https://www.ertnews.gr/perifereiakoi-stathmoi/notio_aigaio/kleista-kai-ayrio-ta-sxoleia-sti-rodo-gia-tin-katagrafi-zimion/"
+            ],
+            "newestContentAt": "2026-10-14T13:53:52.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.ertnews.gr/feed/",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 3318,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.ertnews.gr/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:56:40.464Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.ertnews.gr/",
+            "found_at": "2026-10-14T13:36:56.259Z",
+            "page_sha256": "dfd21caf244deba390c135fb6fdea906d6943bc240ba223296156c61cf21cb6c",
+            "tag": "{\"declared_url\": \"https://www.ertnews.gr/feed/\"}"
+          }
+        }
+      ]
+    },
+    {
+      "country": "LV",
+      "name": "Dienas Bizness",
+      "language": "lv",
+      "homepage": "https://db.lv/",
+      "publisher_reference": "https://db.lv/",
+      "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://db.lv/rss",
+          "endpoint_id": "ep_0dadbaeec9df223ea8892d86",
+          "observation": {
+            "endpointId": "ep_0dadbaeec9df223ea8892d86",
+            "type": "rss",
+            "url": "https://db.lv/rss",
+            "checkedAt": "2026-10-14T13:56:47.350Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 50,
+            "entriesWithUrl": 50,
+            "sampleUrls": [
+              "https://db.lv/zinas/stacijas-laukuma-metu-konkursa-uzvarejis-piedavajums-ar-devizi-migla",
+              "https://db.lv/zinas/par-800-000-eiro-livu-akvaparka-top-divi-jauni-slidkalnini",
+              "https://db.lv/zinas/imintosi-piedava-ieguldit-akcijas-bez-komisijas-maksas"
+            ],
+            "newestContentAt": "2026-10-14T13:38:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://db.lv/rss",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2740,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://db.lv/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:56:44.610Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://db.lv/",
+            "found_at": "2026-10-14T13:37:01.275Z",
+            "page_sha256": "0897609726f8179dde8c5d4ba32c576f4a9b24013fb1c86022039f72c1204037",
+            "tag": "{\"declared_url\": \"https://db.lv/rss\"}"
+          }
+        }
+      ]
+    },
+    {
+      "country": "IN",
+      "name": "Dainik Bhaskar",
+      "language": "hi",
+      "homepage": "https://www.bhaskar.com/",
+      "publisher_reference": "https://www.bhaskar.com/",
+      "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://www.bhaskar.com/sitemaps-v1--sitemap-google-news-1.xml",
+          "endpoint_id": "ep_aee7955ca9bc86d725bd2bdb",
+          "observation": {
+            "endpointId": "ep_aee7955ca9bc86d725bd2bdb",
+            "type": "sitemap",
+            "url": "https://www.bhaskar.com/sitemaps-v1--sitemap-google-news-1.xml",
+            "checkedAt": "2026-10-14T13:56:54.872Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 700,
+            "entriesWithUrl": 700,
+            "sampleUrls": [
+              "https://www.bhaskar.com/local/uttar-pradesh/lucknow/news/lucknow-ashiana-cyber-fraud-gang-arrested-fake-documents-139361095.html",
+              "https://www.bhaskar.com/sports/cricket/news/india-west-indies-t20-hyderabad-match-preview-live-update-139349628.html",
+              "https://www.bhaskar.com/local/bihar/munger/tarapur/news/tarapur-voter-list-verification-campaign-sdo-mahesh-kumar-bihar-news-139359270.html"
+            ],
+            "newestContentAt": "2026-10-14T19:26:52.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.bhaskar.com/sitemaps-v1--sitemap-google-news-1.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 3445,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.bhaskar.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:56:48.964Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://www.bhaskar.com/sitemaps-v1--sitemap-google-news-index.xml",
+            "found_at": "2026-10-14T13:56:51.422Z",
+            "page_sha256": "e6e9ac6d09b663fa7301b2156b53fdd8b93c09b829c97a588adf13adc5dc1c15",
+            "declaration": "<loc>https://www.bhaskar.com/sitemaps-v1--sitemap-google-news-1.xml</loc>",
+            "declared_lastmod": null
+          }
+        }
+      ]
+    },
+    {
+      "country": "PH",
+      "name": "ABS-CBN News",
+      "language": "en",
+      "homepage": "https://www.abs-cbn.com/news",
+      "publisher_reference": "https://www.abs-cbn.com/news",
+      "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://abs-cbn.com/sitemap.xml",
+          "endpoint_id": "ep_cbfa488b730e3b7f1d8438f2",
+          "observation": {
+            "endpointId": "ep_cbfa488b730e3b7f1d8438f2",
+            "type": "sitemap",
+            "url": "https://abs-cbn.com/sitemap.xml",
+            "checkedAt": "2026-10-14T13:56:59.743Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 100,
+            "entriesWithUrl": 100,
+            "sampleUrls": [
+              "https://www.abs-cbn.com/news/nation/2026/10/14/ejercito-concerned-at-reduced-funding-for-vital-programs-in-house-budget-bill-1649",
+              "https://www.abs-cbn.com/news/nation/2026/10/14/qcpd-relieves-police-clearance-chief-amid-probe-into-viral-service-1218",
+              "https://www.abs-cbn.com/sports/othersports/2026/10/14/how-12-year-old-uno-magallanes-learns-to-overcome-failure-in-speedcubing-1643"
+            ],
+            "newestContentAt": "2026-10-14T08:49:43.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.abs-cbn.com/sitemap.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 2,
+            "durationMs": 2341,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://abs-cbn.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:56:57.401Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://www.abs-cbn.com/robots.txt",
+            "found_at": "2026-10-14T13:56:52.587Z",
+            "page_sha256": "5305acf22f85137cf80055d2b7f81854dd75a5ca6ab4c0ac17610d9e679f35b3",
+            "declaration": "Sitemap: https://abs-cbn.com/sitemap.xml"
+          }
+        }
+      ]
+    },
+    {
+      "country": "KZ",
+      "name": "Egemen Qazaqstan",
+      "language": "kk",
+      "homepage": "https://egemen.kz/",
+      "publisher_reference": "https://egemen.kz/",
+      "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://egemen.kz/rss",
+          "endpoint_id": "ep_c0ddb00b38b8b10a897ccfa7",
+          "observation": {
+            "endpointId": "ep_c0ddb00b38b8b10a897ccfa7",
+            "type": "rss",
+            "url": "https://egemen.kz/rss",
+            "checkedAt": "2026-10-14T13:56:58.716Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 50,
+            "entriesWithUrl": 50,
+            "sampleUrls": [
+              "https://egemen.kz/news/qazaqstan-halyq-kenesinin-quryluy-zhalpyulttyq-dialogty-damytudagy-manyzdy-qadam-boldy-sarapshy",
+              "https://egemen.kz/news/memleket-basshysy-vitse-prezidentti-qabyldady",
+              "https://egemen.kz/news/aybek-aytbekov-amerikaga-alem-chempiony-atanu-ushin-gana-bardym"
+            ],
+            "newestContentAt": "2026-10-14T13:48:34.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://egemen.kz/rss",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2810,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://egemen.kz/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:56:55.905Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://egemen.kz/",
+            "found_at": "2026-10-14T13:36:49.000Z",
+            "page_sha256": "30871e3f4e137c4587edaa6f7b790f69ca833bc7d113af66b2d9f8f95e04b974",
+            "tag": "{\"tag\": \"link\", \"rel\": \"alternate\", \"type\": \"application/rss+xml\", \"title\": \"Egemen Qazaqstan - Соңғы жаңалықтар, саясат, экономика, қоғам RSS\", \"href\": \"/rss\"}"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://egemen.kz/news-sitemap.xml",
+          "endpoint_id": "ep_f9b0bb321c61541df7d75c01",
+          "observation": {
+            "endpointId": "ep_f9b0bb321c61541df7d75c01",
+            "type": "sitemap",
+            "url": "https://egemen.kz/news-sitemap.xml",
+            "checkedAt": "2026-10-14T13:57:02.073Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 195,
+            "entriesWithUrl": 195,
+            "sampleUrls": [
+              "https://egemen.kz/news/qazaqstan-halyq-kenesinin-quryluy-zhalpyulttyq-dialogty-damytudagy-manyzdy-qadam-boldy-sarapshy",
+              "https://egemen.kz/news/memleket-basshysy-vitse-prezidentti-qabyldady",
+              "https://egemen.kz/news/aybek-aytbekov-amerikaga-alem-chempiony-atanu-ushin-gana-bardym"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://egemen.kz/news-sitemap.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 3347,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://egemen.kz/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:56:55.905Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/news-sitemap.xml"
+            }
+          },
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://egemen.kz/robots.txt",
+            "found_at": "2026-10-14T13:36:45.000Z",
+            "page_sha256": "d1ce793a00bbf593ea82f11c35c020e8615f27a4e7ce8946907e34f1f3ac6b6a",
+            "declaration": "Sitemap: https://egemen.kz/news-sitemap.xml"
+          }
+        }
+      ]
+    },
+    {
+      "country": "AR",
+      "name": "Noticias Argentinas",
+      "language": "es",
+      "homepage": "https://noticiasargentinas.com/",
+      "publisher_reference": "https://noticiasargentinas.com/",
+      "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://noticiasargentinas.com/rss.xml",
+          "endpoint_id": "ep_3ed58683f5cb82a1eb0159a6",
+          "observation": {
+            "endpointId": "ep_3ed58683f5cb82a1eb0159a6",
+            "type": "rss",
+            "url": "https://noticiasargentinas.com/rss.xml",
+            "checkedAt": "2026-10-14T13:57:03.134Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 20,
+            "entriesWithUrl": 20,
+            "sampleUrls": [
+              "https://noticiasargentinas.com/politica/presupuesto-2027--el-secretario-de-trabajo-ya-expone-en-diputados_a6acf85668298ee386b2d3f40",
+              "https://noticiasargentinas.com/sociedad/dia-mundial-de-la-donacion-de-organos--tejidos-y-trasplantes---por-que-se-celebra-hoy-_a6acf84ff8298ee386b2d34fc",
+              "https://noticiasargentinas.com/sociedad/-el-nino--no-da-tregua-en-el-litoral-y-volvieron-a-cerrar-uno-de-los-circuitos-en-las-cataratas-del-iguazu_a6acf815b8298ee386b2cb180"
+            ],
+            "newestContentAt": "2026-10-14T13:43:25.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://noticiasargentinas.com/rss.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2088,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://noticiasargentinas.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:57:01.046Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://noticiasargentinas.com/",
+            "found_at": "2026-10-14T13:36:54.000Z",
+            "page_sha256": "64d6d85986e1f1e9740f5ce22ba508ba843ed2ad3d808b33eb9b395b6b41c83c",
+            "tag": "{\"tag\": \"link\", \"title\": \"Agencia Noticias Argentinas\", \"href\": \"https://noticiasargentinas.com/rss.xml\", \"rel\": \"alternate\", \"type\": \"application/rss+xml\"}"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://noticiasargentinas.com/sitemap-news.xml",
+          "endpoint_id": "ep_fd9d68bdb83f2164d2eb3173",
+          "observation": {
+            "endpointId": "ep_fd9d68bdb83f2164d2eb3173",
+            "type": "sitemap",
+            "url": "https://noticiasargentinas.com/sitemap-news.xml",
+            "checkedAt": "2026-10-14T13:57:05.382Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 242,
+            "entriesWithUrl": 242,
+            "sampleUrls": [
+              "https://noticiasargentinas.com/deportes/boca--villa-se-doblo-el-tobillo--termino-lesionado-y-arruabarrena-espera-los-estudios--_a6acf85718298ee386b2d409f",
+              "https://noticiasargentinas.com/deportes/wayne-rooney-sobre-las-declaraciones-explosivas-de-lisandro-martinez---le-falto-el-respeto-a-los-companeros-_a6acecd8006650845db88b53b",
+              "https://noticiasargentinas.com/politica/presupuesto-2027--el-secretario-de-trabajo-ya-expone-en-diputados_a6acf85668298ee386b2d3f40"
+            ],
+            "newestContentAt": "2026-10-14T13:52:56.405Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://noticiasargentinas.com/sitemap-news.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2240,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://noticiasargentinas.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:57:01.046Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://noticiasargentinas.com/robots.txt",
+            "found_at": "2026-10-14T13:36:51.000Z",
+            "page_sha256": "dbfbd57aa52428912bf7de4f4213df3c4a12e12ffde3d98007b4489ce8386f22",
+            "declaration": "Sitemap: https://noticiasargentinas.com/sitemap-news.xml"
+          }
+        }
+      ]
+    },
+    {
+      "country": "MA",
+      "name": "Le360",
+      "language": "fr",
+      "homepage": "https://fr.le360.ma/",
+      "publisher_reference": "https://fr.le360.ma/",
+      "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://fr.le360.ma/arc/outboundfeeds/sitemap-news/",
+          "endpoint_id": "ep_a2d45483ceacf57ea95fe3da",
+          "observation": {
+            "endpointId": "ep_a2d45483ceacf57ea95fe3da",
+            "type": "sitemap",
+            "url": "https://fr.le360.ma/arc/outboundfeeds/sitemap-news/",
+            "checkedAt": "2026-10-14T13:57:10.358Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 100,
+            "entriesWithUrl": 100,
+            "sampleUrls": [
+              "https://fr.le360.ma/economie/aeronautique-tuyaux-techniques-et-pieces-moulees-bientot-produits-par-masterduct-morocco-a-nouaceur_34P7BHKWCFANPAUCB4KYGMWIVE/",
+              "https://fr.le360.ma/politique/ahmed-touizi-du-haouz-au-perchoir-de-la-chambre-des-representants_IZSYWF7U6FCLXIUHHKT6OBA7B4/",
+              "https://fr.le360.ma/culture/exposition-mustapha-boujemaoui-un-univers-plastique-entre-transparence-et-metamorphose_JAG74T5XNBBQXOFFUPGQFUCREY/"
+            ],
+            "newestContentAt": "2026-10-14T13:45:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://fr.le360.ma/arc/outboundfeeds/sitemap-news/",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2701,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://fr.le360.ma/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:57:07.656Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://fr.le360.ma/robots.txt",
+            "found_at": "2026-10-14T13:36:54.000Z",
+            "page_sha256": "98ccf527f09da24b301eaa25e38032006151c5f8920a28586d2fd8f87360870c",
+            "declaration": "Sitemap: https://fr.le360.ma/arc/outboundfeeds/sitemap-news/"
+          }
+        }
+      ]
+    },
+    {
+      "country": "CO",
+      "name": "Noticias RCN",
+      "language": "es",
+      "homepage": "https://www.noticiasrcn.com/",
+      "publisher_reference": "https://www.noticiasrcn.com/",
+      "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://www.noticiasrcn.com/sitemaps/recent_articles.xml.gz",
+          "endpoint_id": "ep_731917340ca7f66ad47b8b3f",
+          "observation": {
+            "endpointId": "ep_731917340ca7f66ad47b8b3f",
+            "type": "sitemap",
+            "url": "https://www.noticiasrcn.com/sitemaps/recent_articles.xml.gz",
+            "checkedAt": "2026-10-14T13:57:11.850Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 511,
+            "entriesWithUrl": 511,
+            "sampleUrls": [
+              "https://www.noticiasrcn.com/deportes/carlos-gomez-expulsado-en-un-minuto-vs-boca-juniors-1071360",
+              "https://www.noticiasrcn.com/economia/precio-del-dolar-en-colombia-hoy-14-de-octubre-1071364",
+              "https://www.noticiasrcn.com/opinion/areandina-2026/la-felicidad-en-tiempos-de-ia-sin-etica-y-proposito-la-educacion-se-vuelve-eficiente-pero-vacia-1070312"
+            ],
+            "newestContentAt": "2026-10-14T13:50:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.noticiasrcn.com/sitemaps/recent_articles.xml.gz",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2207,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.noticiasrcn.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:57:04.473Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://www.noticiasrcn.com/sitemapindex",
+            "found_at": "2026-10-14T13:57:09.637Z",
+            "page_sha256": "adffb7b897c81d5831dff3aeb8291aecfc1c613f7cc34f3f5bed59dd12bcc0e1",
+            "declaration": "<loc>https://www.noticiasrcn.com/sitemaps/recent_articles.xml.gz</loc>",
+            "declared_lastmod": "2026-10-14T13:50+00:00"
+          }
+        }
+      ]
+    },
+    {
+      "country": "CO",
+      "name": "Noticias Caracol",
+      "language": "es",
+      "homepage": "https://www.noticiascaracol.com/",
+      "publisher_reference": "https://www.noticiascaracol.com/",
+      "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://www.noticiascaracol.com/content-sitemap-latest.xml",
+          "endpoint_id": "ep_e0b7cc13071dc996c9a9d412",
+          "observation": {
+            "endpointId": "ep_e0b7cc13071dc996c9a9d412",
+            "type": "sitemap",
+            "url": "https://www.noticiascaracol.com/content-sitemap-latest.xml",
+            "checkedAt": "2026-10-14T13:57:19.372Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 81,
+            "entriesWithUrl": 81,
+            "sampleUrls": [
+              "https://www.noticiascaracol.com/politica/presidente-llama-a-calificar-servicios-a-comandante-de-policia-de-santa-marta-tras-fuga-de-41-presos-rg10",
+              "https://www.noticiascaracol.com/mundo/nino-de-4-anos-murio-tras-ser-atacado-por-un-pitbull-autoridades-investigan-a-su-madrina-cb20",
+              "https://www.noticiascaracol.com/colombia/que-causo-el-accidente-de-el-andariego-en-sonson-antioquia-esto-explico-el-cantante-rg10"
+            ],
+            "newestContentAt": "2026-10-14T13:41:21.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.noticiascaracol.com/content-sitemap-latest.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2582,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.noticiascaracol.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:57:02.861Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://www.noticiascaracol.com/content-sitemap.xml",
+            "found_at": "2026-10-14T13:57:16.784Z",
+            "page_sha256": "38eb7c6c5de11ad37df934fc48e17bb981735c799ac3b972a6ee29f3c22737da",
+            "declaration": "<loc>https://www.noticiascaracol.com/content-sitemap-latest.xml</loc>",
+            "declared_lastmod": null
+          }
+        }
+      ]
+    },
+    {
+      "country": "IR",
+      "name": "IRIB News",
+      "language": "fa",
+      "homepage": "https://www.irib-news.ir/",
+      "publisher_reference": "https://www.irib-news.ir/",
+      "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "rss",
+          "url": "https://www.irib-news.ir/fa/rss/allnews",
+          "endpoint_id": "ep_0f09c3ae7f7ac3778cb24e7d",
+          "observation": {
+            "endpointId": "ep_0f09c3ae7f7ac3778cb24e7d",
+            "type": "rss",
+            "url": "https://www.irib-news.ir/fa/rss/allnews",
+            "checkedAt": "2026-10-14T13:57:00.174Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 100,
+            "entriesWithUrl": 100,
+            "sampleUrls": [
+              "https://www.irib-news.ir/fa/news/5938860/%D8%B1%D8%A6%DB%8C%D8%B3-%D8%AC%D9%87%D8%A7%D8%AF-%DA%A9%D8%B4%D8%A7%D9%88%D8%B1%D8%B2%DB%8C-%D8%A2%D8%B0%D8%B1%D8%A8%D8%A7%DB%8C%D8%AC%D8%A7%D9%86-%D8%BA%D8%B1%D8%A8%DB%8C-%D9%86%D8%B1%D8%AE-%D8%AE%D8%B1%DB%8C%D8%AF-%D8%B3%DB%8C%D8%A8-%D8%B2%DB%8C%D8%B1%D8%AF%D8%B1%D8%AE%D8%AA%DB%8C-%D9%88%D8%A7%D9%82%D8%B9%DB%8C-%D8%B3%D8%A7%D8%B2%DB%8C-%D8%B4%D9%88%D8%AF",
+              "https://www.irib-news.ir/fa/news/5938847/%D8%B3%D9%82%D9%88%D8%B7-%D9%82%DB%8C%D9%85%D8%AA-%D8%AF%D9%84%D8%A7%D8%B1-%D8%A7%D8%B2-%DA%A9%D8%A7%D9%86%D8%A7%D9%84-270-%D8%A8%D9%87-250-%D9%87%D8%B2%D8%A7%D8%B1-%D8%AA%D9%88%D9%85%D8%A7%D9%86%DB%8C",
+              "https://www.irib-news.ir/fa/news/5938858/%D8%B3%D8%B1%D9%85%D8%A7%DB%8C%D9%87-%DA%AF%D8%B0%D8%A7%D8%B1%DB%8C-%D9%81%D8%B1%D9%87%D9%86%DA%AF%DB%8C-%D9%81%D9%88%D9%84%D8%A7%D8%AF-%D8%AE%D8%B1%D8%A7%D8%B3%D8%A7%D9%86-%D8%AF%D8%B1-%D8%AD%D9%81%D8%A7%D8%B8%D8%AA-%D8%A7%D8%B2-%D9%85%D8%AD%DB%8C%D8%B7-%D8%B2%DB%8C%D8%B3%D8%AA"
+            ],
+            "newestContentAt": "2026-10-14T13:50:11.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.irib-news.ir/fa/rss/allnews",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 3042,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.irib-news.ir/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:56:57.133Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.irib-news.ir/",
+            "found_at": "2026-10-14T13:36:50.000Z",
+            "page_sha256": "805d1f0accd909eb5d4679976dc6ddd4f1bd88097188ff1a2db3d40a7ba31222",
+            "tag": "{\"tag\": \"link\", \"rel\": \"alternate\", \"type\": \"application/rss+xml\", \"title\": \"RSS FEED\", \"href\": \"/fa/rss/allnews\"}"
+          }
+        },
+        {
+          "type": "sitemap",
+          "url": "https://www.irib-news.ir/fa-sitemap-news",
+          "endpoint_id": "ep_05eb10f5477d3d577b139e0a",
+          "observation": {
+            "endpointId": "ep_05eb10f5477d3d577b139e0a",
+            "type": "sitemap",
+            "url": "https://www.irib-news.ir/fa-sitemap-news",
+            "checkedAt": "2026-10-14T13:57:21.507Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 1000,
+            "entriesWithUrl": 1000,
+            "sampleUrls": [
+              "https://www.irib-news.ir/fa/news/5938868/%D8%AE%D9%88%D9%86-%D8%B4%D9%87%D8%AF%D8%A7-%D9%82%D8%AF%D8%B1%D8%AA-%D8%A8%D8%A7%D8%B2%D8%AF%D8%A7%D8%B1%D9%86%D8%AF%DA%AF%DB%8C-%D9%88-%D8%B1%D9%88%D8%AD-%D9%85%D9%82%D8%A7%D9%88%D9%85%D8%AA-%D8%AC%D9%87%D8%A7%D9%86%DB%8C-%D8%B1%D8%A7-%D8%AA%D8%AB%D8%A8%DB%8C%D8%AA-%DA%A9%D8%B1%D8%AF",
+              "https://www.irib-news.ir/fa/news/5938869/%D8%AA%D8%B5%D8%A7%D8%AF%D9%81-%D8%B2%D9%86%D8%AC%DB%8C%D8%B1%D9%87-%D8%A7%DB%8C-%D8%AF%D8%B1-%D8%A8%D8%B2%D8%B1%DA%AF%D8%B1%D8%A7%D9%87-%DA%A9%D8%A7%D8%B4%D8%A7%D9%86-%D8%A7%D8%B5%D9%81%D9%87%D8%A7%D9%86-%D8%A8%D8%A7-6-%D9%85%D8%B5%D8%AF%D9%88%D9%85-%D9%88%DB%8C%DA%A9-%D9%81%D9%88%D8%AA%DB%8C",
+              "https://www.irib-news.ir/fa/news/5938853/%D8%A7%D9%86%D8%AA%D9%82%D8%A7%D8%AF-%D8%AE%D9%84%DB%8C%D9%84%DB%8C-%D8%A7%D8%B2-%D8%A7%D8%AF%D8%A7%D9%85%D9%87-%D8%B1%D9%88%D8%B4-%D9%87%D8%A7%DB%8C-%D8%B3%D9%86%D8%AA%DB%8C-%D8%AF%D8%B1-%DA%A9%D8%A7%D9%87%D8%B4-%D8%AC%D9%85%D8%B9%DB%8C%D8%AA-%DA%A9%DB%8C%D9%81%D8%B1%DB%8C"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.irib-news.ir/fa-sitemap-news",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 5001,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.irib-news.ir/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:56:57.133Z",
+            "decision": "allowed",
+            "matched_rule": null
+          },
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://www.irib-news.ir/robots.txt",
+            "found_at": "2026-10-14T13:36:47.000Z",
+            "page_sha256": "b5bc79fd01b366bb0d582c386f0c7189897c5f771ccc1fdad265b3f317f15319",
+            "declaration": "Sitemap: https://www.irib-news.ir/fa-sitemap-news"
+          }
+        }
+      ]
+    },
+    {
+      "country": "TR",
+      "name": "Anadolu Agency",
+      "language": "tr",
+      "homepage": "https://www.aa.com.tr/en",
+      "publisher_reference": "https://www.aa.com.tr/en",
+      "scope_note": "Public editorial article URLs from verified official declarations; feed/sitemap coverage is partial and does not establish all publisher output.",
+      "kind": "new_domain",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://www.aa.com.tr/tr/SiteMap/News",
+          "endpoint_id": "ep_c32c2de8e265b5922a0782bd",
+          "observation": {
+            "endpointId": "ep_c32c2de8e265b5922a0782bd",
+            "type": "sitemap",
+            "url": "https://www.aa.com.tr/tr/SiteMap/News",
+            "checkedAt": "2026-10-14T13:57:08.201Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 1000,
+            "entriesWithUrl": 1000,
+            "sampleUrls": [
+              "https://www.aa.com.tr/tr/dunya/suudi-arabistanin-baskenti-riyada-dusen-fuze-sarapnelleri-nedeniyle-1-kisi-yaralandi/4088647",
+              "https://www.aa.com.tr/tr/gundem/cumhurbaskani-erdogan-yuksek-mahkeme-baskanlariyla-yemekte-bir-araya-geldi/4088637",
+              "https://www.aa.com.tr/tr/kultur/14-bogazici-film-festivalinde-uluslararasi-yarismaya-10-film-secildi/4088635"
+            ],
+            "newestContentAt": "2026-10-14T09:59:40.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.aa.com.tr/tr/SiteMap/News",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 4294,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.aa.com.tr/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:56:57.170Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://www.aa.com.tr/tr/Sitemap/index",
+            "found_at": "2026-10-14T13:57:03.905Z",
+            "page_sha256": "dce6e31136ab5f634f6543acb2a02682af12c0b53b5f3cef358ad97aa110151b",
+            "declaration": "<loc>https://www.aa.com.tr/tr/SiteMap/News</loc>",
+            "declared_lastmod": null
+          }
+        }
+      ]
+    },
+    {
+      "country": "TR",
+      "name": "Anadolu Agency — English",
+      "language": "en",
+      "homepage": "https://www.aa.com.tr/en",
+      "publisher_reference": "https://www.aa.com.tr/en",
+      "scope_note": "English edition of Anadolu Agency public news sitemap; same publisher brand as the Turkish edition, not a separate company or complete wire feed.",
+      "kind": "existing_publisher_additional_language",
+      "endpoints": [
+        {
+          "type": "sitemap",
+          "url": "https://www.aa.com.tr/en/SiteMap/News",
+          "endpoint_id": "ep_0e5d5d0ad37ce9991ba4ea03",
+          "observation": {
+            "endpointId": "ep_0e5d5d0ad37ce9991ba4ea03",
+            "type": "sitemap",
+            "url": "https://www.aa.com.tr/en/SiteMap/News",
+            "checkedAt": "2026-10-14T13:57:16.742Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 1000,
+            "entriesWithUrl": 1000,
+            "sampleUrls": [
+              "https://www.aa.com.tr/en/economy/imf-chief-warns-growth-alone-cannot-bring-us-debt-under-control/4088651",
+              "https://www.aa.com.tr/en/world/interview-you-re-not-alone-the-truth-will-come-out-nobel-winner-navi-pillay-on-global-support-for-palestinians/4088648",
+              "https://www.aa.com.tr/en/middle-east/lebanese-president-iranian-foreign-minister-stress-diplomatic-solutions-to-regional-conflicts/4088645"
+            ],
+            "newestContentAt": "2026-10-14T09:57:47.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.aa.com.tr/en/SiteMap/News",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 5105,
+            "validatorVersion": "2"
+          },
+          "access_review": {
+            "robots_url": "https://www.aa.com.tr/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T13:56:57.170Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          },
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://www.aa.com.tr/en/Sitemap/index",
+            "found_at": "2026-10-14T13:57:11.634Z",
+            "page_sha256": "423fd819f43856c8c411aa7e71bdbb6fab553293d985d0164611cda208726e9f",
+            "declaration": "<loc>https://www.aa.com.tr/en/SiteMap/News</loc>",
+            "declared_lastmod": null
+          }
+        }
+      ]
+    }
+  ]
+}

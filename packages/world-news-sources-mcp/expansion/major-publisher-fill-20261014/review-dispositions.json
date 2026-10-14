@@ -1,0 +1,796 @@
+{
+  "version": 1,
+  "scope": "81 preselected missing anchors; not an exhaustive national publisher census",
+  "registered_anchors": 16,
+  "unregistered_anchors": 65,
+  "status_counts": {
+    "publisher_robots_disallows": 4,
+    "only_index_archive_or_non_article_xml_verified": 6,
+    "no_current_exact_declaration_retrieved": 34,
+    "declaration_found_but_no_adoptable_article_xml": 11,
+    "registered_and_baseline_initialized": 16,
+    "policy_or_editorial_scope_hold": 9,
+    "longer_host_delay_requires_review": 1
+  },
+  "candidate_records_semantics": "Bounded candidate-result records; includes cached, duplicate, denied and failed records. Not HTTP request counts or publisher census.",
+  "rows": [
+    {
+      "country": "KW",
+      "publisher": "Al Jarida",
+      "status": "publisher_robots_disallows",
+      "reasons": [
+        "ROBOTS_DISALLOWED"
+      ],
+      "candidate_records_count": 1
+    },
+    {
+      "country": "KW",
+      "publisher": "Al Qabas",
+      "status": "only_index_archive_or_non_article_xml_verified",
+      "reasons": [
+        "urlset"
+      ],
+      "candidate_records_count": 1
+    },
+    {
+      "country": "BH",
+      "publisher": "Bahrain News Agency / BNA",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "BH",
+      "publisher": "Al Ayam",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "KW",
+      "publisher": "Al Rai Kuwait",
+      "status": "publisher_robots_disallows",
+      "reasons": [
+        "ROBOTS_DISALLOWED",
+        "sitemapindex",
+        "urlset"
+      ],
+      "candidate_records_count": 4
+    },
+    {
+      "country": "BH",
+      "publisher": "Akhbar Al Khaleej",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "KW",
+      "publisher": "Al Anba",
+      "status": "only_index_archive_or_non_article_xml_verified",
+      "reasons": [
+        "sitemapindex",
+        "urlset"
+      ],
+      "candidate_records_count": 4
+    },
+    {
+      "country": "KW",
+      "publisher": "Kuwait News Agency / KUNA",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "BH",
+      "publisher": "Gulf Daily News / Gulf Digital News",
+      "status": "declaration_found_but_no_adoptable_article_xml",
+      "reasons": [
+        "WRONG_ENDPOINT_FORMAT",
+        "urlset"
+      ],
+      "candidate_records_count": 2
+    },
+    {
+      "country": "KW",
+      "publisher": "Kuwait Times",
+      "status": "registered_and_baseline_initialized",
+      "reasons": [
+        "rss",
+        "sitemapindex",
+        "urlset"
+      ],
+      "candidate_records_count": 4,
+      "registered_source_ids": [
+        "src_d3c8639761d78e4949f05993"
+      ],
+      "initialized_endpoint_ids": [
+        "ep_c8b745d4785ba2a423b6d7f9"
+      ]
+    },
+    {
+      "country": "BH",
+      "publisher": "The Daily Tribune / News of Bahrain",
+      "status": "registered_and_baseline_initialized",
+      "reasons": [
+        "rss",
+        "sitemapindex",
+        "urlset"
+      ],
+      "candidate_records_count": 3,
+      "registered_source_ids": [
+        "src_885b7cf23c5f4fa29fe6b5e6"
+      ],
+      "initialized_endpoint_ids": [
+        "ep_5ea8f64b03b498de39a7902c",
+        "ep_6f768751d323b73abd74cd81"
+      ]
+    },
+    {
+      "country": "PK",
+      "publisher": "PTV News",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "MN",
+      "publisher": "Unuudur",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "PK",
+      "publisher": "Associated Press of Pakistan",
+      "status": "registered_and_baseline_initialized",
+      "reasons": [
+        "rss"
+      ],
+      "candidate_records_count": 1,
+      "registered_source_ids": [
+        "src_6b020fc8879fb1032bb1d4da"
+      ],
+      "initialized_endpoint_ids": [
+        "ep_1bd1d8ac44b80fa9bc40ff65"
+      ]
+    },
+    {
+      "country": "JO",
+      "publisher": "Ad-Dustour",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "JO",
+      "publisher": "Jordan News Agency / Petra",
+      "status": "publisher_robots_disallows",
+      "reasons": [
+        "ROBOTS_DISALLOWED"
+      ],
+      "candidate_records_count": 1
+    },
+    {
+      "country": "JO",
+      "publisher": "The Jordan Times",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "MN",
+      "publisher": "MONTSAME",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "PK",
+      "publisher": "Business Recorder",
+      "status": "registered_and_baseline_initialized",
+      "reasons": [
+        "HTTP_404",
+        "rss",
+        "urlset"
+      ],
+      "candidate_records_count": 3,
+      "registered_source_ids": [
+        "src_21c90b9a64add2c7fe2a85ad"
+      ],
+      "initialized_endpoint_ids": [
+        "ep_68fed7e14f94a3ddccb5b4ae"
+      ]
+    },
+    {
+      "country": "OM",
+      "publisher": "Oman News Agency / ONA",
+      "status": "declaration_found_but_no_adoptable_article_xml",
+      "reasons": [
+        "ROBOTS_UNKNOWN"
+      ],
+      "candidate_records_count": 3
+    },
+    {
+      "country": "OM",
+      "publisher": "Al Watan Oman",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "MN",
+      "publisher": "Mongolian National Broadcaster / MNB",
+      "status": "registered_and_baseline_initialized",
+      "reasons": [
+        "rss",
+        "urlset"
+      ],
+      "candidate_records_count": 4,
+      "registered_source_ids": [
+        "src_c530c0058d848fb019dc214a"
+      ],
+      "initialized_endpoint_ids": [
+        "ep_7e66f5de0aecbb6a68561544",
+        "ep_ac3f0ec87c2596c31afeb93d"
+      ]
+    },
+    {
+      "country": "JO",
+      "publisher": "Al Rai Jordan",
+      "status": "only_index_archive_or_non_article_xml_verified",
+      "reasons": [
+        "sitemapindex",
+        "urlset"
+      ],
+      "candidate_records_count": 3
+    },
+    {
+      "country": "JO",
+      "publisher": "Roya News",
+      "status": "only_index_archive_or_non_article_xml_verified",
+      "reasons": [
+        "HTTP_500",
+        "sitemapindex",
+        "urlset"
+      ],
+      "candidate_records_count": 3
+    },
+    {
+      "country": "DE",
+      "publisher": "Deutsche Presse-Agentur (dpa)",
+      "status": "policy_or_editorial_scope_hold",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "CH",
+      "publisher": "Keystone-SDA",
+      "status": "policy_or_editorial_scope_hold",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "GB",
+      "publisher": "The Times and The Sunday Times",
+      "status": "publisher_robots_disallows",
+      "reasons": [
+        "ROBOTS_DISALLOWED"
+      ],
+      "candidate_records_count": 3
+    },
+    {
+      "country": "SE",
+      "publisher": "TT Nyhetsbyrån",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "NO",
+      "publisher": "Norsk Telegrambyrå (NTB)",
+      "status": "policy_or_editorial_scope_hold",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "ES",
+      "publisher": "Agencia EFE",
+      "status": "declaration_found_but_no_adoptable_article_xml",
+      "reasons": [
+        "HTTP_429"
+      ],
+      "candidate_records_count": 1
+    },
+    {
+      "country": "PT",
+      "publisher": "Lusa",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "DK",
+      "publisher": "Ritzau",
+      "status": "policy_or_editorial_scope_hold",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "FI",
+      "publisher": "Suomen Tietotoimisto (STT)",
+      "status": "policy_or_editorial_scope_hold",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "AT",
+      "publisher": "Austria Presse Agentur (APA)",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "NL",
+      "publisher": "Algemeen Nederlands Persbureau (ANP)",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "IE",
+      "publisher": "Business Post",
+      "status": "declaration_found_but_no_adoptable_article_xml",
+      "reasons": [
+        "INVALID_XML"
+      ],
+      "candidate_records_count": 1
+    },
+    {
+      "country": "RO",
+      "publisher": "TVR Info",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "RO",
+      "publisher": "AGERPRES",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "LU",
+      "publisher": "Tageblatt",
+      "status": "policy_or_editorial_scope_hold",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "UA",
+      "publisher": "Suspilne News",
+      "status": "declaration_found_but_no_adoptable_article_xml",
+      "reasons": [
+        "ROBOTS_UNKNOWN"
+      ],
+      "candidate_records_count": 2
+    },
+    {
+      "country": "FR",
+      "publisher": "Agence France-Presse (AFP)",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "GR",
+      "publisher": "ERT News",
+      "status": "registered_and_baseline_initialized",
+      "reasons": [
+        "rss"
+      ],
+      "candidate_records_count": 1,
+      "registered_source_ids": [
+        "src_ecf48823cd0ab17705bea3e3"
+      ],
+      "initialized_endpoint_ids": [
+        "ep_9cc3a59d7ffe5ddd035ceb54"
+      ]
+    },
+    {
+      "country": "GR",
+      "publisher": "Athens-Macedonian News Agency (ANA-MPA)",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "BE",
+      "publisher": "Belga",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "HR",
+      "publisher": "HINA",
+      "status": "declaration_found_but_no_adoptable_article_xml",
+      "reasons": [
+        "HTTP_403"
+      ],
+      "candidate_records_count": 1
+    },
+    {
+      "country": "IS",
+      "publisher": "Viðskiptablaðið",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "EE",
+      "publisher": "Baltic News Service Estonia (BNS)",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "CN",
+      "publisher": "CCTV News",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "HU",
+      "publisher": "Magyar Távirati Iroda (MTI)",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "LT",
+      "publisher": "Baltic News Service Lithuania (BNS)",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "ID",
+      "publisher": "Harian Kompas / Kompas.id",
+      "status": "policy_or_editorial_scope_hold",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "IN",
+      "publisher": "DD News",
+      "status": "declaration_found_but_no_adoptable_article_xml",
+      "reasons": [
+        "ROBOTS_UNKNOWN"
+      ],
+      "candidate_records_count": 1
+    },
+    {
+      "country": "LV",
+      "publisher": "Dienas Bizness",
+      "status": "registered_and_baseline_initialized",
+      "reasons": [
+        "rss",
+        "sitemapindex"
+      ],
+      "candidate_records_count": 2,
+      "registered_source_ids": [
+        "src_92470cfe231c2ad8037da44f"
+      ],
+      "initialized_endpoint_ids": [
+        "ep_0dadbaeec9df223ea8892d86"
+      ]
+    },
+    {
+      "country": "ID",
+      "publisher": "TVRI",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "LV",
+      "publisher": "LETA",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "IN",
+      "publisher": "Press Trust of India",
+      "status": "only_index_archive_or_non_article_xml_verified",
+      "reasons": [
+        "sitemapindex",
+        "urlset"
+      ],
+      "candidate_records_count": 2
+    },
+    {
+      "country": "TW",
+      "publisher": "Commercial Times",
+      "status": "declaration_found_but_no_adoptable_article_xml",
+      "reasons": [
+        "HTTP_403"
+      ],
+      "candidate_records_count": 2
+    },
+    {
+      "country": "MY",
+      "publisher": "The Edge Malaysia",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "PH",
+      "publisher": "Philippine News Agency",
+      "status": "declaration_found_but_no_adoptable_article_xml",
+      "reasons": [
+        "ROBOTS_UNKNOWN"
+      ],
+      "candidate_records_count": 1
+    },
+    {
+      "country": "MY",
+      "publisher": "RTM / Berita RTM",
+      "status": "declaration_found_but_no_adoptable_article_xml",
+      "reasons": [
+        "WRONG_ENDPOINT_FORMAT"
+      ],
+      "candidate_records_count": 1
+    },
+    {
+      "country": "IR",
+      "publisher": "Donya-e-Eqtesad",
+      "status": "policy_or_editorial_scope_hold",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "IN",
+      "publisher": "Dainik Bhaskar",
+      "status": "registered_and_baseline_initialized",
+      "reasons": [
+        "sitemapindex",
+        "urlset"
+      ],
+      "candidate_records_count": 3,
+      "registered_source_ids": [
+        "src_6abd40440b1dfe2064d9603e"
+      ],
+      "initialized_endpoint_ids": [
+        "ep_aee7955ca9bc86d725bd2bdb"
+      ]
+    },
+    {
+      "country": "PH",
+      "publisher": "ABS-CBN News",
+      "status": "registered_and_baseline_initialized",
+      "reasons": [
+        "urlset"
+      ],
+      "candidate_records_count": 1,
+      "registered_source_ids": [
+        "src_2d984701b79faf567280584e"
+      ],
+      "initialized_endpoint_ids": [
+        "ep_cbfa488b730e3b7f1d8438f2"
+      ]
+    },
+    {
+      "country": "KZ",
+      "publisher": "Qazaqstan TV",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "CA",
+      "publisher": "The Canadian Press",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "SV",
+      "publisher": "La Prensa Gráfica",
+      "status": "policy_or_editorial_scope_hold",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "BR",
+      "publisher": "Agência Brasil",
+      "status": "longer_host_delay_requires_review",
+      "reasons": [
+        "ROBOTS_CRAWL_DELAY_POLICY_REVIEW"
+      ],
+      "candidate_records_count": 3
+    },
+    {
+      "country": "SV",
+      "publisher": "El Faro",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "KZ",
+      "publisher": "Egemen Qazaqstan",
+      "status": "registered_and_baseline_initialized",
+      "reasons": [
+        "DUPLICATE_PUBLISHER_CHECK",
+        "rss",
+        "sitemapindex",
+        "urlset"
+      ],
+      "candidate_records_count": 4,
+      "registered_source_ids": [
+        "src_dce394149f81641652333e5e"
+      ],
+      "initialized_endpoint_ids": [
+        "ep_c0ddb00b38b8b10a897ccfa7",
+        "ep_f9b0bb321c61541df7d75c01"
+      ]
+    },
+    {
+      "country": "MA",
+      "publisher": "Maghreb Arab Press / MAP",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "AR",
+      "publisher": "Noticias Argentinas",
+      "status": "registered_and_baseline_initialized",
+      "reasons": [
+        "atom",
+        "rss",
+        "urlset"
+      ],
+      "candidate_records_count": 3,
+      "registered_source_ids": [
+        "src_44b163cfa7b7f9bd6012cac4"
+      ],
+      "initialized_endpoint_ids": [
+        "ep_3ed58683f5cb82a1eb0159a6",
+        "ep_fd9d68bdb83f2164d2eb3173"
+      ]
+    },
+    {
+      "country": "MA",
+      "publisher": "2M",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "EG",
+      "publisher": "Al-Ahram / Ahram Online",
+      "status": "declaration_found_but_no_adoptable_article_xml",
+      "reasons": [
+        "HTTP_403"
+      ],
+      "candidate_records_count": 1
+    },
+    {
+      "country": "EG",
+      "publisher": "Middle East News Agency / MENA",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "MA",
+      "publisher": "Le360",
+      "status": "registered_and_baseline_initialized",
+      "reasons": [
+        "sitemapindex",
+        "urlset"
+      ],
+      "candidate_records_count": 2,
+      "registered_source_ids": [
+        "src_7237bca60479c192fc7e6901"
+      ],
+      "initialized_endpoint_ids": [
+        "ep_a2d45483ceacf57ea95fe3da"
+      ]
+    },
+    {
+      "country": "IL",
+      "publisher": "KAN",
+      "status": "no_current_exact_declaration_retrieved",
+      "reasons": [],
+      "candidate_records_count": 0
+    },
+    {
+      "country": "CO",
+      "publisher": "Noticias RCN",
+      "status": "registered_and_baseline_initialized",
+      "reasons": [
+        "WRONG_ENDPOINT_FORMAT",
+        "sitemapindex",
+        "urlset"
+      ],
+      "candidate_records_count": 5,
+      "registered_source_ids": [
+        "src_e6c5e4f9c074d2bd25db9e18"
+      ],
+      "initialized_endpoint_ids": [
+        "ep_731917340ca7f66ad47b8b3f"
+      ]
+    },
+    {
+      "country": "CO",
+      "publisher": "Noticias Caracol",
+      "status": "registered_and_baseline_initialized",
+      "reasons": [
+        "DTD_NOT_ALLOWED",
+        "sitemapindex",
+        "urlset"
+      ],
+      "candidate_records_count": 5,
+      "registered_source_ids": [
+        "src_d10ff0ffbf7efe0109172db8"
+      ],
+      "initialized_endpoint_ids": [
+        "ep_e0b7cc13071dc996c9a9d412"
+      ]
+    },
+    {
+      "country": "EG",
+      "publisher": "Youm7",
+      "status": "only_index_archive_or_non_article_xml_verified",
+      "reasons": [
+        "WRONG_ENDPOINT_FORMAT",
+        "sitemapindex"
+      ],
+      "candidate_records_count": 3
+    },
+    {
+      "country": "IR",
+      "publisher": "IRIB News",
+      "status": "registered_and_baseline_initialized",
+      "reasons": [
+        "BODY_TOO_LARGE",
+        "rss",
+        "sitemapindex",
+        "urlset"
+      ],
+      "candidate_records_count": 5,
+      "registered_source_ids": [
+        "src_11a13d9ec70985bd93ab1cd7"
+      ],
+      "initialized_endpoint_ids": [
+        "ep_0f09c3ae7f7ac3778cb24e7d",
+        "ep_05eb10f5477d3d577b139e0a"
+      ]
+    },
+    {
+      "country": "TR",
+      "publisher": "Anadolu Agency",
+      "status": "registered_and_baseline_initialized",
+      "reasons": [
+        "sitemapindex",
+        "urlset"
+      ],
+      "candidate_records_count": 6,
+      "registered_source_ids": [
+        "src_2309f5d6c018332bd877f80c",
+        "src_49d586ca0bdcc623371c5221"
+      ],
+      "initialized_endpoint_ids": [
+        "ep_c32c2de8e265b5922a0782bd",
+        "ep_0e5d5d0ad37ce9991ba4ea03"
+      ]
+    }
+  ]
+}

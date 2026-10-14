@@ -1,0 +1,602 @@
+{
+  "version": 1,
+  "generated_at_utc": "2026-10-14T13:34:16.570121+00:00",
+  "scope": "Kuwait and Bahrain selected missing anchors; official declaration discovery only, not collection validation or registration.",
+  "audit_source": "expansion/major-publisher-audit-20261014/audit.json",
+  "policy": "No candidate XML endpoints fetched. Root owns collector-policy checks, XML validation and registry changes. RSS explicitly disallowed by publisher robots is flagged and not proposed as eligible. Exact URLs originate in official robots, homepage alternate metadata or publisher RSS service pages.",
+  "summary": {
+    "anchors": 11,
+    "anchors_with_exact_declared_candidates": 6,
+    "declared_candidates": 13,
+    "blocked_exact_candidates": 1
+  },
+  "items": [
+    {
+      "country": "KW",
+      "name": "Kuwait News Agency / KUNA",
+      "website": "https://www.kuna.net.kw/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.kuna.net.kw/ArticleDetails.aspx?id=3236259",
+          "what_supports": "Official KUNA page identifies the Kuwait News Agency and its services."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:32:40Z",
+      "candidates": [],
+      "documents": [
+        {
+          "request_url": "https://www.kuna.net.kw/robots.txt",
+          "error": "<urlopen error timed out>"
+        },
+        {
+          "request_url": "https://www.kuna.net.kw/",
+          "error": "<urlopen error timed out>",
+          "relevant_tags": []
+        }
+      ],
+      "uncertainties": [
+        "Bounded local homepage and robots GET each timed out; web homepage also timed out and audited identity article not accessible. No endpoint was guessed. Revisit from Oracle only if policy/declarations can be read."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "KW",
+      "name": "Al Qabas",
+      "website": "https://www.alqabas.com/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.alqabas.com/about-us/",
+          "what_supports": "Official about page identifies the Kuwaiti newspaper and publisher."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:32:40Z",
+      "candidates": [
+        {
+          "url": "https://www.alqabas.com/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.alqabas.com/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "observed_at_utc": "2026-10-14T13:32:40Z",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "not_disallowed_by_retrieved_wildcard_robots"
+        }
+      ],
+      "documents": [
+        {
+          "request_url": "https://www.alqabas.com/robots.txt",
+          "url": "https://www.alqabas.com/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=UTF-8",
+          "sha256": "bec83b12d33d623e469e7e02308981d684cd818e6a26109439726c72d9765bf8",
+          "sitemap_declarations": [
+            "https://www.alqabas.com/sitemap.xml"
+          ]
+        },
+        {
+          "request_url": "https://www.alqabas.com/",
+          "url": "https://www.alqabas.com/",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "c063ab045a15aec72323eaf105dd6f0bc388218c333c314290b0ade63db6e478",
+          "relevant_tags": []
+        }
+      ],
+      "uncertainties": [],
+      "xml_validated": false
+    },
+    {
+      "country": "KW",
+      "name": "Al Rai Kuwait",
+      "website": "https://www.alraimedia.com/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.alraimedia.com/",
+          "what_supports": "Official publisher homepage identifies this newsroom and its editorial scope."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:32:40Z",
+      "candidates": [
+        {
+          "url": "https://www.alraimedia.com/sitemaps/sitemap_0.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.alraimedia.com/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "observed_at_utc": "2026-10-14T13:32:40Z",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "not_disallowed_by_retrieved_wildcard_robots"
+        },
+        {
+          "url": "https://www.alraimedia.com/rssFeed/0",
+          "type": "rss",
+          "declaration_url": "https://www.alraimedia.com/rss",
+          "declaration_method": "Official RSS service page hyperlink",
+          "observed_at_utc": "2026-10-14T13:32:40Z",
+          "xml_validated": false,
+          "status": "blocked_by_publisher_robots",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "explicit Disallow /rssFeed/* in User-agent: *"
+        }
+      ],
+      "documents": [
+        {
+          "request_url": "https://www.alraimedia.com/robots.txt",
+          "url": "https://www.alraimedia.com/robots.txt",
+          "status": 200,
+          "content_type": "text/plain",
+          "sha256": "6284924add77a33a24671fff20eab05bbf84a777eca1d4561d86f6a0d98fb27f",
+          "sitemap_declarations": [
+            "https://www.alraimedia.com/sitemaps/sitemap_0.xml"
+          ],
+          "relevant_robots_directives": [
+            "User-agent: *",
+            "Disallow: /rss",
+            "Disallow: /rssFeed/*"
+          ]
+        },
+        {
+          "request_url": "https://www.alraimedia.com/",
+          "url": "https://www.alraimedia.com/",
+          "status": 200,
+          "content_type": "text/html; charset=UTF-8",
+          "sha256": "f69022555d2da207a940c601b7691a116f752ddb3c2ced5c6cc147e3440b38b3",
+          "relevant_tags": [
+            "<a href=\"/rss\" class=\"ExtraLink\">"
+          ]
+        }
+      ],
+      "uncertainties": [
+        "Official RSS info page publishes latest/category feeds, but retrieved robots explicitly disallows /rss and /rssFeed/*. Keep RSS blocked; use only permitted declared sitemap after validation."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "KW",
+      "name": "Al Anba",
+      "website": "https://www.alanba.com.kw/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.alanba.com.kw/",
+          "what_supports": "Official publisher homepage identifies this newsroom and its editorial scope."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:32:40Z",
+      "candidates": [
+        {
+          "url": "https://www.alanba.com.kw/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.alanba.com.kw/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "observed_at_utc": "2026-10-14T13:32:40Z",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "not_disallowed_by_retrieved_wildcard_robots"
+        },
+        {
+          "url": "https://www.alanba.com.kw/sitemap/alanba_news.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.alanba.com.kw/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "observed_at_utc": "2026-10-14T13:32:40Z",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "not_disallowed_by_retrieved_wildcard_robots"
+        },
+        {
+          "url": "https://www.alanba.com.kw/alanbaarchive.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.alanba.com.kw/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "observed_at_utc": "2026-10-14T13:32:40Z",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "not_disallowed_by_retrieved_wildcard_robots"
+        },
+        {
+          "url": "https://www.alanba.com.kw/xml_filelist.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.alanba.com.kw/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "observed_at_utc": "2026-10-14T13:32:40Z",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "not_disallowed_by_retrieved_wildcard_robots"
+        }
+      ],
+      "documents": [
+        {
+          "request_url": "https://www.alanba.com.kw/robots.txt",
+          "url": "https://www.alanba.com.kw/robots.txt",
+          "status": 200,
+          "content_type": "text/plain",
+          "sha256": "4eee627944fafe0e4af1bec27516f576328118587f947ffd4179a48af70f740a",
+          "sitemap_declarations": [
+            "https://www.alanba.com.kw/sitemap.xml",
+            "https://www.alanba.com.kw/sitemap/alanba_news.xml",
+            "https://www.alanba.com.kw/alanbaarchive.xml",
+            "https://www.alanba.com.kw/xml_filelist.xml"
+          ]
+        },
+        {
+          "request_url": "https://www.alanba.com.kw/",
+          "url": "https://www.alanba.com.kw/newspaper/",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "4e0660256a0113283c0f44a30c01aaf0c5322306ded56484da93a66572415543",
+          "relevant_tags": [
+            "<a href=\"/sitemap/\" target=\"_blank\">"
+          ]
+        }
+      ],
+      "uncertainties": [
+        "Four robots-declared sitemap addresses include likely archive/index purposes, but XML content/type/recency have not been fetched or inferred. Current-news named declaration may be preferred after validation."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "KW",
+      "name": "Al Jarida",
+      "website": "https://www.aljarida.com/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.aljarida.com/",
+          "what_supports": "Official publisher homepage identifies this newsroom and its editorial scope."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:32:40Z",
+      "candidates": [],
+      "documents": [
+        {
+          "request_url": "https://www.aljarida.com/robots.txt",
+          "url": "https://www.aljarida.com/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=utf-8",
+          "sha256": "9b3d67498f8b61d9daa53488993a23c43bf4a648c18e7b04a8a6412cce001476",
+          "sitemap_declarations": [],
+          "relevant_robots_directives": [
+            "User-agent: *",
+            "Disallow: /rss",
+            "Disallow: /rssFeed/*"
+          ]
+        },
+        {
+          "request_url": "https://www.aljarida.com/",
+          "url": "https://www.aljarida.com/",
+          "status": 200,
+          "content_type": "text/html; charset=UTF-8",
+          "sha256": "117be535a96feaaebdda615bff6db56d19daa9da293e9e2007bcf0183012f8c1",
+          "relevant_tags": [
+            "<a href=\"/rss\" title=\"rss\">",
+            "<a href=\"/rss\" title=\"rss\">"
+          ]
+        }
+      ],
+      "uncertainties": [
+        "Official homepage links /rss, but retrieved User-agent:* robots disallows /rss and /rssFeed/*; no Sitemap directive. RSS info page deliberately not fetched after discovering restriction; no candidate XML fetched."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "KW",
+      "name": "Kuwait Times",
+      "website": "https://www.kuwaittimes.com/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://kuwaittimes.com/",
+          "what_supports": "Official publisher homepage identifies this newsroom and its editorial scope."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:32:40Z",
+      "candidates": [
+        {
+          "url": "https://kuwaittimes.com/sitemaps/sitemap_0.xml",
+          "type": "sitemap",
+          "declaration_url": "https://kuwaittimes.com/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "observed_at_utc": "2026-10-14T13:32:40Z",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "not_disallowed_by_retrieved_wildcard_robots"
+        },
+        {
+          "url": "https://kuwaittimes.com/rssFeed/0",
+          "type": "rss",
+          "declaration_url": "https://kuwaittimes.com/rss/",
+          "declaration_method": "Official RSS service page hyperlink",
+          "observed_at_utc": "2026-10-14T13:32:40Z",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "not_disallowed_by_retrieved_wildcard_robots"
+        }
+      ],
+      "documents": [
+        {
+          "request_url": "https://www.kuwaittimes.com/robots.txt",
+          "url": "https://kuwaittimes.com/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=utf-8",
+          "sha256": "1b50750737323bb27bc222de903773f5f51f4be0f5231c1f552829ca6b0d7b04",
+          "sitemap_declarations": [
+            "https://kuwaittimes.com/sitemaps/sitemap_0.xml"
+          ]
+        },
+        {
+          "request_url": "https://www.kuwaittimes.com/",
+          "url": "https://kuwaittimes.com/",
+          "status": 200,
+          "content_type": "text/html; charset=UTF-8",
+          "sha256": "88bd880e78ac860601e20bd1f5bf136f280f95ef95dcf934483667b3cf69210f",
+          "relevant_tags": []
+        }
+      ],
+      "uncertainties": [
+        "Homepage redirects www.kuwaittimes.com to kuwaittimes.com. No reliance on legacy kuwaittimes.net; latest feed selected to avoid redundant categories."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "BH",
+      "name": "Bahrain News Agency / BNA",
+      "website": "https://www.bna.bh/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://beta.bna.bh/article/XVvz1ECl5ogMvbd2",
+          "what_supports": "Official Bahrain News Agency page identifies its Bahrain news service."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:32:40Z",
+      "candidates": [],
+      "documents": [
+        {
+          "request_url": "https://www.bna.bh/robots.txt",
+          "error": "HTTP Error 405: Not Allowed"
+        },
+        {
+          "request_url": "https://www.bna.bh/",
+          "error": "HTTP Error 405: Not Allowed",
+          "relevant_tags": []
+        }
+      ],
+      "uncertainties": [
+        "Both local homepage/robots returned HTTP405; web homepage also405. beta.bna.bh audited identity reference unavailable. No endpoint was guessed."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "BH",
+      "name": "Al Ayam",
+      "website": "https://www.alayam.com/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.alayam.com/",
+          "what_supports": "Official publisher homepage identifies this newsroom and its editorial scope."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:32:40Z",
+      "candidates": [],
+      "documents": [
+        {
+          "request_url": "https://www.alayam.com/robots.txt",
+          "error": "HTTP Error 403: Forbidden"
+        },
+        {
+          "request_url": "https://www.alayam.com/",
+          "url": "https://www.alayam.com/",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "90d8996e3b215c4df897c70d94498453d407007fc8703162d3e6f8658dcedff4",
+          "relevant_tags": [
+            "<a b-lbyu7y2tzc target=\"_blank\" href=\"https://www.alayam.com/pages/rss\" title=\"RSS\" target=\"_blank\">"
+          ]
+        },
+        {
+          "request_url": "https://www.alayam.com/pages/rss",
+          "status": 403,
+          "method": "bounded local HTML GET",
+          "web_view_url": "https://www.alayam.com/pages/rss",
+          "web_view_crawl_label": "last month",
+          "declaration_summary": "Official RSS information page lists general/category feed hyperlinks delegated to feeds.feedburner.com; web text hides exact href values. Exact URLs were not recovered without clicking XML."
+        }
+      ],
+      "uncertainties": [
+        "robots.txt403 and RSS info HTML403 locally. Cached official web view proves FeedBurner delegation, but exact feed IDs unresolved. Do not guess or use a third-party feed absent an exact publisher declaration. Root may resolve HTML hrefs from Oracle under policy."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "BH",
+      "name": "Akhbar Al Khaleej",
+      "website": "https://www.akhbar-alkhaleej.com/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.akhbar-alkhaleej.com/",
+          "what_supports": "Official publisher homepage identifies this newsroom and its editorial scope."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:32:40Z",
+      "candidates": [],
+      "documents": [
+        {
+          "request_url": "https://www.akhbar-alkhaleej.com/robots.txt",
+          "error": "HTTP Error 404: Not Found"
+        },
+        {
+          "request_url": "https://www.akhbar-alkhaleej.com/",
+          "url": "https://akhbar-alkhaleej.com/",
+          "status": 200,
+          "content_type": "text/html; charset=UTF-8",
+          "sha256": "cf1509c4a9add212db05d5724d5c9d06d568a8f5de2885f5fd01dde039f44844",
+          "relevant_tags": []
+        },
+        {
+          "request_url": "https://akhbar-alkhaleej.com/robots.txt",
+          "error": "HTTP Error 404: Not Found"
+        }
+      ],
+      "uncertainties": [
+        "Homepage redirects to non-www hostname; www robots404; canonical robots HTTP Error 404: Not Found. No alternate RSS/sitemap declaration in retrieved homepage; no endpoint guessed."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "BH",
+      "name": "Gulf Daily News / Gulf Digital News",
+      "website": "https://www.gdnonline.com/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.gdnonline.com/",
+          "what_supports": "Official publisher homepage identifies this newsroom and its editorial scope."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:32:40Z",
+      "candidates": [
+        {
+          "url": "https://www.gdnonline.com/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.gdnonline.com/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "observed_at_utc": "2026-10-14T13:32:40Z",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "not_disallowed_by_retrieved_wildcard_robots"
+        },
+        {
+          "url": "https://online.webceo.com/submission/smaps/310cc01b.xml.gz",
+          "type": "sitemap",
+          "declaration_url": "https://www.gdnonline.com/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "observed_at_utc": "2026-10-14T13:32:40Z",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": true,
+          "ownership_evidence": "Publisher robots.txt explicitly delegates this exact sitemap URL; article hostname still needs XML validation.",
+          "robots_path_policy": "publisher_delegation_confirmed; target host robots uninspected"
+        }
+      ],
+      "documents": [
+        {
+          "request_url": "https://www.gdnonline.com/robots.txt",
+          "url": "https://www.gdnonline.com/robots.txt",
+          "status": 200,
+          "content_type": "text/plain",
+          "sha256": "9a9437bf8ceefe59209d76dc8f35242281ede492eef8434787b3450654319fbf",
+          "sitemap_declarations": [
+            "https://www.gdnonline.com/sitemap.xml",
+            "https://online.webceo.com/submission/smaps/310cc01b.xml.gz"
+          ]
+        },
+        {
+          "request_url": "https://www.gdnonline.com/",
+          "url": "https://www.gdnonline.com/index.html",
+          "status": 200,
+          "content_type": "text/html",
+          "sha256": "b0bb55fb371d7019977e107b27333b03a602dd18682d648b07b886f2a6c1b675",
+          "relevant_tags": []
+        }
+      ],
+      "uncertainties": [
+        "External WebCEO XML is explicitly declared by GDN robots; central validator must verify target-host policy and GDN article identity before adopting. Prefer publisher-host sitemap if valid."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "BH",
+      "name": "The Daily Tribune / News of Bahrain",
+      "website": "https://www.newsofbahrain.com/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.newsofbahrain.com/",
+          "what_supports": "Official publisher homepage identifies this newsroom and its editorial scope."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:32:40Z",
+      "candidates": [
+        {
+          "url": "https://www.newsofbahrain.com/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.newsofbahrain.com/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "observed_at_utc": "2026-10-14T13:32:40Z",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "not_disallowed_by_retrieved_wildcard_robots"
+        },
+        {
+          "url": "https://www.newsofbahrain.com/rss/en.xml",
+          "type": "rss",
+          "declaration_url": "https://www.newsofbahrain.com/en",
+          "declaration_method": "Official homepage link rel=alternate type=application/rss+xml",
+          "observed_at_utc": "2026-10-14T13:32:40Z",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "not_disallowed_by_retrieved_wildcard_robots",
+          "language": "en"
+        }
+      ],
+      "documents": [
+        {
+          "request_url": "https://www.newsofbahrain.com/robots.txt",
+          "url": "https://www.newsofbahrain.com/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=utf-8",
+          "sha256": "7b5bad45a296de71ffed3d5bd49d738c0e2a56b6c0af5df4c672a261562eff81",
+          "sitemap_declarations": [
+            "https://www.newsofbahrain.com/sitemap.xml"
+          ]
+        },
+        {
+          "request_url": "https://www.newsofbahrain.com/",
+          "url": "https://www.newsofbahrain.com/en",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "268c5765a98a8bd914cb77d42bf1186f304695ffd646af5490bbe1b9d6f2e748",
+          "relevant_tags": [
+            "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"News of Bahrain\" href=\"/rss/en.xml\"/>",
+            "<a tabindex=\"-1\" href=\"/en/community/feed\" class=\"inline-flex items-center gap-1 whitespace-nowrap border-b pb-0.5 text-foreground transition-colors border-transparent hover:border-foreground\">",
+            "<a href=\"/en/community/feed\" class=\"inline-flex shrink-0 items-center gap-1 font-serif text-sm font-bold leading-none text-dpb\">",
+            "<a href=\"/en/community/feed?sort=unanswered\" class=\"mt-auto inline-flex items-center justify-center gap-2 rounded-full bg-foreground px-5 py-2.5 text-[13px] font-normal text-background transition hover:bg-foreground/90 hover:-translate-y-px hover:shadow-[0_6px_18px_rgba(0,56,71,0.22)] motion-reduce:transition-none motion-reduce:hover:translate-y-0 dark:bg-brand dark:text-brand-foreground dark:hover:bg-brand/90\">"
+          ]
+        }
+      ],
+      "uncertainties": [
+        "Current homepage redirects to /en and declares the exact /rss/en.xml feed. English feed only; Arabic feed has not been declared or guessed. robots contains use=reference/search permissions and agent-specific exclusions; validation must use the actual collector policy."
+      ],
+      "xml_validated": false
+    }
+  ]
+}

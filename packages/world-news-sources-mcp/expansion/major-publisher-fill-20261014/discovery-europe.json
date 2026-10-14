@@ -1,0 +1,2892 @@
+{
+  "version": 1,
+  "generated_at_utc": "2026-10-14T13:40:35.072192+00:00",
+  "scope": "All27 selected missing Europe anchors from the prior dated audit; official declarations only, not collection validation or registration.",
+  "audit_source": "expansion/major-publisher-audit-20261014/audit.json",
+  "policy": "No candidate XML endpoints fetched. Root owns live robots/collector policy checks, XML type/article scope validation and registry mutations. Comments/stylesheet and HTML sitemap links are not XML candidates. All official declarations retained, but blocked and corporate/service metadata are flagged for hold.",
+  "summary": {
+    "anchors": 27,
+    "anchors_with_exact_declared_candidates": 13,
+    "declared_candidates": 54,
+    "blocked_exact_candidates": 10,
+    "recommended_initial_validation_candidates": 8
+  },
+  "items": [
+    {
+      "country": "GB",
+      "name": "The Times and The Sunday Times",
+      "website": "https://www.thetimes.com/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.news.co.uk/our-brands/",
+          "what_supports": "Official News UK brand directory identifies The Times and The Sunday Times as newspaper brands."
+        },
+        {
+          "url": "https://www.news.co.uk/our-brands/the-sunday-times/",
+          "what_supports": "Official owner page confirms The Sunday Times newspaper brand and history."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:48.182480+00:00",
+      "candidates": [
+        {
+          "url": "https://www.thetimes.com/sitemaps/news",
+          "type": "sitemap",
+          "declaration_url": "https://www.thetimes.com/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "732f24a44dff93e1bc31355454a47c6cdb868b211a900430da823aea4ad969a1",
+          "observed_at_utc": "2026-10-14T13:36:45.296037+00:00",
+          "xml_validated": false,
+          "status": "blocked_by_publisher_robots",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "actual collector blocked by wildcard Disallow: /",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false
+        },
+        {
+          "url": "https://www.thetimes.com/sitemaps/articles/2026",
+          "type": "sitemap",
+          "declaration_url": "https://www.thetimes.com/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "732f24a44dff93e1bc31355454a47c6cdb868b211a900430da823aea4ad969a1",
+          "observed_at_utc": "2026-10-14T13:36:45.296037+00:00",
+          "xml_validated": false,
+          "status": "blocked_by_publisher_robots",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "actual collector blocked by wildcard Disallow: /",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false
+        },
+        {
+          "url": "https://www.thetimes.com/sitemaps/articles/2025",
+          "type": "sitemap",
+          "declaration_url": "https://www.thetimes.com/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "732f24a44dff93e1bc31355454a47c6cdb868b211a900430da823aea4ad969a1",
+          "observed_at_utc": "2026-10-14T13:36:45.296037+00:00",
+          "xml_validated": false,
+          "status": "blocked_by_publisher_robots",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "actual collector blocked by wildcard Disallow: /",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false
+        },
+        {
+          "url": "https://www.thetimes.com/sitemaps/articles",
+          "type": "sitemap",
+          "declaration_url": "https://www.thetimes.com/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "732f24a44dff93e1bc31355454a47c6cdb868b211a900430da823aea4ad969a1",
+          "observed_at_utc": "2026-10-14T13:36:45.296037+00:00",
+          "xml_validated": false,
+          "status": "blocked_by_publisher_robots",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "actual collector blocked by wildcard Disallow: /",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false
+        },
+        {
+          "url": "https://www.thetimes.com/sitemaps/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.thetimes.com/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "732f24a44dff93e1bc31355454a47c6cdb868b211a900430da823aea4ad969a1",
+          "observed_at_utc": "2026-10-14T13:36:45.296037+00:00",
+          "xml_validated": false,
+          "status": "blocked_by_publisher_robots",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "actual collector blocked by wildcard Disallow: /",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false
+        },
+        {
+          "url": "https://www.thetimes.com/subscribe/sitemap_index.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.thetimes.com/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "732f24a44dff93e1bc31355454a47c6cdb868b211a900430da823aea4ad969a1",
+          "observed_at_utc": "2026-10-14T13:36:45.296037+00:00",
+          "xml_validated": false,
+          "status": "blocked_by_publisher_robots",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "actual collector blocked by wildcard Disallow: /",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false
+        },
+        {
+          "url": "https://www.thetimes.com/static/sitemap_index.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.thetimes.com/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "732f24a44dff93e1bc31355454a47c6cdb868b211a900430da823aea4ad969a1",
+          "observed_at_utc": "2026-10-14T13:36:45.296037+00:00",
+          "xml_validated": false,
+          "status": "blocked_by_publisher_robots",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "actual collector blocked by wildcard Disallow: /",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false
+        }
+      ],
+      "documents": [
+        {
+          "request_url": "https://www.thetimes.com/robots.txt",
+          "url": "https://www.thetimes.com/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=UTF-8",
+          "sha256": "732f24a44dff93e1bc31355454a47c6cdb868b211a900430da823aea4ad969a1",
+          "observed_at_utc": "2026-10-14T13:36:45.296037+00:00",
+          "sitemap_declarations": [
+            "https://www.thetimes.com/sitemaps/news",
+            "https://www.thetimes.com/sitemaps/articles/2026",
+            "https://www.thetimes.com/sitemaps/articles/2025",
+            "https://www.thetimes.com/sitemaps/articles",
+            "https://www.thetimes.com/sitemaps/sitemap.xml",
+            "https://www.thetimes.com/subscribe/sitemap_index.xml",
+            "https://www.thetimes.com/static/sitemap_index.xml"
+          ],
+          "robots_directives": [
+            "User-agent: *",
+            "Disallow: /",
+            "Sitemap: https://www.thetimes.com/sitemaps/news",
+            "Sitemap: https://www.thetimes.com/sitemaps/articles/2026",
+            "Sitemap: https://www.thetimes.com/sitemaps/articles/2025",
+            "Sitemap: https://www.thetimes.com/sitemaps/articles",
+            "Sitemap: https://www.thetimes.com/sitemaps/sitemap.xml",
+            "Sitemap: https://www.thetimes.com/subscribe/sitemap_index.xml",
+            "Sitemap: https://www.thetimes.com/static/sitemap_index.xml",
+            "User-agent: Googlebot",
+            "User-agent: Googlebot-Image",
+            "User-agent: Googlebot-Video",
+            "User-agent: Googlebot-News",
+            "User-agent: Google-InspectionTool",
+            "User-agent: GoogleOther",
+            "User-agent: APIs-Google",
+            "User-agent: Mediapartners-Google",
+            "User-agent: DuckDuckBot",
+            "User-agent: Slurp",
+            "User-agent: Twitterbot",
+            "User-agent: Bingbot",
+            "User-agent: adidxbot",
+            "User-agent: MicrosoftPreview",
+            "User-agent: Applebot",
+            "User-agent: AdsBot-Google",
+            "User-agent: AmazonAdBot",
+            "User-agent: facebookexternalhit",
+            "User-agent: Yahoo Ad Monitoring",
+            "User-agent: parse.ly scraper",
+            "User-agent: Screaming Frog SEO Spider",
+            "User-agent: SemrushBot",
+            "User-agent: OnCrawl",
+            "User-agent: Chrome-Lighthouse",
+            "User-agent: Slackbot-LinkExpanding",
+            "User-agent: Slack-ImgProxy",
+            "User-agent: Slackbot",
+            "User-agent: Snap URL Preview Service",
+            "User-agent: proximic",
+            "User-agent: GumGum-Bot",
+            "User-agent: TTD-Content",
+            "User-agent: Pubmatic",
+            "User-agent: ias_crawler",
+            "User-agent: outbrain",
+            "User-agent: Leikibot",
+            "User-agent: weborama-fetcher",
+            "User-agent: AHC/2.1",
+            "User-agent: SirdataBot",
+            "User-agent: peer39_crawler/1.0",
+            "User-agent: EchoboxBot/1.0",
+            "User-agent: CriteoBot/0.1",
+            "User-agent: AdDefend Site Context Crawler/1.0",
+            "User-agent: SmartologyBot",
+            "User-agent: Dianomi",
+            "User-agent: ChatGPT-User",
+            "User-agent: GPTBot",
+            "User-agent: OAI-SearchBot",
+            "Allow: /",
+            "Allow: /ads.txt",
+            "Allow: /world/*?*region=*",
+            "Allow: /sport/*?*region=*",
+            "Allow: /best-law-firms/*?*region=*",
+            "Disallow: /api/",
+            "Disallow: /archive/page/",
+            "Disallow: /archive/article/",
+            "Disallow: /article/category/",
+            "Disallow: /interactives/",
+            "Disallow: /my-articles",
+            "Disallow: /my-articles/",
+            "Disallow: /player/brightcove/",
+            "Disallow: /topic/bbc",
+            "Disallow: /tto/archive/article/",
+            "Disallow: /tto/archive/find/",
+            "Disallow: /tto/archive/frame/article/",
+            "Disallow: /tto/archive/page/",
+            "Disallow: /*?*shareToken=*",
+            "Disallow: /*?*region=*",
+            "Disallow: /*?s=*",
+            "Disallow: /*&s=*",
+            "Disallow: /?_ga",
+            "Disallow: /?ExternalDataReference",
+            "Disallow: /search?*",
+            "Disallow: /search/browse-by-day*",
+            "Disallow: /article/this-article-has-been-deleted*",
+            "Disallow: /article/this-article-has-been-removed*",
+            "Disallow: /article/this-article-is-no-longer-available*",
+            "Disallow: /wp-json/live-coverage/*"
+          ],
+          "publisher_notice": "Wildcard crawler group Disallow:/; named search/AI user-agent groups have their own Allow:/ entries. Actual collector must not impersonate an allowlisted bot."
+        },
+        {
+          "request_url": "https://www.thetimes.com/",
+          "url": "https://www.thetimes.com/",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "3e145cdb61591b4be7fbad2ede66a2b48a6695b85bc54dd48cad15e012216765",
+          "observed_at_utc": "2026-10-14T13:36:48.182480+00:00",
+          "title": "Latest news &amp; breaking headlines | The Times and The Sunday Times",
+          "relevant_links": [
+            {
+              "tag": "a",
+              "href": "/html-sitemap",
+              "label": "Site map"
+            },
+            {
+              "tag": "a",
+              "href": "/html-topic-sitemap",
+              "label": "Topics"
+            },
+            {
+              "tag": "a",
+              "href": "/html-puzzles-sitemap",
+              "label": "Puzzles Archive"
+            }
+          ]
+        }
+      ],
+      "uncertainties": [
+        "Seven official sitemap addresses retained as declaration evidence only. Wildcard crawler Disallow:/ prevents collector validation; named allowlist is not an invitation to change collector identity."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "DE",
+      "name": "Deutsche Presse-Agentur (dpa)",
+      "website": "https://www.dpa.com/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.dpa.com/en/about-dpa",
+          "what_supports": "Official agency description identifies dpa as the German Press Agency and independent media-owned news provider."
+        },
+        {
+          "url": "https://www.dpa.com/en/faq",
+          "what_supports": "Official FAQ explains the wholesale news-agency service and customer licensing."
+        },
+        {
+          "url": "https://www.dpa.com/en/newsticker",
+          "what_supports": "Official dpa-Select service describes saved news feeds within web/app service and free trial contact; not an anonymous public wire feed."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:50.398580+00:00",
+      "candidates": [
+        {
+          "url": "https://www.dpa.com/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.dpa.com/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "f2f1280a7a4ecd0a61871b54be6c5ff04a0940e46ef186e4ac7398b5f540295a",
+          "observed_at_utc": "2026-10-14T13:36:45.624329+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "corporate_and_service_site; not_full_wire_coverage",
+          "recommended_for_initial_validation": false
+        }
+      ],
+      "documents": [
+        {
+          "request_url": "https://www.dpa.com/robots.txt",
+          "url": "https://www.dpa.com/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=UTF-8",
+          "sha256": "f2f1280a7a4ecd0a61871b54be6c5ff04a0940e46ef186e4ac7398b5f540295a",
+          "observed_at_utc": "2026-10-14T13:36:45.624329+00:00",
+          "sitemap_declarations": [
+            "https://www.dpa.com/sitemap.xml"
+          ],
+          "robots_directives": [
+            "User-agent: *",
+            "Allow: /",
+            "Disallow: /auth",
+            "Sitemap: https://www.dpa.com/sitemap.xml"
+          ]
+        },
+        {
+          "request_url": "https://www.dpa.com/",
+          "url": "https://www.dpa.com/de",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "ee57bb2b1d53b6373c86de8b3602dae9e2ee282a92a980c301cd204bc85e6db2",
+          "observed_at_utc": "2026-10-14T13:36:50.398580+00:00",
+          "title": "dpa Deutsche Presse-Agentur. Den Fakten verpflichtet",
+          "relevant_links": []
+        }
+      ],
+      "uncertainties": [
+        "Corporate/site sitemap or company RSS declaration does not establish collection of licensed national agency wire. Hold initial adoption unless XML confirms public editorial article scope; never count service/about/company announcements as wire coverage."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "FR",
+      "name": "Agence France-Presse (AFP)",
+      "website": "https://www.afp.com/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.afp.com/en/about-us",
+          "what_supports": "Official agency description confirms AFP as an international multimedia news agency with French origins; it does not declare a free full-wire feed."
+        },
+        {
+          "url": "https://www.afp.com/en/our-offer/afp-api",
+          "what_supports": "Official AFP API service describes customer RSS/ATOM feed output and trial access; no public anonymous XML URL recovered."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:47.828726+00:00",
+      "candidates": [],
+      "documents": [
+        {
+          "request_url": "https://www.afp.com/robots.txt",
+          "url": "https://www.afp.com/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=UTF-8",
+          "sha256": "773fb8d35bb9a39d35335ee6db8dc5c912d2aacbfb823152d9c61cd647dd902d",
+          "observed_at_utc": "2026-10-14T13:36:44.960061+00:00",
+          "sitemap_declarations": [],
+          "robots_directives": [
+            "User-agent: *",
+            "Allow: /core/*.css$",
+            "Allow: /core/*.css?",
+            "Allow: /core/*.js$",
+            "Allow: /core/*.js?",
+            "Allow: /core/*.gif",
+            "Allow: /core/*.jpg",
+            "Allow: /core/*.jpeg",
+            "Allow: /core/*.png",
+            "Allow: /core/*.svg",
+            "Allow: /profiles/*.css$",
+            "Allow: /profiles/*.css?",
+            "Allow: /profiles/*.js$",
+            "Allow: /profiles/*.js?",
+            "Allow: /profiles/*.gif",
+            "Allow: /profiles/*.jpg",
+            "Allow: /profiles/*.jpeg",
+            "Allow: /profiles/*.png",
+            "Allow: /profiles/*.svg",
+            "Disallow: /core/",
+            "Disallow: /profiles/",
+            "Disallow: /README.md",
+            "Disallow: /composer/Metapackage/README.txt",
+            "Disallow: /composer/Plugin/ProjectMessage/README.md",
+            "Disallow: /composer/Plugin/Scaffold/README.md",
+            "Disallow: /composer/Plugin/VendorHardening/README.txt",
+            "Disallow: /composer/Template/README.txt",
+            "Disallow: /modules/README.txt",
+            "Disallow: /sites/README.txt",
+            "Disallow: /themes/README.txt",
+            "Disallow: /web.config",
+            "Disallow: /admin/",
+            "Disallow: /comment/reply/",
+            "Disallow: /filter/tips",
+            "Disallow: /node/add/",
+            "Disallow: /search/",
+            "Disallow: /user/register",
+            "Disallow: /user/password",
+            "Disallow: /user/login",
+            "Disallow: /user/logout",
+            "Disallow: /media/oembed",
+            "Disallow: /*/media/oembed",
+            "Disallow: /index.php/admin/",
+            "Disallow: /index.php/comment/reply/",
+            "Disallow: /index.php/filter/tips",
+            "Disallow: /index.php/node/add/",
+            "Disallow: /index.php/search/",
+            "Disallow: /index.php/user/password",
+            "Disallow: /index.php/user/register",
+            "Disallow: /index.php/user/login",
+            "Disallow: /index.php/user/logout",
+            "Disallow: /index.php/media/oembed",
+            "Disallow: /index.php/*/media/oembed"
+          ]
+        },
+        {
+          "request_url": "https://www.afp.com/",
+          "url": "https://www.afp.com/fr",
+          "status": 200,
+          "content_type": "text/html; charset=UTF-8",
+          "sha256": "7cdaff852c2986f0c62c230be090bfc63dca3ab681881aefc428a7cf3e44ae2c",
+          "observed_at_utc": "2026-10-14T13:36:47.828726+00:00",
+          "title": "Plateforme de l&#039;info | AFP.com",
+          "relevant_links": [
+            {
+              "tag": "a",
+              "href": "/fr/sitemap",
+              "label": "\n                      Plan du site\n                    "
+            }
+          ]
+        }
+      ],
+      "uncertainties": [
+        "No exact XML candidate declared in bounded official homepage/robots metadata read; do not infer absence of all possible feeds or guess conventional /feed or /sitemap addresses.",
+        "Official AFP API page supports customer RSS/ATOM delivery and trial signup, not an anonymous free wire URL. Corporate press-release RSS must not be mistaken for public national/world news coverage."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "ES",
+      "name": "Agencia EFE",
+      "website": "https://efe.com/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://efe.com/",
+          "what_supports": "Official EFE publisher homepage and agency identity, with news and service navigation."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:46.837918+00:00",
+      "candidates": [
+        {
+          "url": "https://efe.com/sitemap_index.xml",
+          "type": "sitemap",
+          "declaration_url": "https://efe.com/robots.txt",
+          "declaration_method": "Official robots.txt primary web text view",
+          "declaration_sha256": null,
+          "observed_at_utc": "2026-10-14T13:40:35.072192+00:00",
+          "web_crawl_label": "yesterday",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same EFE publisher hostname.",
+          "robots_path_policy": "cached primary robots permits this sitemap path; fresh actual collector policy/403 handling required on Oracle",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation; not_full_licensed_wire",
+          "recommended_for_initial_validation": true
+        }
+      ],
+      "documents": [
+        {
+          "request_url": "https://efe.com/robots.txt",
+          "error": "HTTP Error 403: Forbidden",
+          "observed_at_utc": "2026-10-14T13:36:44.774819+00:00"
+        },
+        {
+          "request_url": "https://efe.com/",
+          "error": "HTTP Error 403: Forbidden",
+          "observed_at_utc": "2026-10-14T13:36:46.837918+00:00"
+        },
+        {
+          "request_url": "https://efe.com/robots.txt",
+          "url": "https://efe.com/robots.txt",
+          "method": "web official robots text view",
+          "web_crawl_label": "yesterday",
+          "observed_at_utc": "2026-10-14T13:40:35.072192+00:00",
+          "sitemap_declarations": [
+            "https://efe.com/sitemap_index.xml"
+          ],
+          "robots_directives": [
+            "User-agent: *",
+            "Disallow: /wp-admin/",
+            "Disallow: /wp-content/plugins/",
+            "Disallow: /wp-content/themes/",
+            "Disallow: /wp-includes/",
+            "Disallow: /*?s=",
+            "Disallow: /*&s=",
+            "Disallow: /*?feed=",
+            "Disallow: /trackback",
+            "Disallow: /*trackback",
+            "Disallow: /*.pdf$",
+            "Disallow: /cdn-cgi/",
+            "Allow: /wp-content/uploads/",
+            "Allow: /images/",
+            "Allow: /*.css$",
+            "Allow: /*.js$",
+            "Sitemap: https://efe.com/sitemap_index.xml"
+          ],
+          "sha256": null
+        }
+      ],
+      "uncertainties": [
+        "https://efe.com/robots.txt → HTTP Error 403: Forbidden",
+        "https://efe.com/ → HTTP Error 403: Forbidden",
+        "Exact sitemap discovered through official robots primary web fallback; local403 remains real access evidence. No raw document hash available from web view. Public EFE news pages are visible in primary web index; XML/provider-server validation pending.",
+        "Official primary web homepage consulted as fallback; XML endpoints were never clicked/fetched. Web publication visibility does not prove Oracle collector access."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "NL",
+      "name": "Algemeen Nederlands Persbureau (ANP)",
+      "website": "https://www.anp.nl/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://anpconnect.nl/over-ons/",
+          "what_supports": "Official ANP Connect subsidiary describes its relationship to Algemeen Nederlands Persbureau ANP."
+        },
+        {
+          "url": "https://www.anpfoto.nl/misc.pp?code=algemene-voorwaarden-anp-foto",
+          "what_supports": "Official ANP service terms identify ANP B.V. and its licensed services; supports agency identity, not open-feed availability."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:49.483547+00:00",
+      "candidates": [],
+      "documents": [
+        {
+          "request_url": "https://www.anp.nl/robots.txt",
+          "url": "https://www.anp.nl/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=utf-8",
+          "sha256": "e5c4b84484ee4216e9373be99380320c25dd94805f99f0a805846f087636553f",
+          "observed_at_utc": "2026-10-14T13:36:45.449853+00:00",
+          "sitemap_declarations": [],
+          "robots_directives": [
+            "User-agent: *",
+            "Disallow:"
+          ]
+        },
+        {
+          "request_url": "https://www.anp.nl/",
+          "url": "https://www.anp.nl/",
+          "status": 200,
+          "content_type": "text/html; charset=UTF-8",
+          "sha256": "e56379612056c194c51b9ceb5ec251bce4af54dd3b9c23b7318568c8a6e10b2f",
+          "observed_at_utc": "2026-10-14T13:36:49.483547+00:00",
+          "title": "Wij zijn het Algemeen Nederlands Persbureau - ANP",
+          "relevant_links": []
+        }
+      ],
+      "uncertainties": [
+        "No exact XML candidate declared in bounded official homepage/robots metadata read; do not infer absence of all possible feeds or guess conventional /feed or /sitemap addresses."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "CH",
+      "name": "Keystone-SDA",
+      "website": "https://www.keystone-sda.ch/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.keystone-sda.ch/",
+          "what_supports": "Official homepage identifies the Swiss national news agency and its text, photo, video and service offerings."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:49.127916+00:00",
+      "candidates": [
+        {
+          "url": "https://keystone-sda.ch/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.keystone-sda.ch/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "17c13da985fe47acd06d3dbd79131a5e981ea8bfab44684afe9c23594aa80307",
+          "observed_at_utc": "2026-10-14T13:36:45.219486+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "corporate_and_service_site; not_full_wire_coverage",
+          "recommended_for_initial_validation": false
+        },
+        {
+          "url": "https://keystone-sda.ch/fr/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.keystone-sda.ch/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "17c13da985fe47acd06d3dbd79131a5e981ea8bfab44684afe9c23594aa80307",
+          "observed_at_utc": "2026-10-14T13:36:45.219486+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "corporate_and_service_site; not_full_wire_coverage",
+          "recommended_for_initial_validation": false
+        },
+        {
+          "url": "https://keystone-sda.ch/it/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.keystone-sda.ch/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "17c13da985fe47acd06d3dbd79131a5e981ea8bfab44684afe9c23594aa80307",
+          "observed_at_utc": "2026-10-14T13:36:45.219486+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "corporate_and_service_site; not_full_wire_coverage",
+          "recommended_for_initial_validation": false
+        },
+        {
+          "url": "https://keystone-sda.ch/en/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.keystone-sda.ch/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "17c13da985fe47acd06d3dbd79131a5e981ea8bfab44684afe9c23594aa80307",
+          "observed_at_utc": "2026-10-14T13:36:45.219486+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "corporate_and_service_site; not_full_wire_coverage",
+          "recommended_for_initial_validation": false
+        }
+      ],
+      "documents": [
+        {
+          "request_url": "https://www.keystone-sda.ch/robots.txt",
+          "url": "https://www.keystone-sda.ch/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=utf-8",
+          "sha256": "17c13da985fe47acd06d3dbd79131a5e981ea8bfab44684afe9c23594aa80307",
+          "observed_at_utc": "2026-10-14T13:36:45.219486+00:00",
+          "sitemap_declarations": [
+            "https://keystone-sda.ch/sitemap.xml",
+            "https://keystone-sda.ch/fr/sitemap.xml",
+            "https://keystone-sda.ch/it/sitemap.xml",
+            "https://keystone-sda.ch/en/sitemap.xml"
+          ],
+          "robots_directives": [
+            "User-agent: *",
+            "Allow: /",
+            "Sitemap: https://keystone-sda.ch/sitemap.xml",
+            "Sitemap: https://keystone-sda.ch/fr/sitemap.xml",
+            "Sitemap: https://keystone-sda.ch/it/sitemap.xml",
+            "Sitemap: https://keystone-sda.ch/en/sitemap.xml"
+          ]
+        },
+        {
+          "request_url": "https://www.keystone-sda.ch/",
+          "url": "https://www.keystone-sda.ch/",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "14666cae85b413d2481f8b823d4df9c3d6c5d88ccb8dadf035860c40ff82943f",
+          "observed_at_utc": "2026-10-14T13:36:49.127916+00:00",
+          "title": "Keystone SDA | Ihre Nachrichtenagentur in der Schweiz.",
+          "relevant_links": []
+        }
+      ],
+      "uncertainties": [
+        "Corporate/site sitemap or company RSS declaration does not establish collection of licensed national agency wire. Hold initial adoption unless XML confirms public editorial article scope; never count service/about/company announcements as wire coverage."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "SE",
+      "name": "TT Nyhetsbyrån",
+      "website": "https://tt.se/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://tt.se/om-tt",
+          "what_supports": "Official about page identifies the Swedish news agency and its history."
+        },
+        {
+          "url": "https://tt.se/om/nyheter",
+          "what_supports": "Official service page describes the agency news subscription and customer delivery."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:50.843098+00:00",
+      "candidates": [],
+      "documents": [
+        {
+          "request_url": "https://tt.se/robots.txt",
+          "url": "https://tt.se/robots.txt",
+          "status": 200,
+          "content_type": "text/plain",
+          "sha256": "7f4d226bded45ee1bf1e9cffeb1b53dd09706856bc27d65efe588a97a59f8327",
+          "observed_at_utc": "2026-10-14T13:36:47.546201+00:00",
+          "sitemap_declarations": [],
+          "robots_directives": [
+            "User-agent: GPTBot",
+            "Disallow: /",
+            "User-agent: ChatGPT-User",
+            "Disallow: /",
+            "User-agent: Google-Extended",
+            "Disallow: /"
+          ]
+        },
+        {
+          "request_url": "https://tt.se/",
+          "url": "https://tt.se/",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "1871fa853ecec718de41ac646e3ac30c755fd18db36825caed9b86c82a474039",
+          "observed_at_utc": "2026-10-14T13:36:50.843098+00:00",
+          "title": "TT Nyhetsbyrån - Sveriges nationella nyhetsbyrå sedan 1921",
+          "relevant_links": []
+        }
+      ],
+      "uncertainties": [
+        "No exact XML candidate declared in bounded official homepage/robots metadata read; do not infer absence of all possible feeds or guess conventional /feed or /sitemap addresses.",
+        "robots disallows GPTBot, ChatGPT-User and Google-Extended. No XML candidate declared. Licensed service/about pages establish agency identity, not public wire availability."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "BE",
+      "name": "Belga",
+      "website": "https://www.belga.be/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.belga.be/home/",
+          "what_supports": "Official homepage identifies Belga News Agency and its Belgian media news and service offerings."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:53.214522+00:00",
+      "candidates": [],
+      "documents": [
+        {
+          "request_url": "https://www.belga.be/robots.txt",
+          "url": "https://www.belga.be/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=UTF-8",
+          "sha256": "f846ef5023bd8558416fd93874d90c75225b1dd5690bed9452b0624cbe2c99f8",
+          "observed_at_utc": "2026-10-14T13:36:48.596593+00:00",
+          "sitemap_declarations": [],
+          "robots_directives": [
+            "User-agent: *",
+            "Allow: /"
+          ]
+        },
+        {
+          "request_url": "https://www.belga.be/",
+          "url": "https://www.belga.be/home/",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "c3d5aae26cc0ce36291e8aab9e3a60782dc90ca0b9aa10852476f42f461b8d1f",
+          "observed_at_utc": "2026-10-14T13:36:53.214522+00:00",
+          "title": "Belga - Homepage",
+          "relevant_links": []
+        }
+      ],
+      "uncertainties": [
+        "No exact XML candidate declared in bounded official homepage/robots metadata read; do not infer absence of all possible feeds or guess conventional /feed or /sitemap addresses."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "AT",
+      "name": "Austria Presse Agentur (APA)",
+      "website": "https://apa.at/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://apa.at/",
+          "what_supports": "Official homepage identifies the Austrian news agency owned by Austrian newspapers and ORF, with editorial and service offerings."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:52.265293+00:00",
+      "candidates": [],
+      "documents": [
+        {
+          "request_url": "https://apa.at/robots.txt",
+          "url": "https://apa.at/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=utf-8",
+          "sha256": "e6eea348de42fcf014aee25fcacc14adfe27d3bbf4d65d7cc59bfa6696775587",
+          "observed_at_utc": "2026-10-14T13:36:48.890235+00:00",
+          "sitemap_declarations": [],
+          "robots_directives": [
+            "User-agent: *",
+            "Disallow: /news/",
+            "Disallow: /newsfeed/",
+            "Disallow: /produkt/apa-wahltrend",
+            "Disallow: /produkt/apa-wahltrend/",
+            "TDM-policy: /tdmrep.json"
+          ]
+        },
+        {
+          "request_url": "https://apa.at/",
+          "url": "https://apa.at/",
+          "status": 200,
+          "content_type": "text/html; charset=UTF-8",
+          "sha256": "a8369bb899718f4d49415d16ddafe4a93bfd5eed6203e7ec146c2926ebd3e7f0",
+          "observed_at_utc": "2026-10-14T13:36:52.265293+00:00",
+          "title": "APA – Austria Presse Agentur | Nationale Nachrichtenagentur",
+          "relevant_links": []
+        }
+      ],
+      "uncertainties": [
+        "No exact XML candidate declared in bounded official homepage/robots metadata read; do not infer absence of all possible feeds or guess conventional /feed or /sitemap addresses.",
+        "Wildcard robots disallows /news/ and /newsfeed/. No exact feed declaration discovered, so no guessed agency feed candidate."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "NO",
+      "name": "Norsk Telegrambyrå (NTB)",
+      "website": "https://www.ntb.no/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.ntb.no/",
+          "what_supports": "Official homepage identifies NTB as an editorial text, image, video and graphics supplier to Norwegian media and business."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:52.416441+00:00",
+      "candidates": [
+        {
+          "url": "https://www.ntb.no/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.ntb.no/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "f9b7862c7e4b967a739bffceccb42bafa97b2a4fba409ad6fd22633e60ce91f1",
+          "observed_at_utc": "2026-10-14T13:36:49.645503+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "corporate_and_service_site; not_full_wire_coverage",
+          "recommended_for_initial_validation": false
+        }
+      ],
+      "documents": [
+        {
+          "request_url": "https://www.ntb.no/robots.txt",
+          "url": "https://www.ntb.no/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=utf-8",
+          "sha256": "f9b7862c7e4b967a739bffceccb42bafa97b2a4fba409ad6fd22633e60ce91f1",
+          "observed_at_utc": "2026-10-14T13:36:49.645503+00:00",
+          "sitemap_declarations": [
+            "https://www.ntb.no/sitemap.xml"
+          ],
+          "robots_directives": [
+            "User-agent: *",
+            "Disallow: /search*",
+            "Disallow: /api/*",
+            "Sitemap: https://www.ntb.no/sitemap.xml"
+          ]
+        },
+        {
+          "request_url": "https://www.ntb.no/",
+          "url": "https://www.ntb.no/",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "6fdd505c780bfd4d0eb28578526da3d694d4ab189cf37092fa666f4f849e065c",
+          "observed_at_utc": "2026-10-14T13:36:52.416441+00:00",
+          "title": "NTB",
+          "relevant_links": [
+            {
+              "tag": "link",
+              "href": "/sitemap.xml",
+              "rel": "sitemap",
+              "type": "application/xml",
+              "title": "Sitemap"
+            }
+          ]
+        }
+      ],
+      "uncertainties": [
+        "Corporate/site sitemap or company RSS declaration does not establish collection of licensed national agency wire. Hold initial adoption unless XML confirms public editorial article scope; never count service/about/company announcements as wire coverage."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "IE",
+      "name": "Business Post",
+      "website": "https://www.businesspost.ie/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://businesspostgroup.com/",
+          "what_supports": "Official owner website identifies Business Post as an Irish national Sunday newspaper covering business, politics and current affairs."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:52.511361+00:00",
+      "candidates": [
+        {
+          "url": "https://www.businesspost.ie/feed/",
+          "type": "rss",
+          "declaration_url": "https://www.businesspost.ie/",
+          "declaration_method": "Official homepage link rel=alternate",
+          "declaration_sha256": "6c930315f18ba0fd595aa7f3a58e56312c5436bd37bd8a34d7677e46fe8d5731",
+          "observed_at_utc": "2026-10-14T13:36:52.511361+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": true,
+          "declaration_tag": {
+            "tag": "link",
+            "rel": "alternate",
+            "type": "application/rss+xml",
+            "title": "Business Post » Feed",
+            "href": "https://www.businesspost.ie/feed/"
+          }
+        }
+      ],
+      "documents": [
+        {
+          "request_url": "https://www.businesspost.ie/robots.txt",
+          "url": "https://www.businesspost.ie/robots.txt",
+          "status": 200,
+          "content_type": "text/plain",
+          "sha256": "f48efb63123fd32d32989c2fc1a95ca1176898490059ca408a4f5feebd2dfb9a",
+          "observed_at_utc": "2026-10-14T13:36:49.818100+00:00",
+          "sitemap_declarations": [],
+          "robots_directives": [
+            "User-agent: AI2Bot",
+            "Disallow: /",
+            "User-agent: Amazonbot",
+            "Disallow: /",
+            "User-agent: amazon-kendra",
+            "Disallow: /",
+            "User-agent: anthropic-ai",
+            "Disallow: /",
+            "User-agent: Applebot",
+            "Disallow: /",
+            "User-agent: Applebot-Extended",
+            "Disallow: /",
+            "User-agent: AwarioRssBot",
+            "Disallow: /",
+            "User-agent: AwarioSmartBot",
+            "Disallow: /",
+            "User-agent: Brightbot",
+            "Disallow: /",
+            "User-agent: Bytespider",
+            "Disallow: /",
+            "User-agent: ChatGPT-User",
+            "Disallow: /",
+            "User-agent: ClaudeBot",
+            "Disallow: /",
+            "User-agent: Diffbot",
+            "Disallow: /",
+            "User-agent: DuckAssistBot",
+            "Disallow: /",
+            "User-agent: FacebookBot",
+            "Disallow: /",
+            "User-agent: FriendlyCrawler",
+            "Disallow: /",
+            "User-agent: Google-Extended",
+            "Disallow: /",
+            "User-agent: GPTBot",
+            "Disallow: /",
+            "User-agent: iaskspider/2.0",
+            "Disallow: /",
+            "User-agent: ICC-Crawler",
+            "Disallow: /",
+            "User-agent: img2dataset",
+            "Disallow: /",
+            "User-agent: Kangaroo Bot",
+            "Disallow: /",
+            "User-agent: LinerBot",
+            "Disallow: /",
+            "User-agent: MachineLearningForPeaceBot",
+            "Disallow: /",
+            "User-agent: Meltwater",
+            "Disallow: /",
+            "User-agent: meta-externalagent",
+            "Disallow: /",
+            "User-agent: meta-externalfetcher",
+            "Disallow: /",
+            "User-agent: Nicecrawler",
+            "Disallow: /",
+            "User-agent: OAI-SearchBot",
+            "Disallow: /",
+            "User-agent: omgili",
+            "Disallow: /",
+            "User-agent: omgilibot",
+            "Disallow: /",
+            "User-agent: PanguBot",
+            "Disallow: /",
+            "User-agent: PerplexityBot",
+            "Disallow: /",
+            "User-agent: Perplexity-User",
+            "Disallow: /",
+            "User-agent: PetalBot",
+            "Disallow: /",
+            "User-agent: PiplBot",
+            "Disallow: /",
+            "User-agent: QualifiedBot",
+            "Disallow: /",
+            "User-agent: Scoop.it",
+            "Disallow: /",
+            "User-agent: Seekr",
+            "Disallow: /",
+            "User-agent: SemrushBot-OCOB",
+            "Disallow: /",
+            "User-agent: Sidetrade indexer bot",
+            "Disallow: /",
+            "User-agent: Timpibot",
+            "Disallow: /",
+            "User-agent: VelenPublicWebCrawler",
+            "Disallow: /",
+            "User-agent: Webzio-Extended",
+            "Disallow: /",
+            "User-agent: YouBot",
+            "Disallow: /"
+          ]
+        },
+        {
+          "request_url": "https://www.businesspost.ie/",
+          "url": "https://www.businesspost.ie/",
+          "status": 200,
+          "content_type": "text/html; charset=UTF-8",
+          "sha256": "6c930315f18ba0fd595aa7f3a58e56312c5436bd37bd8a34d7677e46fe8d5731",
+          "observed_at_utc": "2026-10-14T13:36:52.511361+00:00",
+          "title": "Business Post - Independent journalism every day",
+          "relevant_links": [
+            {
+              "tag": "link",
+              "href": "https://www.businesspost.ie/feed/",
+              "rel": "alternate",
+              "type": "application/rss+xml",
+              "title": "Business Post » Feed"
+            },
+            {
+              "tag": "link",
+              "href": "https://www.businesspost.ie/comments/feed/",
+              "rel": "alternate",
+              "type": "application/rss+xml",
+              "title": "Business Post » Comments Feed"
+            },
+            {
+              "tag": "link",
+              "href": "https://www.businesspost.ie/trusted-independent-journalism-seven-days-a-week/feed/",
+              "rel": "alternate",
+              "type": "application/rss+xml",
+              "title": "Business Post » Trusted Independent Journalism Seven Days a Week Comments Feed"
+            }
+          ]
+        }
+      ],
+      "uncertainties": [
+        "Exact general RSS alternate retained; comments feeds are excluded. Numerous AI user-agent groups have Disallow:/; central validation must use real collector policy and cannot impersonate exempt agents."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "PT",
+      "name": "Lusa",
+      "website": "https://www.lusa.pt/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.lusa.pt/about-lusa",
+          "what_supports": "Official agency about page identifies Lusa and its text, photo, video, audio, archive and agenda services."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:54.230116+00:00",
+      "candidates": [],
+      "documents": [
+        {
+          "request_url": "https://www.lusa.pt/robots.txt",
+          "url": "https://www.lusa.pt/robots.txt",
+          "status": 200,
+          "content_type": "text/plain",
+          "sha256": "f64b22bb45805857807c34fb428399a2e11fa00def59e940a9ef5fcf69c24936",
+          "observed_at_utc": "2026-10-14T13:36:51.002850+00:00",
+          "sitemap_declarations": [],
+          "robots_directives": [
+            "Disallow: /",
+            "User-agent: OpenAI-Crawler",
+            "Disallow: /",
+            "User-agent: ChatGPT-User",
+            "Disallow: /",
+            "User-agent: GPTBot",
+            "Disallow: /",
+            "User-agent: Googlebot",
+            "Crawl-delay: 120",
+            "Disallow: /Admin/",
+            "Disallow: /App_Code/",
+            "Disallow: /App_Data/",
+            "Disallow: /bin/",
+            "Disallow: /Content/",
+            "Disallow: /logs/",
+            "Disallow: /styles/",
+            "Disallow: /Scripts/",
+            "Disallow: /Portal/",
+            "Disallow: /Handlers/",
+            "Allow: /national",
+            "Allow: /economia",
+            "Allow: /culture",
+            "Allow: /desporto",
+            "Allow: /international",
+            "Allow: /lusofonia",
+            "Allow: /lusanews",
+            "Allow: /newsletters",
+            "Allow: /about-lusa",
+            "Allow: /contact-us",
+            "Allow: /video-gallery",
+            "Allow: /image-gallery",
+            "Allow: /article/",
+            "User-agent: Twitterbot",
+            "Crawl-delay: 120",
+            "Disallow: /Admin/",
+            "Disallow: /App_Code/",
+            "Disallow: /App_Data/",
+            "Disallow: /bin/",
+            "Disallow: /Content/",
+            "Disallow: /logs/",
+            "Disallow: /styles/",
+            "Disallow: /Scripts/",
+            "Disallow: /Portal/",
+            "Disallow: /Handlers/",
+            "Allow: /national",
+            "Allow: /economia",
+            "Allow: /culture",
+            "Allow: /desporto",
+            "Allow: /international",
+            "Allow: /lusofonia",
+            "Allow: /lusanews",
+            "Allow: /newsletters",
+            "Allow: /about-lusa",
+            "Allow: /contact-us",
+            "Allow: /video-gallery",
+            "Allow: /image-gallery",
+            "Allow: /article/",
+            "User-agent: FacebookBot",
+            "Crawl-delay: 120",
+            "Disallow: /Admin/",
+            "Disallow: /App_Code/",
+            "Disallow: /App_Data/",
+            "Disallow: /bin/",
+            "Disallow: /Content/",
+            "Disallow: /logs/",
+            "Disallow: /styles/",
+            "Disallow: /Scripts/",
+            "Disallow: /Portal/",
+            "Disallow: /Handlers/",
+            "Allow: /national",
+            "Allow: /economia",
+            "Allow: /culture",
+            "Allow: /desporto",
+            "Allow: /international",
+            "Allow: /lusofonia",
+            "Allow: /lusanews",
+            "Allow: /newsletters",
+            "Allow: /about-lusa",
+            "Allow: /contact-us",
+            "Allow: /video-gallery",
+            "Allow: /image-gallery",
+            "Allow: /article/",
+            "User-agent: *",
+            "Crawl-delay: 120",
+            "Disallow: /Admin/",
+            "Disallow: /App_Code/",
+            "Disallow: /App_Data/",
+            "Disallow: /bin/",
+            "Disallow: /Content/",
+            "Disallow: /logs/",
+            "Disallow: /styles/",
+            "Disallow: /Scripts/",
+            "Disallow: /Portal/",
+            "Disallow: /Handlers/",
+            "Disallow: /article/",
+            "Allow: /national",
+            "Allow: /economia",
+            "Allow: /culture",
+            "Allow: /desporto",
+            "Allow: /international",
+            "Allow: /lusofonia",
+            "Allow: /lusanews",
+            "Allow: /newsletters",
+            "Allow: /about-lusa",
+            "Allow: /contact-us",
+            "Allow: /video-gallery",
+            "Allow: /image-gallery"
+          ]
+        },
+        {
+          "request_url": "https://www.lusa.pt/",
+          "url": "https://www.lusa.pt/",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "5d7fcf49f155aa21ef73f3c8c573c8e188e9a36b87689a05e1346916f09caa53",
+          "observed_at_utc": "2026-10-14T13:36:54.230116+00:00",
+          "title": "LUSA: Notícias do Dia",
+          "relevant_links": []
+        }
+      ],
+      "uncertainties": [
+        "No exact XML candidate declared in bounded official homepage/robots metadata read; do not infer absence of all possible feeds or guess conventional /feed or /sitemap addresses.",
+        "Wildcard robots has Crawl-delay:120 and Disallow:/article/; no feed declared by homepage. Further metadata work must honor120-second gap and agent-specific exclusions. Public listing links do not authorize article crawling."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "DK",
+      "name": "Ritzau",
+      "website": "https://www.ritzau.com/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://via.ritzau.dk/nyhedsrum/10/ritzausbureau",
+          "what_supports": "Official Ritzau newsroom identifies Ritzaus Bureau A/S, its news-agency services, Copenhagen contacts and the ritzau.com corporate site."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:57.014597+00:00",
+      "candidates": [
+        {
+          "url": "https://ritzau.com/sitemap_index.xml",
+          "type": "sitemap",
+          "declaration_url": "https://ritzau.com/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "1ee22c2bd7b7c9025fb4138d7547f201cd14167f5d6b01c3117afafd13b0d18d",
+          "observed_at_utc": "2026-10-14T13:36:52.786994+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "corporate_and_service_site; not_full_wire_coverage",
+          "recommended_for_initial_validation": false
+        }
+      ],
+      "documents": [
+        {
+          "request_url": "https://www.ritzau.com/robots.txt",
+          "url": "https://ritzau.com/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=utf-8",
+          "sha256": "1ee22c2bd7b7c9025fb4138d7547f201cd14167f5d6b01c3117afafd13b0d18d",
+          "observed_at_utc": "2026-10-14T13:36:52.786994+00:00",
+          "sitemap_declarations": [
+            "https://ritzau.com/sitemap_index.xml"
+          ],
+          "robots_directives": [
+            "User-agent: *",
+            "Disallow:",
+            "Sitemap: https://ritzau.com/sitemap_index.xml"
+          ]
+        },
+        {
+          "request_url": "https://www.ritzau.com/",
+          "url": "https://ritzau.com/",
+          "status": 200,
+          "content_type": "text/html; charset=UTF-8",
+          "sha256": "2a5ef2045e6238f79143bad116255cec2db01c332811c9ec572784fdd95e91bd",
+          "observed_at_utc": "2026-10-14T13:36:57.014597+00:00",
+          "title": "RITZAU - En verden af nyheder",
+          "relevant_links": []
+        }
+      ],
+      "uncertainties": [
+        "Corporate/site sitemap or company RSS declaration does not establish collection of licensed national agency wire. Hold initial adoption unless XML confirms public editorial article scope; never count service/about/company announcements as wire coverage."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "FI",
+      "name": "Suomen Tietotoimisto (STT)",
+      "website": "https://stt.fi/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://stt.fi/en/about-stt/",
+          "what_supports": "Official about page identifies the Finnish News Agency and its media news service."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:56.092291+00:00",
+      "candidates": [
+        {
+          "url": "https://stt.fi/sitemap_index.xml",
+          "type": "sitemap",
+          "declaration_url": "https://stt.fi/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "471c03804afa96f3481651cb0646814cd7d63147f42f5380d7aa1350e1bb0c95",
+          "observed_at_utc": "2026-10-14T13:36:52.949048+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "corporate_and_service_site; not_full_wire_coverage",
+          "recommended_for_initial_validation": false
+        },
+        {
+          "url": "https://stt.fi/feed/",
+          "type": "rss",
+          "declaration_url": "https://stt.fi/",
+          "declaration_method": "Official homepage link rel=alternate",
+          "declaration_sha256": "702676da913ee48a116a23cecc9fc7236beab26b4a6d98c2cfa3cc5cbab49b63",
+          "observed_at_utc": "2026-10-14T13:36:56.092291+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "corporate_and_service_site; not_full_wire_coverage",
+          "recommended_for_initial_validation": false,
+          "declaration_tag": {
+            "tag": "link",
+            "rel": "alternate",
+            "type": "application/rss+xml",
+            "title": "STT » syöte",
+            "href": "https://stt.fi/feed/"
+          }
+        }
+      ],
+      "documents": [
+        {
+          "request_url": "https://stt.fi/robots.txt",
+          "url": "https://stt.fi/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=utf-8",
+          "sha256": "471c03804afa96f3481651cb0646814cd7d63147f42f5380d7aa1350e1bb0c95",
+          "observed_at_utc": "2026-10-14T13:36:52.949048+00:00",
+          "sitemap_declarations": [
+            "https://stt.fi/sitemap_index.xml"
+          ],
+          "robots_directives": [
+            "User-agent: *",
+            "Disallow:",
+            "Sitemap: https://stt.fi/sitemap_index.xml"
+          ]
+        },
+        {
+          "request_url": "https://stt.fi/",
+          "url": "https://stt.fi/",
+          "status": 200,
+          "content_type": "text/html; charset=UTF-8",
+          "sha256": "702676da913ee48a116a23cecc9fc7236beab26b4a6d98c2cfa3cc5cbab49b63",
+          "observed_at_utc": "2026-10-14T13:36:56.092291+00:00",
+          "title": "STT - STT",
+          "relevant_links": [
+            {
+              "tag": "link",
+              "href": "https://stt.fi/feed/",
+              "rel": "alternate",
+              "type": "application/rss+xml",
+              "title": "STT » syöte"
+            },
+            {
+              "tag": "link",
+              "href": "https://stt.fi/comments/feed/",
+              "rel": "alternate",
+              "type": "application/rss+xml",
+              "title": "STT » kommenttien syöte"
+            }
+          ]
+        }
+      ],
+      "uncertainties": [
+        "Corporate/site sitemap or company RSS declaration does not establish collection of licensed national agency wire. Hold initial adoption unless XML confirms public editorial article scope; never count service/about/company announcements as wire coverage."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "GR",
+      "name": "ERT News",
+      "website": "https://www.ertnews.gr/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.ertnews.gr/",
+          "what_supports": "Official ERT News homepage identifies the current broadcaster news site and links ERT corporate information."
+        },
+        {
+          "url": "https://www.ert.gr/etairia//",
+          "what_supports": "Official ERT corporate page lists ertnews.gr among the broadcaster websites."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:56.259836+00:00",
+      "candidates": [
+        {
+          "url": "https://www.ertnews.gr/feed/",
+          "type": "rss",
+          "declaration_url": "https://www.ertnews.gr/",
+          "declaration_method": "Official homepage link rel=alternate",
+          "declaration_sha256": "dfd21caf244deba390c135fb6fdea906d6943bc240ba223296156c61cf21cb6c",
+          "observed_at_utc": "2026-10-14T13:36:56.259836+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": true,
+          "declaration_tag": {
+            "tag": "link",
+            "rel": "alternate",
+            "type": "application/rss+xml",
+            "title": "Ροή RSS » ertnews.gr",
+            "href": "https://www.ertnews.gr/feed/"
+          }
+        }
+      ],
+      "documents": [
+        {
+          "request_url": "https://www.ertnews.gr/robots.txt",
+          "url": "https://www.ertnews.gr/robots.txt",
+          "status": 200,
+          "content_type": "text/plain",
+          "sha256": "1ba82922c167cd5b0d349b233aa8a3183f59d7a7679c6915d907f027421a4cbf",
+          "observed_at_utc": "2026-10-14T13:36:52.932465+00:00",
+          "sitemap_declarations": [],
+          "robots_directives": [
+            "User-agent: *",
+            "Disallow: /livetv/",
+            "Disallow: /advert/",
+            "Disallow: /ertsports/",
+            "Disallow: /ertflix/",
+            "Disallow: /broadcast/",
+            "Disallow: /video-file/",
+            "Disallow: /wp-json/"
+          ]
+        },
+        {
+          "request_url": "https://www.ertnews.gr/",
+          "url": "https://www.ertnews.gr/",
+          "status": 200,
+          "content_type": "text/html; charset=UTF-8",
+          "sha256": "dfd21caf244deba390c135fb6fdea906d6943bc240ba223296156c61cf21cb6c",
+          "observed_at_utc": "2026-10-14T13:36:56.259836+00:00",
+          "title": "ERT NEWS | Ενημέρωση, Πολιτισμός, Ψυχαγωγία - ertnews.gr",
+          "relevant_links": [
+            {
+              "tag": "link",
+              "href": "https://www.ertnews.gr/feed/",
+              "rel": "alternate",
+              "type": "application/rss+xml",
+              "title": "Ροή RSS » ertnews.gr"
+            },
+            {
+              "tag": "link",
+              "href": "https://www.ertnews.gr/comments/feed/",
+              "rel": "alternate",
+              "type": "application/rss+xml",
+              "title": "Ροή Σχολίων » ertnews.gr"
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "xml_validated": false
+    },
+    {
+      "country": "GR",
+      "name": "Athens-Macedonian News Agency (ANA-MPA)",
+      "website": "https://www.amna.gr/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.amna.gr/en",
+          "what_supports": "Official English agency homepage indexed as Athens-Macedonian News Agency; confirms publisher identity, not current endpoint health."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:55.935843+00:00",
+      "candidates": [],
+      "documents": [
+        {
+          "request_url": "https://www.amna.gr/robots.txt",
+          "url": "https://www.amna.gr/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=UTF-8",
+          "sha256": "683998ed3d9e3113d7600d9bd595eee0aad9286cacdc09ec0b76a4a6f3dd82b4",
+          "observed_at_utc": "2026-10-14T13:36:53.321804+00:00",
+          "sitemap_declarations": [],
+          "robots_directives": [
+            "User-agent: facebookexternalhit/1.1",
+            "Allow: /",
+            "User-agent: Facebot",
+            "Allow: /",
+            "User-agent: Meta-ExternalAds",
+            "Allow: /",
+            "User-agent: *",
+            "Allow: /"
+          ]
+        },
+        {
+          "request_url": "https://www.amna.gr/",
+          "url": "https://www.amna.gr/",
+          "status": 200,
+          "content_type": "text/html",
+          "sha256": "d02032286070b4dd9d8fbd985a7bdca8af8edf52b89ff177db3bfcb2c8a9c43d",
+          "observed_at_utc": "2026-10-14T13:36:55.935843+00:00",
+          "title": null,
+          "relevant_links": []
+        },
+        {
+          "request_url": "https://www.amna.gr/en",
+          "method": "official primary web reference homepage fallback",
+          "observation": "Official English homepage view inaccessible; no declaration recovered."
+        }
+      ],
+      "uncertainties": [
+        "No exact XML candidate declared in bounded official homepage/robots metadata read; do not infer absence of all possible feeds or guess conventional /feed or /sitemap addresses.",
+        "Homepage returned200 with no title; a success status alone does not establish that real editorial HTML was available. Official /en page inaccessible in web fallback. No endpoint guessed."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "RO",
+      "name": "AGERPRES",
+      "website": "https://agerpres.ro/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://agerpres.ro/",
+          "what_supports": "Official homepage identifies AGERPRES as the national news agency and provides Romanian, English and Hungarian news editions."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:55.980577+00:00",
+      "candidates": [],
+      "documents": [
+        {
+          "request_url": "https://agerpres.ro/robots.txt",
+          "url": "https://agerpres.ro/robots.txt",
+          "status": 200,
+          "content_type": "text/plain",
+          "sha256": "61ae29308271208fc0dbc9992ccb782f712371de122a66df489733181fc3f63e",
+          "observed_at_utc": "2026-10-14T13:36:53.732823+00:00",
+          "sitemap_declarations": [],
+          "robots_directives": [
+            "User-agent: *",
+            "Disallow: /foto/thumb",
+            "Disallow: /foto/thumb/",
+            "Disallow: /foto/thumb/*",
+            "Disallow: /storage/thumb",
+            "Disallow: /storage/thumb/",
+            "Disallow: /storage/thumb/*",
+            "Disallow: /advanced_search",
+            "Disallow: /advanced_search/",
+            "Disallow: /advanced_search/*",
+            "Disallow: /advanced_search/search",
+            "Disallow: /search",
+            "Disallow: /search/*",
+            "Disallow: /search*",
+            "User-agent: *",
+            "Crawl-delay: 1"
+          ]
+        },
+        {
+          "request_url": "https://agerpres.ro/",
+          "url": "https://agerpres.ro/",
+          "status": 200,
+          "content_type": "text/html; charset=UTF-8",
+          "sha256": "b3ddcfce47e9eef72abd43e8f534e0e8fedb751d896c473740b06e309d2beeda",
+          "observed_at_utc": "2026-10-14T13:36:55.980577+00:00",
+          "title": "AGERPRES • Actualizează lumea",
+          "relevant_links": []
+        }
+      ],
+      "uncertainties": [
+        "No exact XML candidate declared in bounded official homepage/robots metadata read; do not infer absence of all possible feeds or guess conventional /feed or /sitemap addresses."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "RO",
+      "name": "TVR Info",
+      "website": "https://tvrinfo.ro/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://tvrinfo.ro/",
+          "what_supports": "Official homepage identifies itself as the TVR news website and provides broadcaster news content."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:56.572020+00:00",
+      "candidates": [],
+      "documents": [
+        {
+          "request_url": "https://tvrinfo.ro/robots.txt",
+          "error": "HTTP Error 403: Forbidden",
+          "observed_at_utc": "2026-10-14T13:36:54.433896+00:00"
+        },
+        {
+          "request_url": "https://tvrinfo.ro/",
+          "error": "HTTP Error 403: Forbidden",
+          "observed_at_utc": "2026-10-14T13:36:56.572020+00:00"
+        },
+        {
+          "request_url": "https://tvrinfo.ro/",
+          "method": "official primary web homepage fallback",
+          "web_crawl_label": "today",
+          "observation": "Indexed TVR editorial homepage visible; RSS metadata not exposed in text. Official web robots view inaccessible."
+        }
+      ],
+      "uncertainties": [
+        "No exact XML candidate declared in bounded official homepage/robots metadata read; do not infer absence of all possible feeds or guess conventional /feed or /sitemap addresses.",
+        "https://tvrinfo.ro/robots.txt → HTTP Error 403: Forbidden",
+        "https://tvrinfo.ro/ → HTTP Error 403: Forbidden",
+        "Official primary web homepage consulted as fallback; XML endpoints were never clicked/fetched. Web publication visibility does not prove Oracle collector access."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "UA",
+      "name": "Suspilne News",
+      "website": "https://suspilne.media/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://suspilne.media/",
+          "what_supports": "Official Suspilne news homepage links the broadcaster corporate site."
+        },
+        {
+          "url": "https://corp.suspilne.media/en/about-us/54558-about-suspilne-mission-history-reports/",
+          "what_supports": "Official broadcaster about page identifies Suspilne Ukraine and lists Suspilne.media among its digital platforms."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:58.773487+00:00",
+      "candidates": [
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": true,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/sitemap-news.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": true,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/sport/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/culture/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/cherkasy/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/kropyvnytskiy/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/vinnytsia/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/poltava/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/khmelnytskiy/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/zhytomyr/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/odesa/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/lutsk/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/uzhhorod/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/dnipro/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/chernihiv/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/sumy/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/lviv/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/mykolaiv/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/ternopil/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/rivne/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/chernivtsi/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/ivano-frankivsk/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/kharkiv/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/crimea/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/kherson/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/kyiv/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/donbas/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/zaporizhzhia/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/suspilne/sitemap/mediacenter/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://suspilne.media/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        },
+        {
+          "url": "https://suspilne.media/rss/all.rss",
+          "type": "rss",
+          "declaration_url": "https://suspilne.media/",
+          "declaration_method": "Official homepage RSS hyperlink",
+          "declaration_sha256": "4c7ae13b3fcb2a4614766c4f3d405261cdc2c30268eaeb493482a0d6bd953831",
+          "observed_at_utc": "2026-10-14T13:36:58.773487+00:00",
+          "xml_validated": false,
+          "status": "blocked_by_publisher_robots",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "RSS blocked by wildcard Disallow: /rss*",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "declaration_tag": {
+            "tag": "a",
+            "class": " shr-lnk shr-lnk--rss",
+            "href": "https://suspilne.media/rss/all.rss",
+            "title": "Читайте новини Суспільного у Rss",
+            "rel": "nofollow",
+            "target": "_blank",
+            "aria-label": "Читайте новини Суспільного у Rss",
+            "label": ""
+          },
+          "scope_note": "Master or latest-news stream preferred. Other declared regional/category addresses retained as evidence; avoid redundant initial validation."
+        }
+      ],
+      "documents": [
+        {
+          "request_url": "https://suspilne.media/robots.txt",
+          "url": "https://suspilne.media/robots.txt",
+          "status": 200,
+          "content_type": "text/plain;charset=UTF-8",
+          "sha256": "88132ed7e3ce8b3cbe8fe12f9929087fa0102ed3f25274e349820a4d51ec2a0b",
+          "observed_at_utc": "2026-10-14T13:36:56.320408+00:00",
+          "sitemap_declarations": [
+            "https://suspilne.media/suspilne/sitemap/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/sitemap-news.xml",
+            "https://suspilne.media/suspilne/sitemap/sport/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/culture/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/cherkasy/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/kropyvnytskiy/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/vinnytsia/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/poltava/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/khmelnytskiy/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/zhytomyr/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/odesa/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/lutsk/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/uzhhorod/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/dnipro/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/chernihiv/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/sumy/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/lviv/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/mykolaiv/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/ternopil/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/rivne/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/chernivtsi/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/ivano-frankivsk/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/kharkiv/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/crimea/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/kherson/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/kyiv/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/donbas/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/zaporizhzhia/sitemap.xml",
+            "https://suspilne.media/suspilne/sitemap/mediacenter/sitemap.xml"
+          ],
+          "robots_directives": [
+            "User-agent: Googlebot",
+            "Content-Signal: ai-train=no, search=yes, ai-input=yes",
+            "Allow: /*.css",
+            "Allow: /*.js",
+            "Allow: /*.png",
+            "Allow: /*.jpg",
+            "Allow: /*.jpeg",
+            "Allow: /*.svg",
+            "Disallow: */away.php?",
+            "Disallow: */redirect.php?",
+            "Disallow: *?gclid",
+            "Disallow: /fb_comment_id=*",
+            "Disallow: /*?utm_source*",
+            "Disallow: /*?utm_medium*",
+            "Disallow: /*?utm_campaign*",
+            "Disallow: /*?utm_content*",
+            "Disallow: */maillist/*",
+            "Disallow: */resource/*",
+            "Disallow: /member.php*",
+            "Disallow: *?new_letter",
+            "Disallow: *?t=*",
+            "Disallow: */feedback.php*",
+            "Disallow: /?pk_campaign=*",
+            "Disallow: /newsfeed",
+            "Disallow: /app-landing/",
+            "Disallow: /rss*",
+            "Disallow: /ajax/*",
+            "Disallow: /widget4/",
+            "Disallow: /lightnews/",
+            "Disallow: /lightnews/*",
+            "Disallow: */{{ampHref}}",
+            "User-agent: *",
+            "Content-Signal: ai-train=no, search=yes, ai-input=yes",
+            "Allow: /*.css",
+            "Allow: /*.js",
+            "Allow: /*.png",
+            "Allow: /*.jpg",
+            "Allow: /*.jpeg",
+            "Allow: /*.svg",
+            "Disallow: */away.php?",
+            "Disallow: */redirect.php?",
+            "Disallow: *?gclid",
+            "Disallow: /fb_comment_id=*",
+            "Disallow: /*?utm_source*",
+            "Disallow: /*?utm_medium*",
+            "Disallow: /*?utm_campaign*",
+            "Disallow: /*?utm_content*",
+            "Disallow: */maillist/*",
+            "Disallow: */resource/*",
+            "Disallow: /member.php*",
+            "Disallow: *?new_letter",
+            "Disallow: *?t=*",
+            "Disallow: */feedback.php*",
+            "Disallow: /?pk_campaign=*",
+            "Disallow: /newsfeed",
+            "Disallow: /app-landing/",
+            "Disallow: /rss*",
+            "Disallow: /ajax/*",
+            "Disallow: /widget4/",
+            "Disallow: /lightnews/",
+            "Disallow: /lightnews/*",
+            "Disallow: */{{ampHref}}",
+            "Disallow: /suspilne/smart/img/netpeak_logo.svg",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/sitemap-news.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/sport/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/culture/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/cherkasy/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/kropyvnytskiy/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/vinnytsia/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/poltava/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/khmelnytskiy/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/zhytomyr/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/odesa/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/lutsk/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/uzhhorod/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/dnipro/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/chernihiv/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/sumy/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/lviv/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/mykolaiv/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/ternopil/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/rivne/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/chernivtsi/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/ivano-frankivsk/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/kharkiv/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/crimea/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/kherson/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/kyiv/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/donbas/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/zaporizhzhia/sitemap.xml",
+            "Sitemap: https://suspilne.media/suspilne/sitemap/mediacenter/sitemap.xml"
+          ]
+        },
+        {
+          "request_url": "https://suspilne.media/",
+          "url": "https://suspilne.media/",
+          "status": 200,
+          "content_type": "text/html; charset=UTF-8",
+          "sha256": "4c7ae13b3fcb2a4614766c4f3d405261cdc2c30268eaeb493482a0d6bd953831",
+          "observed_at_utc": "2026-10-14T13:36:58.773487+00:00",
+          "title": "Новини України та світу — Суспільне | Новини",
+          "relevant_links": [
+            {
+              "tag": "a",
+              "href": "https://suspilne.media/rss/all.rss",
+              "rel": "nofollow",
+              "title": "Читайте новини Суспільного у Rss",
+              "label": ""
+            },
+            {
+              "tag": "a",
+              "href": "https://suspilne.media/rss/all.rss",
+              "rel": "nofollow",
+              "title": "Читайте новини Суспільного у Rss",
+              "label": ""
+            },
+            {
+              "tag": "a",
+              "href": "https://suspilne.media/rss/all.rss",
+              "rel": "nofollow",
+              "title": "Читайте новини Суспільного у Rss",
+              "label": ""
+            }
+          ]
+        }
+      ],
+      "uncertainties": [
+        "Homepage declares RSS/all.rss, but wildcard robots blocks /rss*. Use only permitted declared sitemap paths after central XML validation; preserve all29 sitemap declarations without claiming equivalent feed coverage."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "LU",
+      "name": "Tageblatt",
+      "website": "https://www.tageblatt.lu/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.tageblatt.lu/",
+          "what_supports": "Official publisher homepage confirms the newspaper brand and Luxembourg news coverage."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:59.743347+00:00",
+      "candidates": [
+        {
+          "url": "https://www.tageblatt.lu/Sitemap_Index.xml.gz",
+          "type": "sitemap",
+          "declaration_url": "https://www.tageblatt.lu/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "8cf9586715ca20fec285c996bd2e4616feeb07d8e8dec502cb87becf0a3f1d2f",
+          "observed_at_utc": "2026-10-14T13:36:56.499193+00:00",
+          "xml_validated": false,
+          "status": "blocked_by_publisher_notice",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "explicit publisher automated-access permission requirement",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false
+        },
+        {
+          "url": "https://www.tageblatt.lu/news.rss",
+          "type": "rss",
+          "declaration_url": "https://www.tageblatt.lu/",
+          "declaration_method": "Official homepage link rel=alternate",
+          "declaration_sha256": "b8dc3f3838b375e457506a4fc26524d4fd448d838e987844e4691af6137715db",
+          "observed_at_utc": "2026-10-14T13:36:59.743347+00:00",
+          "xml_validated": false,
+          "status": "blocked_by_publisher_notice",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "explicit publisher automated-access permission requirement",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": false,
+          "declaration_tag": {
+            "tag": "link",
+            "rel": "alternate",
+            "href": "/news.rss",
+            "type": "application/rss+xml",
+            "title": "Tageblatt.lu – Schlagzeilen"
+          }
+        }
+      ],
+      "documents": [
+        {
+          "request_url": "https://www.tageblatt.lu/robots.txt",
+          "url": "https://www.tageblatt.lu/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=utf-8",
+          "sha256": "8cf9586715ca20fec285c996bd2e4616feeb07d8e8dec502cb87becf0a3f1d2f",
+          "observed_at_utc": "2026-10-14T13:36:56.499193+00:00",
+          "sitemap_declarations": [
+            "https://www.tageblatt.lu/Sitemap_Index.xml.gz"
+          ],
+          "robots_directives": [
+            "User-agent: facebookexternalhit",
+            "Allow: /",
+            "Disallow: /Sso",
+            "Disallow: /Benutzer",
+            "Disallow: /User",
+            "Disallow: /Anzeigen",
+            "Disallow: /Dateien",
+            "Disallow: /Nachrichten/Suche",
+            "Disallow: /Motif/*.jpg",
+            "User-agent: Facebot",
+            "Allow: /",
+            "Disallow: /Sso",
+            "Disallow: /Benutzer",
+            "Disallow: /User",
+            "Disallow: /Anzeigen",
+            "Disallow: /Dateien",
+            "Disallow: /Nachrichten/Suche",
+            "Disallow: /Motif/*.jpg",
+            "User-agent: *",
+            "Disallow: /Sso",
+            "Disallow: /Benutzer",
+            "Disallow: /User",
+            "Disallow: /Anzeigen",
+            "Disallow: /Dateien",
+            "Disallow: /Nachrichten/Suche",
+            "User-agent: ChatGPT-User",
+            "Disallow: /",
+            "User-agent: GPTBot",
+            "Disallow: /",
+            "User-agent: CCBot",
+            "Disallow: /",
+            "Crawl-Delay: 2",
+            "Sitemap: https://www.tageblatt.lu/Sitemap_Index.xml.gz"
+          ],
+          "publisher_notice": "Official robots legal notice prohibits automated access/collection without express publisher permission and supplies syndication contact."
+        },
+        {
+          "request_url": "https://www.tageblatt.lu/",
+          "url": "https://www.tageblatt.lu/",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "b8dc3f3838b375e457506a4fc26524d4fd448d838e987844e4691af6137715db",
+          "observed_at_utc": "2026-10-14T13:36:59.743347+00:00",
+          "title": "Tageblatt.lu - Startseite",
+          "relevant_links": [
+            {
+              "tag": "link",
+              "href": "/news.rss",
+              "rel": "alternate",
+              "type": "application/rss+xml",
+              "title": "Tageblatt.lu – Schlagzeilen"
+            }
+          ]
+        }
+      ],
+      "uncertainties": [
+        "Official robots legal notice requires express permission for automated collection. Keep declared news.rss and sitemap on hold; RSS/sitemap publication does not cancel that notice."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "HU",
+      "name": "Magyar Távirati Iroda (MTI)",
+      "website": "https://mti.hu/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://mti.hu/",
+          "what_supports": "Official national news-agency homepage identifies MTI, its services and registration/login access."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:37:00.445159+00:00",
+      "candidates": [],
+      "documents": [
+        {
+          "request_url": "https://mti.hu/robots.txt",
+          "error": "HTTP Error 404: Not Found",
+          "observed_at_utc": "2026-10-14T13:36:57.290671+00:00"
+        },
+        {
+          "request_url": "https://mti.hu/",
+          "url": "https://mti.hu/",
+          "status": 200,
+          "content_type": "text/html",
+          "sha256": "d99e77ffc65252350368ec1b4e1cf95779d8da3a0a9a6f8ea492a3acb6718c5f",
+          "observed_at_utc": "2026-10-14T13:37:00.445159+00:00",
+          "title": "Nemzeti Hírügynökség",
+          "relevant_links": []
+        }
+      ],
+      "uncertainties": [
+        "No exact XML candidate declared in bounded official homepage/robots metadata read; do not infer absence of all possible feeds or guess conventional /feed or /sitemap addresses.",
+        "https://mti.hu/robots.txt → HTTP Error 404: Not Found"
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "HR",
+      "name": "HINA",
+      "website": "https://www.hina.hr/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.hina.hr/english",
+          "what_supports": "Official English agency page identifies HINA as the Croatian News Agency and describes its news and customer services; indexed official evidence used after homepage 403."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:36:59.264103+00:00",
+      "candidates": [
+        {
+          "url": "https://www.hina.hr/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://www.hina.hr/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "815d589c5cdcfe0c421481bd0e627ed8985b28c8b1314f46276a2be4fa1a2d97",
+          "observed_at_utc": "2026-10-14T13:36:57.182769+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": true
+        }
+      ],
+      "documents": [
+        {
+          "request_url": "https://www.hina.hr/robots.txt",
+          "url": "https://www.hina.hr/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=utf-8",
+          "sha256": "815d589c5cdcfe0c421481bd0e627ed8985b28c8b1314f46276a2be4fa1a2d97",
+          "observed_at_utc": "2026-10-14T13:36:57.182769+00:00",
+          "sitemap_declarations": [
+            "https://www.hina.hr/sitemap.xml"
+          ],
+          "robots_directives": [
+            "User-agent: *",
+            "Content-Signal: search=yes,ai-train=no,use=reference",
+            "Allow: /",
+            "User-agent: Amazonbot",
+            "Disallow: /",
+            "User-agent: Applebot-Extended",
+            "Disallow: /",
+            "User-agent: Bytespider",
+            "Disallow: /",
+            "User-agent: CCBot",
+            "Disallow: /",
+            "User-agent: ClaudeBot",
+            "Disallow: /",
+            "User-agent: Diffbot",
+            "Disallow: /",
+            "User-agent: Google-Extended",
+            "Disallow: /",
+            "User-agent: GPTBot",
+            "Disallow: /",
+            "User-agent: omgili",
+            "Disallow: /",
+            "User-agent: anthropic-ai",
+            "Disallow: /",
+            "User-agent: Claude-Web",
+            "Disallow: /",
+            "User-agent: cohere-ai",
+            "Disallow: /",
+            "User-agent: MistralAI-Training",
+            "Disallow: /",
+            "User-agent: meta-externalagent",
+            "Disallow: /",
+            "User-agent: GoogleOther",
+            "Disallow: /",
+            "User-agent: Baiduspider",
+            "Disallow: /",
+            "User-agent: PetalBot",
+            "Disallow: /",
+            "User-agent: AwarioSmartBot",
+            "User-agent: AwarioRssBot",
+            "Disallow: /",
+            "User-agent: Google-CloudVertexBot",
+            "Disallow: /",
+            "User-agent: QualifiedBot",
+            "Disallow: /",
+            "User-agent: Cotoyogi",
+            "Disallow: /",
+            "User-agent: ICC-Crawler",
+            "Disallow: /",
+            "User-agent: atlassian-bot",
+            "Disallow: /",
+            "User-agent: FishBot",
+            "Disallow: /",
+            "User-agent: BorderxBot",
+            "Disallow: /",
+            "User-agent: NavuBot",
+            "Disallow: /",
+            "User-agent: SemrushBot-SWA",
+            "Disallow: /",
+            "User-agent: WARDBot",
+            "Disallow: /",
+            "User-agent: magpie-crawler",
+            "Disallow: /",
+            "User-agent: KimiBot",
+            "Disallow: /",
+            "User-agent: CitibotSiteCrawler",
+            "Disallow: /",
+            "User-agent: Googlebot",
+            "Disallow: /_framework/",
+            "Disallow: /ico/*",
+            "Disallow: /OTS/6998167",
+            "Disallow: /OTS/8116464",
+            "User-agent: Bingbot",
+            "Disallow: /_framework/",
+            "Disallow: /ico/*",
+            "Disallow: /OTS/6998167",
+            "Disallow: /OTS/8116464",
+            "User-agent: AhrefsBot",
+            "Disallow: /",
+            "User-agent: SemrushBot",
+            "Disallow: /",
+            "User-agent: MJ12bot",
+            "Disallow: /",
+            "User-agent: DotBot",
+            "Disallow: /",
+            "User-agent: BLEXBot",
+            "Disallow: /",
+            "User-agent: Yandex",
+            "Disallow: /",
+            "User-agent: Amazonbot",
+            "Disallow: /",
+            "User-agent: Msnbot",
+            "Disallow: /",
+            "User-agent: Baidu",
+            "User-agent: Baiduspider",
+            "Disallow: /",
+            "User-agent: Baiduspider-video",
+            "Disallow: /",
+            "User-agent: Baiduspider-image",
+            "Disallow: /",
+            "User-agent: *",
+            "Disallow: /_framework/*",
+            "Disallow: /ico/*",
+            "Sitemap: https://www.hina.hr/sitemap.xml"
+          ]
+        },
+        {
+          "request_url": "https://www.hina.hr/",
+          "error": "HTTP Error 403: Forbidden",
+          "observed_at_utc": "2026-10-14T13:36:59.264103+00:00"
+        }
+      ],
+      "uncertainties": [
+        "https://www.hina.hr/ → HTTP Error 403: Forbidden",
+        "robots publishes a sitemap while homepage403 prevents local inspection of editorial scope. Validating a public sitemap must not be described as subscribing to HINA full wire; only exposed public article URLs can be counted."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "LT",
+      "name": "Baltic News Service Lithuania (BNS)",
+      "website": "https://www.bns.lt/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://bns.lt/en/apie",
+          "what_supports": "Official agency about page identifies BNS Lithuania, Vilnius contacts and regional news service; indexed official evidence, not live endpoint verification."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:37:00.756835+00:00",
+      "candidates": [],
+      "documents": [
+        {
+          "request_url": "https://www.bns.lt/robots.txt",
+          "url": "https://bns.lt/robots.txt",
+          "status": 200,
+          "content_type": "text/plain",
+          "sha256": "628cf28f54afa1ea3482ed8dff09ef50ba9fabbdeb59f40b0a971ab6b5b08529",
+          "observed_at_utc": "2026-10-14T13:36:57.816453+00:00",
+          "sitemap_declarations": [],
+          "robots_directives": [
+            "User-agent: *",
+            "Disallow: /_app/",
+            "Disallow: /__data.json"
+          ]
+        },
+        {
+          "request_url": "https://www.bns.lt/",
+          "url": "https://bns.lt/",
+          "status": 200,
+          "content_type": "text/html",
+          "sha256": "501d6f81998d33e5df4422e689cc069febc408329a0c8a8ea5d3175961eb4b41",
+          "observed_at_utc": "2026-10-14T13:37:00.756835+00:00",
+          "title": "Naujienos | BNS.lt",
+          "relevant_links": [
+            {
+              "tag": "link",
+              "href": "/_app/immutable/assets/EditFeedContent.MfJQOcAd.css",
+              "rel": "stylesheet"
+            }
+          ]
+        }
+      ],
+      "uncertainties": [
+        "No exact XML candidate declared in bounded official homepage/robots metadata read; do not infer absence of all possible feeds or guess conventional /feed or /sitemap addresses.",
+        "Stylesheet filename EditFeedContent is an application asset, not an RSS declaration, and is excluded. Current publisher homepage redirects www to bns.lt."
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "LV",
+      "name": "LETA",
+      "website": "https://www.leta.lv/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.letanews.com/rus/info_pages/contacts/",
+          "what_supports": "Official LETA contact page identifies the national news agency in Riga, Latvia and links staff email identities at leta.lv; indexed official evidence."
+        },
+        {
+          "url": "https://www.letanews.com/eng/",
+          "what_supports": "Official LETA English news homepage confirms Latvian news-agency brand and service; indexed official evidence, not fresh collection health."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:37:29.383043+00:00",
+      "candidates": [],
+      "documents": [
+        {
+          "request_url": "https://www.leta.lv/robots.txt",
+          "error": "<urlopen error timed out>",
+          "observed_at_utc": "2026-10-14T13:37:12.366070+00:00"
+        },
+        {
+          "request_url": "https://www.leta.lv/",
+          "error": "<urlopen error timed out>",
+          "observed_at_utc": "2026-10-14T13:37:29.383043+00:00"
+        }
+      ],
+      "uncertainties": [
+        "No exact XML candidate declared in bounded official homepage/robots metadata read; do not infer absence of all possible feeds or guess conventional /feed or /sitemap addresses.",
+        "https://www.leta.lv/robots.txt → <urlopen error timed out>",
+        "https://www.leta.lv/ → <urlopen error timed out>"
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "LV",
+      "name": "Dienas Bizness",
+      "website": "https://db.lv/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://db.lv/",
+          "what_supports": "Official business-news publisher homepage confirms Dienas Bizness and economic/financial coverage; print offering is described as a weekly business publication."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:37:01.275579+00:00",
+      "candidates": [
+        {
+          "url": "https://db.lv/sitemap.xml",
+          "type": "sitemap",
+          "declaration_url": "https://db.lv/robots.txt",
+          "declaration_method": "robots.txt Sitemap directive",
+          "declaration_sha256": "6ede1cbe0c5819f00a050d33aef96dbd30a82410fe8e138171891432756cbb04",
+          "observed_at_utc": "2026-10-14T13:36:58.943025+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": true
+        },
+        {
+          "url": "https://db.lv/rss",
+          "type": "rss",
+          "declaration_url": "https://db.lv/",
+          "declaration_method": "Official homepage link rel=alternate",
+          "declaration_sha256": "0897609726f8179dde8c5d4ba32c576f4a9b24013fb1c86022039f72c1204037",
+          "observed_at_utc": "2026-10-14T13:37:01.275579+00:00",
+          "xml_validated": false,
+          "status": "needs_governed_xml_validation",
+          "cross_domain": false,
+          "ownership_evidence": "Same publisher hostname or www/non-www canonical host.",
+          "robots_path_policy": "central validator must apply retrieved robots to actual collector user agent and final redirect URL",
+          "content_scope_review": "public_news_article_stream_scope_pending_XML_validation",
+          "recommended_for_initial_validation": true,
+          "declaration_tag": {
+            "tag": "link",
+            "rel": "alternate",
+            "type": "application/rss+xml",
+            "title": "Dienas Bizness RSS",
+            "href": "https://db.lv/rss"
+          }
+        }
+      ],
+      "documents": [
+        {
+          "request_url": "https://db.lv/robots.txt",
+          "url": "https://db.lv/robots.txt",
+          "status": 200,
+          "content_type": "text/plain; charset=UTF-8",
+          "sha256": "6ede1cbe0c5819f00a050d33aef96dbd30a82410fe8e138171891432756cbb04",
+          "observed_at_utc": "2026-10-14T13:36:58.943025+00:00",
+          "sitemap_declarations": [
+            "https://db.lv/sitemap.xml"
+          ],
+          "robots_directives": [
+            "User-agent: *",
+            "Disallow: /cp/",
+            "Disallow: /login",
+            "Disallow: /register",
+            "Disallow: /profils",
+            "Disallow: /api/",
+            "Sitemap: https://db.lv/sitemap.xml",
+            "User-agent: GPTBot",
+            "User-agent: ClaudeBot",
+            "User-agent: anthropic-ai",
+            "User-agent: CCBot",
+            "User-agent: Bytespider",
+            "Disallow: /"
+          ]
+        },
+        {
+          "request_url": "https://db.lv/",
+          "url": "https://db.lv/",
+          "status": 200,
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "0897609726f8179dde8c5d4ba32c576f4a9b24013fb1c86022039f72c1204037",
+          "observed_at_utc": "2026-10-14T13:37:01.275579+00:00",
+          "title": "Dienas Bizness",
+          "relevant_links": [
+            {
+              "tag": "link",
+              "href": "https://db.lv/rss",
+              "rel": "alternate",
+              "type": "application/rss+xml",
+              "title": "Dienas Bizness RSS"
+            }
+          ]
+        }
+      ],
+      "uncertainties": [],
+      "xml_validated": false
+    },
+    {
+      "country": "EE",
+      "name": "Baltic News Service Estonia (BNS)",
+      "website": "https://www.bns.ee/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://www.bns.ee/ru/services",
+          "what_supports": "Official BNS services page describes news coverage in Estonia, Latvia and Lithuania, language editions and contract-based terminal access; indexed official evidence."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:37:02.754172+00:00",
+      "candidates": [],
+      "documents": [
+        {
+          "request_url": "https://www.bns.ee/robots.txt",
+          "error": "HTTP Error 404: Not Found",
+          "observed_at_utc": "2026-10-14T13:36:59.977005+00:00"
+        },
+        {
+          "request_url": "https://www.bns.ee/",
+          "url": "https://www.bns.ee/",
+          "status": 200,
+          "content_type": "text/html; charset=UTF-8",
+          "sha256": "3c23cdb3903c6c976509d78e5fc3825f798b173c34feb53ff8df609c47851b95",
+          "observed_at_utc": "2026-10-14T13:37:02.754172+00:00",
+          "title": "BNS - Baltic News Service - uudised Eestist, Lätist, Leedust ja maailmast",
+          "relevant_links": []
+        }
+      ],
+      "uncertainties": [
+        "No exact XML candidate declared in bounded official homepage/robots metadata read; do not infer absence of all possible feeds or guess conventional /feed or /sitemap addresses.",
+        "https://www.bns.ee/robots.txt → HTTP Error 404: Not Found"
+      ],
+      "xml_validated": false
+    },
+    {
+      "country": "IS",
+      "name": "Viðskiptablaðið",
+      "website": "https://www.vb.is/",
+      "audit_presence_status": "missing",
+      "official_identity_references": [
+        {
+          "url": "https://myllusetur.is/",
+          "what_supports": "Official owner homepage identifies Viðskiptablaðið and explicitly says it operates vb.is; publisher identity verified despite vb.is homepage 403."
+        }
+      ],
+      "observed_at_utc": "2026-10-14T13:37:02.003385+00:00",
+      "candidates": [],
+      "documents": [
+        {
+          "request_url": "https://www.vb.is/robots.txt",
+          "error": "HTTP Error 403: Forbidden",
+          "observed_at_utc": "2026-10-14T13:36:59.899143+00:00"
+        },
+        {
+          "request_url": "https://www.vb.is/",
+          "error": "HTTP Error 403: Forbidden",
+          "observed_at_utc": "2026-10-14T13:37:02.003385+00:00"
+        },
+        {
+          "request_url": "https://www.vb.is/",
+          "method": "official primary web homepage and robots fallback",
+          "observation": "Both official web views inaccessible; no declaration recovered."
+        }
+      ],
+      "uncertainties": [
+        "No exact XML candidate declared in bounded official homepage/robots metadata read; do not infer absence of all possible feeds or guess conventional /feed or /sitemap addresses.",
+        "https://www.vb.is/robots.txt → HTTP Error 403: Forbidden",
+        "https://www.vb.is/ → HTTP Error 403: Forbidden",
+        "Official primary web homepage consulted as fallback; XML endpoints were never clicked/fetched. Web publication visibility does not prove Oracle collector access."
+      ],
+      "xml_validated": false
+    }
+  ]
+}
