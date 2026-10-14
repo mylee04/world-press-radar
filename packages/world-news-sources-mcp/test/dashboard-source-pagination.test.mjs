@@ -106,6 +106,7 @@ function fixture(data = countryData(), countryTransport) {
     inventory: country => country.inventory ?? country,
     timeText: value => value ?? '—', appendMeta() {}, showError() {},
     renderCountries: () => { countryRenders++; },
+    utcToday: () => get('date-input').value,
     dateQuery: extra => new URLSearchParams({ date: get('date-input').value, ...extra }).toString(),
     api: async route => {
       requests.push(route);

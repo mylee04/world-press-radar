@@ -208,3 +208,12 @@ td.country-name{display:table-cell}
   .detail-panel .section-heading{flex-wrap:wrap}
   .detail-panel .section-heading .primary-button{margin-left:auto}
 }
+
+/* Bounded lists retain horizontal table access without a second vertical scroll. */
+.table-shell.paginated-table{max-height:none}
+.today-date{display:inline-flex;align-items:center;min-height:35px;padding:7px 10px;border:1px solid var(--border);border-radius:3px;background:var(--surface);font:11px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums}
+.list-page-size,.new-source-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.list-page-size label{font-size:11px;color:var(--muted);white-space:nowrap}
+.list-page-size select{min-width:62px}
+.list-pagination .page-status{min-width:82px;text-align:center;font-variant-numeric:tabular-nums}
+@media(max-width:560px){.section-heading:has(.list-page-size){flex-wrap:wrap;gap:12px}.filter-controls .list-page-size{flex:0 0 auto}.filter-controls .list-page-size select{flex:none;min-width:62px}.new-source-controls{width:100%;justify-content:space-between}.list-pagination .source-page-navigation{width:100%}}

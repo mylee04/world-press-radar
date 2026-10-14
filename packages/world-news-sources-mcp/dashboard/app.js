@@ -215,6 +215,7 @@ const translations = Object.freeze({
   "국가를 선택하세요": "Select a country",
   "{0}개 국가의 저장 기록을 불러왔습니다.": "Loaded saved records for {0} countries.",
   "기록 조회에 실패했습니다. 다시 조회해 주세요.": "Could not load records. Refresh to try again.",
+  "오늘 날짜의 기록을 불러오지 못했습니다. 새로고침해 주세요.": "Could not load today's records. Refresh to try again.",
   "조회 실패 · 저장 데이터 연결을 확인하세요": "Lookup failed · check the saved data connection",
   "국가별 기록을 불러오지 못했습니다.": "Could not load country records.",
   "{0} 수집 상세": "{0} collection details",
@@ -444,7 +445,7 @@ function applyLanguage(value, persist = true) {
 
 // Rendering uses text nodes only. Source names, URLs and tool results are untrusted data.
 const $ = (id) => document.getElementById(id);
-const state = { overview: null, countries: [], selected: null, countryData: null, countryRequest: 0, overviewRequest: 0, accessRevision: 0, sourcePage: 1, sourcePageSize: 10, sourceCache: new Map(), run: null, poll: null, activeTab: 'status', pendingStart: null, pollFailures: 0, adminSession: null, reloadRequiredProposals: new Set() };
+const state = { overview: null, countries: [], selected: null, countryData: null, countryRequest: 0, overviewRequest: 0, accessRevision: 0, date: null, dayTimer: null, countryPage: 1, countryPageSize: 10, inventoryPage: 1, inventoryPageSize: 10, inventoryHistoryPage: 1, inventoryHistoryPageSize: 10, newSourcePage: 1, newSourcePageSize: 10, sourcePage: 1, sourcePageSize: 10, sourceCache: new Map(), run: null, poll: null, activeTab: 'status', pendingStart: null, pollFailures: 0, adminSession: null, reloadRequiredProposals: new Set() };
 const numberFormats = { en: new Intl.NumberFormat('en-US'), ko: new Intl.NumberFormat('ko-KR') };
 const regionNames = { en: new Intl.DisplayNames(['en'], { type: 'region', fallback: 'none' }), ko: new Intl.DisplayNames(['ko'], { type: 'region', fallback: 'none' }) };
 const koreanCountries = { US: t('미국'), KR: t('한국'), JP: t('일본'), GB: t('영국'), CN: t('중국'), FR: t('프랑스'), DE: t('독일'), IN: t('인도'), AU: t('호주'), CA: t('캐나다'), BR: t('브라질'), IT: t('이탈리아'), ES: t('스페인'), RU: t('러시아'), MX: t('멕시코'), ID: t('인도네시아'), TR: t('튀르키예'), SA: t('사우디아라비아'), AR: t('아르헨티나'), ZA: t('남아프리카공화국') };
@@ -595,9 +596,33 @@ async function api(path, options = {}) {
     } finally { window.clearTimeout(timeout); }
   }
 }
+function utcToday(now = Date.now()) { return new Date(now).toISOString().slice(0, 10); }
+function syncTodayView() {
+  const date = utcToday(), previous = state.date;
+  state.date = date; $('date-input').value = date;
+  setText($('date-input'), () => date);
+  if (previous && previous !== date) {
+    state.overviewRequest++; state.countryRequest++;
+    state.overview = null; state.countries = []; state.countryData = null; state.sourceCache.clear();
+    state.countryPage = state.inventoryPage = state.inventoryHistoryPage = state.newSourcePage = state.sourcePage = 1;
+    $('country-detail').hidden = true;
+    ['country-pagination', 'inventory-pagination', 'inventory-history-pagination', 'new-source-pagination', 'source-pagination'].forEach(id => { $(id).hidden = true; });
+    emptyRow($('country-rows'), countryTableColumns(), t('국가별 저장 기록을 조회합니다.'));
+    emptyRow($('inventory-rows'), 6, t('국가별 저장 기록을 조회합니다.'));
+    $('inventory-history-rows').replaceChildren(); $('new-source-list').replaceChildren();
+    setText($('data-note'), () => t`${date} UTC 기록`);
+  }
+  return date;
+}
+function refreshUtcDay() { if (state.date !== utcToday()) return loadOverview(); }
+function scheduleUtcDay() {
+  if (state.dayTimer) window.clearTimeout(state.dayTimer);
+  const midnight = Date.parse(`${utcToday()}T00:00:00Z`) + 86400000;
+  state.dayTimer = window.setTimeout(() => { refreshUtcDay(); scheduleUtcDay(); }, Math.max(1, midnight - Date.now() + 50));
+}
 function dateQuery(extra = {}) {
   const params = new URLSearchParams(extra);
-  if ($('date-input').value) params.set('date', $('date-input').value);
+  params.set('date', utcToday());
   return params.toString();
 }
 
@@ -684,6 +709,18 @@ function observationNote(data) {
   return clauses.join(' / ');
 }
 
+function paginateItems(items, prefix, pageKey, sizeKey) {
+  const size = [10, 20, 50].includes(state[sizeKey]) ? state[sizeKey] : 10;
+  const count = Math.ceil(items.length / size), page = Math.min(Math.max(1, state[pageKey] || 1), Math.max(1, count));
+  state[sizeKey] = size; state[pageKey] = page; $(`${prefix}-page-size`).value = String(size);
+  const start = (page - 1) * size, end = Math.min(start + size, items.length);
+  $(`${prefix}-pagination`).hidden = !items.length;
+  $(`${prefix}-page-prev`).disabled = page <= 1;
+  $(`${prefix}-page-next`).disabled = page >= count;
+  setText($(`${prefix}-page-range`), () => t`${items.length}개 중 ${items.length ? start + 1 : 0}–${end}개 표시`);
+  setText($(`${prefix}-page-status`), () => t`${count}페이지 중 ${items.length ? page : 0}페이지`);
+  return items.slice(start, end);
+}
 function renderCountries() {
   const search = $('country-search').value.trim().toLocaleLowerCase();
   const exactCode = state.countries.some((country) => countryCode(country).toLocaleLowerCase() === search);
@@ -704,9 +741,10 @@ function renderCountries() {
   $('freshness-heading').hidden = !showFreshness;
   const showObservation = state.countries.some((country) => ['review_needed', 'no_drop_signal'].includes(countryAssessment(country).state));
   $('observation-heading').hidden = !showObservation;
+  const visible = paginateItems(countries, 'country', 'countryPage', 'countryPageSize');
   const tbody = $('country-rows'); tbody.replaceChildren();
   if (!countries.length) { emptyRow(tbody, countryTableColumns(), state.countries.length ? t('검색 조건에 맞는 국가가 없습니다.') : t('조회 가능한 국가 기록이 없습니다.')); return; }
-  countries.forEach((country) => {
+  visible.forEach((country) => {
     const code = countryCode(country), row = node('tr', `country-row${state.selected === code ? ' selected' : ''}`);
     const nameCell = node('td'), button = node('button', 'country-button'); button.type = 'button';
     const title = node('span', 'country-name', () => (countryName(country)));
@@ -745,8 +783,7 @@ function renderSummary(data) {
   setText($('stat-sitemaps'), () => (valueText(global?.unique_active_sitemap_endpoints)));
   setText($('as-of'), () => (timeText(data.latest_collection)));
   setText($('snapshot-status'), () => (data.snapshot_at ? t`스냅샷 생성 ${timeText(data.snapshot_at)}` : t('저장 데이터 시각 미확인')));
-  const date = data.date ?? $('date-input').value;
-  if (date) $('date-input').value = date;
+  const date = state.date ?? utcToday();
   setText($('data-note'), () => (observationNote({ ...data, date, items: state.countries })));
   const runtime = data.runtime ?? {};
   const investigationsEnabled = runtime.investigations_enabled !== false;
@@ -834,7 +871,7 @@ function renderInventory() {
   const data = state.overview ?? {}, view = registryHistoryView(data);
   const countries = [...state.countries].sort((a, b) => (inventory(b).active_source_registrations ?? 0) - (inventory(a).active_source_registrations ?? 0));
   const tbody = $('inventory-rows'); tbody.replaceChildren();
-  countries.forEach((country) => {
+  paginateItems(countries, 'inventory', 'inventoryPage', 'inventoryPageSize').forEach((country) => {
     const row = node('tr'), counts = inventory(country); row.append(node('td', 'country-name', () => (countryName(country))));
     row.append(publisherCountCell(counts));
     ['active_source_registrations', 'disabled_source_registrations', 'unique_active_rss_endpoints', 'unique_active_sitemap_endpoints'].forEach((key) => row.append(node('td', 'numeric', () => (valueText(counts[key], country.lookup_error ? t('조회 실패') : '—')))));
@@ -861,7 +898,8 @@ function renderInventory() {
     .sort((a, b) => (b.added ?? b.additions ?? 0) - (a.added ?? a.additions ?? 0) || compareEconomy(a, b));
   const rows = view.mode === 'observed' ? observedRows : actualRows;
   $('inventory-history-table').hidden = view.mode === 'unavailable' || view.mode === 'observed' && !view.rows.length;
-  if (!$('inventory-history-table').hidden) rows.forEach((change) => {
+  const visibleRows = paginateItems($('inventory-history-table').hidden ? [] : rows, 'inventory-history', 'inventoryHistoryPage', 'inventoryHistoryPageSize');
+  if (!$('inventory-history-table').hidden) visibleRows.forEach((change) => {
     const row = node('tr'); row.append(node('td', 'country-name', () => (countryName(change))));
     const counts = view.mode === 'observed' ? [change.observed_additions, change.observed_reappearances, change.observed_reactivations, change.observed_deactivations, change.observed_registry_removals, change.observed_net_normalized_sources] : [change.added ?? change.additions, change.deactivations, change.reactivations ?? change.reactivated, change.deletions, change.net_change ?? change.net];
     counts.forEach((count) => { const cell = node('td', 'numeric', () => (valueText(count))); if (typeof count !== 'number') setLocalizedAttribute(cell, 'title', () => (t('이력이 없어 계산할 수 없습니다. 0건을 뜻하지 않습니다.'))); row.append(cell); }); historyBody.append(row);
@@ -874,13 +912,13 @@ function renderInventory() {
     : view.mode === 'actual' ? t`${view.date} UTC 기록 · —는 이력 없음. 0은 기록된 이벤트 없음. 과거 추가일은 추정하지 않습니다.` : t('이력이 없어 과거 증가량을 집계하지 않습니다. 신규 0건을 뜻하지 않습니다.')));
   setText($('source-events-title'), () => (view.mode === 'observed' ? t('관측된 소스 변화') : t('신규 소스 목록')));
   const events = view.mode === 'observed' ? [...view.events].reverse() : [...view.events, ...(view.observations ?? [])], list = $('new-source-list'); list.replaceChildren();
+  const visibleEvents = paginateItems(events, 'new-source', 'newSourcePage', 'newSourcePageSize');
   setText($('new-source-count'), () => (view.mode === 'observed' ? beforeBaseline ? t('관측 이전') : !view.comparison ? t('최초 기준선') : t`관측 ${events.length}건` : view.mode === 'actual' ? t`기록된 추가 ${view.events.length}개${view.observations?.length ? t` · 별도 관측 ${view.observations.length}건` : ''}` : t('추가 이력 미제공')));
-  if (view.mode === 'actual' && view.events.length) $('inventory-history-details').open = true;
   if (!events.length) {
     list.append(node('div', 'inventory-empty', () => (beforeBaseline ? t('이 날짜는 관측 시작 이전입니다.') : view.mode === 'observed' ? view.comparison ? t('조회일에 기록된 관측 변화가 없습니다. 실제 변화 없음과 다릅니다.') : t('첫 목록을 기준선으로 저장했습니다. 과거 소스를 신규 추가로 세지 않습니다.') : view.mode === 'actual' ? t('조회일에 기록된 추가가 없습니다.') : t('등록 추가 이력이 제공되지 않습니다.'))));
     return;
   }
-  events.forEach((source) => {
+  visibleEvents.forEach((source) => {
     const observation = Boolean(registryEventLabels[source.kind]);
     const card = node('article', 'new-source-card'); card.append(node('h3', '', () => (source.name ?? source.source_name ?? source.source?.name ?? t('이름 없음'))));
     const types = [...new Set((source.endpoints ?? []).map((endpoint) => endpoint.type))].map(endpointTypeText);
@@ -899,11 +937,15 @@ function renderInventory() {
 }
 
 async function loadOverview() {
+  const date = syncTodayView();
   const request = ++state.overviewRequest;
+  state.countryRequest++;
   $('refresh').disabled = true; showError('page-error', null); setText($('screen-status'), () => (t('국가별 저장 기록을 조회합니다.')));
   try {
     const data = await api(`overview?${dateQuery()}`);
     if (request !== state.overviewRequest) return;
+    if (date !== utcToday()) { refreshUtcDay(); return; }
+    if (data.date && data.date !== date) throw new UIError(t('오늘 날짜의 기록을 불러오지 못했습니다. 새로고침해 주세요.'));
     state.overview = data; state.countries = data.items ?? data.countries ?? []; state.sourceCache.clear();
     renderSummary(data); renderCountries(); renderInventory();
     loadRunHistory().catch(() => {});
@@ -911,6 +953,7 @@ async function loadOverview() {
       try { state.adminSession = await api('admin/session'); if (data.runtime?.repair_workflow?.enabled) await loadProposals(); } catch { state.adminSession = null; }
       renderExecutionAccess();
     }
+    if (request !== state.overviewRequest || date !== utcToday()) return;
     const select = $('investigation-country'), previous = select.value; select.replaceChildren(node('option', '', () => (t('국가를 선택하세요')))); select.firstChild.value = '';
     state.countries.forEach((country) => { const option = node('option', '', () => (countryName(country))); option.value = countryCode(country); select.append(option); });
     select.value = state.countries.some((country) => countryCode(country) === previous) ? previous : '';
@@ -919,12 +962,15 @@ async function loadOverview() {
     setText($('screen-status'), () => (t`${state.countries.length}개 국가의 저장 기록을 불러왔습니다.`));
   } catch (error) {
     if (request !== state.overviewRequest) return;
+    if (date !== utcToday()) { refreshUtcDay(); return; }
     showError('page-error', error); emptyRow($('country-rows'), countryTableColumns(), t('기록 조회에 실패했습니다. 다시 조회해 주세요.'));
     setText($('snapshot-status'), () => (t('조회 실패 · 저장 데이터 연결을 확인하세요'))); setText($('screen-status'), () => (t('국가별 기록을 불러오지 못했습니다.')));
   } finally { if (request === state.overviewRequest) $('refresh').disabled = false; }
 }
 
 async function selectCountry(code, scroll = false) {
+  const date = state.date ?? utcToday();
+  if (date !== utcToday()) { await loadOverview(); return; }
   const request = ++state.countryRequest; state.selected = code; state.countryData = null;
   state.sourcePage = 1; $('source-pagination').hidden = true;
   const country = state.countries.find((item) => countryCode(item) === code);
@@ -934,7 +980,8 @@ async function selectCountry(code, scroll = false) {
   if (scroll) $('country-detail').scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
   try {
     const data = await api(`country?${dateQuery({ country: code })}`);
-    if (request !== state.countryRequest) return;
+    if (request !== state.countryRequest || date !== (state.date ?? utcToday()) || date !== utcToday()) return;
+    if (data.date && data.date !== date) throw new UIError(t('오늘 날짜의 기록을 불러오지 못했습니다. 새로고침해 주세요.'));
     state.countryData = data;
     const info = data.country && typeof data.country === 'object' ? data.country : country;
     const counts = inventory(info ?? {}); const meta = $('country-detail-meta');
@@ -946,7 +993,7 @@ async function selectCountry(code, scroll = false) {
     else if (!completed && info?.baseline?.state === 'comparable_closed_calendar_windows') appendMeta(meta, t('참고 기준'), t`${valueText(info.baseline.samples)}개 같은 요일 저장 구간`);
     renderCountryTrend(info);
     renderSources();
-  } catch (error) { if (request !== state.countryRequest) return; showError('country-detail-error', error); $('source-list').replaceChildren(node('div', 'empty-cell', () => (t('소스 상세 조회에 실패했습니다. 국가를 다시 선택해 주세요.')))); }
+  } catch (error) { if (request !== state.countryRequest || date !== utcToday()) return; showError('country-detail-error', error); $('source-list').replaceChildren(node('div', 'empty-cell', () => (t('소스 상세 조회에 실패했습니다. 국가를 다시 선택해 주세요.')))); }
 }
 
 function renderCountryTrend(country) {
@@ -997,13 +1044,17 @@ function renderSources() {
     card.addEventListener('toggle', async () => {
       setText(marker, () => (card.open ? '−' : '+'));
       if (!card.open || content.dataset.loaded === 'true') return;
+      if (state.date && state.date !== utcToday()) { loadOverview(); return; }
       content.dataset.loaded = 'true'; content.replaceChildren(node('div', 'empty-cell', () => (t('이 소스의 실제 활동 이력을 조회합니다.'))));
-      const key = `${source.id}:${$('date-input').value}`;
+      const date = $('date-input').value, request = state.countryRequest;
+      const key = `${source.id}:${date}`;
       try {
         if (!state.sourceCache.has(key)) state.sourceCache.set(key, api(`source?${dateQuery({ source_id: source.id })}`));
         const detail = await state.sourceCache.get(key);
+        if (request !== state.countryRequest || date !== $('date-input').value || date !== utcToday() || content.isConnected === false) return;
+        if (detail.date && detail.date !== date) throw new UIError(t('오늘 날짜의 기록을 불러오지 못했습니다. 새로고침해 주세요.'));
         renderSourceDetail(content, detail, source);
-      } catch (error) { state.sourceCache.delete(key); content.dataset.loaded = 'false'; content.replaceChildren(node('p', 'notice danger', () => (errorMessage(error)))); }
+      } catch (error) { if (request !== state.countryRequest || date !== $('date-input').value || date !== utcToday() || content.isConnected === false) return; state.sourceCache.delete(key); content.dataset.loaded = 'false'; content.replaceChildren(node('p', 'notice danger', () => (errorMessage(error)))); }
     });
   });
 }
@@ -1334,7 +1385,7 @@ async function startInvestigation(country) {
   if (state.poll) window.clearTimeout(state.poll);
   setTab('investigations'); $('investigation-country').value = country; $('start-investigation').disabled = true; showError('investigation-error', null);
   $('investigate-selected').disabled = true; $('reconnect-investigation').hidden = true;
-  const input = { country, date: $('date-input').value || undefined, engine: $('investigation-engine').value };
+  const input = { country, date: utcToday(), engine: $('investigation-engine').value };
   const samePending = state.pendingStart && ['country', 'date', 'engine'].every(key => state.pendingStart[key] === input[key]);
   const request = samePending ? state.pendingStart : { ...input, request_id: crypto.randomUUID() };
   state.pendingStart = request;
@@ -1358,11 +1409,18 @@ document.querySelectorAll('[data-tab]').forEach((button, index, buttons) => {
   button.addEventListener('click', () => setTab(button.dataset.tab));
   button.addEventListener('keydown', (event) => { let next; if (event.key === 'ArrowRight') next = (index + 1) % buttons.length; else if (event.key === 'ArrowLeft') next = (index + buttons.length - 1) % buttons.length; else if (event.key === 'Home') next = 0; else if (event.key === 'End') next = buttons.length - 1; if (next !== undefined) { event.preventDefault(); setTab(buttons[next].dataset.tab, true); } });
 });
-$('date-input').max = new Date().toISOString().slice(0, 10);
-$('date-input').addEventListener('change', loadOverview);
+function bindPagination(prefix, pageKey, sizeKey, render) {
+  $(`${prefix}-page-size`).addEventListener('change', () => { const size = Number($(`${prefix}-page-size`).value); state[sizeKey] = [10, 20, 50].includes(size) ? size : 10; state[pageKey] = 1; render(); });
+  $(`${prefix}-page-prev`).addEventListener('click', () => { state[pageKey]--; render(); });
+  $(`${prefix}-page-next`).addEventListener('click', () => { state[pageKey]++; render(); });
+}
+bindPagination('country', 'countryPage', 'countryPageSize', renderCountries);
+bindPagination('inventory', 'inventoryPage', 'inventoryPageSize', renderInventory);
+bindPagination('inventory-history', 'inventoryHistoryPage', 'inventoryHistoryPageSize', renderInventory);
+bindPagination('new-source', 'newSourcePage', 'newSourcePageSize', renderInventory);
 $('refresh').addEventListener('click', loadOverview);
-$('country-search').addEventListener('input', renderCountries);
-$('country-sort').addEventListener('change', renderCountries);
+$('country-search').addEventListener('input', () => { state.countryPage = 1; renderCountries(); });
+$('country-sort').addEventListener('change', () => { state.countryPage = 1; renderCountries(); });
 $('source-search').addEventListener('input', () => { state.sourcePage = 1; renderSources(); });
 $('source-page-size').addEventListener('change', () => {
   const size = Number($('source-page-size').value);
@@ -1410,4 +1468,7 @@ $('reconnect-investigation').addEventListener('click', () => {
 $('investigation-form').addEventListener('submit', (event) => { event.preventDefault(); startInvestigation($('investigation-country').value); });
 applyLanguage(readLanguage(), false);
 $('language-select')?.addEventListener('change', event => applyLanguage(event.target.value));
+window.addEventListener('focus', refreshUtcDay);
+document.addEventListener('visibilitychange', () => { if (document.visibilityState !== 'hidden') refreshUtcDay(); });
+scheduleUtcDay();
 loadOverview();
