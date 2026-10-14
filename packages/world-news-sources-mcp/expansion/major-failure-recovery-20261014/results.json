@@ -1,0 +1,334 @@
+{
+  "version": 1,
+  "status": "completed_targeted_recovery_deployed_followup_required",
+  "report_date_utc": "2026-10-14",
+  "observation_as_of": "2026-10-14T19:58:11.755Z",
+  "scope": "Cause-based recovery of the October 14 failed cohort, prioritizing selected major-country publishers and related format failures. Point-in-time XML recognition and URL extraction are not sustained recovery or publication counts.",
+  "cohort": {
+    "failed_on_october_14_before": 1148,
+    "failed_on_october_14_after": 864,
+    "reduction_in_active_failed_addresses": 284,
+    "latest_failures_including_older_observation": 865,
+    "older_failed_observation_not_checked_today": 1,
+    "older_observation_label": "Yomiuri latest sitemap; October 13 observation, excluded from the October 14 comparison."
+  },
+  "registry": {
+    "active_registrations_before": 5097,
+    "active_registrations_after": 5097,
+    "active_typed_endpoints_before": 5497,
+    "active_typed_endpoints_after": 5497,
+    "registry_sha256_after": "78011c303414e199637dc4e557ba3592c4579af06a1770215ea878f872b6a6dc",
+    "individually_approved_endpoint_replacements": 2,
+    "bulk_deletions": 0,
+    "old_endpoint_history_retained": true,
+    "source_identities_preserved": true,
+    "source_counts_are_publisher_counts": false
+  },
+  "targeted_checks": {
+    "completed_batches": 11,
+    "selected_events": 567,
+    "unique_selected_typed_endpoints": 477,
+    "actual_collection_events": 354,
+    "unique_actually_checked_endpoints": 349,
+    "repeated_actual_collection_events": 5,
+    "latest_working_nonempty_endpoints": 284,
+    "existing_addresses_working_after_recheck": 282,
+    "approved_replacement_addresses_working_at_first_collection": 2,
+    "latest_actual_outcome_counts": {
+      "http_error": 4,
+      "incomplete": 2,
+      "malformed": 56,
+      "timeout": 3,
+      "working_nonempty": 284
+    },
+    "unique_selected_endpoints_never_actually_checked": 128,
+    "never_actually_checked_policy_holds": 127,
+    "never_actually_checked_server_waits": 1,
+    "remaining_policy_hold_reason_counts": {
+      "CRAWL_DELAY_REVIEW": 81,
+      "CROSS_HOST_REDIRECT_REVIEW": 2,
+      "HTTPS_DOWNGRADE_REVIEW": 1,
+      "ROBOTS_DISALLOWED": 6,
+      "ROBOTS_HTML_REVIEW": 2,
+      "ROBOTS_UNAVAILABLE": 35
+    },
+    "working_requires_positive_url_count": true,
+    "counts_are_typed_endpoints_not_publishers": true
+  },
+  "content_date_evidence": {
+    "recent_nonfuture": 272,
+    "content_date_not_extracted": 1,
+    "stale": 2,
+    "unreliable": 9,
+    "strict_nonfuture_recent_within_7_days": 272,
+    "strict_nonfuture_recent_within_24_hours": 263,
+    "future_newest_dates_excluded_from_recent": 1,
+    "definition": "Recent requires a recognized content-date kind, no stored unreliable flag, a newest content date at or before that endpoint checked_at, and age no greater than 30 days. This is saved evidence at the check, not learned publishing cadence.",
+    "stale_still_counts_as_format_recognition": true,
+    "unreliable_does_not_establish_recent_content": true
+  },
+  "approved_replacements": [
+    {
+      "publisher_label": "Stuttgarter Nachrichten",
+      "country": "DE",
+      "endpoint_type": "sitemap",
+      "previous_url": "https://www.stuttgarter-nachrichten.de/docs.newsmap_stuttgarter_nachrichten.xml",
+      "replacement_url": "https://www.stuttgarter-nachrichten.de/sitemap-news.xml",
+      "official_declaration_url": "https://www.stuttgarter-nachrichten.de/robots.txt",
+      "official_declaration_kind": "robots_sitemap",
+      "individual_admin_approval": true,
+      "applied_at": "2026-10-14T19:41:05.346Z",
+      "source_identity_preserved": true,
+      "same_endpoint_type": true,
+      "first_collection_at": "2026-10-14T19:48:41.868Z",
+      "recognized_format": "urlset",
+      "observed_distinct_urls": 289,
+      "first_list_is_baseline": true,
+      "newly_discovered_urls_at_first_collection": 0,
+      "newest_collector_content_at": null,
+      "collector_date_kind": "sitemap_lastmod",
+      "longitudinal_recovery_confirmed": false,
+      "content_date_note": {
+        "news_publication_date_elements": 289,
+        "sitemap_lastmod_elements": 0,
+        "current_collector_extracts": "sitemap lastmod only",
+        "publication_dates_are_absent": false,
+        "meaning": "Publication dates exist in news metadata. The current collector does not extract that field, so its newest content date is null."
+      }
+    },
+    {
+      "publisher_label": "Diamond Online",
+      "country": "JP",
+      "endpoint_type": "rss",
+      "previous_url": "https://diamond.jp/list/feed/rss",
+      "replacement_url": "https://diamond.jp/list/feed/rss/dol",
+      "official_declaration_url": "https://diamond.jp/list/info/about",
+      "official_declaration_kind": "html_feed_link",
+      "individual_admin_approval": true,
+      "applied_at": "2026-10-14T19:44:33.571Z",
+      "source_identity_preserved": true,
+      "same_endpoint_type": true,
+      "first_collection_at": "2026-10-14T19:48:41.918Z",
+      "recognized_format": "rss",
+      "observed_distinct_urls": 25,
+      "first_list_is_baseline": true,
+      "newly_discovered_urls_at_first_collection": 0,
+      "newest_collector_content_at": "2026-10-14T19:45:00.000Z",
+      "collector_date_kind": "feed_item_date",
+      "longitudinal_recovery_confirmed": false
+    }
+  ],
+  "health_merge": {
+    "latest_actual_endpoints_merged": 349,
+    "successful_cached_responses_hash_verified_and_reparsed": 284,
+    "original_full_audit_preserved": true,
+    "additional_publisher_requests": 0,
+    "ledger_writes": 0,
+    "provider_calls": 0
+  },
+  "validation": {
+    "full_local_code_tests": {
+      "passed": 411,
+      "failed": 0
+    },
+    "pinned_release_code_tests": {
+      "passed": 396,
+      "failed": 0
+    },
+    "data_integration_checks": {
+      "passed": 30,
+      "failed": 0
+    },
+    "final_local_http_smoke": "passed",
+    "production_false_positive_rate": null,
+    "longitudinal_recovery_confirmed": false,
+    "encoding_regression_cases": {
+      "cases": 20,
+      "passed": 20,
+      "scope": "Includes successful recognition and expected rejection cases. No separate negative-case false-acceptance total is asserted."
+    }
+  },
+  "public_service": {
+    "url": "https://news.bymyleslee.com/quality/",
+    "deployment_state": "READY",
+    "deployment_receipt_verified_at": "2026-10-14T20:03:20.561Z",
+    "activity_snapshot_generated_at": "2026-10-14T19:48:42.050Z",
+    "registry_sha256": "78011c303414e199637dc4e557ba3592c4579af06a1770215ea878f872b6a6dc",
+    "verification_scope": "Deployment READY and production alias receipt; no additional fetch of the new deployment URL was performed.",
+    "credential_files_copied": false,
+    "gateway_settings_changed": false
+  },
+  "cost": {
+    "new_provider_calls_during_recovery": 0,
+    "approved_combined_pilot_limit_usd": 5.0,
+    "approved_combined_pilot_held_usd": 0.076268448,
+    "existing_completed_quality_runs": 4,
+    "existing_settled_reservations": 323,
+    "pending_reservations": 0,
+    "approved_budget_unchanged": true,
+    "budget_semantics": "Use the approved combined pilot budget. A reservation subtotal is not the combined provider total."
+  },
+  "next_regular_collection": {
+    "scheduled_utc_window": "2026-10-15T03:00:00Z",
+    "scheduled_chicago_window": "2026-10-14T22:00:00-05:00",
+    "next_check_required_for_replacement_longitudinal_recovery": true,
+    "ordinary_daily_collection_configuration_changed": false,
+    "stricter_robots_redirect_wrapper_scope": "This targeted recovery only; the normal daily collector retains its existing robots handling."
+  },
+  "limits": [
+    "864 active endpoints still have a failed October 14 observation.",
+    "Recognized XML and extracted URLs do not prove each URL is an article, complete publisher coverage, or publication totals.",
+    "Source registrations and source IDs are not unique publishers.",
+    "The first replacement collections initialized baselines with zero newly discovered URLs from the first list.",
+    "One-time success does not establish longitudinal recovery, anomaly detection accuracy or long-term reliability."
+  ],
+  "completed_batches": [
+    {
+      "batch": "initial",
+      "started_at": "2026-10-14T18:58:32.380Z",
+      "finished_at": "2026-10-14T18:59:34.802Z",
+      "selected_events": 63,
+      "actual_collection_events": 38,
+      "working_nonempty_events": 24,
+      "policy_hold_events": 24,
+      "server_wait_events": 1,
+      "provider_calls": 0
+    },
+    {
+      "batch": "followup",
+      "started_at": "2026-10-14T19:03:03.339Z",
+      "finished_at": "2026-10-14T19:04:18.778Z",
+      "selected_events": 78,
+      "actual_collection_events": 49,
+      "working_nonempty_events": 40,
+      "policy_hold_events": 29,
+      "server_wait_events": 0,
+      "provider_calls": 0
+    },
+    {
+      "batch": "format_wave_1",
+      "started_at": "2026-10-14T19:08:48.247Z",
+      "finished_at": "2026-10-14T19:09:49.014Z",
+      "selected_events": 80,
+      "actual_collection_events": 19,
+      "working_nonempty_events": 15,
+      "policy_hold_events": 61,
+      "server_wait_events": 0,
+      "provider_calls": 0
+    },
+    {
+      "batch": "format_wave_2",
+      "started_at": "2026-10-14T19:09:50.082Z",
+      "finished_at": "2026-10-14T19:11:41.326Z",
+      "selected_events": 80,
+      "actual_collection_events": 51,
+      "working_nonempty_events": 37,
+      "policy_hold_events": 29,
+      "server_wait_events": 0,
+      "provider_calls": 0
+    },
+    {
+      "batch": "format_wave_3",
+      "started_at": "2026-10-14T19:11:42.424Z",
+      "finished_at": "2026-10-14T19:13:31.562Z",
+      "selected_events": 80,
+      "actual_collection_events": 63,
+      "working_nonempty_events": 55,
+      "policy_hold_events": 17,
+      "server_wait_events": 0,
+      "provider_calls": 0
+    },
+    {
+      "batch": "format_wave_4",
+      "started_at": "2026-10-14T19:13:32.524Z",
+      "finished_at": "2026-10-14T19:14:58.874Z",
+      "selected_events": 80,
+      "actual_collection_events": 43,
+      "working_nonempty_events": 31,
+      "policy_hold_events": 37,
+      "server_wait_events": 0,
+      "provider_calls": 0
+    },
+    {
+      "batch": "canonical_1",
+      "started_at": "2026-10-14T19:33:47.118Z",
+      "finished_at": "2026-10-14T19:35:58.261Z",
+      "selected_events": 40,
+      "actual_collection_events": 31,
+      "working_nonempty_events": 31,
+      "policy_hold_events": 9,
+      "server_wait_events": 0,
+      "provider_calls": 0
+    },
+    {
+      "batch": "canonical_2",
+      "started_at": "2026-10-14T19:35:58.871Z",
+      "finished_at": "2026-10-14T19:37:47.336Z",
+      "selected_events": 40,
+      "actual_collection_events": 39,
+      "working_nonempty_events": 37,
+      "policy_hold_events": 1,
+      "server_wait_events": 0,
+      "provider_calls": 0
+    },
+    {
+      "batch": "canonical_3",
+      "started_at": "2026-10-14T19:37:47.938Z",
+      "finished_at": "2026-10-14T19:38:04.644Z",
+      "selected_events": 3,
+      "actual_collection_events": 3,
+      "working_nonempty_events": 2,
+      "policy_hold_events": 0,
+      "server_wait_events": 0,
+      "provider_calls": 0
+    },
+    {
+      "batch": "encoding",
+      "started_at": "2026-10-14T19:38:05.256Z",
+      "finished_at": "2026-10-14T19:38:34.959Z",
+      "selected_events": 21,
+      "actual_collection_events": 16,
+      "working_nonempty_events": 10,
+      "policy_hold_events": 5,
+      "server_wait_events": 0,
+      "provider_calls": 0
+    },
+    {
+      "batch": "approved_replacement_first_collection",
+      "started_at": "2026-10-14T19:48:38.386Z",
+      "finished_at": "2026-10-14T19:48:45.580Z",
+      "selected_events": 2,
+      "actual_collection_events": 2,
+      "working_nonempty_events": 2,
+      "policy_hold_events": 0,
+      "server_wait_events": 0,
+      "provider_calls": 0
+    }
+  ],
+  "remaining_failure_reason_counts_october_14": {
+    "HTTP_403": 307,
+    "WRONG_ENDPOINT_FORMAT": 169,
+    "HTTP_404": 122,
+    "INVALID_XML": 67,
+    "DTD_NOT_ALLOWED": 60,
+    "TIMEOUT": 51,
+    "HTTP_406": 30,
+    "HTTP_429": 12,
+    "HTTP_451": 10,
+    "POLITENESS_WAIT_LIMIT": 7,
+    "HTTP_503": 5,
+    "NETWORK_OR_PARSE_ERROR": 5,
+    "HTTP_405": 3,
+    "HTTP_500": 3,
+    "TOO_MANY_REDIRECTS": 3,
+    "UNSUPPORTED_ENCODING": 2,
+    "BODY_TOO_LARGE": 1,
+    "EAI_AGAIN": 1,
+    "ERR_TLS_CERT_ALTNAME_INVALID": 1,
+    "HTTP_402": 1,
+    "HTTP_502": 1,
+    "HTTP_530": 1,
+    "INVALID_ENTRY_URL": 1,
+    "UNABLE_TO_VERIFY_LEAF_SIGNATURE": 1
+  }
+}

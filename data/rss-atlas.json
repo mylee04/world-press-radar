@@ -2998,11 +2998,12 @@
         },
         {
           "name": "Diamond Online",
-          "url": "https://diamond.jp/list/feed/rss",
+          "url": "https://diamond.jp/list/feed/rss/dol",
           "status": null,
           "checkedDate": null,
           "valid": "needs verification",
-          "row": 47
+          "row": 47,
+          "persistent_source_id": "src_d514c0e08bbd2ede0df9e773"
         },
         {
           "name": "Sankei News Flash",
@@ -4286,10 +4287,11 @@
         },
         {
           "name": "Stuttgarter Nachrichten - News Sitemap",
-          "sitemapUrl": "https://www.stuttgarter-nachrichten.de/docs.newsmap_stuttgarter_nachrichten.xml",
+          "sitemapUrl": "https://www.stuttgarter-nachrichten.de/sitemap-news.xml",
           "status": "NEW",
           "checkedDate": "04/12/2026",
-          "valid": "valid"
+          "valid": "valid",
+          "persistent_source_id": "src_d9f231dfa298be1ffdeb7741"
         },
         {
           "name": "Mannheimer Morgen - News Sitemap Index",
