@@ -19,6 +19,8 @@ The local default reads `https://news.bymyleslee.com/mcp` through its original s
 
 The three views are collection quality, source holdings and investigations. English is the first-visit default; the header selector offers Korean and saves the selection locally. Interface labels and country names change in place without another data request. Publisher names, recorded investigation prose and raw tool results retain their original contents. US and China appear first, followed by the recorded nominal-GDP ordering. Scope, missing data and raw execution evidence sit behind expandable controls.
 
+Country source lists show ten sources per page by default, with 10/20/50 choices, a displayed range and previous/next controls. Search applies to the complete saved list and starts at page one; changing country or page size also resets the page. Paging makes no additional data request, and source details remain lazy and cached. Language changes preserve the selected page and mounted source details. Pagination behavior and the existing integration suite passed 360 tests locally.
+
 ## Metrics
 
 | Metric | Meaning |

@@ -157,6 +157,14 @@ td.country-name{display:table-cell}
 .masthead-actions{display:flex;align-items:center;gap:18px}.admin-access{border:0;background:transparent;color:var(--muted);font:inherit;font-size:11px;cursor:pointer;padding:6px 0}.admin-access:hover{color:var(--text)}.admin-login-form{padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid var(--border)}.admin-login-form input{width:100%;margin-bottom:12px;min-height:39px}.admin-login-form .primary-button{width:100%}.admin-login-form .small-note{color:var(--bad)}
 
 /* Keep both language choices readable without widening the page on small screens. */
+.source-toolbar{flex-wrap:wrap}
+.source-list-controls{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.source-pagination{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px 16px;margin-top:14px;color:var(--muted);font-size:11px}
+.source-page-navigation{display:flex;align-items:center;gap:12px}
+#source-page-status{min-width:82px;text-align:center;font-variant-numeric:tabular-nums}
+.pagination-button{min-height:40px;padding:7px 12px;border:1px solid var(--border);border-radius:3px;background:var(--surface);color:var(--text);font-size:11px}
+.pagination-button:hover:enabled{background:var(--surface-raised);border-color:#526379}
+.pagination-button:disabled{cursor:default}
 .masthead{flex-wrap:wrap;gap:12px 24px}
 .masthead-actions{margin-left:auto;flex-wrap:wrap;justify-content:flex-end;gap:10px 16px}
 .language-control{display:flex;align-items:center;gap:8px}
@@ -182,6 +190,11 @@ td.country-name{display:table-cell}
   .filter-controls select{max-width:220px}
 }
 @media(max-width:560px){
+  .source-list-controls{width:100%}
+  .source-list-controls input[type=search]{width:auto;min-width:0;flex:1 1 150px}
+  .source-pagination{align-items:flex-start}
+  .source-page-navigation{width:100%;justify-content:space-between;gap:8px}
+  .pagination-button{min-height:44px}
   .masthead{gap:10px 12px}
   .masthead-actions{gap:8px 10px}
   .language-control label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}

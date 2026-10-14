@@ -219,6 +219,8 @@ const translations = Object.freeze({
   "국가별 기록을 불러오지 못했습니다.": "Could not load country records.",
   "{0} 수집 상세": "{0} collection details",
   "등록 소스를 조회합니다.": "Loading registered sources.",
+  "{0}개 중 {1}–{2}개 표시": "Showing {1}–{2} of {0}",
+  "{0}페이지 중 {1}페이지": "Page {1} of {0}",
   "활성 등록": "Active registrations",
   "고유 언론사": "Unique publishers",
   "마지막 검사": "Latest check",
@@ -442,7 +444,7 @@ function applyLanguage(value, persist = true) {
 
 // Rendering uses text nodes only. Source names, URLs and tool results are untrusted data.
 const $ = (id) => document.getElementById(id);
-const state = { overview: null, countries: [], selected: null, countryData: null, countryRequest: 0, overviewRequest: 0, accessRevision: 0, sourceCache: new Map(), run: null, poll: null, activeTab: 'status', pendingStart: null, pollFailures: 0, adminSession: null, reloadRequiredProposals: new Set() };
+const state = { overview: null, countries: [], selected: null, countryData: null, countryRequest: 0, overviewRequest: 0, accessRevision: 0, sourcePage: 1, sourcePageSize: 10, sourceCache: new Map(), run: null, poll: null, activeTab: 'status', pendingStart: null, pollFailures: 0, adminSession: null, reloadRequiredProposals: new Set() };
 const numberFormats = { en: new Intl.NumberFormat('en-US'), ko: new Intl.NumberFormat('ko-KR') };
 const regionNames = { en: new Intl.DisplayNames(['en'], { type: 'region', fallback: 'none' }), ko: new Intl.DisplayNames(['ko'], { type: 'region', fallback: 'none' }) };
 const koreanCountries = { US: t('미국'), KR: t('한국'), JP: t('일본'), GB: t('영국'), CN: t('중국'), FR: t('프랑스'), DE: t('독일'), IN: t('인도'), AU: t('호주'), CA: t('캐나다'), BR: t('브라질'), IT: t('이탈리아'), ES: t('스페인'), RU: t('러시아'), MX: t('멕시코'), ID: t('인도네시아'), TR: t('튀르키예'), SA: t('사우디아라비아'), AR: t('아르헨티나'), ZA: t('남아프리카공화국') };
@@ -924,6 +926,7 @@ async function loadOverview() {
 
 async function selectCountry(code, scroll = false) {
   const request = ++state.countryRequest; state.selected = code; state.countryData = null;
+  state.sourcePage = 1; $('source-pagination').hidden = true;
   const country = state.countries.find((item) => countryCode(item) === code);
   $('country-detail').hidden = false; setText($('detail-title'), () => (t`${countryName(country ?? { country: code })} 수집 상세`)); $('source-list').replaceChildren(node('div', 'empty-cell', () => (t('등록 소스를 조회합니다.'))));
   setText($('source-count'), () => ('')); $('source-search').value = ''; $('country-detail-meta').replaceChildren(); $('country-trend').replaceChildren(); showError('country-detail-error', null); renderCountries();
@@ -971,9 +974,20 @@ function renderSources() {
   const sources = all.filter((source) => [source.name, ...((source.endpoints ?? []).map((endpoint) => endpoint.url))].some((value) => String(value ?? '').toLocaleLowerCase().includes(query)));
   sources.sort((a, b) => String(a.name).localeCompare(String(b.name), language));
   setText($('source-count'), () => (`${sources.length} / ${all.length}`));
+  const pageSize = [10, 20, 50].includes(state.sourcePageSize) ? state.sourcePageSize : 10;
+  state.sourcePageSize = pageSize; $('source-page-size').value = String(pageSize);
+  const pageCount = Math.ceil(sources.length / pageSize);
+  const page = Math.min(Math.max(1, state.sourcePage || 1), Math.max(1, pageCount));
+  state.sourcePage = page;
+  const offset = (page - 1) * pageSize, end = Math.min(offset + pageSize, sources.length);
+  $('source-pagination').hidden = !sources.length;
+  $('source-page-prev').disabled = page <= 1;
+  $('source-page-next').disabled = page >= pageCount;
+  setText($('source-page-range'), () => (t`${sources.length}개 중 ${sources.length ? offset + 1 : 0}–${end}개 표시`));
+  setText($('source-page-status'), () => (t`${pageCount}페이지 중 ${sources.length ? page : 0}페이지`));
   const list = $('source-list'); list.replaceChildren();
   if (!sources.length) { list.append(node('div', 'empty-cell', () => (query ? t('검색 조건에 맞는 소스가 없습니다.') : t('이 국가에 조회 가능한 등록 소스가 없습니다.')))); return; }
-  sources.forEach((source) => {
+  sources.slice(offset, end).forEach((source) => {
     const card = node('details', 'source-card'), summary = node('summary'), heading = node('div', 'source-heading');
     const marker = node('span', '', () => ('+')); marker.setAttribute('aria-hidden', 'true'); heading.append(marker);
     const title = node('div'); title.append(node('h3', '', () => (source.name ?? t('이름 미확인'))), node('p', '', () => ([source.category, source.language].filter(Boolean).join(' · ') || `${source.id ?? t('소스 ID 미확인')}`))); heading.append(title);
@@ -1349,7 +1363,14 @@ $('date-input').addEventListener('change', loadOverview);
 $('refresh').addEventListener('click', loadOverview);
 $('country-search').addEventListener('input', renderCountries);
 $('country-sort').addEventListener('change', renderCountries);
-$('source-search').addEventListener('input', renderSources);
+$('source-search').addEventListener('input', () => { state.sourcePage = 1; renderSources(); });
+$('source-page-size').addEventListener('change', () => {
+  const size = Number($('source-page-size').value);
+  state.sourcePageSize = [10, 20, 50].includes(size) ? size : 10;
+  state.sourcePage = 1; renderSources();
+});
+$('source-page-prev').addEventListener('click', () => { state.sourcePage--; renderSources(); });
+$('source-page-next').addEventListener('click', () => { state.sourcePage++; renderSources(); });
 $('investigate-selected').addEventListener('click', () => startInvestigation(state.selected));
 $('investigation-engine').addEventListener('change', renderEngineStatus);
 $('admin-access').addEventListener('click', async () => {
