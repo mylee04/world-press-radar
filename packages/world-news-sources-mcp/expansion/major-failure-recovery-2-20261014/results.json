@@ -1,0 +1,328 @@
+{
+  "version": 1,
+  "status": "completed_production_recovery_and_public_deployment_followup_required",
+  "report_date_utc": "2026-10-14",
+  "observation_as_of": "2026-10-14T21:29:25.128Z",
+  "scope": "Second targeted cause-based recovery of a selected major-publisher roster. Overlapping research, diagnostics and compatibility checks are not an exhaustive global survey.",
+  "failure_cohort": {
+    "failed_on_october_14_before": 864,
+    "failed_on_october_14_after": 860,
+    "genuine_recovered_failed_addresses": 4,
+    "latest_failures_including_older_observation": 861,
+    "older_failed_not_checked_today": 1,
+    "older_observation_label": "Yomiuri latest sitemap, October 13; excluded from the October 14 failure comparison.",
+    "compatibility_canaries_are_not_added_to_recovery_count": true,
+    "october_14_failed_status_counts": {
+      "blocked": 319,
+      "http_error": 185,
+      "incomplete": 4,
+      "malformed": 298,
+      "network_error": 3,
+      "timeout": 51
+    },
+    "october_14_failed_reason_counts": {
+      "BODY_TOO_LARGE": 1,
+      "DTD_NOT_ALLOWED": 60,
+      "EAI_AGAIN": 1,
+      "ERR_TLS_CERT_ALTNAME_INVALID": 1,
+      "HTTP_402": 1,
+      "HTTP_403": 307,
+      "HTTP_404": 122,
+      "HTTP_405": 3,
+      "HTTP_406": 30,
+      "HTTP_429": 12,
+      "HTTP_451": 10,
+      "HTTP_500": 3,
+      "HTTP_502": 1,
+      "HTTP_503": 5,
+      "HTTP_530": 1,
+      "INVALID_ENTRY_URL": 1,
+      "INVALID_XML": 63,
+      "NETWORK_OR_PARSE_ERROR": 5,
+      "POLITENESS_WAIT_LIMIT": 7,
+      "TIMEOUT": 51,
+      "TOO_MANY_REDIRECTS": 3,
+      "UNABLE_TO_VERIFY_LEAF_SIGNATURE": 1,
+      "UNSUPPORTED_ENCODING": 2,
+      "WRONG_ENDPOINT_FORMAT": 169
+    },
+    "failure_reason_scope": "Only failed observations checked on October 14; the older Yomiuri observation is excluded."
+  },
+  "registry": {
+    "sha256": "78011c303414e199637dc4e557ba3592c4579af06a1770215ea878f872b6a6dc",
+    "active_registrations_before": 5097,
+    "active_registrations_after": 5097,
+    "active_typed_endpoints_before": 5497,
+    "active_typed_endpoints_after": 5497,
+    "registry_changes": 0,
+    "source_approvals_or_applications_this_round": 0,
+    "registrations_source_identities_and_other_bindings_preserved": true,
+    "source_ids_and_registration_counts_are_not_publisher_counts": true
+  },
+  "targeted_checks": {
+    "completed_batches": 4,
+    "selected_events": 76,
+    "unique_selected_typed_endpoints": 72,
+    "actual_collection_events": 36,
+    "unique_actually_checked_endpoints": 32,
+    "repeat_actual_collection_events": 4,
+    "latest_working_nonempty_endpoints": 14,
+    "newly_recovered_failed_addresses": 4,
+    "already_working_compatibility_canaries_passed": 10,
+    "latest_actual_status_counts": {
+      "http_error": 2,
+      "malformed": 6,
+      "timeout": 10,
+      "working_nonempty": 14
+    },
+    "selected_endpoints_never_actually_checked": 40,
+    "remaining_policy_hold_unique_endpoints": 32,
+    "remaining_server_wait_unique_endpoints": 8,
+    "policy_hold_reason_counts": {
+      "CRAWL_DELAY_REVIEW": 19,
+      "HTTPS_DOWNGRADE_REVIEW": 1,
+      "ROBOTS_DISALLOWED": 4,
+      "ROBOTS_HTML_REVIEW": 1,
+      "ROBOTS_UNAVAILABLE": 7
+    }
+  },
+  "mime_cause": {
+    "recovered_feed_family": "UOL, four section feeds",
+    "recorded_http_content_type": "text/xml;charset=ISO-8859-1",
+    "xml_encoding_declaration_present": false,
+    "unannotated_utf8_decode_failed": true,
+    "fix": "Carry the declared HTTP XML MIME charset to the strict XML decoder in collection and repair validation; never infer an undeclared legacy encoding.",
+    "required_feed_metadata_checks_preserved": true,
+    "arbitrary_sitemap_namespace_equivalence_added": false,
+    "undeclared_encoding_guessing_added": false,
+    "production_confirmed_after_offline_replay": true
+  },
+  "recovered_feeds": [
+    {
+      "section_label": "UOL Tecnologia",
+      "country": "BR",
+      "feed_url": "https://rss.uol.com.br/feed/tecnologia.xml",
+      "checked_at": "2026-10-14T21:27:38.972Z",
+      "recognized_format": "rss",
+      "canonical_urls_extracted": 15,
+      "content_date_evidence": "unreliable",
+      "newest_content_at": null,
+      "first_list_is_excluded_baseline": true,
+      "newly_discovered_urls_at_first_collection": 0
+    },
+    {
+      "section_label": "UOL Notícias (Breaking and Top Stories)",
+      "country": "BR",
+      "feed_url": "https://rss.uol.com.br/feed/noticias.xml",
+      "checked_at": "2026-10-14T21:27:42.181Z",
+      "recognized_format": "rss",
+      "canonical_urls_extracted": 15,
+      "content_date_evidence": "unreliable",
+      "newest_content_at": null,
+      "first_list_is_excluded_baseline": true,
+      "newly_discovered_urls_at_first_collection": 0
+    },
+    {
+      "section_label": "UOL Esporte",
+      "country": "BR",
+      "feed_url": "https://rss.uol.com.br/feed/esporte.xml",
+      "checked_at": "2026-10-14T21:27:45.655Z",
+      "recognized_format": "rss",
+      "canonical_urls_extracted": 15,
+      "content_date_evidence": "unreliable",
+      "newest_content_at": null,
+      "first_list_is_excluded_baseline": true,
+      "newly_discovered_urls_at_first_collection": 0
+    },
+    {
+      "section_label": "UOL Economia (Portal Economy)",
+      "country": "BR",
+      "feed_url": "https://rss.uol.com.br/feed/economia.xml",
+      "checked_at": "2026-10-14T21:27:48.750Z",
+      "recognized_format": "rss",
+      "canonical_urls_extracted": 15,
+      "content_date_evidence": "unreliable",
+      "newest_content_at": null,
+      "first_list_is_excluded_baseline": true,
+      "newly_discovered_urls_at_first_collection": 0
+    }
+  ],
+  "content_and_baseline_evidence": {
+    "recovered_canonical_urls_extracted": 60,
+    "recovered_recent_nonfuture_content_confirmations": 0,
+    "recovered_date_unreliable": 4,
+    "recovered_newest_content_dates_extracted": 0,
+    "all_four_first_lists_are_excluded_baselines": true,
+    "new_discoveries_from_first_recovered_lists": 0,
+    "prior_tracking_start_preserved": true,
+    "known_canary_binding_baselines_preserved": true,
+    "known_canary_count": 10,
+    "canary_date_evidence_counts": {
+      "unreliable": 3,
+      "recent": 7
+    },
+    "canaries_count_as_new_recoveries": false,
+    "extracted_urls_are_publication_counts": false,
+    "longitudinal_recovery_confirmed": false
+  },
+  "research_and_diagnosis": {
+    "selected_priority_anchor_roster": 57,
+    "us_canada_research_endpoint_entries": 17,
+    "asia_europe_research_endpoint_entries": 18,
+    "selections_overlap_actual_diagnostics_and_are_not_additive": true,
+    "exhaustive_world_or_country_survey": false,
+    "exact_same_type_same_scope_ready_replacement_candidates": 0,
+    "cached_diagnostic_endpoints": 25,
+    "diagnosis_cause_counts": {
+      "ATOM_REQUIRED_METADATA_CONTRACT": 1,
+      "EXPLICIT_MIME_CHARSET_PREVIOUSLY_NOT_PROPAGATED": 4,
+      "HTTP_202_REPRESENTATION_NOT_AVAILABLE_FOR_XML_DIAGNOSIS": 2,
+      "HTTP_CONTENT_ENCODING_REJECTED_BEFORE_XML_CACHE": 2,
+      "LEGACY_GOOGLE_SITEMAP_0_84_OUTSIDE_CURRENT_FORMAT_CONTRACT": 1,
+      "RSS_REQUIRED_METADATA_CONTRACT": 12,
+      "SITEMAP_NAMESPACE_DIFFERS_FROM_CURRENT_STANDARD": 3
+    }
+  },
+  "validation": {
+    "local_tests": {
+      "passed": 428,
+      "failed": 0
+    },
+    "pinned_release_tests": {
+      "passed": 413,
+      "failed": 0
+    },
+    "data_integration_checks": {
+      "passed": 30,
+      "failed": 0
+    },
+    "added_mime_cases": 16,
+    "added_repair_path_cases": 1,
+    "tests_include_success_and_expected_rejection_cases": true,
+    "production_false_positive_rate": null,
+    "healthy_canary_checks": {
+      "passed": 10,
+      "failed": 0
+    },
+    "final_local_http_smoke": {
+      "status": "passed",
+      "metrics_endpoint_check": "not_configured"
+    }
+  },
+  "preservation": {
+    "quality_validator_modules_updated": 4,
+    "quality_service_code_files": 49,
+    "unrelated_quality_code_changed": false,
+    "model_guards_and_runtime_tables_preserved": true,
+    "prior_quality_runs": 4,
+    "prior_model_reservations": 323,
+    "pending_reservations": 0,
+    "private_repair_evidence_files_copied_and_hash_verified": 5,
+    "prior_applied_proposals_preserved": 2,
+    "prior_proposed_proposals_preserved": 1,
+    "new_approvals_or_source_mutations_from_evidence_copy": 0,
+    "credential_files_copied": false,
+    "timer_unit_configuration_preserved": true
+  },
+  "health_merge": {
+    "latest_actual_endpoints_merged": 32,
+    "successful_cached_responses_hash_verified_and_reparsed": 14,
+    "original_full_audit_preserved": true,
+    "additional_publisher_requests": 0,
+    "additional_collection_writes": 0,
+    "provider_calls": 0
+  },
+  "cost": {
+    "new_paid_provider_calls": 0,
+    "approved_combined_pilot_limit_usd": 5.0,
+    "approved_combined_pilot_held_usd": 0.076268448,
+    "approved_budget_unchanged": true,
+    "reservation_subtotal_is_not_used_as_combined_provider_total": true,
+    "approved_budget_held_field_semantics": "Authoritative budget-ledger cumulative estimate; all 323 reservations are settled and none are pending."
+  },
+  "public_service": {
+    "url": "https://news.bymyleslee.com/quality/",
+    "deployment_state": "READY",
+    "activity_snapshot_generated_at": "2026-10-14T21:27:51.107Z",
+    "deployment_verified_at": "2026-10-14T21:36:54.224Z",
+    "bundle_files": 49,
+    "public_validator_modules_updated": 3,
+    "changed_validator_modules": [
+      "inspect.js",
+      "repair-workflow.js",
+      "validate.js"
+    ],
+    "backend_validator_updated": true,
+    "deployment_and_production_alias_receipts_verified": true,
+    "new_deployment_url_fetch_performed": false,
+    "gateway_settings_changed": false,
+    "credential_files_copied": false
+  },
+  "next_regular_collection": {
+    "scheduled_utc_window": "2026-10-15T03:00:00Z",
+    "scheduled_chicago_window": "2026-10-14T22:00:00-05:00",
+    "ordinary_daily_timer_configuration_changed": false,
+    "stricter_robots_redirect_wrapper_scope": "Targeted one-off recovery only; the ordinary daily collector retains its existing robots handling.",
+    "sustained_recovery_and_empirical_content_cadence_still_need_followup": true
+  },
+  "official_references": [
+    {
+      "title": "XML media types and encoding",
+      "url": "https://www.rfc-editor.org/rfc/rfc7303.html#section-3.2"
+    },
+    {
+      "title": "RSS required metadata",
+      "url": "https://www.rssboard.org/rss-specification"
+    },
+    {
+      "title": "Sitemaps protocol",
+      "url": "https://www.sitemaps.org/protocol.html"
+    }
+  ],
+  "completed_batches": [
+    {
+      "batch": "major_transients",
+      "started_at": "2026-10-14T20:36:53.656Z",
+      "finished_at": "2026-10-14T20:39:15.161Z",
+      "selected_events": 34,
+      "actual_collection_events": 12,
+      "working_nonempty_events": 0,
+      "policy_hold_events": 14,
+      "server_wait_events": 8,
+      "provider_calls": 0
+    },
+    {
+      "batch": "uol_mime",
+      "started_at": "2026-10-14T20:40:38.822Z",
+      "finished_at": "2026-10-14T20:40:55.695Z",
+      "selected_events": 4,
+      "actual_collection_events": 4,
+      "working_nonempty_events": 0,
+      "policy_hold_events": 0,
+      "server_wait_events": 0,
+      "provider_calls": 0
+    },
+    {
+      "batch": "major_mime_diagnostics",
+      "started_at": "2026-10-14T20:45:49.445Z",
+      "finished_at": "2026-10-14T20:46:09.956Z",
+      "selected_events": 24,
+      "actual_collection_events": 6,
+      "working_nonempty_events": 0,
+      "policy_hold_events": 18,
+      "server_wait_events": 0,
+      "provider_calls": 0
+    },
+    {
+      "batch": "mime_recovery",
+      "started_at": "2026-10-14T21:27:24.432Z",
+      "finished_at": "2026-10-14T21:27:54.758Z",
+      "selected_events": 14,
+      "actual_collection_events": 14,
+      "working_nonempty_events": 14,
+      "policy_hold_events": 0,
+      "server_wait_events": 0,
+      "provider_calls": 0
+    }
+  ]
+}
