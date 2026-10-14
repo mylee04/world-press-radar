@@ -51,9 +51,9 @@
     "focused_cloud_pass": 37,
     "focused_dashboard_pass": 19
   },
-  "quality_release": "quality-country-baseline-ready-20261014",
+  "quality_release": "quality-major20-ui-20261014",
   "quality_activation": "activated",
-  "public_deployment": "dpl_BzqxtTbWvd9eF5cyAKUiC7j2RM6E",
+  "public_deployment": "dpl_HxJKc33BwjnAJvKMmTQtdsGFH8QH",
   "public_url": "https://news.bymyleslee.com/quality/",
   "actual_rules_investigation": {
     "run_id": "e1f79829-2d75-44a9-847b-f3db161dd86d",
@@ -75,5 +75,112 @@
         "endpoint_id": "ep_48ee9a8ffe68ed0399e8eb5f"
       }
     ]
+  },
+  "public_deployment_state": "READY",
+  "collector_rollout": {
+    "revision": "news-quality-major20-ec91e40-20261014",
+    "commit": "ec91e40e65702f051d4e128f25b492b8be670323",
+    "activated_at": "2026-10-14T02:41:30.618845+00:00",
+    "actual_tests": {
+      "test_files": 42,
+      "tests": 326,
+      "pass": 326,
+      "fail": 0,
+      "duration_ms": 72436.970339
+    },
+    "fresh_backup": {
+      "path": "/home/ubuntu/.local/share/world-news-audit/backups/rollout-news-quality-major20-ec91e40-20261014.sqlite",
+      "bytes": 4974321664,
+      "quick_check": "ok",
+      "ledger_evidence_matches_original": true,
+      "copy_and_verification_seconds": 748.231
+    },
+    "before_after_evidence": {
+      "collections": 53388,
+      "urls": 2126738,
+      "bindings": 5861,
+      "tracking_start": "2026-10-01T01:36:12.370Z",
+      "baselines_sha256": "59775da9139b341f1bf889283a7b87adb6662e2fac47b22f801d88cab315e878",
+      "all_equal": true
+    },
+    "post_addition_binding_fields_preserved": {
+      "nine_fields_unchanged": true,
+      "total": 42,
+      "initialized": 41,
+      "uninitialized": 1
+    },
+    "registry_sha256": "2eb21a9856ec8e5cbc6a38417aeac1b93addcf0684f7bf3ef6e57af45ef2bdc3",
+    "current_code_matches_manifest": true,
+    "wrapper_unchanged": true,
+    "timers_unchanged": true,
+    "timers": {
+      "world-news-activity.timer": {
+        "NextElapseUSecRealtime": "Wed 2026-10-14 03:00:00 UTC",
+        "ActiveState": "active"
+      },
+      "world-news-health.timer": {
+        "NextElapseUSecRealtime": "Sat 2026-10-17 23:00:00 UTC",
+        "ActiveState": "active"
+      }
+    },
+    "writer_locks": 0,
+    "pending_spools": 0,
+    "disk_free_gib": 58.78,
+    "publisher_requests": 0,
+    "model_calls": 0,
+    "vercel_deployment_submitted": false,
+    "quality_app_restart_performed": false,
+    "remaining": "Observe the next normally scheduled all-active cycle; the separately activated quality app is healthy."
+  },
+  "runtime_verification": {
+    "quality_runs": {
+      "previous_rows": 3,
+      "current_rows": 4,
+      "previous_exact_rows_retained": true
+    },
+    "model_reservations": {
+      "previous_rows": 15,
+      "current_rows": 15,
+      "previous_exact_rows_retained": true
+    },
+    "model_budgets": {
+      "previous_rows": 1,
+      "current_rows": 1,
+      "previous_exact_rows_retained": true
+    },
+    "budget": {
+      "limit_usd": 5.0,
+      "held_usd": 0.013497891999999997
+    },
+    "runs": {
+      "completed": 4
+    },
+    "http_status": 200,
+    "health": {
+      "status": "ok",
+      "service": "news-quality",
+      "persistence": "sqlite",
+      "source_snapshot_at": "2026-10-14T02:41:16.664Z",
+      "metadata_reload_failed": false
+    },
+    "collector_release": "news-quality-major20-ec91e40-20261014",
+    "quality_release": "quality-major20-ui-20261014",
+    "units": {
+      "world-press-radar-quality-web.service": "active",
+      "world-press-radar-quality-daily.timer": "active",
+      "world-news-activity.timer": "active",
+      "world-news-health.timer": "active"
+    },
+    "next_daily_collection_utc": "Wed 2026-10-14 03:00:00 UTC",
+    "verified_at_utc": "2026-10-14T02:46:26.259748+00:00"
+  },
+  "browser_verification": {
+    "url": "https://news.bymyleslee.com/quality/",
+    "date_utc": "2026-10-14",
+    "actual_operator_additions_displayed": 33,
+    "country_labels": "Korean",
+    "linkiesta_sitemap_failure_displayed": 403,
+    "targeted_cycle_not_country_completion": true,
+    "screenshot": "output/playwright/news-quality-major20-source-additions.png"
   }
 }
