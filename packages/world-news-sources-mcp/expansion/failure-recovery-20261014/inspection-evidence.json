@@ -31,7 +31,7 @@
   },
   "first_discovery_batch": {
     "publisher_authorities": 36,
-    "queued_failed_endpoint_ids_covered_by_seeds": 92,
+    "queued_failed_endpoint_ids_covered_by_seeds": 91,
     "actual_http_hops": 157,
     "policy": {
       "concurrency": 6,
@@ -43,7 +43,8 @@
       "model_calls": 0
     },
     "fresh_draft_http_hops": 4,
-    "total_actual_http_hops": 161
+    "total_actual_http_hops": 161,
+    "seed_endpoint_associations_including_one_duplicate": 92
   },
   "inspection_fix_evidence": {
     "summary": {
