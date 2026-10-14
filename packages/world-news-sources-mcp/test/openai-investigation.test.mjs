@@ -6,12 +6,13 @@ import { join } from 'node:path';
 import { Usage } from '@openai/agents';
 import { OpenAIResponsesModel } from '@openai/agents';
 import OpenAI from 'openai';
-import { runModelInvestigation } from '../dist/openai-investigation.js';
+import { runModelInvestigation, proposalContradictsSavedEvidence } from '../dist/openai-investigation.js';
 import { openAIPolicy, openAIReadiness, readReusedKey, createPaidOpenAIModel, OpenAISessionBudget } from '../dist/openai-runtime.js';
 import { InvestigationStore } from '../dist/investigation.js';
 import { normalizeRegistry } from '../dist/catalog.js';
 import { HealthStore } from '../dist/health.js';
 import { ActivityStore } from '../dist/activity.js';
+import { executeFrozenInvestigation } from '../scripts/evaluate-investigation.mjs';
 
 const id = 'src_' + 'a'.repeat(24), endpointId = 'ep_' + 'b'.repeat(24);
 const policy = { authorized: true, model: 'fixture-model', keyFile: null, totalBudgetUsd: 1, perRunBudgetUsd: .2,
@@ -287,4 +288,113 @@ test('mixed model suggestions preserve original provenance and accept only evide
   assert.equal(result.proposal_validation.accepted_count, 1); assert.equal(result.proposal_validation.rejected_count, 1);
   assert.equal(result.inspected_sources, 2); assert.equal(result.model_calls, 3);
   assert.ok(result.estimated_cost_usd > 0); assert.equal(result.billing_cost_usd, null);
+});
+
+test('actual saved Yomiuri 429 and Shorouk malformed evidence reject initializer-only triage through the production MCP loop', async () => {
+  const dataset = JSON.parse(readFileSync(new URL('../evaluation/real-incidents-20261014/cases.json', import.meta.url), 'utf8'));
+  for (const groupId of ['jp-yomiuri-full-sitemap-429-20261014', 'eg-shorouk-malformed-no-baseline-20261014']) {
+    const group = dataset.groups.find(group => group.id === groupId); assert.ok(group, groupId);
+    const original = { summary: 'Unverified synthetic model proposals over actual saved evidence.', proposed_steps: [
+      { source_id: group.source_ids[0], action: 'initialize_tracking', reason: 'Original initializer-only proposal must remain reviewable.' },
+      { source_id: group.source_ids[0], action: 'confirm_freshness', reason: 'Bounded advisory confirmation of saved evidence.' },
+    ] };
+    const fake = fixture([functions('search_country_sources', { query: null, offset: 0, limit: 10 }),
+      functions('read_source_quality', { source_id: group.source_ids[0] }), message(original)]);
+    const result = await executeFrozenInvestigation(group, dataset, 'openai', {
+      policy, createModel: () => fake.options.model,
+    }, new OpenAISessionBudget(1));
+    assert.equal(result.execution_status, 'completed', result.run?.summary);
+    assert.equal(result.run.findings[0].classification, 'access_failure_without_normal_baseline');
+    assert.equal(result.run.findings[0].assessment.requires_live_confirmation, true);
+    assert.ok(result.run.events.some(event => event.tool === 'get_source_collection_quality' && event.status === 'completed'));
+    const validation = result.run.model_assessment.proposal_validation;
+    assert.deepEqual(validation.original_proposed_steps, original.proposed_steps);
+    assert.equal(validation.rejected_count, 1); assert.equal(validation.accepted_count, 1);
+    assert.equal(validation.rejected_steps[0].action, 'initialize_tracking');
+    assert.equal(validation.rejected_steps[0].validation_error, 'PROPOSAL_CONTRADICTS_EVIDENCE');
+    assert.deepEqual(validation.rejected_steps[0].observed_classifications, ['access_failure_without_normal_baseline']);
+    assert.deepEqual(result.run.model_assessment.proposed_steps, [original.proposed_steps[1]]);
+    assert.equal(validation.operational_changes_applied, false);
+  }
+});
+
+test('actual missing selected-period history keeps legitimate initialization proposals accepted', async () => {
+  const dataset = JSON.parse(readFileSync(new URL('../evaluation/real-incidents-20261014/cases.json', import.meta.url), 'utf8'));
+  for (const groupId of ['us-the19th-no-checks-before-first-baseline-20261013', 'jp-yomiuri-latest-not-attempted-deferred-20261014']) {
+    const group = dataset.groups.find(group => group.id === groupId); assert.ok(group, groupId);
+    const original = { summary: 'Synthetic initialization proposal for actual unavailable selected-period evidence.', proposed_steps: [
+      { source_id: group.source_ids[0], action: 'initialize_tracking', reason: 'Preserve missing tracking or selected-period attempt as unknown.' },
+    ] };
+    const fake = fixture([functions('search_country_sources', { query: null, offset: 0, limit: 10 }),
+      functions('read_source_quality', { source_id: group.source_ids[0] }), message(original)]);
+    const result = await executeFrozenInvestigation(group, dataset, 'openai', {
+      policy, createModel: () => fake.options.model,
+    }, new OpenAISessionBudget(1));
+    assert.equal(result.execution_status, 'completed', result.run?.summary);
+    assert.ok(['untracked_or_no_available_checks', 'not_attempted_in_period'].includes(result.run.findings[0].classification));
+    assert.equal(result.run.model_assessment.proposal_validation.rejected_count, 0);
+    assert.deepEqual(result.run.model_assessment.proposed_steps, original.proposed_steps);
+  }
+});
+
+test('initialization requires missing history and cannot outrank a failed or stale sibling endpoint', async () => {
+  // Source-level decisions must cover every inspected endpoint, even when the model sees bounded detail.
+  const sourceStates = [
+    ['failure_after_prior_success', 'untracked_or_no_available_checks'],
+    ['access_failure_without_normal_baseline', 'not_attempted_in_period'],
+    ['stale_content_evidence', 'insufficient_endpoint_history'],
+    ['index_only', 'failure_after_prior_success'],
+    ['index_only', 'access_failure_without_normal_baseline'],
+    ['index_only', 'stale_content_evidence'],
+    ['index_only', 'successful_collection'],
+    ['index_only', 'successful_no_new_discoveries'],
+    ['successful_collection', 'successful_collection', 'successful_collection', 'untracked_or_no_available_checks', 'stale_content_evidence'],
+    ['successful_no_new_discoveries'], ['successful_collection'], ['recovered_after_failure'], [],
+  ];
+  for (const states of sourceStates) {
+    const proposal = { summary: 'Synthetic source initialization proposal.', proposed_steps: [
+      { source_id: id, action: 'initialize_tracking', reason: 'Incorrect initialization that would mask available evidence.' },
+    ] };
+    const f = fixture([functions('search_country_sources', { query: null, offset: 0, limit: 10 }),
+      functions('read_source_quality', { source_id: id }), message(proposal)]);
+    f.detail.endpoints = states.map((classification, index) => ({ endpoint_id: index ? 'ep_' + index.toString(16).repeat(24) : endpointId,
+      type: 'rss', classification }));
+    const result = await runModelInvestigation(f.options);
+    assert.equal(result.proposal_validation.rejected_count, 1, states.join(','));
+    assert.deepEqual(result.proposal_validation.rejected_steps[0].observed_classifications, states);
+    assert.deepEqual(result.assessment.proposed_steps, []);
+  }
+  assert.equal(proposalContradictsSavedEvidence('initialize_tracking', ['successful_collection', 'untracked_or_no_available_checks']), false);
+  assert.equal(proposalContradictsSavedEvidence('initialize_tracking', ['insufficient_evidence']), false);
+  assert.equal(proposalContradictsSavedEvidence('initialize_tracking', ['insufficient_endpoint_history']), false);
+  assert.equal(proposalContradictsSavedEvidence('confirm_freshness', ['successful_no_new_discoveries']), false);
+});
+
+test('saved Reuters index-only collection permits article tracking initialization while an actual sibling source baseline does not', async () => {
+  const dataset = JSON.parse(readFileSync(new URL('../evaluation/real-incidents-20261014/cases.json', import.meta.url), 'utf8'));
+  for (const groupId of ['us-reuters-index-only-20261014', 'stress-us-reuters-index-versus-first-baseline-20261014']) {
+    const group = dataset.groups.find(group => group.id === groupId); assert.ok(group, groupId);
+    const original = { summary: 'Synthetic initialization proposals over actual saved Reuters index and article-baseline facts.',
+      proposed_steps: group.source_ids.map(source_id => ({ source_id, action: 'initialize_tracking',
+        reason: 'Initialize article tracking only if saved source evidence remains index-only.' })) };
+    const fake = fixture([functions('search_country_sources', { query: null, offset: 0, limit: 10 }),
+      functions('read_sources_quality', { source_ids: group.source_ids }), message(original)]);
+    const result = await executeFrozenInvestigation(group, dataset, 'openai', {
+      policy, createModel: () => fake.options.model,
+    }, new OpenAISessionBudget(1));
+    assert.equal(result.execution_status, 'completed', result.run?.summary);
+    const index = result.run.findings.find(finding => finding.classification === 'index_only');
+    assert.ok(index); assert.match(index.source_name, /Reuters/);
+    assert.equal(index.assessment.requires_live_confirmation, false);
+    const validation = result.run.model_assessment.proposal_validation;
+    assert.deepEqual(validation.original_proposed_steps, original.proposed_steps);
+    assert.deepEqual(result.run.model_assessment.proposed_steps, original.proposed_steps.filter(step => step.source_id === index.source_id));
+    assert.equal(validation.accepted_count, 1); assert.equal(validation.rejected_count, group.source_ids.length - 1);
+    if (group.source_ids.length === 2) {
+      assert.equal(validation.rejected_steps[0].action, 'initialize_tracking');
+      assert.deepEqual(validation.rejected_steps[0].observed_classifications, ['successful_no_new_discoveries']);
+      assert.notEqual(validation.rejected_steps[0].source_id, index.source_id);
+    }
+    assert.equal(validation.operational_changes_applied, false);
+  }
 });

@@ -1,0 +1,1558 @@
+{
+  "version": 1,
+  "kind": "saved_real_investigation_comparison_aggregate",
+  "dataset_id": "world-press-radar-real-saved-incidents-20261014-v1",
+  "baseline_recorded_at": "2026-10-14T12:39:18.794Z",
+  "baseline_status": "partial_or_failed",
+  "repeats": 3,
+  "intended_investigations": 216,
+  "dataset": {
+    "diagnostic_groups": 20,
+    "stress_groups": 4,
+    "source_appearances": 28,
+    "endpoint_appearances": 31,
+    "distinct_sources": 16,
+    "distinct_typed_endpoints": 18,
+    "independent_operator_review": false,
+    "external_incident_truth_verified": false,
+    "file_sha256": "dc86ba310307daaf55b6d3fe642de4f825a83b0696818739776c2aa2d1aa7c87",
+    "canonical_json_sha256": "6b2989ef56cf3df9fc36ce25c07bf30cb3d038476beb790c96f0da941c2fe4ba"
+  },
+  "baseline": {
+    "raw_result_sha256": "1c61d0a10dc6a34d073f52a688546f36fe5a863f87afbd000565aba0fa75f4e2",
+    "harness_sha256": "45db0f061b3729b64ca70f52540c9e0b31b6352cbc504744df7e2edbbec86ef3",
+    "pinned_staged_manifest_sha256": "266d4de998de17bf748150a6944144da2e4821006ace4c235b4fcee6c9e75e30",
+    "original_result_unchanged": true,
+    "subsequent_fixes_deployed": false,
+    "subsequent_fixes_live_retested": false
+  },
+  "all_groups": {
+    "rules": {
+      "intended_runs": 72,
+      "completed_runs": 72,
+      "evidence_kinds": [
+        "offline_actual_MCP"
+      ],
+      "execution_failed_runs": 0,
+      "timeout_runs": 0,
+      "limited_runs": 0,
+      "unexecuted_runs": 0,
+      "unknown_model_usage_runs": 0,
+      "inspected_endpoint_observations": 93,
+      "intended_endpoint_observations": 93,
+      "code_classification_accuracy_on_inspected": 1,
+      "raw_jev_classification_accuracy_on_evaluated": null,
+      "raw_jev_evaluated_endpoint_observations": null,
+      "assisted_openai_supported_action_rate": null,
+      "assisted_openai_raw_steps": null,
+      "assisted_openai_guard_rejected_steps": null,
+      "post_guard_source_actions": 0,
+      "post_guard_unsupported_source_actions": 0,
+      "post_guard_unsupported_action_rate": null,
+      "model_invocations": 0,
+      "known_model_invocations": 0,
+      "api_model_calls": 0,
+      "known_api_model_calls": 0,
+      "simulated_model_invocations": 0,
+      "actual_mcp_tool_calls": 384,
+      "actual_mcp_tool_errors": 0,
+      "model_errors": 0,
+      "wall_duration_ms": 12835.733847999862,
+      "duration_and_tool_totals_complete": true,
+      "execution_observation_scope": "Durations and tool/error totals cover returned terminal runs; interrupted no-result executions are incomplete, not measured zero.",
+      "usage_tokens": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "live_api_usage_tokens": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "estimated_usage_cost_usd": 0,
+      "estimated_api_cost_usd": 0,
+      "simulated_estimated_cost_usd": 0,
+      "billing_cost_usd": null,
+      "server_cost_usd": null,
+      "cost_basis": "Live API estimates use provider-reported usage times approved rates; simulated usage/cost is separate. Unresolved reservations remain in the authoritative shared budget. Not a billing receipt; server cost is unmeasured.",
+      "accuracy_scope": "Deterministic code findings on inspected frozen evidence.",
+      "repeat_variability": [
+        {
+          "group_id": "mx-el-sol-prior-success-failure-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "be-newsmonkey-prior-success-timeout-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "pt-campanario-prior-success-timeout-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "it-linkiesta-mixed-baseline-and-403-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "jp-yomiuri-full-sitemap-429-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "eg-shorouk-malformed-no-baseline-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "ar-chequeado-dated-stale-content-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "mx-el-sol-saved-recovery-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "be-newsmonkey-saved-recovery-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "ar-mdz-recovery-initial-baseline-zero-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "pt-campanario-recovery-priority-over-old-date-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "no-tv2-sykkel-measured-zero-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "my-free-malaysia-zero-missing-content-date-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "gb-bbc-index-only-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "us-reuters-index-only-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "us-the19th-initial-baseline-zero-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "kr-sisain-two-endpoint-baselines-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "jp-yomiuri-latest-not-attempted-deferred-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "us-the19th-no-checks-before-first-baseline-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "kr-hankyung-success-positive-discoveries-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "stress-jp-yomiuri-access-versus-unattempted-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "stress-us-reuters-index-versus-first-baseline-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "stress-kr-sisain-baselines-versus-hankyung-discoveries-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "stress-ar-chequeado-date-concern-versus-mdz-recovery-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        }
+      ],
+      "code_correct_classifications": 93,
+      "code_correct_confirmation_flags": 93,
+      "model_binary_confirmation": null,
+      "jev_correct_raw_classifications": null,
+      "jev_raw_classification_confusion": null,
+      "jev_missing_raw_decisions": null,
+      "openai_supported_original_steps": null,
+      "openai_original_action_counts": null,
+      "openai_missing_source_proposals": null,
+      "openai_relevant_sources_without_confirmation_proposal": null,
+      "outside_gold_post_guard_action_counts": {},
+      "wall_ms": {
+        "min": 145.24356999999145,
+        "median": 152.70016599999508,
+        "p95": 295.5336569999927,
+        "max": 315.3552469999995
+      }
+    },
+    "openai": {
+      "intended_runs": 72,
+      "completed_runs": 72,
+      "evidence_kinds": [
+        "live_api"
+      ],
+      "execution_failed_runs": 0,
+      "timeout_runs": 0,
+      "limited_runs": 0,
+      "unexecuted_runs": 0,
+      "unknown_model_usage_runs": 0,
+      "inspected_endpoint_observations": 93,
+      "intended_endpoint_observations": 93,
+      "code_classification_accuracy_on_inspected": 1,
+      "raw_jev_classification_accuracy_on_evaluated": null,
+      "raw_jev_evaluated_endpoint_observations": null,
+      "assisted_openai_supported_action_rate": 0.7623762376237624,
+      "assisted_openai_raw_steps": 101,
+      "assisted_openai_guard_rejected_steps": 7,
+      "post_guard_source_actions": 94,
+      "post_guard_unsupported_source_actions": 22,
+      "post_guard_unsupported_action_rate": 0.23404255319148937,
+      "model_invocations": 216,
+      "known_model_invocations": 216,
+      "api_model_calls": 216,
+      "known_api_model_calls": 216,
+      "simulated_model_invocations": 0,
+      "actual_mcp_tool_calls": 300,
+      "actual_mcp_tool_errors": 0,
+      "model_errors": 0,
+      "wall_duration_ms": 496443.7700690001,
+      "duration_and_tool_totals_complete": true,
+      "execution_observation_scope": "Durations and tool/error totals cover returned terminal runs; interrupted no-result executions are incomplete, not measured zero.",
+      "usage_tokens": {
+        "input_tokens": 385791,
+        "output_tokens": 24139
+      },
+      "live_api_usage_tokens": {
+        "input_tokens": 385791,
+        "output_tokens": 24139
+      },
+      "estimated_usage_cost_usd": 0.05064859999999999,
+      "estimated_api_cost_usd": 0.05064859999999999,
+      "simulated_estimated_cost_usd": 0,
+      "billing_cost_usd": null,
+      "server_cost_usd": null,
+      "cost_basis": "Live API estimates use provider-reported usage times approved rates; simulated usage/cost is separate. Unresolved reservations remain in the authoritative shared budget. Not a billing receipt; server cost is unmeasured.",
+      "accuracy_scope": "Assisted source proposals with code-label exposure; no independent endpoint-classification claim.",
+      "repeat_variability": [
+        {
+          "group_id": "mx-el-sol-prior-success-failure-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "be-newsmonkey-prior-success-timeout-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "pt-campanario-prior-success-timeout-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "it-linkiesta-mixed-baseline-and-403-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "jp-yomiuri-full-sitemap-429-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "eg-shorouk-malformed-no-baseline-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 3
+        },
+        {
+          "group_id": "ar-chequeado-dated-stale-content-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "mx-el-sol-saved-recovery-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 3
+        },
+        {
+          "group_id": "be-newsmonkey-saved-recovery-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "ar-mdz-recovery-initial-baseline-zero-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 3
+        },
+        {
+          "group_id": "pt-campanario-recovery-priority-over-old-date-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "no-tv2-sykkel-measured-zero-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "my-free-malaysia-zero-missing-content-date-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "gb-bbc-index-only-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 3
+        },
+        {
+          "group_id": "us-reuters-index-only-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "us-the19th-initial-baseline-zero-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "kr-sisain-two-endpoint-baselines-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "jp-yomiuri-latest-not-attempted-deferred-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 3
+        },
+        {
+          "group_id": "us-the19th-no-checks-before-first-baseline-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "kr-hankyung-success-positive-discoveries-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "stress-jp-yomiuri-access-versus-unattempted-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "stress-us-reuters-index-versus-first-baseline-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "stress-kr-sisain-baselines-versus-hankyung-discoveries-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "stress-ar-chequeado-date-concern-versus-mdz-recovery-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        }
+      ],
+      "code_correct_classifications": 93,
+      "code_correct_confirmation_flags": 93,
+      "model_binary_confirmation": {
+        "true_positive": 27,
+        "false_positive": 21,
+        "true_negative": 36,
+        "false_negative": 0
+      },
+      "jev_correct_raw_classifications": null,
+      "jev_raw_classification_confusion": null,
+      "jev_missing_raw_decisions": null,
+      "openai_supported_original_steps": 77,
+      "openai_original_action_counts": {
+        "investigate_failure": 22,
+        "confirm_freshness": 32,
+        "initialize_tracking": 10,
+        "no_change": 27,
+        "observe_recovery": 10
+      },
+      "openai_missing_source_proposals": 0,
+      "openai_relevant_sources_without_confirmation_proposal": 0,
+      "outside_gold_post_guard_action_counts": {
+        "initialize_tracking": 2,
+        "confirm_freshness": 20
+      },
+      "wall_ms": {
+        "min": 5323.337171000021,
+        "median": 6633.681735499995,
+        "p95": 8994.081837,
+        "max": 10139.385572
+      }
+    },
+    "jev": {
+      "intended_runs": 72,
+      "completed_runs": 71,
+      "evidence_kinds": [
+        "live_api"
+      ],
+      "execution_failed_runs": 1,
+      "timeout_runs": 0,
+      "limited_runs": 0,
+      "unexecuted_runs": 0,
+      "unknown_model_usage_runs": 0,
+      "inspected_endpoint_observations": 93,
+      "intended_endpoint_observations": 93,
+      "code_classification_accuracy_on_inspected": 1,
+      "raw_jev_classification_accuracy_on_evaluated": 0.9111111111111111,
+      "raw_jev_evaluated_endpoint_observations": 90,
+      "assisted_openai_supported_action_rate": null,
+      "assisted_openai_raw_steps": null,
+      "assisted_openai_guard_rejected_steps": null,
+      "post_guard_source_actions": 82,
+      "post_guard_unsupported_source_actions": 37,
+      "post_guard_unsupported_action_rate": 0.45121951219512196,
+      "model_invocations": 92,
+      "known_model_invocations": 92,
+      "api_model_calls": 92,
+      "known_api_model_calls": 92,
+      "simulated_model_invocations": 0,
+      "actual_mcp_tool_calls": 384,
+      "actual_mcp_tool_errors": 0,
+      "model_errors": 1,
+      "wall_duration_ms": 32243.261864999688,
+      "duration_and_tool_totals_complete": true,
+      "execution_observation_scope": "Durations and tool/error totals cover returned terminal runs; interrupted no-result executions are incomplete, not measured zero.",
+      "usage_tokens": {
+        "input_tokens": 288618,
+        "output_tokens": 15151
+      },
+      "live_api_usage_tokens": {
+        "input_tokens": 288618,
+        "output_tokens": 15151
+      },
+      "estimated_usage_cost_usd": 0.012121956,
+      "estimated_api_cost_usd": 0.012121956,
+      "simulated_estimated_cost_usd": 0,
+      "billing_cost_usd": null,
+      "server_cost_usd": null,
+      "cost_basis": "Live API estimates use provider-reported usage times approved rates; simulated usage/cost is separate. Unresolved reservations remain in the authoritative shared budget. Not a billing receipt; server cost is unmeasured.",
+      "accuracy_scope": "Raw endpoint choices; reported code agreement/gates are a separate downstream stage.",
+      "repeat_variability": [
+        {
+          "group_id": "mx-el-sol-prior-success-failure-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "be-newsmonkey-prior-success-timeout-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "pt-campanario-prior-success-timeout-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "it-linkiesta-mixed-baseline-and-403-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "jp-yomiuri-full-sitemap-429-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "eg-shorouk-malformed-no-baseline-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "ar-chequeado-dated-stale-content-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "mx-el-sol-saved-recovery-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "be-newsmonkey-saved-recovery-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "ar-mdz-recovery-initial-baseline-zero-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "pt-campanario-recovery-priority-over-old-date-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "no-tv2-sykkel-measured-zero-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "my-free-malaysia-zero-missing-content-date-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "gb-bbc-index-only-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "us-reuters-index-only-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "us-the19th-initial-baseline-zero-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "kr-sisain-two-endpoint-baselines-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "jp-yomiuri-latest-not-attempted-deferred-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "us-the19th-no-checks-before-first-baseline-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "kr-hankyung-success-positive-discoveries-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "stress-jp-yomiuri-access-versus-unattempted-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "stress-us-reuters-index-versus-first-baseline-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "stress-kr-sisain-baselines-versus-hankyung-discoveries-20261014",
+          "completed_repeats": 2,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "stress-ar-chequeado-date-concern-versus-mdz-recovery-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        }
+      ],
+      "code_correct_classifications": 93,
+      "code_correct_confirmation_flags": 93,
+      "model_binary_confirmation": {
+        "true_positive": 27,
+        "false_positive": 18,
+        "true_negative": 45,
+        "false_negative": 0
+      },
+      "jev_correct_raw_classifications": 82,
+      "jev_raw_classification_confusion": {
+        "failure_after_prior_success -> failure_after_prior_success": 9,
+        "successful_no_new_discoveries -> successful_no_new_discoveries": 20,
+        "access_failure_without_normal_baseline -> access_failure_without_normal_baseline": 12,
+        "stale_content_evidence -> stale_content_evidence": 6,
+        "recovered_after_failure -> recovered_after_failure": 12,
+        "recovered_after_failure -> stale_content_evidence": 3,
+        "index_only -> index_only": 9,
+        "successful_no_new_discoveries -> insufficient_evidence": 5,
+        "not_attempted_in_period -> not_attempted_in_period": 6,
+        "untracked_or_no_available_checks -> untracked_or_no_available_checks": 3,
+        "successful_collection -> successful_collection": 5
+      },
+      "jev_missing_raw_decisions": 3,
+      "openai_supported_original_steps": null,
+      "openai_original_action_counts": null,
+      "openai_missing_source_proposals": null,
+      "openai_relevant_sources_without_confirmation_proposal": null,
+      "outside_gold_post_guard_action_counts": {
+        "confirm_freshness": 37
+      },
+      "wall_ms": {
+        "min": 322.905522999994,
+        "median": 392.86168899999757,
+        "p95": 752.4035159999621,
+        "max": 879.2544159999816
+      }
+    }
+  },
+  "diagnostic_groups": {
+    "rules": {
+      "intended_runs": 60,
+      "completed_runs": 60,
+      "evidence_kinds": [
+        "offline_actual_MCP"
+      ],
+      "execution_failed_runs": 0,
+      "timeout_runs": 0,
+      "limited_runs": 0,
+      "unexecuted_runs": 0,
+      "unknown_model_usage_runs": 0,
+      "inspected_endpoint_observations": 66,
+      "intended_endpoint_observations": 66,
+      "code_classification_accuracy_on_inspected": 1,
+      "raw_jev_classification_accuracy_on_evaluated": null,
+      "raw_jev_evaluated_endpoint_observations": null,
+      "assisted_openai_supported_action_rate": null,
+      "assisted_openai_raw_steps": null,
+      "assisted_openai_guard_rejected_steps": null,
+      "post_guard_source_actions": 0,
+      "post_guard_unsupported_source_actions": 0,
+      "post_guard_unsupported_action_rate": null,
+      "model_invocations": 0,
+      "known_model_invocations": 0,
+      "api_model_calls": 0,
+      "known_api_model_calls": 0,
+      "simulated_model_invocations": 0,
+      "actual_mcp_tool_calls": 300,
+      "actual_mcp_tool_errors": 0,
+      "model_errors": 0,
+      "wall_duration_ms": 9292.89368399981,
+      "duration_and_tool_totals_complete": true,
+      "execution_observation_scope": "Durations and tool/error totals cover returned terminal runs; interrupted no-result executions are incomplete, not measured zero.",
+      "usage_tokens": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "live_api_usage_tokens": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "estimated_usage_cost_usd": 0,
+      "estimated_api_cost_usd": 0,
+      "simulated_estimated_cost_usd": 0,
+      "billing_cost_usd": null,
+      "server_cost_usd": null,
+      "cost_basis": "Live API estimates use provider-reported usage times approved rates; simulated usage/cost is separate. Unresolved reservations remain in the authoritative shared budget. Not a billing receipt; server cost is unmeasured.",
+      "accuracy_scope": "Deterministic code findings on inspected frozen evidence.",
+      "repeat_variability": [
+        {
+          "group_id": "mx-el-sol-prior-success-failure-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "be-newsmonkey-prior-success-timeout-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "pt-campanario-prior-success-timeout-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "it-linkiesta-mixed-baseline-and-403-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "jp-yomiuri-full-sitemap-429-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "eg-shorouk-malformed-no-baseline-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "ar-chequeado-dated-stale-content-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "mx-el-sol-saved-recovery-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "be-newsmonkey-saved-recovery-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "ar-mdz-recovery-initial-baseline-zero-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "pt-campanario-recovery-priority-over-old-date-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "no-tv2-sykkel-measured-zero-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "my-free-malaysia-zero-missing-content-date-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "gb-bbc-index-only-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "us-reuters-index-only-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "us-the19th-initial-baseline-zero-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "kr-sisain-two-endpoint-baselines-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "jp-yomiuri-latest-not-attempted-deferred-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "us-the19th-no-checks-before-first-baseline-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "kr-hankyung-success-positive-discoveries-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        }
+      ],
+      "code_correct_classifications": 66,
+      "code_correct_confirmation_flags": 66,
+      "model_binary_confirmation": null,
+      "jev_correct_raw_classifications": null,
+      "jev_raw_classification_confusion": null,
+      "jev_missing_raw_decisions": null,
+      "openai_supported_original_steps": null,
+      "openai_original_action_counts": null,
+      "openai_missing_source_proposals": null,
+      "openai_relevant_sources_without_confirmation_proposal": null,
+      "outside_gold_post_guard_action_counts": {},
+      "wall_ms": {
+        "min": 145.24356999999145,
+        "median": 149.06170749999,
+        "p95": 174.6561939999956,
+        "max": 214.19265499999983
+      }
+    },
+    "openai": {
+      "intended_runs": 60,
+      "completed_runs": 60,
+      "evidence_kinds": [
+        "live_api"
+      ],
+      "execution_failed_runs": 0,
+      "timeout_runs": 0,
+      "limited_runs": 0,
+      "unexecuted_runs": 0,
+      "unknown_model_usage_runs": 0,
+      "inspected_endpoint_observations": 66,
+      "intended_endpoint_observations": 66,
+      "code_classification_accuracy_on_inspected": 1,
+      "raw_jev_classification_accuracy_on_evaluated": null,
+      "raw_jev_evaluated_endpoint_observations": null,
+      "assisted_openai_supported_action_rate": 0.7272727272727273,
+      "assisted_openai_raw_steps": 77,
+      "assisted_openai_guard_rejected_steps": 7,
+      "post_guard_source_actions": 70,
+      "post_guard_unsupported_source_actions": 19,
+      "post_guard_unsupported_action_rate": 0.2714285714285714,
+      "model_invocations": 180,
+      "known_model_invocations": 180,
+      "api_model_calls": 180,
+      "known_api_model_calls": 180,
+      "simulated_model_invocations": 0,
+      "actual_mcp_tool_calls": 240,
+      "actual_mcp_tool_errors": 0,
+      "model_errors": 0,
+      "wall_duration_ms": 407580.696223,
+      "duration_and_tool_totals_complete": true,
+      "execution_observation_scope": "Durations and tool/error totals cover returned terminal runs; interrupted no-result executions are incomplete, not measured zero.",
+      "usage_tokens": {
+        "input_tokens": 312012,
+        "output_tokens": 19273
+      },
+      "live_api_usage_tokens": {
+        "input_tokens": 312012,
+        "output_tokens": 19273
+      },
+      "estimated_usage_cost_usd": 0.040837700000000005,
+      "estimated_api_cost_usd": 0.040837700000000005,
+      "simulated_estimated_cost_usd": 0,
+      "billing_cost_usd": null,
+      "server_cost_usd": null,
+      "cost_basis": "Live API estimates use provider-reported usage times approved rates; simulated usage/cost is separate. Unresolved reservations remain in the authoritative shared budget. Not a billing receipt; server cost is unmeasured.",
+      "accuracy_scope": "Assisted source proposals with code-label exposure; no independent endpoint-classification claim.",
+      "repeat_variability": [
+        {
+          "group_id": "mx-el-sol-prior-success-failure-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "be-newsmonkey-prior-success-timeout-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "pt-campanario-prior-success-timeout-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "it-linkiesta-mixed-baseline-and-403-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "jp-yomiuri-full-sitemap-429-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "eg-shorouk-malformed-no-baseline-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 3
+        },
+        {
+          "group_id": "ar-chequeado-dated-stale-content-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "mx-el-sol-saved-recovery-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 3
+        },
+        {
+          "group_id": "be-newsmonkey-saved-recovery-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "ar-mdz-recovery-initial-baseline-zero-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 3
+        },
+        {
+          "group_id": "pt-campanario-recovery-priority-over-old-date-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "no-tv2-sykkel-measured-zero-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "my-free-malaysia-zero-missing-content-date-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "gb-bbc-index-only-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 3
+        },
+        {
+          "group_id": "us-reuters-index-only-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "us-the19th-initial-baseline-zero-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "kr-sisain-two-endpoint-baselines-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "jp-yomiuri-latest-not-attempted-deferred-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 3
+        },
+        {
+          "group_id": "us-the19th-no-checks-before-first-baseline-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "kr-hankyung-success-positive-discoveries-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        }
+      ],
+      "code_correct_classifications": 66,
+      "code_correct_confirmation_flags": 66,
+      "model_binary_confirmation": {
+        "true_positive": 21,
+        "false_positive": 18,
+        "true_negative": 21,
+        "false_negative": 0
+      },
+      "jev_correct_raw_classifications": null,
+      "jev_raw_classification_confusion": null,
+      "jev_missing_raw_decisions": null,
+      "openai_supported_original_steps": 56,
+      "openai_original_action_counts": {
+        "investigate_failure": 19,
+        "confirm_freshness": 26,
+        "initialize_tracking": 6,
+        "no_change": 19,
+        "observe_recovery": 7
+      },
+      "openai_missing_source_proposals": 0,
+      "openai_relevant_sources_without_confirmation_proposal": 0,
+      "outside_gold_post_guard_action_counts": {
+        "initialize_tracking": 2,
+        "confirm_freshness": 17
+      },
+      "wall_ms": {
+        "min": 5323.337171000021,
+        "median": 6549.797927499982,
+        "p95": 8869.411932000017,
+        "max": 10139.385572
+      }
+    },
+    "jev": {
+      "intended_runs": 60,
+      "completed_runs": 60,
+      "evidence_kinds": [
+        "live_api"
+      ],
+      "execution_failed_runs": 0,
+      "timeout_runs": 0,
+      "limited_runs": 0,
+      "unexecuted_runs": 0,
+      "unknown_model_usage_runs": 0,
+      "inspected_endpoint_observations": 66,
+      "intended_endpoint_observations": 66,
+      "code_classification_accuracy_on_inspected": 1,
+      "raw_jev_classification_accuracy_on_evaluated": 0.9090909090909091,
+      "raw_jev_evaluated_endpoint_observations": 66,
+      "assisted_openai_supported_action_rate": null,
+      "assisted_openai_raw_steps": null,
+      "assisted_openai_guard_rejected_steps": null,
+      "post_guard_source_actions": 60,
+      "post_guard_unsupported_source_actions": 27,
+      "post_guard_unsupported_action_rate": 0.45,
+      "model_invocations": 66,
+      "known_model_invocations": 66,
+      "api_model_calls": 66,
+      "known_api_model_calls": 66,
+      "simulated_model_invocations": 0,
+      "actual_mcp_tool_calls": 300,
+      "actual_mcp_tool_errors": 0,
+      "model_errors": 0,
+      "wall_duration_ms": 23645.080829999642,
+      "duration_and_tool_totals_complete": true,
+      "execution_observation_scope": "Durations and tool/error totals cover returned terminal runs; interrupted no-result executions are incomplete, not measured zero.",
+      "usage_tokens": {
+        "input_tokens": 209088,
+        "output_tokens": 10869
+      },
+      "live_api_usage_tokens": {
+        "input_tokens": 209088,
+        "output_tokens": 10869
+      },
+      "estimated_usage_cost_usd": 0.008781696,
+      "estimated_api_cost_usd": 0.008781696,
+      "simulated_estimated_cost_usd": 0,
+      "billing_cost_usd": null,
+      "server_cost_usd": null,
+      "cost_basis": "Live API estimates use provider-reported usage times approved rates; simulated usage/cost is separate. Unresolved reservations remain in the authoritative shared budget. Not a billing receipt; server cost is unmeasured.",
+      "accuracy_scope": "Raw endpoint choices; reported code agreement/gates are a separate downstream stage.",
+      "repeat_variability": [
+        {
+          "group_id": "mx-el-sol-prior-success-failure-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "be-newsmonkey-prior-success-timeout-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "pt-campanario-prior-success-timeout-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "it-linkiesta-mixed-baseline-and-403-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "jp-yomiuri-full-sitemap-429-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "eg-shorouk-malformed-no-baseline-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "ar-chequeado-dated-stale-content-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "mx-el-sol-saved-recovery-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "be-newsmonkey-saved-recovery-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "ar-mdz-recovery-initial-baseline-zero-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "pt-campanario-recovery-priority-over-old-date-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "no-tv2-sykkel-measured-zero-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "my-free-malaysia-zero-missing-content-date-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "gb-bbc-index-only-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "us-reuters-index-only-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "us-the19th-initial-baseline-zero-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "kr-sisain-two-endpoint-baselines-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "jp-yomiuri-latest-not-attempted-deferred-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "us-the19th-no-checks-before-first-baseline-20261013",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "kr-hankyung-success-positive-discoveries-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        }
+      ],
+      "code_correct_classifications": 66,
+      "code_correct_confirmation_flags": 66,
+      "model_binary_confirmation": {
+        "true_positive": 21,
+        "false_positive": 12,
+        "true_negative": 33,
+        "false_negative": 0
+      },
+      "jev_correct_raw_classifications": 60,
+      "jev_raw_classification_confusion": {
+        "failure_after_prior_success -> failure_after_prior_success": 9,
+        "successful_no_new_discoveries -> successful_no_new_discoveries": 15,
+        "access_failure_without_normal_baseline -> access_failure_without_normal_baseline": 9,
+        "stale_content_evidence -> stale_content_evidence": 3,
+        "recovered_after_failure -> recovered_after_failure": 9,
+        "recovered_after_failure -> stale_content_evidence": 3,
+        "index_only -> index_only": 6,
+        "successful_no_new_discoveries -> insufficient_evidence": 3,
+        "not_attempted_in_period -> not_attempted_in_period": 3,
+        "untracked_or_no_available_checks -> untracked_or_no_available_checks": 3,
+        "successful_collection -> successful_collection": 3
+      },
+      "jev_missing_raw_decisions": 0,
+      "openai_supported_original_steps": null,
+      "openai_original_action_counts": null,
+      "openai_missing_source_proposals": null,
+      "openai_relevant_sources_without_confirmation_proposal": null,
+      "outside_gold_post_guard_action_counts": {
+        "confirm_freshness": 27
+      },
+      "wall_ms": {
+        "min": 322.905522999994,
+        "median": 381.45689450000646,
+        "p95": 552.7678120000055,
+        "max": 601.4963459999999
+      }
+    }
+  },
+  "stress_groups": {
+    "rules": {
+      "intended_runs": 12,
+      "completed_runs": 12,
+      "evidence_kinds": [
+        "offline_actual_MCP"
+      ],
+      "execution_failed_runs": 0,
+      "timeout_runs": 0,
+      "limited_runs": 0,
+      "unexecuted_runs": 0,
+      "unknown_model_usage_runs": 0,
+      "inspected_endpoint_observations": 27,
+      "intended_endpoint_observations": 27,
+      "code_classification_accuracy_on_inspected": 1,
+      "raw_jev_classification_accuracy_on_evaluated": null,
+      "raw_jev_evaluated_endpoint_observations": null,
+      "assisted_openai_supported_action_rate": null,
+      "assisted_openai_raw_steps": null,
+      "assisted_openai_guard_rejected_steps": null,
+      "post_guard_source_actions": 0,
+      "post_guard_unsupported_source_actions": 0,
+      "post_guard_unsupported_action_rate": null,
+      "model_invocations": 0,
+      "known_model_invocations": 0,
+      "api_model_calls": 0,
+      "known_api_model_calls": 0,
+      "simulated_model_invocations": 0,
+      "actual_mcp_tool_calls": 84,
+      "actual_mcp_tool_errors": 0,
+      "model_errors": 0,
+      "wall_duration_ms": 3542.840164000052,
+      "duration_and_tool_totals_complete": true,
+      "execution_observation_scope": "Durations and tool/error totals cover returned terminal runs; interrupted no-result executions are incomplete, not measured zero.",
+      "usage_tokens": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "live_api_usage_tokens": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "estimated_usage_cost_usd": 0,
+      "estimated_api_cost_usd": 0,
+      "simulated_estimated_cost_usd": 0,
+      "billing_cost_usd": null,
+      "server_cost_usd": null,
+      "cost_basis": "Live API estimates use provider-reported usage times approved rates; simulated usage/cost is separate. Unresolved reservations remain in the authoritative shared budget. Not a billing receipt; server cost is unmeasured.",
+      "accuracy_scope": "Deterministic code findings on inspected frozen evidence.",
+      "repeat_variability": [
+        {
+          "group_id": "stress-jp-yomiuri-access-versus-unattempted-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "stress-us-reuters-index-versus-first-baseline-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "stress-kr-sisain-baselines-versus-hankyung-discoveries-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "stress-ar-chequeado-date-concern-versus-mdz-recovery-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        }
+      ],
+      "code_correct_classifications": 27,
+      "code_correct_confirmation_flags": 27,
+      "model_binary_confirmation": null,
+      "jev_correct_raw_classifications": null,
+      "jev_raw_classification_confusion": null,
+      "jev_missing_raw_decisions": null,
+      "openai_supported_original_steps": null,
+      "openai_original_action_counts": null,
+      "openai_missing_source_proposals": null,
+      "openai_relevant_sources_without_confirmation_proposal": null,
+      "outside_gold_post_guard_action_counts": {},
+      "wall_ms": {
+        "min": 286.14970100001665,
+        "median": 291.95953950000694,
+        "p95": 315.3552469999995,
+        "max": 315.3552469999995
+      }
+    },
+    "openai": {
+      "intended_runs": 12,
+      "completed_runs": 12,
+      "evidence_kinds": [
+        "live_api"
+      ],
+      "execution_failed_runs": 0,
+      "timeout_runs": 0,
+      "limited_runs": 0,
+      "unexecuted_runs": 0,
+      "unknown_model_usage_runs": 0,
+      "inspected_endpoint_observations": 27,
+      "intended_endpoint_observations": 27,
+      "code_classification_accuracy_on_inspected": 1,
+      "raw_jev_classification_accuracy_on_evaluated": null,
+      "raw_jev_evaluated_endpoint_observations": null,
+      "assisted_openai_supported_action_rate": 0.875,
+      "assisted_openai_raw_steps": 24,
+      "assisted_openai_guard_rejected_steps": 0,
+      "post_guard_source_actions": 24,
+      "post_guard_unsupported_source_actions": 3,
+      "post_guard_unsupported_action_rate": 0.125,
+      "model_invocations": 36,
+      "known_model_invocations": 36,
+      "api_model_calls": 36,
+      "known_api_model_calls": 36,
+      "simulated_model_invocations": 0,
+      "actual_mcp_tool_calls": 60,
+      "actual_mcp_tool_errors": 0,
+      "model_errors": 0,
+      "wall_duration_ms": 88863.07384600007,
+      "duration_and_tool_totals_complete": true,
+      "execution_observation_scope": "Durations and tool/error totals cover returned terminal runs; interrupted no-result executions are incomplete, not measured zero.",
+      "usage_tokens": {
+        "input_tokens": 73779,
+        "output_tokens": 4866
+      },
+      "live_api_usage_tokens": {
+        "input_tokens": 73779,
+        "output_tokens": 4866
+      },
+      "estimated_usage_cost_usd": 0.0098109,
+      "estimated_api_cost_usd": 0.0098109,
+      "simulated_estimated_cost_usd": 0,
+      "billing_cost_usd": null,
+      "server_cost_usd": null,
+      "cost_basis": "Live API estimates use provider-reported usage times approved rates; simulated usage/cost is separate. Unresolved reservations remain in the authoritative shared budget. Not a billing receipt; server cost is unmeasured.",
+      "accuracy_scope": "Assisted source proposals with code-label exposure; no independent endpoint-classification claim.",
+      "repeat_variability": [
+        {
+          "group_id": "stress-jp-yomiuri-access-versus-unattempted-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "stress-us-reuters-index-versus-first-baseline-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "stress-kr-sisain-baselines-versus-hankyung-discoveries-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "stress-ar-chequeado-date-concern-versus-mdz-recovery-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        }
+      ],
+      "code_correct_classifications": 27,
+      "code_correct_confirmation_flags": 27,
+      "model_binary_confirmation": {
+        "true_positive": 6,
+        "false_positive": 3,
+        "true_negative": 15,
+        "false_negative": 0
+      },
+      "jev_correct_raw_classifications": null,
+      "jev_raw_classification_confusion": null,
+      "jev_missing_raw_decisions": null,
+      "openai_supported_original_steps": 21,
+      "openai_original_action_counts": {
+        "investigate_failure": 3,
+        "initialize_tracking": 4,
+        "no_change": 8,
+        "confirm_freshness": 6,
+        "observe_recovery": 3
+      },
+      "openai_missing_source_proposals": 0,
+      "openai_relevant_sources_without_confirmation_proposal": 0,
+      "outside_gold_post_guard_action_counts": {
+        "confirm_freshness": 3
+      },
+      "wall_ms": {
+        "min": 5975.1497040000395,
+        "median": 7463.9208610000205,
+        "p95": 9154.464817999979,
+        "max": 9154.464817999979
+      }
+    },
+    "jev": {
+      "intended_runs": 12,
+      "completed_runs": 11,
+      "evidence_kinds": [
+        "live_api"
+      ],
+      "execution_failed_runs": 1,
+      "timeout_runs": 0,
+      "limited_runs": 0,
+      "unexecuted_runs": 0,
+      "unknown_model_usage_runs": 0,
+      "inspected_endpoint_observations": 27,
+      "intended_endpoint_observations": 27,
+      "code_classification_accuracy_on_inspected": 1,
+      "raw_jev_classification_accuracy_on_evaluated": 0.9166666666666666,
+      "raw_jev_evaluated_endpoint_observations": 24,
+      "assisted_openai_supported_action_rate": null,
+      "assisted_openai_raw_steps": null,
+      "assisted_openai_guard_rejected_steps": null,
+      "post_guard_source_actions": 22,
+      "post_guard_unsupported_source_actions": 10,
+      "post_guard_unsupported_action_rate": 0.45454545454545453,
+      "model_invocations": 26,
+      "known_model_invocations": 26,
+      "api_model_calls": 26,
+      "known_api_model_calls": 26,
+      "simulated_model_invocations": 0,
+      "actual_mcp_tool_calls": 84,
+      "actual_mcp_tool_errors": 0,
+      "model_errors": 1,
+      "wall_duration_ms": 8598.181035000045,
+      "duration_and_tool_totals_complete": true,
+      "execution_observation_scope": "Durations and tool/error totals cover returned terminal runs; interrupted no-result executions are incomplete, not measured zero.",
+      "usage_tokens": {
+        "input_tokens": 79530,
+        "output_tokens": 4282
+      },
+      "live_api_usage_tokens": {
+        "input_tokens": 79530,
+        "output_tokens": 4282
+      },
+      "estimated_usage_cost_usd": 0.0033402600000000007,
+      "estimated_api_cost_usd": 0.0033402600000000007,
+      "simulated_estimated_cost_usd": 0,
+      "billing_cost_usd": null,
+      "server_cost_usd": null,
+      "cost_basis": "Live API estimates use provider-reported usage times approved rates; simulated usage/cost is separate. Unresolved reservations remain in the authoritative shared budget. Not a billing receipt; server cost is unmeasured.",
+      "accuracy_scope": "Raw endpoint choices; reported code agreement/gates are a separate downstream stage.",
+      "repeat_variability": [
+        {
+          "group_id": "stress-jp-yomiuri-access-versus-unattempted-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "stress-us-reuters-index-versus-first-baseline-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        },
+        {
+          "group_id": "stress-kr-sisain-baselines-versus-hankyung-discoveries-20261014",
+          "completed_repeats": 2,
+          "distinct_decision_and_coverage_signatures": 2
+        },
+        {
+          "group_id": "stress-ar-chequeado-date-concern-versus-mdz-recovery-20261014",
+          "completed_repeats": 3,
+          "distinct_decision_and_coverage_signatures": 1
+        }
+      ],
+      "code_correct_classifications": 27,
+      "code_correct_confirmation_flags": 27,
+      "model_binary_confirmation": {
+        "true_positive": 6,
+        "false_positive": 6,
+        "true_negative": 12,
+        "false_negative": 0
+      },
+      "jev_correct_raw_classifications": 22,
+      "jev_raw_classification_confusion": {
+        "access_failure_without_normal_baseline -> access_failure_without_normal_baseline": 3,
+        "not_attempted_in_period -> not_attempted_in_period": 3,
+        "index_only -> index_only": 3,
+        "successful_no_new_discoveries -> successful_no_new_discoveries": 5,
+        "stale_content_evidence -> stale_content_evidence": 3,
+        "recovered_after_failure -> recovered_after_failure": 3,
+        "successful_no_new_discoveries -> insufficient_evidence": 2,
+        "successful_collection -> successful_collection": 2
+      },
+      "jev_missing_raw_decisions": 3,
+      "openai_supported_original_steps": null,
+      "openai_original_action_counts": null,
+      "openai_missing_source_proposals": null,
+      "openai_relevant_sources_without_confirmation_proposal": null,
+      "outside_gold_post_guard_action_counts": {
+        "confirm_freshness": 10
+      },
+      "wall_ms": {
+        "min": 610.8940630000143,
+        "median": 731.7625665000523,
+        "p95": 879.2544159999816,
+        "max": 879.2544159999816
+      }
+    }
+  },
+  "failed_runs": [
+    {
+      "group_id": "stress-kr-sisain-baselines-versus-hankyung-discoveries-20261014",
+      "repeat": 1,
+      "engine": "jev",
+      "status": "execution_failed",
+      "error": "JEV_PROBABILITY_CONTRACT_INVALID",
+      "cost_usd": 0.00013360200000000003,
+      "model_calls": 2
+    }
+  ],
+  "shared_budget_before": {
+    "authorization_limit_usd": 5,
+    "estimated_or_reserved_usd": 0.013497891999999997,
+    "remaining_usd": 4.986502108,
+    "persistence": "sqlite_across_providers_and_restarts"
+  },
+  "shared_budget_after": {
+    "authorization_limit_usd": 5,
+    "estimated_or_reserved_usd": 0.07626844799999989,
+    "remaining_usd": 4.9237315520000005,
+    "persistence": "sqlite_across_providers_and_restarts"
+  },
+  "cost_estimates": {
+    "experiment_usd": 0.06277055599999999,
+    "billing_cost_usd": null,
+    "server_cost_usd": null,
+    "configured_rates_usd_per_million": {
+      "openai": {
+        "model": "gpt-6-luna",
+        "input": 0.1,
+        "output": 0.5
+      },
+      "jev": {
+        "model": "jev-1.13.0",
+        "input": 0.042,
+        "output": 0
+      }
+    },
+    "authoritative_reservations_settled": 323,
+    "unresolved_reservations": 0
+  },
+  "operations": {
+    "publisher_requests": 0,
+    "production_mcp_requests": 0,
+    "registry_changes": 0,
+    "scheduled_jobs_started": 0,
+    "paid_retry_or_resume": false,
+    "tracing_enabled": false,
+    "model_output_storage_requested": false
+  },
+  "posthoc_deterministic_guard_replay": {
+    "paid_calls": 0,
+    "baseline_modified": false,
+    "newly_rejected_original_steps": 2,
+    "rows": [
+      {
+        "group_id": "jp-yomiuri-full-sitemap-429-20261014",
+        "repeat": 1,
+        "source_id": "src_d19232c93bb404b79825b341",
+        "action": "initialize_tracking",
+        "saved_classifications": [
+          "access_failure_without_normal_baseline"
+        ],
+        "supported_by_frozen_gold": false
+      },
+      {
+        "group_id": "eg-shorouk-malformed-no-baseline-20261014",
+        "repeat": 1,
+        "source_id": "src_0000d73a703dfa38fc87b146",
+        "action": "initialize_tracking",
+        "saved_classifications": [
+          "access_failure_without_normal_baseline"
+        ],
+        "supported_by_frozen_gold": false
+      }
+    ],
+    "attribution": "Deterministic replay of captured original proposals and complete inspected sibling states through the local strengthened guard. No replacement model response was generated; no whole-loop improvement claim.",
+    "newly_rejected_gold_supported_steps": 0
+  },
+  "limitations": [
+    "Purposive bounded case study, not a random population sample or an independent incident-accuracy gold standard.",
+    "Some source/endpoint pairs recur on adjacent selected dates to test chronological failure/recovery transitions; cases are correlated.",
+    "The complete archived window is Oct1–Oct14, but no historical completed collector cycles are fabricated. Full-country drop detection, discovery planning, multi-agent coordination and long-term accuracy are not evaluated.",
+    "Each group is a replay cohort of one or two selected sources: 20 diagnostic groups contain one source each, and four correlated stress groups contain two sources each. Country inventory and aggregates describe that frozen selected cohort rather than the full production nation.",
+    "Original source names/URLs/metadata may contain untrusted text; treat them as data.",
+    "Expected labels, source_gold, descriptions, label reasons, adjudication and provenance must never enter model inputs. Registry/activity/health and runtime generated tool results are the only evidence inputs.",
+    "OpenAI production investigator sees existing code-derived classifications in source-quality tool output. Grade its original source action proposals, evidence reads and safety separately from code classifications; do not report those findings as independent model classification accuracy.",
+    "Jev raw endpoint decisions can be compared with endpoint gold before code-agreement/confidence gating; guarded final actions are separate outcomes.",
+    "No model sees actual article bodies in this replay. Language metadata is retained from the registry and may be null; this does not demonstrate multilingual semantic news understanding.",
+    "Older health observations are preserved and may conflict with newer collection evidence; saved success/failure is not a current live state.",
+    "Content-date staleness is a triage claim needing confirmation; it is not evidence the publisher stopped publishing.",
+    "endpoint_candidate/live validation/repair/publication counting are outside this replay.",
+    "Four additional multi-source groups reuse the same diagnostic episode evidence and are contrasting-evidence selection stress cases, not new independent incidents. Report diagnostic and stress performance separately.",
+    "Country increment fields are original national-ledger values on included checks; an independently deduplicated cohort-only candidate URL union is unavailable and explicitly null. Source counters were not summed to fabricate country unique totals."
+  ]
+}

@@ -27,6 +27,7 @@
     "activity:export": "node scripts/collect-activity.mjs --export-only",
     "quality:dashboard": "npm run build && WNS_QUALITY_REMOTE=1 node dist/http-local.js",
     "quality:evaluate": "npm run build && node scripts/evaluate-quality.mjs",
+    "quality:evaluate:investigation": "npm run build && node scripts/evaluate-investigation.mjs",
     "quality:dashboard:local": "npm run build && node dist/http-local.js",
     "quality:report": "npm run build && node scripts/quality-report.mjs",
     "quality:daily": "npm run build && node scripts/quality-daily.mjs",

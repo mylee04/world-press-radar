@@ -28,11 +28,18 @@ const reasonFor: Record<string, string> = { investigate_failure: '검사 실패�
 
 /** Jev is a narrow decision stage after actual MCP reads; it neither fakes tools nor overrides code evidence. */
 export async function runJevInvestigation(options: { country: string; date: string; sources: Row[];
-  policy: JevPolicy; client: JevClient; signal: AbortSignal; onModel: (event: JevObservation) => void }) {
+  policy: JevPolicy; client: JevClient; signal: AbortSignal; onModel: (event: JevObservation) => void;
+  onDecision?: (decision: Row, scope: Row) => void }) {
   const decisions: Row[] = [], proposed = new Map<string, Row>();
   let estimate = 0, input = 0, output = 0, calls = 0;
   const selected = options.sources.slice(0, 12);
   const inspectedSources = new Set<string>();
+  const availableEndpoints = options.sources.reduce((n, source) => n + (source.endpoints?.length ?? 0), 0);
+  const scope = () => ({ selected_sources: selected.length, available_sources: options.sources.length,
+    assessed_sources: inspectedSources.size, assessed_source_ids: [...inspectedSources],
+    assessed_endpoints: decisions.length, available_endpoints: availableEndpoints,
+    complete: decisions.length === availableEndpoints,
+    endpoint_scope: 'at most twelve observed endpoints; additional endpoints remain unassessed' });
   const priority: Record<string, number> = { investigate_failure: 1, check_official_alternative: 2,
     confirm_freshness: 3, initialize_tracking: 4, observe_recovery: 5, no_change: 6 };
   for (const detail of selected) {
@@ -50,10 +57,13 @@ export async function runJevInvestigation(options: { country: string; date: stri
       || result.decision.requires_live_confirmation === endpoint.requires_live_confirmation);
     const confidenceSufficient = result.confidence >= .8 && result.confirmation_confidence >= .8;
     inspectedSources.add(detail.source.id);
-    decisions.push({ source_id: detail.source.id, endpoint_id: endpoint.endpoint_id ?? endpoint.id,
+    const decision = { source_id: detail.source.id, endpoint_id: endpoint.endpoint_id ?? endpoint.id,
       ...result.decision, confidence: result.confidence, confirmation_confidence: result.confirmation_confidence, probabilities: result.probabilities,
       agrees_with_code_evidence: agrees, requires_review: !agrees || !confidenceSufficient,
-      verification: 'saved_evidence_only; current_live_state_not_verified' });
+      verification: 'saved_evidence_only; current_live_state_not_verified' };
+    decisions.push(decision);
+    // Report only validated typed decisions, never raw responses or provisional source actions.
+    options.onDecision?.(decision, scope());
     // Conflicting/low-confidence model choices are review observations, never operational actions.
     const action = agrees && confidenceSufficient ? actionFor(evidenceClass) : 'confirm_freshness';
     if (!proposed.has(detail.source.id) || priority[action] < priority[proposed.get(detail.source.id)!.action]) {
@@ -66,7 +76,5 @@ export async function runJevInvestigation(options: { country: string; date: stri
     proposed_steps: [...proposed.values()] }, decisions, model_calls: calls, inspected_sources: inspectedSources.size,
     input_tokens: input, output_tokens: output, estimated_cost_usd: estimate, billing_cost_usd: null,
     cost_basis: 'reported_input_usage_times_configured_rate; output_free; not_billing_receipt',
-    scope: { selected_sources: selected.length, available_sources: options.sources.length,
-      assessed_endpoints: decisions.length, available_endpoints: options.sources.reduce((n, source) => n + (source.endpoints?.length ?? 0), 0),
-      endpoint_scope: 'at most twelve observed endpoints; additional endpoints remain unassessed' } };
+    scope: scope() };
 }

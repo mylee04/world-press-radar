@@ -106,3 +106,73 @@ test('A failed durable start stops before model construction or any MCP/model ex
   assert.throws(() => store.start({ country: 'US', date: '2026-10-12', engine: 'jev' }), /QUALITY_RUN_PERSISTENCE_FAILED/);
   assert.equal(constructed, 0); assert.equal(store.runs.size, 0);
 });
+
+test('a later Jev probability-contract failure preserves the first validated decision and settled usage without final actions or retry', async t => {
+  const { storage, budget } = durable(t);
+  const twoSourceCatalog = normalizeRegistry({ countries: [{ code: 'US', name: 'US', feeds: [
+    { name: 'Fixture First', url: 'https://first.fixture.example/feed' },
+    { name: 'Fixture Second', url: 'https://second.fixture.example/feed' },
+  ] }] });
+  const snapshot = { version: 1, lane: 'production', generated_at: '2026-10-13T02:00:00.000Z',
+    registry_at: '2026-10-13T01:00:00.000Z', tracking_start: '2026-10-01T00:00:00.000Z',
+    available_since: '2026-10-01T00:00:00.000Z', semantics: 'Synthetic first-discovered URL fixture',
+    scope_starts: { source: Object.fromEntries(twoSourceCatalog.sources.map(source => [source.id, '2026-10-01T00:00:00.000Z'])),
+      country: { US: '2026-10-01T00:00:00.000Z' } },
+    scope_latest: { source: Object.fromEntries(twoSourceCatalog.sources.map(source => [source.id, '2026-10-13T01:00:00.000Z'])),
+      country: { US: '2026-10-13T01:00:00.000Z' } },
+    bindings: twoSourceCatalog.sources.flatMap(source => source.endpoints.map(endpoint => ({ source_id: source.id,
+      endpoint_id: endpoint.id, baseline_at: '2026-10-01T00:00:00.000Z' }))),
+    collections: twoSourceCatalog.sources.flatMap(source => source.endpoints.flatMap(endpoint => ['2026-10-11', '2026-10-12', '2026-10-13'].map(date => ({
+      endpoint_id: endpoint.id, checked_at: `${date}T01:00:00.000Z`, status: 'working_nonempty', format: 'rss',
+      source_ids: [source.id], countries: ['US'], source_new: { [source.id]: 0 }, country_new: { US: 0 },
+      baseline_sources: [], uncertain_urls: 0 })))) };
+  const policy = { authorized: true, model: 'jev-1.13.0', keyFile: null, totalBudgetUsd: 1, perRunBudgetUsd: .1,
+    inputUsdPerMillion: .042, maxModelCalls: 12, maxInputBytes: 24000, timeoutMs: 1000 };
+  const answer = (question, choice) => ({ type: 'choice', choice, confidence: 1,
+    probabilities: Object.fromEntries(Object.keys(question.criteria).map(key => [key, key === choice ? 1 : 0])) });
+  let requests = 0, run, progress;
+  const store = new InvestigationStore(twoSourceCatalog, new HealthStore(), new ActivityStore(snapshot), false, {
+    store: storage, budget, jevPolicy: policy,
+    createJevClient: shared => new JevClient(policy, 'DUMMY_FIXTURE_NEVER_SENT', shared, async () => {
+      requests++;
+      if (requests === 2) {
+        progress = storage.get(run.id).model_assessment;
+        assert.equal(progress.status, 'running'); assert.equal(progress.incomplete, true);
+        assert.equal(progress.decisions.length, 1); assert.deepEqual(progress.proposed_steps, []);
+        assert.equal(progress.scope.assessed_endpoints, 1); assert.equal(progress.scope.available_endpoints, 2);
+      }
+      const classification = answer(qualityChoiceQuestions.classification, 'successful_no_new_discoveries');
+      if (requests === 2) classification.probabilities = Object.fromEntries(Object.keys(classification.probabilities).map(key => [key, 0]));
+      return Response.json({ model: policy.model, answers: { classification,
+        confirmation: answer(qualityChoiceQuestions.confirmation, 'no') },
+        usage: { input_tokens: requests === 1 ? 500 : 700, output_tokens: requests === 1 ? 40 : 60 },
+        private_reasoning: 'INVALID_RESPONSE_PRIVATE_SENTINEL' });
+    }) });
+  run = store.start({ country: 'US', date: '2026-10-12', engine: 'jev' });
+  const until = Date.now() + 5000;
+  while (run.status === 'running' && Date.now() < until) await new Promise(resolve => setTimeout(resolve, 10));
+  assert.equal(run.status, 'failed'); assert.equal(run.summary, 'JEV_PROBABILITY_CONTRACT_INVALID');
+  assert.equal(requests, 2, 'The invalid decision must not be retried');
+  assert.ok(progress, 'The first decision must persist before the later request');
+  assert.equal(run.findings.length, 2, 'Deterministic inspected findings remain separate from partial Jev decisions');
+  const assessment = run.model_assessment;
+  assert.equal(assessment.status, 'failed'); assert.equal(assessment.incomplete, true);
+  assert.equal(assessment.failure_code, 'JEV_PROBABILITY_CONTRACT_INVALID');
+  assert.equal(assessment.decisions.length, 1); assert.equal(assessment.decisions[0].classification, 'successful_no_new_discoveries');
+  assert.equal(assessment.decisions[0].source_id, run.findings[0].source_id);
+  assert.equal(assessment.decisions[0].endpoint_id, run.findings[0].endpoint_id);
+  assert.equal(assessment.decisions[0].agrees_with_code_evidence, true);
+  assert.deepEqual(assessment.proposed_steps, [], 'A partial stage must never promote final source actions');
+  assert.equal(assessment.scope.assessed_sources, 1); assert.equal(assessment.scope.available_sources, 2);
+  assert.deepEqual(assessment.scope.assessed_source_ids, [assessment.decisions[0].source_id]);
+  assert.equal(assessment.scope.assessed_endpoints, 1); assert.equal(assessment.scope.available_endpoints, 2);
+  assert.equal(assessment.scope.complete, false);
+  assert.equal(run.cost.model_calls, 2); assert.equal(run.cost.input_tokens, 1200); assert.equal(run.cost.output_tokens, 100);
+  assert.ok(Math.abs(run.cost.estimated_model_cost_usd - 1200 * .042 / 1e6) < 1e-12);
+  assert.equal(run.events.filter(event => event.type === 'model_completed').length, 1);
+  assert.equal(run.events.filter(event => event.type === 'model_failed').length, 1);
+  assert.deepEqual(storage.get(run.id).model_assessment, assessment);
+  assert.deepEqual(storage.get(run.id).cost, run.cost);
+  assert.ok(!JSON.stringify(run).includes('INVALID_RESPONSE_PRIVATE_SENTINEL'));
+  assert.ok(!JSON.stringify(run).includes('DUMMY_FIXTURE_NEVER_SENT'));
+});

@@ -313,15 +313,34 @@ export class InvestigationStore {
         }
       }
       if (run.cost.provider === 'jev') {
-        const result = await runJevInvestigation({ country: run.country, date: run.date, sources: inspectedDetails,
+        run.model_assessment = { kind: 'structured_evidence_classifier', independently_verified: false,
+          status: 'running', incomplete: true,
+          summary: 'Jev 조사 진행 중입니다. 검증된 부분 판정만 기록하며 최종 소스 제안은 아직 제공하지 않습니다.',
+          decisions: [], proposed_steps: [], scope: { selected_sources: Math.min(12, inspectedDetails.length),
+            available_sources: inspectedDetails.length, assessed_sources: 0, assessed_source_ids: [],
+            assessed_endpoints: 0, available_endpoints: inspectedDetails.reduce((n, detail) => n + (detail.endpoints?.length ?? 0), 0),
+            complete: false, endpoint_scope: 'at most twelve observed endpoints; additional endpoints remain unassessed' } };
+        this.persist(run);
+        const result = await Promise.resolve().then(() => runJevInvestigation({ country: run.country, date: run.date, sources: inspectedDetails,
           policy: this.jevModelPolicy, client: this.modelOptions?.createJevClient?.(this.modelBudget)
             ?? createPaidJevClient(this.jevModelPolicy, this.modelBudget), signal: deadline.signal,
-          onModel: observation => this.modelObservation(run, observation) }).catch(error => {
+          onModel: observation => this.modelObservation(run, observation),
+          onDecision: (decision, scope) => {
+            run.model_assessment = { ...run.model_assessment,
+              decisions: [...(run.model_assessment?.decisions as Array<Record<string, unknown>> ?? []),
+                structuredClone(decision)], scope };
+            this.persist(run);
+          } })).catch(error => {
             const safe = error instanceof Error && /^[A-Z_]{5,100}$/.test(error.message) ? error.message : 'JEV_CLASSIFIER_RUN_FAILED';
+            run.model_assessment = { ...run.model_assessment, status: 'failed', incomplete: true, failure_code: safe,
+              summary: 'Jev 조사를 완료하지 못했습니다. 검증된 부분 판정만 보존했으며 최종 소스 제안은 제공하지 않습니다.',
+              proposed_steps: [] };
+            this.persist(run);
             throw Error(safe);
           });
         run.model_assessment = { ...result.assessment, decisions: result.decisions, scope: result.scope,
-          kind: 'structured_evidence_classifier', independently_verified: false };
+          kind: 'structured_evidence_classifier', independently_verified: false,
+          status: 'completed', incomplete: !result.scope.complete };
         if (result.scope.assessed_endpoints < result.scope.available_endpoints) {
           run.truncated = true; run.limit_reached = true;
         }

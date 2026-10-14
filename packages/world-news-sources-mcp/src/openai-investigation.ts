@@ -43,6 +43,28 @@ export const modelAssessmentSchema = z.object({
     reason: z.string().min(1).max(400),
   }).strict()).max(12),
 }).strict();
+
+/** Source actions are checked against all inspected sibling endpoints, including omitted model detail. */
+export function proposalContradictsSavedEvidence(
+  action: z.infer<typeof modelAssessmentSchema>['proposed_steps'][number]['action'], states: readonly string[],
+) {
+  if (action === 'initialize_tracking') {
+    // A saved failure or dated stale result takes priority over a sibling's missing history.
+    const requiresTriage = states.some(state => ['failure_after_prior_success',
+      'access_failure_without_normal_baseline', 'stale_content_evidence'].includes(state));
+    const missingHistory = states.some(state => ['untracked_or_no_available_checks',
+      'not_attempted_in_period', 'insufficient_evidence', 'insufficient_endpoint_history'].includes(state));
+    // Reading an index alone has not initialized article collection; an actual article success has.
+    const indexOnlyArticleGap = states.includes('index_only') && !states.some(state =>
+      ['successful_collection', 'successful_no_new_discoveries', 'recovered_after_failure'].includes(state));
+    return requiresTriage || !(missingHistory || indexOnlyArticleGap);
+  }
+  return action === 'investigate_failure' && !states.some(state =>
+    ['failure_after_prior_success', 'access_failure_without_normal_baseline'].includes(state))
+    || action === 'observe_recovery' && !states.includes('recovered_after_failure')
+    || action === 'no_change' && !states.every(state =>
+      ['successful_collection', 'successful_no_new_discoveries', 'index_only'].includes(state));
+}
 export type ModelObservation = { type: string; status: string; at: string; duration_ms?: number;
   model: string; usage?: { input_tokens: number; output_tokens: number; cached_input_tokens: number | null };
   estimated_cost_usd?: number | null; error?: string; http_status?: number | null; requested_tools?: string[]; cost_basis?: string };
@@ -254,11 +276,7 @@ Do not output reasoning or private thoughts. Return only the specified evidence-
   for (const step of originalAssessment.proposed_steps) {
     const detail = inspectedDetails.get(step.source_id)!;
     const states: string[] = detail.endpoints.map((endpoint: Row) => endpoint.classification ?? 'insufficient_evidence');
-    const contradiction = step.action === 'investigate_failure' && !states.some(state =>
-      ['failure_after_prior_success', 'access_failure_without_normal_baseline'].includes(state))
-      || step.action === 'observe_recovery' && !states.includes('recovered_after_failure')
-      || step.action === 'no_change' && !states.every(state =>
-        ['successful_collection', 'successful_no_new_discoveries', 'index_only'].includes(state));
+    const contradiction = proposalContradictsSavedEvidence(step.action, states);
     if (contradiction) rejected.push({ ...step, validation_error: 'PROPOSAL_CONTRADICTS_EVIDENCE', observed_classifications: states });
     else accepted.push(step);
   }
