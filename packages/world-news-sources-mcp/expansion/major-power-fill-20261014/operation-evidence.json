@@ -1,0 +1,199 @@
+{
+  "version": 1,
+  "batch_id": "major-power-fill-20261014",
+  "started_at": "2026-10-14T15:00:17.944Z",
+  "finished_at": "2026-10-14T15:05:10.240Z",
+  "status": "applied_and_actual_selected_baseline_verified",
+  "inventory": {
+    "before": {
+      "configured_rows": 5454,
+      "active_registrations": 5084,
+      "active_countries": 73,
+      "unique_active_rss": 3701,
+      "unique_active_sitemap": 1779,
+      "estimated_publishers": 2840
+    },
+    "after": {
+      "configured_rows": 5467,
+      "active_registrations": 5097,
+      "active_countries": 73,
+      "unique_active_rss": 3707,
+      "unique_active_sitemap": 1790,
+      "estimated_publishers": 2853
+    }
+  },
+  "ledger_before": {
+    "collections": 58825,
+    "urls": 2270471,
+    "bindings": 5883
+  },
+  "ledger_after": {
+    "collections": 58842,
+    "urls": 2275159,
+    "bindings": 5900
+  },
+  "registry_before_sha256": "6bc0c46d1c482b4aa9d0931a9b98959ac7840aa2b7812cfed9f245eec1adfb75",
+  "registry_after_sha256": "5ca99418a88d0283553bf97bbdcd683673b385b768e722f93aa81d43952544aa",
+  "retained_evidence": {
+    "old_binding_baselines_preserved": true,
+    "original_collections_unchanged": true,
+    "old_canonical_url_count_preserved": true,
+    "tracking_start_preserved": true,
+    "successful_new_checks_are_excluded_baselines": true,
+    "all_new_bindings_initialized": true,
+    "all_new_source_candidates_remain_baseline_excluded": true,
+    "relationship_counts_not_reduced": true,
+    "all_old_evidence_preserved": true,
+    "after_verification_passed": true
+  },
+  "old_collection_digest": {
+    "rows": 58825,
+    "sha256": "a195b56e1a4f4e768f5620b20f937758c81bf35fcdf69f38e5f7407edcdd03e8"
+  },
+  "old_binding_baselines_digest": {
+    "rows": 5883,
+    "sha256": "b957de903f6e361ec2fdeec07fd8541031fe5208fdb95bb75b14698cb7f5b14f"
+  },
+  "old_nine_binding_fields_sha256": "63b7890fa9b52f4282daa0e3665f0d5cfe05839adec221fe1f95dff935e714f9",
+  "original_url_identity": {
+    "rows": 2270471,
+    "sha256": "14632d70eefa51ffd914ed83159c182f9566a6e8a06bc61012b74006a58c1fbd"
+  },
+  "retained_url_identity": {
+    "rows": 2270471,
+    "sha256": "14632d70eefa51ffd914ed83159c182f9566a6e8a06bc61012b74006a58c1fbd"
+  },
+  "tracking_start": "2026-10-01T01:36:12.370Z",
+  "actual_first_check": "2026-10-14T15:03:48.919Z",
+  "actual_last_check": "2026-10-14T15:03:54.636Z",
+  "selected_baseline": {
+    "attempted": 17,
+    "working_nonempty": 16,
+    "valid_empty": 1,
+    "failed": 0,
+    "deferred": 0,
+    "http_hops": 17,
+    "gross_observed_urls": 4728,
+    "uncertain_observed_urls": 1,
+    "canonical_store_increase": 4688,
+    "source_new": 0,
+    "country_new": 0,
+    "excluded_baselines": true,
+    "parser_missing_content_dates": 8,
+    "semantics": "URL observations are not article publication totals; one successful sitemap was actually empty. No forced repeat was performed to change that outcome."
+  },
+  "consistent_preaddition_backup": {
+    "bytes": 5325144064,
+    "quick_check": "ok",
+    "matches_original_ledger": true
+  },
+  "collector_release": "news-quality-source-pagination-20261014",
+  "quality_release": "quality-major20-ui-20261014",
+  "old_source_metadata_and_health_preserved": true,
+  "existing_source_edits": 0,
+  "timer_starts": 0,
+  "timer_definitions_changed": false,
+  "model_calls": 0,
+  "budget_usd": {
+    "fixed_combined_limit": 5,
+    "estimated_cumulative_usage_unchanged": 0.076268448,
+    "settled_reservations": 323,
+    "pending_reservations": 0
+  },
+  "protected_application_rows_unchanged": {
+    "quality_runs": {
+      "rows": 4,
+      "sha256": "f27754532797a874d835d72f8cfeac13d0b30deb52aa6079edb62553eba0e04e"
+    },
+    "model_reservations": {
+      "rows": 323,
+      "sha256": "9ecd957fa06d8e06864bfe4efe8ab3dd0ef70b8b10a141e62fd346c9f590b4bf"
+    },
+    "model_budgets": {
+      "rows": 1,
+      "sha256": "e5438e31744abbfcafef8cbfda0595f9f813c783cfb8cb84b0cbc475ea4f2258"
+    }
+  },
+  "backend_health": {
+    "status": "ok",
+    "service": "news-quality",
+    "persistence": "sqlite",
+    "source_snapshot_at": "2026-10-14T15:03:55.144Z",
+    "metadata_reload_failed": false
+  },
+  "active_units": {
+    "world-press-radar-quality-web.service": "active",
+    "world-press-radar-quality-daily.timer": "active",
+    "world-news-activity.timer": "active",
+    "world-news-health.timer": "active"
+  },
+  "activity_generated_at": "2026-10-14T15:03:55.144Z",
+  "live_backend_read_acceptance": {
+    "kind": "live_backend_read_only_inventory_acceptance",
+    "observed_at": "2026-10-14T15:09:06.241619+00:00",
+    "global_inventory": {
+      "active_countries": 73,
+      "active_source_registrations": 5097,
+      "unique_active_rss_endpoints": 3707,
+      "unique_active_sitemap_endpoints": 1790,
+      "unique_publishers": 2853,
+      "publisher_count_state": "estimated_from_registry_identity",
+      "publisher_count_semantics": "활성 등록의 매체 브랜드 기준 추정. 등록된 사이트 도메인·별칭으로 중복을 제거함. 55개는 사이트 도메인 없이 등록명·공유 피드 경로로 추정. 모회사별로 합치지 않으며, 공유 서버·연결되지 않은 다른 도메인에는 오차가 있을 수 있음.",
+      "publisher_identity_basis": {
+        "domain_groups": 2798,
+        "name_fallback_groups": 55,
+        "unresolved_active_registrations": 0
+      }
+    },
+    "snapshot_at": "2026-10-14T15:03:55.144Z",
+    "date": "2026-10-14",
+    "united_states_sources": 242,
+    "new_us_publisher_registrations": [
+      "Pittsburgh Post-Gazette",
+      "STAT News",
+      "Semafor",
+      "The Christian Science Monitor",
+      "The Daily Beast"
+    ],
+    "requests": 2,
+    "methods": [
+      "GET"
+    ],
+    "admin_credentials_used": false,
+    "publisher_fetches": 0,
+    "model_calls": 0,
+    "credential_copied": false
+  },
+  "public_deployment": {
+    "kind": "major-power-fill-production-ready",
+    "verified_at": "2026-10-14T15:12:05.554Z",
+    "deployment_id": "dpl_2v9WvsN5WJP6hBAgLjo4qY5a8Frn",
+    "deployment_url": "https://world-news-sources-1fxcu1eid-mylee04s-projects.vercel.app",
+    "target": "production",
+    "readyState": "READY",
+    "project": "prj_BJ4NiHnL2RbmtjojGUogPS2faQJs",
+    "aliasAssigned": true,
+    "aliases": [
+      "news.bymyleslee.com",
+      "world-news-sources-mcp.vercel.app",
+      "world-news-sources-mcp-mylee04s-projects.vercel.app"
+    ],
+    "public_url": "https://news.bymyleslee.com/quality/",
+    "submitted_body_sha256": "b3bd150f21905b0f3ea0694fc8bb6820a333620aa861b2ddcdeb5725faec6f0d",
+    "public_url_fetch_performed": false,
+    "gateway_settings_changed": false,
+    "credential_reused_on_owner_machine": true,
+    "credential_copied": false
+  },
+  "local_validation": {
+    "tests": 360,
+    "passed": 360,
+    "failed": 0,
+    "already_applied_batch_idempotence_dry_run_passed": true,
+    "all_existing_raw_feed_rows_unchanged": true,
+    "public_credential_and_private_path_scan_passed": true
+  },
+  "next_regular_check_utc": "2026-10-15T03:00:00Z",
+  "next_regular_check_chicago": "2026-10-14T22:00:00-05:00",
+  "scheduled_result_pending": true
+}

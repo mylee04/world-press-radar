@@ -1,0 +1,1069 @@
+{
+  "version": 1,
+  "batch_id": "major-power-fill-20261014",
+  "registered_at": "2026-10-14T15:03:45.700Z",
+  "verified_at": "2026-10-14T15:05:10.240Z",
+  "registrations": 13,
+  "typed_endpoints": 17,
+  "rss": 6,
+  "sitemap": 11,
+  "countries": [
+    "US",
+    "GB",
+    "IN",
+    "SA",
+    "KR",
+    "JP",
+    "BR",
+    "CN"
+  ],
+  "nonempty_first_observations": 16,
+  "valid_empty_first_observations": 1,
+  "failed_first_observations": 0,
+  "additions": [
+    {
+      "source_id": "src_0d465b08a7ce2d6b15a76be9",
+      "country": "US",
+      "publisher_registration": "Semafor",
+      "language": "en",
+      "initial_enabled_at": "2026-10-14T15:03:45.700Z",
+      "homepage": "https://www.semafor.com/",
+      "scope_note": "Current public editorial article-address XML from official declarations. Partial coverage; metadata and hyperlinks only, not full article redistribution or complete publisher output.",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_d60585d6c9cbf22c2f335328",
+          "type": "sitemap",
+          "url": "https://www.semafor.com/sitemap-news.xml",
+          "actual_observation": {
+            "endpointId": "ep_d60585d6c9cbf22c2f335328",
+            "type": "sitemap",
+            "url": "https://www.semafor.com/sitemap-news.xml",
+            "checkedAt": "2026-10-14T15:03:52.508Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 56,
+            "entriesWithUrl": 56,
+            "sampleUrls": [
+              "https://www.semafor.com/article/10/14/2026/why-one-spoiler-candidate-is-now-trying-to-replicate-his-work-nationwide",
+              "https://www.semafor.com/article/10/14/2026/rwanda-confirms-it-will-host-f1-grand-prix",
+              "https://www.semafor.com/article/10/14/2026/malawi-launches-crackdown-on-black-market-fuel-as-prices-spike"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.semafor.com/sitemap-news.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 549,
+            "validatorVersion": "2"
+          },
+          "baseline_excluded": true,
+          "stored_url_observations": 56,
+          "uncertain_url_observations": 0,
+          "source_new": 0,
+          "country_new": 0,
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://www.semafor.com/robots.txt",
+            "found_at": "2026-10-14T14:47:49.675Z",
+            "page_sha256": "723140cd3ac98fcdba1aba060fb13405b800136b959995cfb4dc12cb87f4d874",
+            "declaration": "Sitemap: https://www.semafor.com/sitemap-news.xml"
+          },
+          "access_review": {
+            "robots_url": "https://www.semafor.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T14:47:49.675Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "src_6e79194289ed1aae5ecc89eb",
+      "country": "US",
+      "publisher_registration": "The Daily Beast",
+      "language": "en",
+      "initial_enabled_at": "2026-10-14T15:03:45.700Z",
+      "homepage": "https://www.thedailybeast.com/",
+      "scope_note": "Current public editorial article-address XML from official declarations. Partial coverage; metadata and hyperlinks only, not full article redistribution or complete publisher output.",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_db1b72f2e544d4012e1593bd",
+          "type": "rss",
+          "url": "https://www.thedailybeast.com/arc/outboundfeeds/rss/articles",
+          "actual_observation": {
+            "endpointId": "ep_db1b72f2e544d4012e1593bd",
+            "type": "rss",
+            "url": "https://www.thedailybeast.com/arc/outboundfeeds/rss/articles",
+            "checkedAt": "2026-10-14T15:03:54.636Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 100,
+            "entriesWithUrl": 100,
+            "sampleUrls": [
+              "https://www.thedailybeast.com/obsessed/snl-veteran-paula-pell-goes-nuclear-on-shane-gillis-gym-joke",
+              "https://www.thedailybeast.com/trumps-massive-greenland-brag-immediately-gets-brutal-reality-check",
+              "https://www.thedailybeast.com/trumps-desperate-maga-plea-spectacularly-backfires"
+            ],
+            "newestContentAt": "2026-10-14T14:42:44.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.thedailybeast.com/arc/outboundfeeds/rss/articles",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2379,
+            "validatorVersion": "2"
+          },
+          "baseline_excluded": true,
+          "stored_url_observations": 100,
+          "uncertain_url_observations": 0,
+          "source_new": 0,
+          "country_new": 0,
+          "provenance": {
+            "kind": "official_html_feed_anchor",
+            "source_url": "https://www.thedailybeast.com/",
+            "found_at": "2026-10-14T14:47:52.026Z",
+            "page_sha256": "53f706401bf0f5fc80f88a59381f105e14784c7752b4387d42aac7f34bd54af4",
+            "tag": "<a href=\"/arc/outboundfeeds/rss/articles\" target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"Subscribe to The Daily Beast RSS feed\" data-element=\"Footer Link\" data-group=\"Social\"><div class=\"inline-flex items-center justify-center size-5 text-[var(--components-footer-color-link-default)]\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-rss\" aria-hidden="
+          },
+          "access_review": {
+            "robots_url": "https://www.thedailybeast.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T14:47:49.818Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          }
+        },
+        {
+          "endpoint_id": "ep_d07d5b5c9bd97a5c3d6c88eb",
+          "type": "sitemap",
+          "url": "https://www.thedailybeast.com/arc/outboundfeeds/sitemap-news/latest",
+          "actual_observation": {
+            "endpointId": "ep_d07d5b5c9bd97a5c3d6c88eb",
+            "type": "sitemap",
+            "url": "https://www.thedailybeast.com/arc/outboundfeeds/sitemap-news/latest",
+            "checkedAt": "2026-10-14T15:03:52.246Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 38,
+            "entriesWithUrl": 38,
+            "sampleUrls": [
+              "https://www.thedailybeast.com/jaw-dropping-scale-of-trumps-reflecting-pool-fiasco-exposed",
+              "https://www.thedailybeast.com/obsessed/snl-veteran-paula-pell-goes-nuclear-on-shane-gillis-gym-joke",
+              "https://www.thedailybeast.com/trumps-massive-greenland-brag-immediately-gets-brutal-reality-check"
+            ],
+            "newestContentAt": "2026-10-14T15:01:32.237Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.thedailybeast.com/arc/outboundfeeds/sitemap-news/latest",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 382,
+            "validatorVersion": "2"
+          },
+          "baseline_excluded": true,
+          "stored_url_observations": 38,
+          "uncertain_url_observations": 0,
+          "source_new": 0,
+          "country_new": 0,
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://www.thedailybeast.com/arc/outboundfeeds/sitemap-news-index?outputType=xml",
+            "found_at": "2026-10-14T14:48:04.117Z",
+            "page_sha256": "2d25a374010e03a981df4a88ce55de45e5fdeb748c4e1c5c766b4bc186c735cc",
+            "declaration": "<loc>https://www.thedailybeast.com/arc/outboundfeeds/sitemap-news/latest</loc>",
+            "declared_lastmod": null
+          },
+          "access_review": {
+            "robots_url": "https://www.thedailybeast.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T14:47:49.818Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "src_e638fe53efc4101790ac970d",
+      "country": "US",
+      "publisher_registration": "STAT News",
+      "language": "en",
+      "initial_enabled_at": "2026-10-14T15:03:45.700Z",
+      "homepage": "https://www.statnews.com/",
+      "scope_note": "Current public editorial article-address XML from official declarations. Partial coverage; metadata and hyperlinks only, not full article redistribution or complete publisher output.",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_18baad2e5c684eb04a80dbaf",
+          "type": "rss",
+          "url": "https://www.statnews.com/feed/",
+          "actual_observation": {
+            "endpointId": "ep_18baad2e5c684eb04a80dbaf",
+            "type": "rss",
+            "url": "https://www.statnews.com/feed/",
+            "checkedAt": "2026-10-14T15:03:48.919Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 20,
+            "entriesWithUrl": 20,
+            "sampleUrls": [
+              "https://www.statnews.com/2026/10/14/biotech-news-fda-adcomm-member-ties-to-industry-under-scrutiny/?utm_campaign=rss",
+              "https://www.statnews.com/pharmalot/2026/10/14/sanofi-settling-european-antitrust-probe-pharma-bro-shkreli/?utm_campaign=rss",
+              "https://www.statnews.com/2026/10/14/the-startup-chasing-general-biological-intelligence-ai-prognosis/?utm_campaign=rss"
+            ],
+            "newestContentAt": "2026-10-14T14:12:14.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.statnews.com/feed/",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 293,
+            "validatorVersion": "2"
+          },
+          "baseline_excluded": true,
+          "stored_url_observations": 20,
+          "uncertain_url_observations": 0,
+          "source_new": 0,
+          "country_new": 0,
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.statnews.com/",
+            "found_at": "2026-10-14T14:48:01.152Z",
+            "page_sha256": "33d15e41c0c778364a274f157e39590623ccb78632b0e37e1abd0ca13c0a17b7",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"STAT &raquo; Feed\" href=\"https://www.statnews.com/feed/\" />"
+          },
+          "access_review": {
+            "robots_url": "https://www.statnews.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T14:47:57.957Z",
+            "decision": "allowed",
+            "matched_rule": null
+          }
+        },
+        {
+          "endpoint_id": "ep_563f061341a91af58df7f42d",
+          "type": "sitemap",
+          "url": "https://www.statnews.com/news-sitemap.xml",
+          "actual_observation": {
+            "endpointId": "ep_563f061341a91af58df7f42d",
+            "type": "sitemap",
+            "url": "https://www.statnews.com/news-sitemap.xml",
+            "checkedAt": "2026-10-14T15:03:51.060Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "valid_empty",
+            "entryCount": 0,
+            "entriesWithUrl": 0,
+            "sampleUrls": [],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.statnews.com/news-sitemap.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 1101,
+            "validatorVersion": "2"
+          },
+          "baseline_excluded": true,
+          "stored_url_observations": 0,
+          "uncertain_url_observations": 0,
+          "source_new": 0,
+          "country_new": 0,
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://www.statnews.com/sitemap_index.xml",
+            "found_at": "2026-10-14T14:48:05.437Z",
+            "page_sha256": "9d208d1527dbac1999332fd1d4c3efc23782e35ba3e5d6fd6b8a8d36ebd9f64d",
+            "declaration": "<loc>https://www.statnews.com/news-sitemap.xml</loc>",
+            "declared_lastmod": "2026-10-14T12:17:35+00:00"
+          },
+          "access_review": {
+            "robots_url": "https://www.statnews.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T14:47:57.957Z",
+            "decision": "allowed",
+            "matched_rule": null
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "src_245ff2555b578d0ccabdd619",
+      "country": "US",
+      "publisher_registration": "Pittsburgh Post-Gazette",
+      "language": "en",
+      "initial_enabled_at": "2026-10-14T15:03:45.700Z",
+      "homepage": "https://www.post-gazette.com/",
+      "scope_note": "Current public editorial article-address XML from official declarations. Partial coverage; metadata and hyperlinks only, not full article redistribution or complete publisher output.",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_55406e6ad4b945cc2b019327",
+          "type": "rss",
+          "url": "https://www.post-gazette.com/rss",
+          "actual_observation": {
+            "endpointId": "ep_55406e6ad4b945cc2b019327",
+            "type": "rss",
+            "url": "https://www.post-gazette.com/rss",
+            "checkedAt": "2026-10-14T15:03:50.843Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 20,
+            "entriesWithUrl": 20,
+            "sampleUrls": [
+              "https://www.post-gazette.com/sports/high-school-football/2026/10/14/best-wpial-receivers-since-2000/stories/202610140022",
+              "https://www.post-gazette.com/business/money/2026/10/14/stock-market-today-october-14-2026/stories/202610140037",
+              "https://www.post-gazette.com/news/politics-nation/2026/10/14/trump-media-ban-white-house/stories/202610140036"
+            ],
+            "newestContentAt": "2026-10-14T15:00:00.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.post-gazette.com/rss",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 1507,
+            "validatorVersion": "2"
+          },
+          "baseline_excluded": true,
+          "stored_url_observations": 20,
+          "uncertain_url_observations": 0,
+          "source_new": 0,
+          "country_new": 0,
+          "provenance": {
+            "kind": "official_html_feed_link",
+            "source_url": "https://www.post-gazette.com/",
+            "found_at": "2026-10-14T14:47:59.966Z",
+            "page_sha256": "71fe4028feec90685edf2a226387c1e56055dd8b90dce723232af273334988b7",
+            "tag": "<link rel=\"alternate\" type=\"application/rss+xml\" href=\"https://www.post-gazette.com/rss\" />"
+          },
+          "access_review": {
+            "robots_url": "https://www.post-gazette.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T14:47:57.124Z",
+            "decision": "allowed",
+            "matched_rule": null
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "src_fcec1c43ef5812fbaa47cf61",
+      "country": "US",
+      "publisher_registration": "The Christian Science Monitor",
+      "language": "en",
+      "initial_enabled_at": "2026-10-14T15:03:45.700Z",
+      "homepage": "https://www.csmonitor.com/",
+      "scope_note": "Official public all-stories RSS and current news sitemap. Personal, non-commercial metadata/hyperlink use; no RSS text/photos are redistributed. Partial publisher coverage.",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_2541fb51f3b0ddb8113a39e8",
+          "type": "rss",
+          "url": "https://rss.csmonitor.com/feeds/all",
+          "actual_observation": {
+            "endpointId": "ep_2541fb51f3b0ddb8113a39e8",
+            "type": "rss",
+            "url": "https://rss.csmonitor.com/feeds/all",
+            "checkedAt": "2026-10-14T15:03:49.322Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 10,
+            "entriesWithUrl": 10,
+            "sampleUrls": [
+              "https://www.csmonitor.com/USA/Justice/2026/1014/memphis-crime-national-guard-surge?icid=rss",
+              "https://www.csmonitor.com/World/Middle-East/2026/1013/saudi-security-houthi-airport-attacks-iran-yemen?icid=rss",
+              "https://www.csmonitor.com/World/Europe/2026/1013/students-protest-france-politics-1968?icid=rss"
+            ],
+            "newestContentAt": "2026-10-14T09:00:12.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://rss.csmonitor.com/feeds/all",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 696,
+            "validatorVersion": "2"
+          },
+          "baseline_excluded": true,
+          "stored_url_observations": 10,
+          "uncertain_url_observations": 0,
+          "source_new": 0,
+          "country_new": 0,
+          "provenance": {
+            "kind": "official_html_feed_anchor",
+            "source_url": "https://www.csmonitor.com/About/RSS",
+            "found_at": "2026-10-14T14:48:01.177Z",
+            "page_sha256": "4743b0c9130021928bca4b105603af3c966039a1437697986c813e69557c1b69",
+            "tag": "<a href=\"https://rss.csmonitor.com/feeds/all\" target=\"_self\" rel=\"nofollow\">All Stories</a>"
+          },
+          "access_review": {
+            "robots_url": "https://rss.csmonitor.com/robots.txt",
+            "http_status": 404,
+            "checked_at": "2026-10-14T14:48:01.492Z",
+            "decision": "allowed_robots_absent",
+            "matched_rule": null
+          }
+        },
+        {
+          "endpoint_id": "ep_ac776b572ba6588d9faaf594",
+          "type": "sitemap",
+          "url": "https://www.csmonitor.com/sitemap-news-auto-1.xml",
+          "actual_observation": {
+            "endpointId": "ep_ac776b572ba6588d9faaf594",
+            "type": "sitemap",
+            "url": "https://www.csmonitor.com/sitemap-news-auto-1.xml",
+            "checkedAt": "2026-10-14T15:03:51.309Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 14,
+            "entriesWithUrl": 14,
+            "sampleUrls": [
+              "https://www.csmonitor.com/USA/Justice/2026/1014/memphis-crime-national-guard-surge",
+              "https://www.csmonitor.com/World/Middle-East/2026/1013/saudi-security-houthi-airport-attacks-iran-yemen",
+              "https://www.csmonitor.com/World/Europe/2026/1013/students-protest-france-politics-1968"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.csmonitor.com/sitemap-news-auto-1.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 242,
+            "validatorVersion": "2"
+          },
+          "baseline_excluded": true,
+          "stored_url_observations": 14,
+          "uncertain_url_observations": 0,
+          "source_new": 0,
+          "country_new": 0,
+          "provenance": {
+            "kind": "official_sitemap_index_enumerated_child",
+            "source_url": "https://www.csmonitor.com/sitemap-index.xml",
+            "found_at": "2026-10-14T14:48:08.182Z",
+            "page_sha256": "6eff77af80dd0ce7e0d25ed4283eaa005bcb042da40e59a56b561cebaff83c7d",
+            "declaration": "<loc>https://www.csmonitor.com/sitemap-news-auto-1.xml</loc>",
+            "declared_lastmod": null
+          },
+          "access_review": {
+            "robots_url": "https://www.csmonitor.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T14:47:56.139Z",
+            "decision": "allowed",
+            "matched_rule": null
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "src_24538aaaa8448f958b8f2f11",
+      "country": "GB",
+      "publisher_registration": "Channel 4 News",
+      "language": "en",
+      "initial_enabled_at": "2026-10-14T15:03:45.700Z",
+      "homepage": "https://www.channel4.com/news/",
+      "scope_note": "Current public editorial article-address XML from official declarations. Partial coverage; metadata and hyperlinks only, not full article redistribution or complete publisher output.",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_6e81213e0290ef9d5531d85a",
+          "type": "sitemap",
+          "url": "https://www.channel4.com/news/sitemap.xml",
+          "actual_observation": {
+            "endpointId": "ep_6e81213e0290ef9d5531d85a",
+            "type": "sitemap",
+            "url": "https://www.channel4.com/news/sitemap.xml",
+            "checkedAt": "2026-10-14T15:03:52.393Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 1001,
+            "entriesWithUrl": 1001,
+            "sampleUrls": [
+              "https://www.channel4.com/news/the-rules-court-procedures-and-russell-brand-trial-explained",
+              "https://www.channel4.com/news/behind-the-mask-orville-peck-on-sexuality-and-country-music",
+              "https://www.channel4.com/news/tributes-paid-to-breaking-bad-actor-rj-mitte-dead-at-34"
+            ],
+            "newestContentAt": "2026-10-14T09:11:15.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.channel4.com/news/sitemap.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 1535,
+            "validatorVersion": "2"
+          },
+          "baseline_excluded": true,
+          "stored_url_observations": 1001,
+          "uncertain_url_observations": 1,
+          "source_new": 0,
+          "country_new": 0,
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://www.channel4.com/robots.txt",
+            "found_at": "2026-10-14T14:47:32.025Z",
+            "page_sha256": "1155c252f0a40ab4db4b6e627f99b3404788e8c8dc770036333ec2ee9da21008",
+            "declaration": "Sitemap: https://www.channel4.com/news/sitemap.xml"
+          },
+          "access_review": {
+            "robots_url": "https://www.channel4.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T14:47:32.025Z",
+            "decision": "allowed",
+            "matched_rule": null
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "src_7aeb08eca75f97a7c5373313",
+      "country": "IN",
+      "publisher_registration": "Aaj Tak",
+      "language": "hi",
+      "initial_enabled_at": "2026-10-14T15:03:45.700Z",
+      "homepage": "https://www.aajtak.in/",
+      "scope_note": "Current public editorial article-address XML from official declarations. Partial coverage; metadata and hyperlinks only, not full article redistribution or complete publisher output.",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_03ca7c1bc9e897ea089cf2aa",
+          "type": "sitemap",
+          "url": "https://www.aajtak.in/rssfeeds/news-sitemap.xml",
+          "actual_observation": {
+            "endpointId": "ep_03ca7c1bc9e897ea089cf2aa",
+            "type": "sitemap",
+            "url": "https://www.aajtak.in/rssfeeds/news-sitemap.xml",
+            "checkedAt": "2026-10-14T15:03:49.854Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 1110,
+            "entriesWithUrl": 1110,
+            "sampleUrls": [
+              "https://www.aajtak.in/business/utility/story/jio-platforms-files-rhp-for-ipo-of-up-to-27-crore-shares-issue-to-open-on-october-21-tuta-dskc-2670676-2026-10-14",
+              "https://www.aajtak.in/sports/cricket/story/ind-vs-wi-4th-t20i-live-score-india-west-indies-match-rajiv-gandhi-international-stadium-hyderabad-aksp-dskc-2670559-2026-10-14",
+              "https://www.aajtak.in/fact-check/story/fact-check-up-bjp-mla-bhupesh-chaubey-sit-ups-video-viral-ahead-of-2027-polls-ntc-apdy-rptc-2670709-2026-10-14"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "unreliable",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.aajtak.in/rssfeeds/news-sitemap.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 1236,
+            "validatorVersion": "2"
+          },
+          "baseline_excluded": true,
+          "stored_url_observations": 1110,
+          "uncertain_url_observations": 0,
+          "source_new": 0,
+          "country_new": 0,
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://www.aajtak.in/robots.txt",
+            "found_at": "2026-10-14T14:47:42.499Z",
+            "page_sha256": "2590548b3589dbac3b4f8e7fdf3f79784bac3ef220f0c40b37ff8b03154cce3c",
+            "declaration": "Sitemap: https://www.aajtak.in/rssfeeds/news-sitemap.xml"
+          },
+          "access_review": {
+            "robots_url": "https://www.aajtak.in/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T14:47:42.499Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "src_ae9a0e955ed6c159af794f27",
+      "country": "IN",
+      "publisher_registration": "Zee News",
+      "language": "en",
+      "initial_enabled_at": "2026-10-14T15:03:45.700Z",
+      "homepage": "https://zeenews.india.com/",
+      "scope_note": "Current public editorial article-address XML from official declarations. Partial coverage; metadata and hyperlinks only, not full article redistribution or complete publisher output.",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_ac866ae40f1994c2c65db254",
+          "type": "sitemap",
+          "url": "https://zeenews.india.com/sitemaps/news-sitemap.xml",
+          "actual_observation": {
+            "endpointId": "ep_ac866ae40f1994c2c65db254",
+            "type": "sitemap",
+            "url": "https://zeenews.india.com/sitemaps/news-sitemap.xml",
+            "checkedAt": "2026-10-14T15:03:53.904Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 192,
+            "entriesWithUrl": 192,
+            "sampleUrls": [
+              "https://zeenews.india.com/india/kashmir-snowfall-gulmarg-sonamarg-srinagar-rain-imd-weather-alert-3076053.html",
+              "https://zeenews.india.com/industry-updates/transline-technologies-intellius-recode-and-bonbloc-technologies-enter-spotlight-as-ai-moves-into-industry-3076016.html",
+              "https://zeenews.india.com/india/opinion-a-roof-of-hope-on-reclaimed-mafias-land-3076052.html"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://zeenews.india.com/sitemaps/news-sitemap.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2645,
+            "validatorVersion": "2"
+          },
+          "baseline_excluded": true,
+          "stored_url_observations": 192,
+          "uncertain_url_observations": 0,
+          "source_new": 0,
+          "country_new": 0,
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://zeenews.india.com/robots.txt",
+            "found_at": "2026-10-14T14:48:14.382Z",
+            "page_sha256": "a1309ec73f75af1983cede02d1188b932b999286ffcf29641df72af115a74d77",
+            "declaration": "Sitemap: https://zeenews.india.com/sitemaps/news-sitemap.xml"
+          },
+          "access_review": {
+            "robots_url": "https://zeenews.india.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T14:48:14.382Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "src_893cbd3f860143d1e9aff538",
+      "country": "SA",
+      "publisher_registration": "Asharq Al-Awsat",
+      "language": "ar",
+      "initial_enabled_at": "2026-10-14T15:03:45.700Z",
+      "homepage": "https://aawsat.com/",
+      "scope_note": "Current public editorial article-address XML from official declarations. Partial coverage; metadata and hyperlinks only, not full article redistribution or complete publisher output.",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_05d438a7fc7321319fc71254",
+          "type": "sitemap",
+          "url": "https://aawsat.com/googlenews.xml",
+          "actual_observation": {
+            "endpointId": "ep_05d438a7fc7321319fc71254",
+            "type": "sitemap",
+            "url": "https://aawsat.com/googlenews.xml",
+            "checkedAt": "2026-10-14T15:03:52.868Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 1000,
+            "entriesWithUrl": 1000,
+            "sampleUrls": [
+              "https://aawsat.com/%D8%B9%D8%A7%D9%84%D9%85-%D8%A7%D9%84%D8%A7%D8%B9%D9%85%D8%A7%D9%84/5329600-%D8%AC%D8%AF%D8%A9-%D8%AA%D8%AD%D8%AA%D8%B6%D9%86-%D8%A7%D9%81%D8%AA%D8%AA%D8%A7%D8%AD-%D9%81%D9%86%D8%AF%D9%82-%D8%AF%D9%84%D8%AA%D8%A7-%D8%A8%D8%A7%D9%8A-%D9%85%D8%A7%D8%B1%D9%8A%D9%88%D8%AA-%D9%88%D8%B4%D9%82%D9%82-%D9%85%D8%A7%D8%B1%D9%8A%D9%88%D8%AA-%D8%A7%D9%84%D9%81%D9%86%D8%AF%D9%82%D9%8A%D8%A9-%D9%81%D9%8A-%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85",
+              "https://aawsat.com/%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D8%A9/%D8%B1%D9%8A%D8%A7%D8%B6%D8%A9-%D8%B9%D8%A7%D9%84%D9%85%D9%8A%D8%A9/5329597-%D8%A8%D9%8A%D8%B1%D9%86%D9%87%D8%A7%D9%85-%D9%85%D9%8F%D9%84%D9%91%D8%A7%D9%83-%D9%85%D8%A7%D9%86%D8%B4%D8%B3%D8%AA%D8%B1-%D8%B3%D9%8A%D8%AA%D9%8A-%D9%84%D9%85-%D9%8A%D8%B7%D8%B1%D8%AD%D9%88%D8%A7-%D9%85%D8%B9%D9%8A-%D9%82%D8%B6%D9%8A%D8%A9-%D8%A7%D9%84%D8%A7%D8%AA%D9%87%D8%A7%D9%85%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D9%88%D8%AC%D9%87%D8%A9-%D8%A5%D9%84%D9%89",
+              "https://aawsat.com/%D8%B4%D8%A4%D9%88%D9%86-%D8%A5%D9%82%D9%84%D9%8A%D9%85%D9%8A%D8%A9/5329596-%D8%AA%D8%B1%D9%83%D9%8A%D8%A7-%D9%88%D9%82%D9%81-%D8%A8%D8%AB-%D8%A3%D9%83%D8%A8%D8%B1-%D9%82%D9%86%D9%88%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D8%B1%D8%B6%D8%A9-%D9%88%D9%88%D8%B6%D8%B9%D9%87%D8%A7-%D8%AA%D8%AD%D8%AA-%D9%88%D8%B5%D8%A7%D9%8A%D8%A9-%D8%A7%D9%84%D8%AD%D9%83%D9%88%D9%85%D8%A9"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://aawsat.com/googlenews.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 4246,
+            "validatorVersion": "2"
+          },
+          "baseline_excluded": true,
+          "stored_url_observations": 1000,
+          "uncertain_url_observations": 0,
+          "source_new": 0,
+          "country_new": 0,
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://aawsat.com/robots.txt",
+            "found_at": "2026-10-14T14:47:48.694Z",
+            "page_sha256": "37e6f71212ebe5c9fb4e9adfddbed7341821afe02b9a544d458d9a3d61835f40",
+            "declaration": "Sitemap: https://aawsat.com/googlenews.xml"
+          },
+          "access_review": {
+            "robots_url": "https://aawsat.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T14:47:48.694Z",
+            "decision": "allowed",
+            "matched_rule": null
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "src_e08422e071ed496b100552a2",
+      "country": "KR",
+      "publisher_registration": "Seoul Economic Daily",
+      "language": "ko",
+      "initial_enabled_at": "2026-10-14T15:03:45.700Z",
+      "homepage": "https://www.sedaily.com/",
+      "scope_note": "Current public editorial article-address XML from official declarations. Partial coverage; metadata and hyperlinks only, not full article redistribution or complete publisher output.",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_e028048d4b37045b67596c72",
+          "type": "rss",
+          "url": "https://www.sedaily.com/rss/newsall",
+          "actual_observation": {
+            "endpointId": "ep_e028048d4b37045b67596c72",
+            "type": "rss",
+            "url": "https://www.sedaily.com/rss/newsall",
+            "checkedAt": "2026-10-14T15:03:54.080Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 50,
+            "entriesWithUrl": 50,
+            "sampleUrls": [
+              "https://www.sedaily.com/article/20101631",
+              "https://www.sedaily.com/article/20101633",
+              "https://www.sedaily.com/article/20101634"
+            ],
+            "newestContentAt": "2026-10-14T15:03:05.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.sedaily.com/rss/newsall",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 1596,
+            "validatorVersion": "2"
+          },
+          "baseline_excluded": true,
+          "stored_url_observations": 50,
+          "uncertain_url_observations": 0,
+          "source_new": 0,
+          "country_new": 0,
+          "provenance": {
+            "kind": "official_html_feed_anchor",
+            "source_url": "https://www.sedaily.com/rss",
+            "found_at": "2026-10-14T14:48:27.787Z",
+            "page_sha256": "de38752993d1682247c434ccd919a2f7b4a6a6d690f1609d4f452f26444cafce",
+            "tag": "<a href=\"//www.sedaily.com/rss/newsall\" target=\"_blank\">https://www.sedaily.com/rss/newsall</a>"
+          },
+          "access_review": {
+            "robots_url": "https://www.sedaily.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T14:48:21.790Z",
+            "decision": "allowed",
+            "matched_rule": null
+          }
+        },
+        {
+          "endpoint_id": "ep_2132b2b40bb02468c2608017",
+          "type": "sitemap",
+          "url": "https://www.sedaily.com/sitemap/latestnews",
+          "actual_observation": {
+            "endpointId": "ep_2132b2b40bb02468c2608017",
+            "type": "sitemap",
+            "url": "https://www.sedaily.com/sitemap/latestnews",
+            "checkedAt": "2026-10-14T15:03:51.251Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 3,
+            "entriesWithUrl": 3,
+            "sampleUrls": [
+              "https://www.sedaily.com/article/20101631",
+              "https://www.sedaily.com/article/20101633",
+              "https://www.sedaily.com/article/20101634"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.sedaily.com/sitemap/latestnews",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2625,
+            "validatorVersion": "2"
+          },
+          "baseline_excluded": true,
+          "stored_url_observations": 3,
+          "uncertain_url_observations": 0,
+          "source_new": 0,
+          "country_new": 0,
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://www.sedaily.com/robots.txt",
+            "found_at": "2026-10-14T14:48:21.790Z",
+            "page_sha256": "9077bc9fb4bd5c23aca18b45fef78924c99245ca3d193e5a9b3e4fb2d6a8b328",
+            "declaration": "Sitemap: https://www.sedaily.com/sitemap/latestnews"
+          },
+          "access_review": {
+            "robots_url": "https://www.sedaily.com/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T14:48:21.790Z",
+            "decision": "allowed",
+            "matched_rule": null
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "src_c341269de81823519d26a8b9",
+      "country": "JP",
+      "publisher_registration": "Hokkaido Shimbun",
+      "language": "ja",
+      "initial_enabled_at": "2026-10-14T15:03:45.700Z",
+      "homepage": "https://www.hokkaido-np.co.jp/",
+      "scope_note": "Current public editorial article-address XML from official declarations. Partial coverage; metadata and hyperlinks only, not full article redistribution or complete publisher output.",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_4c1ca7f88f0ad677a5ea077f",
+          "type": "rss",
+          "url": "https://www.hokkaido-np.co.jp/output/7/free/index.ad.xml",
+          "actual_observation": {
+            "endpointId": "ep_4c1ca7f88f0ad677a5ea077f",
+            "type": "rss",
+            "url": "https://www.hokkaido-np.co.jp/output/7/free/index.ad.xml",
+            "checkedAt": "2026-10-14T15:03:51.849Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "rss",
+            "auditStatus": "working_nonempty",
+            "entryCount": 51,
+            "entriesWithUrl": 51,
+            "sampleUrls": [
+              "https://www.hokkaido-np.co.jp/article/1389548/",
+              "https://www.hokkaido-np.co.jp/article/1389547/",
+              "https://www.hokkaido-np.co.jp/article/1389542/"
+            ],
+            "newestContentAt": "2026-10-14T14:52:32.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "feed_item_date",
+            "finalUrl": "https://www.hokkaido-np.co.jp/output/7/free/index.ad.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 2910,
+            "validatorVersion": "2"
+          },
+          "baseline_excluded": true,
+          "stored_url_observations": 51,
+          "uncertain_url_observations": 0,
+          "source_new": 0,
+          "country_new": 0,
+          "provenance": {
+            "kind": "official_html_feed_anchor",
+            "source_url": "https://www.hokkaido-np.co.jp/rss/",
+            "found_at": "2026-10-14T14:48:21.389Z",
+            "page_sha256": "ee592c50ae81651b67af6a7bd106a94b6034d730b16ed661f2e338f0f72f4e08",
+            "tag": "<a href=\"https://www.hokkaido-np.co.jp/output/7/free/index.ad.xml\" target=\"_blank\">"
+          },
+          "access_review": {
+            "robots_url": "https://www.hokkaido-np.co.jp/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T14:53:17.275Z",
+            "decision": "allowed",
+            "matched_rule": null
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "src_aa3b25344b652f9e049faff6",
+      "country": "BR",
+      "publisher_registration": "Band News",
+      "language": "pt",
+      "initial_enabled_at": "2026-10-14T15:03:45.700Z",
+      "homepage": "https://www.band.com.br/",
+      "scope_note": "Current public editorial article-address XML from official declarations. Partial coverage; metadata and hyperlinks only, not full article redistribution or complete publisher output.",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_d0571913e110473668e8a337",
+          "type": "sitemap",
+          "url": "https://www.band.com.br/sitemap-news.xml",
+          "actual_observation": {
+            "endpointId": "ep_d0571913e110473668e8a337",
+            "type": "sitemap",
+            "url": "https://www.band.com.br/sitemap-news.xml",
+            "checkedAt": "2026-10-14T15:03:51.918Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 554,
+            "entriesWithUrl": 554,
+            "sampleUrls": [
+              "https://www.band.com.br/internacional/papa-faz-fisioterapia-respiratoria-e-retoma-alimentacao-apos-cirurgia",
+              "https://www.band.com.br/esportes/basquete/nba/lebron-james-vai-faturar-mais-com-patrocinio-do-que-com-salario-na-nba",
+              "https://www.band.com.br/entretenimento/celebridades/filho-de-john-lennon-expoe-polemica-sobre-heranca-milionaria-do-pai"
+            ],
+            "newestContentAt": null,
+            "contentFreshness": "missing",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "https://www.band.com.br/sitemap-news.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 600,
+            "validatorVersion": "2"
+          },
+          "baseline_excluded": true,
+          "stored_url_observations": 554,
+          "uncertain_url_observations": 0,
+          "source_new": 0,
+          "country_new": 0,
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://www.band.com.br/robots.txt",
+            "found_at": "2026-10-14T14:48:16.069Z",
+            "page_sha256": "4bb50c3ef45df208f39576b5cf3f1162b90f7a64d816c7e447971c0a0491b5e3",
+            "declaration": "Sitemap: https://www.band.com.br/sitemap-news.xml"
+          },
+          "access_review": {
+            "robots_url": "https://www.band.com.br/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T14:48:16.069Z",
+            "decision": "allowed",
+            "matched_rule": null
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "src_e25149377551f1f588489b67",
+      "country": "CN",
+      "publisher_registration": "Economic Observer",
+      "language": "zh",
+      "initial_enabled_at": "2026-10-14T15:03:45.700Z",
+      "homepage": "https://www.eeo.com.cn/",
+      "scope_note": "Mixed official URL set: 300 dated article-shaped URLs and 209 other URLs at validation. Current article paths verified from XML; URL counts are not article totals. Metadata and hyperlinks only.",
+      "endpoints": [
+        {
+          "endpoint_id": "ep_2e74210cbd40e95a31a66ff4",
+          "type": "sitemap",
+          "url": "http://www.eeo.com.cn/xml/sitemap.xml",
+          "actual_observation": {
+            "endpointId": "ep_2e74210cbd40e95a31a66ff4",
+            "type": "sitemap",
+            "url": "http://www.eeo.com.cn/xml/sitemap.xml",
+            "checkedAt": "2026-10-14T15:03:54.040Z",
+            "outcome": "healthy",
+            "httpStatus": 200,
+            "reason": null,
+            "format": "urlset",
+            "auditStatus": "working_nonempty",
+            "entryCount": 509,
+            "entriesWithUrl": 509,
+            "sampleUrls": [
+              "http://www.eeo.com.cn/index.shtml",
+              "http://www.eeo.com.cn/caijing/",
+              "http://www.eeo.com.cn/tmt/"
+            ],
+            "newestContentAt": "2026-10-14T14:56:52.000Z",
+            "contentFreshness": "recent",
+            "dateKind": "sitemap_lastmod",
+            "finalUrl": "http://www.eeo.com.cn/xml/sitemap.xml",
+            "attempts": 1,
+            "retryAfterAt": null,
+            "retryAfterSource": null,
+            "requestedHops": 1,
+            "durationMs": 5414,
+            "validatorVersion": "2"
+          },
+          "baseline_excluded": true,
+          "stored_url_observations": 509,
+          "uncertain_url_observations": 0,
+          "source_new": 0,
+          "country_new": 0,
+          "provenance": {
+            "kind": "official_robots_sitemap",
+            "source_url": "https://www.eeo.com.cn/robots.txt",
+            "found_at": "2026-10-14T14:47:28.744Z",
+            "page_sha256": "1ccf07da2e28f913c293a9ec09e5618c318b59b79b51b70c742b99da65335897",
+            "declaration": "Sitemap: http://www.eeo.com.cn/xml/sitemap.xml"
+          },
+          "access_review": {
+            "robots_url": "http://www.eeo.com.cn/robots.txt",
+            "http_status": 200,
+            "checked_at": "2026-10-14T14:47:33.717Z",
+            "decision": "allowed",
+            "matched_rule": {
+              "allow": true,
+              "pattern": "/"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

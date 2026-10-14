@@ -1,0 +1,575 @@
+{
+  "version": 1,
+  "missing_candidates_before": 42,
+  "added": 13,
+  "not_adopted": 29,
+  "existing_disabled_only": 7,
+  "existing_disabled_registrations_changed": false,
+  "semantics": "Candidate-result records include blocked, malformed, duplicate and cached results; they are not request counts. Holds do not prove permanent publisher failure.",
+  "items": [
+    {
+      "country": "US",
+      "publisher": "Barron's",
+      "homepage": "https://www.barrons.com/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 3,
+      "reasons": [
+        "ROBOTS_DISALLOWED"
+      ],
+      "scope_note": "No allowable current article-address XML was adopted from this bounded discovery. Not proof that the publisher has no feed or is permanently unavailable.",
+      "notes": [
+        "Homepage policy disallowed; no homepage request"
+      ]
+    },
+    {
+      "country": "CN",
+      "publisher": "CCTV News",
+      "homepage": "https://news.cctv.com/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 0,
+      "reasons": [],
+      "scope_note": "No allowable current article-address XML was adopted from this bounded discovery. Not proof that the publisher has no feed or is permanently unavailable.",
+      "notes": []
+    },
+    {
+      "country": "CN",
+      "publisher": "The Paper",
+      "homepage": "https://www.thepaper.cn/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 3,
+      "reasons": [
+        "TIMEOUT",
+        "sitemapindex"
+      ],
+      "scope_note": "Declared index reports 2018 child dates; inspected children did not yield adopted current article XML.",
+      "notes": []
+    },
+    {
+      "country": "CN",
+      "publisher": "Jiemian",
+      "homepage": "https://www.jiemian.com/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 0,
+      "reasons": [],
+      "scope_note": "No allowable current article-address XML was adopted from this bounded discovery. Not proof that the publisher has no feed or is permanently unavailable.",
+      "notes": []
+    },
+    {
+      "country": "CN",
+      "publisher": "China Economic Net",
+      "homepage": "https://www.ce.cn/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 0,
+      "reasons": [],
+      "scope_note": "No allowable current article-address XML was adopted from this bounded discovery. Not proof that the publisher has no feed or is permanently unavailable.",
+      "notes": []
+    },
+    {
+      "country": "CN",
+      "publisher": "Economic Observer",
+      "homepage": "https://www.eeo.com.cn/",
+      "status": "registered_and_baseline_initialized",
+      "candidate_records": 3,
+      "reasons": [
+        "HTTP_404",
+        "NETWORK_OR_PARSE_ERROR",
+        "urlset"
+      ],
+      "scope_note": "Adopted exact verified article-address declaration.",
+      "notes": []
+    },
+    {
+      "country": "CN",
+      "publisher": "Southern Metropolis Daily",
+      "homepage": "https://www.oeeee.com/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 3,
+      "reasons": [
+        "urlset"
+      ],
+      "scope_note": "No allowable current article-address XML was adopted from this bounded discovery. Not proof that the publisher has no feed or is permanently unavailable.",
+      "notes": []
+    },
+    {
+      "country": "CN",
+      "publisher": "China Securities Journal",
+      "homepage": "https://www.cs.com.cn/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 0,
+      "reasons": [],
+      "scope_note": "No allowable current article-address XML was adopted from this bounded discovery. Not proof that the publisher has no feed or is permanently unavailable.",
+      "notes": []
+    },
+    {
+      "country": "GB",
+      "publisher": "The Times and The Sunday Times",
+      "homepage": "https://www.thetimes.com/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 3,
+      "reasons": [
+        "ROBOTS_DISALLOWED"
+      ],
+      "scope_note": "No allowable current article-address XML was adopted from this bounded discovery. Not proof that the publisher has no feed or is permanently unavailable.",
+      "notes": [
+        "Homepage policy disallowed; no homepage request"
+      ]
+    },
+    {
+      "country": "GB",
+      "publisher": "ITV News",
+      "homepage": "https://www.itv.com/news/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 1,
+      "reasons": [
+        "sitemapindex"
+      ],
+      "scope_note": "Verified index enumerates television programme/episode maps; no ITV News article list was confirmed.",
+      "notes": []
+    },
+    {
+      "country": "GB",
+      "publisher": "Channel 4 News",
+      "homepage": "https://www.channel4.com/news/",
+      "status": "registered_and_baseline_initialized",
+      "candidate_records": 3,
+      "reasons": [
+        "WRONG_ENDPOINT_FORMAT",
+        "sitemapindex",
+        "urlset"
+      ],
+      "scope_note": "Adopted exact verified article-address declaration.",
+      "notes": []
+    },
+    {
+      "country": "GB",
+      "publisher": "The Economist",
+      "homepage": "https://www.economist.com/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 2,
+      "reasons": [
+        "HTTP_403"
+      ],
+      "scope_note": "No allowable current article-address XML was adopted from this bounded discovery. Not proof that the publisher has no feed or is permanently unavailable.",
+      "notes": []
+    },
+    {
+      "country": "FR",
+      "publisher": "Agence France-Presse",
+      "homepage": "https://www.afp.com/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 0,
+      "reasons": [],
+      "scope_note": "No allowable current article-address XML was adopted from this bounded discovery. Not proof that the publisher has no feed or is permanently unavailable.",
+      "notes": []
+    },
+    {
+      "country": "IN",
+      "publisher": "Dainik Jagran",
+      "homepage": "https://www.jagran.com/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 3,
+      "reasons": [
+        "WRONG_ENDPOINT_FORMAT",
+        "urlset"
+      ],
+      "scope_note": "Verified URL set contains section/navigation links; no article-shaped paths were confirmed in that map.",
+      "notes": []
+    },
+    {
+      "country": "IN",
+      "publisher": "Aaj Tak",
+      "homepage": "https://www.aajtak.in/",
+      "status": "registered_and_baseline_initialized",
+      "candidate_records": 3,
+      "reasons": [
+        "urlset"
+      ],
+      "scope_note": "Adopted exact verified article-address declaration.",
+      "notes": []
+    },
+    {
+      "country": "IN",
+      "publisher": "DD News",
+      "homepage": "https://ddnews.gov.in/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 0,
+      "reasons": [],
+      "scope_note": "No allowable current article-address XML was adopted from this bounded discovery. Not proof that the publisher has no feed or is permanently unavailable.",
+      "notes": [
+        "Homepage policy unknown; no homepage request"
+      ]
+    },
+    {
+      "country": "CA",
+      "publisher": "The Canadian Press",
+      "homepage": "https://www.thecanadianpress.com/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 0,
+      "reasons": [],
+      "scope_note": "No allowable current article-address XML was adopted from this bounded discovery. Not proof that the publisher has no feed or is permanently unavailable.",
+      "notes": []
+    },
+    {
+      "country": "BR",
+      "publisher": "Agência Brasil",
+      "homepage": "https://agenciabrasil.ebc.com.br/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 0,
+      "reasons": [],
+      "scope_note": "Ten-second crawl-delay declaration exceeds the current common two-second host policy.",
+      "notes": [
+        "Homepage policy crawl_delay_policy_review; no homepage request"
+      ]
+    },
+    {
+      "country": "KR",
+      "publisher": "YTN",
+      "homepage": "https://www.ytn.co.kr/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 1,
+      "reasons": [
+        "ROBOTS_CRAWL_DELAY_POLICY_REVIEW"
+      ],
+      "scope_note": "Longer robots crawl delay requires host-policy review before registration.",
+      "notes": [
+        "Homepage policy crawl_delay_policy_review; no homepage request"
+      ]
+    },
+    {
+      "country": "ES",
+      "publisher": "Agencia EFE",
+      "homepage": "https://efe.com/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 1,
+      "reasons": [
+        "SERVER_RETRY_AFTER_WAIT"
+      ],
+      "scope_note": "No allowable current article-address XML was adopted from this bounded discovery. Not proof that the publisher has no feed or is permanently unavailable.",
+      "notes": []
+    },
+    {
+      "country": "ID",
+      "publisher": "TVRI",
+      "homepage": "https://www.tvri.go.id/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 0,
+      "reasons": [],
+      "scope_note": "No allowable current article-address XML was adopted from this bounded discovery. Not proof that the publisher has no feed or is permanently unavailable.",
+      "notes": [
+        "Homepage policy unknown; no homepage request"
+      ]
+    },
+    {
+      "country": "SA",
+      "publisher": "Asharq Al-Awsat",
+      "homepage": "https://aawsat.com/",
+      "status": "registered_and_baseline_initialized",
+      "candidate_records": 2,
+      "reasons": [
+        "sitemapindex",
+        "urlset"
+      ],
+      "scope_note": "Adopted exact verified article-address declaration.",
+      "notes": []
+    },
+    {
+      "country": "US",
+      "publisher": "Semafor",
+      "homepage": "https://www.semafor.com/",
+      "status": "registered_and_baseline_initialized",
+      "candidate_records": 2,
+      "reasons": [
+        "urlset"
+      ],
+      "scope_note": "Adopted exact verified article-address declaration.",
+      "notes": []
+    },
+    {
+      "country": "US",
+      "publisher": "The Daily Beast",
+      "homepage": "https://www.thedailybeast.com/",
+      "status": "registered_and_baseline_initialized",
+      "candidate_records": 6,
+      "reasons": [
+        "rss",
+        "sitemapindex",
+        "urlset"
+      ],
+      "scope_note": "Adopted exact verified article-address declaration.",
+      "notes": []
+    },
+    {
+      "country": "US",
+      "publisher": "New York Magazine / Intelligencer",
+      "homepage": "https://nymag.com/intelligencer/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 4,
+      "reasons": [
+        "HTTP_404",
+        "sitemapindex",
+        "urlset"
+      ],
+      "scope_note": "Current Intelligencer declaration is an annual sitemap index; separately verified news.xml contained other publication sections. No stable current Intelligencer article leaf adopted.",
+      "notes": []
+    },
+    {
+      "country": "US",
+      "publisher": "The Christian Science Monitor",
+      "homepage": "https://www.csmonitor.com/",
+      "status": "registered_and_baseline_initialized",
+      "candidate_records": 6,
+      "reasons": [
+        "INVALID_XML",
+        "rss",
+        "sitemapindex",
+        "urlset"
+      ],
+      "scope_note": "Adopted exact verified article-address declaration.",
+      "notes": []
+    },
+    {
+      "country": "US",
+      "publisher": "Pittsburgh Post-Gazette",
+      "homepage": "https://www.post-gazette.com/",
+      "status": "registered_and_baseline_initialized",
+      "candidate_records": 3,
+      "reasons": [
+        "HTTP_404",
+        "rss",
+        "sitemapindex"
+      ],
+      "scope_note": "Adopted exact verified article-address declaration.",
+      "notes": []
+    },
+    {
+      "country": "US",
+      "publisher": "STAT News",
+      "homepage": "https://www.statnews.com/",
+      "status": "registered_and_baseline_initialized",
+      "candidate_records": 4,
+      "reasons": [
+        "rss",
+        "sitemapindex",
+        "urlset"
+      ],
+      "scope_note": "Adopted exact verified article-address declaration.",
+      "notes": []
+    },
+    {
+      "country": "CN",
+      "publisher": "Caijing",
+      "homepage": "https://www.caijing.com.cn/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 0,
+      "reasons": [],
+      "scope_note": "No allowable current article-address XML was adopted from this bounded discovery. Not proof that the publisher has no feed or is permanently unavailable.",
+      "notes": [
+        "Homepage policy disallowed; no homepage request"
+      ]
+    },
+    {
+      "country": "CN",
+      "publisher": "21st Century Business Herald",
+      "homepage": "https://www.21jingji.com/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 0,
+      "reasons": [],
+      "scope_note": "No allowable current article-address XML was adopted from this bounded discovery. Not proof that the publisher has no feed or is permanently unavailable.",
+      "notes": [
+        "Homepage policy unknown; no homepage request"
+      ]
+    },
+    {
+      "country": "CN",
+      "publisher": "Securities Times",
+      "homepage": "https://www.stcn.com/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 0,
+      "reasons": [],
+      "scope_note": "No allowable current article-address XML was adopted from this bounded discovery. Not proof that the publisher has no feed or is permanently unavailable.",
+      "notes": [
+        "Homepage policy unknown; no homepage request"
+      ]
+    },
+    {
+      "country": "CN",
+      "publisher": "Securities Daily",
+      "homepage": "https://www.zqrb.cn/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 0,
+      "reasons": [],
+      "scope_note": "No allowable current article-address XML was adopted from this bounded discovery. Not proof that the publisher has no feed or is permanently unavailable.",
+      "notes": [
+        "Homepage policy unknown; no homepage request"
+      ]
+    },
+    {
+      "country": "CN",
+      "publisher": "Southern Daily / Nanfang",
+      "homepage": "https://www.southcn.com/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 6,
+      "reasons": [
+        "sitemapindex",
+        "urlset"
+      ],
+      "scope_note": "Five officially declared category URL sets were verified but reported newest lastmod dates in June-August 2026. No current stream adopted.",
+      "notes": []
+    },
+    {
+      "country": "CN",
+      "publisher": "Yangcheng Evening News",
+      "homepage": "https://www.ycwb.com/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 0,
+      "reasons": [],
+      "scope_note": "No allowable current article-address XML was adopted from this bounded discovery. Not proof that the publisher has no feed or is permanently unavailable.",
+      "notes": []
+    },
+    {
+      "country": "GB",
+      "publisher": "The Spectator",
+      "homepage": "https://www.spectator.co.uk/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 1,
+      "reasons": [
+        "TIMEOUT"
+      ],
+      "scope_note": "UK origin declared a US-edition sitemap; timed out. No US edition was mislabelled as a UK feed.",
+      "notes": []
+    },
+    {
+      "country": "GB",
+      "publisher": "The New European",
+      "homepage": "https://www.theneweuropean.co.uk/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 2,
+      "reasons": [
+        "sitemapindex",
+        "urlset"
+      ],
+      "scope_note": "Official origin redirects to The New World; examined post sitemap contains 2021 archive entries. Original name/origin and changed scope retained.",
+      "notes": []
+    },
+    {
+      "country": "IN",
+      "publisher": "The Wire",
+      "homepage": "https://thewire.in/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 0,
+      "reasons": [],
+      "scope_note": "No allowable current article-address XML was adopted from this bounded discovery. Not proof that the publisher has no feed or is permanently unavailable.",
+      "notes": []
+    },
+    {
+      "country": "IN",
+      "publisher": "Zee News",
+      "homepage": "https://zeenews.india.com/",
+      "status": "registered_and_baseline_initialized",
+      "candidate_records": 4,
+      "reasons": [
+        "DUPLICATE_PUBLISHER_CHECK",
+        "sitemapindex",
+        "urlset"
+      ],
+      "scope_note": "Adopted exact verified article-address declaration.",
+      "notes": []
+    },
+    {
+      "country": "JP",
+      "publisher": "Hokkaido Shimbun",
+      "homepage": "https://www.hokkaido-np.co.jp/",
+      "status": "registered_and_baseline_initialized",
+      "candidate_records": 2,
+      "reasons": [
+        "DTD_NOT_ALLOWED",
+        "rss"
+      ],
+      "scope_note": "Adopted exact verified article-address declaration.",
+      "notes": []
+    },
+    {
+      "country": "JP",
+      "publisher": "Nishinippon Shimbun",
+      "homepage": "https://www.nishinippon.co.jp/",
+      "status": "not_adopted_in_this_bounded_review",
+      "candidate_records": 2,
+      "reasons": [
+        "ERR_BUFFER_TOO_LARGE",
+        "sitemapindex"
+      ],
+      "scope_note": "Declared article XML exceeds the installed bounded decompression/size handling; no limit bypass used.",
+      "notes": []
+    },
+    {
+      "country": "BR",
+      "publisher": "Band News",
+      "homepage": "https://www.band.com.br/",
+      "status": "registered_and_baseline_initialized",
+      "candidate_records": 1,
+      "reasons": [
+        "urlset"
+      ],
+      "scope_note": "Adopted exact verified article-address declaration.",
+      "notes": []
+    },
+    {
+      "country": "KR",
+      "publisher": "Seoul Economic Daily",
+      "homepage": "https://www.sedaily.com/",
+      "status": "registered_and_baseline_initialized",
+      "candidate_records": 6,
+      "reasons": [
+        "DTD_NOT_ALLOWED",
+        "rss",
+        "urlset"
+      ],
+      "scope_note": "Adopted exact verified article-address declaration.",
+      "notes": []
+    }
+  ],
+  "disabled_only_selected_anchors": [
+    {
+      "country": "CN",
+      "name": "People's Daily",
+      "home": "https://www.people.com.cn/",
+      "presence_status": "registered_disabled_only"
+    },
+    {
+      "country": "CN",
+      "name": "Beijing News",
+      "home": "https://www.bjnews.com.cn/",
+      "presence_status": "registered_disabled_only"
+    },
+    {
+      "country": "FR",
+      "name": "Les Echos",
+      "home": "https://www.lesechos.fr/",
+      "presence_status": "registered_disabled_only"
+    },
+    {
+      "country": "IN",
+      "name": "Firstpost",
+      "home": "https://www.firstpost.com/",
+      "presence_status": "registered_disabled_only"
+    },
+    {
+      "country": "JP",
+      "name": "Tokyo Shimbun",
+      "home": "https://www.tokyo-np.co.jp/",
+      "presence_status": "registered_disabled_only"
+    },
+    {
+      "country": "DE",
+      "name": "taz",
+      "home": "https://taz.de/",
+      "presence_status": "registered_disabled_only"
+    },
+    {
+      "country": "KR",
+      "name": "MBC News",
+      "home": "https://imnews.imbc.com/",
+      "presence_status": "registered_disabled_only"
+    }
+  ]
+}

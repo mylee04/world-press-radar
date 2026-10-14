@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "observed_at": "2026-10-14T15:12:44.412Z",
+  "active": 5497,
+  "date": "2026-10-14",
+  "today": {
+    "nonempty_article_xml": 3817,
+    "valid_empty_article_xml": 22,
+    "index_only": 479,
+    "failed": 1178,
+    "not_checked_today": 1
+  },
+  "last_check": "2026-10-14T15:03:54.636Z",
+  "semantics": "Saved validator outcomes, not a guarantee of current reachability, article completeness or freshness. Some URL sets include navigation URLs."
+}

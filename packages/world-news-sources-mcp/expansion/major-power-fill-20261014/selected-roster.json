@@ -1,0 +1,5406 @@
+{
+  "version": 1,
+  "scope": "232 manually selected representative national, business, broadcast and regional newsroom anchors in 18 major economies. Not an exhaustive census or readership ranking. Registry presence is a domain/name comparison, not evidence of successful collection.",
+  "registry_sha256": "6bc0c46d1c482b4aa9d0931a9b98959ac7840aa2b7812cfed9f245eec1adfb75",
+  "presence_counts": {
+    "registered_active": 183,
+    "missing": 42,
+    "registered_disabled_only": 7
+  },
+  "items": [
+    {
+      "country": "US",
+      "name": "CNN",
+      "home": "https://www.cnn.com/",
+      "language": "en",
+      "domain": "cnn.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_3c9a5752240c8122788c0acd",
+          "name": "CNN - News Sitemap",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_f38a656a815af39a8ad8e9da",
+          "name": "CNN",
+          "country": "US",
+          "enabled": false
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "The New York Times",
+      "home": "https://www.nytimes.com/",
+      "language": "en",
+      "domain": "nytimes.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 6,
+      "matched_sources_sample": [
+        {
+          "id": "src_019c965bee2ef60e151b54d4",
+          "name": "The New York Times - Technology",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_1c41fb25cd925a73a5e5aa05",
+          "name": "The New York Times",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_1dde532f3e450b8c47fb1a5e",
+          "name": "The New York Times - World",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_a01ad9c023c3e37b2622187d",
+          "name": "The New York Times - Business",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_bc15edd0ca816d98c6c656f7",
+          "name": "The New York Times - U.S.",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "US",
+      "name": "The Washington Post",
+      "home": "https://www.washingtonpost.com/",
+      "language": "en",
+      "domain": "washingtonpost.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 4,
+      "matched_sources_sample": [
+        {
+          "id": "src_5a21ad5f120747f859d21f5d",
+          "name": "Washington Post - Politics",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_7e34f3fcde3e2e8a00d94396",
+          "name": "Washington Post - National",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_99f6df5e82bee2208188c8ab",
+          "name": "Washington Post",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_cb2788dc4766cc35bb05718e",
+          "name": "Washington Post - World",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "The Wall Street Journal",
+      "home": "https://www.wsj.com/",
+      "language": "en",
+      "domain": "wsj.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_c24cf798a8fa1f5de27dea95",
+          "name": "Wall Street Journal",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Bloomberg",
+      "home": "https://www.bloomberg.com/",
+      "language": "en",
+      "domain": "bloomberg.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_1b103eda93923f30cf721356",
+          "name": "Bloomberg - Latest News Sitemap",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "USA Today",
+      "home": "https://www.usatoday.com/",
+      "language": "en",
+      "domain": "usatoday.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_d561e6580a079c33eb85d68f",
+          "name": "USA Today - News Sitemap",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "NBC News",
+      "home": "https://www.nbcnews.com/",
+      "language": "en",
+      "domain": "nbcnews.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 5,
+      "matched_sources_sample": [
+        {
+          "id": "src_1f88076ffd1543e9168c1609",
+          "name": "NBC News - World",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_222ac1b1d90d5b352aec747a",
+          "name": "NBC News - U.S.",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_26adb462480ea84f2a9d7a50",
+          "name": "NBC News",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_6e9a3dbd7d477edc75109427",
+          "name": "NBC News - Politics",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_786cbb377828c914e480adf3",
+          "name": "NBC News - Business",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "ABC News",
+      "home": "https://abcnews.go.com/",
+      "language": "en",
+      "domain": "go.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 16,
+      "matched_sources_sample": [
+        {
+          "id": "src_101ea857ec918c1ab6983157",
+          "name": "ABC News - Politics (Topic)",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_2159203596d81ec4893940c9",
+          "name": "ABC News - Technology",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_319d1469bb275f286437f37a",
+          "name": "ABC News - Rural",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_4a109d1fab9f0f7b7307d7db",
+          "name": "ABC News - International",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_5ef44f58c8b6ab7921d1e6e2",
+          "name": "ABC News - U.S.",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "US",
+      "name": "CBS News",
+      "home": "https://www.cbsnews.com/",
+      "language": "en",
+      "domain": "cbsnews.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 4,
+      "matched_sources_sample": [
+        {
+          "id": "src_2f6c2f06d6db2b2b9574f06d",
+          "name": "CBS News",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_59b733270289a37ff1375a39",
+          "name": "CBS News - World",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_813581a374f7e052886b01ff",
+          "name": "CBS News - U.S.",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_c80fa2137f1f5e4c448cf239",
+          "name": "CBS News - Politics",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Fox News",
+      "home": "https://www.foxnews.com/",
+      "language": "en",
+      "domain": "foxnews.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 4,
+      "matched_sources_sample": [
+        {
+          "id": "src_1985a384d9c18a3e38867eae",
+          "name": "Fox News - Politics",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_2ff4d2fa8835e6aaa0ffb989",
+          "name": "Fox News - National",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_813637c8b44401aa94b3dd8b",
+          "name": "Fox News",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_d49a92013b12a07cb8dd8c49",
+          "name": "Fox News - World",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "NPR",
+      "home": "https://www.npr.org/",
+      "language": "en",
+      "domain": "npr.org",
+      "presence_status": "registered_active",
+      "matched_source_count": 6,
+      "matched_sources_sample": [
+        {
+          "id": "src_165fcf318b382914b2249e2c",
+          "name": "NPR - Business",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_19c3624c94da3e912497c9e7",
+          "name": "NPR",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_2fca2008f78825d061519155",
+          "name": "NPR - Politics",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_4eaf326743b9d43ed1eff431",
+          "name": "NPR - Technology",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_50b6a55a7a88474044c9bce7",
+          "name": "NPR - World",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "US",
+      "name": "PBS News",
+      "home": "https://www.pbs.org/newshour/",
+      "language": "en",
+      "domain": "pbs.org",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_c33d68ccb76611ab91ed409d",
+          "name": "PBS NewsHour",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Associated Press",
+      "home": "https://apnews.com/",
+      "language": "en",
+      "domain": "apnews.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_c846b029a49f173811cdb142",
+          "name": "Associated Press - News Sitemap",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "CNBC",
+      "home": "https://www.cnbc.com/",
+      "language": "en",
+      "domain": "cnbc.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_05eb7e46b45e7b002dfd4f12",
+          "name": "CNBC",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Politico",
+      "home": "https://www.politico.com/",
+      "language": "en",
+      "domain": "politico.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 6,
+      "matched_sources_sample": [
+        {
+          "id": "src_1e8c3e19c2fcfaec9013ebfa",
+          "name": "Politico White House",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_2fd9f8ad6dd8eb00c16f8dce",
+          "name": "Politico Congress",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_7d88dcfe33766d7d20559f7d",
+          "name": "Politico - News Sitemap",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_ca19755b2de14daf721e3bdc",
+          "name": "Politico Politics",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_d02487713083fc8f50b2721e",
+          "name": "Politico Playbook",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "US",
+      "name": "Axios",
+      "home": "https://www.axios.com/",
+      "language": "en",
+      "domain": "axios.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_d5f70101572c06f65a15084a",
+          "name": "Axios",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "The Atlantic",
+      "home": "https://www.theatlantic.com/",
+      "language": "en",
+      "domain": "theatlantic.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_bcff54765fb4bd31eca18766",
+          "name": "The Atlantic",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "TIME",
+      "home": "https://time.com/",
+      "language": "en",
+      "domain": "time.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_c24337c188deadfaa50672ed",
+          "name": "Time",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Newsweek",
+      "home": "https://www.newsweek.com/",
+      "language": "en",
+      "domain": "newsweek.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_7cfdc5b2c825bce057ee7383",
+          "name": "Newsweek",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Los Angeles Times",
+      "home": "https://www.latimes.com/",
+      "language": "en",
+      "domain": "latimes.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 5,
+      "matched_sources_sample": [
+        {
+          "id": "src_02c0e11904917c174df473f4",
+          "name": "LA Times - California",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_11ad2ee0dcd99fa2ef2ce959",
+          "name": "LA Times - Business",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_2d7537d293b241200db355ca",
+          "name": "LA Times",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_47215c6b424e88e097df17ef",
+          "name": "LA Times - Politics",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_ec831a595370b9abd28948e8",
+          "name": "LA Times - World & Nation",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "The Boston Globe",
+      "home": "https://www.bostonglobe.com/",
+      "language": "en",
+      "domain": "bostonglobe.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_fdbd03aa10ab96c0a9c90692",
+          "name": "Boston Globe",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Chicago Tribune",
+      "home": "https://www.chicagotribune.com/",
+      "language": "en",
+      "domain": "chicagotribune.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_b12d6c6c1e538875324111b6",
+          "name": "Chicago Tribune",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "The Hill",
+      "home": "https://thehill.com/",
+      "language": "en",
+      "domain": "thehill.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_2a3d70eaf9532b52f938573e",
+          "name": "The Hill",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Barron's",
+      "home": "https://www.barrons.com/",
+      "language": "en",
+      "domain": "barrons.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "MarketWatch",
+      "home": "https://www.marketwatch.com/",
+      "language": "en",
+      "domain": "marketwatch.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_1d636ac6034ad393cb19825e",
+          "name": "MarketWatch",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Fortune",
+      "home": "https://fortune.com/",
+      "language": "en",
+      "domain": "fortune.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_ace87bec8251849ec00185f2",
+          "name": "Fortune",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Forbes",
+      "home": "https://www.forbes.com/",
+      "language": "en",
+      "domain": "forbes.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_9eff43b4c3157ba9cdb1b6ec",
+          "name": "Forbes",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "ProPublica",
+      "home": "https://www.propublica.org/",
+      "language": "en",
+      "domain": "propublica.org",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_462556aba1d4e57c7efa814c",
+          "name": "ProPublica",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CN",
+      "name": "CCTV News",
+      "home": "https://news.cctv.com/",
+      "language": "zh",
+      "domain": "cctv.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CN",
+      "name": "People's Daily",
+      "home": "https://www.people.com.cn/",
+      "language": "zh",
+      "domain": "people.com.cn",
+      "presence_status": "registered_disabled_only",
+      "matched_source_count": 12,
+      "matched_sources_sample": [
+        {
+          "id": "src_07dc8c556c349ca7c4a8808f",
+          "name": "People.cn - Finance",
+          "country": "CN",
+          "enabled": false
+        },
+        {
+          "id": "src_20a34e3279beee429c78d1d1",
+          "name": "People.cn - Politics",
+          "country": "CN",
+          "enabled": false
+        },
+        {
+          "id": "src_3685470a3e29fc25b6a4af46",
+          "name": "People.cn - Legal",
+          "country": "CN",
+          "enabled": false
+        },
+        {
+          "id": "src_679a21db30dbca87735b56f3",
+          "name": "People.cn - Military",
+          "country": "CN",
+          "enabled": false
+        },
+        {
+          "id": "src_7ae3caf38da1fa4d2b4bb5f0",
+          "name": "People.cn - ChinaPic",
+          "country": "CN",
+          "enabled": false
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "CN",
+      "name": "China News Service",
+      "home": "https://www.chinanews.com.cn/",
+      "language": "zh",
+      "domain": "chinanews.com.cn",
+      "presence_status": "registered_active",
+      "matched_source_count": 9,
+      "matched_sources_sample": [
+        {
+          "id": "src_037f5eb5bb48bc27d30e16b9",
+          "name": "China News Service - Sports",
+          "country": "CN",
+          "enabled": true
+        },
+        {
+          "id": "src_311df845fdc5ba341d2d4bea",
+          "name": "China News Service - Scroll News",
+          "country": "CN",
+          "enabled": true
+        },
+        {
+          "id": "src_36b739e92ae9a3b8555f08dd",
+          "name": "China News Service - Life",
+          "country": "CN",
+          "enabled": true
+        },
+        {
+          "id": "src_4e7618acd002d138ff66575a",
+          "name": "China News Service - Health",
+          "country": "CN",
+          "enabled": true
+        },
+        {
+          "id": "src_5f8a12db76a5942f59973111",
+          "name": "China News Service - China",
+          "country": "CN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "CN",
+      "name": "Global Times",
+      "home": "https://www.globaltimes.cn/",
+      "language": "en",
+      "domain": "globaltimes.cn",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_b6468410eabf8bce446bb1be",
+          "name": "Global Times - News Sitemap",
+          "country": "CN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CN",
+      "name": "CGTN",
+      "home": "https://www.cgtn.com/",
+      "language": "en",
+      "domain": "cgtn.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 15,
+      "matched_sources_sample": [
+        {
+          "id": "src_10b38341d76d127da9804d20",
+          "name": "CGTN - Documentary",
+          "country": "CN",
+          "enabled": false
+        },
+        {
+          "id": "src_33f56025e36d2332b84c81ae",
+          "name": "CGTN - World",
+          "country": "CN",
+          "enabled": true
+        },
+        {
+          "id": "src_350890aedb362d487076c6ea",
+          "name": "CGTN - Live",
+          "country": "CN",
+          "enabled": true
+        },
+        {
+          "id": "src_36092fa7734fb172027717db",
+          "name": "CGTN - Video",
+          "country": "CN",
+          "enabled": true
+        },
+        {
+          "id": "src_3d9d2738bd7f1e948c28ed92",
+          "name": "CGTN - Politics",
+          "country": "CN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "CN",
+      "name": "South China Morning Post",
+      "home": "https://www.scmp.com/",
+      "language": "en",
+      "domain": "scmp.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_cf833e00b96ff2de283416b0",
+          "name": "South China Morning Post",
+          "country": "CN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CN",
+      "name": "The Paper",
+      "home": "https://www.thepaper.cn/",
+      "language": "zh",
+      "domain": "thepaper.cn",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CN",
+      "name": "Jiemian",
+      "home": "https://www.jiemian.com/",
+      "language": "zh",
+      "domain": "jiemian.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CN",
+      "name": "Yicai",
+      "home": "https://www.yicai.com/",
+      "language": "zh",
+      "domain": "yicai.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_615e7453a3a8119891d0e42a",
+          "name": "Yicai - News HTML Collection",
+          "country": "CN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CN",
+      "name": "China Economic Net",
+      "home": "https://www.ce.cn/",
+      "language": "zh",
+      "domain": "ce.cn",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CN",
+      "name": "Economic Observer",
+      "home": "https://www.eeo.com.cn/",
+      "language": "zh",
+      "domain": "eeo.com.cn",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CN",
+      "name": "Beijing News",
+      "home": "https://www.bjnews.com.cn/",
+      "language": "zh",
+      "domain": "bjnews.com.cn",
+      "presence_status": "registered_disabled_only",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_c44e259d059226b8158d9d91",
+          "name": "BJNews - Sitemap",
+          "country": "CN",
+          "enabled": false
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CN",
+      "name": "Southern Metropolis Daily",
+      "home": "https://www.oeeee.com/",
+      "language": "zh",
+      "domain": "oeeee.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CN",
+      "name": "China Securities Journal",
+      "home": "https://www.cs.com.cn/",
+      "language": "zh",
+      "domain": "cs.com.cn",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "JP",
+      "name": "NHK",
+      "home": "https://www3.nhk.or.jp/news/",
+      "language": "ja",
+      "domain": "nhk.or.jp",
+      "presence_status": "registered_active",
+      "matched_source_count": 10,
+      "matched_sources_sample": [
+        {
+          "id": "src_0720caa54d65ed03ca5ac188",
+          "name": "NHK News (Politics - Category 1)",
+          "country": "JP",
+          "enabled": true
+        },
+        {
+          "id": "src_51cb4769e057aacf08cbe840",
+          "name": "NHK News Web - cat6",
+          "country": "JP",
+          "enabled": true
+        },
+        {
+          "id": "src_6c4e55f205d6de047ceceb97",
+          "name": "NHK News Web - cat7",
+          "country": "JP",
+          "enabled": true
+        },
+        {
+          "id": "src_7302e20e84dcfca9404560e9",
+          "name": "NHK News Web - cat4",
+          "country": "JP",
+          "enabled": true
+        },
+        {
+          "id": "src_9aea88cb86c979de097347a1",
+          "name": "NHK News Web - cat5",
+          "country": "JP",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "JP",
+      "name": "Nikkei",
+      "home": "https://www.nikkei.com/",
+      "language": "ja",
+      "domain": "nikkei.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_0c2f348be18c38bbb595a949",
+          "name": "Nikkei - News Sitemap",
+          "country": "JP",
+          "enabled": true
+        },
+        {
+          "id": "src_88bb5fafa066faf68211503c",
+          "name": "Nikkei",
+          "country": "JP",
+          "enabled": false
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "JP",
+      "name": "Asahi Shimbun",
+      "home": "https://www.asahi.com/",
+      "language": "ja",
+      "domain": "asahi.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_ecbd91598fa0498c81261924",
+          "name": "Asahi Shimbun",
+          "country": "JP",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "JP",
+      "name": "Yomiuri Shimbun",
+      "home": "https://www.yomiuri.co.jp/",
+      "language": "ja",
+      "domain": "yomiuri.co.jp",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_02aad31de0ddc6319ce12d95",
+          "name": "Yomiuri - Latest Sitemap",
+          "country": "JP",
+          "enabled": true
+        },
+        {
+          "id": "src_d19232c93bb404b79825b341",
+          "name": "Yomiuri - Full Sitemap",
+          "country": "JP",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "JP",
+      "name": "Mainichi Shimbun",
+      "home": "https://mainichi.jp/",
+      "language": "ja",
+      "domain": "mainichi.jp",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_1bb7c8fddf0fd853a0799ec3",
+          "name": "Mainichi Flash",
+          "country": "JP",
+          "enabled": true
+        },
+        {
+          "id": "src_52d523ecaa94824cce4e7621",
+          "name": "Mainichi (Biz)",
+          "country": "JP",
+          "enabled": false
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "JP",
+      "name": "Sankei Shimbun",
+      "home": "https://www.sankei.com/",
+      "language": "ja",
+      "domain": "sankei.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 3,
+      "matched_sources_sample": [
+        {
+          "id": "src_189a41822dfe5243e483b457",
+          "name": "Sankei News Flash",
+          "country": "JP",
+          "enabled": false
+        },
+        {
+          "id": "src_7709f4ca8ced9062d72ae510",
+          "name": "Sankei Economy",
+          "country": "JP",
+          "enabled": false
+        },
+        {
+          "id": "src_b0c943de3e449b4b215f0f11",
+          "name": "Sankei - Google Sitemap Index",
+          "country": "JP",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "JP",
+      "name": "Kyodo News",
+      "home": "https://www.kyodonews.jp/",
+      "language": "ja",
+      "domain": "kyodonews.jp",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_b55d1a35380e20661372cc40",
+          "name": "Kyodo News",
+          "country": "JP",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "JP",
+      "name": "Jiji Press",
+      "home": "https://www.jiji.com/",
+      "language": "ja",
+      "domain": "jiji.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_98997a888e5a985a1c5434f0",
+          "name": "Jiji Press - Sitemap",
+          "country": "JP",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "JP",
+      "name": "The Japan Times",
+      "home": "https://www.japantimes.co.jp/",
+      "language": "en",
+      "domain": "japantimes.co.jp",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_29d9801e9238e4672805357b",
+          "name": "The Japan Times",
+          "country": "JP",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "JP",
+      "name": "TBS News DIG",
+      "home": "https://newsdig.tbs.co.jp/",
+      "language": "ja",
+      "domain": "tbs.co.jp",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_b645aa370373a27d1b93565e",
+          "name": "TBS News DIG - Sitemap",
+          "country": "JP",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "JP",
+      "name": "FNN Prime Online",
+      "home": "https://www.fnn.jp/",
+      "language": "ja",
+      "domain": "fnn.jp",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_d030651cf3ef24580d4e30c7",
+          "name": "FNN Prime - Sitemap",
+          "country": "JP",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "JP",
+      "name": "Nippon TV News",
+      "home": "https://news.ntv.co.jp/",
+      "language": "ja",
+      "domain": "ntv.co.jp",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_7a105f40978cc14b70c6a507",
+          "name": "NTV - News Sitemap",
+          "country": "JP",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "DE",
+      "name": "Tagesschau",
+      "home": "https://www.tagesschau.de/",
+      "language": "de",
+      "domain": "tagesschau.de",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_1feb743d899b46f46ae4c019",
+          "name": "Tagesschau",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_3eff667e6e56537974632a71",
+          "name": "Tagesschau",
+          "country": "DE",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "DE",
+      "name": "ZDFheute",
+      "home": "https://www.zdfheute.de/",
+      "language": "de",
+      "domain": "zdfheute.de",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_62eb897ab6538a02776c3c75",
+          "name": "ZDFheute",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_c5b54374a51aa7c337a2b080",
+          "name": "ZDFheute - Politik",
+          "country": "DE",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "DE",
+      "name": "Der Spiegel",
+      "home": "https://www.spiegel.de/",
+      "language": "de",
+      "domain": "spiegel.de",
+      "presence_status": "registered_active",
+      "matched_source_count": 3,
+      "matched_sources_sample": [
+        {
+          "id": "src_4df43e05a43538816d725a68",
+          "name": "Der Spiegel - News Sitemap",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_abbea65859f02ef482720b00",
+          "name": "Der Spiegel",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_b0c1d0b5c1b39348df45b506",
+          "name": "Der Spiegel",
+          "country": "DE",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "DE",
+      "name": "Die Zeit",
+      "home": "https://www.zeit.de/",
+      "language": "de",
+      "domain": "zeit.de",
+      "presence_status": "registered_active",
+      "matched_source_count": 3,
+      "matched_sources_sample": [
+        {
+          "id": "src_0b119a7be8a13ca355a764f6",
+          "name": "Die Zeit - Sitemap Index",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_6a6ba9a5d59df77b56cb66a5",
+          "name": "Zeit Welt",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_e628d630538f6075fa38f37e",
+          "name": "Die Zeit",
+          "country": "DE",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "DE",
+      "name": "Frankfurter Allgemeine Zeitung",
+      "home": "https://www.faz.net/",
+      "language": "de",
+      "domain": "faz.net",
+      "presence_status": "registered_active",
+      "matched_source_count": 3,
+      "matched_sources_sample": [
+        {
+          "id": "src_7314ee68f3a714ef3285470e",
+          "name": "Frankfurter Allgemeine",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_8f4265b68cad7946eccf4878",
+          "name": "Frankfurter Allgemeine - News Sitemap",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_eebe634c16cd26f3b641e835",
+          "name": "FAZ",
+          "country": "DE",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "DE",
+      "name": "Süddeutsche Zeitung",
+      "home": "https://www.sueddeutsche.de/",
+      "language": "de",
+      "domain": "sueddeutsche.de",
+      "presence_status": "registered_active",
+      "matched_source_count": 18,
+      "matched_sources_sample": [
+        {
+          "id": "src_53f2f9dab953334a2981b147",
+          "name": "Süddeutsche - Wissen",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_5b50d14e20ac24c8057c3426",
+          "name": "Süddeutsche - Medien",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_6960ee4bf54e2d57b9677f7d",
+          "name": "Süddeutsche - Kultur",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_7f9d05a278caa7bd3f47c662",
+          "name": "Süddeutsche - Sport",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_8493709c987c770e042ac841",
+          "name": "Süddeutsche - Top-Themen",
+          "country": "DE",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "DE",
+      "name": "Die Welt",
+      "home": "https://www.welt.de/",
+      "language": "de",
+      "domain": "welt.de",
+      "presence_status": "registered_active",
+      "matched_source_count": 9,
+      "matched_sources_sample": [
+        {
+          "id": "src_51e970e312d16e351898be32",
+          "name": "WELT - Regionales",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_66d961275700036ced93e452",
+          "name": "WELT - Politik",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_6b1d90340e9def11950d3ed0",
+          "name": "WELT - Wissenschaft",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_733019ca57f928011afe5733",
+          "name": "WELT - Vermischtes",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_7fa17740f178f6e8d1450ac3",
+          "name": "WELT - Wirtschaft",
+          "country": "DE",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "DE",
+      "name": "Bild",
+      "home": "https://www.bild.de/",
+      "language": "de",
+      "domain": "bild.de",
+      "presence_status": "registered_active",
+      "matched_source_count": 8,
+      "matched_sources_sample": [
+        {
+          "id": "src_00397934e8f637fb38b18785",
+          "name": "BILD - Sport",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_069bde295f27920903dbbfeb",
+          "name": "BILD - Digital",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_1807b6fb799dee5b1e558638",
+          "name": "BILD - News",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_1f68fe35a11e545362bb98a9",
+          "name": "BILD - Alles",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_5a007777108631cf6b3d74d0",
+          "name": "BILD - Regional Chemnitz",
+          "country": "DE",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "DE",
+      "name": "Handelsblatt",
+      "home": "https://www.handelsblatt.com/",
+      "language": "de",
+      "domain": "handelsblatt.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 7,
+      "matched_sources_sample": [
+        {
+          "id": "src_5ae75e3f00b473b52b84fcd9",
+          "name": "Handelsblatt Economy",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_91a9cfc51330a8de3f41a6bd",
+          "name": "Handelsblatt - Agentur News Sitemap",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_9a76f8011ce966d641ddb769",
+          "name": "Handelsblatt - Premium News Sitemap",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_b72f065cfc6e476101f742c9",
+          "name": "Handelsblatt - News Sitemap",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_c573e92c87c59e522bc4ded0",
+          "name": "Handelsblatt - Top",
+          "country": "DE",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "DE",
+      "name": "WirtschaftsWoche",
+      "home": "https://www.wiwo.de/",
+      "language": "de",
+      "domain": "wiwo.de",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_86c28bdf4c3d7bcb3b39fd5e",
+          "name": "WirtschaftsWoche",
+          "country": "DE",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "DE",
+      "name": "Deutsche Welle",
+      "home": "https://www.dw.com/",
+      "language": "de",
+      "domain": "dw.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_ebc39d1726e66cd0e72a6a5a",
+          "name": "Deutsche Welle (EN)",
+          "country": "DE",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "GB",
+      "name": "BBC News",
+      "home": "https://www.bbc.co.uk/news/",
+      "language": "en",
+      "domain": "bbc.co.uk",
+      "presence_status": "registered_active",
+      "matched_source_count": 6,
+      "matched_sources_sample": [
+        {
+          "id": "src_4374e32b70570143cb12147c",
+          "name": "BBC News - Sitemap Index",
+          "country": "GB",
+          "enabled": true
+        },
+        {
+          "id": "src_0f19dd0a22e266a0403d8a07",
+          "name": "BBC News - Technology",
+          "country": "GB",
+          "enabled": true
+        },
+        {
+          "id": "src_109a686e546aa97b8ce3e6f3",
+          "name": "BBC News - UK",
+          "country": "GB",
+          "enabled": true
+        },
+        {
+          "id": "src_6e5e4e353b9ccbc19dade3c6",
+          "name": "BBC News - World",
+          "country": "GB",
+          "enabled": true
+        },
+        {
+          "id": "src_9b0238962e861592136ddf43",
+          "name": "BBC News - Politics",
+          "country": "GB",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "GB",
+      "name": "The Guardian",
+      "home": "https://www.theguardian.com/",
+      "language": "en",
+      "domain": "theguardian.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 12,
+      "matched_sources_sample": [
+        {
+          "id": "src_0760437d79289b821a959652",
+          "name": "The Guardian Australia - Business",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_0ff52b0131df6f221a452c77",
+          "name": "The Guardian Australia - Media",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_134455e936386f39d9ef5bb0",
+          "name": "The Guardian - Americas",
+          "country": "GB",
+          "enabled": true
+        },
+        {
+          "id": "src_421bc0b02b405ef32de9d0f3",
+          "name": "The Guardian - Politics",
+          "country": "GB",
+          "enabled": true
+        },
+        {
+          "id": "src_50d207faf908ffd984ff0881",
+          "name": "The Guardian Australia - Environment",
+          "country": "AU",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "GB",
+      "name": "Financial Times",
+      "home": "https://www.ft.com/",
+      "language": "en",
+      "domain": "ft.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 6,
+      "matched_sources_sample": [
+        {
+          "id": "src_278ab774eb853373f00f8a96",
+          "name": "Financial Times Germany",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_6713162c54026d5705cc3df0",
+          "name": "Financial Times - World",
+          "country": "GB",
+          "enabled": true
+        },
+        {
+          "id": "src_9886c47db0b6272525451434",
+          "name": "Financial Times",
+          "country": "US",
+          "enabled": true
+        },
+        {
+          "id": "src_b069613e14d5887f370dace9",
+          "name": "Financial Times",
+          "country": "GB",
+          "enabled": true
+        },
+        {
+          "id": "src_dcd5b2f335de47010a94e0e8",
+          "name": "Financial Times UK",
+          "country": "GB",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "GB",
+      "name": "The Times and The Sunday Times",
+      "home": "https://www.thetimes.com/",
+      "language": "en",
+      "domain": "thetimes.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "GB",
+      "name": "The Telegraph",
+      "home": "https://www.telegraph.co.uk/",
+      "language": "en",
+      "domain": "telegraph.co.uk",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_93bd4a665ee536f2bc2fa29e",
+          "name": "Telegraph - Business",
+          "country": "GB",
+          "enabled": true
+        },
+        {
+          "id": "src_e5f5682af910da560748aaf0",
+          "name": "The Telegraph UK",
+          "country": "GB",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "GB",
+      "name": "The Independent",
+      "home": "https://www.independent.co.uk/",
+      "language": "en",
+      "domain": "independent.co.uk",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_d71607a92f306b1dbb4a458c",
+          "name": "The Independent",
+          "country": "GB",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "GB",
+      "name": "Sky News",
+      "home": "https://news.sky.com/",
+      "language": "en",
+      "domain": "sky.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 4,
+      "matched_sources_sample": [
+        {
+          "id": "src_06a141c8bfaf007db7e26953",
+          "name": "Sky News - Sitemap Index",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_158234ae7b20a801211a05f3",
+          "name": "Sky News - Business",
+          "country": "GB",
+          "enabled": true
+        },
+        {
+          "id": "src_47533571db6639cc94c6503e",
+          "name": "Sky News",
+          "country": "GB",
+          "enabled": true
+        },
+        {
+          "id": "src_e6bc03a55660117b3b8574cd",
+          "name": "Sky News - World",
+          "country": "GB",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "GB",
+      "name": "ITV News",
+      "home": "https://www.itv.com/news/",
+      "language": "en",
+      "domain": "itv.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "GB",
+      "name": "Channel 4 News",
+      "home": "https://www.channel4.com/news/",
+      "language": "en",
+      "domain": "channel4.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "GB",
+      "name": "The Economist",
+      "home": "https://www.economist.com/",
+      "language": "en",
+      "domain": "economist.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "GB",
+      "name": "Reuters",
+      "home": "https://www.reuters.com/",
+      "language": "en",
+      "domain": "reuters.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_98ef3418a3c8b62757757885",
+          "name": "Reuters - News Sitemap Index",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "FR",
+      "name": "Le Monde",
+      "home": "https://www.lemonde.fr/",
+      "language": "fr",
+      "domain": "lemonde.fr",
+      "presence_status": "registered_active",
+      "matched_source_count": 14,
+      "matched_sources_sample": [
+        {
+          "id": "src_06570564c45c737a802e1bb9",
+          "name": "Le Monde (EN – International)",
+          "country": "FR",
+          "enabled": true
+        },
+        {
+          "id": "src_236f610cc2b4d2656b6bec51",
+          "name": "Le Monde (Economy)",
+          "country": "FR",
+          "enabled": true
+        },
+        {
+          "id": "src_2abe4a61dc564059f88440c3",
+          "name": "Le Monde (EN – Main)",
+          "country": "FR",
+          "enabled": true
+        },
+        {
+          "id": "src_30aa38e8c0cf9c894ee47da8",
+          "name": "Le Monde (EN – Science)",
+          "country": "FR",
+          "enabled": false
+        },
+        {
+          "id": "src_3e44ca7b2fab23d2135db582",
+          "name": "Le Monde (Politics)",
+          "country": "FR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "FR",
+      "name": "Le Figaro",
+      "home": "https://www.lefigaro.fr/",
+      "language": "fr",
+      "domain": "lefigaro.fr",
+      "presence_status": "registered_active",
+      "matched_source_count": 11,
+      "matched_sources_sample": [
+        {
+          "id": "src_0682d63b17b8910ab271872a",
+          "name": "Le Figaro (Economy)",
+          "country": "FR",
+          "enabled": true
+        },
+        {
+          "id": "src_24d442499f546de0e8574e24",
+          "name": "Le Figaro (Sport)",
+          "country": "FR",
+          "enabled": true
+        },
+        {
+          "id": "src_3471c718f6f1937e5f16ade0",
+          "name": "Le Figaro (International)",
+          "country": "FR",
+          "enabled": true
+        },
+        {
+          "id": "src_4f167528c444acc59a538dcf",
+          "name": "Le Figaro (France)",
+          "country": "FR",
+          "enabled": true
+        },
+        {
+          "id": "src_90c62518159a64a6222b23d3",
+          "name": "Le Figaro (Science)",
+          "country": "FR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "FR",
+      "name": "Franceinfo",
+      "home": "https://www.franceinfo.fr/",
+      "language": "fr",
+      "domain": "franceinfo.fr",
+      "presence_status": "registered_active",
+      "matched_source_count": 4,
+      "matched_sources_sample": [
+        {
+          "id": "src_102b7301ae76db955b7f8349",
+          "name": "France Info (Politics)",
+          "country": "FR",
+          "enabled": true
+        },
+        {
+          "id": "src_75da882629190d4f84376f81",
+          "name": "France Info",
+          "country": "FR",
+          "enabled": true
+        },
+        {
+          "id": "src_8e807ac1b51586d0d8a99e52",
+          "name": "France Info (Economy)",
+          "country": "FR",
+          "enabled": true
+        },
+        {
+          "id": "src_91b15047ec265bc28edcc244",
+          "name": "France Info - News Sitemap",
+          "country": "FR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "FR",
+      "name": "France 24",
+      "home": "https://www.france24.com/",
+      "language": "fr",
+      "domain": "france24.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_850d93ffd2124fc007a92277",
+          "name": "France 24",
+          "country": "FR",
+          "enabled": true
+        },
+        {
+          "id": "src_e9752c70250318ffa0dcfcb5",
+          "name": "France 24 (FR)",
+          "country": "FR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "FR",
+      "name": "Radio France Internationale",
+      "home": "https://www.rfi.fr/",
+      "language": "fr",
+      "domain": "rfi.fr",
+      "presence_status": "registered_active",
+      "matched_source_count": 3,
+      "matched_sources_sample": [
+        {
+          "id": "src_420d3ea2fcadb31fef9dbdb3",
+          "name": "RFI (FR)",
+          "country": "FR",
+          "enabled": true
+        },
+        {
+          "id": "src_739a39dacbd15f5e965ba63e",
+          "name": "RFI (France)",
+          "country": "FR",
+          "enabled": false
+        },
+        {
+          "id": "src_b45c9b4116c722a6115ecde2",
+          "name": "RFI (All / EN)",
+          "country": "FR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "FR",
+      "name": "Libération",
+      "home": "https://www.liberation.fr/",
+      "language": "fr",
+      "domain": "liberation.fr",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_06a63cc572abd42ebff3657e",
+          "name": "Libération (Society/Politics)",
+          "country": "FR",
+          "enabled": false
+        },
+        {
+          "id": "src_42673c9e536462fb2f5b722f",
+          "name": "Libération - News Sitemap",
+          "country": "FR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "FR",
+      "name": "Les Echos",
+      "home": "https://www.lesechos.fr/",
+      "language": "fr",
+      "domain": "lesechos.fr",
+      "presence_status": "registered_disabled_only",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_2f40c683338c449b9164aef8",
+          "name": "Les Echos (Tech/Media)",
+          "country": "FR",
+          "enabled": false
+        },
+        {
+          "id": "src_e7f71a4d52fe06751d3f6d84",
+          "name": "Les Echos (Finance/Markets)",
+          "country": "FR",
+          "enabled": false
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "FR",
+      "name": "La Tribune",
+      "home": "https://www.latribune.fr/",
+      "language": "fr",
+      "domain": "latribune.fr",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_7fce0245520d47a8cca08fa3",
+          "name": "La Tribune (Economy)",
+          "country": "FR",
+          "enabled": false
+        },
+        {
+          "id": "src_cb19023628a77a8fe93fce27",
+          "name": "La Tribune - News Sitemap",
+          "country": "CA",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "FR",
+      "name": "BFMTV",
+      "home": "https://www.bfmtv.com/",
+      "language": "fr",
+      "domain": "bfmtv.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 3,
+      "matched_sources_sample": [
+        {
+          "id": "src_557a22b71e5936166f1879be",
+          "name": "BFM TV",
+          "country": "FR",
+          "enabled": true
+        },
+        {
+          "id": "src_75aa55ba7124a9671004049f",
+          "name": "BFM TV (Economy/Business)",
+          "country": "FR",
+          "enabled": true
+        },
+        {
+          "id": "src_c3afb776a78377c565241794",
+          "name": "BFM TV - News Sitemap",
+          "country": "FR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "FR",
+      "name": "Agence France-Presse",
+      "home": "https://www.afp.com/",
+      "language": "fr",
+      "domain": "afp.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "The Hindu",
+      "home": "https://www.thehindu.com/",
+      "language": "en",
+      "domain": "thehindu.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_2eba6a1ffc7183c8e2ee3bae",
+          "name": "The Hindu (National)",
+          "country": "IN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "The Indian Express",
+      "home": "https://indianexpress.com/",
+      "language": "en",
+      "domain": "indianexpress.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_94cd65901ec32d655b1b4e2c",
+          "name": "The Indian Express",
+          "country": "IN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "The Times of India",
+      "home": "https://timesofindia.indiatimes.com/",
+      "language": "en",
+      "domain": "indiatimes.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_897f10d2bee6c9df79d1be1e",
+          "name": "The Times of India (Top Stories)",
+          "country": "IN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "Hindustan Times",
+      "home": "https://www.hindustantimes.com/",
+      "language": "en",
+      "domain": "hindustantimes.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_912c5fde5fc46d7e8cb9080f",
+          "name": "Hindustan Times - News Sitemap",
+          "country": "IN",
+          "enabled": true
+        },
+        {
+          "id": "src_feba22a34a5126062976904d",
+          "name": "Hindustan Times - India News RSS",
+          "country": "IN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "NDTV",
+      "home": "https://www.ndtv.com/",
+      "language": "en",
+      "domain": "ndtv.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_6e7fcd7a0eaa2a8a362edb32",
+          "name": "NDTV (Latest)",
+          "country": "IN",
+          "enabled": true
+        },
+        {
+          "id": "src_a94577a3b2f1f67ae09e31ba",
+          "name": "NDTV - Top Stories",
+          "country": "IN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "India Today",
+      "home": "https://www.indiatoday.in/",
+      "language": "en",
+      "domain": "indiatoday.in",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_a6f7414ab3c19187b2e2404e",
+          "name": "India Today (India)",
+          "country": "IN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "Economic Times",
+      "home": "https://economictimes.indiatimes.com/",
+      "language": "en",
+      "domain": "indiatimes.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_b9f1db01e01880c796c84968",
+          "name": "Economic Times",
+          "country": "IN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "Business Standard",
+      "home": "https://www.business-standard.com/",
+      "language": "en",
+      "domain": "business-standard.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_c376086a1252e8c0c57a0ac1",
+          "name": "Business Standard",
+          "country": "IN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "Mint",
+      "home": "https://www.livemint.com/",
+      "language": "en",
+      "domain": "livemint.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_2d66cb97314997966b861adb",
+          "name": "Livemint - Today Sitemap",
+          "country": "IN",
+          "enabled": true
+        },
+        {
+          "id": "src_b63e20cfa08b853e6e37e17c",
+          "name": "Livemint - RSS News",
+          "country": "IN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "Dainik Jagran",
+      "home": "https://www.jagran.com/",
+      "language": "hi",
+      "domain": "jagran.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "Amar Ujala",
+      "home": "https://www.amarujala.com/",
+      "language": "hi",
+      "domain": "amarujala.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_2908ec48c1daabd610469b30",
+          "name": "Amar Ujala (Breaking)",
+          "country": "IN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "Aaj Tak",
+      "home": "https://www.aajtak.in/",
+      "language": "hi",
+      "domain": "aajtak.in",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "DD News",
+      "home": "https://ddnews.gov.in/",
+      "language": "en",
+      "domain": "ddnews.gov.in",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IT",
+      "name": "Corriere della Sera",
+      "home": "https://www.corriere.it/",
+      "language": "it",
+      "domain": "corriere.it",
+      "presence_status": "registered_active",
+      "matched_source_count": 7,
+      "matched_sources_sample": [
+        {
+          "id": "src_30b2b5346883214b9542ed2b",
+          "name": "Corriere della Sera (feed-hp Homepage)",
+          "country": "IT",
+          "enabled": true
+        },
+        {
+          "id": "src_403dd1beaa9a9eb170316b77",
+          "name": "Corriere della Sera - Politica Sitemap",
+          "country": "IT",
+          "enabled": true
+        },
+        {
+          "id": "src_49d0dfbf671c1f64b68ddb5a",
+          "name": "Corriere della Sera - Esteri Sitemap",
+          "country": "IT",
+          "enabled": true
+        },
+        {
+          "id": "src_6b7dce67caada8f5b7fb266c",
+          "name": "Corriere della Sera (Homepage)",
+          "country": "IT",
+          "enabled": false
+        },
+        {
+          "id": "src_6c0a92ad8f59a4bbfc82035d",
+          "name": "Corriere della Sera (Ultimora)",
+          "country": "IT",
+          "enabled": false
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "IT",
+      "name": "La Repubblica",
+      "home": "https://www.repubblica.it/",
+      "language": "it",
+      "domain": "repubblica.it",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_5ed2546c916657d253682075",
+          "name": "la Repubblica - News Sitemap",
+          "country": "IT",
+          "enabled": true
+        },
+        {
+          "id": "src_6a0b8dfd3504377c2d81e6bd",
+          "name": "la Repubblica",
+          "country": "IT",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IT",
+      "name": "La Stampa",
+      "home": "https://www.lastampa.it/",
+      "language": "it",
+      "domain": "lastampa.it",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_93b9fe57d673cb9f06870261",
+          "name": "La Stampa",
+          "country": "IT",
+          "enabled": false
+        },
+        {
+          "id": "src_d755ca177e6fecb1e781967d",
+          "name": "La Stampa - News Sitemap",
+          "country": "IT",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IT",
+      "name": "Il Sole 24 Ore",
+      "home": "https://www.ilsole24ore.com/",
+      "language": "it",
+      "domain": "ilsole24ore.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_b6639731742e4af18d654d62",
+          "name": "Il Sole 24 Ore (Italia)",
+          "country": "IT",
+          "enabled": true
+        },
+        {
+          "id": "src_bd7ca9e6b4e1872bbe8931eb",
+          "name": "Il Sole 24 Ore - News Sitemap",
+          "country": "IT",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IT",
+      "name": "Rai News",
+      "home": "https://www.rainews.it/",
+      "language": "it",
+      "domain": "rainews.it",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_be0b9674b3590e05502fda95",
+          "name": "RaiNews - Sitemap Index",
+          "country": "IT",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IT",
+      "name": "ANSA",
+      "home": "https://www.ansa.it/",
+      "language": "it",
+      "domain": "ansa.it",
+      "presence_status": "registered_active",
+      "matched_source_count": 13,
+      "matched_sources_sample": [
+        {
+          "id": "src_0702c5aa7557bd533f94b250",
+          "name": "ANSA (Cultura e Tendenze)",
+          "country": "IT",
+          "enabled": true
+        },
+        {
+          "id": "src_20d3a09d75e38873a98a862e",
+          "name": "ANSA (Calcio)",
+          "country": "IT",
+          "enabled": true
+        },
+        {
+          "id": "src_55316bc4d68261aa52bf0787",
+          "name": "ANSA (Video)",
+          "country": "IT",
+          "enabled": true
+        },
+        {
+          "id": "src_791fbfe7ee1682b4ada6e2c7",
+          "name": "ANSA (Sport)",
+          "country": "IT",
+          "enabled": true
+        },
+        {
+          "id": "src_8352c91cc23dea7a32427dbc",
+          "name": "ANSA (Mondo)",
+          "country": "IT",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "IT",
+      "name": "Sky TG24",
+      "home": "https://tg24.sky.it/",
+      "language": "it",
+      "domain": "sky.it",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_c651284f674168cffb8e8952",
+          "name": "Sky TG24",
+          "country": "IT",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CA",
+      "name": "CBC News",
+      "home": "https://www.cbc.ca/news/",
+      "language": "en",
+      "domain": "cbc.ca",
+      "presence_status": "registered_active",
+      "matched_source_count": 25,
+      "matched_sources_sample": [
+        {
+          "id": "src_146375f9f9a8698fcde464e8",
+          "name": "CBC BC",
+          "country": "CA",
+          "enabled": true
+        },
+        {
+          "id": "src_1a31dd7dc2d2b98206fca424",
+          "name": "CBC North",
+          "country": "CA",
+          "enabled": true
+        },
+        {
+          "id": "src_2552970a39807ad559f9c58c",
+          "name": "CBC Ottawa",
+          "country": "CA",
+          "enabled": true
+        },
+        {
+          "id": "src_36d511afee21c26c482b3b8d",
+          "name": "CBC News - Business",
+          "country": "CA",
+          "enabled": true
+        },
+        {
+          "id": "src_3cf5480664e226e802c90db2",
+          "name": "CBC Kamloops",
+          "country": "CA",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "CA",
+      "name": "CTV News",
+      "home": "https://www.ctvnews.ca/",
+      "language": "en",
+      "domain": "ctvnews.ca",
+      "presence_status": "registered_active",
+      "matched_source_count": 18,
+      "matched_sources_sample": [
+        {
+          "id": "src_0c24fc32d3c2867d93767d00",
+          "name": "CTV Montreal - Sitemap News Index",
+          "country": "CA",
+          "enabled": true
+        },
+        {
+          "id": "src_12d70d9cafbb1b8ca85ebc7c",
+          "name": "CTV News - Business",
+          "country": "CA",
+          "enabled": true
+        },
+        {
+          "id": "src_1392399758436c31c55b76f2",
+          "name": "CTV Vancouver Island - Sitemap News Index",
+          "country": "CA",
+          "enabled": true
+        },
+        {
+          "id": "src_21af8456d878f4872147703c",
+          "name": "CTV London - Sitemap News Index",
+          "country": "CA",
+          "enabled": true
+        },
+        {
+          "id": "src_2230b9a3595b93b4fe312e56",
+          "name": "CTV Edmonton - Sitemap News Index",
+          "country": "CA",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "CA",
+      "name": "Global News",
+      "home": "https://globalnews.ca/",
+      "language": "en",
+      "domain": "globalnews.ca",
+      "presence_status": "registered_active",
+      "matched_source_count": 28,
+      "matched_sources_sample": [
+        {
+          "id": "src_2047150e2cf3877a3d8b2b63",
+          "name": "Global News - Politics",
+          "country": "CA",
+          "enabled": true
+        },
+        {
+          "id": "src_2ead9e2d33a77aab892d1dc0",
+          "name": "Global News - Toronto",
+          "country": "CA",
+          "enabled": true
+        },
+        {
+          "id": "src_3be1aeb090edf1c92bb657b3",
+          "name": "Global News - Lethbridge",
+          "country": "CA",
+          "enabled": true
+        },
+        {
+          "id": "src_41d7c9260e4cb23a1c005359",
+          "name": "Global News - Montreal",
+          "country": "CA",
+          "enabled": true
+        },
+        {
+          "id": "src_4741079cba756db9cd805268",
+          "name": "Global News - Ottawa",
+          "country": "CA",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "CA",
+      "name": "The Globe and Mail",
+      "home": "https://www.theglobeandmail.com/",
+      "language": "en",
+      "domain": "theglobeandmail.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_68e40f3b4f73a83784b544a7",
+          "name": "The Globe and Mail - Sitemap Index",
+          "country": "CA",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CA",
+      "name": "Toronto Star",
+      "home": "https://www.thestar.com/",
+      "language": "en",
+      "domain": "thestar.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_3b3bfe55d21d5930b6b3bda2",
+          "name": "Toronto Star - Sitemap Index",
+          "country": "CA",
+          "enabled": true
+        },
+        {
+          "id": "src_d5cc80faaf9a3591f5c27fd2",
+          "name": "Toronto Star - Politics",
+          "country": "CA",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CA",
+      "name": "National Post",
+      "home": "https://nationalpost.com/",
+      "language": "en",
+      "domain": "nationalpost.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_0649ea87ede87128bb7a027a",
+          "name": "National Post",
+          "country": "CA",
+          "enabled": true
+        },
+        {
+          "id": "src_dc8af7a2dd6358367ea78202",
+          "name": "National Post - News Sitemap",
+          "country": "CA",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CA",
+      "name": "Financial Post",
+      "home": "https://financialpost.com/",
+      "language": "en",
+      "domain": "financialpost.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_4d5fdd0cd30df086ac52e5f4",
+          "name": "Financial Post",
+          "country": "CA",
+          "enabled": true
+        },
+        {
+          "id": "src_a23f2f127a619b1eacb12707",
+          "name": "Financial Post (Economy)",
+          "country": "CA",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CA",
+      "name": "The Canadian Press",
+      "home": "https://www.thecanadianpress.com/",
+      "language": "en",
+      "domain": "thecanadianpress.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "BR",
+      "name": "Folha de S.Paulo",
+      "home": "https://www.folha.uol.com.br/",
+      "language": "pt",
+      "domain": "uol.com.br",
+      "presence_status": "registered_active",
+      "matched_source_count": 7,
+      "matched_sources_sample": [
+        {
+          "id": "src_00cf89893db38881d0df0267",
+          "name": "Folha - Poder (정치)",
+          "country": "BR",
+          "enabled": true
+        },
+        {
+          "id": "src_25ae2193978a733be154287c",
+          "name": "Folha - Ilustrada (문화)",
+          "country": "BR",
+          "enabled": true
+        },
+        {
+          "id": "src_88503d3cf1d62b1bed079425",
+          "name": "Folha - Mundo",
+          "country": "BR",
+          "enabled": true
+        },
+        {
+          "id": "src_a52106028aafa586c1bd1e9a",
+          "name": "Folha - Cotidiano",
+          "country": "BR",
+          "enabled": true
+        },
+        {
+          "id": "src_aa23a4ab28488821f8374d9c",
+          "name": "Folha - Esporte",
+          "country": "BR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "BR",
+      "name": "O Globo",
+      "home": "https://oglobo.globo.com/",
+      "language": "pt",
+      "domain": "globo.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_46780527a5c3db7a8190dc0d",
+          "name": "O Globo - News Sitemap",
+          "country": "BR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "BR",
+      "name": "O Estado de S.Paulo",
+      "home": "https://www.estadao.com.br/",
+      "language": "pt",
+      "domain": "estadao.com.br",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_47ab06837dba00967f471b3f",
+          "name": "Estadão (Mainstream Daily)",
+          "country": "BR",
+          "enabled": false
+        },
+        {
+          "id": "src_7edd87c3a4d8f080a6d9612d",
+          "name": "Estadão - Sitemap Index by Day",
+          "country": "BR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "BR",
+      "name": "G1",
+      "home": "https://g1.globo.com/",
+      "language": "pt",
+      "domain": "globo.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 8,
+      "matched_sources_sample": [
+        {
+          "id": "src_02de4306df2baf26d75c0389",
+          "name": "G1 Ciência e Saúde",
+          "country": "BR",
+          "enabled": false
+        },
+        {
+          "id": "src_3e419b4c705bdc161af17158",
+          "name": "G1 Economia - Tecnologia",
+          "country": "BR",
+          "enabled": false
+        },
+        {
+          "id": "src_4f04f272d452d0bd54c6deee",
+          "name": "G1 Política (Politics)",
+          "country": "BR",
+          "enabled": true
+        },
+        {
+          "id": "src_57369286345c9c37685bf9ee",
+          "name": "G1 Carros",
+          "country": "BR",
+          "enabled": true
+        },
+        {
+          "id": "src_6012a3d0bcdd10de64bcf99c",
+          "name": "G1 (Globo - Tech)",
+          "country": "BR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "BR",
+      "name": "Valor Econômico",
+      "home": "https://valor.globo.com/",
+      "language": "pt",
+      "domain": "globo.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_8649aafae00c6f3b75842317",
+          "name": "Valor Econômico (Financial Daily)",
+          "country": "BR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "BR",
+      "name": "Agência Brasil",
+      "home": "https://agenciabrasil.ebc.com.br/",
+      "language": "pt",
+      "domain": "ebc.com.br",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "KR",
+      "name": "Yonhap News Agency",
+      "home": "https://www.yna.co.kr/",
+      "language": "ko",
+      "domain": "yna.co.kr",
+      "presence_status": "registered_active",
+      "matched_source_count": 4,
+      "matched_sources_sample": [
+        {
+          "id": "src_288c4142946f90558aacbbef",
+          "name": "Yonhap Korea - News Sitemap 5",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_439cda68f5fc3dd5f052aa22",
+          "name": "Yonhap (EN)",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_4db2eafdb8d150143a66cf57",
+          "name": "Yonhap Korea - News Sitemap 3",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_abe5d1dfbe93b137a8b5954a",
+          "name": "Yonhap Korea - News Sitemap 4",
+          "country": "KR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "KR",
+      "name": "KBS News",
+      "home": "https://news.kbs.co.kr/",
+      "language": "ko",
+      "domain": "kbs.co.kr",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_0f58a37b3bd7f49685665e8e",
+          "name": "KBS World Radio (RSS directory)",
+          "country": "KR",
+          "enabled": false
+        },
+        {
+          "id": "src_e66a902b02d4ff2d5bce40ce",
+          "name": "KBS News - Recent Sitemap",
+          "country": "KR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "KR",
+      "name": "SBS News",
+      "home": "https://news.sbs.co.kr/",
+      "language": "ko",
+      "domain": "sbs.co.kr",
+      "presence_status": "registered_active",
+      "matched_source_count": 12,
+      "matched_sources_sample": [
+        {
+          "id": "src_3547d8d75a7ab426f5ba40ae",
+          "name": "SBS - 경제",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_3c7b4d6a380fe801a11530f6",
+          "name": "SBS - 국제/글로벌",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_4a49ccf3c48be33072b77558",
+          "name": "SBS - 사회",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_76925401728c88cb9326e135",
+          "name": "SBS - 정치",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_a562d527ad73888dc6fbd732",
+          "name": "SBS - 연예/방송",
+          "country": "KR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "KR",
+      "name": "YTN",
+      "home": "https://www.ytn.co.kr/",
+      "language": "ko",
+      "domain": "ytn.co.kr",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "KR",
+      "name": "JoongAng Ilbo",
+      "home": "https://www.joongang.co.kr/",
+      "language": "ko",
+      "domain": "joongang.co.kr",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_691afc80fdbc4df14249a5b2",
+          "name": "JoongAng - Latest Articles",
+          "country": "KR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "KR",
+      "name": "Chosun Ilbo",
+      "home": "https://www.chosun.com/",
+      "language": "ko",
+      "domain": "chosun.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_d5d589c3e7a462154c2d9910",
+          "name": "조선닷컴 (전체)",
+          "country": "KR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "KR",
+      "name": "Dong-A Ilbo",
+      "home": "https://www.donga.com/",
+      "language": "ko",
+      "domain": "donga.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 9,
+      "matched_sources_sample": [
+        {
+          "id": "src_3e2ca3bec2ff31f68a4a2e7b",
+          "name": "Donga Ilbo",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_3e9c39fdaa2d46dfea76838d",
+          "name": "Donga Ilbo - International",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_744ca3c31e1ba92990c54bd0",
+          "name": "Donga Ilbo - Politics",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_90107f5c6f00734efa710da5",
+          "name": "Donga Ilbo - Culture",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_cf160db02094f26c688f6ffc",
+          "name": "Donga Ilbo - Editorials",
+          "country": "KR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "KR",
+      "name": "Hankyoreh",
+      "home": "https://www.hani.co.kr/",
+      "language": "ko",
+      "domain": "hani.co.kr",
+      "presence_status": "registered_active",
+      "matched_source_count": 3,
+      "matched_sources_sample": [
+        {
+          "id": "src_6248ef2db6cf4665c433e48c",
+          "name": "한겨레 - 스포츠",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_b9c4b83e5ae6aae5150b327f",
+          "name": "한겨레 - 국제",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_de6e209a73b16d3ca4cf71e9",
+          "name": "한겨레 - 문화",
+          "country": "KR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "KR",
+      "name": "Kyunghyang Shinmun",
+      "home": "https://www.khan.co.kr/",
+      "language": "ko",
+      "domain": "khan.co.kr",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_1e68e81150b4abd9bff59ebb",
+          "name": "경향신문 - 전체",
+          "country": "KR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "KR",
+      "name": "Maeil Business Newspaper",
+      "home": "https://www.mk.co.kr/",
+      "language": "ko",
+      "domain": "mk.co.kr",
+      "presence_status": "registered_active",
+      "matched_source_count": 5,
+      "matched_sources_sample": [
+        {
+          "id": "src_3716755d17829d8c152e2720",
+          "name": "매일경제 - 뉴스 정치",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_395e15bb13057de9e69c27b3",
+          "name": "매일경제 - 뉴스 헤드라인",
+          "country": "KR",
+          "enabled": false
+        },
+        {
+          "id": "src_65e4a1e92a36314d39d2c8b2",
+          "name": "매일경제 - 뉴스 경제",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_b861245fd2b5ce1b0900c8d8",
+          "name": "매일경제 - 뉴스 사회",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_bc2217d0a1da620251e97f6d",
+          "name": "매일경제 - 뉴스 전체뉴스",
+          "country": "KR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "KR",
+      "name": "Korea Economic Daily",
+      "home": "https://www.hankyung.com/",
+      "language": "ko",
+      "domain": "hankyung.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 7,
+      "matched_sources_sample": [
+        {
+          "id": "src_0dd96054c0776b037ba77b0d",
+          "name": "한국경제 - 부동산",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_1323fed6cb7f653363bb77bb",
+          "name": "한국경제 - 전체뉴스",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_38aff0cf418b0a72a862124d",
+          "name": "한국경제 - 국제",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_4afe23dfa43afa2961151376",
+          "name": "한국경제 - 증권",
+          "country": "KR",
+          "enabled": true
+        },
+        {
+          "id": "src_7ad31bbe8a5aaa70c611c4b4",
+          "name": "한국경제 - IT",
+          "country": "KR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "RU",
+      "name": "TASS",
+      "home": "https://tass.com/",
+      "language": "en",
+      "domain": "tass.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_87f8055c36bee055e16d9aa1",
+          "name": "TASS Finance",
+          "country": "RU",
+          "enabled": false
+        },
+        {
+          "id": "src_63db4f09b149f9b4b0690203",
+          "name": "TASS (TASS Russian Main)",
+          "country": "RU",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "RU",
+      "name": "RIA Novosti",
+      "home": "https://ria.ru/",
+      "language": "ru",
+      "domain": "ria.ru",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_c2d05c178a5bdb4947400965",
+          "name": "RIA Novosti (Russian State Broadcaster)",
+          "country": "RU",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "RU",
+      "name": "Interfax",
+      "home": "https://www.interfax.ru/",
+      "language": "ru",
+      "domain": "interfax.ru",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_b9385c7bd8733f84eb7f5b30",
+          "name": "Interfax",
+          "country": "RU",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "RU",
+      "name": "Kommersant",
+      "home": "https://www.kommersant.ru/",
+      "language": "ru",
+      "domain": "kommersant.ru",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_01a9384c5c449ee0ac76fbb5",
+          "name": "Kommersant (Главное)",
+          "country": "RU",
+          "enabled": true
+        },
+        {
+          "id": "src_d86977efdf6c085cbb2f0fdd",
+          "name": "Kommersant (Economy/Business Major Daily)",
+          "country": "RU",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "RU",
+      "name": "Vedomosti",
+      "home": "https://www.vedomosti.ru/",
+      "language": "ru",
+      "domain": "vedomosti.ru",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_e99cd3b0edc10da049e0201c",
+          "name": "Vedomosti (Economy Major Daily)",
+          "country": "RU",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "RU",
+      "name": "RBC",
+      "home": "https://www.rbc.ru/",
+      "language": "ru",
+      "domain": "rbc.ru",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_7d5e42e2b06d487da11d68f0",
+          "name": "RBC (Russian Finance/Economy #1)",
+          "country": "RU",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "AU",
+      "name": "ABC News Australia",
+      "home": "https://www.abc.net.au/news/",
+      "language": "en",
+      "domain": "abc.net.au",
+      "presence_status": "registered_active",
+      "matched_source_count": 12,
+      "matched_sources_sample": [
+        {
+          "id": "src_101ea857ec918c1ab6983157",
+          "name": "ABC News - Politics (Topic)",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_319d1469bb275f286437f37a",
+          "name": "ABC News - Rural",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_399f27ce84d3e61f51e18439",
+          "name": "Australian Broadcasting Corporation - World",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_8f41f0b3850e56505f97635d",
+          "name": "ABC News - Top Stories",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_8f7d994c67a5ccc9f5ea05d9",
+          "name": "ABC News - Science",
+          "country": "AU",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "AU",
+      "name": "SBS News Australia",
+      "home": "https://www.sbs.com.au/news/",
+      "language": "en",
+      "domain": "sbs.com.au",
+      "presence_status": "registered_active",
+      "matched_source_count": 8,
+      "matched_sources_sample": [
+        {
+          "id": "src_1f4b55c28a7a63402e5adc7a",
+          "name": "SBS News - World",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_407964d6f8761d0242f5b529",
+          "name": "SBS Dateline - Sitemap",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_54a6a381a907ef4ce21281fb",
+          "name": "SBS News - English Sitemap",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_a1b5f536a237c64acdd777a8",
+          "name": "SBS News (Breaking)",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_aa9c15f380018c78d0633822",
+          "name": "SBS News - Australia",
+          "country": "AU",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "AU",
+      "name": "The Sydney Morning Herald",
+      "home": "https://www.smh.com.au/",
+      "language": "en",
+      "domain": "smh.com.au",
+      "presence_status": "registered_active",
+      "matched_source_count": 4,
+      "matched_sources_sample": [
+        {
+          "id": "src_0920b23e74f0d4264075e7e3",
+          "name": "Sydney Morning Herald",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_0f2bff3d3f148c76035aa847",
+          "name": "Sydney Morning Herald - Articles Sitemap Index",
+          "country": "AU",
+          "enabled": false
+        },
+        {
+          "id": "src_9b21b86f600c91ef8dc2c6df",
+          "name": "Sydney Morning Herald - National",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_ed5097a1a8fffe62ea2c4996",
+          "name": "Sydney Morning Herald - Business",
+          "country": "AU",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "AU",
+      "name": "The Australian",
+      "home": "https://www.theaustralian.com.au/",
+      "language": "en",
+      "domain": "theaustralian.com.au",
+      "presence_status": "registered_active",
+      "matched_source_count": 3,
+      "matched_sources_sample": [
+        {
+          "id": "src_2d094331dc26d08f3ded01b3",
+          "name": "The Australian - Business",
+          "country": "AU",
+          "enabled": false
+        },
+        {
+          "id": "src_4e818c7a683e6455f73e19d7",
+          "name": "The Australian - Sitemap Index",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_73fe918570e06a5e0edd11b8",
+          "name": "The Australian",
+          "country": "AU",
+          "enabled": false
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "AU",
+      "name": "Australian Financial Review",
+      "home": "https://www.afr.com/",
+      "language": "en",
+      "domain": "afr.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 8,
+      "matched_sources_sample": [
+        {
+          "id": "src_06f850aef90bdc8650425f10",
+          "name": "AFR - Policy",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_1598c309b6341bb6fb2c5072",
+          "name": "AFR (Financial Review)",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_1cf3acf43bb60990f2931645",
+          "name": "AFR - Politics",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_679abdc393c34721dfb2e3d7",
+          "name": "AFR - World",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_6b4b4d3b3ebba4e9efcc7634",
+          "name": "AFR - Technology",
+          "country": "AU",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "AU",
+      "name": "The Age",
+      "home": "https://www.theage.com.au/",
+      "language": "en",
+      "domain": "theage.com.au",
+      "presence_status": "registered_active",
+      "matched_source_count": 4,
+      "matched_sources_sample": [
+        {
+          "id": "src_7baa83d43aa46fb249b83bc3",
+          "name": "The Age - National",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_8505903adb0c69ee1883d690",
+          "name": "The Age - Articles Sitemap Index",
+          "country": "AU",
+          "enabled": false
+        },
+        {
+          "id": "src_b99b11adb995bbb38502df78",
+          "name": "The Age - Business",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_e230498f046d4e90546c4db6",
+          "name": "The Age",
+          "country": "AU",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "ES",
+      "name": "El País",
+      "home": "https://elpais.com/",
+      "language": "es",
+      "domain": "elpais.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 27,
+      "matched_sources_sample": [
+        {
+          "id": "src_0615609b2afa861097d977cd",
+          "name": "EL PAÍS - Últimas",
+          "country": "ES",
+          "enabled": true
+        },
+        {
+          "id": "src_0871aa6c52de986d7e760988",
+          "name": "EL PAÍS - Cultura",
+          "country": "ES",
+          "enabled": true
+        },
+        {
+          "id": "src_0efcfb670072c097794f8d21",
+          "name": "EL PAÍS - Opinión",
+          "country": "ES",
+          "enabled": true
+        },
+        {
+          "id": "src_41558d6583cf22b45e97ac81",
+          "name": "EL PAÍS - Sociedad",
+          "country": "ES",
+          "enabled": true
+        },
+        {
+          "id": "src_5f448e0ba83e14a3e2766cba",
+          "name": "EL PAÍS - Internacional",
+          "country": "ES",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "ES",
+      "name": "El Mundo",
+      "home": "https://www.elmundo.es/",
+      "language": "es",
+      "domain": "elmundo.es",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_1137e04849914fd847372fd6",
+          "name": "El Mundo - Portada",
+          "country": "ES",
+          "enabled": true
+        },
+        {
+          "id": "src_5e1e7d0527dba3a598ff3c7a",
+          "name": "El Mundo - Economy",
+          "country": "ES",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "ES",
+      "name": "La Vanguardia",
+      "home": "https://www.lavanguardia.com/",
+      "language": "es",
+      "domain": "lavanguardia.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 7,
+      "matched_sources_sample": [
+        {
+          "id": "src_29b76e5685dfa75a5d287152",
+          "name": "La Vanguardia - Deportes",
+          "country": "ES",
+          "enabled": true
+        },
+        {
+          "id": "src_57a41226c540607bbba5ed25",
+          "name": "La Vanguardia - Política",
+          "country": "ES",
+          "enabled": true
+        },
+        {
+          "id": "src_9a5e7ff61586493ac65b5440",
+          "name": "La Vanguardia - Portada",
+          "country": "ES",
+          "enabled": true
+        },
+        {
+          "id": "src_9ac7528bf3d9d2bf3ff7c642",
+          "name": "La Vanguardia - Internacional",
+          "country": "ES",
+          "enabled": true
+        },
+        {
+          "id": "src_c6f875c5c09c7208aacd5970",
+          "name": "La Vanguardia - Opinión",
+          "country": "ES",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "ES",
+      "name": "RTVE",
+      "home": "https://www.rtve.es/",
+      "language": "es",
+      "domain": "rtve.es",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_d5e0e139dafcaf80576a453b",
+          "name": "RTVE - News Sitemap",
+          "country": "ES",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "ES",
+      "name": "Agencia EFE",
+      "home": "https://efe.com/",
+      "language": "es",
+      "domain": "efe.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "MX",
+      "name": "El Universal",
+      "home": "https://www.eluniversal.com.mx/",
+      "language": "es",
+      "domain": "eluniversal.com.mx",
+      "presence_status": "registered_active",
+      "matched_source_count": 18,
+      "matched_sources_sample": [
+        {
+          "id": "src_0ed41532eead930e824811fa",
+          "name": "El Universal - Cartera Sitemap",
+          "country": "MX",
+          "enabled": true
+        },
+        {
+          "id": "src_1460a12b0c5676bb1b86b4a3",
+          "name": "El Universal - Opinion Sitemap",
+          "country": "MX",
+          "enabled": true
+        },
+        {
+          "id": "src_1da19089b0d10862f296dc3b",
+          "name": "El Universal - Ciencia Sitemap",
+          "country": "MX",
+          "enabled": true
+        },
+        {
+          "id": "src_22dc058ca79fedc25270dc8d",
+          "name": "El Universal - Deportes Sitemap",
+          "country": "MX",
+          "enabled": true
+        },
+        {
+          "id": "src_26b0dc229cec6359d2124ad3",
+          "name": "El Universal - News Sitemap",
+          "country": "MX",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "MX",
+      "name": "Reforma",
+      "home": "https://www.reforma.com/",
+      "language": "es",
+      "domain": "reforma.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_f6c83b68d7c0fed1fb8817e0",
+          "name": "Reforma - News Sitemap",
+          "country": "MX",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "MX",
+      "name": "Milenio",
+      "home": "https://www.milenio.com/",
+      "language": "es",
+      "domain": "milenio.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 4,
+      "matched_sources_sample": [
+        {
+          "id": "src_21c031200eb7c12b1fe95957",
+          "name": "Milenio - Articles Sitemap Index",
+          "country": "MX",
+          "enabled": true
+        },
+        {
+          "id": "src_880762394974b31782729ab7",
+          "name": "Milenio (전국지)",
+          "country": "MX",
+          "enabled": false
+        },
+        {
+          "id": "src_bbe5a5295042f9629e329bd7",
+          "name": "Milenio - Google News Sitemap",
+          "country": "MX",
+          "enabled": true
+        },
+        {
+          "id": "src_edf7ccd53854ae5a3d696afe",
+          "name": "Milenio Negocios (Business)",
+          "country": "MX",
+          "enabled": false
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "MX",
+      "name": "La Jornada",
+      "home": "https://www.jornada.com.mx/",
+      "language": "es",
+      "domain": "jornada.com.mx",
+      "presence_status": "registered_active",
+      "matched_source_count": 8,
+      "matched_sources_sample": [
+        {
+          "id": "src_62fae8707d423165d6558d80",
+          "name": "La Jornada - Politica",
+          "country": "MX",
+          "enabled": true
+        },
+        {
+          "id": "src_6352c8fad205ab9c7927f37a",
+          "name": "La Jornada - Opinión",
+          "country": "MX",
+          "enabled": true
+        },
+        {
+          "id": "src_6531938aefd152434145e832",
+          "name": "La Jornada - Deportes",
+          "country": "MX",
+          "enabled": true
+        },
+        {
+          "id": "src_934895b26d6d259ab5b3b8bd",
+          "name": "La Jornada - Estados",
+          "country": "MX",
+          "enabled": true
+        },
+        {
+          "id": "src_9ea19630ddfdd3c8bc036f3f",
+          "name": "La Jornada (Progressive Daily)",
+          "country": "MX",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "MX",
+      "name": "El Financiero",
+      "home": "https://www.elfinanciero.com.mx/",
+      "language": "es",
+      "domain": "elfinanciero.com.mx",
+      "presence_status": "registered_active",
+      "matched_source_count": 5,
+      "matched_sources_sample": [
+        {
+          "id": "src_03b00d0ab782679b5d2418a7",
+          "name": "El Financiero",
+          "country": "MX",
+          "enabled": true
+        },
+        {
+          "id": "src_0f276ef6f3718d920f7c5fe8",
+          "name": "El Financiero - Google News Feed",
+          "country": "MX",
+          "enabled": true
+        },
+        {
+          "id": "src_112d8a131438eaebb3eabbd9",
+          "name": "El Financiero (Mercados)",
+          "country": "MX",
+          "enabled": true
+        },
+        {
+          "id": "src_b43b4323e6d8f4d27e09205d",
+          "name": "El Financiero",
+          "country": "MX",
+          "enabled": true
+        },
+        {
+          "id": "src_bb134082730601970ef49d5b",
+          "name": "El Financiero (Economía)",
+          "country": "MX",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "ID",
+      "name": "Kompas.com",
+      "home": "https://www.kompas.com/",
+      "language": "id",
+      "domain": "kompas.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 3,
+      "matched_sources_sample": [
+        {
+          "id": "src_243ba5eb75ada157ec435824",
+          "name": "Kompas - Sitemap Index",
+          "country": "ID",
+          "enabled": true
+        },
+        {
+          "id": "src_bba3921f48980d8e8ef05927",
+          "name": "Kompas (Mainstream Daily)",
+          "country": "ID",
+          "enabled": false
+        },
+        {
+          "id": "src_cb4241b54b5355aa00684e4f",
+          "name": "Kompas Ekonomi (Economy)",
+          "country": "ID",
+          "enabled": false
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "ID",
+      "name": "Detik",
+      "home": "https://www.detik.com/",
+      "language": "id",
+      "domain": "detik.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 3,
+      "matched_sources_sample": [
+        {
+          "id": "src_0e2d0bdbe179d0ca24f64a51",
+          "name": "Detik Finance (Finance and Economy)",
+          "country": "ID",
+          "enabled": false
+        },
+        {
+          "id": "src_27868c7943db6a98ebed86ae",
+          "name": "Detik - Sitemap Index",
+          "country": "ID",
+          "enabled": true
+        },
+        {
+          "id": "src_855a744b5cfdb9664c72e135",
+          "name": "Detikcom (Top Breaking Portal)",
+          "country": "ID",
+          "enabled": false
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "ID",
+      "name": "Tempo",
+      "home": "https://www.tempo.co/",
+      "language": "id",
+      "domain": "tempo.co",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_f2df7b31aca90c1547f7cde5",
+          "name": "Tempo.co - Sitemap Index",
+          "country": "ID",
+          "enabled": true
+        },
+        {
+          "id": "src_259f68e470d66475d657b88e",
+          "name": "Tempo - Feed",
+          "country": "PH",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "ID",
+      "name": "Antara",
+      "home": "https://www.antaranews.com/",
+      "language": "id",
+      "domain": "antaranews.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 33,
+      "matched_sources_sample": [
+        {
+          "id": "src_068ec981e0dbb27e5069b155",
+          "name": "ANTARA - Olahraga (Tenis)",
+          "country": "ID",
+          "enabled": true
+        },
+        {
+          "id": "src_171b468deb179ab0f8bd9720",
+          "name": "ANTARA - Sepakbola (Liga Spanyol)",
+          "country": "ID",
+          "enabled": true
+        },
+        {
+          "id": "src_1e17d1ca560c9a64f5fe7d50",
+          "name": "ANTARA - Metro",
+          "country": "ID",
+          "enabled": true
+        },
+        {
+          "id": "src_1f133b729fca8ee89c862587",
+          "name": "ANTARA - Dunia",
+          "country": "ID",
+          "enabled": true
+        },
+        {
+          "id": "src_2b4e662cdb154db474648245",
+          "name": "ANTARA - Ekonomi",
+          "country": "ID",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "ID",
+      "name": "TVRI",
+      "home": "https://www.tvri.go.id/",
+      "language": "id",
+      "domain": "tvri.go.id",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "TR",
+      "name": "Hürriyet",
+      "home": "https://www.hurriyet.com.tr/",
+      "language": "tr",
+      "domain": "hurriyet.com.tr",
+      "presence_status": "registered_active",
+      "matched_source_count": 11,
+      "matched_sources_sample": [
+        {
+          "id": "src_1a7a6ea5f9b791dd77b400bd",
+          "name": "Hürriyet (Sağlık)",
+          "country": "TR",
+          "enabled": true
+        },
+        {
+          "id": "src_40ce959fa0caf35ca738a30f",
+          "name": "Hürriyet (Dünya)",
+          "country": "TR",
+          "enabled": true
+        },
+        {
+          "id": "src_63ce67dcd655c1b0cbd2b281",
+          "name": "Hürriyet (Magazin)",
+          "country": "TR",
+          "enabled": false
+        },
+        {
+          "id": "src_685da95c489196c32247bc64",
+          "name": "Hürriyet (Anasayfa)",
+          "country": "TR",
+          "enabled": true
+        },
+        {
+          "id": "src_79de0fcb896434510fa7286f",
+          "name": "Hürriyet (Gündem)",
+          "country": "TR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "TR",
+      "name": "Habertürk",
+      "home": "https://www.haberturk.com/",
+      "language": "tr",
+      "domain": "haberturk.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 4,
+      "matched_sources_sample": [
+        {
+          "id": "src_0962aee1ad669433b2d06646",
+          "name": "Habertürk Ekonomi (Portal Economy)",
+          "country": "TR",
+          "enabled": true
+        },
+        {
+          "id": "src_b97fe797b44506e0f4790480",
+          "name": "Habertürk (Main)",
+          "country": "TR",
+          "enabled": true
+        },
+        {
+          "id": "src_d39a1fc45c3616fc50d2a487",
+          "name": "Haber Turk",
+          "country": "TR",
+          "enabled": true
+        },
+        {
+          "id": "src_f39895e3500041e9336eb8ae",
+          "name": "Haberturk",
+          "country": "TR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "TR",
+      "name": "TRT Haber",
+      "home": "https://www.trthaber.com/",
+      "language": "tr",
+      "domain": "trthaber.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 5,
+      "matched_sources_sample": [
+        {
+          "id": "src_04fe6ae2966f718c8c902ce7",
+          "name": "TRT Haber - Sitemap Index",
+          "country": "TR",
+          "enabled": true
+        },
+        {
+          "id": "src_1e327008203f99a4323f3539",
+          "name": "TRT Haber - News Sitemap",
+          "country": "TR",
+          "enabled": true
+        },
+        {
+          "id": "src_2f8782d52b0238ffd4317bf0",
+          "name": "TRT Haber (Son Dakika)",
+          "country": "TR",
+          "enabled": true
+        },
+        {
+          "id": "src_7c08c5cbfd38586c77028073",
+          "name": "TRT Haber - March 2026 Sitemap",
+          "country": "TR",
+          "enabled": true
+        },
+        {
+          "id": "src_c87faab1dbe232da37b17d3a",
+          "name": "TRT Haber (Public Broadcaster Breaking)",
+          "country": "TR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "SA",
+      "name": "Saudi Press Agency",
+      "home": "https://www.spa.gov.sa/",
+      "language": "ar",
+      "domain": "spa.gov.sa",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_8d42fd9ea0bdee05281c3d81",
+          "name": "Saudi Press Agency (Arabic)",
+          "country": "SA",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "SA",
+      "name": "Arab News",
+      "home": "https://www.arabnews.com/",
+      "language": "en",
+      "domain": "arabnews.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_e2106b3cf2649d2877942d07",
+          "name": "Arab News",
+          "country": "SA",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "SA",
+      "name": "Asharq Al-Awsat",
+      "home": "https://aawsat.com/",
+      "language": "ar",
+      "domain": "aawsat.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "SA",
+      "name": "Al Eqtisadiah",
+      "home": "https://www.aleqt.com/",
+      "language": "ar",
+      "domain": "aleqt.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_67634438de9fd2ee5a934eec",
+          "name": "Al Eqtisadiah (Economy - Arabic)",
+          "country": "SA",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "SA",
+      "name": "Okaz",
+      "home": "https://www.okaz.com.sa/",
+      "language": "ar",
+      "domain": "okaz.com.sa",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_0d68fed6e56eb31b574a7b08",
+          "name": "Okaz - News Sitemap",
+          "country": "SA",
+          "enabled": true
+        },
+        {
+          "id": "src_fe2e37511f211fd861eec2d4",
+          "name": "Okaz",
+          "country": "SA",
+          "enabled": false
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Semafor",
+      "home": "https://www.semafor.com/",
+      "language": "en",
+      "domain": "semafor.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Business Insider",
+      "home": "https://www.businessinsider.com/",
+      "language": "en",
+      "domain": "businessinsider.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_53b6fe5e8377bfb2377b2477",
+          "name": "Business Insider",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Vox",
+      "home": "https://www.vox.com/",
+      "language": "en",
+      "domain": "vox.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_b2aca5ee18b7d5e48468483b",
+          "name": "Vox",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Slate",
+      "home": "https://slate.com/",
+      "language": "en",
+      "domain": "slate.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_3e0020b2405509cb0da4e1e2",
+          "name": "Slate",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "The Daily Beast",
+      "home": "https://www.thedailybeast.com/",
+      "language": "en",
+      "domain": "thedailybeast.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Mother Jones",
+      "home": "https://www.motherjones.com/",
+      "language": "en",
+      "domain": "motherjones.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_01ef3bb5efa5aac9ac7c7df9",
+          "name": "Mother Jones",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "New York Magazine / Intelligencer",
+      "home": "https://nymag.com/intelligencer/",
+      "language": "en",
+      "domain": "nymag.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "The Christian Science Monitor",
+      "home": "https://www.csmonitor.com/",
+      "language": "en",
+      "domain": "csmonitor.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "The Philadelphia Inquirer",
+      "home": "https://www.inquirer.com/",
+      "language": "en",
+      "domain": "inquirer.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_06c551db1ce52aef3afad4bc",
+          "name": "The Philadelphia Inquirer",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "The Seattle Times",
+      "home": "https://www.seattletimes.com/",
+      "language": "en",
+      "domain": "seattletimes.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_df94488b76d7b77d9d415a0c",
+          "name": "Seattle Times",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "The Dallas Morning News",
+      "home": "https://www.dallasnews.com/",
+      "language": "en",
+      "domain": "dallasnews.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_3aed40b868ac8b60bf9c79de",
+          "name": "Dallas Morning News",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "San Francisco Chronicle",
+      "home": "https://www.sfchronicle.com/",
+      "language": "en",
+      "domain": "sfchronicle.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_f610486aa2f53a951b3dfa77",
+          "name": "SF Chronicle",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Houston Chronicle",
+      "home": "https://www.houstonchronicle.com/",
+      "language": "en",
+      "domain": "houstonchronicle.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_43917d66ff1626a50afa4aa4",
+          "name": "Houston Chronicle",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Miami Herald",
+      "home": "https://www.miamiherald.com/",
+      "language": "en",
+      "domain": "miamiherald.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_4152bf768eb350632159321c",
+          "name": "Miami Herald",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "The Atlanta Journal-Constitution",
+      "home": "https://www.ajc.com/",
+      "language": "en",
+      "domain": "ajc.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_4b2b5d38d057da4b2ef9e92f",
+          "name": "Atlanta Journal-Constitution",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Star Tribune",
+      "home": "https://www.startribune.com/",
+      "language": "en",
+      "domain": "startribune.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_53fdf24b0006b0ffe09de256",
+          "name": "Star Tribune",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "The Denver Post",
+      "home": "https://www.denverpost.com/",
+      "language": "en",
+      "domain": "denverpost.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_91deea751ca88f14e454af0e",
+          "name": "Denver Post",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "The Baltimore Sun",
+      "home": "https://www.baltimoresun.com/",
+      "language": "en",
+      "domain": "baltimoresun.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_7afd907bb367adbb11ddb2d2",
+          "name": "Baltimore Sun",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Tampa Bay Times",
+      "home": "https://www.tampabay.com/",
+      "language": "en",
+      "domain": "tampabay.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_52946e37fdb5f7cbf5ac9802",
+          "name": "Tampa Bay Times",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Detroit Free Press",
+      "home": "https://www.freep.com/",
+      "language": "en",
+      "domain": "freep.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_cfeda2047d2b190ade227b81",
+          "name": "Detroit Free Press",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "The San Diego Union-Tribune",
+      "home": "https://www.sandiegouniontribune.com/",
+      "language": "en",
+      "domain": "sandiegouniontribune.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_aae89aa908078142910e26ba",
+          "name": "San Diego Union-Tribune",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "The Salt Lake Tribune",
+      "home": "https://www.sltrib.com/",
+      "language": "en",
+      "domain": "sltrib.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_aca4b13a2154b4ebf172f246",
+          "name": "The Salt Lake Tribune",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Boston Herald",
+      "home": "https://www.bostonherald.com/",
+      "language": "en",
+      "domain": "bostonherald.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_570762801e5b7d677fc4317a",
+          "name": "Boston Herald",
+          "country": "US",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "Pittsburgh Post-Gazette",
+      "home": "https://www.post-gazette.com/",
+      "language": "en",
+      "domain": "post-gazette.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "US",
+      "name": "STAT News",
+      "home": "https://www.statnews.com/",
+      "language": "en",
+      "domain": "statnews.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CN",
+      "name": "Sixth Tone",
+      "home": "https://www.sixthtone.com/",
+      "language": "en",
+      "domain": "sixthtone.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_1960aaf9a0cb8021fbcee0ca",
+          "name": "Sixth Tone",
+          "country": "CN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CN",
+      "name": "Caijing",
+      "home": "https://www.caijing.com.cn/",
+      "language": "zh",
+      "domain": "caijing.com.cn",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CN",
+      "name": "21st Century Business Herald",
+      "home": "https://www.21jingji.com/",
+      "language": "zh",
+      "domain": "21jingji.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CN",
+      "name": "Securities Times",
+      "home": "https://www.stcn.com/",
+      "language": "zh",
+      "domain": "stcn.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CN",
+      "name": "Securities Daily",
+      "home": "https://www.zqrb.cn/",
+      "language": "zh",
+      "domain": "zqrb.cn",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CN",
+      "name": "Southern Daily / Nanfang",
+      "home": "https://www.southcn.com/",
+      "language": "zh",
+      "domain": "southcn.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CN",
+      "name": "Yangcheng Evening News",
+      "home": "https://www.ycwb.com/",
+      "language": "zh",
+      "domain": "ycwb.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CN",
+      "name": "36Kr",
+      "home": "https://36kr.com/",
+      "language": "zh",
+      "domain": "36kr.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_16b9f5a902bcb64e5acf9675",
+          "name": "36Kr",
+          "country": "CN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "GB",
+      "name": "The New Statesman",
+      "home": "https://www.newstatesman.com/",
+      "language": "en",
+      "domain": "newstatesman.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_98e90db478071cf5a76843fa",
+          "name": "New Statesman",
+          "country": "GB",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "GB",
+      "name": "The Spectator",
+      "home": "https://www.spectator.co.uk/",
+      "language": "en",
+      "domain": "spectator.co.uk",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "GB",
+      "name": "The New European",
+      "home": "https://www.theneweuropean.co.uk/",
+      "language": "en",
+      "domain": "theneweuropean.co.uk",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "FR",
+      "name": "Le Parisien",
+      "home": "https://www.leparisien.fr/",
+      "language": "fr",
+      "domain": "leparisien.fr",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_517bf898a4c1c54c77f0e62d",
+          "name": "Le Parisien - News Sitemap Index",
+          "country": "FR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "FR",
+      "name": "Le Point",
+      "home": "https://www.lepoint.fr/",
+      "language": "fr",
+      "domain": "lepoint.fr",
+      "presence_status": "registered_active",
+      "matched_source_count": 2,
+      "matched_sources_sample": [
+        {
+          "id": "src_009ece73216207a929c2250a",
+          "name": "Le Point - News Sitemap",
+          "country": "FR",
+          "enabled": true
+        },
+        {
+          "id": "src_1a77aa856a4e7cfac621cdc8",
+          "name": "Le Point (Current Affairs/Economy)",
+          "country": "FR",
+          "enabled": false
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "FR",
+      "name": "L'Express",
+      "home": "https://www.lexpress.fr/",
+      "language": "fr",
+      "domain": "lexpress.fr",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_2e4d8ef2120e9fdd7edd48fa",
+          "name": "L'Express (Current Affairs Magazine)",
+          "country": "FR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "FR",
+      "name": "L'Obs",
+      "home": "https://www.nouvelobs.com/",
+      "language": "fr",
+      "domain": "nouvelobs.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_67fbeeb33141824961b9670b",
+          "name": "L'Obs (General Current Affairs)",
+          "country": "FR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "FR",
+      "name": "Mediapart",
+      "home": "https://www.mediapart.fr/",
+      "language": "fr",
+      "domain": "mediapart.fr",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_aac8d6ef55bb3013453ef11e",
+          "name": "Mediapart",
+          "country": "FR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "FR",
+      "name": "Ouest-France",
+      "home": "https://www.ouest-france.fr/",
+      "language": "fr",
+      "domain": "ouest-france.fr",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_9872b109742b889ee198e91c",
+          "name": "Ouest-France (Regional News/Society)",
+          "country": "FR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "The Print",
+      "home": "https://theprint.in/",
+      "language": "en",
+      "domain": "theprint.in",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_15a6fa368b3324068b0240f9",
+          "name": "ThePrint - Google News Sitemap",
+          "country": "IN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "The Wire",
+      "home": "https://thewire.in/",
+      "language": "en",
+      "domain": "thewire.in",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "The Quint",
+      "home": "https://www.thequint.com/",
+      "language": "en",
+      "domain": "thequint.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_acd98fc1cfc9e665f4bfdf60",
+          "name": "The Quint",
+          "country": "IN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "Firstpost",
+      "home": "https://www.firstpost.com/",
+      "language": "en",
+      "domain": "firstpost.com",
+      "presence_status": "registered_disabled_only",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_14cfc2d43f6dbb8248803bdf",
+          "name": "Firstpost",
+          "country": "IN",
+          "enabled": false
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "Deccan Herald",
+      "home": "https://www.deccanherald.com/",
+      "language": "en",
+      "domain": "deccanherald.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_ef80f177c5410d0c007177c0",
+          "name": "Deccan Herald - News Sitemap",
+          "country": "IN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "News18",
+      "home": "https://www.news18.com/",
+      "language": "en",
+      "domain": "news18.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_62894b35d6739caacf99036a",
+          "name": "News18",
+          "country": "IN",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "IN",
+      "name": "Zee News",
+      "home": "https://zeenews.india.com/",
+      "language": "en",
+      "domain": "india.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "JP",
+      "name": "Tokyo Shimbun",
+      "home": "https://www.tokyo-np.co.jp/",
+      "language": "ja",
+      "domain": "tokyo-np.co.jp",
+      "presence_status": "registered_disabled_only",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_45c11bfed8c881c53f745637",
+          "name": "Tokyo Shimbun General News",
+          "country": "JP",
+          "enabled": false
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "JP",
+      "name": "Hokkaido Shimbun",
+      "home": "https://www.hokkaido-np.co.jp/",
+      "language": "ja",
+      "domain": "hokkaido-np.co.jp",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "JP",
+      "name": "Nishinippon Shimbun",
+      "home": "https://www.nishinippon.co.jp/",
+      "language": "ja",
+      "domain": "nishinippon.co.jp",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "DE",
+      "name": "n-tv",
+      "home": "https://www.n-tv.de/",
+      "language": "de",
+      "domain": "n-tv.de",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_5af9f7aa95514727dc1a17d7",
+          "name": "n-tv - News Sitemap",
+          "country": "DE",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "DE",
+      "name": "Focus",
+      "home": "https://www.focus.de/",
+      "language": "de",
+      "domain": "focus.de",
+      "presence_status": "registered_active",
+      "matched_source_count": 6,
+      "matched_sources_sample": [
+        {
+          "id": "src_67925af5586bf237f4c0ee91",
+          "name": "FOCUS Online - Politik",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_927b361e5f669102435bb27c",
+          "name": "FOCUS Online - Finanzen",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_b0c179abe5f0b39d4947fe5d",
+          "name": "FOCUS Online - Sport",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_c794bd7889699be83d9c824f",
+          "name": "FOCUS Online - Panorama",
+          "country": "DE",
+          "enabled": true
+        },
+        {
+          "id": "src_e2b0480116f02ffca121a169",
+          "name": "FOCUS Online",
+          "country": "DE",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "DE",
+      "name": "taz",
+      "home": "https://taz.de/",
+      "language": "de",
+      "domain": "taz.de",
+      "presence_status": "registered_disabled_only",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_f06f072d99c11c8c76f3fb10",
+          "name": "taz.de (gesamt)",
+          "country": "DE",
+          "enabled": false
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "AU",
+      "name": "The Conversation",
+      "home": "https://theconversation.com/au",
+      "language": "en",
+      "domain": "theconversation.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_8b3d86e7c507c4e82a09f76e",
+          "name": "The Conversation AU (오피니언/정책)",
+          "country": "AU",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "AU",
+      "name": "Guardian Australia",
+      "home": "https://www.theguardian.com/au",
+      "language": "en",
+      "domain": "theguardian.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 12,
+      "matched_sources_sample": [
+        {
+          "id": "src_0760437d79289b821a959652",
+          "name": "The Guardian Australia - Business",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_0ff52b0131df6f221a452c77",
+          "name": "The Guardian Australia - Media",
+          "country": "AU",
+          "enabled": true
+        },
+        {
+          "id": "src_134455e936386f39d9ef5bb0",
+          "name": "The Guardian - Americas",
+          "country": "GB",
+          "enabled": true
+        },
+        {
+          "id": "src_421bc0b02b405ef32de9d0f3",
+          "name": "The Guardian - Politics",
+          "country": "GB",
+          "enabled": true
+        },
+        {
+          "id": "src_50d207faf908ffd984ff0881",
+          "name": "The Guardian Australia - Environment",
+          "country": "AU",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": false
+    },
+    {
+      "country": "CA",
+      "name": "Radio-Canada",
+      "home": "https://ici.radio-canada.ca/",
+      "language": "fr",
+      "domain": "radio-canada.ca",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_afb651f5fbb145713820856f",
+          "name": "Radio-Canada - Info Sitemap",
+          "country": "CA",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "CA",
+      "name": "Le Devoir",
+      "home": "https://www.ledevoir.com/",
+      "language": "fr",
+      "domain": "ledevoir.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_f790b748d2eba07242e03772",
+          "name": "Le Devoir - Sitemap",
+          "country": "CA",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "BR",
+      "name": "CNN Brasil",
+      "home": "https://www.cnnbrasil.com.br/",
+      "language": "pt",
+      "domain": "cnnbrasil.com.br",
+      "presence_status": "registered_active",
+      "matched_source_count": 3,
+      "matched_sources_sample": [
+        {
+          "id": "src_3b777ce686b765ae84c313f8",
+          "name": "CNN Brasil - Sitemap Index",
+          "country": "BR",
+          "enabled": true
+        },
+        {
+          "id": "src_d7b326882b4bbb6a52e0892a",
+          "name": "CNN Brasil (Business)",
+          "country": "BR",
+          "enabled": true
+        },
+        {
+          "id": "src_d87eefbad1d3eedd6f3f6172",
+          "name": "CNN Brasil - News Sitemap",
+          "country": "BR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "BR",
+      "name": "Band News",
+      "home": "https://www.band.com.br/",
+      "language": "pt",
+      "domain": "band.com.br",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "KR",
+      "name": "JTBC News",
+      "home": "https://news.jtbc.co.kr/",
+      "language": "ko",
+      "domain": "jtbc.co.kr",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_14a8098286d77d52255ea0fd",
+          "name": "JTBC - Latest Articles",
+          "country": "KR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "KR",
+      "name": "MBC News",
+      "home": "https://imnews.imbc.com/",
+      "language": "ko",
+      "domain": "imbc.com",
+      "presence_status": "registered_disabled_only",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_448a55cbdaf2eb20b17a96dc",
+          "name": "MBC 주요뉴스",
+          "country": "KR",
+          "enabled": false
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "KR",
+      "name": "Seoul Economic Daily",
+      "home": "https://www.sedaily.com/",
+      "language": "ko",
+      "domain": "sedaily.com",
+      "presence_status": "missing",
+      "matched_source_count": 0,
+      "matched_sources_sample": [],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "KR",
+      "name": "Korea Times",
+      "home": "https://www.koreatimes.co.kr/",
+      "language": "en",
+      "domain": "koreatimes.co.kr",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_086b89d1fdfc1f72e5803dca",
+          "name": "Korea Times (RSS directory)",
+          "country": "KR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    },
+    {
+      "country": "KR",
+      "name": "Korea Herald",
+      "home": "https://www.koreaherald.com/",
+      "language": "en",
+      "domain": "koreaherald.com",
+      "presence_status": "registered_active",
+      "matched_source_count": 1,
+      "matched_sources_sample": [
+        {
+          "id": "src_722ac2111f8d85755bc21d4e",
+          "name": "Korea Herald (RSS directory)",
+          "country": "KR",
+          "enabled": true
+        }
+      ],
+      "matched_sources_sample_complete": true
+    }
+  ]
+}

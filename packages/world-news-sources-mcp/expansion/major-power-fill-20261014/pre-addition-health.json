@@ -1,0 +1,10 @@
+{
+  "active": 5480,
+  "date": "2026-10-14",
+  "snapshot_last_check": "2026-10-14T14:16:19.922Z",
+  "article_xml_success": 3822,
+  "index_only": 479,
+  "failed": 1178,
+  "not_checked_today": 1,
+  "semantics": "Saved validator outcomes, not a guarantee of current reachability, freshness or article completeness. XML success can include some non-article URLs."
+}
