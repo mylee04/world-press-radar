@@ -93,7 +93,7 @@ On September 30, 2026, package typecheck/build and **24 tests** passed on Node.j
 
 ## HTTP and ChatGPT
 
-Live endpoint: **https://news.bymyleslee.com/mcp**. This public endpoint serves only configured source metadata and cached audit results, with no authentication or publisher fetches during tool calls. Service/audit summary: https://news.bymyleslee.com/health. Actual HTTPS SDK calls and legacy `initialize` / `tools/list` / `tools/call` were verified. ChatGPT connection itself and public directory listing have not been performed.
+Live endpoint: **https://news.bymyleslee.com/mcp**. This public endpoint serves configured source metadata, cached audit results and retained URL-discovery aggregates, with no authentication or publisher fetches during tool calls. Service/audit summary: https://news.bymyleslee.com/health. Actual HTTPS SDK calls, legacy `initialize` / `tools/list` / `tools/call`, and published-plugin source, health and country-activity queries were verified.
 
 For local HTTP testing:
 
@@ -105,7 +105,7 @@ npm run smoke:http -- http://127.0.0.1:3000/mcp
 
 HTTP is stateless Streamable HTTP using the official SDK, including legacy MCP compatibility. `/mcp` accepts POST only; GET returns 405 because there are no persistent streams. Requests are capped at 64 KiB, subscriptions disabled, and Host/Origin validated. HTTPS terminates at Vercel. Metadata responses use normal pagination and byte limits.
 
-According to the [official ChatGPT connection guide](https://developers.openai.com/plugins/deploy/connect-chatgpt), enable developer-mode app testing where your account/workspace permits it, choose Create for a connection, enter the live `/mcp` URL, and select **no authentication**. Name: **World News Sources**; description: configured publisher RSS and sitemap metadata with cached per-endpoint health. The existing portfolio and web application are separate Vercel projects.
+Install the published [World News Sources plugin](https://chatgpt.com/plugins/plugin_asdk_app_6abd7c20121c8191a04bc4ca47c47da8), sign in to ChatGPT, and choose **Install plugin**. Start a new chat, type `@`, and select **World News Sources**, following the [official plugin usage guide](https://learn.chatgpt.com/docs/plugins). No separate World News Sources account or API key is required. The [homepage](https://news.bymyleslee.com) provides installation steps and copyable prompts for source search, cached endpoint health and country URL activity. Other MCP clients can connect directly to `/mcp` with **no authentication**. The existing portfolio and web application are separate Vercel projects.
 
 ## Full live audit and weekly refresh
 
@@ -143,9 +143,9 @@ Completed **2026-09-30T20:05:37.106Z**: all 5,775 distinct typed URLs were attem
 
 Transport and SDK choices follow the [official MCP transport specification](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports) and [TypeScript SDK v2](https://github.com/modelcontextprotocol/typescript-sdk) (`@modelcontextprotocol/server` 2.2.0, pinned in the lockfile).
 
-## Public plugin draft
+## Published plugin
 
-The English directory package is in [`plugin/`](plugin/). Run `npm run plugin:package` to create the ZIP. A draft was uploaded to the verified mylee organization; domain ownership and all four MCP tools passed the Platform scan. It is **not submitted or publicly listed**. See [`publication/READINESS.md`](publication/READINESS.md) for the remaining demo/review gates. The public [website](https://news.bymyleslee.com), [support](https://news.bymyleslee.com/support), [privacy](https://news.bymyleslee.com/privacy) and [terms](https://news.bymyleslee.com/terms) identify Myungeun Lee and the approved support contact.
+The [World News Sources plugin](https://chatgpt.com/plugins/plugin_asdk_app_6abd7c20121c8191a04bc4ca47c47da8) was published on October 15, 2026. Its public detail page and **Install plugin** action were visible without signing in; installation completion in an independent user account has not been verified. The English directory package is in [`plugin/`](plugin/); `npm run plugin:package` creates the ZIP. [`publication/READINESS.md`](publication/READINESS.md) retains the earlier submission evidence and gates. The public [website](https://news.bymyleslee.com), [support](https://news.bymyleslee.com/support), [privacy](https://news.bymyleslee.com/privacy) and [terms](https://news.bymyleslee.com/terms) identify Myungeun Lee and the approved support contact.
 
 Optional long-term aggregate counters are described in [`metrics/README.md`](metrics/README.md). No query database or user profiles are used; deployment evidence records when collection becomes active. Local package tests include atomic concurrent increments, durability, privacy projection and protocol/error classification.
 

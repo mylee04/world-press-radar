@@ -1,9 +1,103 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>World News Sources</title><meta name="description" content="Configured publisher RSS and sitemap source metadata with cached endpoint health."><link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="/styles.css"></head>
-<body><a class="skip" href="#main">Skip to content</a><header><a class="brand" href="/"><img src="/icon.svg" width="36" height="36" alt="">World News Sources</a><nav aria-label="Main navigation"><a href="/">Home</a><a href="/quality/">Collection quality</a><a href="/support">Support</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav></header><main id="main"><h1>World News Sources</h1>
-<p>Find configured news publisher RSS feeds and sitemaps, and inspect their cached health.</p>
-<p>Search sources by country, publisher name or domain, language, category and endpoint type. Browse supported countries, inspect source details, and read separate RSS and sitemap check results.</p>
-<p>Health records include actual check times, parsed entry counts, sample URLs and publication freshness when dates are available. Checks are cached and can become stale. Some endpoints are empty, blocked, unavailable, malformed or incompletely checked. An enabled source is a configuration choice, not a guarantee of availability. Sitemap indexes describe child sitemap references; their child files and article links are not validated by this service.</p>
-<p>The service provides read-only source metadata. Article search and full article text are outside its capabilities. Tool calls use the existing catalog and health cache rather than fetching publishers live. No account or API key is required.</p>
-<p>MCP address: <code>https://news.bymyleslee.com/mcp</code> <a href="/health">Service status</a> · <a href="/support">Support</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></p>
-<p>Developer: <strong>Myungeun Lee</strong> Support: <a href="mailto:myungeun2dc@gmail.com">myungeun2dc@gmail.com</a></p></main><footer><p>World News Sources · Myungeun Lee</p><p><a href="mailto:myungeun2dc@gmail.com">myungeun2dc@gmail.com</a> · Published September 30, 2026</p></footer></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>World News Sources — RSS &amp; sitemaps in ChatGPT</title>
+  <meta name="description" content="Install World News Sources in ChatGPT to find publisher RSS feeds and sitemaps, view saved health checks, and explore newly discovered URL activity by country.">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header>
+    <a class="brand" href="/"><img src="/icon.svg" width="36" height="36" alt="">World News Sources</a>
+    <nav aria-label="Main navigation">
+      <a href="#get-started">How to use</a>
+      <a href="/quality/">Collection quality</a>
+      <a href="/support">Support</a>
+    </nav>
+  </header>
+  <main id="main" class="home">
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="eyebrow">World News Sources · ChatGPT plugin</p>
+      <h1 id="hero-title">Find RSS feeds and sitemaps in ChatGPT.</h1>
+      <p class="hero-description">Discover registered news sources, check their latest saved health results, and explore newly discovered URLs by country. Just ask in your own words.</p>
+      <div class="actions">
+        <a class="button button-primary" href="https://chatgpt.com/plugins/plugin_asdk_app_6abd7c20121c8191a04bc4ca47c47da8">Install in ChatGPT <span aria-hidden="true">↗</span></a>
+        <a class="button button-secondary" href="#examples">See example prompts</a>
+      </div>
+      <p class="installation-note">Sign in with your ChatGPT account. No separate World News Sources account or API key needed.</p>
+    </section>
+
+    <section id="get-started" class="home-section" aria-labelledby="get-started-title">
+      <p class="eyebrow">Get started</p>
+      <h2 id="get-started-title">Three steps to your first search.</h2>
+      <ol class="setup-steps">
+        <li><span class="step-number" aria-hidden="true">1</span><h3>Open the plugin page</h3><p>Follow <a href="https://chatgpt.com/plugins/plugin_asdk_app_6abd7c20121c8191a04bc4ca47c47da8">World News Sources on ChatGPT</a> and sign in.</p></li>
+        <li><span class="step-number" aria-hidden="true">2</span><h3>Install the plugin</h3><p>Choose <strong>Install plugin</strong> on the plugin page.</p></li>
+        <li><span class="step-number" aria-hidden="true">3</span><h3>Ask in a new chat</h3><p>Start a new chat, type <code>@</code>, and select <strong>World News Sources</strong>. Then ask a question.</p></li>
+      </ol>
+    </section>
+
+    <section id="examples" class="home-section" aria-labelledby="examples-title">
+      <p class="eyebrow">Try it in ChatGPT</p>
+      <h2 id="examples-title">Start with one of these prompts.</h2>
+      <p>After selecting the plugin, paste a prompt into your chat. You can ask in English or Korean.</p>
+      <div class="prompt-list">
+        <article class="prompt-card">
+          <div><h3>Find sources</h3><p>Look up registered publishers and their RSS or sitemap addresses.</p><blockquote id="prompt-sources">Find RSS feeds and sitemaps for registered news publishers in the United States.</blockquote></div>
+          <button class="copy-prompt" type="button" data-copy="prompt-sources" aria-label="Copy source search prompt" hidden>Copy prompt</button>
+        </article>
+        <article class="prompt-card">
+          <div><h3>Check source health</h3><p>See the saved result and when the endpoint was actually checked.</p><blockquote id="prompt-health">Show the cached health results and last check times for BBC RSS feeds and sitemaps.</blockquote></div>
+          <button class="copy-prompt" type="button" data-copy="prompt-health" aria-label="Copy source health prompt" hidden>Copy prompt</button>
+        </article>
+        <article class="prompt-card">
+          <div><h3>Explore country activity</h3><p>View first-discovered URL counts with available collection coverage.</p><blockquote id="prompt-activity">How many new URLs were first discovered in South Korea today? Use UTC and include collection coverage.</blockquote></div>
+          <button class="copy-prompt" type="button" data-copy="prompt-activity" aria-label="Copy country activity prompt" hidden>Copy prompt</button>
+        </article>
+      </div>
+      <p id="copy-status" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></p>
+    </section>
+
+    <section class="home-section service-details" aria-labelledby="service-details-title">
+      <h2 id="service-details-title">Understand the results.</h2>
+      <p>Search the registered catalog by country, publisher name or domain, language, category, and endpoint type. The <a href="/quality/">collection quality dashboard</a> shows country coverage and source details.</p>
+      <p>Health results are cached and can become stale. Check times and content dates are separate; an enabled registration does not guarantee a working endpoint. Sitemap indexes describe child sitemap references; child files and article links are not validated by this service.</p>
+      <p>New URL counts describe first discoveries after an excluded initial baseline, not the number of articles published. Untracked periods and partial collection are identified in the results.</p>
+      <p>The plugin reads saved source metadata and observation aggregates. It does not search article contents, retrieve full articles, or fetch publisher sites during your request.</p>
+      <details class="developer-details"><summary>Connect another MCP client</summary><p>Use the public MCP address <code>https://news.bymyleslee.com/mcp</code> with no authentication. <a href="/health">View service status</a>.</p></details>
+    </section>
+  </main>
+  <footer>
+    <p>World News Sources · Myungeun Lee</p>
+    <p><a href="/support">Support</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="mailto:myungeun2dc@gmail.com">myungeun2dc@gmail.com</a></p>
+  </footer>
+  <script type="module">
+    if (navigator.clipboard?.writeText) {
+      const status = document.getElementById('copy-status');
+      for (const button of document.querySelectorAll('[data-copy]')) {
+        button.hidden = false;
+        button.addEventListener('click', async () => {
+          const prompt = document.getElementById(button.dataset.copy);
+          try {
+            await navigator.clipboard.writeText(prompt.textContent.trim());
+            button.textContent = 'Copied';
+            status.textContent = button.getAttribute('aria-label').replace(/^Copy /, '') + ' copied. Paste it into ChatGPT.';
+          } catch {
+            const range = document.createRange();
+            range.selectNodeContents(prompt);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            button.textContent = 'Prompt selected';
+            status.textContent = 'Prompt selected. Copy it and paste it into ChatGPT.';
+          }
+          window.setTimeout(() => { button.textContent = 'Copy prompt'; }, 2000);
+        });
+      }
+    }
+  </script>
+</body>
+</html>
