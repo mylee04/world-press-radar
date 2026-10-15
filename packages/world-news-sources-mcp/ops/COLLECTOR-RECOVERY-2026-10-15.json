@@ -1,0 +1,240 @@
+{
+  "version": 1,
+  "status": "completed",
+  "day_utc": "2026-10-15",
+  "verified_at_utc": "2026-10-15T19:21:00.460424+00:00",
+  "original_scheduled_invocation": {
+    "at_utc": "2026-10-15T03:00:28Z",
+    "outcome": "stopped_before_collection_and_deployment",
+    "cause": "Insufficient disk for the existing 20 GiB guard",
+    "original_failure_log_retained": true
+  },
+  "space": {
+    "available_bytes_at_final_verification": 65117945856,
+    "configured_floor_bytes": 53687091200,
+    "reserved_collection_growth_bytes": 2147483648,
+    "phase_checks": {
+      "before_backup": "floor + logical backup bytes + growth",
+      "after_backup": "floor + growth",
+      "after_child_before_state_copy": "floor",
+      "final": "floor"
+    },
+    "installed_next_run_preflight_passed": true,
+    "continuous_watch": false,
+    "unrelated_writers_guarded": false,
+    "older_backups_losslessly_compressed": 6,
+    "backup_compression_saved_bytes": 23736422223,
+    "latest_two_rollout_backups_remain_raw": true,
+    "unused_other_project_pdf_files_removed": 26487,
+    "unused_pdf_allocated_bytes_removed": 32068362240,
+    "extracted_markdown_files_preserved": 15018,
+    "other_project_catalogs_source_manifests_verification_and_derived_work_preserved": true,
+    "unused_package_cache_files_removed": 212,
+    "package_cache_allocated_file_bytes_removed": 2963132416,
+    "installed_packages_changed": false
+  },
+  "preservation": {
+    "passed": true,
+    "original_counts": {
+      "collections": 59303,
+      "urls": 2284657,
+      "scope_urls": 4834098,
+      "endpoint_urls": 2579897,
+      "binding_urls": 2611341,
+      "bindings": 5902
+    },
+    "final_counts": {
+      "collections": 64800,
+      "urls": 2497170,
+      "scope_urls": 5285420,
+      "endpoint_urls": 2820919,
+      "binding_urls": 2856716,
+      "bindings": 5902
+    },
+    "original_immutable_table_hashes": {
+      "collections": "59b6878803b06b0245dac35d2b101e4893e1b61e8fae80ad4cc870eac3a9403e",
+      "urls": "fb6e1ef174e8ca40663e59dd9a8cc048bc7681ef41f0432be554bd9b833a956c",
+      "scope_urls": "b526f96fe7839c43d5190f6f21385e5bf36a5d7b3bb5cee250f35f12d62dc159",
+      "endpoint_urls": "2525b018eb4f4a018af6d82a6684a5bebe53d204def9d21c99ec5bc7609f56f3",
+      "binding_urls": "07eb63c7838a9f599dc0e11b14cae1ec062a8fadb9825db0b74ea6757a8be293",
+      "bindings": "20dbf2f1882ae9000f632d8c79c1fc7fb1b67cddaf533c20f6783838292c936c"
+    },
+    "all_original_immutable_table_hashes_match": true,
+    "original_known_baselines_preserved": 4235,
+    "tracking_start_unchanged": "2026-10-01T01:36:12.370Z",
+    "registry_sha256_unchanged": "78011c303414e199637dc4e557ba3592c4579af06a1770215ea878f872b6a6dc",
+    "existing_web_and_timer_file_hashes_unchanged": 4,
+    "existing_completed_investigations": 4,
+    "settled_model_reservations": 323,
+    "pending_model_reservations": 0,
+    "model_budget_hash_unchanged": true,
+    "provider_calls_this_operation": 0
+  },
+  "resume": {
+    "existing_service_starts": 1,
+    "service_started_utc": "2026-10-15T18:24:40Z",
+    "service_exited_utc": "2026-10-15T19:19:17Z",
+    "exit_status": 0,
+    "terminal_success": true,
+    "production_tests": {
+      "tests": 413,
+      "pass": 413,
+      "fail": 0
+    },
+    "new_backup_bytes": 5364744192,
+    "new_backup_quick_check": "ok",
+    "cycle": {
+      "status": "completed",
+      "started_at": "2026-10-15T18:34:30.003Z",
+      "finished_at": "2026-10-15T19:16:03.186Z",
+      "reason": null
+    },
+    "active_endpoint_coverage": {
+      "expected_endpoints": 5497,
+      "attempted_endpoints": 5497,
+      "successful_article_endpoints": 4193,
+      "latest_failed_endpoints": 823,
+      "unattempted_endpoints": 0,
+      "attempt_coverage_percent": 100.0
+    },
+    "today": {
+      "collection_events": 5497,
+      "distinct_endpoints": 5497,
+      "duplicate_endpoint_count": 0,
+      "extra_collection_events": 0,
+      "duplicate_endpoints": [],
+      "first_collection_at": "2026-10-15T18:34:35.409Z",
+      "last_collection_at": "2026-10-15T19:16:02.846Z",
+      "status_counts": {
+        "working_nonempty": 4653,
+        "malformed": 239,
+        "blocked": 324,
+        "http_error": 192,
+        "incomplete": 10,
+        "timeout": 52,
+        "valid_empty": 21,
+        "network_error": 6
+      },
+      "failure_reason_counts": {
+        "WRONG_ENDPOINT_FORMAT": 65,
+        "HTTP_403": 312,
+        "HTTP_404": 122,
+        "UNSUPPORTED_ENCODING": 9,
+        "HTTP_451": 10,
+        "INVALID_XML": 113,
+        "DTD_NOT_ALLOWED": 60,
+        "HTTP_406": 31,
+        "TIMEOUT": 52,
+        "POLITENESS_WAIT_LIMIT": 11,
+        "HTTP_500": 4,
+        "TOO_MANY_REDIRECTS": 2,
+        "HTTP_405": 3,
+        "HTTP_429": 12,
+        "INVALID_ENTRY_URL": 1,
+        "HTTP_402": 1,
+        "HTTP_503": 3,
+        "EAI_AGAIN": 1,
+        "ECONNRESET": 1,
+        "BODY_TOO_LARGE": 1,
+        "ERR_TLS_CERT_ALTNAME_INVALID": 2,
+        "UNABLE_TO_VERIFY_LEAF_SIGNATURE": 1,
+        "NETWORK_OR_PARSE_ERROR": 1,
+        "HTTP_502": 4,
+        "HTTP_530": 1
+      }
+    },
+    "reserved_http_hops": 6512,
+    "daily_http_hop_budget": 12000,
+    "global_concurrency": 6,
+    "successful_nonempty_xml": 4653,
+    "valid_empty_xml": 21,
+    "successful_index_endpoints": 481,
+    "failed_endpoints": 823,
+    "source_changes": 0,
+    "registry_enabled_changes": 0,
+    "existing_units_active": true,
+    "new_timers": 0,
+    "next_daily_utc": "2026-10-16T03:00:00Z"
+  },
+  "public": {
+    "deployment_id": "dpl_87q86kNCLcjDgQgBS9Z2YafRcmU9",
+    "ready_state": "READY",
+    "snapshot_at": "2026-10-15T19:16:06.688Z",
+    "complete_history_records": 64800,
+    "complete_history_checksums_verified": true,
+    "secondary_snapshot_matches": true,
+    "backend_current": true,
+    "public_bundle_files": 49,
+    "public_code_unchanged": true,
+    "only_changed_public_files": [
+      "metadata/activity-history/2026-10-0931f634091c066dbd16e6b168b88b83303d83c766dd80dd480d9e983e707c8b.json.gz",
+      "metadata/activity-history/2026-10-6209630a91c248e6d5d66b78bb45cb613d369126f5ae3048fd1ed680a351a536.json.gz",
+      "metadata/activity.json"
+    ],
+    "actual_published_connector_calls_compared": 4,
+    "country_discoveries": {
+      "US": {
+        "new_unique_candidate_urls": 7537,
+        "state": "partial",
+        "targeted_endpoints": 269,
+        "successful_article_endpoints": 188,
+        "initialization": "partial",
+        "baseline_checks": 6,
+        "schedule_matches": true
+      },
+      "KR": {
+        "new_unique_candidate_urls": 8741,
+        "state": "partial",
+        "targeted_endpoints": 57,
+        "successful_article_endpoints": 53,
+        "initialization": "partial",
+        "baseline_checks": 0,
+        "schedule_matches": true
+      },
+      "BR": {
+        "new_unique_candidate_urls": 6304,
+        "state": "partial",
+        "targeted_endpoints": 71,
+        "successful_article_endpoints": 61,
+        "initialization": "partial",
+        "baseline_checks": 0,
+        "schedule_matches": true
+      }
+    },
+    "united_states_2026_10_14_discoveries_preserved": 4711,
+    "http_functional_smoke": {
+      "status": "passed",
+      "tools": [
+        "search_sources",
+        "get_source",
+        "list_countries",
+        "get_endpoint_health",
+        "get_country_source_inventory",
+        "get_source_article_activity",
+        "get_country_article_activity",
+        "get_country_collection_quality",
+        "get_source_collection_quality"
+      ],
+      "metrics": {
+        "status": "recorded",
+        "expected_acknowledgments": 10,
+        "received_acknowledgments": 10,
+        "recorded_acknowledgments": 10,
+        "missing_acknowledgments": 0,
+        "warning": null
+      }
+    },
+    "endpoint_health_cache_refreshed_by_activity_job": false,
+    "account_wide_D1_usage_verified": false,
+    "earlier_telemetry_gaps_reconstructed": false
+  },
+  "semantics": [
+    "A completed inspection cycle means all targets were attempted; 823 addresses still failed.",
+    "First discovered candidate URLs exclude binding baselines and are not publication totals.",
+    "Country activity and initialization retain partial/null/zero distinctions.",
+    "Endpoint health uses its separately dated cached audit; daily activity does not relabel that cache.",
+    "Other-project download catalogs are historical; a private removal receipt qualifies removed PDF payloads.",
+    "The 50 GiB phase guard reserves expected work but does not continuously police unrelated writers."
+  ],
+  "private_evidence": "output/news-quality/disk-recovery-daily-resume-20261015; no raw response bodies, private databases, source manifests or credentials included here."
+}
