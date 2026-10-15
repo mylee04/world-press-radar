@@ -1,0 +1,407 @@
+{
+  "version": 1,
+  "status": "bounded_cause_followup_complete_remaining_failures_explicit",
+  "verified_at": "2026-10-15T20:27:38.868402+00:00",
+  "initial_latest_failed_active_endpoints": 823,
+  "final_latest_failed_active_endpoints": 814,
+  "recovered_endpoint_count": 9,
+  "unique_selected_failed_addresses": 55,
+  "actual_checked_unique_addresses": 34,
+  "authorized_appended_observations": 36,
+  "policy_held_addresses": 21,
+  "batches": [
+    {
+      "batch": "major-diagnosis-1",
+      "selected": 31,
+      "actual_observations": 21,
+      "http_hops": 61,
+      "result_sha256": "29226d492294ef13f1a840440784d110a0732d3af6067add9c02e0306c3e7f24"
+    },
+    {
+      "batch": "major-transients-2",
+      "selected": 24,
+      "actual_observations": 13,
+      "http_hops": 50,
+      "result_sha256": "2606fb566f237ae38fe4145509015ef13138e60bfae086f0510739822dcad1a2"
+    },
+    {
+      "batch": "brotli-recovery",
+      "selected": 2,
+      "actual_observations": 2,
+      "http_hops": 4,
+      "result_sha256": "3e97950413569585c1436ccb302844894345d7e69d6f117b555949f7bf3e500b"
+    }
+  ],
+  "additional_http_hops": 115,
+  "daily_http_hops": 6627,
+  "recovered_endpoints": [
+    {
+      "endpoint_id": "ep_e51403691dc1a156cb067d1a",
+      "sources": [
+        {
+          "id": "src_5c9e303e313d48b06a17c714",
+          "name": "VOL.AT - News Sitemap",
+          "country": "AT"
+        }
+      ],
+      "type": "sitemap",
+      "status": "working_nonempty",
+      "format": "urlset",
+      "checked_at": "2026-10-15T20:05:06.885Z",
+      "parsed_urls": 560,
+      "newest_content_at": null,
+      "content_freshness": "missing"
+    },
+    {
+      "endpoint_id": "ep_d283a1cd579fe6e5dbebda09",
+      "sources": [
+        {
+          "id": "src_acea31bd62d0b662d78e0672",
+          "name": "Bali Post - Post Sitemap",
+          "country": "ID"
+        }
+      ],
+      "type": "sitemap",
+      "status": "working_nonempty",
+      "format": "urlset",
+      "checked_at": "2026-10-15T19:50:10.574Z",
+      "parsed_urls": 1001,
+      "newest_content_at": "2026-10-15T14:58:59.000Z",
+      "content_freshness": "recent"
+    },
+    {
+      "endpoint_id": "ep_6247ccb05a1f1e52b21ca088",
+      "sources": [
+        {
+          "id": "src_74563bedd5ee80bad18c4000",
+          "name": "MetroTV News - News Sitemap",
+          "country": "ID"
+        }
+      ],
+      "type": "sitemap",
+      "status": "working_nonempty",
+      "format": "urlset",
+      "checked_at": "2026-10-15T19:50:30.968Z",
+      "parsed_urls": 1000,
+      "newest_content_at": null,
+      "content_freshness": "missing"
+    },
+    {
+      "endpoint_id": "ep_80829ed84f5de5438a203d06",
+      "sources": [
+        {
+          "id": "src_90107f5c6f00734efa710da5",
+          "name": "Donga Ilbo - Culture",
+          "country": "KR"
+        }
+      ],
+      "type": "rss",
+      "status": "working_nonempty",
+      "format": "rss",
+      "checked_at": "2026-10-15T19:50:17.954Z",
+      "parsed_urls": 50,
+      "newest_content_at": "2026-10-15T19:30:00.000Z",
+      "content_freshness": "recent"
+    },
+    {
+      "endpoint_id": "ep_df3063cecb161bb237317f74",
+      "sources": [
+        {
+          "id": "src_dc3f09caf259e084a54cfeb0",
+          "name": "Donga Ilbo - Science",
+          "country": "KR"
+        }
+      ],
+      "type": "rss",
+      "status": "working_nonempty",
+      "format": "rss",
+      "checked_at": "2026-10-15T19:50:22.942Z",
+      "parsed_urls": 50,
+      "newest_content_at": "2026-10-15T19:30:00.000Z",
+      "content_freshness": "recent"
+    },
+    {
+      "endpoint_id": "ep_58133bbb631a773cfd2193c1",
+      "sources": [
+        {
+          "id": "src_03b00d0ab782679b5d2418a7",
+          "name": "El Financiero",
+          "country": "MX"
+        }
+      ],
+      "type": "rss",
+      "status": "working_nonempty",
+      "format": "rss",
+      "checked_at": "2026-10-15T19:50:22.753Z",
+      "parsed_urls": 100,
+      "newest_content_at": "2026-10-15T19:35:59.000Z",
+      "content_freshness": "recent"
+    },
+    {
+      "endpoint_id": "ep_f8e773ab56f1a3dde8ecd03c",
+      "sources": [
+        {
+          "id": "src_b0fb44fa1133f4be5e54aa14",
+          "name": "iXBT",
+          "country": "RU"
+        }
+      ],
+      "type": "rss",
+      "status": "working_nonempty",
+      "format": "rss",
+      "checked_at": "2026-10-15T19:49:50.129Z",
+      "parsed_urls": 50,
+      "newest_content_at": "2026-10-15T19:20:33.000Z",
+      "content_freshness": "recent"
+    },
+    {
+      "endpoint_id": "ep_59ca030cfddc247af1b4ec6e",
+      "sources": [
+        {
+          "id": "src_fdbd03aa10ab96c0a9c90692",
+          "name": "Boston Globe",
+          "country": "US"
+        }
+      ],
+      "type": "rss",
+      "status": "working_nonempty",
+      "format": "rss",
+      "checked_at": "2026-10-15T19:49:43.258Z",
+      "parsed_urls": 100,
+      "newest_content_at": "2026-10-15T19:33:27.000Z",
+      "content_freshness": "recent"
+    },
+    {
+      "endpoint_id": "ep_b71044bed37751d4329a160b",
+      "sources": [
+        {
+          "id": "src_a4d6c256e60bbf8d247f2f40",
+          "name": "Sarandí 690 - RSS",
+          "country": "UY"
+        }
+      ],
+      "type": "rss",
+      "status": "working_nonempty",
+      "format": "rss",
+      "checked_at": "2026-10-15T19:52:31.171Z",
+      "parsed_urls": 20,
+      "newest_content_at": "2026-10-15T19:53:16.000Z",
+      "content_freshness": "unreliable"
+    }
+  ],
+  "remaining_failure_reasons": {
+    "WRONG_ENDPOINT_FORMAT": 66,
+    "HTTP_403": 312,
+    "HTTP_406": 31,
+    "INVALID_XML": 113,
+    "HTTP_404": 121,
+    "DTD_NOT_ALLOWED": 60,
+    "BODY_TOO_LARGE": 1,
+    "HTTP_405": 3,
+    "TIMEOUT": 47,
+    "UNABLE_TO_VERIFY_LEAF_SIGNATURE": 1,
+    "POLITENESS_WAIT_LIMIT": 9,
+    "HTTP_503": 3,
+    "HTTP_500": 4,
+    "HTTP_429": 12,
+    "HTTP_451": 10,
+    "UNSUPPORTED_ENCODING": 7,
+    "HTTP_502": 4,
+    "EAI_AGAIN": 1,
+    "HTTP_530": 1,
+    "TOO_MANY_REDIRECTS": 2,
+    "INVALID_ENTRY_URL": 1,
+    "NETWORK_OR_PARSE_ERROR": 1,
+    "ERR_TLS_CERT_ALTNAME_INVALID": 2,
+    "HTTP_402": 1,
+    "ECONNRESET": 1
+  },
+  "change_scope": {
+    "collector": "news-quality-brotli-20261015",
+    "quality_app": "quality-brotli-20261015",
+    "public_code_files": [
+      "dist/validate.js"
+    ],
+    "registrations_changed": 0,
+    "source_urls_changed": 0,
+    "enabled_states_changed": 0,
+    "source_replacements_applied": 0,
+    "manual_global_daily_restarts": 0,
+    "new_services_or_timers": 0,
+    "model_calls": 0
+  },
+  "validation": {
+    "local_tests": 439,
+    "production_pinned_tests": 424,
+    "new_brotli_tests": 11,
+    "preservation_passed": true,
+    "original_collection_rows_preserved": 64800,
+    "original_canonical_url_rows_preserved": 2497170,
+    "original_known_nonnull_binding_baselines_preserved": 4339,
+    "newly_initialized_previously_null_bindings": 1,
+    "unexplained_collections": 0,
+    "ledger_after": {
+      "collections": 64836,
+      "urls": 2497995,
+      "bindings": 5902
+    },
+    "public_health": {
+      "version": 1,
+      "verified_at_utc": "2026-10-15T20:14:03Z",
+      "status": "passed",
+      "endpoint_health_calls": 2,
+      "endpoint_ids_compared": 34,
+      "exact_latest_check_status_reason_format_http_status_matches": 34,
+      "healthy_recovered_endpoint_ids": [
+        "ep_58133bbb631a773cfd2193c1",
+        "ep_59ca030cfddc247af1b4ec6e",
+        "ep_6247ccb05a1f1e52b21ca088",
+        "ep_80829ed84f5de5438a203d06",
+        "ep_b71044bed37751d4329a160b",
+        "ep_d283a1cd579fe6e5dbebda09",
+        "ep_df3063cecb161bb237317f74",
+        "ep_e51403691dc1a156cb067d1a",
+        "ep_f8e773ab56f1a3dde8ecd03c"
+      ],
+      "healthy_recovered_endpoint_count": 9,
+      "failed_endpoints_kept_unhealthy": 25,
+      "european_pravda": {
+        "endpoint_id": "ep_25355e239cec107b31524e93",
+        "checked_at": "2026-10-15T20:05:04.274Z",
+        "audit_status": "malformed",
+        "reason": "WRONG_ENDPOINT_FORMAT",
+        "status": "unhealthy"
+      },
+      "boston_globe_search": {
+        "status": "passed",
+        "source_id": "src_fdbd03aa10ab96c0a9c90692",
+        "endpoint_id": "ep_59ca030cfddc247af1b4ec6e",
+        "identity_preserved": true
+      },
+      "original_full_audit_dates": {
+        "last_completed_full_audit_at": "2026-09-30T20:05:37.106Z",
+        "current_audit_finished_at": "2026-10-10T23:22:54.291Z"
+      },
+      "publisher_requests": 0,
+      "model_calls": 0,
+      "source_changes": 0
+    },
+    "public_activity": {
+      "verified_at_utc": "2026-10-15T20:13:49.142011Z",
+      "snapshot_at": "2026-10-15T20:05:07.155Z",
+      "actual_connector_responses_compared": 4,
+      "countries": {
+        "US": {
+          "new_unique_candidate_urls": 7635,
+          "state": "partial",
+          "targeted_endpoints": 269,
+          "successful_article_endpoints": 189,
+          "initialization": "partial",
+          "baseline_checks": 6,
+          "schedule_matches": true
+        },
+        "KR": {
+          "new_unique_candidate_urls": 8826,
+          "state": "partial",
+          "targeted_endpoints": 57,
+          "successful_article_endpoints": 55,
+          "initialization": "partial",
+          "baseline_checks": 0,
+          "schedule_matches": true
+        },
+        "BR": {
+          "new_unique_candidate_urls": 6304,
+          "state": "partial",
+          "targeted_endpoints": 71,
+          "successful_article_endpoints": 61,
+          "initialization": "partial",
+          "baseline_checks": 0,
+          "schedule_matches": true
+        }
+      },
+      "us_2026_10_14_discoveries": 4711,
+      "us_2026_10_14_state": "partial",
+      "publisher_requests": 0,
+      "provider_calls": 0
+    },
+    "public_functional": {
+      "initial_strict_acknowledgment_probe_passed": false,
+      "initial_failure_preserved": "public-http-smoke.log",
+      "subsequent_functional_status": "passed",
+      "tools": [
+        "search_sources",
+        "get_source",
+        "list_countries",
+        "get_endpoint_health",
+        "get_country_source_inventory",
+        "get_source_article_activity",
+        "get_country_article_activity",
+        "get_country_collection_quality",
+        "get_source_collection_quality"
+      ],
+      "metrics": {
+        "status": "recorded",
+        "expected_acknowledgments": 10,
+        "received_acknowledgments": 10,
+        "recorded_acknowledgments": 10,
+        "missing_acknowledgments": 0,
+        "warning": null
+      },
+      "historical_metrics_gaps_reconstructed": false,
+      "publisher_requests": 0,
+      "provider_calls": 0
+    }
+  },
+  "public": {
+    "deployment_id": "dpl_8j7ys1bDWPLhVRcyyCCNAqUo3F3d",
+    "ready_state": "READY",
+    "aliases": [
+      "news.bymyleslee.com",
+      "world-news-sources-mcp.vercel.app",
+      "world-news-sources-mcp-mylee04s-projects.vercel.app"
+    ],
+    "snapshot_at": "2026-10-15T20:05:07.155Z",
+    "history_records": 64836,
+    "history_checksums_verified": true,
+    "original_full_audit_provenance_preserved": true
+  },
+  "protected_runtime": {
+    "completed_investigations": 4,
+    "settled_model_reservations": 323,
+    "pending_model_reservations": 0,
+    "pilot_limit_usd": 5,
+    "previous_held_usd_unchanged": 0.07626844799999989,
+    "private_repair_records_preserved": 5
+  },
+  "storage": {
+    "minimum_free_bytes": 53687091200,
+    "free_bytes": 62748241920,
+    "free_gib": 58.44,
+    "new_rollout_backup_archive_bytes": 1009084988,
+    "raw_backup_bytes": 5882466304,
+    "raw_backup_sha256": "77eced565882d43da769acb8d6805054ce5ae889220948b77d237bf3a3fc53d0",
+    "decompressed_sha256": "77eced565882d43da769acb8d6805054ce5ae889220948b77d237bf3a3fc53d0",
+    "gzip_crc_verified": true,
+    "redundant_new_raw_copy_removed_after_verification": true,
+    "old_backups_or_collection_history_removed": 0,
+    "next_backup_preflight_passed": true
+  },
+  "next_daily_utc": "Fri 2026-10-16 03:00:00 UTC",
+  "limitations": [
+    "Recovery is a point-in-time observation; 814 active addresses still fail.",
+    "Policy holds remain enforced; no exact replacement was approved or applied.",
+    "VOL.AT content dates are missing and its first binding baseline is excluded from discoveries.",
+    "Country discoveries are partial first-discovered candidate URL counts, not publication totals.",
+    "The initial HTTP smoke had an unavailable metrics acknowledgment; a subsequent run recorded all ten. Historical telemetry completeness remains unproven."
+  ],
+  "private_evidence_directory": "output/news-quality/failure-recovery-20261015",
+  "evidence_sha256": {
+    "ledger-before.json": "630e1c51c88ad11ae41a0587641813f0aeb483935d79cbc20ece2af19432914a",
+    "ledger-after.json": "5fec895e520ea0902470fd062e0c8ec368d94a677216f09941b7769e89c4b32e",
+    "archive-rollout-backup.json": "d58420f73d18aa1570c11995279436fe9145771488240da0f29f54456db9a3c9",
+    "final-runtime.json": "eb52727c28ee14d1d1eb9a51d627bcd968c02f8e6871245ae0c91333633f9356",
+    "production-ready-receipt.json": "31b2c8e5b26b38a5d499a927c47f73c0b27fb846bf0a164f3ee522988ec26deb",
+    "published-health-verification.json": "000af37f6d573782ca45e46094db770307e258439fe02f3d0f2748548620c1b8",
+    "published-activity-verification.json": "80d3c15605561b1bf0c5e14bb87a4d68d7b23787ec8757b24a2a0929e947176b"
+  }
+}
