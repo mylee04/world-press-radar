@@ -2,7 +2,7 @@ import { lookup } from 'node:dns/promises';
 import { request as httpRequest } from 'node:http';
 import { request as httpsRequest } from 'node:https';
 import { isIP, type LookupFunction } from 'node:net';
-import { gunzipSync } from 'node:zlib';
+import { brotliDecompressSync, gunzipSync } from 'node:zlib';
 import { inspectXml } from './inspect.js';
 import { canonicalUrl, type Endpoint, type EndpointType } from './catalog.js';
 import type { Observation } from './health.js';
@@ -76,6 +76,11 @@ export async function fetchXml(raw: string, timeoutMs = 8000, maxBytes = MAX_BYT
         if (contentTypeCount > 1 || contentType !== undefined && typeof contentType !== 'string') {
           response.destroy(); reject(new Error('INVALID_XML')); return;
         }
+        const contentEncoding = response.headers['content-encoding'];
+        const contentEncodingCount = response.rawHeaders?.filter((name, index) => index % 2 === 0 && name.toLowerCase() === 'content-encoding').length ?? 0;
+        if (contentEncodingCount > 1 || contentEncoding !== undefined && typeof contentEncoding !== 'string') {
+          response.destroy(); reject(new Error('UNSUPPORTED_ENCODING')); return;
+        }
         const chunks: Buffer[] = []; let length = 0;
         response.on('data', (chunk: Buffer) => {
           length += chunk.length;
@@ -95,8 +100,9 @@ export async function fetchXml(raw: string, timeoutMs = 8000, maxBytes = MAX_BYT
       continue;
     }
     let body = response.body;
-    if (response.encoding && !['identity', 'gzip'].includes(response.encoding)) throw new Error('UNSUPPORTED_ENCODING');
-    if (response.encoding === 'gzip' || (body[0] === 0x1f && body[1] === 0x8b)) body = gunzipSync(body, { maxOutputLength: maxBytes });
+    if (response.encoding && !['identity', 'gzip', 'br'].includes(response.encoding)) throw new Error('UNSUPPORTED_ENCODING');
+    if (response.encoding === 'br') body = brotliDecompressSync(body, { maxOutputLength: maxBytes });
+    else if (response.encoding === 'gzip' || (body[0] === 0x1f && body[1] === 0x8b)) body = gunzipSync(body, { maxOutputLength: maxBytes });
     return { status: response.status, body, finalUrl: url.href, requestedHops, ...(response.retryAfter ? { retryAfter: response.retryAfter } : {}), ...(response.contentType !== undefined ? { contentType: response.contentType } : {}) };
     } finally { release(); }
   }
