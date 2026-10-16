@@ -11,20 +11,45 @@
     "portal_availability": "All 12 Live; no findings in the latest MCP scan",
     "first_conversation": "Returned a generated five-RSS OPML file and explicitly said the official download address was not verified",
     "fresh_conversation_after_rescan": "Completed with the exact canonical official OPML URL through the official website fallback; distinguished saved collection, structural audit and content dates",
+    "fresh_consumer_workflow_completed": true,
+    "later_consumer_probe": {
+      "date_utc": "2026-10-16",
+      "model_reported_successful_tools": [
+        "list_source_packs",
+        "get_source_pack",
+        "export_source_pack"
+      ],
+      "successful_visible_integration_wrapper_stages": 3,
+      "official_opml_url_returned": true,
+      "reported_rss_exported": 5,
+      "reported_excluded_endpoints": 0,
+      "reported_sitemaps_omitted": 1,
+      "counts_match_independently_downloaded_opml": true,
+      "worked_seconds_displayed": 50,
+      "evidence_limit": "Final response reports all three exact tool calls succeeded. Visible raw integration wrappers report success but contain plaintext stage notifications, empty arguments and no nested MCP tool identifiers or structured result; exact native invocations remain independently unverified",
+      "execution_linkage": "The returned canonical URL matches the export independently downloaded and imported into FreshRSS earlier in this operator-run acceptance; this is not a single recorded chronological click-through"
+    },
     "official_opml_url": "https://news.bymyleslee.com/source-packs/japan-general/export?format=opml",
     "native_pack_tool_invocation_verified": false,
-    "remaining_blocker": "Portal discovery did not establish availability of the three new pack tools in the fresh consumer conversation",
+    "remaining_evidence_limit": "Portal discovery and successful consumer integration stages do not independently expose the exact nested MCP tool invocations",
     "metadata_revision": {
       "version": "0.3.0",
-      "state": "draft_uploaded_awaiting_terms_confirmation_and_skill_scan",
+      "state": "submitted_in_review",
+      "reviewed_at": "2026-10-16T22:31:49Z",
+      "submission_observed_at": "2026-10-16T22:31Z",
+      "submission_time_precision": "minute; observed in the portal, not a server submission timestamp",
+      "release_id": "pluginrel_64960b67488c8191b13295681ddd5b45",
       "currently_published_version": "0.2.0",
       "zip_sha256": "62076dba3ede29de3b8fd33e93d00f8dbacd15898617c454826b62152f19c2ba",
       "local_package_validation": "passed",
       "metadata_scan": "one_nonblocking_category_warning",
-      "skill_scan": "checking",
-      "terms_confirmation": "requested_from_user_not_yet_received",
-      "submitted": false,
-      "published": false
+      "skill_scan": "checks_passed_no_findings",
+      "terms_confirmation": "received_from_user; six required portal confirmations selected",
+      "submitted": true,
+      "review_status": "In review",
+      "published": false,
+      "last_portal_observed_at": "2026-10-16T22:35Z",
+      "last_portal_observation_precision": "minute; operator observed after explicit page reload"
     }
   },
   "reader": {
@@ -82,7 +107,7 @@
     "private_conversation_urls_or_credentials_in_this_receipt": false
   },
   "remaining_validation": [
-    "Publish and verify the revised plugin metadata, then verify native list/get/export pack tools in a consumer conversation",
+    "Publish and verify the revised plugin metadata; exact native list/get/export invocations remain independently unverified despite successful consumer workflow and model report",
     "Consenting external-user pilot and manual-research comparison for usability and time savings",
     "Other readers, future availability, missing major Japanese publishers and long-term monitoring behavior"
   ],
@@ -94,6 +119,10 @@
     "plugin/chatgpt-before-rescan-final.txt": "83837fa429c8ebe3b94ece12ab9c08de9caaa6eb99637eeda8d9bf3260aa6a0d",
     "plugin/chatgpt-after-rescan.txt": "e69d2495968f53eab74760ba021d9b93443626ac59cc5e0ebe21cd03e3bdab66",
     "plugin/portal-tools-after-rescan.txt": "f41aa1898745cfc9dfb6f3c0a142651daffed28a43f6dbcee715dd39b4274fc7",
+    "plugin/consumer-tools-during-review.txt": "3ba4ab419ea2c8fdd0c38e504d6e783c3001c3a57dc3733b2a04571c927164a8",
+    "plugin/consumer-raw-list-wrapper.txt": "1ae7934d59804a9fce06f74c27877d22a47971f48378fb6dd20f069918dd49d5",
+    "plugin/consumer-raw-detail-wrapper.txt": "4623d5524b0cf3ff9809caade8c5651ace2a95812ae4566171ef7cef2e304688",
+    "plugin/consumer-raw-export-wrapper.txt": "9b3af528a501fd4ed07ddedc725fcf21407b206fae3cb8d78d55b906a34aa956",
     "freshrss-mainichi-first-items.png": "64c6345d940f43cdfda7dfbd04a102cb28fc8a290e1147ed46c25aa88c922942"
   },
   "evidence_note": "Raw local receipts and screenshots remain in ignored japan-user-flow-20261016 output directories; private conversations and test credentials are not copied into tracked documentation"
