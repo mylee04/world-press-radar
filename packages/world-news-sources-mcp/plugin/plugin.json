@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "world-news-sources",
-  "version": "0.2.0",
-  "description": "Discover publisher RSS feeds, sitemaps, cached health and first-discovered article-URL activity.",
+  "version": "0.3.0",
+  "description": "Find publisher RSS feeds and sitemaps, explore three curated starter packs, compare dated collection and audit evidence, and export collector configurations.",
   "homepage": "https://news.bymyleslee.com",
   "keywords": [
     "news sources",
@@ -16,21 +16,23 @@
     "com.openai": {
       "interface": {
         "displayName": "World News Sources",
-        "shortDescription": "Find RSS feeds and sitemaps",
-        "longDescription": "Find configured publisher RSS feeds and sitemaps across countries for source research, feed setup, and news monitoring projects.\n\nSearch by publisher name or domain, country, endpoint type, category, language, and configuration status. View source details, browse supported countries, and inspect separate RSS and sitemap health records with actual check times, parsed item or URL counts, sample URLs, and publication-date information when available.\n\nHealth is cached from bounded operator checks. Check times are separate from content dates: a reachable feed may contain old content, and a cached result may become stale. Some configured endpoints are empty, blocked, unavailable, malformed, or could not be fully checked. Country and configuration counts do not represent unique publishers or guaranteed live coverage. Sitemap indexes describe child sitemap entries; child files and article links are not validated by this plugin.\n\nRead active source-registration inventory and cached first-discovered unique article-candidate URL activity by source or country. Country counts deduplicate across sources. Every new endpoint/source binding begins with an excluded baseline; untracked periods return null, and partial initialization or collection is explicit. Calendar days use a requested IANA timezone or UTC; rolling 24 hours is separate. Activity queries read retained aggregate history in bounded ranges of up to 31 calendar days per request. Older stored dates remain queryable; periods before real recording are not reconstructed. These counts are discoveries, not publications or feed entry counts. Homepage/section/forum heuristics are separated; sitemap-index children are excluded. No semantic content deduplication is performed.\n\nWorld News Sources provides read-only source metadata and observation aggregates. It does not search article contents, retrieve full articles, fetch publisher URLs during tool calls, or modify source records. No account or API key is required to use its public MCP endpoint.\n\nFor support, contact myungeun2dc@gmail.com.",
+        "shortDescription": "News feeds and starter packs",
+        "longDescription": "Find configured publisher RSS feeds and sitemaps across countries for source research, feed setup, and news monitoring projects.\n\nStart with three curated selections: US business, Japanese general news, or Korean news in English. Each includes its intended scope, language and topic metadata, publisher aliases, official evidence, and known gaps. These starter packs are not complete national media lists or editorial reliability ratings. Export RSS/Atom feeds as OPML, or preserve separate RSS and sitemap types in CSV and JSON. Default exports exclude disabled, failed, empty, index-only and outdated evidence; missing content dates remain unknown. A receiving collector may see different results from the saved checker environment.\n\nSearch by publisher name or domain, country, endpoint type, category, language, and configuration status. View source details and compare the latest saved collection evidence with the separate structural audit cache. Actual check times, content dates, parsed item or URL counts, and sample URLs are distinct. The combined status explains conflicting observations rather than letting an older audit override a newer collection. Zero newly discovered URLs alone does not mean failure.\n\nAll status evidence is cached from bounded operator checks. A reachable feed may contain old content, and saved results may become stale. Some configured endpoints are empty, blocked, unavailable, malformed, or incompletely checked. Country and configuration counts are not unique publishers or guaranteed live coverage. Sitemap indexes describe child references; child files and article links are not validated by this plugin.\n\nRead active registration inventory and cached first-discovered unique article-candidate URL activity by source or country. Country counts deduplicate across sources. Every new endpoint/source binding starts with an excluded baseline; untracked periods return null and partial initialization or collection is explicit. Calendar days use the requested IANA timezone or UTC; rolling 24 hours is separate. Retained aggregate history is queryable in bounded ranges of up to 31 calendar days per request. Periods before recording are not reconstructed. Counts are discoveries, not publications or feed entry counts. Homepage/section/forum heuristics are separated; sitemap-index children are excluded. No semantic content deduplication is performed.\n\nWorld News Sources provides read-only source metadata, configuration exports and observation aggregates. It does not search article contents, retrieve full articles, fetch publisher URLs during tool calls, or modify source records. No account or API key is required for its public MCP endpoint.\n\nFor support, contact myungeun2dc@gmail.com.",
         "category": "Productivity",
         "capabilities": [
           "Find RSS and sitemap sources",
+          "Browse three curated starter packs",
+          "Export RSS-only OPML and typed CSV or JSON",
+          "Compare dated collection and audit evidence",
           "Browse supported countries",
-          "Read cached endpoint health",
           "Read source and country URL activity",
           "Read active source inventory"
         ],
         "websiteURL": "https://news.bymyleslee.com",
         "defaultPrompt": [
-          "Find RSS sources in the United States.",
-          "Find sitemap sources in Croatia.",
-          "Show cached health and check times for a news source."
+          "Help me start monitoring Japanese news. Show the Japan starter pack and give me its RSS-only OPML export.",
+          "Find enabled US business RSS sources and explain their latest saved collection and audit status.",
+          "Show today’s first-discovered news URL activity for Japan in UTC, including baseline and coverage limits."
         ],
         "logo": "./assets/icon.svg",
         "composerIcon": "./assets/icon.svg",
@@ -49,10 +51,10 @@
               "expected_behavior": "Return matching configured source registrations and typed endpoints. Enabled is configuration, not health. Present actual cached check times separately from content dates. Do not infer RSS success from sitemap health or fetch articles."
             },
             {
-              "description": "Discover sitemap metadata without article availability claims",
-              "prompt": "Find up to five configured sitemap sources in Croatia. Show source names and sitemap URLs, and explain what a sitemap index health result does and does not verify.",
-              "tools_triggered": "search_sources",
-              "expected_behavior": "Return bounded configured sitemap registrations. Explain index entries are child sitemap references; no child crawl, article-body access or all-healthy claim is made."
+              "description": "Set up Japanese news monitoring from a curated pack and RSS-only OPML",
+              "prompt": "Help me start monitoring Japanese news. Find the Japan starter pack, show its scope, gaps and dated endpoint status, then give me its default RSS-only OPML export. Explain which entries were excluded and how to import it into an RSS reader.",
+              "tools_triggered": "list_source_packs, get_source_pack, export_source_pack",
+              "expected_behavior": "Use a pack ID returned by discovery, preserve the stated scope and known missing publishers, and distinguish collection time, audit time and content date. Return the official exported download URL and actual exclusion counts. OPML includes RSS/Atom only, never sitemap entries. Do not claim the export was imported or fetched successfully by another collector. If these tools are unavailable, explain that limitation and use the official homepage starter-pack section as a fallback without inventing results or export URLs."
             },
             {
               "description": "Paginate supported countries and read current active registration inventory",
@@ -92,7 +94,7 @@
         "commerce_description": "This plugin does not sell products or process payments."
       },
       "publication": {
-        "release_notes": "Adds cached first-discovered article-candidate URL activity and active source inventory. Initial production coverage is partial; every new endpoint/source binding uses an excluded baseline. No article full text or live publisher fetch on tool calls."
+        "release_notes": "Adds three curated starter packs with scope, gaps and official evidence; dated collection-versus-audit status; and RSS-only OPML or typed CSV/JSON exports. Cached evidence is not a live fetch or guaranteed coverage. Existing source inventory and URL-discovery activity retain baseline, timezone and partial-coverage semantics."
       }
     }
   },

@@ -1,0 +1,100 @@
+{
+  "scenario": "Start Japanese news monitoring with the published plugin and import its official RSS-only export into an empty reader",
+  "date_utc": "2026-10-16",
+  "result": "PARTIAL_PASS",
+  "scope": "Operator-run integration acceptance, not a consenting external-user usability study",
+  "chatgpt": {
+    "installed_version_observed": "0.2.0",
+    "existing_connector_tools_exposed": 7,
+    "portal_tools_before_rescan": 9,
+    "portal_tools_after_rescan": 12,
+    "portal_availability": "All 12 Live; no findings in the latest MCP scan",
+    "first_conversation": "Returned a generated five-RSS OPML file and explicitly said the official download address was not verified",
+    "fresh_conversation_after_rescan": "Completed with the exact canonical official OPML URL through the official website fallback; distinguished saved collection, structural audit and content dates",
+    "official_opml_url": "https://news.bymyleslee.com/source-packs/japan-general/export?format=opml",
+    "native_pack_tool_invocation_verified": false,
+    "remaining_blocker": "Portal discovery did not establish availability of the three new pack tools in the fresh consumer conversation",
+    "metadata_revision": {
+      "version": "0.3.0",
+      "state": "draft_uploaded_awaiting_terms_confirmation_and_skill_scan",
+      "currently_published_version": "0.2.0",
+      "zip_sha256": "62076dba3ede29de3b8fd33e93d00f8dbacd15898617c454826b62152f19c2ba",
+      "local_package_validation": "passed",
+      "metadata_scan": "one_nonblocking_category_warning",
+      "skill_scan": "checking",
+      "terms_confirmation": "requested_from_user_not_yet_received",
+      "submitted": false,
+      "published": false
+    }
+  },
+  "reader": {
+    "name": "FreshRSS",
+    "version": "1.30.1",
+    "image": "freshrss/freshrss@sha256:48b63b9bc3d042a1301c32971b01af8841c7f059b452589c5bf77f475ba44c61",
+    "environment": "Isolated local Docker, linux/arm64, loopback access only",
+    "opml_downloaded_at": "2026-10-16T22:16:58.308935+00:00",
+    "opml_sha256": "71776b3d43227a362a0fe1228f210b2f30406ca8d3812313e5a33e6db2e15d42",
+    "opml_http_status": 200,
+    "rss_subscriptions_imported": 5,
+    "sitemap_subscriptions": 0,
+    "refresh_started_at": "2026-10-16T22:19:23.178382+00:00",
+    "refreshes_per_feed": 1,
+    "feed_http_200": 5,
+    "feed_errors": 0,
+    "stored_items": 171,
+    "items_by_feed": {
+      "Mainichi Shimbun": 20,
+      "J-CAST News": 54,
+      "Hokkaido Shimbun": 57,
+      "Kyoto Shimbun": 20,
+      "Okinawa Times": 20
+    },
+    "first_feed_refresh_seconds": 0.899,
+    "all_five_refresh_invocations_seconds": 4.684,
+    "timing_limit": "Refresh duration excludes reader setup, source selection, import and human work; it is not a time-savings measurement",
+    "cron_enabled": false,
+    "full_content_scraping_configured": false,
+    "incidental_import_attempts": {
+      "publisher_homepages": 5,
+      "favicons": 5,
+      "qualification": "CLI import attempted these requests despite show_favicons=false; some coincided with network disconnection, so attempts do not establish successful completion",
+      "subsequent_mitigation": "Per-feed custom favicon suppressed icon retrieval during explicit refresh"
+    },
+    "article_request_scope": "No article URL was deliberately fetched; empty full-content paths and app/browser traces were checked, not a complete network packet audit",
+    "cleanup": {
+      "container_state": "exited",
+      "exit_code": 0,
+      "finished_at": "2026-10-16T22:27:35.827246055Z",
+      "isolated_test_volume_preserved": true
+    }
+  },
+  "evidence_times": {
+    "saved_production_snapshot": "2026-10-16T03:59:28.999Z",
+    "earlier_independent_xml_checker": "2026-10-16T21:31:41.104Z",
+    "reader_refresh": "2026-10-16T22:19:23.178382+00:00",
+    "semantics": "These are different observations. Reader receipt is not inserted into production collection history, and archived discovery counts are not reader item counts or publication totals"
+  },
+  "preservation": {
+    "operator_collection_started_by_pilot": false,
+    "registry_changes_by_pilot": false,
+    "existing_production_records_used_read_only": true,
+    "new_primary_database_checksum_audit": false,
+    "private_conversation_urls_or_credentials_in_this_receipt": false
+  },
+  "remaining_validation": [
+    "Publish and verify the revised plugin metadata, then verify native list/get/export pack tools in a consumer conversation",
+    "Consenting external-user pilot and manual-research comparison for usability and time savings",
+    "Other readers, future availability, missing major Japanese publishers and long-term monitoring behavior"
+  ],
+  "evidence_sha256": {
+    "reader/acceptance.json": "8995cedfde14c3e09309b4785c67df3ef9c9f87068821bdb453003f7174a65a9",
+    "reader/download.json": "6056ba561a46845a2d189e9ee3f429b1df598af4dc5dd972a3d4bcc2e1bfdca7",
+    "reader/refresh-receipt.json": "35a8d75f8f51b7e170328374eddb942c8994195bf208f2689e0ddc436e8679a2",
+    "reader/import-2.log": "d27ba478cd53ea7cf67100d38b6b4ac97105cfd4dd967a9da359c1a65308386d",
+    "plugin/chatgpt-before-rescan-final.txt": "83837fa429c8ebe3b94ece12ab9c08de9caaa6eb99637eeda8d9bf3260aa6a0d",
+    "plugin/chatgpt-after-rescan.txt": "e69d2495968f53eab74760ba021d9b93443626ac59cc5e0ebe21cd03e3bdab66",
+    "plugin/portal-tools-after-rescan.txt": "f41aa1898745cfc9dfb6f3c0a142651daffed28a43f6dbcee715dd39b4274fc7",
+    "freshrss-mainichi-first-items.png": "64c6345d940f43cdfda7dfbd04a102cb28fc8a290e1147ed46c25aa88c922942"
+  },
+  "evidence_note": "Raw local receipts and screenshots remain in ignored japan-user-flow-20261016 output directories; private conversations and test credentials are not copied into tracked documentation"
+}

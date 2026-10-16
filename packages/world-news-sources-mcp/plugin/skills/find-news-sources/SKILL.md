@@ -1,6 +1,6 @@
 ---
 name: find-news-sources
-description: Find configured publisher RSS feeds or sitemaps by country, name, domain, language or category, and explain their cached endpoint health when requested.
+description: Find publisher RSS feeds and sitemaps, choose curated monitoring starter packs, export collector configurations, and explain dated collection, audit and URL-discovery evidence.
 ---
 
 Use the World News Sources MCP tools for source discovery and cached endpoint metadata. Follow the user's requested scope and output format.
@@ -12,6 +12,8 @@ Use the World News Sources MCP tools for source discovery and cached endpoint me
 - For a monitoring setup, use `list_source_packs`, then `get_source_pack` for the chosen ID. The three starter selections cover US business, Japanese general news, and Korean news in English. Explain the stated scope and gaps; these are not complete lists of national major publishers or editorial reliability ratings.
 - Use `export_source_pack` to hand the selection to a collector. OPML contains RSS/Atom only; CSV and JSON preserve RSS versus sitemap types. The default excludes disabled, failed, empty, index-only and outdated evidence. `include: "all"` is an explicit inspection option, not a working-feed guarantee. Missing content dates stay unknown. Give the returned download URL and exclusion counts, and explain that another collector's first fetch may differ from the saved checker environment.
 - `search_sources` supports `pack_id` and curated publisher aliases. Curated language/topic matches apply only to `curation.matching_endpoint_ids`; do not transfer a section's language or topic to unrelated endpoints from the same registration.
+
+Use only tools actually available in the current session. If the starter-pack tools are missing, say that this installation does not currently expose them and direct the user to the official starter-pack section at https://news.bymyleslee.com/#source-packs. When web access is available, follow a download link actually declared there; do not invent an export URL or claim an unavailable tool ran. Distinguish an official published export from an OPML file you generate yourself from search results. A generated file must be labelled as such, preserve verified feed URLs and endpoint types, and must not imply the curated pack or its exclusion policy was used.
 
 Present the source name, country, endpoint type and configured URL. Add the recorded status and actual `checked_at` when discussing availability. `healthy` means a recent structural XML check succeeded; inspect `audit_status`, `entry_count` and `entries_with_url` for empty documents or absent URL outputs. A cached result is not a new live check.
 
