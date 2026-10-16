@@ -1,0 +1,74 @@
+{
+  "feature": "curated source discovery, dated evidence and collector exports",
+  "verified_at": "2026-10-16T21:42:28.045557+00:00",
+  "deployment": {
+    "id": "dpl_BRua8Gs3J4ZnUBR3D3MvQhZ9bfxv",
+    "state": "READY",
+    "public_url": "https://news.bymyleslee.com/#source-packs",
+    "aliases": [
+      "news.bymyleslee.com",
+      "world-news-sources-mcp.vercel.app",
+      "world-news-sources-mcp-mylee04s-projects.vercel.app"
+    ],
+    "new_deployment_url_fetch_performed": false
+  },
+  "validation": {
+    "repository_tests": 472,
+    "exact_release_tests": 457,
+    "mcp_tools": 12,
+    "sdk_and_legacy": true,
+    "english_and_korean_mobile": true,
+    "opml_csv_json_downloads": true,
+    "independent_review": "no additional findings after corrections"
+  },
+  "selections": {
+    "packs": 3,
+    "curated_publishers": 15,
+    "default_typed_endpoints": 14,
+    "default_rss": 13,
+    "default_sitemaps": 1,
+    "known_saved_failure_excluded": "The Korea Herald"
+  },
+  "consumer_probe": {
+    "environment": "independent local macOS",
+    "at": "2026-10-16T21:31:41.104Z",
+    "xml_received_and_parsed": 12,
+    "policy_holds": 2,
+    "no_article_or_child_requests": true,
+    "holds": [
+      "ABC News robots redirect outside exact host rule",
+      "Korea Times robots HTTP 204 not verified by probe"
+    ]
+  },
+  "preservation": {
+    "activity_generated_at": "2026-10-16T03:59:28.999Z",
+    "primary_fingerprint_unchanged": true,
+    "original_baselines_and_history_files_unchanged": true,
+    "repair_files_preserved": 5,
+    "runtime_and_history_logical_tables_preserved": true,
+    "primary_database_writes": 0,
+    "collection_started": false,
+    "export_started": false,
+    "timer_files_changed": false,
+    "private_quality_code_changed": false,
+    "web_restarts": 1,
+    "next_daily_guard_passed": true,
+    "free_bytes": 63924895744,
+    "minimum_free_bytes": 53687091200
+  },
+  "remaining_validation": [
+    "Consenting external-user pilot for time savings",
+    "Import behavior in specific third-party feed readers",
+    "Installed ChatGPT connection tool-cache refresh; directory skill revision not republished"
+  ],
+  "evidence_sha256": {
+    "activation-receipt.json": "ba1e870d4eea502561356710a8f7f45c34d52f942329b43c4ab3379a58a7b67d",
+    "production-ready-receipt.json": "d320446e57d47d720ace982652298794fc35cc274549d2811efdff4395ec6e45",
+    "local-acceptance.json": "9fa290edaeab451e2365e22c9617fc7f333d2a2f0e211377db3e1d0038ece2a1",
+    "full-tests-472.log": "e1abaad8bd82b0d4d9f568a4d318499d17a28e23a3ae3d5ec98960497397c96a",
+    "stage-validation.log": "170559c6845f62bf08952b8c16b74695ebb5e540303070961f62b82355d6e0a0",
+    "timers-postflight.json": "3583dea582c2934a56ff1f2fc9bfb062946fb1b68d0bb6cd5e42122ba71bbed3",
+    "consumer/result.json": "6db1267682eb1403c4c466ecb12def67f59c0667241a63c590f63f99c1e674bc",
+    "browser/exact-bundle-acceptance.json": "04ed3c41a2401fba792a5179b96d5ec5f18c2feb9c9adb056104c0b7c07c588d"
+  }
+}

@@ -5,9 +5,11 @@ import { createServer } from './server.js';
 import { callMetadata, callOutcome, readRpcResponse, type AggregateSink } from './metrics.js';
 import { ActivityStore } from './activity.js';
 import { createQualityHandler, type QualityRuntimeOptions } from './quality-http.js';
+import { createSourcePackHandler } from './source-packs.js';
 
 export function createHttpHandler(catalog: Catalog, health: HealthStore, allowedHosts: string[], metrics?: AggregateSink, activity = new ActivityStore(), rawRegistry?: unknown, allowInvestigations = false, remoteQuality = false, qualityRuntime: QualityRuntimeOptions = {}) {
   const quality = createQualityHandler(catalog, health, activity, rawRegistry, allowInvestigations, remoteQuality, qualityRuntime);
+  const sourcePacks = createSourcePackHandler(catalog, health, activity);
   const mcp = createMcpHandler(() => createServer(catalog, health, activity), {
     legacy: 'stateless', responseMode: 'json', maxRequestBodySize: 64 * 1024,
     maxSubscriptions: 0, keepAliveMs: 0,
@@ -25,6 +27,8 @@ export function createHttpHandler(catalog: Catalog, health: HealthStore, allowed
       const rejected = hostHeaderValidationResponse(guardedRequest, allowedHosts)
         ?? originValidationResponse(guardedRequest, [...allowedHosts, 'chatgpt.com']);
       if (rejected) return rejected;
+      const packResponse = await sourcePacks(guardedRequest);
+      if (packResponse) return packResponse;
       const qualityResponse = await quality(guardedRequest);
       if (qualityResponse) return qualityResponse;
       if (url.pathname === '/health' && request.method === 'GET') return Response.json({

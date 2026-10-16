@@ -9,7 +9,7 @@ const fixtureFiles = new Set(['expansion/registry-additions.json', 'expansion/ve
   'expansion/robots-policy.mjs', 'expansion/second-pass-live-before.json', 'expansion/first-pass-checkpoints.json',
   'expansion/remaining13/checkpoints.json', 'expansion/remaining13/targeted.json', 'expansion/remaining13/registry-additions.json',
   'expansion/remaining13/verified-health-additions.json', 'expansion/remaining13/verified-existing-health.json', 'evaluation/cases.json']);
-export const collectorCodePath = path => fixed.includes(path) || fixtureFiles.has(path)
+export const collectorCodePath = path => fixed.includes(path) || fixtureFiles.has(path) || path === 'curation/source-packs.json' || path === 'site/source-packs.js'
   || /^(?:src\/[A-Za-z0-9_-]+\.ts|dist\/[A-Za-z0-9_-]+\.(?:js|d\.ts)|scripts\/[A-Za-z0-9_-]+\.(?:mjs|py)|test\/[A-Za-z0-9_-]+(?:\.test)?\.mjs|dashboard\/(?:index\.html|app\.js|styles\.css)|site\/(?:[A-Za-z0-9_-]+\.(?:html|css|svg)|\.well-known\/openai-apps-challenge)|metrics\/(?:worker\.mjs|schema\.sql|report\.sql)|plugin\/(?:plugin\.json|mcp\.json|skills\/find-news-sources\/(?:SKILL\.md|agents\/openai\.yaml)))$/.test(path);
 
 export async function prepareCollectorRelease({ packageRoot = root, output, revision }) {
@@ -22,7 +22,7 @@ export async function prepareCollectorRelease({ packageRoot = root, output, revi
     for (const name of await readdir(directory)) {
       if (name === 'node_modules' || name === 'output' || name === '.deploy-vercel' || name === '.vercel') continue;
       const path = prefix + name, info = await lstat(join(directory, name));
-      if (info.isDirectory() && /^(?:src|dist|scripts|test|dashboard|site|metrics|plugin|expansion|evaluation)(?:\/|$)/.test(path)) await walk(join(directory, name), path + '/');
+      if (info.isDirectory() && /^(?:src|dist|scripts|test|dashboard|site|metrics|plugin|expansion|evaluation|curation)(?:\/|$)/.test(path)) await walk(join(directory, name), path + '/');
       else if (collectorCodePath(path)) {
         if (!info.isFile() || info.isSymbolicLink() || info.size > 4 * 1024 * 1024) throw Error('COLLECTOR_RELEASE_UNSAFE_FILE');
         listed.push(path);
@@ -30,6 +30,7 @@ export async function prepareCollectorRelease({ packageRoot = root, output, revi
     }
   };
   await walk(packageRoot);
+  if (listed.includes('dist/source-packs.js') && !listed.includes('curation/source-packs.json')) throw Error('COLLECTOR_RELEASE_BUILD_REQUIRED');
   for (const required of [...fixed, 'dist/activity-ledger.js', 'dist/collection-schedule.js', 'scripts/collect-activity.mjs',
     'scripts/prepare-vercel.mjs', 'scripts/quality-cloud-gateway.mjs', 'scripts/install-collector-release.py', 'evaluation/cases.json'])
     if (!listed.includes(required)) throw Error('COLLECTOR_RELEASE_BUILD_REQUIRED');

@@ -11,7 +11,7 @@ import { cloudOptions, cloudUnitFiles, verifyCloudBundle, installCloud, validate
 async function fixture(t) {
   const directory = await mkdtemp(join(await realpath(tmpdir()), 'quality-cloud-ops-')); t.after(() => rm(directory, { recursive: true, force: true }));
   const code = join(directory, 'source');
-  const files = ['package.json', 'package-lock.json', 'dashboard/index.html', 'dashboard/app.js', 'dashboard/styles.css', 'scripts/quality-daily.mjs',
+  const files = ['package.json', 'package-lock.json', 'curation/source-packs.json', 'dashboard/index.html', 'dashboard/app.js', 'dashboard/styles.css', 'scripts/quality-daily.mjs',
     'scripts/collect-activity.mjs', 'scripts/install-quality-cloud.mjs', 'dist/http-cloud.js'];
   for (const file of files) { await mkdir(join(code, file, '..'), { recursive: true }); await writeFile(join(code, file), file.endsWith('.json') ? '{}' : '// code\n'); }
   for (const forbidden of ['data/registry.json', 'output/runtime.sqlite', '.env.local', '.vercel/token.json']) {
@@ -37,11 +37,24 @@ async function fixture(t) {
   return { directory, options, lines, collector, code, bundle, shardFile };
 }
 
-test('cloud code bundle is a fixed whitelist with no metadata or private state', async t => {
+test('cloud code bundle includes public curation within a fixed whitelist and excludes private state', async t => {
   const { bundle } = await fixture(t), manifest = await verifyCloudBundle(bundle, 'test-20261013');
-  assert.equal(manifest.files.length, 9); assert.equal(manifest.contains_credentials, false);
-  assert.deepEqual((await readdir(bundle)).sort(), ['dashboard', 'dist', 'package-lock.json', 'package.json', 'quality-cloud-manifest.json', 'scripts']);
+  assert.equal(manifest.files.length, 10); assert.equal(manifest.contains_credentials, false);
+  assert.deepEqual((await readdir(bundle)).sort(), ['curation', 'dashboard', 'dist', 'package-lock.json', 'package.json', 'quality-cloud-manifest.json', 'scripts']);
   await writeFile(join(bundle, '.env'), 'unlisted'); await assert.rejects(verifyCloudBundle(bundle), /UNLISTED_BUNDLE_FILE/);
+});
+
+test('cloud verifier rejects a pack runtime with missing curated data before activation', async t => {
+  const { bundle } = await fixture(t);
+  const manifestPath = join(bundle, 'quality-cloud-manifest.json');
+  const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
+  const bytes = Buffer.from('// pack runtime\n');
+  await writeFile(join(bundle, 'dist/source-packs.js'), bytes);
+  manifest.files.push({ path: 'dist/source-packs.js', bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex') });
+  manifest.files = manifest.files.filter(file => file.path !== 'curation/source-packs.json');
+  await rm(join(bundle, 'curation/source-packs.json'));
+  await writeFile(manifestPath, JSON.stringify(manifest));
+  await assert.rejects(verifyCloudBundle(bundle), /INCOMPLETE_CODE_BUNDLE/);
 });
 
 test('cloud dry-run leaves all production metadata, ledger, state and units untouched', async t => {

@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
-const fixedFiles = ['package.json', 'package-lock.json', 'dashboard/index.html', 'dashboard/app.js', 'dashboard/styles.css',
+const fixedFiles = ['package.json', 'package-lock.json', 'curation/source-packs.json', 'dashboard/index.html', 'dashboard/app.js', 'dashboard/styles.css',
   'scripts/quality-daily.mjs', 'scripts/collect-activity.mjs', 'scripts/install-quality-cloud.mjs'];
 
 export async function prepareQualityCloud({ packageRoot = root, output, revision }) {

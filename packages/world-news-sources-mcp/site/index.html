@@ -6,13 +6,14 @@
   <title>World News Sources — RSS &amp; sitemaps in ChatGPT</title>
   <meta name="description" content="Install World News Sources in ChatGPT to find publisher RSS feeds and sitemaps, view saved health checks, and explore newly discovered URL activity by country.">
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles.css?v=source-packs-20261016">
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header>
     <a class="brand" href="/"><img src="/icon.svg" width="36" height="36" alt="">World News Sources</a>
     <nav aria-label="Main navigation">
+      <a href="#source-packs">Source packs</a>
       <a href="#get-started">How to use</a>
       <a href="/quality/">Collection quality</a>
       <a href="/support">Support</a>
@@ -25,9 +26,21 @@
       <p class="hero-description">Discover registered news sources, check their latest saved health results, and explore newly discovered URLs by country. Just ask in your own words.</p>
       <div class="actions">
         <a class="button button-primary" href="https://chatgpt.com/plugins/plugin_asdk_app_6abd7c20121c8191a04bc4ca47c47da8">Install in ChatGPT <span aria-hidden="true">↗</span></a>
-        <a class="button button-secondary" href="#examples">See example prompts</a>
+        <a class="button button-secondary" href="#source-packs">Find a starting source pack</a>
       </div>
       <p class="installation-note">Sign in with your ChatGPT account. No separate World News Sources account or API key needed.</p>
+    </section>
+
+    <section id="source-packs" class="home-section source-packs" aria-labelledby="source-packs-title">
+      <div class="pack-heading">
+        <div><p class="eyebrow" data-pack-i18n="eyebrow">Build your monitoring list</p><h2 id="source-packs-title" data-pack-i18n="heading">Start with a curated source pack.</h2></div>
+        <label class="pack-language"><span data-pack-i18n="language">Pack language</span><select id="pack-language"><option value="en">English</option><option value="ko">한국어</option></select></label>
+      </div>
+      <p data-pack-i18n="intro">Choose a purpose, check the saved evidence, and download addresses for your news reader or collector.</p>
+      <p class="pack-status" id="pack-status" role="status" aria-live="polite">Loading source packs…</p>
+      <div class="pack-choices" id="pack-choices" role="group" aria-label="Choose a source pack"></div>
+      <div id="pack-detail"></div>
+      <noscript><p>Enable JavaScript to preview packs, or download the <a href="/source-packs">source pack catalog as JSON</a>.</p></noscript>
     </section>
 
     <section id="get-started" class="home-section" aria-labelledby="get-started-title">
@@ -74,6 +87,7 @@
     <p>World News Sources · Myungeun Lee</p>
     <p><a href="/support">Support</a> · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="mailto:myungeun2dc@gmail.com">myungeun2dc@gmail.com</a></p>
   </footer>
+  <script type="module" src="/source-packs.js?v=20261016-1"></script>
   <script type="module">
     if (navigator.clipboard?.writeText) {
       const status = document.getElementById('copy-status');

@@ -44,7 +44,7 @@ for (const field of ['websiteURL', 'supportURL', 'privacyPolicyURL', 'termsOfSer
 }
 const review = openai.review;
 requireValue(review.test_cases.positive.length === 5 && review.test_cases.negative.length === 3, 'Review needs exactly five positive and three negative scenarios');
-const toolNames = new Set(['search_sources', 'get_source', 'list_countries', 'get_endpoint_health','get_country_source_inventory','get_source_article_activity','get_country_article_activity']);
+const toolNames = new Set(['search_sources', 'get_source', 'list_countries', 'get_endpoint_health','get_country_source_inventory','get_source_article_activity','get_country_article_activity','get_country_collection_quality','get_source_collection_quality','list_source_packs','get_source_pack','export_source_pack']);
 for (const scenario of review.test_cases.positive) {
   for (const field of ['description','prompt','tools_triggered','expected_behavior']) bounded(scenario[field], 4000, field);
   for (const tool of scenario.tools_triggered.split(',').map(s => s.trim())) requireValue(toolNames.has(tool), `Unknown review tool ${tool}`);

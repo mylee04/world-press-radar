@@ -12,8 +12,9 @@ const DOMAINS=['news.bymyleslee.com','world-news-sources-mcp.vercel.app'];
 // source file. Merely uploading vercel.json does not transmit its route options.
 const DEPLOYMENT_CONFIG={
   framework:null,installCommand:'npm ci --omit=dev --ignore-scripts',buildCommand:'',outputDirectory:'public',cleanUrls:true,
-  functions:{'api/*.mjs':{maxDuration:60,includeFiles:'{metadata/activity-history/**,dashboard/**}'}},
+  functions:{'api/*.mjs':{maxDuration:60,includeFiles:'{metadata/activity-history/**,dashboard/**,curation/**}'}},
   rewrites:[{source:'/mcp',destination:'/api/mcp'},{source:'/health',destination:'/api/health'},
+    {source:'/source-packs',destination:'/api/source-packs'},{source:'/source-packs/:path*',destination:'/api/source-packs?path=:path*'},
     {source:'/quality',destination:'/api/quality'},{source:'/quality/',destination:'/api/quality'},
     {source:'/quality/app.js',destination:'/api/quality?path=app.js'},{source:'/quality/styles.css',destination:'/api/quality?path=styles.css'},
     {source:'/quality/:path*',destination:'/api/quality?path=:path*'}],
@@ -22,11 +23,11 @@ const DEPLOYMENT_CONFIG={
 };
 export const expectedDeploymentConfig=()=>structuredClone(DEPLOYMENT_CONFIG);
 const ALLOWED=new Set(['package.json','package-lock.json','vercel.json',
-  'api/mcp.mjs','api/health.mjs','api/quality.mjs',
+  'api/mcp.mjs','api/health.mjs','api/quality.mjs','api/source-packs.mjs','curation/source-packs.json','dist/source-packs.js','dist/endpoint-status.js',
   ...['catalog','status','health','http','server','metrics','activity','activity-history','quality','quality-history','quality-inventory','quality-http','quality-remote','quality-cloud-auth','publisher-inventory','investigation','openai-runtime','openai-investigation','jev-runtime','jev-investigation','quality-decision','repair-workflow','host-gate','inspect','validate'].map(x=>`dist/${x}.js`),'dist/hosted.mjs','dist/quality-cloud-gateway.mjs',
   ...['index.html','app.js','styles.css'].map(x=>`dashboard/${x}`),
   'metadata/registry.json','metadata/legacy-health.json','metadata/health.json','metadata/activity.json','metadata/quality-overview.json',
-  ...['index.html','support.html','privacy.html','terms.html','styles.css','icon.svg'].map(x=>`public/${x}`),
+  ...['index.html','support.html','privacy.html','terms.html','styles.css','icon.svg','source-packs.js'].map(x=>`public/${x}`),
   'public/.well-known/openai-apps-challenge']);
 // Pure collector helpers may enter the public runtime import graph. They are
 // allowed code, never evidence databases, operator state, or runtime credentials.

@@ -1,0 +1,910 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-10-16T21:20:03Z",
+  "notes": [
+    "Curation metadata and editorial search aliases do not modify the registry or past observations. Korean aliases are editorial transliterations for search, not a claim that the publisher uses those names.",
+    "Official web pages were reviewed on the stated date. Some XML and legacy bindings require the separately recorded bounded endpoint check; identity evidence must not be presented as a reachability check.",
+    "Whole-publisher scope means a publisher-wide selection, not a guarantee of every published article. Sections, language editions, regional coverage and unresolved national-major gaps are explicit."
+  ],
+  "packs": [
+    {
+      "id": "us-business",
+      "title": {
+        "en": "US business monitoring",
+        "ko": "미국 경제·비즈니스 모니터링"
+      },
+      "description": {
+        "en": "Six US-registered publisher selections for English business monitoring, mixing business-focused publishers with explicitly labelled business sections of general newsrooms. Coverage can include international business.",
+        "ko": "미국 등록 매체 6곳의 영어 경제·비즈니스 시작 목록입니다. 경제 전문 매체와 종합 매체의 비즈니스 섹션을 구분하며, 국제 경제 기사도 포함할 수 있습니다."
+      },
+      "country": "US",
+      "language": "en",
+      "topics": [
+        "business",
+        "economy",
+        "markets"
+      ],
+      "selection_criteria": [
+        "Use exact existing country and typed endpoint bindings; no new or reactivated registrations.",
+        "One entry per publisher brand; multiple sections must not inflate publisher counts.",
+        "Official publisher identity and endpoint-declaration evidence is distinguished from endpoint reachability.",
+        "Selections are starting points; a successful check does not guarantee complete coverage, content freshness, article access or republication rights.",
+        "Include business-focused publisher streams and explicitly labelled business sections; do not describe all selections as economy-only."
+      ],
+      "entries": [
+        {
+          "publisher_id": "new-york-times",
+          "name": "The New York Times",
+          "aliases": [
+            "New York Times",
+            "NYT",
+            "뉴욕타임스"
+          ],
+          "language": "en",
+          "topics": [
+            "business",
+            "economy"
+          ],
+          "scope": "section",
+          "scope_description": "Business section of a general newspaper; section selection, not all New York Times output.",
+          "homepage": "https://www.nytimes.com/",
+          "evidence": [
+            {
+              "url": "https://www.nytimes.com/rss",
+              "kind": "official_identity_language_topics",
+              "claim": "English RSS directory labels this selection Business.",
+              "checked_at": "2026-10-16T21:20:03Z",
+              "fields": [
+                "name",
+                "language",
+                "topics",
+                "scope"
+              ]
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "rss",
+              "url": "https://rss.nytimes.com/services/xml/rss/nyt/Business.xml",
+              "evidence": [
+                {
+                  "url": "https://www.nytimes.com/rss",
+                  "kind": "official_html_feed_link",
+                  "claim": "Official publisher page declares this exact RSS address.",
+                  "checked_at": "2026-10-16T21:20:03Z",
+                  "fields": [
+                    "endpoint"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "publisher_id": "abc-news-us",
+          "name": "ABC News",
+          "aliases": [
+            "ABC News US",
+            "ABC 뉴스"
+          ],
+          "language": "en",
+          "topics": [
+            "business",
+            "economy"
+          ],
+          "scope": "section",
+          "scope_description": "Business headlines from the US broadcaster; excludes its other news sections.",
+          "homepage": "https://abcnews.com/",
+          "evidence": [
+            {
+              "url": "https://abcnews.go.com/Site/page?id=3520115",
+              "kind": "official_identity_language_topics",
+              "claim": "English-language feed directory identifies the Business Headlines section.",
+              "checked_at": "2026-10-16T21:20:03Z",
+              "fields": [
+                "name",
+                "language",
+                "topics",
+                "scope"
+              ]
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "rss",
+              "url": "https://feeds.abcnews.com/abcnews/businessheadlines",
+              "evidence": [
+                {
+                  "url": "https://abcnews.go.com/Site/page?id=3520115",
+                  "kind": "official_html_feed_link",
+                  "claim": "Official publisher page declares this exact RSS address.",
+                  "checked_at": "2026-10-16T21:20:03Z",
+                  "fields": [
+                    "endpoint"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "publisher_id": "los-angeles-times",
+          "name": "Los Angeles Times",
+          "aliases": [
+            "LA Times",
+            "L.A. Times",
+            "로스앤젤레스 타임스"
+          ],
+          "language": "en",
+          "topics": [
+            "business",
+            "economy"
+          ],
+          "scope": "section",
+          "scope_description": "Business section of a general newspaper, including a Southern California perspective.",
+          "homepage": "https://www.latimes.com/",
+          "evidence": [
+            {
+              "url": "https://www.latimes.com/feeds",
+              "kind": "official_identity_language_topics",
+              "claim": "English-language RSS directory lists Business separately from other sections.",
+              "checked_at": "2026-10-16T21:20:03Z",
+              "fields": [
+                "name",
+                "language",
+                "topics",
+                "scope"
+              ]
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "rss",
+              "url": "https://www.latimes.com/business/rss2.0.xml",
+              "evidence": [
+                {
+                  "url": "https://www.latimes.com/feeds",
+                  "kind": "official_html_feed_link",
+                  "claim": "Official publisher page declares this exact RSS address.",
+                  "checked_at": "2026-10-16T21:20:03Z",
+                  "fields": [
+                    "endpoint"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "publisher_id": "cnbc",
+          "name": "CNBC",
+          "aliases": [
+            "CNBC News",
+            "시엔비시"
+          ],
+          "language": "en",
+          "topics": [
+            "business",
+            "economy",
+            "markets"
+          ],
+          "scope": "whole_publisher",
+          "scope_description": "CNBC Top News: a publisher-wide selection from a business-focused newsroom; may include politics and other topics. It is not a dedicated economy-only feed.",
+          "homepage": "https://www.cnbc.com/",
+          "evidence": [
+            {
+              "url": "https://www.cnbc.com/",
+              "kind": "official_identity_language_topics",
+              "claim": "English homepage identifies CNBC as a business and financial news outlet.",
+              "checked_at": "2026-10-16T21:20:03Z",
+              "fields": [
+                "name",
+                "language",
+                "topics",
+                "scope"
+              ]
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "rss",
+              "url": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
+              "evidence": [
+                {
+                  "url": "https://www.cnbc.com/rss-feeds/",
+                  "kind": "official_feed_directory_same_content_id",
+                  "claim": "Official RSS directory declares Top News with content ID 100003114 using a different search.cnbc.com path; exact registered legacy-path equivalence requires the separate endpoint check.",
+                  "checked_at": "2026-10-16T21:20:03Z",
+                  "fields": [
+                    "endpoint"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "publisher_id": "fortune",
+          "name": "Fortune",
+          "aliases": [
+            "FORTUNE",
+            "포춘"
+          ],
+          "language": "en",
+          "topics": [
+            "business",
+            "economy",
+            "markets"
+          ],
+          "scope": "whole_publisher",
+          "scope_description": "Publisher-wide Fortune selection, including business, finance, leadership and lifestyle; no claim of complete publisher output or business-only filtering.",
+          "homepage": "https://fortune.com/",
+          "evidence": [
+            {
+              "url": "https://fortune.com/",
+              "kind": "official_identity_language_topics",
+              "claim": "English business publisher; homepage includes finance, leadership and lifestyle.",
+              "checked_at": "2026-10-16T21:20:03Z",
+              "fields": [
+                "name",
+                "language",
+                "topics",
+                "scope"
+              ]
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "rss",
+              "url": "https://fortune.com/feed",
+              "evidence": [
+                {
+                  "url": "https://fortune.com/feed",
+                  "kind": "publisher_hosted_xml_identity",
+                  "claim": "The publisher-hosted RSS identifies Fortune and language en-US. Its atom:self points to a different Fortune feed path; no separate HTML declaration of the registered path was rediscovered.",
+                  "checked_at": "2026-10-16T21:20:03Z",
+                  "fields": [
+                    "endpoint"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "publisher_id": "nbc-news-us",
+          "name": "NBC News",
+          "aliases": [
+            "NBC News US",
+            "NBC 뉴스"
+          ],
+          "language": "en",
+          "topics": [
+            "business",
+            "economy"
+          ],
+          "scope": "section",
+          "scope_description": "Business section of the US general-news broadcaster; excludes its other sections.",
+          "homepage": "https://www.nbcnews.com/",
+          "evidence": [
+            {
+              "url": "https://www.nbcnews.com/business",
+              "kind": "official_identity_language_topics",
+              "claim": "English-language NBC News business section identifies the selected subject.",
+              "checked_at": "2026-10-16T21:20:03Z",
+              "fields": [
+                "name",
+                "language",
+                "topics",
+                "scope"
+              ]
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "rss",
+              "url": "https://feeds.nbcnews.com/nbcnews/public/business",
+              "evidence": [
+                {
+                  "url": "https://feeds.nbcnews.com/nbcnews/public/business",
+                  "kind": "registered_publisher_hosted_binding",
+                  "claim": "Exact RSS address is an existing active registry binding on the publisher feed host. No current HTML declaration was rediscovered; identity and availability must be read from the separate endpoint observation.",
+                  "checked_at": "2026-10-16T21:20:03Z",
+                  "fields": [
+                    "endpoint"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "gaps": [
+        {
+          "publisher": "NPR",
+          "reason": "The active legacy Business binding uses feed ID 1003, while the reviewed official Business page declares ID 1006. Do not recommend or relabel the mismatched registered address as business.",
+          "evidence_url": "https://www.npr.org/sections/business/"
+        },
+        {
+          "publisher": "Wall Street Journal",
+          "reason": "Existing active RSS selections are World News and US News; no registered business-only RSS selection was identified for this pack. Sitewide sitemap alone does not establish business article coverage.",
+          "evidence_url": "https://www.wsj.com/"
+        },
+        {
+          "publisher": "Bloomberg / Reuters",
+          "reason": "Registered sitemap selections are broader news or sitemap-index routes. Business-only article-stream coverage was not established, so these important publishers are not counted in this starter selection.",
+          "evidence_url": "https://www.bloomberg.com/"
+        },
+        {
+          "publisher": "Financial Times",
+          "reason": "Despite a US registry grouping, this starter pack does not infer US publisher identity from that grouping. A UK/global business pack needs a separately verified country classification.",
+          "evidence_url": "https://aboutus.ft.com/"
+        }
+      ]
+    },
+    {
+      "id": "japan-general",
+      "title": {
+        "en": "Japan general-news starter",
+        "ko": "일본 종합 뉴스 시작 목록"
+      },
+      "description": {
+        "en": "Six Japanese-language publisher selections: national and digital news plus Hokkaido, Kyoto/Shiga and Okinawa regional perspectives. This is an incomplete starter sample, not a claim to cover Japan's national major publishers.",
+        "ko": "일본어 매체 6곳의 시작 목록입니다. 전국·디지털 뉴스와 홋카이도·교토/시가·오키나와 지역 관점을 포함하며 일본 주요 전국지 전체를 확보했다는 뜻은 아닙니다."
+      },
+      "country": "JP",
+      "language": "ja",
+      "topics": [
+        "general",
+        "politics",
+        "society",
+        "regional"
+      ],
+      "selection_criteria": [
+        "Use exact existing country and typed endpoint bindings; no new or reactivated registrations.",
+        "One entry per publisher brand; multiple sections must not inflate publisher counts.",
+        "Official publisher identity and endpoint-declaration evidence is distinguished from endpoint reachability.",
+        "Selections are starting points; a successful check does not guarantee complete coverage, content freshness, article access or republication rights.",
+        "Keep Japanese-language bindings separate from English editions and portal redistributions.",
+        "Label regional publishers explicitly; do not claim national-major completeness."
+      ],
+      "entries": [
+        {
+          "publisher_id": "mainichi",
+          "name": "Mainichi Shimbun",
+          "aliases": [
+            "Mainichi",
+            "毎日新聞",
+            "마이니치신문"
+          ],
+          "language": "ja",
+          "topics": [
+            "general",
+            "politics",
+            "society",
+            "economy"
+          ],
+          "scope": "whole_publisher",
+          "scope_description": "Japanese latest-news selection from Mainichi; article availability is bounded by the feed window. The newsroom also operates separate English products.",
+          "homepage": "https://mainichi.jp/",
+          "evidence": [
+            {
+              "url": "https://lp.mainichi.jp/contents/houjin/lp02/",
+              "kind": "official_identity_language_topics",
+              "claim": "Mainichi describes its Japanese general-news coverage, including politics, society and economy.",
+              "checked_at": "2026-10-16T21:20:03Z",
+              "fields": [
+                "name",
+                "language",
+                "topics",
+                "scope"
+              ]
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "rss",
+              "url": "https://mainichi.jp/rss/etc/mainichi-flash.rss",
+              "evidence": [
+                {
+                  "url": "https://mainichi.jp/rss/etc/mainichi-flash.rss",
+                  "kind": "registered_publisher_hosted_binding",
+                  "claim": "Existing active Japanese Mainichi Flash RSS binding. Current RSS-directory and homepage requests returned HTTP 403 during declaration review; no renewed HTML declaration is claimed.",
+                  "checked_at": "2026-10-16T21:20:03Z",
+                  "fields": [
+                    "endpoint"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "publisher_id": "j-cast",
+          "name": "J-CAST News",
+          "aliases": [
+            "J-CAST",
+            "J-CASTニュース",
+            "제이캐스트"
+          ],
+          "language": "ja",
+          "topics": [
+            "general",
+            "politics",
+            "society"
+          ],
+          "scope": "whole_publisher",
+          "scope_description": "J-CAST News general stream; separate Trend and other J-CAST products are excluded.",
+          "homepage": "https://www.j-cast.com/",
+          "evidence": [
+            {
+              "url": "https://www.j-cast.com/etc/rss.html",
+              "kind": "official_identity_language_topics",
+              "claim": "Japanese publisher directory identifies J-CAST News and separates its other products.",
+              "checked_at": "2026-10-16T21:20:03Z",
+              "fields": [
+                "name",
+                "language",
+                "topics",
+                "scope"
+              ]
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "rss",
+              "url": "https://www.j-cast.com/index.xml",
+              "evidence": [
+                {
+                  "url": "https://www.j-cast.com/etc/rss.html",
+                  "kind": "official_html_feed_link",
+                  "claim": "Official publisher page declares this exact RSS address.",
+                  "checked_at": "2026-10-16T21:20:03Z",
+                  "fields": [
+                    "endpoint"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "publisher_id": "hokkaido-shimbun",
+          "name": "Hokkaido Shimbun",
+          "aliases": [
+            "北海道新聞",
+            "北海道新聞デジタル",
+            "홋카이도신문"
+          ],
+          "language": "ja",
+          "topics": [
+            "general",
+            "regional",
+            "society"
+          ],
+          "scope": "whole_publisher",
+          "scope_description": "General-news selection from a Hokkaido regional daily; adds regional coverage and is not a substitute for all national newspapers.",
+          "homepage": "https://www.hokkaido-np.co.jp/",
+          "evidence": [
+            {
+              "url": "https://www.hokkaido-np.co.jp/rss/",
+              "kind": "official_identity_language_topics",
+              "claim": "Japanese RSS page identifies Hokkaido Shimbun Digital and its general update feed.",
+              "checked_at": "2026-10-16T21:20:03Z",
+              "fields": [
+                "name",
+                "language",
+                "topics",
+                "scope"
+              ]
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "rss",
+              "url": "https://www.hokkaido-np.co.jp/output/7/free/index.ad.xml",
+              "evidence": [
+                {
+                  "url": "https://www.hokkaido-np.co.jp/rss/",
+                  "kind": "official_html_feed_link",
+                  "claim": "Official publisher page declares this exact RSS address.",
+                  "checked_at": "2026-10-16T21:20:03Z",
+                  "fields": [
+                    "endpoint"
+                  ]
+                }
+              ]
+            }
+          ],
+          "regional_coverage": [
+            "Hokkaido"
+          ]
+        },
+        {
+          "publisher_id": "kyoto-shimbun",
+          "name": "Kyoto Shimbun",
+          "aliases": [
+            "京都新聞",
+            "京都新聞デジタル",
+            "교토신문"
+          ],
+          "language": "ja",
+          "topics": [
+            "general",
+            "regional",
+            "society"
+          ],
+          "scope": "whole_publisher",
+          "scope_description": "General RSS from the Kyoto and Shiga regional daily; includes local reporting and is not national-major completeness.",
+          "homepage": "https://www.kyoto-np.co.jp/",
+          "evidence": [
+            {
+              "url": "https://www.kyoto-np.co.jp/",
+              "kind": "official_identity_language_topics",
+              "claim": "Japanese homepage identifies Kyoto/Shiga news and declares its general RSS.",
+              "checked_at": "2026-10-16T21:20:03Z",
+              "fields": [
+                "name",
+                "language",
+                "topics",
+                "scope"
+              ]
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "rss",
+              "url": "https://www.kyoto-np.co.jp/list/feed/rss",
+              "evidence": [
+                {
+                  "url": "https://www.kyoto-np.co.jp/",
+                  "kind": "official_html_feed_link",
+                  "claim": "Official publisher page declares this exact RSS address.",
+                  "checked_at": "2026-10-16T21:20:03Z",
+                  "fields": [
+                    "endpoint"
+                  ]
+                }
+              ]
+            }
+          ],
+          "regional_coverage": [
+            "Kyoto",
+            "Shiga"
+          ]
+        },
+        {
+          "publisher_id": "okinawa-times",
+          "name": "Okinawa Times",
+          "aliases": [
+            "沖縄タイムス",
+            "沖縄タイムス＋プラス",
+            "오키나와타임스"
+          ],
+          "language": "ja",
+          "topics": [
+            "general",
+            "regional",
+            "society"
+          ],
+          "scope": "whole_publisher",
+          "scope_description": "General RSS from an Okinawa regional daily; adds local coverage and does not represent all Japanese national news.",
+          "homepage": "https://www.okinawatimes.co.jp/",
+          "evidence": [
+            {
+              "url": "https://www.okinawatimes.co.jp/",
+              "kind": "official_identity_language_topics",
+              "claim": "Japanese homepage identifies Okinawa Times and its general RSS.",
+              "checked_at": "2026-10-16T21:20:03Z",
+              "fields": [
+                "name",
+                "language",
+                "topics",
+                "scope"
+              ]
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "rss",
+              "url": "https://www.okinawatimes.co.jp/list/feed/rss",
+              "evidence": [
+                {
+                  "url": "https://www.okinawatimes.co.jp/",
+                  "kind": "official_html_feed_link",
+                  "claim": "Official publisher page declares this exact RSS address.",
+                  "checked_at": "2026-10-16T21:20:03Z",
+                  "fields": [
+                    "endpoint"
+                  ]
+                }
+              ]
+            }
+          ],
+          "regional_coverage": [
+            "Okinawa"
+          ]
+        },
+        {
+          "publisher_id": "nippon-com",
+          "name": "Nippon.com",
+          "aliases": [
+            "nippon.com",
+            "ニッポンドットコム",
+            "닛폰닷컴"
+          ],
+          "language": "ja",
+          "topics": [
+            "general",
+            "society",
+            "politics"
+          ],
+          "scope": "section",
+          "scope_description": "Japanese-language news sitemap from a multilingual Japan-focused publisher. A rolling news URL set, not the full site or English edition.",
+          "homepage": "https://www.nippon.com/ja/",
+          "evidence": [
+            {
+              "url": "https://www.nippon.com/ja/",
+              "kind": "official_identity_language_topics",
+              "claim": "Japanese edition covers Japan-related news and society.",
+              "checked_at": "2026-10-16T21:20:03Z",
+              "fields": [
+                "name",
+                "language",
+                "topics",
+                "scope"
+              ]
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "sitemap",
+              "url": "https://www.nippon.com/ja/googleNews.xml",
+              "evidence": [
+                {
+                  "url": "https://www.nippon.com/ja/sitemap.xml",
+                  "kind": "official_sitemap_index_child",
+                  "claim": "Official Japanese sitemap index explicitly lists this news sitemap.",
+                  "checked_at": "2026-10-16T21:20:03Z",
+                  "fields": [
+                    "endpoint"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "gaps": [
+        {
+          "publisher": "NHK",
+          "reason": "Legacy rows have conflicting names, host versions and category labels (including an EN name on a Japanese category URL). This pack does not resolve those bindings by name alone.",
+          "evidence_url": "https://www.nhk.or.jp/"
+        },
+        {
+          "publisher": "Asahi Shimbun",
+          "reason": "The registered endpoint is a sitewide sitemap route; a bounded declared article-level news stream was not established in this curation.",
+          "evidence_url": "https://www.asahi.com/"
+        },
+        {
+          "publisher": "Yomiuri Shimbun",
+          "reason": "Registered latest-news and full-sitemap routes require separate declaration, format and coverage review before recommendation.",
+          "evidence_url": "https://www.yomiuri.co.jp/"
+        },
+        {
+          "publisher": "Kyodo News",
+          "reason": "The existing registered RSS is distributed by Yahoo Japan, rather than directly hosted by Kyodo; this direct-publisher starter does not count that portal feed.",
+          "evidence_url": "https://www.kyodonews.jp/"
+        },
+        {
+          "publisher": "Nikkei",
+          "reason": "The registered RSS is disabled; the active sitewide sitemap does not establish a usable article-level stream. Disabled endpoints are not reactivated by curation.",
+          "evidence_url": "https://www.nikkei.com/"
+        }
+      ]
+    },
+    {
+      "id": "korea-english",
+      "title": {
+        "en": "Korea in English starter",
+        "ko": "한국 영문 뉴스 시작 목록"
+      },
+      "description": {
+        "en": "Three English-language publisher selections currently bound to active Korean registrations: two general-news outlets and one explicitly labelled North Korea specialist. Important English outlets remain gaps.",
+        "ko": "한국의 활성 등록에 연결된 영어 매체 3곳입니다. 종합 뉴스 2곳과 북한 전문 1곳을 구분하며 주요 영문 매체 중 미확보 항목을 함께 표시합니다."
+      },
+      "country": "KR",
+      "language": "en",
+      "topics": [
+        "general",
+        "politics",
+        "business",
+        "north_korea"
+      ],
+      "selection_criteria": [
+        "Use exact existing country and typed endpoint bindings; no new or reactivated registrations.",
+        "One entry per publisher brand; multiple sections must not inflate publisher counts.",
+        "Official publisher identity and endpoint-declaration evidence is distinguished from endpoint reachability.",
+        "Selections are starting points; a successful check does not guarantee complete coverage, content freshness, article access or republication rights.",
+        "English must be established for the exact selected endpoint, not inferred from the registry display name.",
+        "Prefer a smaller documented selection over padding with Korean-language or disabled sources."
+      ],
+      "entries": [
+        {
+          "publisher_id": "korea-times",
+          "name": "The Korea Times",
+          "aliases": [
+            "Korea Times",
+            "코리아타임스"
+          ],
+          "language": "en",
+          "topics": [
+            "general",
+            "politics",
+            "business",
+            "society"
+          ],
+          "scope": "whole_publisher",
+          "scope_description": "English-language general-news RSS from The Korea Times; bounded headline selection, not complete publisher output.",
+          "homepage": "https://www.koreatimes.co.kr/",
+          "evidence": [
+            {
+              "url": "https://www.koreatimes.co.kr/",
+              "kind": "official_identity_language_topics",
+              "claim": "Official homepage identifies an English-language Korea outlet with news, business and culture coverage.",
+              "checked_at": "2026-10-16T21:20:03Z",
+              "fields": [
+                "name",
+                "language",
+                "topics",
+                "scope"
+              ]
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "rss",
+              "url": "https://feed.koreatimes.co.kr/k/allnews.xml",
+              "evidence": [
+                {
+                  "url": "https://www.koreatimes.co.kr/",
+                  "kind": "official_html_feed_link",
+                  "claim": "Official publisher page declares this exact RSS address.",
+                  "checked_at": "2026-10-16T21:20:03Z",
+                  "fields": [
+                    "endpoint"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "publisher_id": "korea-herald",
+          "name": "The Korea Herald",
+          "aliases": [
+            "Korea Herald",
+            "코리아헤럴드"
+          ],
+          "language": "en",
+          "topics": [
+            "general",
+            "politics",
+            "business",
+            "society"
+          ],
+          "scope": "whole_publisher",
+          "scope_description": "All-news RSS from the English-language Korea Herald; includes national news, business, life, culture and opinion.",
+          "homepage": "https://www.koreaherald.com/",
+          "evidence": [
+            {
+              "url": "https://www.koreaherald.com/",
+              "kind": "official_identity_language_topics",
+              "claim": "Official homepage identifies an English-language daily and its national, business and culture sections.",
+              "checked_at": "2026-10-16T21:20:03Z",
+              "fields": [
+                "name",
+                "language",
+                "topics",
+                "scope"
+              ]
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "rss",
+              "url": "https://www.koreaherald.com/rss/newsAll",
+              "evidence": [
+                {
+                  "url": "https://www.koreaherald.com/rss",
+                  "kind": "official_html_feed_link",
+                  "claim": "Official publisher page declares this exact RSS address.",
+                  "checked_at": "2026-10-16T21:20:03Z",
+                  "fields": [
+                    "endpoint"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "publisher_id": "daily-nk",
+          "name": "Daily NK",
+          "aliases": [
+            "DailyNK",
+            "데일리NK",
+            "데일리엔케이"
+          ],
+          "language": "en",
+          "topics": [
+            "north_korea",
+            "politics",
+            "society"
+          ],
+          "scope": "section",
+          "scope_description": "Daily NK English edition: North Korea specialist coverage, not a South Korea general-news substitute.",
+          "homepage": "https://www.dailynk.com/english/",
+          "evidence": [
+            {
+              "url": "https://www.dailynk.com/english/",
+              "kind": "official_identity_language_topics",
+              "claim": "English edition identifies Daily NK as North Korea-focused news.",
+              "checked_at": "2026-10-16T21:20:03Z",
+              "fields": [
+                "name",
+                "language",
+                "topics",
+                "scope"
+              ]
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "rss",
+              "url": "https://www.dailynk.com/english/feed/",
+              "evidence": [
+                {
+                  "url": "https://www.dailynk.com/english/",
+                  "kind": "official_html_feed_link",
+                  "claim": "Official publisher page declares this exact RSS address.",
+                  "checked_at": "2026-10-16T21:20:03Z",
+                  "fields": [
+                    "endpoint"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "gaps": [
+        {
+          "publisher": "Yonhap News Agency English",
+          "reason": "The row labelled Yonhap (EN) binds a www.yna.co.kr Korean sitemap. It is not evidence of an English article stream and is excluded rather than relabelled.",
+          "evidence_url": "https://en.yna.co.kr/"
+        },
+        {
+          "publisher": "KED Global",
+          "reason": "Existing RSS registration is disabled; the pack does not reactivate it or claim current availability.",
+          "evidence_url": "https://www.kedglobal.com/"
+        },
+        {
+          "publisher": "KBS World Radio",
+          "reason": "Existing English RSS registration is disabled; a current declared and validated replacement requires a separate registry review.",
+          "evidence_url": "https://world.kbs.co.kr/"
+        },
+        {
+          "publisher": "Korea JoongAng Daily",
+          "reason": "No active publisher-specific English endpoint binding was found in the reviewed Korean registry.",
+          "evidence_url": "https://koreajoongangdaily.joins.com/"
+        },
+        {
+          "publisher": "Arirang News",
+          "reason": "No active publisher-specific English endpoint binding was found in the reviewed Korean registry.",
+          "evidence_url": "https://www.arirang.com/"
+        }
+      ]
+    }
+  ]
+}

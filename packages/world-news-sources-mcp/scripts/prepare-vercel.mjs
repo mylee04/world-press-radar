@@ -21,7 +21,7 @@ const activityPath = metadataPath('WNS_ACTIVITY_PATH', 'activity/activity-snapsh
 for (const [name, path] of [['WNS_REGISTRY_PATH', registryPath], ['WNS_LEGACY_HEALTH_PATH', legacyPath], ['WNS_HEALTH_PATH', snapshotPath], ['WNS_ACTIVITY_PATH', activityPath]]) {
   if (process.env[name] && !existsSync(path)) throw Error(`${name} does not exist`);
 }
-for (const dir of ['api', 'dist', 'metadata', 'public']) mkdirSync(new URL(`${dir}/`, output), { recursive: true });
+for (const dir of ['api', 'dist', 'metadata', 'public', 'curation']) mkdirSync(new URL(`${dir}/`, output), { recursive: true });
 const writeJson = (path, value) => writeFileSync(new URL(path, output), JSON.stringify(value) + '\n');
 const raw = readMetadata(registryPath);
 normalizeRegistry(raw); // Validate before preparing any upload.
@@ -108,8 +108,9 @@ lock.packages[''].engines = { node: '22.x' };
 writeJson('package-lock.json', lock);
 writeJson('vercel.json', {
   framework: null, installCommand: 'npm ci --omit=dev --ignore-scripts', buildCommand: '', outputDirectory: 'public', cleanUrls: true,
-  functions: { 'api/*.mjs': { maxDuration: 60,includeFiles:'{metadata/activity-history/**,dashboard/**}' } },
+  functions: { 'api/*.mjs': { maxDuration: 60,includeFiles:'{metadata/activity-history/**,dashboard/**,curation/**}' } },
   rewrites: [{ source: '/mcp', destination: '/api/mcp' }, { source: '/health', destination: '/api/health' },
+    { source: '/source-packs', destination: '/api/source-packs' }, { source: '/source-packs/:path*', destination: '/api/source-packs?path=:path*' },
     { source: '/quality', destination: '/api/quality' }, { source: '/quality/', destination: '/api/quality' },
     { source: '/quality/app.js', destination: '/api/quality?path=app.js' }, { source: '/quality/styles.css', destination: '/api/quality?path=styles.css' },
     { source: '/quality/:path*', destination: '/api/quality?path=:path*' }],
@@ -134,11 +135,14 @@ export const handler = createHttpHandler(normalizeRegistry(registry), new Health
 `);
 for (const route of ['mcp', 'health']) writeFileSync(new URL(`api/${route}.mjs`, output),
   `import {handler} from '../dist/hosted.mjs';\nexport default {fetch(request){const url=new URL(request.url);url.pathname='/${route}';return handler.fetch(new Request(url,request));}};\n`);
+writeFileSync(new URL('api/source-packs.mjs', output),
+  `import {handler} from '../dist/hosted.mjs';\nexport default {fetch(request){const url=new URL(request.url);const paths=url.searchParams.getAll('path');if(paths.length>1||paths[0]&&!/^[a-z][a-z0-9-]{1,79}\\/export$/.test(paths[0]))return new Response('Not found',{status:404});url.pathname=paths[0]?'/source-packs/'+paths[0]:'/source-packs';url.searchParams.delete('path');return handler.fetch(new Request(url,request));}};\n`);
 writeFileSync(new URL('api/quality.mjs', output),
   `import {handler} from '../dist/hosted.mjs';\nimport {createQualityCloudGateway,normalizeQualityRequest} from '../dist/quality-cloud-gateway.mjs';\nconst gateway=createQualityCloudGateway({backendUrl:process.env.WNS_QUALITY_BACKEND_URL,gatewayToken:process.env.WNS_QUALITY_GATEWAY_TOKEN,publicOrigins:[process.env.WNS_QUALITY_PUBLIC_ORIGIN]});\nexport default {async fetch(request){const forwarded=normalizeQualityRequest(request);if(!forwarded)return new Response('Not found',{status:404});const url=new URL(forwarded.url);if(url.pathname.startsWith('/quality/api/')&&process.env.WNS_QUALITY_BACKEND_URL)return gateway(forwarded);return handler.fetch(forwarded);}};\n`);
-for (const file of ['index.html', 'support.html', 'privacy.html', 'terms.html', 'styles.css', 'icon.svg']) {
+for (const file of ['index.html', 'support.html', 'privacy.html', 'terms.html', 'styles.css', 'icon.svg', 'source-packs.js']) {
   copyFileSync(new URL(`site/${file}`, root), new URL(`public/${file}`, output));
 }
+copyFileSync(new URL('curation/source-packs.json', root), new URL('curation/source-packs.json', output));
 mkdirSync(new URL('public/.well-known/', output), { recursive: true });
 copyFileSync(new URL('site/.well-known/openai-apps-challenge', root), new URL('public/.well-known/openai-apps-challenge', output));
 console.log(`Prepared metadata-only Vercel bundle: ${fileURLToPath(output)}`);

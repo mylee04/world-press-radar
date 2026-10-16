@@ -73,12 +73,13 @@ export async function verifyCloudBundle(path, revision) {
     || revision && manifest.revision !== revision || !Array.isArray(manifest.files) || manifest.files.length > 150) fail('INVALID_MANIFEST');
   const listed = new Set(); let size = 0;
   for (const file of manifest.files) {
-    if (!/^(?:package(?:-lock)?\.json|dashboard\/(?:index\.html|app\.js|styles\.css)|dist\/[A-Za-z0-9_-]+\.js|scripts\/(?:quality-daily|collect-activity|install-quality-cloud)\.mjs)$/.test(file.path)
+    if (!/^(?:package(?:-lock)?\.json|curation\/source-packs\.json|dashboard\/(?:index\.html|app\.js|styles\.css)|dist\/[A-Za-z0-9_-]+\.js|scripts\/(?:quality-daily|collect-activity|install-quality-cloud)\.mjs)$/.test(file.path)
       || listed.has(file.path) || !Number.isInteger(file.bytes) || file.bytes < 0 || file.bytes > 4 * 1024 * 1024 || !/^[a-f0-9]{64}$/.test(file.sha256)) fail('INVALID_MANIFEST_FILE');
     listed.add(file.path); await regular(join(path, file.path)); const bytes = await readFile(join(path, file.path));
     if (bytes.length !== file.bytes || digest(bytes) !== file.sha256) fail('CODE_HASH_MISMATCH'); size += bytes.length;
   }
   if (size > 16 * 1024 * 1024 || !listed.has('dist/http-cloud.js') || !listed.has('scripts/quality-daily.mjs') || !listed.has('package-lock.json')) fail('INCOMPLETE_CODE_BUNDLE');
+  if (listed.has('dist/source-packs.js') && !listed.has('curation/source-packs.json')) fail('INCOMPLETE_CODE_BUNDLE');
   const walk = async (directory, prefix = '') => {
     for (const name of await readdir(directory)) {
       const item = prefix + name, info = await lstat(join(directory, name));

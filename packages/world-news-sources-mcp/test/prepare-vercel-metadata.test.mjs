@@ -14,7 +14,7 @@ test('Vercel preparation retains repaired source identity with explicit metadata
   const packageRoot = fileURLToPath(new URL('../', import.meta.url));
   const directory = mkdtempSync(join(tmpdir(), 'wns-vercel-fresh-'));
   t.after(() => rmSync(directory, { recursive: true, force: true }));
-  for (const folder of ['dist', 'dashboard', 'site', 'scripts']) cpSync(join(packageRoot, folder), join(directory, folder), { recursive: true, filter: source => !source.endsWith('.env') });
+  for (const folder of ['dist', 'dashboard', 'site', 'scripts', 'curation']) cpSync(join(packageRoot, folder), join(directory, folder), { recursive: true, filter: source => !source.endsWith('.env') });
   for (const file of ['package.json', 'package-lock.json']) cpSync(join(packageRoot, file), join(directory, file));
   symlinkSync(join(packageRoot, 'node_modules'), join(directory, 'node_modules'), 'dir');
   const staged = join(directory, 'fresh'); mkdirSync(join(staged, 'history'), { recursive: true });

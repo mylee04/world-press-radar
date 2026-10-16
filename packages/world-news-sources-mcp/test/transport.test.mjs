@@ -12,7 +12,7 @@ test('SDK client initializes real stdio server and exercises current registry to
   const client=new Client({name:'world-news-sources-test',version:'0.1.0'});
   try {
     await client.connect(transport);
-    const {tools}=await client.listTools();assert.equal(tools.length,9);
+    const {tools}=await client.listTools();assert.equal(tools.length,12);
     assert.ok(tools.every(t=>t.annotations.readOnlyHint));
     const countries=await client.callTool({name:'list_countries',arguments:{limit:2}});
     assert.equal(countries.structuredContent.configured_rows,expectedRows);

@@ -122,7 +122,7 @@ def verify_bundle(bundle):
     seen, size = set(), 0
     for file in manifest.get('files', []):
         path = file.get('path', '')
-        if not CODE.fullmatch(path) or path in seen or not re.fullmatch(r'[a-f0-9]{64}', file.get('sha256', '')):
+        if (not CODE.fullmatch(path) and path not in ('curation/source-packs.json', 'site/source-packs.js')) or path in seen or not re.fullmatch(r'[a-f0-9]{64}', file.get('sha256', '')):
             fail('INVALID_MANIFEST_FILE')
         source = regular(bundle / PACKAGE / path)
         if source.stat().st_size != file.get('bytes') or source.stat().st_size > 4 * 1024**2 or hash_file(source) != file['sha256']:
@@ -131,6 +131,8 @@ def verify_bundle(bundle):
         size += file['bytes']
     required = {'package-lock.json', 'dist/activity-ledger.js', 'dist/collection-schedule.js', 'scripts/collect-activity.mjs',
                 'scripts/prepare-vercel.mjs', 'scripts/quality-cloud-gateway.mjs', 'scripts/install-collector-release.py', 'evaluation/cases.json'}
+    if 'dist/source-packs.js' in seen:
+        required.add('curation/source-packs.json')
     if not required <= seen or size > 32 * 1024**2 or len(seen) > 400:
         fail('INCOMPLETE_BUNDLE')
     listed = {str(PACKAGE / path) for path in seen} | {'COLLECTOR-CODE-MANIFEST.json'}

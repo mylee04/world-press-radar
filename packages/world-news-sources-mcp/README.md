@@ -46,6 +46,8 @@ Ordinary metadata runtimes load files once at startup, capped at 16 MiB; restart
 
 ## Tools and examples
 
+Three curated starter packs connect discovery, saved status evidence and collector exports: US business, Japanese general news, and Korean news in English. Use `list_source_packs`, `get_source_pack` and `export_source_pack`; search also accepts `pack_id` and curated aliases. OPML contains RSS/Atom only, while CSV/JSON retain endpoint types. See [source workflow and validation](ops/SOURCE-WORKFLOW.md) for scope, exclusions, evidence dates and the remaining real-user pilot.
+
 The four core metadata tools below are read-only and use cached metadata. Additional activity/inventory/quality tools are documented below. MCP tool calls never fetch a publisher or write the registry.
 
 | Tool | Example arguments | Result |
@@ -151,7 +153,7 @@ Optional long-term aggregate counters are described in [`metrics/README.md`](met
 
 ## Article-URL activity and current inventory
 
-Nine read tools are available in this checkout, including `get_country_source_inventory`, `get_source_article_activity`, `get_country_article_activity`, `get_country_collection_quality` and `get_source_collection_quality`. The older deployed MCP had seven tools; the remote dashboard reader remains compatible with those seven. The cloud quality runtime reads the authoritative Oracle metadata with the nine-tool implementation. [Activity operator documentation](activity/README.md) defines excluded initialization baselines, scope-specific discovery, deduplication, timezone/DST, partial coverage and the separate durable SQLite ledger. Future collector runs record completed cohorts and reliable content dates for comparable quality baselines. No MCP tool crawls a publisher. Counts describe first-discovered candidate URLs, not publications or entry counts.
+Twelve read tools are available in this checkout, including `get_country_source_inventory`, `get_source_article_activity`, `get_country_article_activity`, `get_country_collection_quality`, `get_source_collection_quality` and the three source-pack tools above. Older remote dashboard readers remain compatible with the original seven tools. [Activity operator documentation](activity/README.md) defines excluded initialization baselines, scope-specific discovery, deduplication, timezone/DST, partial coverage and the separate durable SQLite ledger. Future collector runs record completed cohorts and reliable content dates for comparable quality baselines. No MCP tool crawls a publisher. Counts describe first-discovered candidate URLs, not publications or entry counts.
 
 ```json
 {"name":"get_country_source_inventory","arguments":{"country":"US","include_disabled":true}}
