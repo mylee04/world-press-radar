@@ -26,31 +26,59 @@ def utc_text(value):
     return value.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
-def previous_growth(previous, identity, total_bytes, at):
+def previous_sample_window(previous, identity, at):
     if previous is None:
-        return None, "no_previous_sample", None
+        return "no_previous_sample", None
     try:
         if previous.get("report_version") != 1:
-            return None, "invalid_previous_sample", None
+            return "invalid_previous_sample", None
         if previous.get("ledger_identity") != identity:
-            return None, "ledger_identity_changed", None
-        prior_total = previous["ledger_bytes"]
-        if isinstance(prior_total, bool) or not isinstance(prior_total, int) or prior_total < 0:
-            return None, "invalid_previous_sample", None
+            return "ledger_identity_changed", None
         prior_at = datetime.fromisoformat(previous["observed_at"].replace("Z", "+00:00"))
         if prior_at.tzinfo is None:
-            return None, "invalid_previous_sample", None
+            return "invalid_previous_sample", None
         hours = (at - prior_at).total_seconds() / 3600
         if hours < 0:
-            return None, "previous_sample_in_future", None
+            return "previous_sample_in_future", None
         if hours < MINIMUM_SAMPLE_HOURS:
-            return None, "sample_interval_too_short", hours
+            return "sample_interval_too_short", hours
+        return "measured", hours
+    except (AttributeError, KeyError, TypeError, ValueError, OverflowError):
+        return "invalid_previous_sample", None
+
+
+def previous_growth(previous, identity, total_bytes, at):
+    status, hours = previous_sample_window(previous, identity, at)
+    if status != "measured":
+        return None, status, hours
+    try:
+        prior_total = previous["ledger_bytes"]
+        if isinstance(prior_total, bool) or not isinstance(prior_total, int) or prior_total < 0:
+            return None, "invalid_previous_sample", hours
         # WAL checkpoints can reduce this physical total. Negative growth is
         # zero for the measured rate, not evidence of future free capacity.
         daily = max(0, math.ceil((total_bytes - prior_total) * 24 / hours))
         return daily, "measured", hours
     except (AttributeError, KeyError, TypeError, ValueError, OverflowError):
-        return None, "invalid_previous_sample", None
+        return None, "invalid_previous_sample", hours
+
+
+def previous_filesystem_decline(previous, identity, free_bytes, at):
+    status, hours = previous_sample_window(previous, identity, at)
+    if status != "measured":
+        return None, status, hours
+    try:
+        if previous.get("mode") != "activity" or previous.get("phase") != "after":
+            return None, "previous_sample_not_completed_activity", hours
+        prior_free = previous["filesystem_free_bytes"]
+        if isinstance(prior_free, bool) or not isinstance(prior_free, int) or prior_free < 0:
+            return None, "invalid_previous_filesystem_free_bytes", hours
+        # This net filesystem change includes all projects and reclamation.
+        # A cleanup cannot establish a negative future consumption rate.
+        decline = max(0, math.ceil((prior_free - free_bytes) * 24 / hours))
+        return decline, "measured", hours
+    except (AttributeError, KeyError, TypeError, ValueError, OverflowError):
+        return None, "invalid_previous_filesystem_free_bytes", hours
 
 
 def forecast(headroom, daily_growth, at):
@@ -89,11 +117,13 @@ def build_report(db, base, phase, mode, max_db_mib=16384, previous=None, at=None
     identity = {"device": db_stat.st_dev, "inode": db_stat.st_ino}
     measured, sample_status, elapsed_hours = previous_growth(previous, identity, total_bytes, at)
     daily_growth = max(BASELINE_DAILY_GROWTH_BYTES, measured or 0)
+    filesystem_decline, filesystem_sample_status, filesystem_elapsed_hours = previous_filesystem_decline(previous, identity, free_bytes, at)
+    filesystem_daily_decline = max(daily_growth, filesystem_decline or 0)
     cap_bytes = max_db_mib * MIB
     required_free = FLOOR_BYTES + GROWTH_RESERVE_BYTES
     ledger_forecast = forecast(cap_bytes - total_bytes, daily_growth, at)
-    filesystem_preflight_forecast = forecast(free_bytes - required_free, daily_growth, at)
-    filesystem_floor_forecast = forecast(free_bytes - FLOOR_BYTES, daily_growth, at)
+    filesystem_preflight_forecast = forecast(free_bytes - required_free, filesystem_daily_decline, at)
+    filesystem_floor_forecast = forecast(free_bytes - FLOOR_BYTES, filesystem_daily_decline, at)
     warnings = []
     if total_bytes >= cap_bytes:
         warnings.append("ledger_cap_exhausted")
@@ -119,11 +149,20 @@ def build_report(db, base, phase, mode, max_db_mib=16384, previous=None, at=None
         "measured_daily_growth_bytes": measured,
         "forecast_daily_growth_bytes": daily_growth,
         "forecast_growth_basis": "measured_above_baseline" if measured is not None and measured > BASELINE_DAILY_GROWTH_BYTES else "baseline_floor",
+        "filesystem_sample_status": filesystem_sample_status,
+        "filesystem_sample_elapsed_hours": filesystem_elapsed_hours,
+        "filesystem_measured_daily_decline_bytes": filesystem_decline,
+        "filesystem_forecast_daily_decline_bytes": filesystem_daily_decline,
+        "filesystem_forecast_rate_basis": "measured_total_filesystem_decline" if filesystem_decline is not None and filesystem_decline > daily_growth else "conservative_news_growth",
         "baseline": {"bytes_per_day": BASELINE_DAILY_GROWTH_BYTES, "provenance": "operator-supplied recent two-cycle growth estimate"},
         "ledger_forecast": ledger_forecast, "filesystem_preflight_forecast": filesystem_preflight_forecast,
         "filesystem_floor_forecast": filesystem_floor_forecast,
         "forecast_is_guarantee": False, "other_filesystem_writers_modeled": False,
+        "filesystem_forecast_includes_total_measured_decline": filesystem_decline is not None,
+        "other_filesystem_writers_attributed": False,
         "forecast_limitations": ["DB plus WAL is a physical sample and can change during checkpoints or collection.",
+            "Total filesystem decline includes other projects, cleanup and volume changes; individual causes are not attributed.",
+            "Cleanup or reclamation can mask simultaneous growth; negative net decline is clamped to zero.",
             "Future publisher volume and unrelated project writes are unknown.",
             "A larger bounded ledger cap postpones its limit; it does not provide unlimited retention."],
         "warning_codes": warnings, "status": "warning" if warnings else "ok",

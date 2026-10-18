@@ -32,10 +32,13 @@ with tempfile.TemporaryDirectory(prefix="wns-storage-report-") as directory:
     previous = None
     if "previous_bytes" in options:
         stat = db.stat()
-        previous = {"report_version": 1,
+        previous = {"report_version": 1, "mode": options.get("previous_mode", "activity"),
+            "phase": options.get("previous_phase", "after"),
             "ledger_identity": {"device": stat.st_dev, "inode": stat.st_ino + int(options.get("different_ledger", False))},
             "ledger_bytes": options["previous_bytes"],
             "observed_at": helper.utc_text(at - datetime.timedelta(hours=options.get("elapsed_hours", 24)))}
+        if "previous_free_bytes" in options:
+            previous["filesystem_free_bytes"] = options["previous_free_bytes"]
     def snapshot():
         result = {}
         for path in base.iterdir():
@@ -99,10 +102,51 @@ test('does not extrapolate short, future or different-ledger samples', () => {
     [{ elapsed_hours: -1 }, 'previous_sample_in_future'],
     [{ different_ledger: true }, 'ledger_identity_changed'],
   ]) {
-    const report = run({ db_bytes: 6 * gib, previous_bytes: 5 * gib, ...extra }).report;
+    const report = run({ db_bytes: 6 * gib, previous_bytes: 5 * gib, free_bytes: 60 * gib, previous_free_bytes: 100 * gib, ...extra }).report;
     assert.equal(report.sample_status, status);
     assert.equal(report.measured_daily_growth_bytes, null);
     assert.equal(report.forecast_daily_growth_bytes, baseline);
+    assert.equal(report.filesystem_sample_status, status);
+    assert.equal(report.filesystem_measured_daily_decline_bytes, null);
+    assert.equal(report.filesystem_forecast_daily_decline_bytes, baseline);
+  }
+});
+
+test('warns on rapid total filesystem consumption while retaining the slower independent ledger forecast', () => {
+  const report = run({ db_bytes: 6 * gib, previous_bytes: 6 * gib - 32 * 1024 ** 2,
+    free_bytes: 60 * gib, previous_free_bytes: 72 * gib, elapsed_hours: 24 }).report;
+  assert.equal(report.measured_daily_growth_bytes, 32 * 1024 ** 2);
+  assert.equal(report.forecast_daily_growth_bytes, baseline);
+  assert.equal(report.filesystem_measured_daily_decline_bytes, 12 * gib);
+  assert.equal(report.filesystem_forecast_daily_decline_bytes, 12 * gib);
+  assert.equal(report.filesystem_forecast_rate_basis, 'measured_total_filesystem_decline');
+  assert.equal(report.filesystem_preflight_forecast.estimated_days_remaining, 0.67);
+  assert.ok(report.warning_codes.includes('filesystem_preflight_within_14_days'));
+  assert.ok(!report.warning_codes.includes('ledger_cap_within_14_days'));
+  assert.equal(report.filesystem_forecast_includes_total_measured_decline, true);
+  assert.equal(report.other_filesystem_writers_attributed, false);
+  assert.equal(report.forecast_is_guarantee, false);
+});
+
+test('clamps filesystem reclamation to zero without crediting it against ongoing news growth', () => {
+  const report = run({ db_bytes: 6 * gib, previous_bytes: 5.5 * gib,
+    free_bytes: 80 * gib, previous_free_bytes: 60 * gib, elapsed_hours: 24 }).report;
+  assert.equal(report.filesystem_measured_daily_decline_bytes, 0);
+  assert.equal(report.filesystem_forecast_daily_decline_bytes, gib / 2);
+  assert.equal(report.filesystem_forecast_rate_basis, 'conservative_news_growth');
+  assert.equal(report.filesystem_preflight_forecast.estimated_days_remaining, 56);
+  assert.ok(report.forecast_limitations.some(value => value.includes('Cleanup or reclamation can mask')));
+});
+
+test('falls back gracefully for missing or invalid filesystem readings and non-completed activity samples', () => {
+  for (const extra of [{}, ...[null, -1, true, '100'].map(previous_free_bytes => ({ previous_free_bytes })),
+    { previous_free_bytes: 100 * gib, previous_mode: 'health' },
+    { previous_free_bytes: 100 * gib, previous_phase: 'before' }]) {
+    const report = run({ db_bytes: 6 * gib, previous_bytes: 6 * gib, free_bytes: 60 * gib, ...extra }).report;
+    assert.equal(report.filesystem_measured_daily_decline_bytes, null);
+    assert.equal(report.filesystem_forecast_daily_decline_bytes, baseline);
+    assert.equal(report.filesystem_forecast_rate_basis, 'conservative_news_growth');
+    assert.equal(report.filesystem_forecast_includes_total_measured_decline, false);
   }
 });
 
