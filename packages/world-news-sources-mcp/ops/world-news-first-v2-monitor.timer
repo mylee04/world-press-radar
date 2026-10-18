@@ -1,0 +1,11 @@
+[Unit]
+Description=App-independent follow-up for the first format 2 scheduled collection
+
+[Timer]
+OnCalendar=*-*-* *:00/10:00 UTC
+Persistent=true
+AccuracySec=1min
+Unit=world-news-first-v2-monitor.service
+
+[Install]
+WantedBy=timers.target
