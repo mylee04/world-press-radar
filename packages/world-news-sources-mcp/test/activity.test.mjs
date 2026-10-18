@@ -35,12 +35,12 @@ test('binding baselines, RSS+sitemap source dedup and country cross-source dedup
     const b=visit(ledger,'B',0,[fresh]);assert.equal(b.result.source_new[source('B').id],1);assert.equal(b.result.country_new.US,0);
     const c=visit(ledger,'C',0,[fresh]);assert.equal(c.result.country_new.CA,1);
     const global=ledger.db.prepare('SELECT * FROM urls WHERE url=?').get(fresh);
-    const country=ledger.db.prepare("SELECT * FROM scope_urls WHERE scope_kind='country' AND scope_id='CA' AND url=?").get(fresh);
+    const country=ledger.db.prepare("SELECT s.* FROM scope_urls s JOIN urls u ON u.id=s.url_id WHERE scope_kind='country' AND scope_id='CA' AND u.url=?").get(fresh);
     assert.ok(country.first_seen>global.first_seen);assert.equal(country.last_seen,c.value.checked_at);
     const store=new ActivityStore(ledger.snapshot(catalog,now));
     const us=store.query(catalog,'country',{country:'US',start_date:'2026-10-01',end_date:'2026-10-01'},Date.parse(now));
     assert.equal(us.items[0].new_unique_candidate_urls,1);assert.equal(us.items[0].state,'complete');
-    assert.equal(ledger.db.prepare('SELECT COUNT(*) n FROM endpoint_urls WHERE url=?').get(fresh).n,4);
+    assert.equal(ledger.db.prepare('SELECT COUNT(*) n FROM endpoint_urls e JOIN urls u ON u.id=e.url_id WHERE u.url=?').get(fresh).n,4);
     const archiveDir=`${path}.history`,archived=new ActivityStore(ledger.archive(catalog,archiveDir,now),archiveDir);
     const query=(kind,scope)=>archived.query(catalog,kind,{...(kind==='country'?{country:scope}:{source_id:scope}),start_date:'2026-10-01',end_date:'2026-10-01'},Date.parse(now)).items[0];
     assert.equal(query('country','US').new_unique_candidate_urls,1);assert.equal(query('country','CA').new_unique_candidate_urls,1);

@@ -7,22 +7,18 @@ import type { Catalog, Endpoint, Source } from './catalog.js';
 import { normalizeArticleUrl, NORMALIZATION_VERSION } from './article-url.js';
 import { validateCollectionCycle, summarizeCollectionCycle, type CollectionCycle } from './quality-history.js';
 import { collectionNextDue, endpointDue, type CollectionScheduling, type DeferredEndpoint, type RetryAfterSource, type SchedulingState } from './collection-schedule.js';
+import { COMPACT_URL_SCHEMA, LEGACY_URL_SCHEMA, urlStorageVersion } from './activity-url-storage.js';
 
 export type CollectionBinding = Pick<Source, 'id' | 'countryCode'>;
 export type Collection = { id: string; endpoint: Endpoint; checked_at: string; status: string; format: string | null; urls: string[]; reason: string | null; traffic: 'production' | 'inspection'; source_bindings?: CollectionBinding[];
   cycle_id?: string; newest_content_at?: string | null; date_kind?: 'feed_item_date' | 'sitemap_lastmod';
   http_status?: number | null; retry_after_at?: string | null; retry_after_source?: RetryAfterSource | null; request_host?: string; response_host?: string; attempts?: number;
   requested_hops?: number; server_deferral?: { until: string; http_status: number | null; hostname?: string } };
-export const ACTIVITY_SCHEMA = `
+export const COMMON_ACTIVITY_SCHEMA = `
 PRAGMA journal_mode=WAL;
 PRAGMA foreign_keys=ON;
 CREATE TABLE IF NOT EXISTS metadata(key TEXT PRIMARY KEY,value TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS registry(source_id TEXT NOT NULL,country TEXT NOT NULL,endpoint_id TEXT NOT NULL,type TEXT NOT NULL,url TEXT NOT NULL,enabled INTEGER NOT NULL,registrations INTEGER NOT NULL,PRIMARY KEY(source_id,endpoint_id));
-CREATE TABLE IF NOT EXISTS urls(url TEXT PRIMARY KEY,normalization_version TEXT NOT NULL,kind TEXT NOT NULL,first_seen TEXT NOT NULL,last_seen TEXT NOT NULL);
-CREATE TABLE IF NOT EXISTS scope_urls(scope_kind TEXT NOT NULL,scope_id TEXT NOT NULL,url TEXT NOT NULL REFERENCES urls(url),first_seen TEXT NOT NULL,last_seen TEXT NOT NULL,baseline INTEGER NOT NULL,kind TEXT NOT NULL,PRIMARY KEY(scope_kind,scope_id,url));
-CREATE INDEX IF NOT EXISTS scope_discovery ON scope_urls(scope_kind,scope_id,baseline,kind,first_seen);
-CREATE TABLE IF NOT EXISTS endpoint_urls(endpoint_id TEXT NOT NULL,url TEXT NOT NULL REFERENCES urls(url),first_seen TEXT NOT NULL,last_seen TEXT NOT NULL,PRIMARY KEY(endpoint_id,url));
-CREATE TABLE IF NOT EXISTS binding_urls(source_id TEXT NOT NULL,endpoint_id TEXT NOT NULL,country TEXT NOT NULL,url TEXT NOT NULL REFERENCES urls(url),first_seen TEXT NOT NULL,last_seen TEXT NOT NULL,PRIMARY KEY(source_id,endpoint_id,url));
 CREATE TABLE IF NOT EXISTS bindings(source_id TEXT NOT NULL,endpoint_id TEXT NOT NULL,country TEXT NOT NULL,baseline_at TEXT,last_success_at TEXT,last_attempt_at TEXT,last_status TEXT,failures INTEGER NOT NULL DEFAULT 0,next_due TEXT,PRIMARY KEY(source_id,endpoint_id));
 CREATE TABLE IF NOT EXISTS collections(id TEXT PRIMARY KEY,endpoint_id TEXT NOT NULL,checked_at TEXT NOT NULL,status TEXT NOT NULL,format TEXT,reason TEXT,details TEXT NOT NULL);
 CREATE INDEX IF NOT EXISTS collection_time ON collections(checked_at);
@@ -34,12 +30,21 @@ CREATE TABLE IF NOT EXISTS endpoint_recovery(endpoint_id TEXT PRIMARY KEY,reques
 CREATE TABLE IF NOT EXISTS recovery_events(event_key TEXT PRIMARY KEY,endpoint_id TEXT,checked_at TEXT,record TEXT);
 CREATE TABLE IF NOT EXISTS host_cooldowns(host TEXT PRIMARY KEY,until_at TEXT,category TEXT);
 `;
+export const ACTIVITY_SCHEMA = COMMON_ACTIVITY_SCHEMA + COMPACT_URL_SCHEMA;
 export function collectionId(endpointId: string, checkedAt: string, urls: string[]) {
   return createHash('sha256').update(JSON.stringify([endpointId, checkedAt, urls])).digest('hex');
 }
 export class ActivityLedger {
   readonly db: DatabaseSync;
-  constructor(path: string) { this.db = new DatabaseSync(path); this.db.exec('PRAGMA busy_timeout=5000'); this.db.exec(ACTIVITY_SCHEMA); }
+  readonly urlStorageVersion: 1 | 2;
+  constructor(path: string) {
+    this.db = new DatabaseSync(path);
+    try {
+      this.db.exec('PRAGMA busy_timeout=5000');
+      this.urlStorageVersion = urlStorageVersion(this.db) ?? 2;
+      this.db.exec(COMMON_ACTIVITY_SCHEMA + (this.urlStorageVersion === 1 ? LEGACY_URL_SCHEMA : COMPACT_URL_SCHEMA));
+    } catch (error) { this.db.close(); throw error; }
+  }
   close() { this.db.close(); }
   transaction<T>(action: () => T): T {
     this.db.exec('BEGIN IMMEDIATE');
@@ -158,11 +163,12 @@ export class ActivityLedger {
       // Child sitemap loc values never become observed article URLs.
       const urls = successful && !index ? [...new Map(collection.urls.map(raw => { const value = normalizeArticleUrl(raw); return [value.url, value] as const; })).values()] : [];
       const sourceNew: Record<string, number> = {}, countryNew: Record<string, number> = {}, baselineSources: string[] = [];
-      const upsertUrl = this.db.prepare(`INSERT INTO urls VALUES(?,?,?,?,?) ON CONFLICT(url) DO UPDATE SET last_seen=MAX(last_seen,excluded.last_seen)`);
-      const endpointUrl = this.db.prepare(`INSERT INTO endpoint_urls VALUES(?,?,?,?) ON CONFLICT(endpoint_id,url) DO UPDATE SET last_seen=MAX(last_seen,excluded.last_seen)`);
-      const bindingUrl = this.db.prepare(`INSERT INTO binding_urls VALUES(?,?,?,?,?,?) ON CONFLICT(source_id,endpoint_id,url) DO UPDATE SET last_seen=MAX(last_seen,excluded.last_seen)`);
-      const scope = this.db.prepare(`INSERT INTO scope_urls VALUES(?,?,?,?,?,?,?) ON CONFLICT(scope_kind,scope_id,url) DO UPDATE SET last_seen=MAX(last_seen,excluded.last_seen)`);
-      const scopeExists = this.db.prepare('SELECT 1 FROM scope_urls WHERE scope_kind=? AND scope_id=? AND url=?');
+      const urlKey = this.urlStorageVersion === 2 ? 'url_id' : 'url';
+      const upsertUrl = this.db.prepare(`INSERT INTO urls(url,normalization_version,kind,first_seen,last_seen) VALUES(?,?,?,?,?) ON CONFLICT(url) DO UPDATE SET last_seen=MAX(last_seen,excluded.last_seen) RETURNING ${this.urlStorageVersion === 2 ? 'id' : 'url'} AS url_key`);
+      const endpointUrl = this.db.prepare(`INSERT INTO endpoint_urls VALUES(?,?,?,?) ON CONFLICT(endpoint_id,${urlKey}) DO UPDATE SET last_seen=MAX(last_seen,excluded.last_seen)`);
+      const bindingUrl = this.db.prepare(`INSERT INTO binding_urls VALUES(?,?,?,?,?,?) ON CONFLICT(source_id,endpoint_id,${urlKey}) DO UPDATE SET last_seen=MAX(last_seen,excluded.last_seen)`);
+      const scope = this.db.prepare(`INSERT INTO scope_urls VALUES(?,?,?,?,?,?,?) ON CONFLICT(scope_kind,scope_id,${urlKey}) DO UPDATE SET last_seen=MAX(last_seen,excluded.last_seen)`);
+      const scopeExists = this.db.prepare(`SELECT 1 FROM scope_urls WHERE scope_kind=? AND scope_id=? AND ${urlKey}=?`);
       const bindingStates = sources.map(source => ({ source, initialized: !!this.db.prepare('SELECT baseline_at FROM bindings WHERE source_id=? AND endpoint_id=?').get(source.id, collection.endpoint.id)?.baseline_at }));
       for (const { source, initialized } of bindingStates) {
         sourceNew[source.id] = 0; countryNew[source.countryCode] ??= 0;
@@ -171,19 +177,19 @@ export class ActivityLedger {
       const countryBaselines = [...new Set(sources.map(source => source.countryCode))]
         .map(country => ({ country, baseline: bindingStates.some(binding => binding.source.countryCode === country && !binding.initialized) }));
       for (const article of urls) {
-        upsertUrl.run(article.url, NORMALIZATION_VERSION, article.kind, collection.checked_at, collection.checked_at);
-        endpointUrl.run(collection.endpoint.id, article.url, collection.checked_at, collection.checked_at);
+        const storedUrl = upsertUrl.get(article.url, NORMALIZATION_VERSION, article.kind, collection.checked_at, collection.checked_at)!.url_key;
+        endpointUrl.run(collection.endpoint.id, storedUrl, collection.checked_at, collection.checked_at);
         // A newly initialized binding excludes its old archive from BOTH source and country NEW.
         // Country baseline wins when several bindings share the same endpoint on its first visit.
         for (const { country, baseline } of countryBaselines) {
-          const existed = scopeExists.get('country', country, article.url);
-          scope.run('country', country, article.url, collection.checked_at, collection.checked_at, +baseline, article.kind);
+          const existed = scopeExists.get('country', country, storedUrl);
+          scope.run('country', country, storedUrl, collection.checked_at, collection.checked_at, +baseline, article.kind);
           if (!existed && !baseline && article.kind === 'candidate') countryNew[country]++;
         }
         for (const { source, initialized } of bindingStates) {
-          bindingUrl.run(source.id, collection.endpoint.id, source.countryCode, article.url, collection.checked_at, collection.checked_at);
-          const existed = scopeExists.get('source', source.id, article.url);
-          scope.run('source', source.id, article.url, collection.checked_at, collection.checked_at, +!initialized, article.kind);
+          bindingUrl.run(source.id, collection.endpoint.id, source.countryCode, storedUrl, collection.checked_at, collection.checked_at);
+          const existed = scopeExists.get('source', source.id, storedUrl);
+          scope.run('source', source.id, storedUrl, collection.checked_at, collection.checked_at, +!initialized, article.kind);
           if (!existed && initialized && article.kind === 'candidate') sourceNew[source.id]++;
         }
       }

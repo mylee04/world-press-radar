@@ -71,7 +71,7 @@ test('mixed initialization on a shared endpoint excludes the new US binding base
   assert.equal(observation.result.source_new[source('C').id], 1);
   assert.equal(observation.result.country_new.US, 0);
   assert.equal(observation.result.country_new.CA, 1);
-  const scope = (kind, id) => ledger.db.prepare('SELECT * FROM scope_urls WHERE scope_kind=? AND scope_id=? AND url=?').get(kind, id, article);
+  const scope = (kind, id) => ledger.db.prepare('SELECT s.* FROM scope_urls s JOIN urls u ON u.id=s.url_id WHERE scope_kind=? AND scope_id=? AND u.url=?').get(kind, id, article);
   assert.equal(scope('country', 'US').baseline, 1);
   assert.equal(scope('country', 'CA').baseline, 0);
   assert.equal(scope('source', source('A').id).baseline, 0);
