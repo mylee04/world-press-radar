@@ -29,3 +29,11 @@ Compaction runs after the conversion commits. If that later step fails, format 2
 The affected activity, storage, migration and reopen/spool tests cover exact historical fields, baseline exclusion, country/source deduplication, replay, rollback, mixed-schema refusal, unchanged snapshots and actual disk reduction on a bounded repeated-URL fixture. The migration command also passed preview, apply, compaction and idempotent-repeat checks. No unrelated full suite is required for this change.
 
 Operational savings must be measured after actual compaction. A smaller fixture does not establish a production saving rate or guarantee future growth. The existing 16 GiB planning threshold, capacity reports and 52/50 GiB disk checks remain applicable.
+
+## Applied on Oracle, October 18, 2026
+
+The existing authoritative ledger was converted in place under the shared runner lock and compacted at `2026-10-18T05:11:26Z` (00:11 CDT). Its size fell from 6,575,132,672 to 2,696,220,672 bytes: 6.12 GiB to 2.51 GiB, a measured 58.99 percent reduction (3.61 GiB reclaimed). All 2,772,499 canonical URLs and all 5,880,921 scope, 3,150,112 endpoint and 3,189,920 binding relationships were mapped and checked before the old layout was removed.
+
+Before/after fingerprints of every non-URL table matched, including all 81,326 collection observations, original metadata, binding baselines, cycles, request budgets and recovery state. The retained public snapshot was byte-identical. The published plugin returned the same United States UTC October 18 activity: 2,781 newly discovered candidate URLs, unchanged tracking start and 81,326 retained observations. There were no publisher requests, new collections, expired records or data backups. The WAL and pending spool were empty at completion, with about 98.4 GiB free. The existing timers, 16 GiB collector threshold and no-backup policy remain in place.
+
+Code-only release `url-storage-v2-20261018` passed typechecking and the 28 affected runtime tests on Oracle. Only affected checks were used locally and on the runner; no full suite or public-site deployment was added for this storage change. Future daily growth must be measured from real post-conversion cycles; the one-time reduction does not establish a new daily growth rate.
