@@ -4,11 +4,13 @@ import { fileURLToPath } from 'node:url';
 import { loadData } from './config.js';
 import { observationSchema, snapshotSchema, type Observation } from './health.js';
 import { auditEndpoint, isTransient } from './audit-check.js';
-import { createHostGate } from './host-gate.js';
+import { createAuditHostGate, loadAuditHostCooldowns, observeAuditHostCooldowns } from './audit-cooldowns.js';
 
 const flags = process.argv.slice(2);
 if (flags.length > 1 || (flags[0] && !/^\d{4}-\d{2}-\d{2}(?:-[a-z0-9]+)?$/.test(flags[0]))) throw new Error('Use audit [YYYY-MM-DD[-suffix]]; an existing run resumes');
 const runId = flags[0] ?? new Date().toISOString().slice(0, 10);
+const persistedCooldowns = loadAuditHostCooldowns(process.env.WNS_ACTIVITY_DB);
+const hostname = (url: string) => new URL(url).hostname.replace(/^\[|\]$/g, '');
 const base = fileURLToPath(new URL('../audits/', import.meta.url));
 const directory = `${base}/${runId}`; mkdirSync(directory, { recursive: true });
 const journal = `${directory}/observations.jsonl`; const manifestPath = `${directory}/manifest.json`;
@@ -39,8 +41,9 @@ for (const source of catalog.sources) for (const endpoint of source.endpoints) {
 const pending = endpoints.filter(e => !observations.has(e.id) || (isTransient(observations.get(e.id)!) && observations.get(e.id)!.attempts === 1) ||
   (observations.get(e.id)?.reason === 'PRIVATE_ADDRESS' && observations.get(e.id)?.validatorVersion !== '2'));
 const activeHosts = new Set<string>(); const nextHostAt = new Map<string, number>(); const limitedHosts = new Set<string>();
-for (const observation of observations.values()) if (observation.httpStatus === 429) limitedHosts.add(new URL(observation.url).hostname);
-const requestGate = createHostGate();
+const requestGate = createAuditHostGate(limitedHosts);
+for (const observation of observations.values()) if (observation.httpStatus === 429) observeAuditHostCooldowns(observation, requestGate, limitedHosts);
+for (const hold of persistedCooldowns) requestGate.defer(hold.host, hold.until, hold.httpStatus);
 const skipped = new Map<string, string>(); let stopped = false;
 const earlierReport = existsSync(`${directory}/report.json`) ? JSON.parse(readFileSync(`${directory}/report.json`, 'utf8')) : undefined;
 const existingFinishedAt: string | null = pending.length === 0 ? earlierReport?.audit?.finishedAt ?? null : null;
@@ -77,15 +80,19 @@ checkpoint(); const timer = setInterval(() => checkpoint(), 30000);
 const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 async function worker() {
   while (!stopped && pending.length) {
-    const index = pending.findIndex(e => { const host = new URL(e.url).hostname; return !activeHosts.has(host) && (nextHostAt.get(host) ?? 0) <= Date.now(); });
+    const index = pending.findIndex(e => { const host = hostname(e.url); return !activeHosts.has(host) && (nextHostAt.get(host) ?? 0) <= Date.now(); });
     if (index < 0) { await sleep(100); continue; }
-    const endpoint = pending.splice(index, 1)[0]; const host = new URL(endpoint.url).hostname;
+    const endpoint = pending.splice(index, 1)[0]; const host = hostname(endpoint.url);
     if (limitedHosts.has(host)) { skipped.set(endpoint.id, 'HOST_RATE_LIMITED'); continue; }
+    const hold = requestGate.deferred(host);
+    if (hold) { skipped.set(endpoint.id, hold.httpStatus === 429 ? 'HOST_RATE_LIMITED' : 'HOST_SERVER_RETRY_AFTER'); continue; }
     activeHosts.add(host);
     try {
-      const result = await auditEndpoint(endpoint, requestGate); result.attempts = observations.has(endpoint.id) ? 2 : 1;
+      const result = await auditEndpoint(endpoint, requestGate);
+      if (result.requestDeferred) { skipped.set(endpoint.id, result.requestDeferred.httpStatus === 429 ? 'HOST_RATE_LIMITED' : 'HOST_SERVER_RETRY_AFTER'); continue; }
+      observeAuditHostCooldowns(result, requestGate, limitedHosts);
+      result.attempts = observations.has(endpoint.id) ? 2 : 1;
       observationSchema.parse(result); observations.set(endpoint.id, result); appendFileSync(journal, JSON.stringify(result) + '\n');
-      if (result.httpStatus === 429) limitedHosts.add(host);
       if (isTransient(result) && result.attempts === 1) { pending.push(endpoint); nextHostAt.set(host, Date.now() + 30000); }
       else nextHostAt.set(host, Date.now() + 2000);
     } finally { activeHosts.delete(host); }
