@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Operator disk guard. No deletion, database write, or child process.
 
-Called inside the existing shared flock. Reserve 50 GiB after a fresh backup
-and 2 GiB collection growth. Other filesystem writers are outside this guard.
+Called inside the existing shared flock. Regular runs reserve 50 GiB plus
+2 GiB collection growth without creating a backup. Legacy backup phases retain
+their original reservation. Other filesystem writers are outside this guard.
 """
 import argparse
 import json
@@ -19,7 +20,7 @@ GROWTH_BYTES = 2 * GIB
 def required_bytes(phase, backup_bytes):
     if phase == "before-backup":
         return FLOOR_BYTES + backup_bytes + GROWTH_BYTES
-    if phase == "after-backup":
+    if phase in ("before-run", "after-backup"):
         return FLOOR_BYTES + GROWTH_BYTES
     if phase in ("pre-copy", "postflight"):
         return FLOOR_BYTES
@@ -43,16 +44,19 @@ def backup_size(db):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("phase", choices=("before-backup", "after-backup", "pre-copy", "postflight"))
+    parser.add_argument("phase", choices=("before-run", "before-backup", "after-backup", "pre-copy", "postflight"))
     parser.add_argument("db", type=Path)
     parser.add_argument("base", type=Path)
     args = parser.parse_args()
     db = args.db.resolve()
     base = args.base.resolve()
-    if os.stat(db).st_dev != os.stat(base / "backups").st_dev:
-        raise RuntimeError("Ledger and backups must share the guarded filesystem")
-    expected_backup = backup_size(db)
-    filesystem = os.statvfs(base / "backups")
+    if not db.is_file() or db.stat().st_size == 0:
+        raise RuntimeError("Existing nonempty ledger is required")
+    guarded_path = base if args.phase == "before-run" else base / "backups"
+    if os.stat(db).st_dev != os.stat(guarded_path).st_dev:
+        raise RuntimeError("Ledger and guarded path must share the guarded filesystem")
+    expected_backup = backup_size(db) if args.phase == "before-backup" else 0
+    filesystem = os.statvfs(guarded_path)
     free = filesystem.f_bavail * filesystem.f_frsize
     required = required_bytes(args.phase, expected_backup)
     print(json.dumps({"disk_guard": args.phase, "free_bytes": free, "required_free_bytes": required,
