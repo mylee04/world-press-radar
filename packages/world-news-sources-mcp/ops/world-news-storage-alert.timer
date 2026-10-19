@@ -1,0 +1,11 @@
+[Unit]
+Description=Hourly shared disk early warning independent of the desktop app
+
+[Timer]
+OnCalendar=*-*-* *:15:00 UTC
+Persistent=true
+AccuracySec=1min
+Unit=world-news-storage-alert.service
+
+[Install]
+WantedBy=timers.target
