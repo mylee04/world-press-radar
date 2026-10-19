@@ -1,0 +1,16 @@
+[Unit]
+Description=Retain bounded Clinic and FBM backups and inactive deployment artifacts
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/shared-project-retention --apply
+UMask=0077
+Nice=15
+IOSchedulingClass=idle
+CPUQuota=25%
+MemoryMax=128M
+TimeoutStartSec=5min
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/srv/clinic-signals-ru/releases /srv/clinic-signals-ru/backups /srv/clinic-signals-ru/data /srv/fbm-ai/backups/postgres /srv/fbm-ai/deploy-backup-15f2f25c /srv/fbm-ai/deploy-backup-6d7d3133 /srv/fbm-ai/deploy-backup-security-20260926 /run/lock /var/lib/shared-project-retention

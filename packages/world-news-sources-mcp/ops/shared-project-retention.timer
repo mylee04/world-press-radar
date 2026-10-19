@@ -1,0 +1,12 @@
+[Unit]
+Description=Hourly bounded retention for Clinic and FBM operator artifacts
+
+[Timer]
+OnBootSec=10min
+OnUnitActiveSec=1h
+RandomizedDelaySec=90s
+Persistent=true
+Unit=shared-project-retention.service
+
+[Install]
+WantedBy=timers.target
