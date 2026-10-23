@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily summary fallback if regular collection is delayed or missing
+
+[Timer]
+OnCalendar=*-*-* 04:15:00 UTC
+Persistent=true
+AccuracySec=1min
+Unit=world-news-daily-summary.service
+
+[Install]
+WantedBy=timers.target

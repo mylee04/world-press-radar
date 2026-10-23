@@ -1,0 +1,23 @@
+[Unit]
+Description=Private daily news collection outcome and progress summary
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=1h
+StartLimitBurst=3
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 %h/.local/share/world-news-audit/bin/daily-collection-summary.py --base %h/.local/share/world-news-audit --credentials %d/telegram-notify
+LoadCredential=telegram-notify:%h/.config/world-news-audit/telegram-notify.json
+Environment=TZ=UTC
+UMask=0077
+Nice=15
+CPUQuota=20%
+MemoryMax=192M
+TimeoutStartSec=2min
+Restart=on-failure
+RestartSec=5min
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=%h/.local/share/world-news-audit/state
