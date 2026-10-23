@@ -12,8 +12,9 @@ test('SDK client initializes real stdio server and exercises current registry to
   const client=new Client({name:'world-news-sources-test',version:'0.1.0'});
   try {
     await client.connect(transport);
-    const {tools}=await client.listTools();assert.equal(tools.length,12);
-    assert.ok(tools.every(t=>t.annotations.readOnlyHint));
+    const {tools}=await client.listTools();assert.equal(tools.length,13);
+    assert.ok(tools.filter(t=>t.name!=='set_usage_analytics').every(t=>t.annotations.readOnlyHint));
+    assert.equal(tools.find(t=>t.name==='set_usage_analytics').annotations.readOnlyHint,false);
     const countries=await client.callTool({name:'list_countries',arguments:{limit:2}});
     assert.equal(countries.structuredContent.configured_rows,expectedRows);
     assert.equal(countries.structuredContent.total,new Set(registry.countries.map(country=>country.code.toUpperCase())).size);

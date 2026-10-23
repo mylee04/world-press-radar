@@ -1,4 +1,5 @@
 import { McpServer } from '@modelcontextprotocol/server';
+import { z } from 'zod';
 import { countrySchema, detailsSchema, healthSchema, page, type Catalog } from './catalog.js';
 import { HealthStore } from './health.js';
 import { ActivityStore, countryActivitySchema, sourceActivitySchema, inventorySchema, countryInventory } from './activity.js';
@@ -7,7 +8,7 @@ import { describeEndpointStatus } from './endpoint-status.js';
 import { curatedSearchSchema, searchCuratedSources, loadSourcePacks, resolveSourcePacks, listSourcePacks, getSourcePack, exportSourcePack,
   listSourcePacksSchema, getSourcePackSchema, exportSourcePackSchema, type SourcePackDocument } from './source-packs.js';
 
-export function createServer(catalog: Catalog, health: HealthStore, activity = new ActivityStore(), sourcePacks: SourcePackDocument = loadSourcePacks()) {
+export function createServer(catalog: Catalog, health: HealthStore, activity = new ActivityStore(), sourcePacks: SourcePackDocument = loadSourcePacks(), usagePreferences?: (rawMeta: unknown, enabled: boolean) => Promise<{ enabled: boolean; identity_available: boolean }>) {
   const server = new McpServer({ name: 'world-news-sources-mcp', title: 'World News Sources', version: '0.1.0' });
   const annotations = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false };
   const result = (value: Record<string, unknown>) => ({ content: [{ type: 'text' as const, text: JSON.stringify(value) }], structuredContent: value });
@@ -78,6 +79,19 @@ export function createServer(catalog: Catalog, health: HealthStore, activity = n
       if (Buffer.byteLength(exported.content) > 40000) { const { content, ...metadata } = exported; return result({ ...metadata, inline_content_omitted: true, inline_content_bytes: Buffer.byteLength(content), note: 'Use download_url for the complete export; no export rows were truncated.' }); }
       return result(exported);
     } catch { return { isError: true, content: [{ type: 'text' as const, text: 'Unknown source pack or invalid export request' }] }; }
+  });
+  server.registerTool('set_usage_analytics', {
+    description: 'Enable or disable pseudonymous repeat-use measurement for the optional client identity on this call. Disabling deletes its last 30 days of presence and keeps a suppression key until enabled again. Source access and results stay available; aggregate counters continue. A preference cannot be stored when no supported identity is provided.',
+    inputSchema: z.object({ enabled: z.boolean() }).strict(),
+    annotations: { readOnlyHint: false, destructiveHint: true, idempotentHint: true, openWorldHint: false },
+  }, async (input, context) => {
+    if (!usagePreferences) return { ...result({ status: 'unavailable', applied: false, enabled: null, identity_available: false, message: 'Usage preferences are unavailable on this connection. No preference was changed.' }), isError: true };
+    try {
+      const preference = await usagePreferences(context.mcpReq._meta, input.enabled);
+      if (typeof preference.enabled !== 'boolean' || typeof preference.identity_available !== 'boolean') throw new Error('Invalid usage preference response');
+      if (!preference.identity_available) return result({ status: 'unavailable', applied: false, enabled: null, identity_available: false, message: 'No supported client identity was provided. Repeat-use measurement is unavailable for this call; aggregate counters continue. No stored preference was changed.' });
+      return result({ status: 'applied', applied: true, enabled: preference.enabled, identity_available: true, message: preference.enabled ? 'The preference to allow repeat-use measurement was saved for this client identity. Measurement also depends on service activation. Source access and results are unchanged.' : 'Repeat-use measurement is disabled for this client identity. Its recent presence was deleted and a suppression key is retained until enabled again. Source access, results and aggregate counters are unchanged.' });
+    } catch { return { ...result({ status: 'error', applied: false, enabled: null, identity_available: null, message: 'The usage preference could not be confirmed. No successful change is claimed; retry this request.' }), isError: true }; }
   });
   return server;
 }

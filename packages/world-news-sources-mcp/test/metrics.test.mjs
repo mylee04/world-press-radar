@@ -39,7 +39,7 @@ test('real HTTP SDK and legacy calls count errors separately, excluding initiali
     assert.equal(events.length,3);assert.deepEqual(events.map(x=>x.outcome),['success','error','error']);
     assert.deepEqual(events.map(x=>x.tool),['list_countries','search_sources','unknown']);
     assert.equal(events[2].traffic,'inspection');
-    assert.ok(events.every(x=>Object.keys(x).sort().join(',')==='duration_ms,outcome,tool,traffic'&&Number.isInteger(x.duration_ms)));
+    assert.ok(events.every(x=>Object.keys(x).sort().join(',')==='duration_ms,outcome,product,tool,traffic'&&Number.isInteger(x.duration_ms)));
   }finally{await client.close();await handler.close();}
 });
 
@@ -69,7 +69,9 @@ test('atomic SQLite increments survive concurrent writers and reopen; no event h
     })));
     const reopened=new DatabaseSync(path);const row=reopened.prepare('SELECT * FROM daily_tool_usage').get();
     assert.equal(row.calls,400);assert.equal(row.successes,400);assert.equal(row.errors,0);assert.equal(row.duration_sum_ms,48000);assert.equal(row.duration_max_ms,120);assert.equal(row.latency_101_500,400);
-    assert.deepEqual(reopened.prepare("SELECT name FROM sqlite_master WHERE type='table'").all().map(x=>x.name),['daily_tool_usage','daily_activity_tool_usage']);reopened.close();
+    const names=reopened.prepare("SELECT name FROM sqlite_master WHERE type='table'").all().map(x=>x.name);
+    assert.ok(names.includes('daily_tool_usage')&&names.includes('daily_activity_tool_usage'));
+    assert.ok(!names.some(name=>/event|request|query|conversation/.test(name)));reopened.close();
   }finally{rmSync(dir,{recursive:true,force:true});}
 });
 

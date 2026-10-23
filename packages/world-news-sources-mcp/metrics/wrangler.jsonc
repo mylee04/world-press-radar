@@ -5,6 +5,8 @@
   "account_id": "2241c539af4ee9cc0248040227fe30c5",
   "workers_dev": true,
   "observability": { "enabled": false },
+  "vars": { "REPEAT_USAGE_ENABLED": "1" },
+  "triggers": { "crons": ["15 0 * * *"] },
   "d1_databases": [
     {
       "binding": "DB",
