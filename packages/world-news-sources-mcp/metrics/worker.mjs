@@ -117,9 +117,79 @@ async function boundedJson(request) {
   const data=new Uint8Array(size);let offset=0;for(const part of parts){data.set(part,offset);offset+=part.length;}
   return JSON.parse(new TextDecoder().decode(data));
 }
+export const DAILY_PRODUCT_REPORT = `SELECT day,traffic,channel,${productColumns.join(',')},
+ search_nonempty+search_zero_matches+search_empty_page AS known_successful_searches,
+ export_nonempty+export_empty+export_unknown AS successful_exports,
+ ROUND(100.0*search_zero_matches/NULLIF(search_nonempty+search_zero_matches+search_empty_page,0),2) AS zero_match_percent
+ FROM daily_product_usage WHERE day=? ORDER BY traffic,channel`;
+export const DAILY_CALL_REPORT = `SELECT traffic,SUM(calls) AS calls,SUM(successes) AS successes,SUM(errors) AS errors
+ FROM (SELECT traffic,calls,successes,errors FROM daily_tool_usage WHERE day=?
+ UNION ALL SELECT traffic,calls,successes,errors FROM daily_activity_tool_usage WHERE day=?
+ UNION ALL SELECT traffic,calls,successes,errors FROM daily_extended_tool_usage WHERE day=?)
+ GROUP BY traffic ORDER BY traffic`;
+export const DAILY_REPEAT_REPORT = `SELECT COUNT(*) AS observed_keys,
+ COALESCE(SUM(EXISTS(SELECT 1 FROM usage_actor_days b WHERE b.actor_key=a.actor_key
+ AND b.day BETWEEN date(a.day,'-7 days') AND date(a.day,'-1 day') AND b.day>=?)),0) AS returning_keys_prior_7_days
+ FROM usage_actor_days a WHERE a.day=? AND a.day>=?`;
+export const DAILY_COVERAGE_REPORT = `SELECT
+ (SELECT MIN(day) FROM daily_product_usage WHERE day<=?) AS first_product_day,
+ (SELECT MIN(day) FROM usage_actor_days WHERE day BETWEEN ? AND ?) AS first_presence_day`;
+export function validateReportDay(url, now = new Date()) {
+  const entries = [...url.searchParams];
+  if (entries.length !== 1 || entries[0][0] !== 'day') throw new Error('Invalid report date');
+  const day = entries[0][1];
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(day)) throw new Error('Invalid report date');
+  const parsed = new Date(`${day}T00:00:00Z`);
+  if (!Number.isFinite(parsed.getTime()) || parsed.toISOString().slice(0, 10) !== day) throw new Error('Invalid report date');
+  const today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+  const oldest = new Date(today.getTime() - 30 * 86400000).toISOString().slice(0, 10);
+  if (day < oldest || day >= today.toISOString().slice(0, 10)) throw new Error('Report date outside closed window');
+  return day;
+}
+export async function dailyReport(env, day, now = new Date()) {
+  const [productResult, callResult, coverage, keys] = await Promise.all([
+    env.DB.prepare(DAILY_PRODUCT_REPORT).bind(day).all(),
+    env.DB.prepare(DAILY_CALL_REPORT).bind(day, day, day).all(),
+    env.DB.prepare(DAILY_COVERAGE_REPORT).bind(day, actorCutoff(now), day).first(),
+    env.DB.prepare(DAILY_REPEAT_REPORT).bind(actorCutoff(now), day, actorCutoff(now)).first(),
+  ]);
+  const product = productResult.results, calls = callResult.results;
+  if (!Array.isArray(product) || product.length > 4 || !Array.isArray(calls) || calls.length > 2 || !coverage || !keys) throw new Error('Invalid report result');
+  const identityProvided = product.find(row => row.traffic === 'unclassified' && row.channel === 'mcp')?.identity_provided ?? 0;
+  const enabled = env.REPEAT_USAGE_ENABLED === '1';
+  const firstPresence = coverage.first_presence_day;
+  const lookback = firstPresence ? Math.max(0, Math.min(7, Math.floor((Date.parse(day) - Date.parse(firstPresence)) / 86400000))) : 0;
+  const hasKeys = enabled && identityProvided > 0 && day >= actorCutoff(now);
+  return {
+    version: 1, day, observed_at: now.toISOString(), repeat_enabled: enabled, product, calls,
+    repeat: {
+      status: !enabled ? 'disabled' : !hasKeys ? 'unobserved' : 'observed',
+      observed_keys: hasKeys ? keys.observed_keys : null,
+      returning_keys_prior_7_days: hasKeys ? keys.returning_keys_prior_7_days : null,
+      lookback_complete: hasKeys && lookback === 7,
+      population: 'observed_pseudonymous_keys_only',
+    },
+    coverage: {
+      first_product_day: coverage.first_product_day, first_presence_day: firstPresence,
+      lookback_days_available: lookback, product_status: product.length ? 'observed' : 'unobserved', product_complete: false,
+      note: 'Counters may have gaps. Declared inspection is client supplied; unclassified includes undeclared tests and automated traffic. No pre-activation identity history is reconstructed.',
+    },
+  };
+}
+async function reportResponse(request, env, url) {
+  const headers = {'cache-control': 'no-store'};
+  if (request.method !== 'GET') return new Response('Method not allowed', {status: 405, headers});
+  if (!await authorized(request, env.METRICS_REPORT_SECRET)) return new Response('Unauthorized', {status: 401, headers});
+  let day;
+  try { day = validateReportDay(url); }
+  catch { return new Response('Invalid report date', {status: 400, headers}); }
+  try { return Response.json(await dailyReport(env, day), {headers}); }
+  catch { return new Response('Report unavailable', {status: 503, headers}); }
+}
 export default {
   async fetch(request,env) {
-    const path=new URL(request.url).pathname;
+    const url = new URL(request.url), path = url.pathname;
+    if (path === '/v1/daily-report') return reportResponse(request, env, url);
     if (!['/v1/aggregate', '/v1/preference'].includes(path)) return new Response('Not found',{status:404});
     if(request.method!=='POST')return new Response('Method not allowed',{status:405});
     if(!await authorized(request,env.METRICS_WRITE_SECRET))return new Response('Unauthorized',{status:401});

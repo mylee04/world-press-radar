@@ -10,6 +10,8 @@ import os
 from pathlib import Path
 import sqlite3
 import sys
+import urllib.parse
+import urllib.request
 from zoneinfo import ZoneInfo
 
 CHICAGO = ZoneInfo('America/Chicago')
@@ -123,6 +125,108 @@ def public_status(result):
         return '공개 상태 조회 실패'
 
 
+USAGE_URL = 'https://world-news-sources-metrics.mylee.workers.dev/v1/daily-report'
+PRODUCT_COUNTS = ('events', 'search_nonempty', 'search_zero_matches', 'search_empty_page', 'search_unknown',
+    'export_nonempty', 'export_empty', 'export_unknown', 'identity_provided', 'identity_missing',
+    'identity_excluded', 'identity_suppressed', 'identity_disabled')
+
+
+class UsageNoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, request, fp, code, message, headers, new_url):
+        return None
+
+
+def fetch_usage(credentials, now, opener=None):
+    day = (now.astimezone(timezone.utc).date() - timedelta(days=1)).isoformat()
+    try:
+        if credentials.get('url') != USAGE_URL or not isinstance(credentials.get('token'), str) or not 32 <= len(credentials['token']) <= 256 or any(c.isspace() for c in credentials['token']):
+            raise ValueError('invalid_usage_credentials')
+        request = urllib.request.Request(USAGE_URL + '?' + urllib.parse.urlencode({'day': day}),
+            headers={'Authorization': 'Bearer ' + credentials['token'], 'Accept': 'application/json',
+                'User-Agent': 'WorldNewsSources-DailySummary/1.0'})
+        open_report = opener or urllib.request.build_opener(UsageNoRedirect()).open
+        with open_report(request, timeout=12) as response:
+            raw = response.read(65537)
+        if len(raw) > 65536:
+            raise ValueError('oversized_usage_response')
+        data = json.loads(raw)
+        if data.get('version') != 1 or data.get('day') != day or type(data.get('repeat_enabled')) is not bool:
+            raise ValueError('invalid_usage_report')
+        product = data.get('product')
+        if not isinstance(product, list) or len(product) > 4:
+            raise ValueError('invalid_product_rows')
+        cleaned, seen = [], set()
+        for row in product:
+            group = (row.get('traffic'), row.get('channel'))
+            if group[0] not in ('inspection', 'unclassified') or group[1] not in ('mcp', 'web_export') or group in seen:
+                raise ValueError('invalid_product_group')
+            seen.add(group)
+            values = {name: row.get(name) for name in PRODUCT_COUNTS}
+            if any(type(value) is not int or not 0 <= value <= 10**10 for value in values.values()):
+                raise ValueError('invalid_product_counts')
+            cleaned.append({'traffic': group[0], 'channel': group[1], **values})
+        calls, seen = [], set()
+        for row in data.get('calls', []):
+            if row.get('traffic') not in ('inspection', 'unclassified') or row['traffic'] in seen or type(row.get('calls')) is not int or not 0 <= row['calls'] <= 10**10:
+                raise ValueError('invalid_call_counts')
+            seen.add(row['traffic'])
+            calls.append({'traffic': row['traffic'], 'calls': row['calls']})
+        repeat, coverage = data.get('repeat', {}), data.get('coverage', {})
+        if repeat.get('status') not in ('observed', 'unobserved', 'disabled') or type(repeat.get('lookback_complete')) is not bool:
+            raise ValueError('invalid_repeat_status')
+        for name in ('observed_keys', 'returning_keys_prior_7_days'):
+            value = repeat.get(name)
+            if value is not None and (type(value) is not int or not 0 <= value <= 10**10):
+                raise ValueError('invalid_repeat_count')
+        if repeat['status'] == 'observed' and (repeat.get('observed_keys') is None or repeat.get('returning_keys_prior_7_days') is None or repeat['returning_keys_prior_7_days'] > repeat['observed_keys']):
+            raise ValueError('incomplete_repeat_counts')
+        if coverage.get('product_status') not in ('observed', 'unobserved') or type(coverage.get('lookback_days_available')) is not int or not 0 <= coverage['lookback_days_available'] <= 7:
+            raise ValueError('invalid_usage_coverage')
+        return {'state': coverage['product_status'], 'day': day, 'repeat_enabled': data['repeat_enabled'],
+            'product': cleaned, 'calls': calls,
+            'repeat': {name: repeat.get(name) for name in ('status', 'observed_keys', 'returning_keys_prior_7_days', 'lookback_complete')},
+            'coverage': {name: coverage.get(name) for name in ('first_product_day', 'first_presence_day', 'lookback_days_available', 'product_status', 'product_complete')}}
+    except Exception as error:
+        return {'state': 'unavailable', 'day': day, 'error_type': type(error).__name__}
+
+
+def usage_lines(usage):
+    lines = ['', f"사용 통계: UTC {usage['day']} 하루"]
+    if usage['state'] == 'unavailable':
+        return lines + ['사용 통계 조회 실패: 미확인. 수집 결과와 별도로 확인이 필요합니다.']
+    if usage['state'] == 'unobserved':
+        return lines + ['새 사용 지표의 관측 기록 없음: 내보내기·빈 검색·재방문은 미확인']
+    for traffic, label in [('unclassified', '미분류 호출'), ('inspection', '점검 표시 호출')]:
+        call = next((r for r in usage['calls'] if r['traffic'] == traffic), None)
+        lines += [label + (f": {call['calls']:,}회" if call else ': 관측 기록 없음')]
+        for channel, channel_label in [('mcp', 'MCP'), ('web_export', '웹 파일 다운로드')]:
+            row = next((r for r in usage['product'] if r['traffic'] == traffic and r['channel'] == channel), None)
+            if row is None:
+                lines += [f'{channel_label} 새 지표: 관측 기록 없음']
+                continue
+            exports = sum(row[name] for name in ('export_nonempty', 'export_empty', 'export_unknown'))
+            lines += [f"{channel_label} 내보내기 성공 {exports:,}회 (내용 있음 {row['export_nonempty']:,} / 빈 파일 {row['export_empty']:,} / 내용 미확인 {row['export_unknown']:,})"]
+            if channel == 'mcp':
+                denominator = row['search_nonempty'] + row['search_zero_matches'] + row['search_empty_page']
+                rate = f"{100 * row['search_zero_matches'] / denominator:.1f}% ({row['search_zero_matches']:,}/{denominator:,}회)" if denominator else '미확인 (확인된 검색 결과 없음)'
+                lines += [f"빈 검색 비율 {rate}; 페이지 끝 {row['search_empty_page']:,}회, 결과 미확인 {row['search_unknown']:,}회"]
+                if call and row['events'] < call['calls']:
+                    lines += [f"새 지표 관측 {row['events']:,}/{call['calls']:,}회 (도입 전 호출 또는 집계 누락 포함)"]
+    repeat = usage['repeat']
+    if repeat['status'] == 'disabled':
+        lines += ['재방문 추정: 해당 조회의 측정 기능 비활성 상태, 미확인']
+    elif repeat['status'] == 'unobserved':
+        lines += ['재방문 추정: 측정 가능한 식별정보 관측 없음, 미확인']
+    else:
+        lines += [f"재방문 추정: 관측 식별자 {repeat['observed_keys']:,}개 중 이전 날짜 재방문 {repeat['returning_keys_prior_7_days']:,}개 (직전 7일 기준)"]
+        if not repeat['lookback_complete']:
+            lines += [f"재방문 비교 기간 일부만 관측 ({usage['coverage']['lookback_days_available']}/7일); 도입 전 사용은 미확인"]
+    row = next((r for r in usage['product'] if r['traffic'] == 'unclassified' and r['channel'] == 'mcp'), None)
+    if row:
+        lines += [f"식별정보 미제공 {row['identity_missing']:,}회 / 선택 거부 {row['identity_suppressed']:,}회 / 측정 비활성 {row['identity_disabled']:,}회"]
+    return lines + ['점검 표시는 클라이언트 선언입니다. 미분류에도 자체 점검·자동 호출이 섞이며, 재방문은 고유 인원·만족도가 아닙니다.']
+
+
 def message(result):
     labels = {'complete': '수집·후속 작업 정상 종료', 'failed': '수집 또는 후속 작업 실패, 확인 필요', 'running': '정기 작업 진행 중', 'missing': '이번 정기 작업 시작 기록 없음', 'report_error': '요약 데이터 확인 필요'}
     started = at(result['service_started_at']).astimezone(CHICAGO).strftime('%m/%d %H:%M') if result.get('service_started_at') else None
@@ -151,6 +255,8 @@ def message(result):
         growth = result.get('growth_bytes')
         lines += [f"원장 {result['ledger_bytes'] / 1024**3:.2f} GiB" + (f" / 이번 회차 {growth / 1024**2:+.1f} MiB" if growth is not None else ' / 회차 증가량 미확인'),
             f"공용 디스크 여유 {result['free_bytes'] / 1024**3:.1f} GiB", '공개 데이터: ' + result.get('public_status', '미확인')]
+    if result.get('usage'):
+        lines += usage_lines(result['usage'])
     lines += ['https://news.bymyleslee.com/quality/']
     return '\n'.join(lines)
 
@@ -161,6 +267,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--base', type=Path, required=True)
     parser.add_argument('--credentials', type=Path, required=True)
+    parser.add_argument('--usage-credentials', type=Path)
+    parser.add_argument('--refresh-delivered', action='store_true', help='Update the existing private message without sending another copy')
     args = parser.parse_args()
     directory = args.base / 'state/daily-summary'
     if directory.is_symlink():
@@ -187,15 +295,28 @@ def main():
         except Exception as error:
             result = {'day': expected.date().isoformat(), 'state': 'report_error', 'error_type': type(error).__name__}
         key = ':'.join([result['day'], result['state'], result.get('cycle_id', 'no-cycle')])
-        if key in state['sent']:
+        if key in state['sent'] and not args.refresh_delivered:
             print(json.dumps({'daily_summary': 'already_delivered', 'day': result['day'], 'state': result['state']}))
             return
+        if args.usage_credentials:
+            try:
+                usage_credentials = notify.load(args.usage_credentials)
+                result['usage'] = fetch_usage(usage_credentials, now)
+            except Exception as error:
+                result['usage'] = {'state': 'unavailable', 'day': (now.date() - timedelta(days=1)).isoformat(), 'error_type': type(error).__name__}
         notify.save(directory / 'latest.json', result)
-        sent = notify.telegram(credentials, 'sendMessage', {'chat_id': credentials['chat_id'], 'text': message(result), 'link_preview_options': {'is_disabled': True}})
+        text = message(result)
+        if len(text) > 3900:
+            raise ValueError('summary_message_too_long')
+        previous = state['sent'].get(key)
+        body = {'chat_id': credentials['chat_id'], 'text': text, 'link_preview_options': {'is_disabled': True}}
+        if previous and args.refresh_delivered:
+            body['message_id'] = previous['message_id']
+        sent = notify.telegram(credentials, 'editMessageText' if previous else 'sendMessage', body)
         state['sent'][key] = {'at': now.isoformat(), 'message_id': sent['message_id']}
         state['sent'] = dict(list(state['sent'].items())[-64:])
         notify.save(state_path, state)
-        print(json.dumps({'daily_summary': 'delivered', 'day': result['day'], 'state': result['state'], 'message_id': sent['message_id']}))
+        print(json.dumps({'daily_summary': 'updated' if previous else 'delivered', 'day': result['day'], 'state': result['state'], 'message_id': sent['message_id']}))
 
 
 if __name__ == '__main__':

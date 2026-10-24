@@ -7,8 +7,9 @@ StartLimitBurst=3
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/python3 %h/.local/share/world-news-audit/bin/daily-collection-summary.py --base %h/.local/share/world-news-audit --credentials %d/telegram-notify
+ExecStart=/usr/bin/python3 %h/.local/share/world-news-audit/bin/daily-collection-summary.py --base %h/.local/share/world-news-audit --credentials %d/telegram-notify --usage-credentials %d/metrics-report
 LoadCredential=telegram-notify:%h/.config/world-news-audit/telegram-notify.json
+LoadCredential=metrics-report:%h/.config/world-news-audit/metrics-report.json
 Environment=TZ=UTC
 UMask=0077
 Nice=15
