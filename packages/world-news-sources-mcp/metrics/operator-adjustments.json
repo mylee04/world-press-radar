@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "product-validation-20261023",
+      "day": "2026-10-23",
+      "channel": "mcp",
+      "calls": 4,
+      "product": {
+        "events": 4,
+        "search_nonempty": 2,
+        "search_zero_matches": 1,
+        "search_empty_page": 0,
+        "search_unknown": 0,
+        "export_nonempty": 1,
+        "export_empty": 0,
+        "export_unknown": 0,
+        "identity_provided": 1,
+        "identity_missing": 0,
+        "identity_excluded": 0,
+        "identity_suppressed": 0,
+        "identity_disabled": 3
+      },
+      "known_operator_presence": true
+    }
+  ]
+}

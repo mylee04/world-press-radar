@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Send one saved daily collection summary per result stage, without collecting."""
 from collections import Counter
+from copy import deepcopy
 from datetime import datetime, timedelta, timezone
 import argparse
 import fcntl
@@ -190,13 +191,89 @@ def fetch_usage(credentials, now, opener=None):
         return {'state': 'unavailable', 'day': day, 'error_type': type(error).__name__}
 
 
+def classify_usage(usage, document):
+    """Apply documented operator corrections to a report copy, never to raw metrics."""
+    result = deepcopy(usage)
+    if result.get('classification', {}).get('status') == 'verified_overlay':
+        return result
+    try:
+        if not isinstance(document, dict) or document.get('version') != 1 or not isinstance(document.get('entries'), list) or len(document['entries']) > 1000:
+            raise ValueError('invalid_operator_adjustments')
+        day = datetime.strptime(usage['day'], '%Y-%m-%d').date()
+        declared = next((row['calls'] for row in usage.get('calls', []) if row['traffic'] == 'inspection'), None)
+        unknown = next((row['calls'] for row in usage.get('calls', []) if row['traffic'] == 'unclassified'), None)
+        verified, presence, history, seen = 0, False, False, set()
+        for entry in document['entries']:
+            if not isinstance(entry, dict) or not isinstance(entry.get('id'), str) or not 1 <= len(entry['id']) <= 120 or entry['id'] in seen:
+                raise ValueError('invalid_adjustment_id')
+            seen.add(entry['id'])
+            entry_day = datetime.strptime(entry['day'], '%Y-%m-%d').date()
+            channel, count, product = entry.get('channel'), entry.get('calls'), entry.get('product')
+            if channel not in ('mcp', 'web_export') or type(count) is not int or not 0 <= count <= 10**10 or type(entry.get('known_operator_presence')) is not bool:
+                raise ValueError('invalid_adjustment')
+            if not isinstance(product, dict) or set(product) != set(PRODUCT_COUNTS) or any(type(v) is not int or not 0 <= v <= 10**10 for v in product.values()):
+                raise ValueError('invalid_adjustment_counts')
+            if sum(product[k] for k in PRODUCT_COUNTS if k.startswith('identity_')) != product['events'] or sum(product[k] for k in PRODUCT_COUNTS if k.startswith(('search_', 'export_'))) > product['events']:
+                raise ValueError('inconsistent_adjustment_counts')
+            if (channel == 'mcp' and product['events'] > count) or (channel == 'web_export' and count != 0):
+                raise ValueError('inconsistent_adjustment_calls')
+            if entry['known_operator_presence'] and day - timedelta(days=7) <= entry_day < day:
+                history = True
+            if entry_day != day:
+                continue
+            if channel == 'mcp':
+                source = next((r for r in result['calls'] if r['traffic'] == 'unclassified'), None)
+                if source is None or source['calls'] < count:
+                    raise ValueError('adjustment_exceeds_calls')
+                target = next((r for r in result['calls'] if r['traffic'] == 'inspection'), None)
+                if target is None:
+                    target = {'traffic': 'inspection', 'calls': 0}
+                    result['calls'].append(target)
+                source['calls'] -= count
+                target['calls'] += count
+                verified += count
+            source = next((r for r in result['product'] if r['traffic'] == 'unclassified' and r['channel'] == channel), None)
+            if source is None or any(source[k] < product[k] for k in PRODUCT_COUNTS):
+                raise ValueError('adjustment_exceeds_product')
+            target = next((r for r in result['product'] if r['traffic'] == 'inspection' and r['channel'] == channel), None)
+            if target is None:
+                target = {'traffic': 'inspection', 'channel': channel, **dict.fromkeys(PRODUCT_COUNTS, 0)}
+                result['product'].append(target)
+            for name in PRODUCT_COUNTS:
+                source[name] -= product[name]
+                target[name] += product[name]
+            presence = presence or entry['known_operator_presence']
+        result['classification'] = {'status': 'verified_overlay', 'declared_inspection_calls': declared,
+            'verified_unmarked_calls': verified, 'unidentified_calls': unknown - verified if unknown is not None else None,
+            'known_operator_presence': presence, 'known_operator_history': history}
+        return result
+    except (KeyError, TypeError, ValueError):
+        result = deepcopy(usage)
+        result['classification'] = {'status': 'unavailable'}
+        return result
+
+
 def usage_lines(usage):
     lines = ['', f"사용 통계: UTC {usage['day']} 하루"]
     if usage['state'] == 'unavailable':
         return lines + ['사용 통계 조회 실패: 미확인. 수집 결과와 별도로 확인이 필요합니다.']
+    classification = usage.get('classification', {})
+    verified = classification.get('status') == 'verified_overlay'
+    if verified:
+        for name, label in [('declared_inspection_calls', '점검 표시 호출'), ('verified_unmarked_calls', '확인된 미표시 자체 점검'), ('unidentified_calls', '주체 미확인 호출')]:
+            value = classification[name]
+            lines += [f"{label}: {value:,}회" if value is not None else f'{label}: 관측 기록 없음']
+        if usage['state'] == 'observed':
+            candidates = sum(row['search_nonempty'] + row['export_nonempty'] for row in usage['product'] if row['traffic'] == 'unclassified')
+            lines += [f'외부 사용 후보 신호: 새 지표 관측분의 결과 있는 검색·내보내기 {candidates:,}회 (주체 미확인, 외부 사용 확정 아님)']
+    elif classification:
+        lines += ['점검 보정 분류 미확인: 원본 집계만 표시하며 외부 사용 후보 판정은 보류합니다.']
     if usage['state'] == 'unobserved':
+        if not verified:
+            lines += [f"{'점검 표시' if row['traffic'] == 'inspection' else '미분류'} 호출: {row['calls']:,}회" for row in usage.get('calls', [])]
         return lines + ['새 사용 지표의 관측 기록 없음: 내보내기·빈 검색·재방문은 미확인']
-    for traffic, label in [('unclassified', '미분류 호출'), ('inspection', '점검 표시 호출')]:
+    labels = [('unclassified', '주체 미확인 상세'), ('inspection', '자체 점검 합계')] if verified else [('unclassified', '미분류 호출'), ('inspection', '점검 표시 호출')]
+    for traffic, label in labels:
         call = next((r for r in usage['calls'] if r['traffic'] == traffic), None)
         lines += [label + (f": {call['calls']:,}회" if call else ': 관측 기록 없음')]
         for channel, channel_label in [('mcp', 'MCP'), ('web_export', '웹 파일 다운로드')]:
@@ -213,7 +290,9 @@ def usage_lines(usage):
                 if call and row['events'] < call['calls']:
                     lines += [f"새 지표 관측 {row['events']:,}/{call['calls']:,}회 (도입 전 호출 또는 집계 누락 포함)"]
     repeat = usage['repeat']
-    if repeat['status'] == 'disabled':
+    if classification and (not verified or classification.get('known_operator_presence') or classification.get('known_operator_history')):
+        lines += ['외부 재방문 추정: 미확인. 자체 검증 식별자 혼입 또는 분류 미확인으로 보류합니다.']
+    elif repeat['status'] == 'disabled':
         lines += ['재방문 추정: 해당 조회의 측정 기능 비활성 상태, 미확인']
     elif repeat['status'] == 'unobserved':
         lines += ['재방문 추정: 측정 가능한 식별정보 관측 없음, 미확인']
@@ -304,6 +383,11 @@ def main():
                 result['usage'] = fetch_usage(usage_credentials, now)
             except Exception as error:
                 result['usage'] = {'state': 'unavailable', 'day': (now.date() - timedelta(days=1)).isoformat(), 'error_type': type(error).__name__}
+            try:
+                adjustments = notify.load(directory / 'operator-adjustments.json')
+            except Exception:
+                adjustments = None
+            result['usage'] = classify_usage(result['usage'], adjustments)
         notify.save(directory / 'latest.json', result)
         text = message(result)
         if len(text) > 3900:
