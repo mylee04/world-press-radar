@@ -1,10 +1,11 @@
 {
   "version": 1,
-  "reviewed_at": "2026-10-16T21:20:03Z",
+  "reviewed_at": "2026-10-26T02:15:11Z",
   "notes": [
     "Curation metadata and editorial search aliases do not modify the registry or past observations. Korean aliases are editorial transliterations for search, not a claim that the publisher uses those names.",
     "Official web pages were reviewed on the stated date. Some XML and legacy bindings require the separately recorded bounded endpoint check; identity evidence must not be presented as a reachability check.",
-    "Whole-publisher scope means a publisher-wide selection, not a guarantee of every published article. Sections, language editions, regional coverage and unresolved national-major gaps are explicit."
+    "Whole-publisher scope means a publisher-wide selection, not a guarantee of every published article. Sections, language editions, regional coverage and unresolved national-major gaps are explicit.",
+    "The October 25 Chicago / October 26 UTC Japanese consumer trial added major-media selections and current publisher declaration evidence. Consumer tests do not replace saved production observations. Earlier US, Korean and supplemental Japanese evidence keeps its own original checked_at dates."
   ],
   "packs": [
     {
@@ -345,12 +346,12 @@
     {
       "id": "japan-general",
       "title": {
-        "en": "Japan general-news starter",
-        "ko": "일본 종합 뉴스 시작 목록"
+        "en": "Japan major-news starter",
+        "ko": "일본 주요 뉴스 시작 목록"
       },
       "description": {
-        "en": "Six Japanese-language publisher selections: national and digital news plus Hokkaido, Kyoto/Shiga and Okinawa regional perspectives. This is an incomplete starter sample, not a claim to cover Japan's national major publishers.",
-        "ko": "일본어 매체 6곳의 시작 목록입니다. 전국·디지털 뉴스와 홋카이도·교토/시가·오키나와 지역 관점을 포함하며 일본 주요 전국지 전체를 확보했다는 뜻은 아닙니다."
+        "en": "Start with NHK, Asahi, Mainichi and Yomiuri, plus an explicitly labelled Kyodo redistribution feed. Five existing digital and regional selections follow as supplements. Nikkei remains an unresolved gap. RSS and article-level news sitemaps are distinct; availability follows saved evidence, not a live promise.",
+        "ko": "NHK·아사히·마이니치·요미우리와 Yahoo 재배포임을 표시한 교도통신 피드를 앞에 둡니다. 기존 디지털·지역 매체 5곳은 보완 목록으로 유지합니다. 닛케이는 미확보이며, RSS와 기사 단위 뉴스 사이트맵을 구분합니다. 사용 가능 여부는 저장된 관측에 따릅니다."
       },
       "country": "JP",
       "language": "ja",
@@ -361,14 +362,151 @@
         "regional"
       ],
       "selection_criteria": [
-        "Use exact existing country and typed endpoint bindings; no new or reactivated registrations.",
-        "One entry per publisher brand; multiple sections must not inflate publisher counts.",
-        "Official publisher identity and endpoint-declaration evidence is distinguished from endpoint reachability.",
-        "Selections are starting points; a successful check does not guarantee complete coverage, content freshness, article access or republication rights.",
-        "Keep Japanese-language bindings separate from English editions and portal redistributions.",
-        "Label regional publishers explicitly; do not claim national-major completeness."
+        "Match exact current country, endpoint type and approved registry URL; curation never creates or reactivates a source.",
+        "Prioritize the requested major Japanese newsrooms, then retain explicitly labelled digital and regional supplements.",
+        "One entry per publisher brand; categories and alternate feed addresses must not inflate publisher counts.",
+        "Keep Japanese feeds distinct from English products, legacy host variants and distribution-platform streams.",
+        "Use direct article-level news sitemaps rather than count sitemap-index children as articles. OPML remains RSS-only; typed exports retain sitemap addresses.",
+        "Distinguish publisher declarations, dated consumer XML tests and saved authoritative collection evidence. A consumer success does not overwrite an Oracle failure.",
+        "These are bounded starter streams, not national-major completeness, neutrality ratings, full article access or republication rights."
       ],
       "entries": [
+        {
+          "publisher_id": "nhk",
+          "name": "NHK News",
+          "aliases": [
+            "NHK",
+            "NHK NEWS",
+            "NHKニュース",
+            "NHK News Web",
+            "NHKニュース・防災",
+            "엔에이치케이",
+            "NHK 일본어"
+          ],
+          "language": "ja",
+          "topics": [
+            "general",
+            "politics",
+            "society",
+            "economy"
+          ],
+          "scope": "whole_publisher",
+          "scope_description": "Japanese major-headlines selection from NHK. A short rolling headline window, not all NHK articles and not NHK World English.",
+          "selection_group": "national_major",
+          "homepage": "https://news.web.nhk/",
+          "evidence": [
+            {
+              "url": "https://www.nhk.or.jp/toppage/rss/index.html",
+              "kind": "official_html_feed_link",
+              "claim": "Official NHK RSS guide declares the current Japanese major-headlines feed on news.web.nhk, separate from NHK World English. The reviewed guide limits RSS use to personal use; it does not grant redistribution rights or establish permission for commercial monitoring.",
+              "checked_at": "2026-10-26T02:15:11Z",
+              "fields": [
+                "name",
+                "language",
+                "endpoint",
+                "scope",
+                "usage_terms"
+              ]
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "rss",
+              "url": "https://news.web.nhk/n-data/conf/na/rss/cat0.xml",
+              "evidence": [
+                {
+                  "url": "https://www.nhk.or.jp/toppage/rss/index.html",
+                  "kind": "official_html_feed_link",
+                  "claim": "Official NHK RSS guide declares the current Japanese major-headlines feed on news.web.nhk, separate from NHK World English. The reviewed guide limits RSS use to personal use; it does not grant redistribution rights or establish permission for commercial monitoring.",
+                  "checked_at": "2026-10-26T02:15:11Z",
+                  "fields": [
+                    "name",
+                    "language",
+                    "endpoint",
+                    "scope",
+                    "usage_terms"
+                  ]
+                },
+                {
+                  "url": "https://news.web.nhk/n-data/conf/na/rss/cat0.xml",
+                  "kind": "bounded_consumer_xml_observation",
+                  "claim": "A bounded macOS consumer request returned HTTP 200, parsed 7 item URLs and found 7 records with title, URL and a feed/news date within 72 hours. This is not an Oracle observation, a completeness claim or a live guarantee.",
+                  "checked_at": "2026-10-26T02:15:08.659744+00:00",
+                  "fields": [
+                    "endpoint",
+                    "consumer_first_collection"
+                  ]
+                }
+              ]
+            }
+          ],
+          "usage_notes": "The reviewed official RSS guide limits use to personal use. This selection and its technical check do not authorize commercial monitoring or redistribution."
+        },
+        {
+          "publisher_id": "asahi-shimbun",
+          "name": "Asahi Shimbun",
+          "aliases": [
+            "Asahi",
+            "朝日新聞",
+            "朝日新聞デジタル",
+            "아사히신문"
+          ],
+          "language": "ja",
+          "topics": [
+            "general",
+            "politics",
+            "society",
+            "economy"
+          ],
+          "scope": "whole_publisher",
+          "scope_description": "Japanese news-headlines RDF feed hosted by Asahi. The rolling feed selection does not establish all articles or full-text access.",
+          "selection_group": "national_major",
+          "homepage": "https://www.asahi.com/",
+          "evidence": [
+            {
+              "url": "http://rss.asahi.com/rss/asahi/newsheadlines.rdf",
+              "kind": "publisher_hosted_xml_identity",
+              "claim": "The Asahi-hosted RDF feed contains Japanese article titles and asahi.com article URLs. The older HTML RSS guide did not provide usable declaration evidence in this review; first-party XML serving and the separately dated consumer check are the evidence.",
+              "checked_at": "2026-10-26T02:15:11Z",
+              "fields": [
+                "name",
+                "language",
+                "endpoint",
+                "scope"
+              ]
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "rss",
+              "url": "http://rss.asahi.com/rss/asahi/newsheadlines.rdf",
+              "evidence": [
+                {
+                  "url": "http://rss.asahi.com/rss/asahi/newsheadlines.rdf",
+                  "kind": "publisher_hosted_xml_identity",
+                  "claim": "The Asahi-hosted RDF feed contains Japanese article titles and asahi.com article URLs. The older HTML RSS guide did not provide usable declaration evidence in this review; first-party XML serving and the separately dated consumer check are the evidence.",
+                  "checked_at": "2026-10-26T02:15:11Z",
+                  "fields": [
+                    "name",
+                    "language",
+                    "endpoint",
+                    "scope"
+                  ]
+                },
+                {
+                  "url": "http://rss.asahi.com/rss/asahi/newsheadlines.rdf",
+                  "kind": "bounded_consumer_xml_observation",
+                  "claim": "A bounded macOS consumer request returned HTTP 200, parsed 40 item URLs and found 39 records with title, URL and a feed/news date within 72 hours. This is not an Oracle observation, a completeness claim or a live guarantee.",
+                  "checked_at": "2026-10-26T02:15:08.660197+00:00",
+                  "fields": [
+                    "endpoint",
+                    "consumer_first_collection"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
         {
           "publisher_id": "mainichi",
           "name": "Mainichi Shimbun",
@@ -407,17 +545,181 @@
               "url": "https://mainichi.jp/rss/etc/mainichi-flash.rss",
               "evidence": [
                 {
-                  "url": "https://mainichi.jp/rss/etc/mainichi-flash.rss",
-                  "kind": "registered_publisher_hosted_binding",
-                  "claim": "Existing active Japanese Mainichi Flash RSS binding. Current RSS-directory and homepage requests returned HTTP 403 during declaration review; no renewed HTML declaration is claimed.",
-                  "checked_at": "2026-10-16T21:20:03Z",
+                  "url": "https://mainichi.jp/rss/",
+                  "kind": "official_html_feed_link",
+                  "claim": "Official Mainichi RSS guide declares the Japanese Flash feed at this exact relative path. A consumer check is separate from its production collection history.",
+                  "checked_at": "2026-10-26T02:15:11Z",
                   "fields": [
+                    "endpoint",
+                    "language"
+                  ]
+                },
+                {
+                  "url": "https://mainichi.jp/rss/etc/mainichi-flash.rss",
+                  "kind": "bounded_consumer_xml_observation",
+                  "claim": "A bounded macOS consumer parsed 20 Japanese item URLs with title and feed date within 72 hours. This is not a new Oracle observation or a completeness guarantee.",
+                  "checked_at": "2026-10-26T02:13:31.352788+00:00",
+                  "fields": [
+                    "endpoint",
+                    "consumer_first_collection"
+                  ]
+                }
+              ]
+            }
+          ],
+          "selection_group": "national_major"
+        },
+        {
+          "publisher_id": "yomiuri-shimbun",
+          "name": "Yomiuri Shimbun",
+          "aliases": [
+            "Yomiuri",
+            "読売新聞",
+            "読売新聞オンライン",
+            "요미우리신문"
+          ],
+          "language": "ja",
+          "topics": [
+            "general",
+            "politics",
+            "society",
+            "economy"
+          ],
+          "scope": "whole_publisher",
+          "scope_description": "Japanese rolling news sitemap with article titles, URLs and news dates. Consumer retrieval succeeded while older saved Oracle observations were blocked; current exported eligibility still follows the saved runtime evidence and may differ by environment. This is a sitemap, not an RSS feed.",
+          "selection_group": "national_major",
+          "homepage": "https://www.yomiuri.co.jp/",
+          "evidence": [
+            {
+              "url": "https://www.yomiuri.co.jp/robots.txt",
+              "kind": "official_robots_sitemap",
+              "claim": "Official robots declares https://www.yomiuri.co.jp/sitemap.xml.",
+              "checked_at": "2026-10-26T02:15:11Z",
+              "fields": [
+                "name",
+                "endpoint"
+              ]
+            },
+            {
+              "url": "https://www.yomiuri.co.jp/sitemap.xml",
+              "kind": "official_sitemap_index_child",
+              "claim": "The publisher sitemap index explicitly lists sitemap-news-latest.xml. The selected child contains article-level news entries, not more sitemap filenames.",
+              "checked_at": "2026-10-26T02:15:11Z",
+              "fields": [
+                "endpoint",
+                "scope"
+              ]
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "sitemap",
+              "url": "https://www.yomiuri.co.jp/sitemap-news-latest.xml",
+              "evidence": [
+                {
+                  "url": "https://www.yomiuri.co.jp/robots.txt",
+                  "kind": "official_robots_sitemap",
+                  "claim": "Official robots declares https://www.yomiuri.co.jp/sitemap.xml.",
+                  "checked_at": "2026-10-26T02:15:11Z",
+                  "fields": [
+                    "name",
                     "endpoint"
+                  ]
+                },
+                {
+                  "url": "https://www.yomiuri.co.jp/sitemap.xml",
+                  "kind": "official_sitemap_index_child",
+                  "claim": "The publisher sitemap index explicitly lists sitemap-news-latest.xml. The selected child contains article-level news entries, not more sitemap filenames.",
+                  "checked_at": "2026-10-26T02:15:11Z",
+                  "fields": [
+                    "endpoint",
+                    "scope"
+                  ]
+                },
+                {
+                  "url": "https://www.yomiuri.co.jp/sitemap-news-latest.xml",
+                  "kind": "bounded_consumer_xml_observation",
+                  "claim": "A bounded macOS consumer request returned HTTP 200, parsed 263 item URLs and found 263 records with title, URL and a feed/news date within 72 hours. This is not an Oracle observation, a completeness claim or a live guarantee.",
+                  "checked_at": "2026-10-26T02:13:32.471818+00:00",
+                  "fields": [
+                    "endpoint",
+                    "consumer_first_collection"
                   ]
                 }
               ]
             }
           ]
+        },
+        {
+          "publisher_id": "kyodo-news",
+          "name": "Kyodo News via Yahoo Japan",
+          "aliases": [
+            "Kyodo",
+            "共同通信",
+            "교도통신",
+            "Kyodo News",
+            "共同通信社"
+          ],
+          "language": "ja",
+          "topics": [
+            "general",
+            "politics",
+            "society",
+            "economy"
+          ],
+          "scope": "section",
+          "scope_description": "Japanese Kyodo articles redistributed through Yahoo Japan. Distribution-platform feed and article links; not a direct Kyodo wire subscription, original-host article stream or complete Kyodo output.",
+          "selection_group": "national_major",
+          "homepage": "https://www.kyodonews.jp/",
+          "evidence": [
+            {
+              "url": "https://news.yahoo.co.jp/rss/media/kyodonews/all.xml",
+              "kind": "distribution_platform_xml_identity",
+              "claim": "Yahoo Japan hosts this Kyodo-labelled Japanese RSS stream. The article titles identify Kyodo and links point to Yahoo Japan. This is redistribution, not a direct Kyodo-hosted source or guaranteed complete wire coverage.",
+              "checked_at": "2026-10-26T02:15:11Z",
+              "fields": [
+                "name",
+                "language",
+                "endpoint",
+                "distribution"
+              ]
+            }
+          ],
+          "endpoints": [
+            {
+              "type": "rss",
+              "url": "https://news.yahoo.co.jp/rss/media/kyodonews/all.xml",
+              "evidence": [
+                {
+                  "url": "https://news.yahoo.co.jp/rss/media/kyodonews/all.xml",
+                  "kind": "distribution_platform_xml_identity",
+                  "claim": "Yahoo Japan hosts this Kyodo-labelled Japanese RSS stream. The article titles identify Kyodo and links point to Yahoo Japan. This is redistribution, not a direct Kyodo-hosted source or guaranteed complete wire coverage.",
+                  "checked_at": "2026-10-26T02:15:11Z",
+                  "fields": [
+                    "name",
+                    "language",
+                    "endpoint",
+                    "distribution"
+                  ]
+                },
+                {
+                  "url": "https://news.yahoo.co.jp/rss/media/kyodonews/all.xml",
+                  "kind": "bounded_consumer_xml_observation",
+                  "claim": "A bounded macOS consumer request returned HTTP 200, parsed 50 item URLs and found 50 records with title, URL and a feed/news date within 72 hours. This is not an Oracle observation, a completeness claim or a live guarantee.",
+                  "checked_at": "2026-10-26T02:13:31.352909+00:00",
+                  "fields": [
+                    "endpoint",
+                    "consumer_first_collection"
+                  ]
+                }
+              ]
+            }
+          ],
+          "distribution": {
+            "kind": "platform_redistribution",
+            "platform": "Yahoo Japan",
+            "direct_publisher_host": false
+          }
         },
         {
           "publisher_id": "j-cast",
@@ -466,7 +768,8 @@
                 }
               ]
             }
-          ]
+          ],
+          "selection_group": "digital_supplement"
         },
         {
           "publisher_id": "hokkaido-shimbun",
@@ -518,7 +821,8 @@
           ],
           "regional_coverage": [
             "Hokkaido"
-          ]
+          ],
+          "selection_group": "regional_supplement"
         },
         {
           "publisher_id": "kyoto-shimbun",
@@ -571,7 +875,8 @@
           "regional_coverage": [
             "Kyoto",
             "Shiga"
-          ]
+          ],
+          "selection_group": "regional_supplement"
         },
         {
           "publisher_id": "okinawa-times",
@@ -623,7 +928,8 @@
           ],
           "regional_coverage": [
             "Okinawa"
-          ]
+          ],
+          "selection_group": "regional_supplement"
         },
         {
           "publisher_id": "nippon-com",
@@ -672,33 +978,14 @@
                 }
               ]
             }
-          ]
+          ],
+          "selection_group": "digital_supplement"
         }
       ],
       "gaps": [
         {
-          "publisher": "NHK",
-          "reason": "Legacy rows have conflicting names, host versions and category labels (including an EN name on a Japanese category URL). This pack does not resolve those bindings by name alone.",
-          "evidence_url": "https://www.nhk.or.jp/"
-        },
-        {
-          "publisher": "Asahi Shimbun",
-          "reason": "The registered endpoint is a sitewide sitemap route; a bounded declared article-level news stream was not established in this curation.",
-          "evidence_url": "https://www.asahi.com/"
-        },
-        {
-          "publisher": "Yomiuri Shimbun",
-          "reason": "Registered latest-news and full-sitemap routes require separate declaration, format and coverage review before recommendation.",
-          "evidence_url": "https://www.yomiuri.co.jp/"
-        },
-        {
-          "publisher": "Kyodo News",
-          "reason": "The existing registered RSS is distributed by Yahoo Japan, rather than directly hosted by Kyodo; this direct-publisher starter does not count that portal feed.",
-          "evidence_url": "https://www.kyodonews.jp/"
-        },
-        {
           "publisher": "Nikkei",
-          "reason": "The registered RSS is disabled; the active sitewide sitemap does not establish a usable article-level stream. Disabled endpoints are not reactivated by curation.",
+          "reason": "The existing RSS is disabled and its saved audit failed. The active sitemap index and inspected section/topic routes did not establish a current Japanese article metadata stream in the bounded trial. It remains an explicit gap; no English edition or section-page URL list is substituted.",
           "evidence_url": "https://www.nikkei.com/"
         }
       ]

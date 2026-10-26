@@ -1,10 +1,10 @@
 # Curated source workflow
 
-This workflow connects a monitoring purpose to a bounded source selection, saved endpoint evidence and an importable collector configuration. It introduces no registry changes, paid model calls, new collection schedule or article fetching in MCP calls.
+This workflow connects a monitoring purpose to a bounded source selection, saved endpoint evidence and an importable collector configuration. Public MCP calls return saved metadata and perform no publisher requests. Operator registration changes and the separate bounded consumer are described below.
 
 ## Selections and provenance
 
-The versioned [curation document](../curation/source-packs.json) contains three starter selections: `us-business` (six publishers), `japan-general` (six publishers, including regional and explanatory coverage), and `korea-english` (three publishers, including specialized North Korea coverage). Every selected address is matched by country, endpoint type and canonical URL to existing registration IDs. Language, topics, aliases, section scope and official evidence are attached to those selected bindings only. Unregistered addresses remain explicit gaps rather than becoming invented registrations.
+The versioned [curation document](../curation/source-packs.json) contains three starter selections: `us-business` (six publishers), `japan-general` (five national-major selections followed by five digital, regional and explanatory supplements), and `korea-english` (three publishers, including specialized North Korea coverage). Every selected address is matched by country, endpoint type and canonical URL to registration IDs. Language, topics, aliases, section scope and official evidence are attached to those selected bindings only. Unregistered addresses remain explicit gaps rather than becoming invented registrations.
 
 These selections are not complete national major-media lists, neutrality ratings or guarantees of usable articles. Each pack includes its known gaps and selection criteria. Official provenance establishes a declared address or scope; it does not establish universal current availability.
 
@@ -48,3 +48,24 @@ Unmodified FreshRSS 1.30.1, pinned to an official Docker image digest in a separ
 The reader's CLI import incidentally attempted five publisher homepages and five favicon URLs despite `show_favicons=false`; logs preserve those attempts, including interruption during network disconnection, without claiming all completed. Per-feed custom favicon settings suppressed icon retrieval during explicit refresh. No article URL was deliberately fetched and full-content paths were empty; this is app/browser evidence, not a complete network packet audit. Cron was disabled. The isolated reader container was stopped successfully with exit code zero and its dedicated test volume preserved. This pilot did not start the operator collector or modify source registrations, and it did not perform a new production database checksum audit.
 
 Real reader compatibility is established for this app, environment and execution. Native pack-tool use in installed ChatGPT sessions, other readers and future availability remain separate checks. The next usability pilot should ask a few consenting users to start Japanese monitoring from a blank collector configuration. Record time to select sources, distinguish saved status from current content, import the configuration and receive the first item; compare against manual publisher research. Record failures and missing major publishers without collecting article bodies or user queries. No external-user time-savings claim follows from the operator-run pilot, and no user recruitment or messages are sent automatically.
+
+
+## Japan starter repair and bounded article import, October 25, 2026 (Chicago)
+
+The Japan selection now puts NHK, Asahi, Mainichi, Yomiuri and Kyodo via Yahoo Japan before the five preserved digital, regional and explanatory supplements. Nikkei remains a documented gap. Yahoo distribution is explicit, and the NHK official guide's personal-use limitation is retained in evidence and usage notes. A selected publisher is not automatically eligible for download.
+
+The NHK headline registration retains source ID `src_a4257f72f8574d8a74f20140` while replacing its stale Japanese legacy address and incorrect English label with the officially declared current Japanese headline feed. Nine other NHK rows retain their source IDs and addresses; their Japanese language and legacy/current scope are explicit, including the corrected current Society and Science/Medicine labels. Asahi retains source ID `src_ecbd91598fa0498c81261924` and its original sitemap binding while adding the publisher-hosted headlines RSS. Previous metadata is retained in the operator registry history. New typed bindings must start with an excluded baseline on the next actual collection. No previous first-seen date or discovery record is rebuilt.
+
+A targeted Oracle XML check returned HTTP 200 with seven NHK and 40 Asahi feed entries. Yomiuri returned HTTP 429 in that environment and remains excluded by default; a separate macOS request succeeding does not override that saved Oracle result. Only the three selected endpoint observations are overlaid, with the original full-audit provenance and all other observations retained. These checks are not a new complete health audit or production collection.
+
+Save the JSON content from `export_source_pack` (or the public JSON download) as `japan-sources.json`. From this repository's `packages/world-news-sources-mcp` directory, with its existing dependencies and compiled modules available, run:
+
+```bash
+node scripts/import-source-pack.mjs --input japan-sources.json --output japan-articles.json --selection-group national_major
+```
+
+The optional selection group limits requests to the major-publisher entries and requires typed JSON. Omitting it reads the entire selected list. OPML works for RSS-only imports. This standalone consumer follows same-origin sitemap-index children to bounded article metadata and extracts RSS, Atom, RDF and Google News title, URL and declared date fields. Both modern sitemap 0.9 and the exact legacy Google sitemap 0.84 namespace used by the observed Japanese news sitemaps are recognized. Unknown namespaces, DTDs and existing XML/transport protections remain rejected.
+
+The default bounds are ten XML documents, one child level, 1,000 candidate items, two seconds between same-host requests and 90 seconds overall. Article bodies are never requested. Limits, missing dates, navigation URLs, HTTP failures, server waits and partial results are reported separately. A partial result is saved with a nonzero process exit status. Existing output files are not overwritten. Explicit `--include-excluded` is reserved for a deliberate consumer attempt using diagnostic exports; it does not change saved status or certify a failed address.
+
+The consumer honors fetched robots rules. Per RFC 9309 section 2.3.1.3, a robots 4xx response other than 429 is recorded as unavailable policy evidence; actual resource 401/403 still blocks collection. Robots 429, network errors, server errors, explicit Disallow and oversized policy documents hold the request. This bounded consumer does not claim complete RFC conformance. Its decisions do not modify the production collector or source-addition approval policy. Source exports and MCP calls remain saved-data reads, while consumer results are independent files and never contribute to production NEW counts.

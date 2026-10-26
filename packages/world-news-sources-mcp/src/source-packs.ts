@@ -14,7 +14,8 @@ const evidenceSchema = z.object({ url: publicUrl, claim: text, checked_at: obser
 const endpointSchema = z.object({ type: z.enum(['rss', 'sitemap']), url: publicUrl, evidence: z.array(evidenceSchema).min(1).max(8) }).passthrough();
 const entrySchema = z.object({ publisher_id: slug, name: text, aliases: z.array(text).max(12), language: z.string().min(2).max(16), topics: z.array(text).min(1).max(12),
   scope: z.enum(['whole_publisher', 'section']), scope_description: text, homepage: publicUrl,
-  evidence: z.array(evidenceSchema).min(1).max(12), endpoints: z.array(endpointSchema).min(1).max(6) }).passthrough();
+  evidence: z.array(evidenceSchema).min(1).max(12), endpoints: z.array(endpointSchema).min(1).max(6),
+  selection_group: z.string().regex(/^[a-z][a-z0-9_]{0,39}$/).optional(), usage_notes: text.optional() }).passthrough();
 const gapSchema = z.object({ publisher: text, reason: text, evidence_url: publicUrl.optional() }).passthrough();
 const packSchema = z.object({ id: slug, title: localized, description: localized, country: z.string().regex(/^[A-Z]{2}$/), language: z.string().min(2).max(16),
   topics: z.array(text).min(1).max(12), selection_criteria: z.array(text).min(1).max(12), entries: z.array(entrySchema).min(1).max(30), gaps: z.array(gapSchema).max(30) }).passthrough();
@@ -119,6 +120,8 @@ export function exportSourcePack(resolved: ResolvedPacks, raw: unknown) {
   for (const entry of pack.entries) for (const source of entry.sources) for (const endpoint of source.endpoints) {
     const candidate = { publisher_id: entry.publisher_id, publisher: entry.name, source_id: source.source_id, endpoint_id: endpoint.endpoint_id, country: pack.country, language: entry.language,
       topics: entry.topics, scope: entry.scope, scope_description: entry.scope_description, homepage: entry.homepage,
+      selection_group: typeof entry.selection_group === 'string' ? entry.selection_group : null,
+      usage_notes: typeof entry.usage_notes === 'string' ? entry.usage_notes : null,
       type: endpoint.type, url: endpoint.url, enabled: endpoint.enabled, default_export_eligible: endpoint.default_export_eligible, exclusion_reason: endpoint.exclusion_reason,
       evidence: [...entry.evidence, ...endpoint.evidence], status_evidence: endpoint.status_evidence };
     const prior = candidates.get(endpoint.endpoint_id);
@@ -132,12 +135,12 @@ export function exportSourcePack(resolved: ResolvedPacks, raw: unknown) {
     exported_endpoints: items.length, excluded_endpoints: excluded, sitemap_endpoints_omitted_from_opml: nonRss, unregistered_endpoints: pack.summary.unregistered_endpoints,
     gaps: pack.gaps, export_policy: resolved.export_policy, semantics: resolved.semantics };
   let content: string;
-  if (input.format === 'opml') content = `<?xml version="1.0" encoding="UTF-8"?>\n<opml version="2.0"><head><title>${xml(pack.title.en)} — RSS only</title><dateCreated>${xml(resolved.evaluated_at)}</dateCreated></head><body>\n${items.map(item => `<outline type="rss" text="${xml(String(item.publisher))}" title="${xml(String(item.publisher))}" xmlUrl="${xml(String(item.url))}" htmlUrl="${xml(String(item.homepage))}"/>`).join('\n')}\n</body></opml>\n`;
+  if (input.format === 'opml') content = `<?xml version="1.0" encoding="UTF-8"?>\n<opml version="2.0"><head><title>${xml(pack.title.en)}: RSS only</title><dateCreated>${xml(resolved.evaluated_at)}</dateCreated></head><body>\n${items.map(item => `<outline type="rss" text="${xml(String(item.publisher))}" title="${xml(String(item.publisher))}" xmlUrl="${xml(String(item.url))}" htmlUrl="${xml(String(item.homepage))}"/>`).join('\n')}\n</body></opml>\n`;
   else if (input.format === 'csv') {
-    const columns = ['publisher', 'country', 'language', 'topics', 'scope', 'type', 'url', 'enabled', 'default_export_eligible', 'status', 'observed_at', 'last_collection_at', 'last_structural_audit_at', 'content_date', 'content_date_kind', 'content_freshness', 'exclusion_reason', 'evidence_urls'];
+    const columns = ['publisher', 'country', 'language', 'topics', 'scope', 'type', 'url', 'enabled', 'default_export_eligible', 'status', 'observed_at', 'last_collection_at', 'last_structural_audit_at', 'content_date', 'content_date_kind', 'content_freshness', 'exclusion_reason', 'evidence_urls', 'selection_group', 'usage_notes'];
     const values = items.map(item => { const status = item.status_evidence as StatusEvidence; return [item.publisher, item.country, item.language, (item.topics as string[]).join(';'), item.scope, item.type, item.url, item.enabled, item.default_export_eligible,
       status.status, status.observed_at, status.latest_collection?.checked_at, status.structural_audit?.checked_at, status.content.newest_content_at, status.content.date_kind, status.content.freshness, item.exclusion_reason,
-      [...new Set((item.evidence as Array<{url:string}>).map(evidence => evidence.url))].join(';')]; });
+      [...new Set((item.evidence as Array<{url:string}>).map(evidence => evidence.url))].join(';'), item.selection_group, item.usage_notes]; });
     content = '\ufeff' + [columns, ...values].map(row => row.map(csv).join(',')).join('\r\n') + '\r\n';
   } else content = JSON.stringify({ ...meta, endpoints: items }, null, 2) + '\n';
   if (Buffer.byteLength(content) > 256 * 1024) throw Error('SOURCE_PACK_EXPORT_TOO_LARGE');

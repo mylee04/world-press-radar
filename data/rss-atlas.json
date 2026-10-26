@@ -2597,12 +2597,40 @@
       "code": "JP",
       "feeds": [
         {
-          "name": "NHK World (EN)",
-          "url": "https://www3.nhk.or.jp/rss/news/cat0.xml",
+          "name": "NHK News Headlines",
+          "url": "https://news.web.nhk/n-data/conf/na/rss/cat0.xml",
           "status": "ERR",
           "checkedDate": "02/18/2026",
           "valid": "invalid",
-          "row": 1
+          "row": 1,
+          "persistent_source_id": "src_a4257f72f8574d8a74f20140",
+          "language": "ja",
+          "category": "general",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "https://news.web.nhk/n-data/conf/na/rss/cat0.xml",
+              "kind": "official_html_feed_anchor",
+              "source_url": "https://www.nhk.or.jp/toppage/rss/index.html",
+              "checked_at": "2026-10-26T02:22:25.457Z",
+              "declaration": "NHK主要ニュース",
+              "scope_note": "Japanese headlines, not NHK World English. Official RSS guide limits use to individuals and does not grant redistribution rights."
+            }
+          ],
+          "source_metadata_history": [
+            {
+              "at": "2026-10-26T02:22:25.457Z",
+              "reason": "Owner-authorized Japan starter repair after bounded user workflow trial",
+              "previous": {
+                "name": "NHK World (EN)",
+                "language": null,
+                "category": null,
+                "url": "https://www3.nhk.or.jp/rss/news/cat0.xml",
+                "sitemapUrl": null
+              },
+              "source_id": "src_a4257f72f8574d8a74f20140"
+            }
+          ]
         },
         {
           "name": "Mainichi (Biz)",
@@ -2620,7 +2648,36 @@
           "checkedDate": "03/15/2026",
           "valid": "needs verification",
           "row": 3,
-          "enabled": true
+          "enabled": true,
+          "persistent_source_id": "src_ecbd91598fa0498c81261924",
+          "url": "http://rss.asahi.com/rss/asahi/newsheadlines.rdf",
+          "language": "ja",
+          "category": "general",
+          "endpoint_provenance": [
+            {
+              "type": "rss",
+              "url": "http://rss.asahi.com/rss/asahi/newsheadlines.rdf",
+              "kind": "official_publisher_host_feed_response",
+              "source_url": "http://rss.asahi.com/rss/asahi/newsheadlines.rdf",
+              "checked_at": "2026-10-26T02:15:08.660197Z",
+              "format": "rdf",
+              "scope_note": "Japanese Asahi headlines RSS served by the publisher subdomain; bounded consumer parsed40items. Current guidance page was not established. Existing sitemap binding is retained."
+            }
+          ],
+          "source_metadata_history": [
+            {
+              "at": "2026-10-26T02:22:25.457Z",
+              "reason": "Owner-authorized Japan starter repair after bounded user workflow trial",
+              "previous": {
+                "name": "Asahi Shimbun",
+                "language": null,
+                "category": null,
+                "url": null,
+                "sitemapUrl": "https://www.asahi.com/sitemap.xml"
+              },
+              "source_id": "src_ecbd91598fa0498c81261924"
+            }
+          ]
         },
         {
           "name": "The Japan Times",
@@ -2656,60 +2713,172 @@
           "row": 7
         },
         {
-          "name": "NHK News Web - cat1",
+          "name": "NHK News Web (Japanese legacy category 1)",
           "url": "https://www3.nhk.or.jp/rss/news/cat1.xml",
           "status": null,
           "checkedDate": null,
           "valid": "needs verification",
-          "row": 8
+          "row": 8,
+          "persistent_source_id": "src_fd1b004fc61587592b558637",
+          "language": "ja",
+          "source_metadata_history": [
+            {
+              "at": "2026-10-26T02:22:25.457Z",
+              "reason": "Owner-authorized Japan starter repair after bounded user workflow trial",
+              "previous": {
+                "name": "NHK News Web - cat1",
+                "language": null,
+                "category": null,
+                "url": "https://www3.nhk.or.jp/rss/news/cat1.xml",
+                "sitemapUrl": null
+              },
+              "source_id": "src_fd1b004fc61587592b558637"
+            }
+          ]
         },
         {
-          "name": "NHK News Web - cat2",
+          "name": "NHK News Web (Japanese legacy category 2)",
           "url": "https://www3.nhk.or.jp/rss/news/cat2.xml",
           "status": null,
           "checkedDate": null,
           "valid": "needs verification",
-          "row": 9
+          "row": 9,
+          "persistent_source_id": "src_c9a7f13231f0212691644272",
+          "language": "ja",
+          "source_metadata_history": [
+            {
+              "at": "2026-10-26T02:22:25.457Z",
+              "reason": "Owner-authorized Japan starter repair after bounded user workflow trial",
+              "previous": {
+                "name": "NHK News Web - cat2",
+                "language": null,
+                "category": null,
+                "url": "https://www3.nhk.or.jp/rss/news/cat2.xml",
+                "sitemapUrl": null
+              },
+              "source_id": "src_c9a7f13231f0212691644272"
+            }
+          ]
         },
         {
-          "name": "NHK News Web - cat3",
+          "name": "NHK News Web (Japanese legacy category 3)",
           "url": "https://www3.nhk.or.jp/rss/news/cat3.xml",
           "status": null,
           "checkedDate": null,
           "valid": "needs verification",
-          "row": 10
+          "row": 10,
+          "persistent_source_id": "src_d8e0790415768c52a1ea1fe9",
+          "language": "ja",
+          "source_metadata_history": [
+            {
+              "at": "2026-10-26T02:22:25.457Z",
+              "reason": "Owner-authorized Japan starter repair after bounded user workflow trial",
+              "previous": {
+                "name": "NHK News Web - cat3",
+                "language": null,
+                "category": null,
+                "url": "https://www3.nhk.or.jp/rss/news/cat3.xml",
+                "sitemapUrl": null
+              },
+              "source_id": "src_d8e0790415768c52a1ea1fe9"
+            }
+          ]
         },
         {
-          "name": "NHK News Web - cat4",
+          "name": "NHK News Web (Japanese legacy category 4)",
           "url": "https://www3.nhk.or.jp/rss/news/cat4.xml",
           "status": null,
           "checkedDate": null,
           "valid": "needs verification",
-          "row": 11
+          "row": 11,
+          "persistent_source_id": "src_7302e20e84dcfca9404560e9",
+          "language": "ja",
+          "source_metadata_history": [
+            {
+              "at": "2026-10-26T02:22:25.457Z",
+              "reason": "Owner-authorized Japan starter repair after bounded user workflow trial",
+              "previous": {
+                "name": "NHK News Web - cat4",
+                "language": null,
+                "category": null,
+                "url": "https://www3.nhk.or.jp/rss/news/cat4.xml",
+                "sitemapUrl": null
+              },
+              "source_id": "src_7302e20e84dcfca9404560e9"
+            }
+          ]
         },
         {
-          "name": "NHK News Web - cat5",
+          "name": "NHK News Web (Japanese legacy category 5)",
           "url": "https://www3.nhk.or.jp/rss/news/cat5.xml",
           "status": null,
           "checkedDate": null,
           "valid": "needs verification",
-          "row": 12
+          "row": 12,
+          "persistent_source_id": "src_9aea88cb86c979de097347a1",
+          "language": "ja",
+          "source_metadata_history": [
+            {
+              "at": "2026-10-26T02:22:25.457Z",
+              "reason": "Owner-authorized Japan starter repair after bounded user workflow trial",
+              "previous": {
+                "name": "NHK News Web - cat5",
+                "language": null,
+                "category": null,
+                "url": "https://www3.nhk.or.jp/rss/news/cat5.xml",
+                "sitemapUrl": null
+              },
+              "source_id": "src_9aea88cb86c979de097347a1"
+            }
+          ]
         },
         {
-          "name": "NHK News Web - cat6",
+          "name": "NHK News Web (Japanese legacy category 6)",
           "url": "https://www3.nhk.or.jp/rss/news/cat6.xml",
           "status": null,
           "checkedDate": null,
           "valid": "needs verification",
-          "row": 13
+          "row": 13,
+          "persistent_source_id": "src_51cb4769e057aacf08cbe840",
+          "language": "ja",
+          "source_metadata_history": [
+            {
+              "at": "2026-10-26T02:22:25.457Z",
+              "reason": "Owner-authorized Japan starter repair after bounded user workflow trial",
+              "previous": {
+                "name": "NHK News Web - cat6",
+                "language": null,
+                "category": null,
+                "url": "https://www3.nhk.or.jp/rss/news/cat6.xml",
+                "sitemapUrl": null
+              },
+              "source_id": "src_51cb4769e057aacf08cbe840"
+            }
+          ]
         },
         {
-          "name": "NHK News Web - cat7",
+          "name": "NHK News Web (Japanese legacy category 7)",
           "url": "https://www3.nhk.or.jp/rss/news/cat7.xml",
           "status": null,
           "checkedDate": null,
           "valid": "needs verification",
-          "row": 14
+          "row": 14,
+          "persistent_source_id": "src_6c4e55f205d6de047ceceb97",
+          "language": "ja",
+          "source_metadata_history": [
+            {
+              "at": "2026-10-26T02:22:25.457Z",
+              "reason": "Owner-authorized Japan starter repair after bounded user workflow trial",
+              "previous": {
+                "name": "NHK News Web - cat7",
+                "language": null,
+                "category": null,
+                "url": "https://www3.nhk.or.jp/rss/news/cat7.xml",
+                "sitemapUrl": null
+              },
+              "source_id": "src_6c4e55f205d6de047ceceb97"
+            }
+          ]
         },
         {
           "name": "ITmedia - 総合記事一覧",
@@ -3287,12 +3456,46 @@
           "row": 66
         },
         {
-          "name": "NHK News (Politics - Category 1)",
-          "url": "https://www.nhk.or.jp/rss/news/cat1.xml"
+          "name": "NHK News: Society",
+          "url": "https://www.nhk.or.jp/rss/news/cat1.xml",
+          "persistent_source_id": "src_0720caa54d65ed03ca5ac188",
+          "language": "ja",
+          "category": "society",
+          "source_metadata_history": [
+            {
+              "at": "2026-10-26T02:22:25.457Z",
+              "reason": "Owner-authorized Japan starter repair after bounded user workflow trial",
+              "previous": {
+                "name": "NHK News (Politics - Category 1)",
+                "language": null,
+                "category": null,
+                "url": "https://www.nhk.or.jp/rss/news/cat1.xml",
+                "sitemapUrl": null
+              },
+              "source_id": "src_0720caa54d65ed03ca5ac188"
+            }
+          ]
         },
         {
-          "name": "NHK News (Economy/Business - Category 3)",
-          "url": "https://www.nhk.or.jp/rss/news/cat3.xml"
+          "name": "NHK News: Science and Medicine",
+          "url": "https://www.nhk.or.jp/rss/news/cat3.xml",
+          "persistent_source_id": "src_b25024633f66352c872e52fe",
+          "language": "ja",
+          "category": "science",
+          "source_metadata_history": [
+            {
+              "at": "2026-10-26T02:22:25.457Z",
+              "reason": "Owner-authorized Japan starter repair after bounded user workflow trial",
+              "previous": {
+                "name": "NHK News (Economy/Business - Category 3)",
+                "language": null,
+                "category": null,
+                "url": "https://www.nhk.or.jp/rss/news/cat3.xml",
+                "sitemapUrl": null
+              },
+              "source_id": "src_b25024633f66352c872e52fe"
+            }
+          ]
         },
         {
           "name": "Nikkan Kogyo (Industrial Manufacturing News)",

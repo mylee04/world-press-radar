@@ -1,6 +1,8 @@
 import { SaxesParser } from 'saxes';
 import { canonicalUrl, type EndpointType } from './catalog.js';
 
+export const SITEMAP_NAMESPACES = ['http://www.sitemaps.org/schemas/sitemap/0.9', 'http://www.google.com/schemas/sitemap/0.84'] as const;
+
 export type XmlSummary = {
   format: 'rss' | 'atom' | 'rdf' | 'urlset' | 'sitemapindex';
   entryCount: number; entriesWithUrl: number; sampleUrls: string[];
@@ -110,7 +112,8 @@ export function inspectXml(buffer: Buffer, type: EndpointType, now = Date.now(),
   let newest = 0; let badDate = false; const sampleUrls: string[] = [];
   const observedUrls = new Set<string>();
   const atomNs = 'http://www.w3.org/2005/Atom'; const rssNs = 'http://purl.org/rss/1.0/';
-  const sitemapNs = 'http://www.sitemaps.org/schemas/sitemap/0.9';
+  const sitemapNamespaces = new Set<string>(SITEMAP_NAMESPACES);
+  const sitemapNamespace = (uri: string) => sitemapNamespaces.has(namespace) && uri === namespace;
   const recordUrl = (value: string, required = false) => {
     try { const url = canonicalUrl(value.trim()); entryUrl = true; if (fullUrls && root !== 'sitemapindex') observedUrls.add(url); if (sampleUrls.length < 3 && !sampleUrls.includes(url)) sampleUrls.push(url); }
     catch { if (required) throw new Error('INVALID_ENTRY_URL'); }
@@ -136,7 +139,7 @@ export function inspectXml(buffer: Buffer, type: EndpointType, now = Date.now(),
       active = { name: tag.local, depth: stack.length, value: '', kind: 'field' };
     }
     if ((path === 'rss/channel/item' && tag.uri === '') || (path === 'feed/entry' && tag.uri === atomNs) ||
-      (path === 'RDF/item' && tag.uri === rssNs) || (['urlset/url', 'sitemapindex/sitemap'].includes(path) && tag.uri === sitemapNs)) {
+      (path === 'RDF/item' && tag.uri === rssNs) || (['urlset/url', 'sitemapindex/sitemap'].includes(path) && sitemapNamespace(tag.uri))) {
       inEntry = true; entryDepth = stack.length; entryUrl = false; entryCount++;
     }
     if (inEntry && stack.length === entryDepth + 1) {
@@ -145,11 +148,11 @@ export function inspectXml(buffer: Buffer, type: EndpointType, now = Date.now(),
         const rel = attributes.find(a => a.local === 'rel')?.value;
         if (href && (!rel || rel === 'alternate')) recordUrl(href);
       }
-      const isLoc = ['urlset', 'sitemapindex'].includes(root) && tag.local === 'loc' && tag.uri === sitemapNs;
+      const isLoc = ['urlset', 'sitemapindex'].includes(root) && tag.local === 'loc' && sitemapNamespace(tag.uri);
       const isLink = ['rss', 'RDF'].includes(root) && tag.local === 'link' && tag.uri === (root === 'RDF' ? rssNs : '');
       const isDate = (root === 'feed' && ['updated', 'published'].includes(tag.local) && tag.uri === atomNs) ||
         (['rss', 'RDF'].includes(root) && ((tag.local === 'pubDate' && tag.uri === '') || (tag.local === 'date' && tag.uri === 'http://purl.org/dc/elements/1.1/'))) ||
-        (['urlset', 'sitemapindex'].includes(root) && tag.local === 'lastmod' && tag.uri === sitemapNs);
+        (['urlset', 'sitemapindex'].includes(root) && tag.local === 'lastmod' && sitemapNamespace(tag.uri));
       if (isLoc || isLink || isDate) active = { name: tag.local, depth: stack.length, value: '', kind: isDate ? 'date' : 'url' };
     }
   });
@@ -179,7 +182,7 @@ export function inspectXml(buffer: Buffer, type: EndpointType, now = Date.now(),
     if (root === 'rss' && namespace === '' && channel && has(['title', 'link']) && fields.has('description')) format = 'rss';
     if (root === 'feed' && namespace === atomNs && has(['title', 'id', 'updated']) && Number.isFinite(Date.parse(fields.get('updated')!))) format = 'atom';
     if (root === 'RDF' && namespace === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#' && has(['title', 'link']) && fields.has('description')) format = 'rdf';
-  } else if (['urlset', 'sitemapindex'].includes(root) && namespace === sitemapNs) format = root as XmlSummary['format'];
+  } else if (['urlset', 'sitemapindex'].includes(root) && sitemapNamespaces.has(namespace)) format = root as XmlSummary['format'];
   if (!format) throw new Error('WRONG_ENDPOINT_FORMAT');
   return { format, entryCount, entriesWithUrl, sampleUrls, newestContentAt: newest ? new Date(newest).toISOString() : null,
     contentFreshness: badDate ? 'unreliable' : !newest ? 'missing' : now - newest > 30 * 24 * 60 * 60 * 1000 ? 'stale' : 'recent',
