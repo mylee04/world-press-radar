@@ -25,7 +25,8 @@ function fixture() {
       format: endpoint.type === 'rss' ? endpoint.url === ASAHI ? 'rdf' : 'rss' : endpoint.url === YOMIURI ? null : 'sitemapindex',
       auditStatus: blocked ? 'blocked' : 'working_nonempty', ...(blocked ? {} : { entryCount: 7, entriesWithUrl: 7, newestContentAt: '2026-10-26T02:00:00Z', contentFreshness: 'recent', dateKind: 'feed_item_date' }) };
   });
-  return { catalog, resolved: resolveSourcePacks(catalog, new HealthStore({ version: 1, observations }), new ActivityStore(), document, Date.parse('2026-10-26T02:20:00Z')) };
+  const health = new HealthStore({ version: 1, observations }), activity = new ActivityStore(), now = Date.parse('2026-10-26T02:20:00Z');
+  return { catalog, health, activity, now, resolved: resolveSourcePacks(catalog, health, activity, document, now) };
 }
 
 test('Japan starter puts five explicitly scoped major selections before the preserved regional and digital supplements', () => {
@@ -48,14 +49,14 @@ test('Japan starter puts five explicitly scoped major selections before the pres
 });
 
 test('Japanese NHK and Asahi searches resolve new exact bindings without borrowing English or sitemap language metadata', () => {
-  const { catalog } = fixture();
-  const nhk = searchCuratedSources(catalog, { country: 'JP', query: 'NHK', language: 'ja' }, document);
+  const { catalog, health, activity, now } = fixture();
+  const nhk = searchCuratedSources(catalog, { country: 'JP', query: 'NHK', language: 'ja' }, document, health, activity, now);
   assert.equal(nhk.total, 1);
   assert.equal(nhk.items[0].id, 'src_a4257f72f8574d8a74f20140');
   assert.equal(nhk.items[0].endpoints[0].url, NHK);
-  assert.equal(searchCuratedSources(catalog, { country: 'JP', query: '朝日新聞', language: 'ja', endpoint_type: 'rss' }, document).total, 1);
-  assert.equal(searchCuratedSources(catalog, { country: 'JP', query: '朝日新聞', language: 'ja', endpoint_type: 'sitemap' }, document).total, 0);
-  assert.equal(searchCuratedSources(catalog, { country: 'JP', query: 'NHK', language: 'en' }, document).items[0].name, 'NHK World English');
+  assert.equal(searchCuratedSources(catalog, { country: 'JP', query: '朝日新聞', language: 'ja', endpoint_type: 'rss' }, document, health, activity, now).total, 1);
+  assert.equal(searchCuratedSources(catalog, { country: 'JP', query: '朝日新聞', language: 'ja', endpoint_type: 'sitemap' }, document, health, activity, now).total, 0);
+  assert.equal(searchCuratedSources(catalog, { country: 'JP', query: 'NHK', language: 'en' }, document, health, activity, now).items[0].name, 'NHK World English');
 });
 
 test('consumer success evidence never converts a saved blocked Yomiuri observation into an eligible export', () => {

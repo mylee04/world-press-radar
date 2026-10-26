@@ -1,8 +1,8 @@
 import { readFileSync, statSync } from 'node:fs';
 import { z } from 'zod';
 import { canonicalUrl, page, pagination, searchSchema, type Catalog, type Source } from './catalog.js';
-import type { HealthStore } from './health.js';
-import type { ActivityStore } from './activity.js';
+import { HealthStore } from './health.js';
+import { ActivityStore } from './activity.js';
 import { describeEndpointStatus } from './endpoint-status.js';
 
 const text = z.string().trim().min(1).max(1024).refine(value => !/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(value), 'Invalid control character');
@@ -26,9 +26,10 @@ export const sourcePackDocumentSchema = z.object({ version: z.literal(1), review
   });
 export type SourcePackDocument = z.infer<typeof sourcePackDocumentSchema>;
 export const listSourcePacksSchema = z.object({ country: z.string().regex(/^[A-Za-z]{2}$/).optional(), language: z.string().min(2).max(16).optional(), ...pagination }).strict();
-export const getSourcePackSchema = z.object({ pack_id: slug, ...pagination }).strict();
-export const exportSourcePackSchema = z.object({ pack_id: slug, format: z.enum(['opml', 'csv', 'json']).default('opml'), include: z.enum(['usable', 'all']).default('usable') }).strict();
-export const curatedSearchSchema = searchSchema.extend({ pack_id: slug.optional() }).strict();
+const inclusion = z.enum(['usable', 'all']).default('usable');
+export const getSourcePackSchema = z.object({ pack_id: slug, include: inclusion, ...pagination }).strict();
+export const exportSourcePackSchema = z.object({ pack_id: slug, format: z.enum(['opml', 'csv', 'json']).default('opml'), include: inclusion }).strict();
+export const curatedSearchSchema = searchSchema.extend({ pack_id: slug.optional(), include: inclusion }).strict();
 let cachedDocument: SourcePackDocument | undefined;
 export function loadSourcePacks(path = new URL('../curation/source-packs.json', import.meta.url)): SourcePackDocument {
   if (!cachedDocument || path.href !== new URL('../curation/source-packs.json', import.meta.url).href) {
@@ -41,13 +42,17 @@ export function loadSourcePacks(path = new URL('../curation/source-packs.json', 
 }
 
 const MAX_DEFAULT_OBSERVATION_AGE = 36 * 3600000;
+export const sourceSelectionPolicy = { default: 'usable', maximum_observation_age_hours: 36, maximum_recorded_content_age_days: 30,
+  excludes: ['disabled', 'failed', 'unknown', 'stale', 'valid_empty', 'index_only', 'stale_or_unreliable_content', 'article_url_count_not_recorded'],
+  requires_observed_article_urls: true, missing_content_dates: 'explicitly_unknown_not_certified_fresh', includes_only_registered_bindings: true } as const;
 type StatusEvidence = ReturnType<typeof describeEndpointStatus>;
 type ResolvedEndpoint = { endpoint_id: string; type: 'rss' | 'sitemap'; url: string; enabled: boolean; evidence: z.infer<typeof evidenceSchema>[]; status_evidence: StatusEvidence; default_export_eligible: boolean; exclusion_reason: string | null };
-function eligible(endpoint: ResolvedEndpoint, now: number) {
+export function sourceEndpointExclusionReason(endpoint: Pick<ResolvedEndpoint, 'enabled' | 'status_evidence'>, now: number) {
   const status = endpoint.status_evidence;
   const time = status.observed_at ? Date.parse(status.observed_at) : NaN;
   if (!endpoint.enabled) return 'registration_disabled';
   if (status.usable !== true) return `endpoint_${status.status}`;
+  if (status.usability_evidence !== 'observed_urls_present') return 'article_url_count_not_recorded';
   if (!Number.isFinite(time) || time > now || now - time > MAX_DEFAULT_OBSERVATION_AGE) return 'observation_older_than_36_hours';
   if (['stale', 'unreliable'].includes(status.content.freshness)) return `content_${status.content.freshness}`;
   const contentTime = status.content.newest_content_at ? Date.parse(status.content.newest_content_at) : NaN;
@@ -68,7 +73,7 @@ export function resolveSourcePacks(catalog: Catalog, health: HealthStore, activi
             if (!selected) return [];
             const value: ResolvedEndpoint = { endpoint_id: endpoint.id, type: endpoint.type, url: endpoint.url, enabled: source.enabled,
               evidence: selected.evidence, status_evidence: describeEndpointStatus(endpoint, byEndpoint.get(endpoint.id) ?? [source], health, activity, now), default_export_eligible: false, exclusion_reason: null };
-            value.exclusion_reason = eligible(value, now); value.default_export_eligible = value.exclusion_reason === null;
+            value.exclusion_reason = sourceEndpointExclusionReason(value, now); value.default_export_eligible = value.exclusion_reason === null;
             const prior = unique.get(endpoint.id); if (!prior || !prior.enabled && value.enabled) unique.set(endpoint.id, value);
             return [value];
           }) }));
@@ -85,7 +90,7 @@ export function resolveSourcePacks(catalog: Catalog, health: HealthStore, activi
         unknown_or_unusable: enabled.filter(endpoint => !endpoint.default_export_eligible).length, unregistered_endpoints: entries.reduce((sum, entry) => sum + entry.unregistered_endpoints.length, 0) } };
   });
   return { snapshot_at: activity.snapshot?.generated_at ?? null, reviewed_at: document.reviewed_at, evaluated_at: new Date(now).toISOString(),
-    export_policy: { default: 'usable', maximum_observation_age_hours: 36, maximum_recorded_content_age_days: 30, excludes: ['disabled', 'failed', 'unknown', 'stale', 'valid_empty', 'index_only', 'stale_or_unreliable_content'], missing_content_dates: 'explicitly_unknown_not_certified_fresh', includes_only_registered_bindings: true },
+    export_policy: sourceSelectionPolicy,
     semantics: 'Curated starter selections, not exhaustive or editorial reliability ratings. Saved observations are environment-specific; first import in another collector is not guaranteed. No publisher fetch occurs during this request.', packs: result };
 }
 type ResolvedPacks = ReturnType<typeof resolveSourcePacks>;
@@ -95,11 +100,36 @@ export function listSourcePacks(resolved: ResolvedPacks, raw: unknown) {
     .map(({ entries, ...pack }) => ({ ...pack, download_urls: downloadUrls(pack.id) }));
   return { snapshot_at: resolved.snapshot_at, evaluated_at: resolved.evaluated_at, export_policy: resolved.export_policy, semantics: resolved.semantics, ...page(items, input.offset, input.limit) };
 }
+function projectPack(pack: ResolvedPacks['packs'][number], include: 'usable' | 'all') {
+  const candidates = new Map<string, ResolvedEndpoint>();
+  for (const entry of pack.entries) for (const source of entry.sources) for (const endpoint of source.endpoints) {
+    const prior = candidates.get(endpoint.endpoint_id);
+    if (!prior || !prior.default_export_eligible && endpoint.default_export_eligible || !prior.enabled && endpoint.enabled) candidates.set(endpoint.endpoint_id, endpoint);
+  }
+  const excludedUrls = new Set([...pack.entries.flatMap(entry => entry.unregistered_endpoints.map(endpoint => endpoint.url)),
+    ...[...candidates.values()].filter(endpoint => !endpoint.default_export_eligible).map(endpoint => endpoint.url)]);
+  const entries = include === 'all' ? pack.entries : pack.entries.flatMap(entry => {
+    const sources = entry.sources.map(source => ({ ...source, endpoints: source.endpoints.filter(endpoint => endpoint.default_export_eligible) })).filter(source => source.endpoints.length);
+    if (!sources.length) return [];
+    const selected = new Set(sources.flatMap(source => source.endpoints.map(endpoint => `${endpoint.type}:${endpoint.url}`)));
+    return [{ ...entry, sources, endpoints: entry.endpoints.filter(endpoint => selected.has(`${endpoint.type}:${canonicalUrl(endpoint.url)}`)),
+      evidence: entry.evidence.filter(evidence => !excludedUrls.has(evidence.url)), unregistered_endpoints: [] }];
+  });
+  const reasons: Record<string, number> = {};
+  if (include === 'usable') for (const endpoint of candidates.values()) if (endpoint.exclusion_reason) reasons[endpoint.exclusion_reason] = (reasons[endpoint.exclusion_reason] ?? 0) + 1;
+  return { ...pack, entries, include,
+    gaps: include === 'all' ? pack.gaps : pack.gaps.map(gap => excludedUrls.has(gap.evidence_url ?? '') ? (({ evidence_url, ...rest }) => rest)(gap) : gap),
+    selection: { matched_publishers: pack.entries.length, returned_publishers: entries.length, excluded_publishers: pack.entries.length - entries.length,
+      matched_endpoints: candidates.size, returned_endpoints: include === 'all' ? candidates.size : pack.summary.default_export_endpoints,
+      excluded_endpoints: include === 'all' ? 0 : pack.summary.excluded_endpoints, excluded_endpoint_reasons: reasons,
+      unregistered_endpoints: pack.summary.unregistered_endpoints },
+    download_urls: downloadUrls(pack.id, include) };
+}
 export function getSourcePack(resolved: ResolvedPacks, raw: unknown) {
   const input = getSourcePackSchema.parse(raw), pack = resolved.packs.find(value => value.id === input.pack_id);
   if (!pack) throw Error('UNKNOWN_SOURCE_PACK');
-  const { entries, ...metadata } = pack;
-  const selected = [];
+  const { entries, ...metadata } = projectPack(pack, input.include);
+  const selected: typeof entries = [];
   let size = 0;
   for (const entry of entries.slice(input.offset, input.offset + input.limit)) {
     const bytes = Buffer.byteLength(JSON.stringify(entry));
@@ -108,9 +138,9 @@ export function getSourcePack(resolved: ResolvedPacks, raw: unknown) {
   }
   const next = input.offset + selected.length;
   return { ...metadata, snapshot_at: resolved.snapshot_at, evaluated_at: resolved.evaluated_at, export_policy: resolved.export_policy, semantics: resolved.semantics,
-    entries: selected, total: entries.length, offset: input.offset, next_offset: next < entries.length ? next : null, download_urls: downloadUrls(pack.id) };
+    entries: selected, total: entries.length, offset: input.offset, next_offset: next < entries.length ? next : null };
 }
-const downloadUrls = (id: string) => Object.fromEntries(['opml', 'csv', 'json'].map(format => [format, `https://news.bymyleslee.com/source-packs/${id}/export?format=${format}`]));
+const downloadUrls = (id: string, include: 'usable' | 'all' = 'usable') => Object.fromEntries(['opml', 'csv', 'json'].map(format => [format, `https://news.bymyleslee.com/source-packs/${id}/export?format=${format}${include === 'all' ? '&include=all' : ''}`]));
 const xml = (value: string) => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&apos;').replaceAll('\r', '&#13;').replaceAll('\n', '&#10;');
 const csv = (value: unknown) => { let text = value == null ? '' : String(value); if (/^[\s]*[=+@-]/.test(text)) text = "'" + text; return '"' + text.replaceAll('"', '""') + '"'; };
 export function exportSourcePack(resolved: ResolvedPacks, raw: unknown) {
@@ -149,37 +179,73 @@ export function exportSourcePack(resolved: ResolvedPacks, raw: unknown) {
 }
 
 const normalized = (value: string) => value.normalize('NFKC').toLocaleLowerCase().trim();
-export function searchCuratedSources(catalog: Catalog, raw: unknown, document = loadSourcePacks()) {
+export function searchCuratedSources(catalog: Catalog, raw: unknown, document = loadSourcePacks(), health = new HealthStore(), activity = new ActivityStore(), now = Date.now()) {
   const input = curatedSearchSchema.parse(raw), query = input.query ? normalized(input.query) : null;
+  if (input.pack_id && !document.packs.some(pack => pack.id === input.pack_id)) throw Error('UNKNOWN_SOURCE_PACK');
   const wantedLanguage = input.language ? normalized(input.language) : null, wantedCategory = input.category ? normalized(input.category) : null;
   const matches = new Map<string, Array<{ pack_id: string; entry: SourcePackDocument['packs'][number]['entries'][number]; endpoint_ids: string[] }>>();
+  const sourcesByEndpoint = new Map<string, Source[]>();
+  for (const source of catalog.sources) for (const endpoint of source.endpoints) sourcesByEndpoint.set(endpoint.id, [...(sourcesByEndpoint.get(endpoint.id) ?? []), source]);
   for (const pack of document.packs) for (const entry of pack.entries) for (const source of catalog.sources) {
     if (source.countryCode !== pack.country) continue;
     const endpoint_ids = source.endpoints.filter(endpoint => entry.endpoints.some(item => item.type === endpoint.type && canonicalUrl(item.url) === endpoint.url)).map(endpoint => endpoint.id);
     if (endpoint_ids.length) matches.set(source.id, [...(matches.get(source.id) ?? []), { pack_id: pack.id, entry, endpoint_ids }]);
   }
+  const statusCache = new Map<string, StatusEvidence>(), matchedEndpoints = new Map<string, { eligible: boolean; enabled: boolean; reason: string | null }>(), returnedEndpointIds = new Set<string>();
+  let matchedRegistrations = 0;
   const ranked = catalog.sources.flatMap(source => {
     const curated = (matches.get(source.id) ?? []).filter(match => !input.pack_id || input.pack_id === match.pack_id);
     if (input.pack_id && !curated.length || input.country && source.countryCode !== input.country.toUpperCase() || input.enabled !== undefined && source.enabled !== input.enabled) return [];
-    if (input.endpoint_type && !source.endpoints.some(endpoint => endpoint.type === input.endpoint_type)) return [];
-    const typedMatches = curated.filter(match => !input.endpoint_type || source.endpoints.some(endpoint => endpoint.type === input.endpoint_type && match.endpoint_ids.includes(endpoint.id)));
+    let scopedEndpoints = source.endpoints.filter(endpoint => !input.endpoint_type || endpoint.type === input.endpoint_type);
+    const typedMatches = curated.filter(match => scopedEndpoints.some(endpoint => match.endpoint_ids.includes(endpoint.id)));
     const metadataMatches = typedMatches.filter(match => (!wantedLanguage || normalized(match.entry.language) === wantedLanguage) && (!wantedCategory || match.entry.topics.some(topic => normalized(topic) === wantedCategory)));
-    const originalMetadataMatch = (!input.language || normalized(source.language ?? '') === normalized(input.language)) && (!input.category || normalized(source.category ?? '') === normalized(input.category));
+    const originalMetadataMatch = (!input.language || normalized(source.language ?? '') === wantedLanguage) && (!input.category || normalized(source.category ?? '') === wantedCategory);
     if ((input.language || input.category) && !originalMetadataMatch && !metadataMatches.length) return [];
+    if (input.pack_id || !originalMetadataMatch) {
+      const ids = new Set((input.language || input.category ? metadataMatches : typedMatches).flatMap(match => match.endpoint_ids));
+      scopedEndpoints = scopedEndpoints.filter(endpoint => ids.has(endpoint.id));
+    }
     const aliases = [...new Set(curated.flatMap(match => [match.entry.name, ...match.entry.aliases]))];
-    const haystack = normalized([source.name, source.countryName, ...source.endpoints.map(endpoint => endpoint.url), ...aliases].join(' '));
-    if (query && !haystack.includes(query)) return [];
+    const nameHaystack = normalized([source.name, source.countryName].join(' '));
+    if (query && !nameHaystack.includes(query)) {
+      const aliasMatches = curated.filter(match => [match.entry.name, ...match.entry.aliases].some(alias => normalized(alias).includes(query)));
+      if (aliasMatches.length) {
+        const ids = new Set(aliasMatches.flatMap(match => match.endpoint_ids));
+        scopedEndpoints = scopedEndpoints.filter(endpoint => ids.has(endpoint.id));
+      } else scopedEndpoints = scopedEndpoints.filter(endpoint => normalized(endpoint.url).includes(query));
+    }
+    if (!scopedEndpoints.length) return [];
+    matchedRegistrations++;
+    const endpoints = scopedEndpoints.flatMap(endpoint => {
+      let status = statusCache.get(endpoint.id);
+      if (!status) { status = describeEndpointStatus(endpoint, sourcesByEndpoint.get(endpoint.id) ?? [source], health, activity, now); statusCache.set(endpoint.id, status); }
+      const reason = sourceEndpointExclusionReason({ enabled: source.enabled, status_evidence: status }, now), eligible = reason === null;
+      const prior = matchedEndpoints.get(endpoint.id);
+      if (!prior || !prior.eligible && eligible || !prior.enabled && source.enabled) matchedEndpoints.set(endpoint.id, { eligible, enabled: source.enabled, reason });
+      if (input.include !== 'all' && !eligible) return [];
+      returnedEndpointIds.add(endpoint.id);
+      return [{ ...endpoint, status_evidence: status, default_export_eligible: eligible, exclusion_reason: reason }];
+    });
+    if (!endpoints.length) return [];
+    const visibleIds = new Set(endpoints.map(endpoint => endpoint.id));
+    const visibleCuration = typedMatches.filter(match => match.endpoint_ids.some(id => visibleIds.has(id)));
+    const visibleMetadataMatches = (input.language || input.category ? metadataMatches : visibleCuration).filter(match => match.endpoint_ids.some(id => visibleIds.has(id)));
     const exactName = !!query && [source.name, ...aliases].some(name => normalized(name) === query);
-    const exactDomain = !!query && source.endpoints.some(endpoint => new URL(endpoint.url).hostname.replace(/^www\./, '') === query.replace(/^www\./, ''));
+    const exactDomain = !!query && endpoints.some(endpoint => new URL(endpoint.url).hostname.replace(/^www\./, '') === query.replace(/^www\./, ''));
     const prefix = !!query && [source.name, ...aliases].some(name => normalized(name).startsWith(query));
     const score = exactName ? 4 : exactDomain ? 3 : prefix ? 2 : curated.length ? 1 : 0;
-    return [{ score, value: { ...source, ...(curated.length ? { curation: { pack_ids: [...new Set(curated.map(match => match.pack_id))], aliases,
-      languages: [...new Set(typedMatches.map(match => match.entry.language))], topics: [...new Set(typedMatches.flatMap(match => match.entry.topics))],
-      matching_endpoint_ids: [...new Set((input.language || input.category ? metadataMatches : typedMatches).flatMap(match => match.endpoint_ids))].filter(id => !input.endpoint_type || source.endpoints.some(endpoint => endpoint.id === id && endpoint.type === input.endpoint_type)),
+    return [{ score, value: { ...source, endpoints, ...(visibleCuration.length ? { curation: { pack_ids: [...new Set(visibleCuration.map(match => match.pack_id))],
+      aliases: [...new Set(visibleCuration.flatMap(match => [match.entry.name, ...match.entry.aliases]))],
+      languages: [...new Set(visibleCuration.map(match => match.entry.language))], topics: [...new Set(visibleCuration.flatMap(match => match.entry.topics))],
+      matching_endpoint_ids: [...new Set(visibleMetadataMatches.flatMap(match => match.endpoint_ids))].filter(id => visibleIds.has(id)),
       metadata_scope: 'declared_curated_endpoint_bindings_only', reviewed_at: document.reviewed_at } } : {}) } }];
   }).sort((a, b) => b.score - a.score || a.value.id.localeCompare(b.value.id));
-  if (input.pack_id && !document.packs.some(pack => pack.id === input.pack_id)) throw Error('UNKNOWN_SOURCE_PACK');
-  return { ...page(ranked.map(item => item.value), input.offset, input.limit), metadata_semantics: 'Curated language/category matches apply only to curation.matching_endpoint_ids; missing registry metadata remains unknown. Name/domain matches rank before aliases/prefix/other matches. Registrations are not publisher counts.' };
+  const reasons: Record<string, number> = {};
+  if (input.include === 'usable') for (const endpoint of matchedEndpoints.values()) if (!endpoint.eligible && endpoint.reason) reasons[endpoint.reason] = (reasons[endpoint.reason] ?? 0) + 1;
+  return { ...page(ranked.map(item => item.value), input.offset, input.limit), include: input.include, evaluated_at: new Date(now).toISOString(), snapshot_at: activity.snapshot?.generated_at ?? null,
+    selection_policy: sourceSelectionPolicy, selection: { matched_registrations: matchedRegistrations, returned_registrations: ranked.length, excluded_registrations: matchedRegistrations - ranked.length,
+      matched_endpoints: matchedEndpoints.size, returned_endpoints: returnedEndpointIds.size, excluded_endpoints: matchedEndpoints.size - returnedEndpointIds.size, excluded_endpoint_reasons: reasons },
+    metadata_semantics: 'Saved usable article-list evidence is required by default. Use include=all for configured exceptions and diagnostics. Curated language/category matches apply only to curation.matching_endpoint_ids; missing registry metadata remains unknown. Registrations are not publisher counts. No publisher request occurs.' };
 }
 
 export function createSourcePackHandler(catalog: Catalog, health: HealthStore, activity: ActivityStore, document = loadSourcePacks()) {
@@ -197,8 +263,10 @@ export function createSourcePackHandler(catalog: Catalog, health: HealthStore, a
           'x-source-pack-exported': String(result.exported_endpoints), 'x-source-pack-excluded': String(result.excluded_endpoints), 'x-source-pack-non-rss-omitted': String(result.sitemap_endpoints_omitted_from_opml) } });
       }
       if (url.pathname !== '/source-packs') return Response.json({ error: 'UNKNOWN_SOURCE_PACK_ROUTE' }, { status: 404 });
-      if ([...url.searchParams.keys()].length) throw Error('INVALID_SOURCE_PACK_QUERY');
-      return new Response(request.method === 'HEAD' ? null : JSON.stringify(resolved), { headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store', 'x-content-type-options': 'nosniff' } });
+      if ([...url.searchParams.keys()].some(key => key !== 'include') || url.searchParams.getAll('include').length > 1) throw Error('INVALID_SOURCE_PACK_QUERY');
+      const include = inclusion.parse(url.searchParams.get('include') ?? undefined);
+      const projected = { ...resolved, include, packs: resolved.packs.map(pack => projectPack(pack, include)) };
+      return new Response(request.method === 'HEAD' ? null : JSON.stringify(projected), { headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store', 'x-content-type-options': 'nosniff' } });
     } catch (error) {
       const unknown = error instanceof Error && error.message === 'UNKNOWN_SOURCE_PACK';
       return Response.json({ error: unknown ? 'UNKNOWN_SOURCE_PACK' : 'SOURCE_PACK_REQUEST_FAILED' }, { status: unknown ? 404 : 400, headers: { 'cache-control': 'no-store' } });

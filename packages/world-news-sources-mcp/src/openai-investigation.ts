@@ -162,12 +162,12 @@ export async function runModelInvestigation(options: ModelInvestigationOptions) 
     execute: args => once('search_country_sources', args, async () => {
       const requestedQuery = args.query?.trim() || null;
       let appliedQuery = requestedQuery, fallbackReason: string | null = null;
-      let result = await options.call('search_sources', { country: options.country, enabled: true, offset: args.offset,
+      let result = await options.call('search_sources', { country: options.country, enabled: true, include: 'all', offset: args.offset,
         limit: args.limit, ...(requestedQuery ? { query: requestedQuery } : {}) });
       if (requestedQuery && args.offset === 0 && result.total === 0 && Array.isArray(result.items) && result.items.length === 0) {
         // A publisher-name filter yielding no matches does not mean the country has no sources.
         // Both calls use the real MCP observer; no result or fallback event is fabricated here.
-        result = await options.call('search_sources', { country: options.country, enabled: true, offset: 0, limit: args.limit });
+        result = await options.call('search_sources', { country: options.country, enabled: true, include: 'all', offset: 0, limit: args.limit });
         appliedQuery = null; fallbackReason = 'empty_publisher_query; real_country_browse_performed_once';
       }
       const items = (result.items ?? []).slice(0, 50).map((source: Row) => {

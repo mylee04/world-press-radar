@@ -182,7 +182,7 @@ export function describeEndpointStatus(endpoint: Endpoint, relevantSources: Sour
       const baseline = bound && Array.isArray(row.baseline_sources) && row.baseline_sources.includes(source.id);
       return { source_id: source.id, bound, baseline, new_unique_candidate_urls: bound && collectionSuccess && format && format !== 'sitemapindex' && !baseline ? count(row.source_new?.[source.id]) : null };
     }),
-    retained_fields: latest.provenance === 'retained_production_collection_archive' ? 'Compressed history retains endpoint outcome, format, scope discovery counts and optional content dates; HTTP status, failure reason and observed URL total are not retained.' : 'Fields are reported only where retained in the production snapshot.'
+    retained_fields: latest.provenance === 'retained_production_collection_archive' ? 'Compressed history retains endpoint outcome, format, scope discovery counts, optional content dates and an observed URL total when recorded. Older archive versions omit the URL total; HTTP status and failure reason are not retained.' : 'Fields are reported only where retained in the production snapshot.'
   } : null;
   const chooseCollection = !!row && (auditAt === null || timestamp(row.checked_at)! >= auditAt);
   const basis = chooseCollection ? 'collection' as const : structuralAudit ? 'structural_audit' as const : null;

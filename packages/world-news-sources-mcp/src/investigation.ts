@@ -259,7 +259,7 @@ export class InvestigationStore {
       const sources: Array<Record<string, any>> = [];
       let offset: number | null = 0;
       while (offset !== null && sources.length < 150) {
-        const page = await call('search_sources', { country: run.country, enabled: true, offset, limit: 50 });
+        const page = await call('search_sources', { country: run.country, enabled: true, include: 'all', offset, limit: 50 });
         sources.push(...page.items); run.available_sources = page.total; offset = page.next_offset;
       }
       const candidates: Array<Record<string, any>> = (country?.investigation_candidates ?? []).slice(0, run.limits.max_sources);

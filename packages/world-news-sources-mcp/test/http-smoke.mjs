@@ -67,7 +67,7 @@ try{
   const packToolNames=['list_source_packs','get_source_pack','export_source_pack'];
   const hasPacks=packToolNames.some(name=>toolNames.has(name));
   if(hasPacks)for(const name of packToolNames)assert.ok(toolNames.has(name),`Incomplete source pack tool set: ${name}`);
-  const sources=await callStructured({name:'search_sources',arguments:{country:'US',endpoint_type:'sitemap',limit:1}});
+  const sources=await callStructured({name:'search_sources',arguments:{country:'US',endpoint_type:'sitemap',include:'all',limit:1}});
   assert.equal(sources.items.length,1);
   const source=sources.items[0];
   const details=await callStructured({name:'get_source',arguments:{source_id:source.id}});

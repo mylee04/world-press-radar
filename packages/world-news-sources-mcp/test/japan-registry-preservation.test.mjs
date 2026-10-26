@@ -25,7 +25,7 @@ test('Japan repairs retain historic publisher identities and the existing Asahi 
   assert.equal(catalog.sources.find(source => source.id === 'src_0720caa54d65ed03ca5ac188').category, 'society');
   assert.equal(catalog.sources.find(source => source.id === 'src_b25024633f66352c872e52fe').category, 'science');
   assert.ok(catalog.sources.filter(source => source.countryCode === 'JP' && source.name.startsWith('NHK')).every(source => source.language === 'ja'));
-  assert.equal(searchCuratedSources(catalog, { country: 'JP', query: 'NHK', language: 'ja' }).items[0].id, NHK);
+  assert.equal(searchCuratedSources(catalog, { country: 'JP', query: 'NHK', language: 'ja', include: 'all' }).items[0].id, NHK);
 });
 
 test('new feed bindings exclude their first list without rewriting previous discoveries or binding baselines', () => {

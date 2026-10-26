@@ -309,7 +309,7 @@ export class RemoteQualityStore {
     const overview = await this.overview(date, code), sources: Row[] = [];
     let offset: number | null = 0, total: number | null = null, pages = 0;
     while (offset !== null && sources.length < 500 && pages++ < 30) {
-      const response = await this.call('search_sources', { country: code, enabled: true, offset, limit: 50 });
+      const response = await this.call('search_sources', { country: code, enabled: true, include: 'all', offset, limit: 50 });
       sources.push(...(response.items ?? []).slice(0, 500 - sources.length)); total = finite(response.total);
       const next = response.next_offset;
       if (next !== null && next !== undefined && (typeof next !== 'number' || next <= offset)) throw Error('Invalid remote source pagination');

@@ -200,9 +200,9 @@ test('archived collection evidence wins over the old audit and missing inline hi
   const activity = new ActivityStore(snapshot([], { history: { version: 1, complete: true, shards: [shard] } }), directory);
   const result = describeEndpointStatus(endpoint, catalog.sources, new HealthStore({ version: 1, observations: [observation()] }), activity, NOW);
   assert.equal(result.status, 'usable'); assert.equal(result.latest_collection.provenance, 'retained_production_collection_archive');
-  assert.equal(result.usability_evidence, 'recorded_nonempty_xml_count_not_retained');
-  assert.match(result.reason, /usable entry-URL count was not retained/);
-  assert.equal(result.latest_collection.http_status, null); assert.equal(result.latest_collection.reason, null); assert.equal(result.latest_collection.observed_url_count, null);
+  assert.equal(result.usability_evidence, 'observed_urls_present');
+  assert.match(result.reason, /valid nonempty article-list/);
+  assert.equal(result.latest_collection.http_status, null); assert.equal(result.latest_collection.reason, null); assert.equal(result.latest_collection.observed_url_count, 25);
   assert.equal(result.content.newest_content_at, '2026-10-15T03:00:00.000Z');
   assert.equal(result.latest_collection.source_activity.find(row => row.source_id === sibling.id).new_unique_candidate_urls, 4);
 });

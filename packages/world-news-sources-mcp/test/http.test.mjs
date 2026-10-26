@@ -17,7 +17,7 @@ test('HTTP SDK client discovers/lists/calls all tools with stateless transport',
   try{
     await client.connect(new StreamableHTTPClientTransport(new URL('https://example.com/mcp'),{fetch:(input,init)=>handler.fetch(new Request(input,init))}));
     assert.equal((await client.listTools()).tools.length,13);
-    const result=await client.callTool({name:'search_sources',arguments:{country:'US',limit:1}});
+    const result=await client.callTool({name:'search_sources',arguments:{country:'US',include:'all',limit:1}});
     assert.equal(result.structuredContent.items.length,1);
     assert.equal((await client.callTool({name:'list_countries',arguments:{}})).structuredContent.total,2);
     const source=result.structuredContent.items[0];
@@ -34,6 +34,33 @@ test('legacy initialize and tools calls succeed without a persistent session',as
     const tools=await post(handler,{jsonrpc:'2.0',id:2,method:'tools/list'}, {'mcp-protocol-version':'2025-06-18'});
     assert.equal((await payload(tools)).result.tools.length,13);
   }finally{await handler.close();}
+});
+test('MCP search defaults to usable siblings while explicit details preserve failed and unknown addresses',async()=>{
+  const catalog=normalizeRegistry({countries:[{code:'US',name:'United States',feeds:[
+    {name:'Mixed Publisher',url:'https://mixed.example/feed',sitemapUrl:'https://mixed.example/broken.xml'},
+    {name:'Unverified Publisher',url:'https://unknown.example/feed'},
+  ]}]});
+  const mixed=catalog.sources.find(s=>s.name==='Mixed Publisher');
+  const checkedAt=new Date(Date.now()-60000).toISOString();
+  const observations=mixed.endpoints.map(e=>({endpointId:e.id,type:e.type,url:e.url,checkedAt,
+    outcome:e.type==='rss'?'healthy':'unhealthy',httpStatus:e.type==='rss'?200:403,reason:e.type==='rss'?null:'HTTP_403',
+    format:e.type==='rss'?'rss':null,auditStatus:e.type==='rss'?'working_nonempty':'blocked',...(e.type==='rss'?{entryCount:10,entriesWithUrl:10}:{})}));
+  const handler=createHttpHandler(catalog,new HealthStore({version:1,observations}),['example.com']);
+  const client=new Client({name:'usable-default-fixture',version:'1'});
+  try{
+    await client.connect(new StreamableHTTPClientTransport(new URL('https://example.com/mcp'),{fetch:(input,init)=>handler.fetch(new Request(input,init))}));
+    const tool=(await client.listTools()).tools.find(t=>t.name==='search_sources');
+    assert.equal(tool.inputSchema.properties.include.default,'usable');
+    const search=(await client.callTool({name:'search_sources',arguments:{country:'US'}})).structuredContent;
+    assert.equal(search.total,1);assert.equal(search.selection.matched_registrations,2);assert.equal(search.selection.excluded_registrations,1);
+    assert.equal(search.items[0].id,mixed.id);assert.deepEqual(search.items[0].endpoints.map(e=>e.type),['rss']);
+    assert.equal(search.items[0].endpoints[0].status_evidence.observed_at,checkedAt);
+    assert.ok(!JSON.stringify(search).includes('broken.xml'));assert.ok(!JSON.stringify(search).includes('https://unknown.example/feed'));
+    const all=(await client.callTool({name:'search_sources',arguments:{country:'US',include:'all'}})).structuredContent;
+    assert.equal(all.total,2);assert.ok(all.items.some(s=>s.endpoints.some(e=>e.url.endsWith('broken.xml'))));
+    const details=(await client.callTool({name:'get_source',arguments:{source_id:mixed.id}})).structuredContent;
+    assert.equal(details.endpoints.length,2);assert.equal(details.endpoints.find(e=>e.type==='sitemap').status_evidence.status,'failed');
+  }finally{await client.close();await handler.close();}
 });
 test('HTTP boundary rejects invalid hosts, origins, paths, methods and oversized requests',async()=>{
   const handler=create();

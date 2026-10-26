@@ -10,9 +10,11 @@ const words = {
     loading: 'Loading source packs…', error: 'Source packs could not be loaded. Your existing searches are still available in ChatGPT.', retry: 'Try again',
     choose: 'Choose a source pack', snapshot: 'Saved snapshot', unknown: 'Not recorded', saved: 'This preview reads saved observations. Publisher sites are not checked during your visit.',
     publishers: 'publishers', rss: 'usable RSS', sitemaps: 'usable sitemaps', excluded: 'excluded by default', selectionNote: 'A selected starting list, not a complete national media directory.',
-    all: 'Include all configured addresses, including failed, empty, index-only, stale, unknown, or inactive addresses.',
+    all: 'Show and export all configured addresses, including failed, empty, index-only, stale, unknown, or inactive addresses.',
+    selectionCounts: (shown, total, excluded) => `Showing ${shown} of ${total} selected publishers; ${excluded} excluded from this view.`,
     downloads: 'Download addresses', opml: 'OPML · RSS only', csv: 'CSV · typed addresses', json: 'JSON · full evidence',
-    defaults: 'Default exports require an enabled address and successful, nonempty article-list evidence from the last 36 hours. Content dates must be within 30 days and not marked stale or unreliable. Missing content dates remain unknown and may be included. Complete or current article coverage is not guaranteed.',
+    defaults: 'Default lists and exports require an enabled address with a recorded positive article-URL count from the last 36 hours. Content dates must be within 30 days and not marked stale or unreliable. Missing content dates remain unknown and may be included. Complete or current article coverage is not guaranteed.',
+    countMissing: 'the saved result does not retain an extracted article-URL count.',
     opmlNote: 'OPML contains RSS/Atom feeds only. CSV and JSON keep RSS and sitemap types separate. Open a CSV/JSON in a compatible collector; a feed reader may not accept sitemaps.',
     importOne: 'For a feed reader, download OPML and use its Import subscriptions option.',
     importTwo: 'For a collector, use the typed CSV or JSON and route each address to the matching RSS or sitemap parser.',
@@ -42,9 +44,11 @@ const words = {
     loading: '소스 묶음을 불러오는 중…', error: '소스 묶음을 불러오지 못했습니다. ChatGPT의 기존 검색 기능은 계속 이용할 수 있습니다.', retry: '다시 시도',
     choose: '소스 묶음 선택', snapshot: '저장된 스냅샷', unknown: '기록 없음', saved: '저장된 관측 결과를 보여줍니다. 페이지를 방문할 때 언론사 사이트를 실시간 검사하지 않습니다.',
     publishers: '언론사', rss: '사용 가능한 RSS', sitemaps: '사용 가능한 사이트맵', excluded: '기본 내보내기 제외', selectionNote: '시작용 선정 목록이며 국가 전체 언론사 목록은 아닙니다.',
-    all: '실패·빈 XML·사이트맵 인덱스·오래된 근거·미확인·비활성 주소도 포함해 모든 등록 주소를 내보냅니다.',
+    all: '실패·빈 XML·사이트맵 인덱스·오래된 근거·미확인·비활성 주소도 목록과 내보내기에 포함합니다.',
+    selectionCounts: (shown, total, excluded) => `선정 언론사 ${total}곳 중 ${shown}곳 표시, 현재 보기에서 ${excluded}곳 제외`,
     downloads: '주소 내려받기', opml: 'OPML · RSS 전용', csv: 'CSV · 주소 종류 구분', json: 'JSON · 전체 근거',
-    defaults: '기본 내보내기는 최근 36시간 안에 비어 있지 않은 기사 목록을 확인한 활성 주소만 포함합니다. 콘텐츠 날짜는 30일 이내여야 하며 오래되었거나 신뢰할 수 없다는 판정이 없어야 합니다. 날짜가 없으면 미확인 상태로 포함될 수 있으며, 전체 기사 확보나 최신성을 보장하지 않습니다.',
+    defaults: '기본 목록과 내보내기는 최근 36시간 안에 기사 URL을 1개 이상 추출한 기록이 있는 활성 주소만 포함합니다. 콘텐츠 날짜는 30일 이내여야 하며 오래되었거나 신뢰할 수 없다는 판정이 없어야 합니다. 날짜가 없으면 미확인 상태로 포함될 수 있으며, 전체 기사 확보나 최신성을 보장하지 않습니다.',
+    countMissing: '저장된 결과에 실제 추출한 기사 URL 개수가 없습니다.',
     opmlNote: 'OPML에는 RSS/Atom 피드만 포함합니다. CSV·JSON은 RSS와 사이트맵 종류를 유지합니다. 사이트맵을 지원하는 수집기에서 사용하세요.',
     importOne: '뉴스 리더에서는 OPML을 내려받아 구독 가져오기 기능을 사용하세요.',
     importTwo: '수집기에서는 CSV·JSON의 주소 종류에 따라 RSS 또는 사이트맵 파서를 연결하세요.',
@@ -113,7 +117,7 @@ function datum(dl, label, text) {
   dl.append(node('dt', label), node('dd', text));
 }
 function exclusionText(reason) {
-  const keys = { registration_disabled: 'disabled', observation_older_than_36_hours: 'observationOld', recorded_content_date_older_than_30_days: 'contentOld', content_stale: 'contentStale', content_unreliable: 'contentUnreliable' };
+  const keys = { registration_disabled: 'disabled', observation_older_than_36_hours: 'observationOld', recorded_content_date_older_than_30_days: 'contentOld', content_stale: 'contentStale', content_unreliable: 'contentUnreliable', article_url_count_not_recorded: 'countMissing' };
   if (keys[reason]) return t(keys[reason]);
   if (typeof reason === 'string' && reason.startsWith('endpoint_') && words[lang][reason.slice(9)]) return t(reason.slice(9));
   return t('exclusionUnknown');
@@ -180,9 +184,10 @@ function downloads(pack) {
   const checkbox = node('input');
   checkbox.type = 'checkbox';
   checkbox.checked = includeAll;
+  checkbox.disabled = loading;
   checkbox.addEventListener('change', () => {
-    includeAll = checkbox.checked;
-    for (const link of section.querySelectorAll('[data-format]')) link.href = exportUrl(pack.id, link.dataset.format);
+    checkbox.disabled = true;
+    load(checkbox.checked);
   });
   scope.append(checkbox, node('span', t('all')));
   section.append(node('p', t('defaults'), 'pack-export-note'), scope);
@@ -261,12 +266,13 @@ function renderDetail() {
   panel.append(title, node('p', local(pack.description)), node('p', `${t('snapshot')}: ${time(catalog.snapshot_at)}`, 'pack-snapshot'), node('p', t('saved'), 'pack-export-note'));
   const counts = node('div', null, 'pack-summary');
   for (const [key, label] of [['publishers', 'publishers'], ['usable_rss', 'rss'], ['usable_sitemaps', 'sitemaps'], ['excluded_endpoints', 'excluded']]) {
-    const value = pack.summary?.[key] ?? (key === 'excluded_endpoints' ? pack.summary?.unknown_or_unusable : undefined);
+    const value = key === 'publishers' ? (pack.selection?.returned_publishers ?? list(pack.entries).length) : pack.summary?.[key] ?? (key === 'excluded_endpoints' ? pack.summary?.unknown_or_unusable : undefined);
     const item = node('span');
-    item.append(node('strong', Number.isFinite(value) ? value : '—'), node('span', t(label)));
+    item.append(node('strong', Number.isFinite(value) ? value : '?'), node('span', t(label)));
     counts.append(item);
   }
   panel.append(counts, node('p', t('selectionNote'), 'pack-note'));
+  if (pack.selection) panel.append(node('p', words[lang].selectionCounts(pack.selection.returned_publishers, pack.selection.matched_publishers, pack.selection.excluded_publishers), 'pack-export-note'));
   if (list(pack.gaps).length) {
     const gap = gapView(pack.gaps[0], 'p', 'pack-notice');
     gap.prepend(node('span', `${t('gaps')}: `));
@@ -292,7 +298,7 @@ function render() {
     button.type = 'button';
     button.setAttribute('aria-pressed', String(pack.id === selected));
     button.setAttribute('aria-controls', 'pack-detail');
-    button.append(node('strong', local(pack.title)), node('span', [pack.country, pack.language, `${pack.summary?.publishers ?? list(pack.entries).length} ${t('publishers')}`].filter(Boolean).join(' · ')));
+    button.append(node('strong', local(pack.title)), node('span', [pack.country, pack.language, `${pack.selection?.returned_publishers ?? list(pack.entries).length} ${t('publishers')}`].filter(Boolean).join(' · ')));
     button.addEventListener('click', () => {
       selected = pack.id;
       for (const choice of choices.children) choice.setAttribute('aria-pressed', String(choice === button));
@@ -302,27 +308,29 @@ function render() {
   }
   renderDetail();
 }
-async function load() {
+async function load(nextIncludeAll = includeAll) {
   if (loading) return;
   loading = true;
   status.textContent = t('loading');
   const controller = new AbortController();
   const timeout = window.setTimeout(() => controller.abort(), 15000);
   try {
-    const response = await fetch('/source-packs', { signal: controller.signal, headers: { Accept: 'application/json' } });
+    const response = await fetch(`/source-packs${nextIncludeAll ? '?include=all' : ''}`, { signal: controller.signal, headers: { Accept: 'application/json' } });
     if (!response.ok) throw new Error('Source pack request failed');
     const data = await response.json();
     if (!Array.isArray(data.packs)) throw new Error('Invalid source pack response');
     catalog = data;
+    includeAll = nextIncludeAll;
     selected = data.packs.some(pack => pack.id === selected) ? selected : data.packs[0]?.id;
     loading = false;
     render();
   } catch {
     loading = false;
+    renderDetail();
     status.replaceChildren(node('span', t('error')));
     const retry = node('button', t('retry'), 'copy-prompt');
     retry.type = 'button';
-    retry.addEventListener('click', load);
+    retry.addEventListener('click', () => load(nextIncludeAll));
     status.append(retry);
   } finally {
     window.clearTimeout(timeout);

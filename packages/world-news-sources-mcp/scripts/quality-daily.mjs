@@ -77,7 +77,7 @@ export async function captureRemoteRegistry(call, observedAt) {
   const sources = [], seen = new Set(); let offset = 0, expected = null, pages = 0;
   while (offset !== null && pages++ < 300 && sources.length <= 10000) {
     // enabled is deliberately omitted: disabled registrations must not appear as deletions.
-    const page = await call('search_sources', { offset, limit: 50 });
+    const page = await call('search_sources', { include: 'all', offset, limit: 50 });
     if (!Array.isArray(page.items) || !Number.isInteger(page.total) || page.total < 0 || page.total > 10000) throw Error('QUALITY_DAILY_INVALID_REGISTRY_PAGE');
     if (expected !== null && expected !== page.total) throw Error('QUALITY_DAILY_REGISTRY_CHANGED_DURING_READ');
     expected = page.total;
