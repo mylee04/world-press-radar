@@ -1,7 +1,9 @@
 import { SaxesParser } from 'saxes';
 import { canonicalUrl, type EndpointType } from './catalog.js';
 
-export const SITEMAP_NAMESPACES = ['http://www.sitemaps.org/schemas/sitemap/0.9', 'http://www.google.com/schemas/sitemap/0.84'] as const;
+// Some publisher generators use the exact HTTPS spelling of the sitemap URI.
+// Recognize that compatibility form explicitly; namespaces still match exactly.
+export const SITEMAP_NAMESPACES = ['http://www.sitemaps.org/schemas/sitemap/0.9', 'https://www.sitemaps.org/schemas/sitemap/0.9', 'http://www.google.com/schemas/sitemap/0.84'] as const;
 
 export type XmlSummary = {
   format: 'rss' | 'atom' | 'rdf' | 'urlset' | 'sitemapindex';
@@ -34,9 +36,20 @@ function requireEncoding(declared: string | undefined, expected: 'utf-8' | 'utf-
   throw new Error('UNSUPPORTED_ENCODING');
 }
 
-function xmlMimeEncoding(contentType: string | undefined): string | undefined {
+function xmlMimeEncoding(contentType: string | undefined, buffer: Buffer): string | undefined {
   if (contentType === undefined) return;
   if (typeof contentType !== 'string' || /[^\t\x20-\x7e]/.test(contentType)) throw new Error('INVALID_XML');
+  // One publisher sends this exact five-type Accept-style list as Content-Type.
+  // This is bounded compatibility, not valid MIME syntax or general list support.
+  // Require its explicit UTF-8 declaration; the normal decoder still rejects
+  // invalid bytes, BOM conflicts and malformed XML declarations.
+  const publisherXmlList = /^[ \t]*application\/rss\+xml[ \t]*,[ \t]*application\/rdf\+xml[ \t]*;[ \t]*q=0\.8[ \t]*,[ \t]*application\/atom\+xml[ \t]*;[ \t]*q=0\.6[ \t]*,[ \t]*application\/xml[ \t]*;[ \t]*q=0\.4[ \t]*,[ \t]*text\/xml[ \t]*;[ \t]*q=0\.4[ \t]*;[ \t]*charset=utf-8[ \t]*$/i;
+  if (publisherXmlList.test(contentType)) {
+    const body = buffer[0] === 0xef && buffer[1] === 0xbb && buffer[2] === 0xbf ? buffer.subarray(3) : buffer;
+    const end = body.indexOf('?>');
+    if (end < 0 || declaredEncoding(body.subarray(0, end + 2).toString('latin1')) !== 'utf-8') throw new Error('INVALID_XML');
+    return 'utf-8';
+  }
   const media = /^[ \t]*([!#$%&'*+.^_`|~0-9A-Za-z-]+)\/([!#$%&'*+.^_`|~0-9A-Za-z-]+)/.exec(contentType);
   if (!media) throw new Error('INVALID_XML');
   const type = `${media[1]}/${media[2]}`.toLowerCase();
@@ -66,7 +79,7 @@ function xmlMimeEncoding(contentType: string | undefined): string | undefined {
 }
 
 function decodeXml(buffer: Buffer, contentType?: string): string {
-  const external = xmlMimeEncoding(contentType);
+  const external = xmlMimeEncoding(contentType, buffer);
   const starts = (...bytes: number[]) => bytes.every((byte, index) => buffer[index] === byte);
   // Recognize unsupported UCS-4 signatures before their UTF-16 prefixes.
   if (starts(0, 0, 0xfe, 0xff) || starts(0xff, 0xfe, 0, 0) ||
