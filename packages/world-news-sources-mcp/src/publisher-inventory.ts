@@ -41,7 +41,7 @@ function knownBrand(name: string, domain: string) {
   const label = normalizedName(name);
   // Aliases identify a newsroom/brand, never a corporate ownership group.
   if (['bbc.com', 'bbc.co.uk', 'bbci.co.uk'].includes(domain) && /^bbc(?:\s|$)/.test(label)) return 'bbc';
-  if (domain === 'nhk.or.jp' && /^nhk(?:\s|$)/.test(label)) return 'nhk';
+  if (['nhk.or.jp', 'web.nhk'].includes(domain) && /^nhk(?:\s|$)/.test(label)) return 'nhk';
   if (domain === 'donga.com' && /^(?:donga ilbo|dong-a ilbo|동아일보)(?:\s|$)/.test(label)) return 'dong-a-ilbo';
   if (domain === 'nytimes.com' && /^(?:the new york times|new york times|nyt)(?:\s|$)/.test(label)) return 'new-york-times';
   return null;

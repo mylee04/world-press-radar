@@ -29,6 +29,13 @@ test('real NYT, Donga and NHK section/legacy endpoint registrations each count o
   }
 });
 
+test('NHK current brand-domain headlines and legacy feeds remain one publisher without merging unrelated namesakes', () => {
+  const nhk = [source('NHK News Headlines', ['https://news.web.nhk/n-data/conf/na/rss/cat0.xml'], true, 'JP'),
+    source('NHK News Web (Japanese legacy category 1)', ['https://www3.nhk.or.jp/rss/news/cat1.xml'], true, 'JP')];
+  assert.equal(estimatePublisherInventory(nhk).unique_publishers, 1);
+  assert.equal(estimatePublisherInventory([...nhk, source('NHK unrelated namesake', ['https://other.example/feed'], true, 'JP')]).unique_publishers, 2);
+});
+
 test('Yahoo and Feedburner hosting do not turn separate newspapers into one publisher', () => {
   const yahoo = [source('Kyodo News', ['https://news.yahoo.co.jp/rss/media/kyodonews/all.xml']),
     source('Nikkan Kogyo', ['https://news.yahoo.co.jp/rss/media/nkogyo/all.xml']),
