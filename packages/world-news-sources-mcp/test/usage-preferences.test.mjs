@@ -8,7 +8,11 @@ import { ActivityStore } from '../dist/activity.js';
 
 async function withServer(preferences, run) {
   const catalog = normalizeRegistry({ countries: [{ code: 'US', name: 'United States', feeds: [{ name: 'Example', url: 'https://example.test/feed' }] }] });
-  const server = createServer(catalog, new HealthStore(), new ActivityStore(), { version: 1, reviewed_at: '2026-10-23', packs: [] }, preferences);
+  const endpoint = catalog.sources[0].endpoints[0];
+  const health = new HealthStore({ version: 1, observations: [{ endpointId: endpoint.id, type: endpoint.type, url: endpoint.url,
+    checkedAt: new Date(Date.now() - 1000).toISOString(), outcome: 'healthy', httpStatus: 200, reason: null,
+    format: 'rss', auditStatus: 'working_nonempty', entryCount: 1, entriesWithUrl: 1 }] });
+  const server = createServer(catalog, health, new ActivityStore(), { version: 1, reviewed_at: '2026-10-23', packs: [] }, preferences);
   const client = new Client({ name: 'usage-preference-test', version: '1' });
   const [clientTransport, serverTransport] = InMemoryTransport.createLinkedPair();
   try {
@@ -29,6 +33,8 @@ test('usage preference tool has explicit mutation annotations and passes SDK met
     assert.notEqual(off.isError, true); assert.equal(off.structuredContent.applied, true); assert.equal(off.structuredContent.enabled, false);
     assert.equal(calls[0].meta['test/identity'], rawMeta['test/identity']); assert.equal(calls[0].enabled, false);
     assert.ok(!JSON.stringify(off).includes(rawMeta['test/identity']));
+    const whileDisabled = await client.callTool({ name: 'search_sources', arguments: { country: 'US' } });
+    assert.equal(whileDisabled.structuredContent.total, 1);
     const on = await client.callTool({ name: tool.name, arguments: { enabled: true }, _meta: rawMeta });
     assert.equal(on.structuredContent.enabled, true); assert.equal(on.structuredContent.identity_available, true);
     const search = await client.callTool({ name: 'search_sources', arguments: { country: 'US' } });

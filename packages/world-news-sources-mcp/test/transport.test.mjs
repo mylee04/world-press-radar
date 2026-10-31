@@ -19,7 +19,7 @@ test('SDK client initializes real stdio server and exercises current registry to
     assert.equal(countries.structuredContent.configured_rows,expectedRows);
     assert.equal(countries.structuredContent.total,new Set(registry.countries.map(country=>country.code.toUpperCase())).size);
     assert.equal(countries.structuredContent.items.length,2);
-    const found=await client.callTool({name:'search_sources',arguments:{country:'GB',endpoint_type:'rss',limit:1}});
+    const found=await client.callTool({name:'search_sources',arguments:{country:'GB',endpoint_type:'rss',include:'all',limit:1}});
     const source=found.structuredContent.items[0];assert.ok(source);
     const detail=await client.callTool({name:'get_source',arguments:{source_id:source.id}});
     assert.equal(detail.structuredContent.id,source.id);
