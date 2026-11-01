@@ -243,3 +243,51 @@ test('public starter list hides excluded and unregistered addresses while explic
   assert.equal((await invoke('/source-packs?include=all&include=usable')).status, 400);
   assert.equal((await invoke('/source-packs?include=failed')).status, 400);
 });
+
+test('repeated searches and pack resolution reevaluate the 36-hour boundary with warm bindings', () => {
+  const f = fixture(), at = Date.parse('2026-10-17T22:00:00Z');
+  const search = now => searchCuratedSources(f.catalog, { query: 'Paper', enabled: true }, f.document, f.health, f.activity, now);
+  const first = search(at);
+  assert.equal(first.total, 1);
+  assert.deepEqual(search(at), first);
+  assert.equal(resolveSourcePacks(f.catalog, f.health, f.activity, f.document, at).packs[0].summary.default_export_endpoints, 2);
+  const expired = search(at + 1);
+  assert.equal(expired.total, 0);
+  assert.equal(expired.selection.excluded_endpoint_reasons.observation_older_than_36_hours, 2);
+  assert.equal(resolveSourcePacks(f.catalog, f.health, f.activity, f.document, at + 1).packs[0].summary.default_export_endpoints, 0);
+});
+
+test('warm catalog bindings read mutated and replaced curation documents without retaining selectors', () => {
+  const f = fixture(), search = document => searchCuratedSources(f.catalog, { pack_id: 'test-pack', query: 'Paper', enabled: true, include: 'all' }, document, f.health, f.activity, NOW);
+  assert.equal(search(f.document).total, 1);
+  f.document.packs[0].country = 'JP';
+  assert.equal(search(f.document).total, 0);
+  assert.equal(resolveSourcePacks(f.catalog, f.health, f.activity, f.document, NOW).packs[0].summary.enabled_endpoints, 0);
+  const replacement = structuredClone(f.document);
+  replacement.packs[0].country = 'US';
+  replacement.packs[0].entries[0].endpoints = replacement.packs[0].entries[0].endpoints.filter(endpoint => endpoint.type === 'sitemap');
+  assert.deepEqual(search(replacement).items[0].endpoints.map(endpoint => endpoint.url), [SITEMAP]);
+  assert.equal(search(f.document).total, 0);
+});
+
+test('warm binding lookups preserve order and follow distinct, replaced and mutated catalogs', () => {
+  const f = fixture(), search = catalog => searchCuratedSources(catalog, { pack_id: 'test-pack', query: 'Paper', enabled: true, include: 'all' }, f.document, f.health, f.activity, NOW);
+  assert.equal(search(f.catalog).total, 1);
+  const other = normalizeRegistry({ countries: [{ code: 'US', name: 'United States', feeds: [{ name: 'Unrelated', url: EMPTY }] }] });
+  assert.equal(search(other).total, 0);
+  const original = f.catalog.sources;
+  f.catalog.sources = other.sources;
+  assert.equal(search(f.catalog).total, 0);
+  f.catalog.sources = original;
+  assert.equal(search(f.catalog).total, 1);
+  f.paper.countryCode = 'JP';
+  assert.equal(search(f.catalog).total, 0);
+  f.paper.countryCode = 'US';
+  f.catalog.sources.reverse();
+  f.paper.endpoints.reverse();
+  const resolved = resolveSourcePacks(f.catalog, f.health, f.activity, f.document, NOW);
+  assert.deepEqual(resolved.packs[0].entries[0].sources.map(source => source.name), ['Paper', 'Disabled shared feed']);
+  assert.deepEqual(search(f.catalog).items[0].endpoints.map(endpoint => endpoint.url), [SITEMAP, FEED]);
+  f.paper.endpoints.splice(0, 1);
+  assert.deepEqual(search(f.catalog).items[0].endpoints.map(endpoint => endpoint.url), [FEED]);
+});

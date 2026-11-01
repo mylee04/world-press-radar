@@ -104,6 +104,20 @@ test('timezone boundaries account for DST, fractional offsets; rolling 24h is se
   assert.throws(()=>store.query(catalog,'source',{...q,mode:'rolling_24h',start_date:'2026-10-01'},Date.parse(now)));
   assert.equal(Date.parse(store.query(catalog,'source',{...q,mode:'rolling_24h'},Date.parse(now)).items[0].to_exclusive)-Date.parse(store.query(catalog,'source',{...q,mode:'rolling_24h'},Date.parse(now)).items[0].from),86400000);
 });
+test('repeated calendar queries preserve timezone boundaries and moving rolling windows',()=>{
+  const store=new ActivityStore(), input={source_id:source('A').id,start_date:'2026-11-01',end_date:'2026-11-01'};
+  const at=Date.parse('2026-11-03T12:00:00Z');
+  const query=timezone=>store.query(catalog,'source',{...input,timezone},at).items[0];
+  const utc=query('UTC'), chicago=query('America/Chicago'), kathmandu=query('Asia/Kathmandu');
+  assert.equal(chicago.from,'2026-11-01T05:00:00.000Z');
+  assert.equal(chicago.to_exclusive,'2026-11-02T06:00:00.000Z');
+  assert.equal(kathmandu.from,'2026-10-31T18:15:00.000Z');
+  assert.equal(kathmandu.to_exclusive,'2026-11-01T18:15:00.000Z');
+  assert.deepEqual(query('UTC'),utc);assert.deepEqual(query('America/Chicago'),chicago);assert.deepEqual(query('Asia/Kathmandu'),kathmandu);
+  const rolling=at=>store.query(catalog,'source',{source_id:source('A').id,mode:'rolling_24h'},at).items[0];
+  assert.equal(Date.parse(rolling(at+3600000).from)-Date.parse(rolling(at).from),3600000);
+  assert.equal(Date.parse(rolling(at+3600000).to_exclusive)-Date.parse(rolling(at).to_exclusive),3600000);
+});
 test('daily full-pass cadence uses calendar due dates; retries share a durable bounded request budget',()=>{
   sequence=0;const {ledger,cleanup}=setup();try{
     visit(ledger,'A',0,[],'valid_empty');
@@ -128,6 +142,9 @@ test('daily scheduling exports measured exceptions without treating deferrals as
     assert.equal(measured.collection_schedule.active_endpoints,3);assert.equal(measured.collection_schedule.already_checked_today_endpoints,1);
     assert.equal(measured.collection_schedule.deferred_endpoints,1);assert.equal(measured.collection_schedule.cycle_status,'completed');
     assert.equal(measured.collection_schedule.unattempted_deferred_endpoints,1);assert.equal(measured.collection_schedule.unattempted_unrestricted_endpoints,0);
+    const early=store.query(catalog,'country',{country:'US',start_date:'2026-10-01',end_date:'2026-10-01'},Date.parse('2026-10-01T14:30:00Z')).items[0];
+    assert.equal(early.collection_schedule,null);
+    assert.deepEqual(query().collection_schedule,measured.collection_schedule);
     assert.equal(countryCollectionSchedule([cycle],'US',Date.parse('2026-10-01'),Date.parse('2026-10-02'),Date.parse(now),4),null);
     const limited=new ActivityStore({...snapshot,collection_cycles:[{...cycle,status:'partial',eligible_endpoint_ids:[a,ca],planned_endpoint_ids:[ca],attempted_endpoint_ids:[ca],successful_article_endpoint_ids:[ca],failure_reason:'PLANNED_ENDPOINT_LIMIT'}]});
     const left=limited.query(catalog,'country',{country:'US',start_date:'2026-10-01',end_date:'2026-10-01'},Date.parse(now)).items[0].collection_schedule;

@@ -1,30 +1,50 @@
 import { z } from 'zod';
 import { page, pagination, type Catalog } from './catalog.js';
 import {readHistory,historyMonths,validateHistory,type HistoryManifest} from './activity-history.js';
-import {summarizeCollectionCycle,type CollectionCycleEvidence} from './quality-history.js';
+import {summarizeCollectionCycle,type CollectionCycleEvidence,type CollectionCycleSummary} from './quality-history.js';
+
+const calendarFormatters = new Map<string, Intl.DateTimeFormat>();
+const dayBoundaries = new Map<string, number>();
+function calendarFormatter(zone: string) {
+  let formatter = calendarFormatters.get(zone);
+  if (!formatter) {
+    formatter = new Intl.DateTimeFormat('en', { timeZone: zone, year: 'numeric', month: '2-digit', day: '2-digit' });
+    if (calendarFormatters.size >= 32) calendarFormatters.delete(calendarFormatters.keys().next().value!);
+    calendarFormatters.set(zone, formatter);
+  }
+  return formatter;
+}
 
 const day = z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine(value => { const at = Date.parse(value); return Number.isFinite(at) && new Date(at).toISOString().slice(0, 10) === value; }, 'Invalid date');
-const timezone = z.string().max(100).default('UTC').refine(value => { try { new Intl.DateTimeFormat('en', { timeZone: value }); return true; } catch { return false; } }, 'Invalid IANA timezone');
+const timezone = z.string().max(100).default('UTC').refine(value => { try { calendarFormatter(value); return true; } catch { return false; } }, 'Invalid IANA timezone');
 const activityFields = { mode: z.enum(['calendar_days', 'rolling_24h']).default('calendar_days'), start_date: day.optional(), end_date: day.optional(), timezone, ...pagination };
 export const sourceActivitySchema = z.object({ source_id: z.string().regex(/^src_[a-f0-9]{24}$/), ...activityFields }).strict();
 export const countryActivitySchema = z.object({ country: z.string().min(2).max(8), ...activityFields }).strict();
 export const inventorySchema = z.object({ country: z.string().min(2).max(8).optional(), include_disabled: z.boolean().default(false), ...pagination }).strict();
 export type ActivitySnapshot = { version: number; lane: string; generated_at: string; tracking_start: string | null; available_since: string; registry_at: string | null; semantics: string; bindings: Array<Record<string, unknown>>; collections: Array<Record<string, any>>; collection_cycles?: CollectionCycleEvidence[]; history?: HistoryManifest; scope_latest?: {source:Record<string,string>;country:Record<string,string>}; scope_starts?: { source: Record<string,string>; country: Record<string,string> }; snapshot_coverage?: Record<string,unknown> };
 export function localDate(at: number, zone: string) {
-  const parts = new Intl.DateTimeFormat('en', { timeZone: zone, year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(at);
+  const parts = calendarFormatter(zone).formatToParts(at);
   const get = (key: string) => parts.find(p => p.type === key)!.value;
   return `${get('year')}-${get('month')}-${get('day')}`;
 }
 // Locate a local calendar boundary rather than assuming every day has 24 hours.
 export function dayBoundary(date: string, zone: string) {
+  const key = JSON.stringify([date, zone]), cached = dayBoundaries.get(key);
+  if (cached !== undefined) return cached;
   const nominal = Date.parse(date); let low = nominal - 36 * 3600000, high = nominal + 36 * 3600000;
   while (low < high) { const mid = Math.floor((low + high) / 2); if (localDate(mid, zone) < date) low = mid + 1; else high = mid; }
+  // Calendar boundaries are fixed for this process's timezone data. Retention is bounded.
+  if (dayBoundaries.size >= 512) dayBoundaries.delete(dayBoundaries.keys().next().value!);
+  dayBoundaries.set(key, low);
   return low;
 }
 const nextDay = (value: string) => new Date(Date.parse(value) + 86400000).toISOString().slice(0, 10);
 /** Scheduling evidence belongs to its measured UTC day, never to the snapshot export date. */
 export function countryCollectionSchedule(cycles: CollectionCycleEvidence[], country: string, from: number, to: number, now: number, expectedEndpoints?: number) {
-  const selected = cycles.map(summarizeCollectionCycle).filter(cycle => {
+  return collectionScheduleFromSummaries(cycles.map(summarizeCollectionCycle), country, from, to, now, expectedEndpoints);
+}
+function collectionScheduleFromSummaries(cycles: CollectionCycleSummary[], country: string, from: number, to: number, now: number, expectedEndpoints?: number) {
+  const selected = cycles.filter(cycle => {
     const scheduling = cycle.scheduling;
     const started = Date.parse(cycle.started_at), observed = scheduling ? Date.parse(scheduling.as_of) : NaN;
     // A cycle crossing midnight cannot certify a single day's scheduling counts.
@@ -41,10 +61,12 @@ export function countryCollectionSchedule(cycles: CollectionCycleEvidence[], cou
     semantics: 'Scheduling counts describe this recorded run. Attempt coverage remains the actual daily attempted/current active endpoint ratio; server deferrals never count as successful checks.' };
 }
 export class ActivityStore {
+  private readonly collectionCycles: CollectionCycleSummary[];
   constructor(readonly snapshot?: ActivitySnapshot, readonly historyDirectory?:string) {
     if (snapshot && (snapshot.version !== 1 || snapshot.lane !== 'production' || !Array.isArray(snapshot.bindings) || !Array.isArray(snapshot.collections))) throw new Error('Invalid production activity snapshot');
     if(snapshot?.history)validateHistory(snapshot.history);
-    if(snapshot?.collection_cycles)for(const cycle of snapshot.collection_cycles)summarizeCollectionCycle(cycle);
+    // A loaded store uses an immutable snapshot. Reuse the summaries already validated here.
+    this.collectionCycles = (snapshot?.collection_cycles ?? []).map(summarizeCollectionCycle);
   }
   query(catalog: Catalog, kind: 'source' | 'country', raw: unknown, now = Date.now()) {
     const input = kind === 'source' ? sourceActivitySchema.parse(raw) : countryActivitySchema.parse(raw);
@@ -63,9 +85,13 @@ export class ActivityStore {
       if (input.start_date || input.end_date) throw new Error('rolling_24h does not accept calendar dates');
       ranges = [{ label: 'rolling_24h', from: now - 86400000, to: now }];
     } else {
-      const end = input.end_date ?? localDate(now, input.timezone), start = input.start_date ?? end;
-      if (start > end || Date.parse(end) - Date.parse(start) > 30 * 86400000 || end > localDate(now, input.timezone)) throw new Error('Date range must be past/present and at most 31 days');
-      for (let date = start; date <= end; date = nextDay(date)) ranges.push({ label: date, from: dayBoundary(date, input.timezone), to: dayBoundary(nextDay(date), input.timezone) });
+      const today = localDate(now, input.timezone), end = input.end_date ?? today, start = input.start_date ?? end;
+      if (start > end || Date.parse(end) - Date.parse(start) > 30 * 86400000 || end > today) throw new Error('Date range must be past/present and at most 31 days');
+      let from = dayBoundary(start, input.timezone);
+      for (let date = start; date <= end; date = nextDay(date)) {
+        const to = dayBoundary(nextDay(date), input.timezone);
+        ranges.push({ label: date, from, to }); from = to;
+      }
     }
     if(snapshot?.history){
       if(!this.historyDirectory)throw Error('ACTIVITY_HISTORY_NOT_CONFIGURED');
@@ -73,8 +99,9 @@ export class ActivityStore {
       recordsAll=snapshot.history.shards.filter(s=>needed.has(s.month)).flatMap(s=>readHistory(this.historyDirectory!,s,{kind,scope,from:ranges[0].from,to:ranges.at(-1)!.to}));
     }
     const events=recordsAll.filter(e=>kind==='source'?e.source_ids.includes(scope):e.countries.includes(scope));
+    const eventTimes=events.map(record=>({record,at:Date.parse(record.checked_at)}));
     const periods = ranges.map(range => {
-      const records = events.filter(e => Date.parse(e.checked_at) >= range.from && Date.parse(e.checked_at) < range.to);
+      const records = eventTimes.filter(e => e.at >= range.from && e.at < range.to).map(e => e.record);
       const successful = records.filter(e => ['working_nonempty', 'valid_empty'].includes(e.status) && e.format !== 'sitemapindex');
       const targeted = new Set(records.map(e => e.endpoint_id));
       const successIds = new Set(successful.map(e => e.endpoint_id));
@@ -87,7 +114,7 @@ export class ActivityStore {
         failed_checks: records.filter(e => !['working_nonempty', 'valid_empty'].includes(e.status)).length,
         index_only_checks: records.filter(e => e.format === 'sitemapindex').length,
         collection_schedule: kind === 'country' && input.mode === 'calendar_days' && input.timezone === 'UTC'
-          && !beforeTracking && !unavailable ? countryCollectionSchedule(snapshot?.collection_cycles ?? [], scope, range.from, range.to, now, expected.size) : null,
+          && !beforeTracking && !unavailable ? collectionScheduleFromSummaries(this.collectionCycles, scope, range.from, range.to, now, expected.size) : null,
         uncertain_url_observations: successful.reduce((total, e) => total + e.uncertain_urls, 0),
         baseline_checks: successful.filter(e => e.baseline_sources.some((id: string) => sourceIds.has(id))).length };
     });

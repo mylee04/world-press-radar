@@ -47,6 +47,46 @@ export const sourceSelectionPolicy = { default: 'usable', maximum_observation_ag
   requires_observed_article_urls: true, missing_content_dates: 'explicitly_unknown_not_certified_fresh', includes_only_registered_bindings: true } as const;
 type StatusEvidence = ReturnType<typeof describeEndpointStatus>;
 type ResolvedEndpoint = { endpoint_id: string; type: 'rss' | 'sitemap'; url: string; enabled: boolean; evidence: z.infer<typeof evidenceSchema>[]; status_evidence: StatusEvidence; default_export_eligible: boolean; exclusion_reason: string | null };
+type SourceBinding = { source: Source; order: number; country: string; endpoints: Source['endpoints']; values: ReadonlyArray<readonly [Source['endpoints'][number], string, string, string]> };
+type CatalogLookup = { sources: Source[]; bindings: SourceBinding[]; byEndpoint: Map<string, Source[]>; byCountry: Map<string, Map<string, SourceBinding[]>> };
+const catalogLookups = new WeakMap<Catalog, CatalogLookup>();
+const typedUrl = (type: 'rss' | 'sitemap', url: string) => `${type}:${url}`;
+function sourceLookup(catalog: Catalog): CatalogLookup {
+  const cached = catalogLookups.get(catalog);
+  // Only binding topology is cached. Source metadata, observations and all
+  // time-dependent eligibility are read again for every request.
+  if (cached?.sources === catalog.sources && cached.bindings.length === catalog.sources.length && cached.bindings.every((binding, index) => {
+    const source = catalog.sources[index];
+    return binding.source === source && binding.country === source.countryCode && binding.endpoints === source.endpoints && binding.values.length === source.endpoints.length
+      && binding.values.every(([endpoint, id, type, url], endpointIndex) => endpoint === source.endpoints[endpointIndex] && endpoint.id === id && endpoint.type === type && endpoint.url === url);
+  })) return cached;
+  const lookup: CatalogLookup = { sources: catalog.sources, bindings: [], byEndpoint: new Map(), byCountry: new Map() };
+  for (const [order, source] of catalog.sources.entries()) {
+    const binding: SourceBinding = { source, order, country: source.countryCode, endpoints: source.endpoints,
+      values: source.endpoints.map(endpoint => [endpoint, endpoint.id, endpoint.type, endpoint.url] as const) };
+    lookup.bindings.push(binding);
+    const country = lookup.byCountry.get(source.countryCode) ?? new Map<string, SourceBinding[]>();
+    lookup.byCountry.set(source.countryCode, country);
+    for (const endpoint of source.endpoints) {
+      const sources = lookup.byEndpoint.get(endpoint.id) ?? [];
+      sources.push(source); lookup.byEndpoint.set(endpoint.id, sources);
+      const key = typedUrl(endpoint.type, endpoint.url), sourcesForUrl = country.get(key) ?? [];
+      sourcesForUrl.push(binding); country.set(key, sourcesForUrl);
+    }
+  }
+  catalogLookups.set(catalog, lookup);
+  return lookup;
+}
+function entryBindings(lookup: CatalogLookup, country: string, entry: SourcePackDocument['packs'][number]['entries'][number]) {
+  const selected = new Map<string, typeof entry.endpoints[number]>();
+  for (const endpoint of entry.endpoints) {
+    const key = typedUrl(endpoint.type, canonicalUrl(endpoint.url));
+    if (!selected.has(key)) selected.set(key, endpoint);
+  }
+  const matched = new Map<number, SourceBinding>(), bindings = lookup.byCountry.get(country);
+  for (const key of selected.keys()) for (const binding of bindings?.get(key) ?? []) matched.set(binding.order, binding);
+  return { selected, sources: [...matched.values()].sort((a, b) => a.order - b.order).map(binding => binding.source) };
+}
 export function sourceEndpointExclusionReason(endpoint: Pick<ResolvedEndpoint, 'enabled' | 'status_evidence'>, now: number) {
   const status = endpoint.status_evidence;
   const time = status.observed_at ? Date.parse(status.observed_at) : NaN;
@@ -61,15 +101,15 @@ export function sourceEndpointExclusionReason(endpoint: Pick<ResolvedEndpoint, '
 }
 
 export function resolveSourcePacks(catalog: Catalog, health: HealthStore, activity: ActivityStore, document = loadSourcePacks(), now = Date.now()) {
-  const byEndpoint = new Map<string, Source[]>();
-  for (const source of catalog.sources) for (const endpoint of source.endpoints) byEndpoint.set(endpoint.id, [...(byEndpoint.get(endpoint.id) ?? []), source]);
+  const lookup = sourceLookup(catalog), byEndpoint = lookup.byEndpoint;
   const result = document.packs.map(pack => {
     const unique = new Map<string, ResolvedEndpoint>();
     const entries = pack.entries.map(entry => {
-      const sources = catalog.sources.filter(source => source.countryCode === pack.country && source.endpoints.some(endpoint => entry.endpoints.some(selected => selected.type === endpoint.type && canonicalUrl(selected.url) === endpoint.url)))
+      const selection = entryBindings(lookup, pack.country, entry);
+      const sources = selection.sources
         .map(source => ({ source_id: source.id, name: source.name, enabled: source.enabled,
           endpoints: source.endpoints.flatMap(endpoint => {
-            const selected = entry.endpoints.find(value => value.type === endpoint.type && canonicalUrl(value.url) === endpoint.url);
+            const selected = selection.selected.get(typedUrl(endpoint.type, endpoint.url));
             if (!selected) return [];
             const value: ResolvedEndpoint = { endpoint_id: endpoint.id, type: endpoint.type, url: endpoint.url, enabled: source.enabled,
               evidence: selected.evidence, status_evidence: describeEndpointStatus(endpoint, byEndpoint.get(endpoint.id) ?? [source], health, activity, now), default_export_eligible: false, exclusion_reason: null };
@@ -184,12 +224,13 @@ export function searchCuratedSources(catalog: Catalog, raw: unknown, document = 
   if (input.pack_id && !document.packs.some(pack => pack.id === input.pack_id)) throw Error('UNKNOWN_SOURCE_PACK');
   const wantedLanguage = input.language ? normalized(input.language) : null, wantedCategory = input.category ? normalized(input.category) : null;
   const matches = new Map<string, Array<{ pack_id: string; entry: SourcePackDocument['packs'][number]['entries'][number]; endpoint_ids: string[] }>>();
-  const sourcesByEndpoint = new Map<string, Source[]>();
-  for (const source of catalog.sources) for (const endpoint of source.endpoints) sourcesByEndpoint.set(endpoint.id, [...(sourcesByEndpoint.get(endpoint.id) ?? []), source]);
-  for (const pack of document.packs) for (const entry of pack.entries) for (const source of catalog.sources) {
-    if (source.countryCode !== pack.country) continue;
-    const endpoint_ids = source.endpoints.filter(endpoint => entry.endpoints.some(item => item.type === endpoint.type && canonicalUrl(item.url) === endpoint.url)).map(endpoint => endpoint.id);
-    if (endpoint_ids.length) matches.set(source.id, [...(matches.get(source.id) ?? []), { pack_id: pack.id, entry, endpoint_ids }]);
+  const lookup = sourceLookup(catalog), sourcesByEndpoint = lookup.byEndpoint;
+  for (const pack of document.packs) for (const entry of pack.entries) {
+    const selection = entryBindings(lookup, pack.country, entry);
+    for (const source of selection.sources) {
+      const endpoint_ids = source.endpoints.filter(endpoint => selection.selected.has(typedUrl(endpoint.type, endpoint.url))).map(endpoint => endpoint.id);
+      if (endpoint_ids.length) matches.set(source.id, [...(matches.get(source.id) ?? []), { pack_id: pack.id, entry, endpoint_ids }]);
+    }
   }
   const statusCache = new Map<string, StatusEvidence>(), matchedEndpoints = new Map<string, { eligible: boolean; enabled: boolean; reason: string | null }>(), returnedEndpointIds = new Set<string>();
   let matchedRegistrations = 0;
