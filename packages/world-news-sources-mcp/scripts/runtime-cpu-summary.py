@@ -150,6 +150,7 @@ def main():
     parser.add_argument('--dry-run', action='store_true', help='Read and format without saving or sending')
     args = parser.parse_args()
     today = datetime.now(timezone.utc).date()
+    cutoff = (today - timedelta(days=30)).isoformat()
     day = date.fromisoformat(args.day) if args.day else today - timedelta(days=1)
     if not today - timedelta(days=30) <= day < today:
         raise ValueError('closed_utc_day_required')
@@ -188,13 +189,13 @@ def main():
             raise ValueError('runtime_cpu_message_too_long')
         if report['state'] != 'unavailable':
             history['days'][day.isoformat()] = report
-            history['days'] = dict(sorted(history['days'].items())[-30:])
-            notify.save(history_path, history)
+        history['days'] = {key: value for key, value in sorted(history['days'].items()) if cutoff <= key < today.isoformat()}
+        notify.save(history_path, history)
         notify.save(directory / 'latest.json', report)
         # Save intent before sending. An ambiguous timeout must not send a second copy.
         state['days'][day.isoformat()] = {'status': 'delivery_intent', 'at': datetime.now(timezone.utc).isoformat(),
             'message_sha256': hashlib.sha256(text.encode()).hexdigest()}
-        state['days'] = dict(sorted(state['days'].items())[-30:])
+        state['days'] = {key: value for key, value in sorted(state['days'].items()) if cutoff <= key < today.isoformat()}
         notify.save(state_path, state)
         sent = notify.telegram(credentials, 'sendMessage', {'chat_id': credentials['chat_id'], 'text': text,
             'link_preview_options': {'is_disabled': True}})

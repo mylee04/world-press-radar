@@ -111,7 +111,7 @@ for fail in [False,True]:
         day=(helper.datetime.now(helper.timezone.utc).date()-helper.timedelta(days=1)).isoformat()
         observed=helper.parse_report(document(day=day),day)
         directory=base/'state/runtime-cpu-summary';directory.mkdir(parents=True)
-        old_days={(helper.date.fromisoformat(day)-helper.timedelta(days=i)).isoformat():{'state':'unobserved','day':(helper.date.fromisoformat(day)-helper.timedelta(days=i)).isoformat(),'rows':[]} for i in range(1,35)}
+        old_days={(helper.date.fromisoformat(day)-helper.timedelta(days=i)).isoformat():{'state':'unobserved','day':(helper.date.fromisoformat(day)-helper.timedelta(days=i)).isoformat(),'rows':[]} for i in list(range(1,15))+list(range(60,76))}
         (directory/'history.json').write_text(json.dumps({'days':old_days}))
         with patch.object(helper.sys,'argv',['summary','--base',str(base),'--credentials',str(cred),'--usage-credentials',str(usage)]),patch.object(helper,'fetch_report',return_value=observed),redirect_stdout(io.StringIO()):
             try:helper.main()
@@ -121,7 +121,7 @@ for fail in [False,True]:
         out.append({'sends':int((base/'counter').read_text()),'delivery':delivery['status'],'history_days':len(json.loads((directory/'history.json').read_text())['days'])})
 print(json.dumps(out))
 `);
-  assert.deepEqual(result,[{sends:1,delivery:'delivered',history_days:30},{sends:1,delivery:'delivery_intent',history_days:30}]);
+  assert.deepEqual(result,[{sends:1,delivery:'delivered',history_days:15},{sends:1,delivery:'delivery_intent',history_days:15}]);
 });
 
 test('activation guard skips earlier closed days before reading credentials, state or network',()=>{
