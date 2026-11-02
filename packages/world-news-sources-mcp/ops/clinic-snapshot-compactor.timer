@@ -1,0 +1,12 @@
+[Unit]
+Description=Periodically compact preserved Clinic HTML snapshots while collection is idle
+
+[Timer]
+OnBootSec=2min
+OnUnitInactiveSec=2min
+RandomizedDelaySec=30s
+AccuracySec=15s
+Unit=clinic-snapshot-compactor.service
+
+[Install]
+WantedBy=timers.target

@@ -112,10 +112,39 @@ with tempfile.TemporaryDirectory(prefix="wns-daily-storage-") as directory:
     def check(before, after):
         (storage / "activity-before-latest.json").write_text(json.dumps(before))
         (storage / "activity-after-latest.json").write_text(json.dumps(after))
-        return helper.matched_growth(base, report, lambda p: json.loads(p.read_text()))
+        return helper.matched_storage(base, report, lambda p: json.loads(p.read_text()))['growth_bytes']
     print(json.dumps([check(first, last), check({**first, "observed_at": "2026-10-22T03:01:00Z"}, last), check(first, {**last, "ledger_identity": {"inode": 2}}), check(first, {**last, "observed_at": "2026-10-24T03:44:00Z"})]))
 `);
   assert.deepEqual(result, [40, null, null, null]);
+});
+
+test('reports shared net disk decline from the matching completed sample, separating its daily window from cycle growth', () => {
+  const result = run(String.raw`
+with tempfile.TemporaryDirectory(prefix="wns-shared-disk-") as directory:
+    base = pathlib.Path(directory); storage = base / "state/storage-budget"; storage.mkdir(parents=True)
+    report = {"day": "2026-10-23", "state": "complete", "cycle_status": "completed", "service_started_at": "2026-10-23T03:00:24Z", "finished_at": "2026-10-23T03:43:00Z", "ledger_bytes": 4 * 1024**3, "free_bytes": 92 * 1024**3}
+    first = {"phase": "before", "mode": "activity", "ledger_identity": {"inode": 1}, "observed_at": "2026-10-23T03:01:00Z", "ledger_bytes": 100}
+    last = {**first, "report_version": 1, "phase": "after", "observed_at": "2026-10-23T03:44:00Z", "ledger_bytes": 140, "filesystem_sample_status": "measured", "filesystem_measured_daily_decline_bytes": 2576980378, "filesystem_sample_elapsed_hours": 23.8}
+    def check(after, selected=report):
+        (storage / "activity-before-latest.json").write_text(json.dumps(first))
+        (storage / "activity-after-latest.json").write_text(json.dumps(after))
+        return helper.matched_storage(base, selected, lambda p: json.loads(p.read_text()))
+    valid = check(last)
+    invalid = [check({**last, **patch})['shared_filesystem_decline'] for patch in [
+        {"filesystem_sample_status": "no_previous_sample"}, {"filesystem_sample_elapsed_hours": 1},
+        {"filesystem_sample_elapsed_hours": float('inf')}, {"filesystem_measured_daily_decline_bytes": -1},
+        {"filesystem_measured_daily_decline_bytes": True}, {"ledger_identity": {"inode": 2}},
+        {"observed_at": "2026-10-24T03:44:00Z"}]]
+    invalid += [check(last, {**report, "state": "running"})['shared_filesystem_decline'], check(last, {**report, "cycle_status": "failed"})['shared_filesystem_decline']]
+    print(json.dumps({"valid": valid, "invalid": invalid, "message": helper.message({**report, **valid}), "unknown": helper.message({**report, "shared_filesystem_decline": None})}))
+`);
+  assert.equal(result.valid.growth_bytes, 40);
+  assert.deepEqual(result.valid.shared_filesystem_decline, { daily_bytes: 2576980378, sample_hours: 23.8 });
+  assert.deepEqual(result.invalid, Array(9).fill(null));
+  assert.match(result.message, /이번 회차 \+0\.0 MiB/);
+  assert.match(result.message, /공용 디스크 순감소 일환산 2\.40 GiB \(23\.8시간 표본·전체 프로젝트\/정리 포함\)/);
+  assert.match(result.unknown, /공용 디스크 순감소: 유효한 일간 표본 미확인/);
+  assert.ok(result.message.length < 3900);
 });
 
 test('renders honest progress and failure states and distinguishes missing discoveries from a confirmed zero', () => {

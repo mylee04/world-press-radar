@@ -1,0 +1,18 @@
+[Unit]
+Description=Compact preserved Clinic HTML snapshots in short idle batches
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/clinic-snapshot-compactor --apply
+StateDirectory=clinic-snapshot-compactor
+StateDirectoryMode=0700
+UMask=0077
+Nice=19
+IOSchedulingClass=idle
+CPUQuota=50%
+MemoryMax=128M
+TimeoutStartSec=45s
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/srv/clinic-signals-ru/data/opening-evidence/snapshots /srv/clinic-signals-ru/data/reviewed-openings/snapshots /srv/clinic-signals-ru/data/reviewed-contacts/snapshots /var/lib/clinic-snapshot-compactor

@@ -7,6 +7,7 @@ import argparse
 import fcntl
 import importlib.util
 import json
+import math
 import os
 from pathlib import Path
 import sqlite3
@@ -101,24 +102,34 @@ def build_report(base, expected, service, status, parse_start, now):
     return result
 
 
-def matched_growth(base, result, load):
+def matched_storage(base, result, load):
+    measured = {'growth_bytes': None, 'shared_filesystem_decline': None}
     paths = [base / 'state/storage-budget' / ('activity-' + phase + '-latest.json') for phase in ('before', 'after')]
     if not result.get('finished_at') or not all(p.exists() for p in paths):
-        return None
+        return measured
     first, last = [load(p) for p in paths]
     if (first.get('phase') == 'before' and last.get('phase') == 'after'
             and first.get('mode') == last.get('mode') == 'activity'
             and first.get('ledger_identity') == last.get('ledger_identity')
             and at(result['service_started_at']) <= at(first['observed_at']) <= at(result['finished_at']) <= at(last['observed_at'])
             and (at(last['observed_at']) - at(first['observed_at'])).total_seconds() <= 8 * 3600):
-        return last['ledger_bytes'] - first['ledger_bytes']
-    return None
+        measured['growth_bytes'] = last['ledger_bytes'] - first['ledger_bytes']
+        decline = last.get('filesystem_measured_daily_decline_bytes')
+        hours = last.get('filesystem_sample_elapsed_hours')
+        if (result.get('state') == 'complete' and result.get('cycle_status') in ('completed', 'partial')
+                and last.get('report_version') == 1 and last.get('filesystem_sample_status') == 'measured'
+                and type(decline) is int and decline >= 0 and type(hours) in (int, float)
+                and math.isfinite(hours) and hours >= 12):
+            measured['shared_filesystem_decline'] = {'daily_bytes': decline, 'sample_hours': hours}
+    return measured
 
 
 def public_status(result):
     import urllib.request
     try:
-        with urllib.request.urlopen('https://news.bymyleslee.com/health', timeout=15) as response:
+        request = urllib.request.Request('https://news.bymyleslee.com/health', headers={
+            'x-world-news-traffic': 'inspection', 'User-Agent': 'WorldNewsSources-DailySummary/1.0'})
+        with urllib.request.urlopen(request, timeout=15) as response:
             data = json.loads(response.read(65537))
         snapshot = data.get('article_activity', {}).get('snapshot_at')
         return '반영 확인' if result.get('finished_at') and snapshot and at(snapshot) >= at(result['finished_at']) else '이전 결과 또는 반영 대기'
@@ -333,7 +344,11 @@ def message(result):
     if 'ledger_bytes' in result:
         growth = result.get('growth_bytes')
         lines += [f"원장 {result['ledger_bytes'] / 1024**3:.2f} GiB" + (f" / 이번 회차 {growth / 1024**2:+.1f} MiB" if growth is not None else ' / 회차 증가량 미확인'),
-            f"공용 디스크 여유 {result['free_bytes'] / 1024**3:.1f} GiB", '공개 데이터: ' + result.get('public_status', '미확인')]
+            f"공용 디스크 여유 {result['free_bytes'] / 1024**3:.1f} GiB"]
+        shared = result.get('shared_filesystem_decline')
+        lines += [f"공용 디스크 순감소 일환산 {shared['daily_bytes'] / 1024**3:.2f} GiB ({shared['sample_hours']:.1f}시간 표본·전체 프로젝트/정리 포함)"
+            if shared is not None else '공용 디스크 순감소: 유효한 일간 표본 미확인',
+            '공개 데이터: ' + result.get('public_status', '미확인')]
     if result.get('usage'):
         lines += usage_lines(result['usage'])
     lines += ['https://news.bymyleslee.com/quality/']
@@ -369,7 +384,7 @@ def main():
         status = stage(service, expected, notify.started_at)
         try:
             result = build_report(args.base, expected, service, status, notify.started_at, now)
-            result['growth_bytes'] = matched_growth(args.base, result, notify.load)
+            result.update(matched_storage(args.base, result, notify.load))
             result['public_status'] = public_status(result)
         except Exception as error:
             result = {'day': expected.date().isoformat(), 'state': 'report_error', 'error_type': type(error).__name__}
