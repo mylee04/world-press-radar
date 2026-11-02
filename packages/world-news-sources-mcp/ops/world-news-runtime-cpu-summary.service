@@ -1,0 +1,20 @@
+[Unit]
+Description=Private supplemental application CPU daily observations
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 %h/.local/share/world-news-audit/bin/runtime-cpu-summary.py --base %h/.local/share/world-news-audit --credentials %d/telegram-notify --usage-credentials %d/metrics-report
+LoadCredential=telegram-notify:%h/.config/world-news-audit/telegram-notify.json
+LoadCredential=metrics-report:%h/.config/world-news-audit/metrics-report.json
+Environment=TZ=UTC
+UMask=0077
+Nice=15
+CPUQuota=20%
+MemoryMax=96M
+TimeoutStartSec=1min
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=%h/.local/share/world-news-audit/state

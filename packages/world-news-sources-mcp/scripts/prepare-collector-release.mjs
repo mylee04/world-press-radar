@@ -8,7 +8,7 @@ const fixed = ['package.json', 'package-lock.json', 'tsconfig.json'];
 const fixtureFiles = new Set(['expansion/registry-additions.json', 'expansion/verified-health-additions.json',
   'expansion/robots-policy.mjs', 'expansion/second-pass-live-before.json', 'expansion/first-pass-checkpoints.json',
   'expansion/remaining13/checkpoints.json', 'expansion/remaining13/targeted.json', 'expansion/remaining13/registry-additions.json',
-  'expansion/remaining13/verified-health-additions.json', 'expansion/remaining13/verified-existing-health.json', 'evaluation/cases.json']);
+  'expansion/remaining13/verified-health-additions.json', 'expansion/remaining13/verified-existing-health.json', 'evaluation/cases.json', 'metrics/migrations/0001-runtime-cpu.sql']);
 export const collectorCodePath = path => fixed.includes(path) || fixtureFiles.has(path) || path === 'curation/source-packs.json' || path === 'site/source-packs.js'
   || /^(?:src\/[A-Za-z0-9_-]+\.ts|dist\/[A-Za-z0-9_-]+\.(?:js|d\.ts)|scripts\/[A-Za-z0-9_-]+\.(?:mjs|py)|test\/[A-Za-z0-9_-]+(?:\.test)?\.mjs|dashboard\/(?:index\.html|app\.js|styles\.css)|site\/(?:[A-Za-z0-9_-]+\.(?:html|css|svg)|\.well-known\/openai-apps-challenge)|metrics\/(?:worker\.mjs|schema\.sql|report\.sql)|plugin\/(?:plugin\.json|mcp\.json|skills\/find-news-sources\/(?:SKILL\.md|agents\/openai\.yaml)))$/.test(path);
 

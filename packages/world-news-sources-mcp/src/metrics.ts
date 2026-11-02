@@ -1,4 +1,67 @@
 const tools = new Set(['search_sources', 'get_source', 'list_countries', 'get_endpoint_health', 'get_source_article_activity', 'get_country_article_activity', 'get_country_source_inventory', 'get_country_collection_quality', 'get_source_collection_quality', 'list_source_packs', 'get_source_pack', 'export_source_pack', 'set_usage_analytics']);
+import { cpuUsage } from 'node:process';
+
+export interface RuntimeAggregate {
+  revision: 'cpu-optimized-v1';
+  traffic: 'inspection' | 'unclassified';
+  route: 'mcp' | 'web_export' | 'source_packs' | 'health' | 'quality' | 'other';
+  outcome: 'success' | 'error';
+  overlap: boolean;
+  cpu_us: number | null;
+  wall_ms: number;
+}
+type RuntimeSink = (event: RuntimeAggregate) => Promise<void>;
+const activeRuntimeWindows = new Set<{ overlap: boolean }>();
+
+function runtimeRoute(request: Request): RuntimeAggregate['route'] {
+  const path = new URL(request.url).pathname;
+  if (path === '/mcp') return 'mcp';
+  if (/^\/source-packs\/[a-z][a-z0-9-]{1,79}\/export$/.test(path)) return 'web_export';
+  if (path === '/source-packs') return 'source_packs';
+  if (path === '/health') return 'health';
+  if (/^\/(api\/)?quality(?:\/|$)/.test(path)) return 'quality';
+  return 'other';
+}
+
+// Process counters cannot attribute overlapping requests. Keep sending windows
+// active until their telemetry finishes so its CPU cannot enter a later sample.
+// Module initialization, response streaming and this telemetry send are excluded.
+export function createRuntimeMeter(sink?: RuntimeSink,
+  readCpu: () => { user: number; system: number } = cpuUsage,
+  readWall: () => number = () => performance.now()) {
+  return async (request: Request, run: (forwarded: Request) => Promise<Response>): Promise<Response> => {
+    if (!sink) return run(request);
+    let startedCpu: { user: number; system: number }, startedWall: number;
+    try { startedCpu = readCpu(); startedWall = readWall(); }
+    catch { return run(request); }
+    const window = { overlap: activeRuntimeWindows.size > 0 };
+    for (const active of activeRuntimeWindows) active.overlap = true;
+    activeRuntimeWindows.add(window);
+    let response: Response | undefined;
+    let acknowledged = false;
+    try {
+      try { response = await run(request); }
+      finally {
+        try {
+          const endedCpu = readCpu();
+          const cpu = endedCpu.user + endedCpu.system - startedCpu.user - startedCpu.system;
+          const wall = Math.round(readWall() - startedWall);
+          if (Number.isSafeInteger(cpu) && cpu >= 0 && cpu <= 120000000 && wall >= 0 && wall <= 120000) {
+            await sink({ revision: 'cpu-optimized-v1', route: runtimeRoute(request),
+              traffic: request.headers.get('x-world-news-traffic') === 'inspection' ? 'inspection' : 'unclassified',
+              outcome: response && response.status < 400 ? 'success' : 'error',
+              overlap: window.overlap, cpu_us: window.overlap ? null : cpu, wall_ms: wall });
+            acknowledged = true;
+          }
+        } catch { /* Operational telemetry never changes application success. */ }
+      }
+      const headers = new Headers(response!.headers);
+      headers.set('x-world-news-runtime-cpu', acknowledged ? 'recorded' : 'unavailable');
+      return new Response(response!.body, { status: response!.status, statusText: response!.statusText, headers });
+    } finally { activeRuntimeWindows.delete(window); }
+  };
+}
+
 export interface ProductObservation {
   channel: 'mcp' | 'web_export';
   identity: 'provided' | 'missing' | 'excluded';
@@ -43,6 +106,7 @@ export async function readRpcResponse(response: Response): Promise<unknown> {
 }
 export type UsagePreference = { enabled: boolean; identity_available: boolean };
 export type AggregateSink = ((event: CallAggregate) => Promise<void>) & {
+  runtime?: RuntimeSink;
   actorKey?: (meta: unknown) => Promise<string | undefined>;
   preference?: (meta: unknown, enabled: boolean) => Promise<UsagePreference>;
 };
@@ -102,6 +166,12 @@ export function createAggregateSink(address: string | undefined, secret: string 
       headers:{'content-type':'application/json', authorization:`Bearer ${secret}`},
       body:JSON.stringify(event), signal:AbortSignal.timeout(1500)});
     if (response.status !== 204) throw new Error('Aggregate collector unavailable');
+  };
+  sink.runtime = async event => {
+    const response = await fetcher(new URL('/v1/runtime-aggregate', url), { method: 'POST', redirect: 'error',
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${secret}` },
+      body: JSON.stringify(event), signal: AbortSignal.timeout(1500) });
+    if (response.status !== 204) throw new Error('Runtime aggregate collector unavailable');
   };
   sink.actorKey = actorKey;
   sink.preference = async (meta, enabled) => {

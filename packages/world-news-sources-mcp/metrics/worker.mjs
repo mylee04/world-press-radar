@@ -16,6 +16,33 @@ const extendedTools = new Set(['get_country_collection_quality', 'get_source_col
 const toolNames = new Set(['search_sources','get_source','list_countries','get_endpoint_health', ...activityTools, ...extendedTools, 'unknown']);
 const actorKey = value => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 const fields = value => Object.keys(value).sort().join(',');
+const runtimeRoutes = new Set(['mcp', 'web_export', 'source_packs', 'health', 'quality', 'other']);
+export function validateRuntimeAggregate(value) {
+  if (!value || Array.isArray(value) || typeof value !== 'object'
+    || fields(value) !== 'cpu_us,outcome,overlap,revision,route,traffic,wall_ms'
+    || value.revision !== 'cpu-optimized-v1' || !runtimeRoutes.has(value.route)
+    || !['inspection', 'unclassified'].includes(value.traffic) || !['success', 'error'].includes(value.outcome)
+    || typeof value.overlap !== 'boolean' || !Number.isSafeInteger(value.wall_ms)
+    || value.wall_ms < 0 || value.wall_ms > 120000
+    || (value.overlap ? value.cpu_us !== null
+      : !Number.isSafeInteger(value.cpu_us) || value.cpu_us < 0 || value.cpu_us > 120000000)) throw new Error('Invalid runtime aggregate');
+  return value;
+}
+export const RUNTIME_UPSERT = `INSERT INTO daily_runtime_cpu
+ (day,traffic,route,outcome,revision,eligible_calls,overlap_calls,cpu_us,wall_ms)
+ VALUES (?,?,?,?,?,?,?,?,?)
+ ON CONFLICT(day,traffic,route,outcome,revision) DO UPDATE SET
+ eligible_calls=eligible_calls+excluded.eligible_calls,overlap_calls=overlap_calls+excluded.overlap_calls,
+ cpu_us=cpu_us+excluded.cpu_us,wall_ms=wall_ms+excluded.wall_ms`;
+export const PRUNE_RUNTIME = 'DELETE FROM daily_runtime_cpu WHERE day < ?';
+export const DAILY_RUNTIME_REPORT = `SELECT traffic,route,outcome,revision,eligible_calls,overlap_calls,cpu_us,wall_ms
+ FROM daily_runtime_cpu WHERE day=? ORDER BY traffic,route,outcome,revision`;
+export function runtimeStatements(db, value, now = new Date()) {
+  validateRuntimeAggregate(value);
+  return [db.prepare(RUNTIME_UPSERT).bind(now.toISOString().slice(0, 10), value.traffic, value.route,
+    value.outcome, value.revision, +!value.overlap, +value.overlap, value.overlap ? 0 : value.cpu_us,
+    value.overlap ? 0 : value.wall_ms), db.prepare(PRUNE_RUNTIME).bind(actorCutoff(now))];
+}
 export function validateAggregate(value) {
   if (!value || Array.isArray(value) || typeof value !== 'object') throw new Error('Invalid aggregate');
   if (!['duration_ms,outcome,tool,traffic', 'duration_ms,outcome,product,tool,traffic'].includes(fields(value))) throw new Error('Unexpected fields');
@@ -147,14 +174,17 @@ export function validateReportDay(url, now = new Date()) {
   return day;
 }
 export async function dailyReport(env, day, now = new Date()) {
-  const [productResult, callResult, coverage, keys] = await Promise.all([
+  const [productResult, callResult, coverage, keys, runtimeResult] = await Promise.all([
     env.DB.prepare(DAILY_PRODUCT_REPORT).bind(day).all(),
     env.DB.prepare(DAILY_CALL_REPORT).bind(day, day, day).all(),
     env.DB.prepare(DAILY_COVERAGE_REPORT).bind(day, actorCutoff(now), day).first(),
     env.DB.prepare(DAILY_REPEAT_REPORT).bind(actorCutoff(now), day, actorCutoff(now)).first(),
+    env.DB.prepare(DAILY_RUNTIME_REPORT).bind(day).all(),
   ]);
   const product = productResult.results, calls = callResult.results;
   if (!Array.isArray(product) || product.length > 4 || !Array.isArray(calls) || calls.length > 2 || !coverage || !keys) throw new Error('Invalid report result');
+  const runtimeRows = runtimeResult.results;
+  if (!Array.isArray(runtimeRows) || runtimeRows.length > 48) throw new Error('Invalid runtime report result');
   const identityProvided = product.find(row => row.traffic === 'unclassified' && row.channel === 'mcp')?.identity_provided ?? 0;
   const enabled = env.REPEAT_USAGE_ENABLED === '1';
   const firstPresence = coverage.first_presence_day;
@@ -162,6 +192,8 @@ export async function dailyReport(env, day, now = new Date()) {
   const hasKeys = enabled && identityProvided > 0 && day >= actorCutoff(now);
   return {
     version: 1, day, observed_at: now.toISOString(), repeat_enabled: enabled, product, calls,
+    runtime_cpu: {version: 1, measurement: 'isolated_process_cpu_v1',
+      state: runtimeRows.length ? 'observed' : 'unobserved', rows: runtimeRows},
     repeat: {
       status: !enabled ? 'disabled' : !hasKeys ? 'unobserved' : 'observed',
       observed_keys: hasKeys ? keys.observed_keys : null,
@@ -190,13 +222,19 @@ export default {
   async fetch(request,env) {
     const url = new URL(request.url), path = url.pathname;
     if (path === '/v1/daily-report') return reportResponse(request, env, url);
-    if (!['/v1/aggregate', '/v1/preference'].includes(path)) return new Response('Not found',{status:404});
-    if(request.method!=='POST')return new Response('Method not allowed',{status:405});
-    if(!await authorized(request,env.METRICS_WRITE_SECRET))return new Response('Unauthorized',{status:401});
+    if (!['/v1/aggregate', '/v1/preference', '/v1/runtime-aggregate'].includes(path)) return new Response('Not found',{status:404});
+    const headers = {'cache-control': 'no-store'};
+    if(request.method!=='POST')return new Response('Method not allowed',{status:405,headers});
+    if(!await authorized(request,env.METRICS_WRITE_SECRET))return new Response('Unauthorized',{status:401,headers});
     let value;
-    try { value = (path === '/v1/preference' ? validatePreference : validateAggregate)(await boundedJson(request)); }
-    catch { return new Response('Invalid aggregate or preference',{status:400}); }
+    try { value = (path === '/v1/preference' ? validatePreference
+      : path === '/v1/runtime-aggregate' ? validateRuntimeAggregate : validateAggregate)(await boundedJson(request)); }
+    catch { return new Response('Invalid aggregate or preference',{status:400,headers}); }
     try {
+      if (path === '/v1/runtime-aggregate') {
+        await env.DB.batch(runtimeStatements(env.DB, value));
+        return new Response(null, {status: 204, headers: {'cache-control': 'no-store'}});
+      }
       if (path === '/v1/preference') {
         await env.DB.batch(preferenceStatements(env.DB, value));
         return Response.json({enabled: value.enabled}, {headers: {'cache-control':'no-store'}});
@@ -204,10 +242,11 @@ export default {
       const statements = aggregateStatements(env.DB, value, new Date(), env.REPEAT_USAGE_ENABLED === '1');
       if (value.product) await env.DB.batch(statements);
       else await statements[0].run();
-    } catch { return new Response('Collector unavailable',{status:503}); }
+    } catch { return new Response('Collector unavailable',{status:503,headers}); }
     return new Response(null,{status:204,headers:{'cache-control':'no-store'}});
   },
   async scheduled(_event, env) {
     await env.DB.prepare(PRUNE_ACTORS).bind(actorCutoff()).run();
+    await env.DB.prepare(PRUNE_RUNTIME).bind(actorCutoff()).run();
   }
 };

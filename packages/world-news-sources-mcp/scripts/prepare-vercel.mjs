@@ -127,18 +127,20 @@ import {ActivityStore} from './activity.js';
 import {normalizeRegistry} from './catalog.js';
 import {HealthStore} from './health.js';
 import {createHttpHandler} from './http.js';
-import {createAggregateSink} from './metrics.js';
+import {createAggregateSink,createRuntimeMeter} from './metrics.js';
 const hosts = ['news.bymyleslee.com', process.env.VERCEL_URL, process.env.VERCEL_PROJECT_PRODUCTION_URL].filter(Boolean);
+const metrics=createAggregateSink(process.env.METRICS_COLLECTOR_URL,process.env.METRICS_WRITE_SECRET);
+export const measure=createRuntimeMeter(metrics?.runtime);
 export const handler = createHttpHandler(normalizeRegistry(registry), new HealthStore(snapshot, legacy), hosts,
-  createAggregateSink(process.env.METRICS_COLLECTOR_URL,process.env.METRICS_WRITE_SECRET),new ActivityStore(activity ?? undefined,fileURLToPath(new URL('../metadata/activity-history/',import.meta.url))),registry,false,true,
+  metrics,new ActivityStore(activity ?? undefined,fileURLToPath(new URL('../metadata/activity-history/',import.meta.url))),registry,false,true,
   {savedRemoteOverview:date=>savedOverview && savedOverview.date===(date??new Date(Date.now()-86400000).toISOString().slice(0,10)) ? savedOverview : undefined});
 `);
 for (const route of ['mcp', 'health']) writeFileSync(new URL(`api/${route}.mjs`, output),
-  `import {handler} from '../dist/hosted.mjs';\nexport default {fetch(request){const url=new URL(request.url);url.pathname='/${route}';return handler.fetch(new Request(url,request));}};\n`);
+  `import {handler,measure} from '../dist/hosted.mjs';\nexport default {fetch(request){const url=new URL(request.url);url.pathname='/${route}';return measure(new Request(url,request),forwarded=>handler.fetch(forwarded));}};\n`);
 writeFileSync(new URL('api/source-packs.mjs', output),
-  `import {handler} from '../dist/hosted.mjs';\nexport default {fetch(request){const url=new URL(request.url);const paths=url.searchParams.getAll('path');if(paths.length>1||paths[0]&&!/^[a-z][a-z0-9-]{1,79}\\/export$/.test(paths[0]))return new Response('Not found',{status:404});url.pathname=paths[0]?'/source-packs/'+paths[0]:'/source-packs';url.searchParams.delete('path');return handler.fetch(new Request(url,request));}};\n`);
+  `import {handler,measure} from '../dist/hosted.mjs';\nexport default {fetch(request){const url=new URL(request.url);const paths=url.searchParams.getAll('path');if(paths.length>1||paths[0]&&!/^[a-z][a-z0-9-]{1,79}\\/export$/.test(paths[0]))return new Response('Not found',{status:404});url.pathname=paths[0]?'/source-packs/'+paths[0]:'/source-packs';url.searchParams.delete('path');return measure(new Request(url,request),forwarded=>handler.fetch(forwarded));}};\n`);
 writeFileSync(new URL('api/quality.mjs', output),
-  `import {handler} from '../dist/hosted.mjs';\nimport {createQualityCloudGateway,normalizeQualityRequest} from '../dist/quality-cloud-gateway.mjs';\nconst gateway=createQualityCloudGateway({backendUrl:process.env.WNS_QUALITY_BACKEND_URL,gatewayToken:process.env.WNS_QUALITY_GATEWAY_TOKEN,publicOrigins:[process.env.WNS_QUALITY_PUBLIC_ORIGIN]});\nexport default {async fetch(request){const forwarded=normalizeQualityRequest(request);if(!forwarded)return new Response('Not found',{status:404});const url=new URL(forwarded.url);if(url.pathname.startsWith('/quality/api/')&&process.env.WNS_QUALITY_BACKEND_URL)return gateway(forwarded);return handler.fetch(forwarded);}};\n`);
+  `import {handler,measure} from '../dist/hosted.mjs';\nimport {createQualityCloudGateway,normalizeQualityRequest} from '../dist/quality-cloud-gateway.mjs';\nconst gateway=createQualityCloudGateway({backendUrl:process.env.WNS_QUALITY_BACKEND_URL,gatewayToken:process.env.WNS_QUALITY_GATEWAY_TOKEN,publicOrigins:[process.env.WNS_QUALITY_PUBLIC_ORIGIN]});\nexport default {fetch(request){return measure(request,async input=>{const forwarded=normalizeQualityRequest(input);if(!forwarded)return new Response('Not found',{status:404});const url=new URL(forwarded.url);if(url.pathname.startsWith('/quality/api/')&&process.env.WNS_QUALITY_BACKEND_URL)return gateway(forwarded);return handler.fetch(forwarded);});}};\n`);
 for (const file of ['index.html', 'support.html', 'privacy.html', 'terms.html', 'styles.css', 'icon.svg', 'source-packs.js']) {
   copyFileSync(new URL(`site/${file}`, root), new URL(`public/${file}`, output));
 }
