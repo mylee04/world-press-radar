@@ -8,12 +8,14 @@ import argparse
 from contextlib import ExitStack
 from datetime import datetime, timezone
 import fcntl
+import hashlib
 import json
 import os
 from pathlib import Path
 import re
 import shutil
 import stat
+import subprocess
 import time
 
 CLINIC = Path('/srv/clinic-signals-ru')
@@ -25,6 +27,62 @@ DUMP = re.compile(r'fbm_ai-\d{8}T\d{6}Z\.dump')
 RELEASE = re.compile(r'\d{8}-[A-Za-z0-9._-]+')
 CONTACT = re.compile(r'(?:phase\d+|moscow-2026|planned|moscow-additions|recent30)-\d{8}T\d{6}Z\.sqlite3')
 TEMP = re.compile(r'(?:tmp[A-Za-z0-9_]{8}|\.(?:city-inventory|catalog|residential)-[A-Za-z0-9_]{8})')
+INCOMPLETE = re.compile(r'\.incomplete-[A-Za-z0-9_]{8}')
+
+
+def tree_state(path):
+    """Bounded metadata fingerprint; no links, contents or database reads."""
+    pending, rows, newest = [(path, 0)], [], 0
+    try:
+        while pending:
+            item, depth = pending.pop()
+            info = item.lstat()
+            if depth > 4 or len(rows) >= 512 or not (stat.S_ISDIR(info.st_mode) or stat.S_ISREG(info.st_mode)):
+                return None
+            rows.append((str(item.relative_to(path)), info.st_dev, info.st_ino,
+                info.st_mode, info.st_size, info.st_mtime_ns, info.st_nlink))
+            newest = max(newest, info.st_mtime)
+            if stat.S_ISDIR(info.st_mode):
+                pending.extend((child, depth + 1) for child in item.iterdir())
+        return hashlib.sha256(json.dumps(sorted(rows)).encode()).hexdigest(), newest
+    except OSError:
+        return None
+
+
+def builds_idle():
+    """Fail closed when a build is running or process inspection is denied."""
+    pattern = re.compile(r'(?:\bnext(?:/dist/bin/next)?\s+build\b|\bnpm\s+run\s+build\b|\bwebpack(?:-cli)?\b)')
+    for proc in Path('/proc').iterdir():
+        if not proc.name.isdigit():
+            continue
+        try:
+            command = (proc / 'cmdline').read_bytes().replace(b'\x00', b' ').decode(errors='replace')
+            if pattern.search(command):
+                return False
+        except (FileNotFoundError, ProcessLookupError):
+            pass
+        except OSError:
+            return False
+    return True
+
+
+def backup_service_idle():
+    try:
+        result = subprocess.run(['systemctl', 'show', 'clinic-signals-ru-backup.service',
+            '--property=ActiveState', '--value'], capture_output=True, text=True, timeout=5, check=True)
+        return result.stdout.strip() in ('inactive', 'failed')
+    except (OSError, subprocess.SubprocessError):
+        return False
+
+
+def incomplete_backup(path):
+    """Recognize only abandoned database-copy staging, never an unknown folder."""
+    if not plain(path, True) or (path / 'manifest.json').exists():
+        return False
+    allowed = {name + suffix for name in DATABASES for suffix in ('', '.gz', '-wal', '-shm')}
+    entries = list(path.iterdir())
+    return bool(entries) and all(file.name in allowed and plain(file)
+        and file.stat().st_nlink == 1 for file in entries)
 
 
 def inside(path, root):
@@ -133,8 +191,15 @@ def build_plan(scope='all', clinic=CLINIC, fbm=FBM, references=None, now=None):
             result['skipped'].append({'path': str(path), 'reason': 'linked_path'})
             return
         info = path.lstat()
-        result['candidates'].append({'path': str(path), 'root': str(root), 'kind': kind,
-            'device': info.st_dev, 'inode': info.st_ino, 'mtime_ns': info.st_mtime_ns})
+        row = {'path': str(path), 'root': str(root), 'kind': kind,
+            'device': info.st_dev, 'inode': info.st_ino, 'mtime_ns': info.st_mtime_ns}
+        if kind in ('clinic_incomplete', 'fbm_webpack_cache'):
+            state = tree_state(path)
+            if state is None:
+                result['skipped'].append({'path': str(path), 'reason': 'unknown_or_unbounded_tree'})
+                return
+            row['tree_stamp'] = state[0]
+        result['candidates'].append(row)
 
     def family(paths, keep, root, kind):
         retained, expired = retained_and_expired(paths, keep)
@@ -172,6 +237,36 @@ def build_plan(scope='all', clinic=CLINIC, fbm=FBM, references=None, now=None):
             if now - path.stat().st_mtime >= 3600:
                 add(path, data, 'clinic_temp')
 
+    if scope in ('all', 'clinic', 'clinic-incomplete') and plain(clinic, True):
+        abandoned = candidates(clinic / 'backups', INCOMPLETE, True, incomplete_backup)
+        idle = backup_service_idle() if abandoned else False
+        for path in abandoned:
+            if not idle:
+                result['skipped'].append({'path': str(path), 'reason': 'backup_not_idle'})
+            elif now - max([path.stat().st_mtime, *(file.stat().st_mtime for file in path.iterdir())]) < 7200:
+                result['skipped'].append({'path': str(path), 'reason': 'recent_backup_staging'})
+            else:
+                add(path, clinic / 'backups', 'clinic_incomplete')
+
+    if scope in ('all', 'fbm', 'fbm-cache') and plain(fbm, True):
+        roots = [fbm / 'app', fbm / 'staging-photo-conflict-5a8e33f']
+        parent = fbm / 'candidates'
+        if plain(parent, True):
+            roots.extend(path for path in parent.iterdir() if plain(path, True))
+        caches = [root / '.next-build/cache/webpack' for root in roots
+            if plain(root / '.next-build/cache/webpack', True)]
+        idle = builds_idle() if caches else False
+        for path in caches:
+            state = tree_state(path)
+            if not idle:
+                result['skipped'].append({'path': str(path), 'reason': 'build_running_or_unknown'})
+            elif state is None:
+                result['skipped'].append({'path': str(path), 'reason': 'unknown_or_unbounded_tree'})
+            elif now - state[1] < 1800:
+                result['skipped'].append({'path': str(path), 'reason': 'recent_build_cache'})
+            else:
+                add(path, fbm, 'fbm_webpack_cache')
+
     if scope in ('all', 'fbm', 'fbm-backups') and plain(fbm, True):
         backups = fbm / 'backups/postgres'
         def dump_header(path):
@@ -195,6 +290,17 @@ def remove_candidates(plan, clinic=CLINIC, references=None, temp_lock=True):
     references = process_paths() if references is None else references
     removed, skipped = [], []
     with ExitStack() as stack:
+        can_remove_incomplete = False
+        if any(row['kind'] == 'clinic_incomplete' for row in plan['candidates']):
+            backup_lock = clinic / 'backups/.backup.lock'
+            if plain(backup_lock) and backup_service_idle():
+                descriptor = os.open(backup_lock, os.O_RDONLY | os.O_NOFOLLOW)
+                handle = stack.enter_context(os.fdopen(descriptor, 'r'))
+                try:
+                    fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                    can_remove_incomplete = True
+                except BlockingIOError:
+                    pass
         can_remove_temp = not temp_lock
         if temp_lock and any(row['kind'] == 'clinic_temp' for row in plan['candidates']):
             lock_path = clinic / 'data/.collection-worker.lock'
@@ -211,6 +317,11 @@ def remove_candidates(plan, clinic=CLINIC, references=None, temp_lock=True):
             reason = None
             if row['kind'] == 'clinic_temp' and not can_remove_temp:
                 reason = 'collector_busy'
+            elif row['kind'] == 'clinic_incomplete' and (not can_remove_incomplete
+                    or not backup_service_idle() or not incomplete_backup(path)):
+                reason = 'backup_busy_or_staging_changed'
+            elif row['kind'] == 'fbm_webpack_cache' and not builds_idle():
+                reason = 'build_running_or_unknown'
             elif not inside(path, root) or path == root or path.is_symlink():
                 reason = 'unsafe_path'
             elif any(parent.is_symlink() for parent in path.parents if inside(parent, root)):
@@ -226,6 +337,10 @@ def remove_candidates(plan, clinic=CLINIC, references=None, temp_lock=True):
             else:
                 if (info.st_dev, info.st_ino, info.st_mtime_ns) != (row['device'], row['inode'], row['mtime_ns']):
                     reason = 'changed_since_preview'
+                elif 'tree_stamp' in row:
+                    state = tree_state(path)
+                    if state is None or state[0] != row['tree_stamp']:
+                        reason = 'tree_changed_since_preview'
             if reason:
                 skipped.append({'path': str(path), 'reason': reason})
                 continue
@@ -249,7 +364,7 @@ def main():
     os.umask(0o077)
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--apply', action='store_true')
-    parser.add_argument('--scope', choices=('all', 'clinic', 'clinic-temps', 'fbm', 'fbm-backups'), default='all')
+    parser.add_argument('--scope', choices=('all', 'clinic', 'clinic-temps', 'clinic-incomplete', 'fbm', 'fbm-backups', 'fbm-cache'), default='all')
     args = parser.parse_args()
     if os.geteuid() != 0:
         raise SystemExit('Root operator required for process-reference inspection')

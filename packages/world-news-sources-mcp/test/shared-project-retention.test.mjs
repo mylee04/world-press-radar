@@ -156,3 +156,62 @@ after = helper.remove_candidates(preview, clinic, references=set())
 print(json.dumps({"busy_removed": busy["removed"], "busy_reasons": [row["reason"] for row in busy["skipped"]], "survived_busy": survived_busy, "removed_after": after["removed"] == [str(stale)], "fresh_survives": fresh.exists(), "lock_same_inode": lock.stat().st_ino == lock_inode, "lock_bytes": lock.read_text()}))
 `), { busy_removed: [], busy_reasons: ['collector_busy'], survived_busy: true, removed_after: true, fresh_survives: true, lock_same_inode: true, lock_bytes: 'coordination' });
 });
+
+test('removes only idle, stale, recognized incomplete backup copies with the original lock held', () => {
+  assert.deepEqual(run(String.raw`
+parent = clinic / "backups"; parent.mkdir()
+lock = parent / ".backup.lock"; lock.write_text("")
+lock_inode = lock.stat().st_ino
+def stage(name, age=True):
+    path = parent / name; path.mkdir()
+    file = path / "clinic-signals.sqlite3"; file.write_text("temporary copy")
+    if age: old(file); old(path)
+    return path
+stale = stage(".incomplete-abcdefgh")
+fresh = stage(".incomplete-ijklmnop", False)
+unknown = stage(".incomplete-qrstuvwx"); (unknown / "original.txt").write_text("protected")
+original = clinic / "data/clinic-signals.sqlite3"; original.write_text("original")
+with patch.object(helper, "backup_service_idle", return_value=True):
+    preview = plan("clinic-incomplete")
+    result = helper.remove_candidates(preview, clinic, references=set())
+print(json.dumps({"removed": result["removed"] == [str(stale)], "fresh": fresh.exists(), "unknown": unknown.exists(), "original": original.read_text(), "lock_same": lock.stat().st_ino == lock_inode}))
+`), { removed: true, fresh: true, unknown: true, original: 'original', lock_same: true });
+});
+
+test('protects incomplete backups during an active service, held backup lock or changed staged file', () => {
+  assert.deepEqual(run(String.raw`
+parent = clinic / "backups"; parent.mkdir()
+lock = parent / ".backup.lock"; lock.write_text("")
+stage = parent / ".incomplete-abcdefgh"; stage.mkdir()
+file = stage / "clinic-signals.sqlite3"; file.write_text("copy"); old(file); old(stage)
+with patch.object(helper, "backup_service_idle", return_value=False):
+    active = plan("clinic-incomplete")
+with patch.object(helper, "backup_service_idle", return_value=True):
+    preview = plan("clinic-incomplete")
+    with lock.open("r") as held:
+        helper.fcntl.flock(held, helper.fcntl.LOCK_EX | helper.fcntl.LOCK_NB)
+        busy = helper.remove_candidates(preview, clinic, references=set())
+    file.write_text("changed staged copy")
+    changed = helper.remove_candidates(preview, clinic, references=set())
+print(json.dumps({"active_candidates": active["candidates"], "busy_removed": busy["removed"], "busy_reason": busy["skipped"][0]["reason"], "changed_removed": changed["removed"], "changed_reason": changed["skipped"][0]["reason"], "survives": file.read_text()}))
+`), { active_candidates: [], busy_removed: [], busy_reason: 'backup_busy_or_staging_changed', changed_removed: [], changed_reason: 'tree_changed_since_preview', survives: 'changed staged copy' });
+});
+
+test('cleans only quiet webpack caches while protecting runtime files, busy builds and changed caches', () => {
+  assert.deepEqual(run(String.raw`
+app = fbm / "app"
+cache = app / ".next-build/cache/webpack"; cache.mkdir(parents=True)
+pack = cache / "index.pack"; pack.write_text("cache"); old(pack); old(cache)
+runtime = app / ".next-build/server/runtime.js"; runtime.parent.mkdir(); runtime.write_text("runtime")
+with patch.object(helper, "builds_idle", return_value=False):
+    active = plan("fbm-cache")
+with patch.object(helper, "builds_idle", return_value=True):
+    referenced = plan("fbm-cache", {pack})
+    preview = plan("fbm-cache")
+    pack.write_text("new build cache")
+    changed = helper.remove_candidates(preview, clinic, references=set())
+    old(pack); old(cache)
+    result = helper.remove_candidates(plan("fbm-cache"), clinic, references=set())
+print(json.dumps({"active_candidates": active["candidates"], "referenced_candidates": referenced["candidates"], "changed_reason": changed["skipped"][0]["reason"], "removed_only_cache": result["removed"] == [str(cache)], "runtime": runtime.read_text()}))
+`), { active_candidates: [], referenced_candidates: [], changed_reason: 'tree_changed_since_preview', removed_only_cache: true, runtime: 'runtime' });
+});
